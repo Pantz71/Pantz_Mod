@@ -1,0 +1,28 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "pantz_mod:config",
+          "value": "flint_and_steel"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shapeless",
+        "category": "equipment",
+        "ingredients": [
+          {
+            "tag": "forge:ingots/steel"
+          },
+          {
+            "item": "minecraft:flint"
+          }
+        ],
+        "result": {
+          "item": "minecraft:flint_and_steel"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "required": true,
+  "package": "pantz.mod.core.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "minVersion": "0.8",
+  "refmap": "pantz_mod.refmap.json",
+  "mixins": [
+
+  ],
+  "client": [
+
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

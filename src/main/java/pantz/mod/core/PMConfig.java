@@ -1,0 +1,29 @@
+package pantz.mod.core;
+
+import com.teamabnormals.blueprint.core.annotations.ConfigKey;
+import net.minecraftforge.common.ForgeConfigSpec;
+import net.minecraftforge.common.ForgeConfigSpec.*;
+import org.apache.commons.lang3.tuple.Pair;
+
+public class PMConfig {
+    public static class Common {
+        public static final ForgeConfigSpec COMMON_SPEC;
+        public static final Common COMMON;
+
+        static {
+            Pair<Common, ForgeConfigSpec> commonSpecPair = new ForgeConfigSpec.Builder().configure(Common::new);
+            COMMON_SPEC = commonSpecPair.getRight();
+            COMMON = commonSpecPair.getLeft();
+        }
+
+        @ConfigKey("flint_and_steel")
+        public final BooleanValue flintAndSteel;
+
+        Common(Builder builder) {
+            builder.push("recipes");
+            flintAndSteel = builder.comment("Change Flint and Steel recipe from using Iron to Steel")
+                    .define("Using steel for flint and steel", true);
+            builder.pop();
+        }
+    }
+}

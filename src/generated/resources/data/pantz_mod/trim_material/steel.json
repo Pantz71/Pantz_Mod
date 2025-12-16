@@ -1,0 +1,9 @@
+{
+  "asset_name": "pantz_mod_steel",
+  "description": {
+    "color": "#818181",
+    "translate": "trim_material.pantz_mod.steel"
+  },
+  "ingredient": "pantz_mod:steel_ingot",
+  "item_model_index": -1.0
+}

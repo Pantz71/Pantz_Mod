@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/iron_bars_side",
+  "textures": {
+    "bars": "pantz_mod:block/steel_bars",
+    "edge": "pantz_mod:block/steel_bars_edge",
+    "particle": "pantz_mod:block/steel_bars"
+  }
+}

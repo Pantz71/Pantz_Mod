@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 2,
+  "ingredient": {
+    "item": "pantz_mod:sulfur_block"
+  },
+  "result": "pantz_mod:sulfur_brick_slab"
+}

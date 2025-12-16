@@ -1,0 +1,35 @@
+{
+  "block.pantz_mod.steel_block": "Steel Block",
+  "block.pantz_mod.steel_door": "Steel Door",
+  "block.pantz_mod.steel_trapdoor": "Steel Trapdoor",
+  "block.pantz_mod.steel_bars": "Steel Bars",
+
+  "item.pantz_mod.steel_ingot": "Steel Ingot",
+  "item.pantz_mod.steel_nugget": "Steel Nugget",
+
+  "item.pantz_mod.steel_sword": "Steel Sword",
+  "item.pantz_mod.steel_shovel": "Steel Shovel",
+  "item.pantz_mod.steel_pickaxe": "Steel Pickaxe",
+  "item.pantz_mod.steel_axe": "Steel Axe",
+  "item.pantz_mod.steel_hoe": "Steel Hoe",
+  "item.pantz_mod.steel_helmet": "Steel Helmet",
+  "item.pantz_mod.steel_chestplate": "Steel Chestplate",
+  "item.pantz_mod.steel_leggings": "Steel Leggings",
+  "item.pantz_mod.steel_boots": "Steel Boots",
+  "item.pantz_mod.steel_horse_armor": "Steel Horse Armor",
+
+  "trim_material.pantz_mod.steel": "Steel Material",
+
+
+  "block.pantz_mod.nether_sulfur_ore": "Nether Sulfur Ore",
+  "block.pantz_mod.sulfur_block": "Sulfur Block",
+  "block.pantz_mod.sulfur_bricks": "Sulfur Bricks",
+  "block.pantz_mod.sulfur_brick_stairs": "Sulfur Brick Stairs",
+  "block.pantz_mod.sulfur_brick_slab": "Sulfur Brick Slab",
+  "block.pantz_mod.sulfur_brick_wall": "Sulfur Brick Wall",
+  "block.pantz_mod.chiseled_sulfur_bricks": "Chiseled Sulfur Brick",
+
+  "item.pantz_mod.sulfur": "Sulfur",
+
+  "trim_material.pantz_mod.sulfur": "Sulfur Material"
+}
