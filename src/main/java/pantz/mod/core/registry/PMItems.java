@@ -34,7 +34,7 @@ public class PMItems {
 
     public static final RegistryObject<Item> SULFUR = ITEMS.createItem("sulfur", basicItem());
 
-    public static final RegistryObject<Item> TROWEL = ITEMS.createItem("trowel", () -> new TrowelItem(new Item.Properties()));
+    public static final RegistryObject<Item> TROWEL = ITEMS.createItem("trowel", () -> new TrowelItem(new Item.Properties().durability(256)));
 
     private static Supplier<Item> basicItem() {
         return () -> new Item(new Item.Properties());
