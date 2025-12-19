@@ -12,9 +12,9 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 
@@ -30,23 +30,21 @@ public class TrowelItem extends Item {
     public InteractionResult useOn(UseOnContext ctx) {
         Player player = ctx.getPlayer();
         Level level = ctx.getLevel();
+
+        if (player == null) return InteractionResult.PASS;
+        if (level.isClientSide()) return InteractionResult.SUCCESS;
+
         RandomSource random = level.getRandom();
-
-        if (player == null || level.isClientSide()) return InteractionResult.PASS;
-
-        BlockPos pos = ctx.getClickedPos();
-        Direction direction = ctx.getClickedFace();
         InteractionHand hand = ctx.getHand();
         ItemStack trowel = ctx.getItemInHand();
-        Inventory playerInv = player.getInventory();
+        Inventory inv = player.getInventory();
 
-        int trowelSlot = playerInv.selected;
+        int trowelSlot = inv.selected;
 
         List<ItemStack> placeableBlocks = new ArrayList<>();
         for (int i = 0; i < 9; i++) {
             if (i == trowelSlot) continue;
-            ItemStack stack = playerInv.getItem(i);
-
+            ItemStack stack = inv.getItem(i);
             if (!stack.isEmpty() && stack.getItem() instanceof BlockItem) {
                 placeableBlocks.add(stack);
             }
@@ -57,35 +55,28 @@ public class TrowelItem extends Item {
         ItemStack selectedStack = placeableBlocks.get(random.nextInt(placeableBlocks.size()));
         BlockItem blockItem = (BlockItem) selectedStack.getItem();
 
-        UseOnContext fakeContext = new UseOnContext(player, hand, new BlockHitResult(ctx.getClickLocation(), direction, pos, ctx.isInside())) {
+        UseOnContext fakeContext = new UseOnContext(player, hand, new BlockHitResult(ctx.getClickLocation(), ctx.getClickedFace(), ctx.getClickedPos(), ctx.isInside())) {
             @Override
             public ItemStack getItemInHand() {
                 return selectedStack;
-            }
-
-            @Override
-            public InteractionHand getHand() {
-                return hand;
             }
         };
 
         InteractionResult result = blockItem.useOn(fakeContext);
 
         if (result.consumesAction()) {
-            BlockState placeState = blockItem.getBlock().getStateForPlacement(new BlockPlaceContext(fakeContext));
+            BlockPos placePos = fakeContext.getClickedPos().relative(fakeContext.getClickedFace());
+            BlockState state = level.getBlockState(placePos);
+            SoundType sound = state.getSoundType();
 
-            if (placeState != null) {
-                SoundEvent sound = placeState.getSoundType().getPlaceSound();
-                level.playSound(null, pos.relative(direction), sound, SoundSource.BLOCKS, 1.0f, 1.0f);
-            }
+            level.playSound(null, placePos, sound.getPlaceSound(), SoundSource.BLOCKS, (sound.getVolume() + 1.0F) / 2.0F, sound.getPitch() * 0.8F);
+            trowel.hurtAndBreak(1, player,
+                    p -> p.broadcastBreakEvent(hand));
 
-            if (!player.isCreative()) {
-                selectedStack.shrink(1);
-                trowel.hurtAndBreak(1, player, level1 -> level1.broadcastBreakEvent(ctx.getHand()));
-            }
-
-            return InteractionResult.SUCCESS;
+            return InteractionResult.sidedSuccess(level.isClientSide());
         }
-        return result;
+
+        return InteractionResult.PASS;
     }
+
 }
