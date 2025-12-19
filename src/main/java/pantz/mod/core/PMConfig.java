@@ -30,6 +30,8 @@ public class PMConfig {
             builder.push("tools");
             waxedBlocksDetectionRadius = builder.comment("How far can the Honey Deserializer detect waxed blocks?")
                     .defineInRange("Honey Deserializer Detection Radius", 16, 0, Integer.MAX_VALUE);
+
+            builder.pop();
         }
     }
 }
