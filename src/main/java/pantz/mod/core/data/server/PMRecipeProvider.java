@@ -93,6 +93,14 @@ public class PMRecipeProvider extends BlueprintRecipeProvider {
                 .pattern("/ ")
                 .unlockedBy(getHasName(STEEL_INGOT.get()), has(PMItemTags.INGOTS_STEEL))
                 .save(consumer);
+
+        ShapedRecipeBuilder.shaped(TOOLS, HONEY_DESERIALIZER.get())
+                .define('#', Tags.Items.INGOTS_COPPER).define('@', Items.HONEYCOMB)
+                .pattern(" # ")
+                .pattern("#@#")
+                .pattern(" # ")
+                .unlockedBy(getHasName(Items.COPPER_INGOT), has(Tags.Items.INGOTS_COPPER))
+                .save(consumer);
     }
 
     private void oreRecipes(Consumer<FinishedRecipe> consumer, RecipeCategory category, ItemLike input, ItemLike output, float experience, int time) {

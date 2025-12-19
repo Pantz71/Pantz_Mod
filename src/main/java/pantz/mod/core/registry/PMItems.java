@@ -36,6 +36,8 @@ public class PMItems {
 
     public static final RegistryObject<Item> TROWEL = ITEMS.createItem("trowel", () -> new TrowelItem(new Item.Properties().durability(256)));
 
+    public static final RegistryObject<Item> HONEY_DESERIALIZER = ITEMS.createItem("honey_deserializer", () -> new Item(PropertyUtil.stacksOnce()));
+
     private static Supplier<Item> basicItem() {
         return () -> new Item(new Item.Properties());
     }
@@ -54,8 +56,10 @@ public class PMItems {
                 .addItemsBefore(of(Items.GOLDEN_HORSE_ARMOR), STEEL_HORSE_ARMOR)
 
                 .tab(TOOLS_AND_UTILITIES)
-                .addItemsBefore(of(Items.IRON_SHOVEL), STEEL_SHOVEL, STEEL_PICKAXE, STEEL_AXE, STEEL_HOE)
+                .addItemsBefore(of(Items.GOLDEN_SHOVEL), STEEL_SHOVEL, STEEL_PICKAXE, STEEL_AXE, STEEL_HOE)
                 .addItemsAfter(of(Items.SHEARS), TROWEL)
+                .addItemsAfter(of(Items.BRUSH), HONEY_DESERIALIZER)
+
         ;
     }
 }
