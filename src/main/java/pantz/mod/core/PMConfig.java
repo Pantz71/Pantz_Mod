@@ -19,11 +19,17 @@ public class PMConfig {
         @ConfigKey("flint_and_steel")
         public final BooleanValue flintAndSteel;
 
+        public final IntValue waxedBlocksDetectionRadius;
+
         Common(Builder builder) {
             builder.push("recipes");
             flintAndSteel = builder.comment("Change Flint and Steel recipe from using Iron to Steel")
                     .define("Using steel for flint and steel", true);
             builder.pop();
+
+            builder.push("tools");
+            waxedBlocksDetectionRadius = builder.comment("How far can the Honey Deserializer detect waxed blocks?")
+                    .defineInRange("Honey Deserializer Detection Radius", 16, 0, Integer.MAX_VALUE);
         }
     }
 }
