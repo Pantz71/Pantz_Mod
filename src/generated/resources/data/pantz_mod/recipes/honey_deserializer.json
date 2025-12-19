@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": {
+      "tag": "forge:ingots/copper"
+    },
+    "@": {
+      "item": "minecraft:honeycomb"
+    }
+  },
+  "pattern": [
+    " # ",
+    "#@#",
+    " # "
+  ],
+  "result": {
+    "item": "pantz_mod:honey_deserializer"
+  },
+  "show_notification": true
+}
