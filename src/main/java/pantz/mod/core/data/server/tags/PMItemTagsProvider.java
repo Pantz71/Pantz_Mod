@@ -54,7 +54,6 @@ public class PMItemTagsProvider extends ItemTagsProvider {
 
         this.copy(Tags.Blocks.STORAGE_BLOCKS, Tags.Items.STORAGE_BLOCKS);
         this.copy(PMBlockTags.STORAGE_BLOCKS_STEEL, STORAGE_BLOCKS_STEEL);
-        this.copy(PMBlockTags.STORAGE_BLOCKS_SULFUR, STORAGE_BLOCKS_SULFUR);
 
         this.copy(PMBlockTags.ORES_SULFUR, ORES_SULFUR);
 

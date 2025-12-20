@@ -13,7 +13,6 @@ public class PMItemTags {
     public static final TagKey<Item> COALS = forgeTag("coals");
 
     public static final TagKey<Item> DUSTS_SULFUR = forgeTag("dusts/sulfur");
-    public static final TagKey<Item> STORAGE_BLOCKS_SULFUR = forgeTag("storage_blocks/sulfur");
     public static final TagKey<Item> ORES_SULFUR = forgeTag("ores/sulfur");
 
     public static final TagKey<Item> EXCAVATORS = itemTag("excavators");
