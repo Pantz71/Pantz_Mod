@@ -1,0 +1,7 @@
+{
+  "parent": "pantz_mod:block/template_decorated_pedestal",
+  "textures": {
+    "carpet": "pantz_mod:block/orange_carpet_pedestal",
+    "pedestal": "pantz_mod:block/purpur_pedestal"
+  }
+}

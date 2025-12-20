@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "pedestal",
+  "key": {
+    "B": {
+      "item": "minecraft:purpur_block"
+    },
+    "S": {
+      "item": "minecraft:purpur_slab"
+    }
+  },
+  "pattern": [
+    "SSS",
+    " B ",
+    " S "
+  ],
+  "result": {
+    "item": "pantz_mod:purpur_pedestal"
+  },
+  "show_notification": true
+}

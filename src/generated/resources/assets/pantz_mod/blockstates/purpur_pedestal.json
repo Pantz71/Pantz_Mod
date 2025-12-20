@@ -1,0 +1,514 @@
+{
+  "variants": {
+    "carpet=black,facing=east,waterlogged=false": {
+      "model": "pantz_mod:block/purpur_pedestal_black",
+      "y": 270
+    },
+    "carpet=black,facing=east,waterlogged=true": {
+      "model": "pantz_mod:block/purpur_pedestal_black",
+      "y": 270
+    },
+    "carpet=black,facing=north,waterlogged=false": {
+      "model": "pantz_mod:block/purpur_pedestal_black",
+      "y": 180
+    },
+    "carpet=black,facing=north,waterlogged=true": {
+      "model": "pantz_mod:block/purpur_pedestal_black",
+      "y": 180
+    },
+    "carpet=black,facing=south,waterlogged=false": {
+      "model": "pantz_mod:block/purpur_pedestal_black"
+    },
+    "carpet=black,facing=south,waterlogged=true": {
+      "model": "pantz_mod:block/purpur_pedestal_black"
+    },
+    "carpet=black,facing=west,waterlogged=false": {
+      "model": "pantz_mod:block/purpur_pedestal_black",
+      "y": 90
+    },
+    "carpet=black,facing=west,waterlogged=true": {
+      "model": "pantz_mod:block/purpur_pedestal_black",
+      "y": 90
+    },
+    "carpet=blue,facing=east,waterlogged=false": {
+      "model": "pantz_mod:block/purpur_pedestal_blue",
+      "y": 270
+    },
+    "carpet=blue,facing=east,waterlogged=true": {
+      "model": "pantz_mod:block/purpur_pedestal_blue",
+      "y": 270
+    },
+    "carpet=blue,facing=north,waterlogged=false": {
+      "model": "pantz_mod:block/purpur_pedestal_blue",
+      "y": 180
+    },
+    "carpet=blue,facing=north,waterlogged=true": {
+      "model": "pantz_mod:block/purpur_pedestal_blue",
+      "y": 180
+    },
+    "carpet=blue,facing=south,waterlogged=false": {
+      "model": "pantz_mod:block/purpur_pedestal_blue"
+    },
+    "carpet=blue,facing=south,waterlogged=true": {
+      "model": "pantz_mod:block/purpur_pedestal_blue"
+    },
+    "carpet=blue,facing=west,waterlogged=false": {
+      "model": "pantz_mod:block/purpur_pedestal_blue",
+      "y": 90
+    },
+    "carpet=blue,facing=west,waterlogged=true": {
+      "model": "pantz_mod:block/purpur_pedestal_blue",
+      "y": 90
+    },
+    "carpet=brown,facing=east,waterlogged=false": {
+      "model": "pantz_mod:block/purpur_pedestal_brown",
+      "y": 270
+    },
+    "carpet=brown,facing=east,waterlogged=true": {
+      "model": "pantz_mod:block/purpur_pedestal_brown",
+      "y": 270
+    },
+    "carpet=brown,facing=north,waterlogged=false": {
+      "model": "pantz_mod:block/purpur_pedestal_brown",
+      "y": 180
+    },
+    "carpet=brown,facing=north,waterlogged=true": {
+      "model": "pantz_mod:block/purpur_pedestal_brown",
+      "y": 180
+    },
+    "carpet=brown,facing=south,waterlogged=false": {
+      "model": "pantz_mod:block/purpur_pedestal_brown"
+    },
+    "carpet=brown,facing=south,waterlogged=true": {
+      "model": "pantz_mod:block/purpur_pedestal_brown"
+    },
+    "carpet=brown,facing=west,waterlogged=false": {
+      "model": "pantz_mod:block/purpur_pedestal_brown",
+      "y": 90
+    },
+    "carpet=brown,facing=west,waterlogged=true": {
+      "model": "pantz_mod:block/purpur_pedestal_brown",
+      "y": 90
+    },
+    "carpet=cyan,facing=east,waterlogged=false": {
+      "model": "pantz_mod:block/purpur_pedestal_cyan",
+      "y": 270
+    },
+    "carpet=cyan,facing=east,waterlogged=true": {
+      "model": "pantz_mod:block/purpur_pedestal_cyan",
+      "y": 270
+    },
+    "carpet=cyan,facing=north,waterlogged=false": {
+      "model": "pantz_mod:block/purpur_pedestal_cyan",
+      "y": 180
+    },
+    "carpet=cyan,facing=north,waterlogged=true": {
+      "model": "pantz_mod:block/purpur_pedestal_cyan",
+      "y": 180
+    },
+    "carpet=cyan,facing=south,waterlogged=false": {
+      "model": "pantz_mod:block/purpur_pedestal_cyan"
+    },
+    "carpet=cyan,facing=south,waterlogged=true": {
+      "model": "pantz_mod:block/purpur_pedestal_cyan"
+    },
+    "carpet=cyan,facing=west,waterlogged=false": {
+      "model": "pantz_mod:block/purpur_pedestal_cyan",
+      "y": 90
+    },
+    "carpet=cyan,facing=west,waterlogged=true": {
+      "model": "pantz_mod:block/purpur_pedestal_cyan",
+      "y": 90
+    },
+    "carpet=gray,facing=east,waterlogged=false": {
+      "model": "pantz_mod:block/purpur_pedestal_gray",
+      "y": 270
+    },
+    "carpet=gray,facing=east,waterlogged=true": {
+      "model": "pantz_mod:block/purpur_pedestal_gray",
+      "y": 270
+    },
+    "carpet=gray,facing=north,waterlogged=false": {
+      "model": "pantz_mod:block/purpur_pedestal_gray",
+      "y": 180
+    },
+    "carpet=gray,facing=north,waterlogged=true": {
+      "model": "pantz_mod:block/purpur_pedestal_gray",
+      "y": 180
+    },
+    "carpet=gray,facing=south,waterlogged=false": {
+      "model": "pantz_mod:block/purpur_pedestal_gray"
+    },
+    "carpet=gray,facing=south,waterlogged=true": {
+      "model": "pantz_mod:block/purpur_pedestal_gray"
+    },
+    "carpet=gray,facing=west,waterlogged=false": {
+      "model": "pantz_mod:block/purpur_pedestal_gray",
+      "y": 90
+    },
+    "carpet=gray,facing=west,waterlogged=true": {
+      "model": "pantz_mod:block/purpur_pedestal_gray",
+      "y": 90
+    },
+    "carpet=green,facing=east,waterlogged=false": {
+      "model": "pantz_mod:block/purpur_pedestal_green",
+      "y": 270
+    },
+    "carpet=green,facing=east,waterlogged=true": {
+      "model": "pantz_mod:block/purpur_pedestal_green",
+      "y": 270
+    },
+    "carpet=green,facing=north,waterlogged=false": {
+      "model": "pantz_mod:block/purpur_pedestal_green",
+      "y": 180
+    },
+    "carpet=green,facing=north,waterlogged=true": {
+      "model": "pantz_mod:block/purpur_pedestal_green",
+      "y": 180
+    },
+    "carpet=green,facing=south,waterlogged=false": {
+      "model": "pantz_mod:block/purpur_pedestal_green"
+    },
+    "carpet=green,facing=south,waterlogged=true": {
+      "model": "pantz_mod:block/purpur_pedestal_green"
+    },
+    "carpet=green,facing=west,waterlogged=false": {
+      "model": "pantz_mod:block/purpur_pedestal_green",
+      "y": 90
+    },
+    "carpet=green,facing=west,waterlogged=true": {
+      "model": "pantz_mod:block/purpur_pedestal_green",
+      "y": 90
+    },
+    "carpet=light_blue,facing=east,waterlogged=false": {
+      "model": "pantz_mod:block/purpur_pedestal_light_blue",
+      "y": 270
+    },
+    "carpet=light_blue,facing=east,waterlogged=true": {
+      "model": "pantz_mod:block/purpur_pedestal_light_blue",
+      "y": 270
+    },
+    "carpet=light_blue,facing=north,waterlogged=false": {
+      "model": "pantz_mod:block/purpur_pedestal_light_blue",
+      "y": 180
+    },
+    "carpet=light_blue,facing=north,waterlogged=true": {
+      "model": "pantz_mod:block/purpur_pedestal_light_blue",
+      "y": 180
+    },
+    "carpet=light_blue,facing=south,waterlogged=false": {
+      "model": "pantz_mod:block/purpur_pedestal_light_blue"
+    },
+    "carpet=light_blue,facing=south,waterlogged=true": {
+      "model": "pantz_mod:block/purpur_pedestal_light_blue"
+    },
+    "carpet=light_blue,facing=west,waterlogged=false": {
+      "model": "pantz_mod:block/purpur_pedestal_light_blue",
+      "y": 90
+    },
+    "carpet=light_blue,facing=west,waterlogged=true": {
+      "model": "pantz_mod:block/purpur_pedestal_light_blue",
+      "y": 90
+    },
+    "carpet=light_gray,facing=east,waterlogged=false": {
+      "model": "pantz_mod:block/purpur_pedestal_light_gray",
+      "y": 270
+    },
+    "carpet=light_gray,facing=east,waterlogged=true": {
+      "model": "pantz_mod:block/purpur_pedestal_light_gray",
+      "y": 270
+    },
+    "carpet=light_gray,facing=north,waterlogged=false": {
+      "model": "pantz_mod:block/purpur_pedestal_light_gray",
+      "y": 180
+    },
+    "carpet=light_gray,facing=north,waterlogged=true": {
+      "model": "pantz_mod:block/purpur_pedestal_light_gray",
+      "y": 180
+    },
+    "carpet=light_gray,facing=south,waterlogged=false": {
+      "model": "pantz_mod:block/purpur_pedestal_light_gray"
+    },
+    "carpet=light_gray,facing=south,waterlogged=true": {
+      "model": "pantz_mod:block/purpur_pedestal_light_gray"
+    },
+    "carpet=light_gray,facing=west,waterlogged=false": {
+      "model": "pantz_mod:block/purpur_pedestal_light_gray",
+      "y": 90
+    },
+    "carpet=light_gray,facing=west,waterlogged=true": {
+      "model": "pantz_mod:block/purpur_pedestal_light_gray",
+      "y": 90
+    },
+    "carpet=lime,facing=east,waterlogged=false": {
+      "model": "pantz_mod:block/purpur_pedestal_lime",
+      "y": 270
+    },
+    "carpet=lime,facing=east,waterlogged=true": {
+      "model": "pantz_mod:block/purpur_pedestal_lime",
+      "y": 270
+    },
+    "carpet=lime,facing=north,waterlogged=false": {
+      "model": "pantz_mod:block/purpur_pedestal_lime",
+      "y": 180
+    },
+    "carpet=lime,facing=north,waterlogged=true": {
+      "model": "pantz_mod:block/purpur_pedestal_lime",
+      "y": 180
+    },
+    "carpet=lime,facing=south,waterlogged=false": {
+      "model": "pantz_mod:block/purpur_pedestal_lime"
+    },
+    "carpet=lime,facing=south,waterlogged=true": {
+      "model": "pantz_mod:block/purpur_pedestal_lime"
+    },
+    "carpet=lime,facing=west,waterlogged=false": {
+      "model": "pantz_mod:block/purpur_pedestal_lime",
+      "y": 90
+    },
+    "carpet=lime,facing=west,waterlogged=true": {
+      "model": "pantz_mod:block/purpur_pedestal_lime",
+      "y": 90
+    },
+    "carpet=magenta,facing=east,waterlogged=false": {
+      "model": "pantz_mod:block/purpur_pedestal_magenta",
+      "y": 270
+    },
+    "carpet=magenta,facing=east,waterlogged=true": {
+      "model": "pantz_mod:block/purpur_pedestal_magenta",
+      "y": 270
+    },
+    "carpet=magenta,facing=north,waterlogged=false": {
+      "model": "pantz_mod:block/purpur_pedestal_magenta",
+      "y": 180
+    },
+    "carpet=magenta,facing=north,waterlogged=true": {
+      "model": "pantz_mod:block/purpur_pedestal_magenta",
+      "y": 180
+    },
+    "carpet=magenta,facing=south,waterlogged=false": {
+      "model": "pantz_mod:block/purpur_pedestal_magenta"
+    },
+    "carpet=magenta,facing=south,waterlogged=true": {
+      "model": "pantz_mod:block/purpur_pedestal_magenta"
+    },
+    "carpet=magenta,facing=west,waterlogged=false": {
+      "model": "pantz_mod:block/purpur_pedestal_magenta",
+      "y": 90
+    },
+    "carpet=magenta,facing=west,waterlogged=true": {
+      "model": "pantz_mod:block/purpur_pedestal_magenta",
+      "y": 90
+    },
+    "carpet=none,facing=east,waterlogged=false": {
+      "model": "pantz_mod:block/purpur_pedestal",
+      "y": 270
+    },
+    "carpet=none,facing=east,waterlogged=true": {
+      "model": "pantz_mod:block/purpur_pedestal",
+      "y": 270
+    },
+    "carpet=none,facing=north,waterlogged=false": {
+      "model": "pantz_mod:block/purpur_pedestal",
+      "y": 180
+    },
+    "carpet=none,facing=north,waterlogged=true": {
+      "model": "pantz_mod:block/purpur_pedestal",
+      "y": 180
+    },
+    "carpet=none,facing=south,waterlogged=false": {
+      "model": "pantz_mod:block/purpur_pedestal"
+    },
+    "carpet=none,facing=south,waterlogged=true": {
+      "model": "pantz_mod:block/purpur_pedestal"
+    },
+    "carpet=none,facing=west,waterlogged=false": {
+      "model": "pantz_mod:block/purpur_pedestal",
+      "y": 90
+    },
+    "carpet=none,facing=west,waterlogged=true": {
+      "model": "pantz_mod:block/purpur_pedestal",
+      "y": 90
+    },
+    "carpet=orange,facing=east,waterlogged=false": {
+      "model": "pantz_mod:block/purpur_pedestal_orange",
+      "y": 270
+    },
+    "carpet=orange,facing=east,waterlogged=true": {
+      "model": "pantz_mod:block/purpur_pedestal_orange",
+      "y": 270
+    },
+    "carpet=orange,facing=north,waterlogged=false": {
+      "model": "pantz_mod:block/purpur_pedestal_orange",
+      "y": 180
+    },
+    "carpet=orange,facing=north,waterlogged=true": {
+      "model": "pantz_mod:block/purpur_pedestal_orange",
+      "y": 180
+    },
+    "carpet=orange,facing=south,waterlogged=false": {
+      "model": "pantz_mod:block/purpur_pedestal_orange"
+    },
+    "carpet=orange,facing=south,waterlogged=true": {
+      "model": "pantz_mod:block/purpur_pedestal_orange"
+    },
+    "carpet=orange,facing=west,waterlogged=false": {
+      "model": "pantz_mod:block/purpur_pedestal_orange",
+      "y": 90
+    },
+    "carpet=orange,facing=west,waterlogged=true": {
+      "model": "pantz_mod:block/purpur_pedestal_orange",
+      "y": 90
+    },
+    "carpet=pink,facing=east,waterlogged=false": {
+      "model": "pantz_mod:block/purpur_pedestal_pink",
+      "y": 270
+    },
+    "carpet=pink,facing=east,waterlogged=true": {
+      "model": "pantz_mod:block/purpur_pedestal_pink",
+      "y": 270
+    },
+    "carpet=pink,facing=north,waterlogged=false": {
+      "model": "pantz_mod:block/purpur_pedestal_pink",
+      "y": 180
+    },
+    "carpet=pink,facing=north,waterlogged=true": {
+      "model": "pantz_mod:block/purpur_pedestal_pink",
+      "y": 180
+    },
+    "carpet=pink,facing=south,waterlogged=false": {
+      "model": "pantz_mod:block/purpur_pedestal_pink"
+    },
+    "carpet=pink,facing=south,waterlogged=true": {
+      "model": "pantz_mod:block/purpur_pedestal_pink"
+    },
+    "carpet=pink,facing=west,waterlogged=false": {
+      "model": "pantz_mod:block/purpur_pedestal_pink",
+      "y": 90
+    },
+    "carpet=pink,facing=west,waterlogged=true": {
+      "model": "pantz_mod:block/purpur_pedestal_pink",
+      "y": 90
+    },
+    "carpet=purple,facing=east,waterlogged=false": {
+      "model": "pantz_mod:block/purpur_pedestal_purple",
+      "y": 270
+    },
+    "carpet=purple,facing=east,waterlogged=true": {
+      "model": "pantz_mod:block/purpur_pedestal_purple",
+      "y": 270
+    },
+    "carpet=purple,facing=north,waterlogged=false": {
+      "model": "pantz_mod:block/purpur_pedestal_purple",
+      "y": 180
+    },
+    "carpet=purple,facing=north,waterlogged=true": {
+      "model": "pantz_mod:block/purpur_pedestal_purple",
+      "y": 180
+    },
+    "carpet=purple,facing=south,waterlogged=false": {
+      "model": "pantz_mod:block/purpur_pedestal_purple"
+    },
+    "carpet=purple,facing=south,waterlogged=true": {
+      "model": "pantz_mod:block/purpur_pedestal_purple"
+    },
+    "carpet=purple,facing=west,waterlogged=false": {
+      "model": "pantz_mod:block/purpur_pedestal_purple",
+      "y": 90
+    },
+    "carpet=purple,facing=west,waterlogged=true": {
+      "model": "pantz_mod:block/purpur_pedestal_purple",
+      "y": 90
+    },
+    "carpet=red,facing=east,waterlogged=false": {
+      "model": "pantz_mod:block/purpur_pedestal_red",
+      "y": 270
+    },
+    "carpet=red,facing=east,waterlogged=true": {
+      "model": "pantz_mod:block/purpur_pedestal_red",
+      "y": 270
+    },
+    "carpet=red,facing=north,waterlogged=false": {
+      "model": "pantz_mod:block/purpur_pedestal_red",
+      "y": 180
+    },
+    "carpet=red,facing=north,waterlogged=true": {
+      "model": "pantz_mod:block/purpur_pedestal_red",
+      "y": 180
+    },
+    "carpet=red,facing=south,waterlogged=false": {
+      "model": "pantz_mod:block/purpur_pedestal_red"
+    },
+    "carpet=red,facing=south,waterlogged=true": {
+      "model": "pantz_mod:block/purpur_pedestal_red"
+    },
+    "carpet=red,facing=west,waterlogged=false": {
+      "model": "pantz_mod:block/purpur_pedestal_red",
+      "y": 90
+    },
+    "carpet=red,facing=west,waterlogged=true": {
+      "model": "pantz_mod:block/purpur_pedestal_red",
+      "y": 90
+    },
+    "carpet=white,facing=east,waterlogged=false": {
+      "model": "pantz_mod:block/purpur_pedestal_white",
+      "y": 270
+    },
+    "carpet=white,facing=east,waterlogged=true": {
+      "model": "pantz_mod:block/purpur_pedestal_white",
+      "y": 270
+    },
+    "carpet=white,facing=north,waterlogged=false": {
+      "model": "pantz_mod:block/purpur_pedestal_white",
+      "y": 180
+    },
+    "carpet=white,facing=north,waterlogged=true": {
+      "model": "pantz_mod:block/purpur_pedestal_white",
+      "y": 180
+    },
+    "carpet=white,facing=south,waterlogged=false": {
+      "model": "pantz_mod:block/purpur_pedestal_white"
+    },
+    "carpet=white,facing=south,waterlogged=true": {
+      "model": "pantz_mod:block/purpur_pedestal_white"
+    },
+    "carpet=white,facing=west,waterlogged=false": {
+      "model": "pantz_mod:block/purpur_pedestal_white",
+      "y": 90
+    },
+    "carpet=white,facing=west,waterlogged=true": {
+      "model": "pantz_mod:block/purpur_pedestal_white",
+      "y": 90
+    },
+    "carpet=yellow,facing=east,waterlogged=false": {
+      "model": "pantz_mod:block/purpur_pedestal_yellow",
+      "y": 270
+    },
+    "carpet=yellow,facing=east,waterlogged=true": {
+      "model": "pantz_mod:block/purpur_pedestal_yellow",
+      "y": 270
+    },
+    "carpet=yellow,facing=north,waterlogged=false": {
+      "model": "pantz_mod:block/purpur_pedestal_yellow",
+      "y": 180
+    },
+    "carpet=yellow,facing=north,waterlogged=true": {
+      "model": "pantz_mod:block/purpur_pedestal_yellow",
+      "y": 180
+    },
+    "carpet=yellow,facing=south,waterlogged=false": {
+      "model": "pantz_mod:block/purpur_pedestal_yellow"
+    },
+    "carpet=yellow,facing=south,waterlogged=true": {
+      "model": "pantz_mod:block/purpur_pedestal_yellow"
+    },
+    "carpet=yellow,facing=west,waterlogged=false": {
+      "model": "pantz_mod:block/purpur_pedestal_yellow",
+      "y": 90
+    },
+    "carpet=yellow,facing=west,waterlogged=true": {
+      "model": "pantz_mod:block/purpur_pedestal_yellow",
+      "y": 90
+    }
+  }
+}
