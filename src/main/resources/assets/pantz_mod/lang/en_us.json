@@ -39,6 +39,13 @@
 
   "item.pantz_mod.excavator": "Excavator",
   "item.pantz_mod.diamond_excavator": "Diamond Excavator",
-  "item.pantz_mod.netherite_excavator": "Netherite Excavator"
+  "item.pantz_mod.netherite_excavator": "Netherite Excavator",
+
+  "block.pantz_mod.stone_pedestal": "Stone Pedestal",
+  "block.pantz_mod.deepslate_pedestal": "Deepslate Pedestal",
+  "block.pantz_mod.blacstone_pedestal": "Blackstone Pedestal",
+  "block.pantz_mod.quartz_pedestal": "Quartz Pedestal",
+  "block.pantz_mod.purpur_pedestal": "Purpur Pedestal",
+  "block.pantz_mod.prismarine_pedestal": "Prismarine Pedestal"
 
 }
