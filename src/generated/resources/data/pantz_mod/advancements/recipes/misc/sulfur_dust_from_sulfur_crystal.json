@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_sulfur_crystal": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "pantz_mod:sulfur_crystal"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "pantz_mod:sulfur_dust_from_sulfur_crystal"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_sulfur_crystal",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "pantz_mod:sulfur_dust_from_sulfur_crystal"
+    ]
+  },
+  "sends_telemetry_event": false
+}

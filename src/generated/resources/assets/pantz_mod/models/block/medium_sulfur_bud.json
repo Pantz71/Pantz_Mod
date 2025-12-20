@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "pantz_mod:block/medium_sulfur_bud"
+  }
+}
