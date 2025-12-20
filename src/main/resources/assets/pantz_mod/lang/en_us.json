@@ -35,6 +35,10 @@
 
   "item.pantz_mod.trowel": "Trowel",
 
-  "item.pantz_mod.honey_deserializer": "Honey Deserializer"
+  "item.pantz_mod.honey_deserializer": "Honey Deserializer",
+
+  "item.pantz_mod.excavator": "Excavator",
+  "item.pantz_mod.diamond_excavator": "Diamond Excavator",
+  "item.pantz_mod.netherite_excavator": "Netherite Excavator"
 
 }
