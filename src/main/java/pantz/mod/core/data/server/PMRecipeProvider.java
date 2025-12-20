@@ -101,6 +101,12 @@ public class PMRecipeProvider extends BlueprintRecipeProvider {
                 .pattern(" # ")
                 .unlockedBy(getHasName(Items.COPPER_INGOT), has(Tags.Items.INGOTS_COPPER))
                 .save(consumer);
+
+        excavator(consumer, EXCAVATOR.get(), STEEL_INGOT.get(), PMItemTags.INGOTS_STEEL);
+        excavator(consumer, DIAMOND_EXCAVATOR.get(), Items.DIAMOND, Tags.Items.GEMS_DIAMOND);
+
+        netheriteSmithing(consumer, DIAMOND_EXCAVATOR.get(), TOOLS, NETHERITE_EXCAVATOR.get());
+
     }
 
     private void oreRecipes(Consumer<FinishedRecipe> consumer, RecipeCategory category, ItemLike input, ItemLike output, float experience, int time) {
@@ -115,6 +121,14 @@ public class PMRecipeProvider extends BlueprintRecipeProvider {
 
     private static RecipeBuilder polishedBuilder(RecipeCategory pCategory, ItemLike pResult, Ingredient pMaterial, int count) {
         return ShapedRecipeBuilder.shaped(pCategory, pResult, count).define('S', pMaterial).pattern("SS").pattern("SS");
+    }
+
+    public static void excavator(Consumer<FinishedRecipe> consumer, ItemLike result, ItemLike item, TagKey<Item> material) {
+        excavatorBuilder(TOOLS, result, Ingredient.of(material), 1).unlockedBy(getHasName(item), has(material)).save(consumer);
+    }
+
+    public static RecipeBuilder excavatorBuilder(RecipeCategory category, ItemLike result, Ingredient material, int count) {
+        return ShapedRecipeBuilder.shaped(category, result, count).define('#', material).define('/', Tags.Items.RODS_WOODEN).pattern(" ##").pattern(" /#").pattern("/  ");
     }
 
     private static void toolsAndArmor(Consumer<FinishedRecipe> consumer, ItemLike sword, ItemLike shovel, ItemLike pickaxe, ItemLike axe, ItemLike hoe, ItemLike helmet, ItemLike chestplate, ItemLike leggings, ItemLike boots, ItemLike ingot, TagKey<Item> ingotTag) {

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": {
+      "tag": "forge:gems/diamond"
+    },
+    "/": {
+      "tag": "forge:rods/wooden"
+    }
+  },
+  "pattern": [
+    " ##",
+    " /#",
+    "/  "
+  ],
+  "result": {
+    "item": "pantz_mod:diamond_excavator"
+  },
+  "show_notification": true
+}

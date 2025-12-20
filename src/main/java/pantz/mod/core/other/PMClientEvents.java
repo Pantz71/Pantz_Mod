@@ -1,18 +1,29 @@
 package pantz.mod.core.other;
 
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.client.renderer.LevelRenderer;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.RenderHighlightEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
+import pantz.mod.common.item.AreaDiggerItem;
 import pantz.mod.core.PMConfig;
 import pantz.mod.core.PantzMod;
 import pantz.mod.core.other.tags.PMBlockTags;
@@ -35,6 +46,63 @@ public class PMClientEvents {
             spawnWaxParticles(minecraft);
         }
     }
+
+    @SubscribeEvent
+    public static void onBlockHighlight(RenderHighlightEvent.Block event) {
+        Player player = Minecraft.getInstance().player;
+        if (player != null) {
+            ItemStack held = player.getMainHandItem();
+            if (held.getItem() instanceof AreaDiggerItem) {
+                BlockPos blockPos = event.getTarget().getBlockPos();
+
+                event.setCanceled(true);
+
+                Direction direction = event.getTarget().getDirection();
+                renderHighlight(blockPos, direction, event.getPoseStack(), event.getMultiBufferSource());
+            }
+        }
+    }
+
+    private static void renderHighlight(BlockPos center, Direction face, PoseStack poseStack, MultiBufferSource bufferSource) {
+        Minecraft minecraft = Minecraft.getInstance();
+        Vec3 camera = minecraft.gameRenderer.getMainCamera().getPosition();
+
+        BlockPos startPos;
+        double width = 1, height = 1, depth = 1;
+
+        // box
+        switch (face) {
+            case UP, DOWN -> {
+                startPos = center.offset(-1, 0, -1);
+                width = 3;
+                depth = 3;
+            }
+            case NORTH, SOUTH -> {
+                startPos = center.offset(-1, -1, 0);
+                width = 3;
+                height = 3;
+            }
+            case WEST, EAST -> {
+                startPos = center.offset(0, -1, -1);
+                height = 3;
+                depth = 3;
+            }
+            default -> startPos = center;
+        }
+        // Outline
+        LevelRenderer.renderLineBox(
+                poseStack,
+                bufferSource.getBuffer(RenderType.lines()),
+                startPos.getX() - camera.x,
+                startPos.getY() - camera.y,
+                startPos.getZ() - camera.z,
+                startPos.getX() + width - camera.x,
+                startPos.getY() + height - camera.y,
+                startPos.getZ() + depth - camera.z,
+                1f, 1f, 1f, 1f
+        );
+    }
+
 
     private static void spawnWaxParticles(Minecraft mc) {
         LocalPlayer player = mc.player;

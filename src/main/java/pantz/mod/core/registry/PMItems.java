@@ -3,8 +3,10 @@ package pantz.mod.core.registry;
 import com.teamabnormals.blueprint.core.util.PropertyUtil;
 import com.teamabnormals.blueprint.core.util.item.CreativeModeTabContentsPopulator;
 import com.teamabnormals.blueprint.core.util.registry.ItemSubRegistryHelper;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.*;
 import net.minecraftforge.registries.RegistryObject;
+import pantz.mod.common.item.AreaDiggerItem;
 import pantz.mod.common.item.TrowelItem;
 import pantz.mod.core.PantzMod;
 import pantz.mod.core.other.PMTiers.*;
@@ -38,6 +40,10 @@ public class PMItems {
 
     public static final RegistryObject<Item> HONEY_DESERIALIZER = ITEMS.createItem("honey_deserializer", () -> new Item(PropertyUtil.stacksOnce()));
 
+    public static final RegistryObject<Item> EXCAVATOR = ITEMS.createItem("excavator", () -> new AreaDiggerItem(-3f, -3f, PMItemTiers.STEEL, BlockTags.MINEABLE_WITH_SHOVEL, new Item.Properties()));
+    public static final RegistryObject<Item> DIAMOND_EXCAVATOR = ITEMS.createItem("diamond_excavator", () -> new AreaDiggerItem(-3f, -3f, Tiers.DIAMOND, BlockTags.MINEABLE_WITH_SHOVEL, new Item.Properties()));
+    public static final RegistryObject<Item> NETHERITE_EXCAVATOR = ITEMS.createItem("netherite_excavator", () -> new AreaDiggerItem(-4f, -2.5f, Tiers.NETHERITE, BlockTags.MINEABLE_WITH_SHOVEL, new Item.Properties()));
+
     private static Supplier<Item> basicItem() {
         return () -> new Item(new Item.Properties());
     }
@@ -56,9 +62,12 @@ public class PMItems {
                 .addItemsBefore(of(Items.GOLDEN_HORSE_ARMOR), STEEL_HORSE_ARMOR)
 
                 .tab(TOOLS_AND_UTILITIES)
-                .addItemsBefore(of(Items.GOLDEN_SHOVEL), STEEL_SHOVEL, STEEL_PICKAXE, STEEL_AXE, STEEL_HOE)
+                .addItemsBefore(of(Items.GOLDEN_SHOVEL), STEEL_SHOVEL, STEEL_PICKAXE, STEEL_AXE, STEEL_HOE, EXCAVATOR)
                 .addItemsAfter(of(Items.SHEARS), TROWEL)
                 .addItemsAfter(of(Items.BRUSH), HONEY_DESERIALIZER)
+
+                .addItemsAfter(of(Items.DIAMOND_HOE), DIAMOND_EXCAVATOR)
+                .addItemsAfter(of(Items.NETHERITE_HOE), NETHERITE_EXCAVATOR)
 
         ;
     }

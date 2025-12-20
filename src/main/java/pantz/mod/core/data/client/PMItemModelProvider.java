@@ -20,6 +20,6 @@ public class PMItemModelProvider extends BlueprintItemModelProvider {
         this.trimmableArmorItem(STEEL_HELMET, STEEL_CHESTPLATE, STEEL_LEGGINGS, STEEL_BOOTS);
 
         this.handheldItem(STEEL_SWORD, STEEL_SHOVEL, STEEL_PICKAXE, STEEL_AXE, STEEL_HOE,
-                TROWEL);
+                TROWEL, EXCAVATOR, DIAMOND_EXCAVATOR, NETHERITE_EXCAVATOR);
     }
 }
