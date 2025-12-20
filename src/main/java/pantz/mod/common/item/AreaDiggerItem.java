@@ -16,11 +16,8 @@ import net.minecraft.world.phys.Vec3;
 import java.util.*;
 
 public class AreaDiggerItem extends DiggerItem {
-    public final TagKey<Block> blockTag;
-
     public AreaDiggerItem(float pAttackDamageModifier, float pAttackSpeedModifier, Tier pTier, TagKey<Block> pBlocks, Properties pProperties) {
         super(pAttackDamageModifier, pAttackSpeedModifier, pTier, pBlocks, pProperties);
-        this.blockTag = pBlocks;
     }
 
     public static List<BlockPos> mineArea(ServerLevel level, Player player, BlockPos pos, int range) {
