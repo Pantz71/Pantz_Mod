@@ -1,8 +1,6 @@
 package pantz.mod.common.item;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
@@ -37,14 +35,14 @@ public class TrowelItem extends Item {
         RandomSource random = level.getRandom();
         InteractionHand hand = ctx.getHand();
         ItemStack trowel = ctx.getItemInHand();
-        Inventory inv = player.getInventory();
+        Inventory inventory = player.getInventory();
 
-        int trowelSlot = inv.selected;
+        int trowelSlot = inventory.selected;
 
         List<ItemStack> placeableBlocks = new ArrayList<>();
         for (int i = 0; i < 9; i++) {
             if (i == trowelSlot) continue;
-            ItemStack stack = inv.getItem(i);
+            ItemStack stack = inventory.getItem(i);
             if (!stack.isEmpty() && stack.getItem() instanceof BlockItem) {
                 placeableBlocks.add(stack);
             }
