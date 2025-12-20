@@ -31,6 +31,11 @@ public class PMBlockStateProvider extends BlueprintBlockStateProvider {
         this.block(NETHER_SULFUR_ORE);
         this.block(CHISELED_SULFUR_BRICKS);
 
+        this.crossBlock(SMALL_SULFUR_BUD);
+        this.crossBlock(MEDIUM_SULFUR_BUD);
+        this.crossBlock(LARGE_SULFUR_BUD);
+        this.crossBlock(SULFUR_CLUSTER);
+
         this.pedestalBlock(STONE_PEDESTAL);
         this.pedestalBlock(DEEPSLATE_PEDESTAL);
         this.pedestalBlock(BLACKSTONE_PEDESTAL);

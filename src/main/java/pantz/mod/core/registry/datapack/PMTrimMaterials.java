@@ -26,7 +26,7 @@ public class PMTrimMaterials {
 
     public static void bootstrap(BootstapContext<TrimMaterial> context) {
         register(context, STEEL, PMItems.STEEL_INGOT.get(), Style.EMPTY.withColor(0x818181), Map.of());
-        register(context, SULFUR, PMItems.SULFUR.get(), Style.EMPTY.withColor(0xf6e484), Map.of());
+        register(context, SULFUR, PMItems.SULFUR_DUST.get(), Style.EMPTY.withColor(0xf6e484), Map.of());
     }
 
     public static void registerArmorMaterialOverrides() {

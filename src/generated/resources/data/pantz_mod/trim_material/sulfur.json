@@ -4,6 +4,6 @@
     "color": "#F6E484",
     "translate": "trim_material.pantz_mod.sulfur"
   },
-  "ingredient": "pantz_mod:sulfur",
+  "ingredient": "pantz_mod:sulfur_dust",
   "item_model_index": -1.0
 }

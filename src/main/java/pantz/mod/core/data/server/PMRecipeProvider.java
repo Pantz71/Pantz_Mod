@@ -67,12 +67,12 @@ public class PMRecipeProvider extends BlueprintRecipeProvider {
 
         toolsAndArmor(consumer, STEEL_SWORD.get(), STEEL_SHOVEL.get(), STEEL_PICKAXE.get(), STEEL_AXE.get(), STEEL_HOE.get(), STEEL_HELMET.get(), STEEL_CHESTPLATE.get(), STEEL_LEGGINGS.get(), STEEL_BOOTS.get(), STEEL_INGOT.get(), PMItemTags.INGOTS_STEEL);
 
-        polishedSingleOutput(consumer, BUILDING_BLOCKS, SULFUR_BLOCK.get(), SULFUR.get());
         polished(consumer, BUILDING_BLOCKS, SULFUR_BRICKS.get(), SULFUR_BLOCK.get());
+        storageRecipesWithCustomUnpacking(consumer, MISC, SULFUR_CRYSTAL.get(), BUILDING_BLOCKS, SULFUR_BLOCK.get(), "sulfur_crystal_from_sulfur_block", "sulfur_crystal");
 
         ShapelessRecipeBuilder.shapeless(MISC, Items.GUNPOWDER, 2)
                 .requires(Ingredient.of(PMItemTags.DUSTS_SULFUR), 2).requires(PMItemTags.COALS)
-                .unlockedBy(getHasName(SULFUR.get()), has(PMItemTags.DUSTS_SULFUR)).save(consumer);
+                .unlockedBy(getHasName(SULFUR_CRYSTAL.get()), has(PMItemTags.DUSTS_SULFUR)).save(consumer);
 
         generateRecipes(consumer, PMBlockFamilies.SULFUR_BRICKS_FAMILY);
 
@@ -86,7 +86,8 @@ public class PMRecipeProvider extends BlueprintRecipeProvider {
         stonecutterRecipe(consumer, BUILDING_BLOCKS, SULFUR_BRICK_WALL.get(), SULFUR_BRICKS.get());
         stonecutterRecipe(consumer, BUILDING_BLOCKS, CHISELED_SULFUR_BRICKS.get(), SULFUR_BRICKS.get());
 
-        oreRecipes(consumer, MISC, NETHER_SULFUR_ORE.get(), SULFUR.get(), 0.2f, 200);
+        conversionRecipe(consumer, SULFUR_DUST.get(), SULFUR_CRYSTAL.get(), null, 2);
+        oreRecipes(consumer, MISC, NETHER_SULFUR_ORE.get(), SULFUR_DUST.get(), 0.2f, 200);
 
         ShapedRecipeBuilder.shaped(TOOLS, TROWEL.get())
                 .define('#', PMItemTags.INGOTS_STEEL).define('/', Tags.Items.RODS_WOODEN)
@@ -119,15 +120,6 @@ public class PMRecipeProvider extends BlueprintRecipeProvider {
     private void oreRecipes(Consumer<FinishedRecipe> consumer, RecipeCategory category, ItemLike input, ItemLike output, float experience, int time) {
         SimpleCookingRecipeBuilder.smelting(Ingredient.of(input), category, output, experience, time).unlockedBy(getHasName(input), has(input)).save(consumer, new ResourceLocation(this.getModID(), getItemName(output) + "_from_smelting_" + getItemName(input)));
         SimpleCookingRecipeBuilder.blasting(Ingredient.of(input), category, output, experience, time).unlockedBy(getHasName(input), has(input)).save(consumer, new ResourceLocation(this.getModID(), getItemName(output) + "_from_blasting_" + getItemName(input)));
-    }
-
-
-    private static void polishedSingleOutput(Consumer<FinishedRecipe> pFinishedRecipeConsumer, RecipeCategory pCategory, ItemLike pResult, ItemLike pMaterial) {
-        polishedBuilder(pCategory, pResult, Ingredient.of(pMaterial), 1).unlockedBy(getHasName(pMaterial), has(pMaterial)).save(pFinishedRecipeConsumer);
-    }
-
-    private static RecipeBuilder polishedBuilder(RecipeCategory pCategory, ItemLike pResult, Ingredient pMaterial, int count) {
-        return ShapedRecipeBuilder.shaped(pCategory, pResult, count).define('S', pMaterial).pattern("SS").pattern("SS");
     }
 
     public static void excavator(Consumer<FinishedRecipe> consumer, ItemLike result, ItemLike item, TagKey<Item> material) {

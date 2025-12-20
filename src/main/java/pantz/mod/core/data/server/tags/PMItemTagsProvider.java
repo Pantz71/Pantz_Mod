@@ -30,6 +30,8 @@ public class PMItemTagsProvider extends ItemTagsProvider {
         this.tag(Tags.Items.ARMORS_LEGGINGS).add(STEEL_LEGGINGS.get());
         this.tag(Tags.Items.ARMORS_BOOTS).add(STEEL_BOOTS.get());
 
+        this.tag(ItemTags.CLUSTER_MAX_HARVESTABLES).addTag(ItemTags.PICKAXES);
+
         this.tag(ItemTags.SWORDS).add(STEEL_SWORD.get());
         this.tag(ItemTags.SHOVELS).add(STEEL_SHOVEL.get());
         this.tag(ItemTags.PICKAXES).add(STEEL_PICKAXE.get());
@@ -41,23 +43,28 @@ public class PMItemTagsProvider extends ItemTagsProvider {
 
         this.tag(WEAPONS).addTag(ItemTags.SWORDS);
 
-        this.tag(ItemTags.TRIM_MATERIALS).add(STEEL_INGOT.get(), SULFUR.get());
+        this.tag(ItemTags.TRIM_MATERIALS).add(STEEL_INGOT.get(), SULFUR_DUST.get());
         this.tag(COALS).add(Items.COAL, Items.CHARCOAL);
 
         this.tag(Tags.Items.INGOTS).addTag(INGOTS_STEEL);
         this.tag(Tags.Items.NUGGETS).addTag(NUGGETS_STEEL);
         this.tag(Tags.Items.DUSTS).addTag(DUSTS_SULFUR);
+        this.tag(Tags.Items.GEMS).addTag(GEMS_SULFUR);
 
-        this.tag(DUSTS_SULFUR).add(SULFUR.get());
+        this.tag(DUSTS_SULFUR).add(SULFUR_DUST.get());
+        this.tag(GEMS_SULFUR).add(SULFUR_CRYSTAL.get());
         this.tag(INGOTS_STEEL).add(STEEL_INGOT.get());
         this.tag(NUGGETS_STEEL).add(STEEL_NUGGET.get());
 
         this.copy(Tags.Blocks.STORAGE_BLOCKS, Tags.Items.STORAGE_BLOCKS);
         this.copy(PMBlockTags.STORAGE_BLOCKS_STEEL, STORAGE_BLOCKS_STEEL);
+        this.copy(PMBlockTags.STORAGE_BLOCKS_SULFUR, STORAGE_BLOCKS_SULFUR);
 
         this.copy(PMBlockTags.ORES_SULFUR, ORES_SULFUR);
 
         this.copy(Tags.Blocks.ORE_RATES_SINGULAR, Tags.Items.ORE_RATES_SINGULAR);
         this.copy(Tags.Blocks.ORES_IN_GROUND_NETHERRACK, Tags.Items.ORES_IN_GROUND_NETHERRACK);
+
+        this.copy(PMBlockTags.PEDESTALS, PEDESTALS);
     }
 }

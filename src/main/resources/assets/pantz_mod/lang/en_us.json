@@ -29,7 +29,13 @@
   "block.pantz_mod.sulfur_brick_wall": "Sulfur Brick Wall",
   "block.pantz_mod.chiseled_sulfur_bricks": "Chiseled Sulfur Brick",
 
-  "item.pantz_mod.sulfur": "Sulfur",
+  "block.pantz_mod.small_sulfur_bud": "Small Sulfur Bud",
+  "block.pantz_mod.medium_sulfur_bud": "Medium Sulfur Bud",
+  "block.pantz_mod.large_sulfur_bud": "large Sulfur Bud",
+  "block.pantz_mod.sulfur_cluster": "Sulfur Cluster",
+
+  "item.pantz_mod.sulfur_dust": "Sulfur Dust",
+  "item.pantz_mod.sulfur_crystal": "Sulfur Crystal",
 
   "trim_material.pantz_mod.sulfur": "Sulfur Material",
 

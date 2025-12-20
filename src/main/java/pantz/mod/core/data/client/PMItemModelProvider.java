@@ -15,7 +15,7 @@ public class PMItemModelProvider extends BlueprintItemModelProvider {
     @Override
     protected void registerModels() {
         this.generatedItem(STEEL_INGOT, STEEL_NUGGET, STEEL_HORSE_ARMOR,
-                SULFUR, HONEY_DESERIALIZER);
+                SULFUR_DUST, SULFUR_CRYSTAL, HONEY_DESERIALIZER);
 
         this.trimmableArmorItem(STEEL_HELMET, STEEL_CHESTPLATE, STEEL_LEGGINGS, STEEL_BOOTS);
 

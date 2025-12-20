@@ -24,5 +24,10 @@ public class PMClientCompat {
         ItemBlockRenderTypes.setRenderLayer(PMBlocks.PURPUR_PEDESTAL.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(PMBlocks.PRISMARINE_PEDESTAL.get(), RenderType.cutout());
 
+        ItemBlockRenderTypes.setRenderLayer(PMBlocks.SMALL_SULFUR_BUD.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(PMBlocks.MEDIUM_SULFUR_BUD.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(PMBlocks.LARGE_SULFUR_BUD.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(PMBlocks.SULFUR_CLUSTER.get(), RenderType.cutout());
+
     }
 }
