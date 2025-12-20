@@ -3,11 +3,14 @@ package pantz.mod.core;
 import com.mojang.logging.LogUtils;
 import com.teamabnormals.blueprint.core.util.DataUtil;
 import com.teamabnormals.blueprint.core.util.registry.RegistryHelper;
+import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.EntityRenderersEvent;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -19,6 +22,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
+import pantz.mod.client.renderer.be.PedestalRenderer;
 import pantz.mod.core.data.client.PMBlockStateProvider;
 import pantz.mod.core.data.client.PMItemModelProvider;
 import pantz.mod.core.data.client.PMSpriteSourceProvider;
@@ -31,6 +35,7 @@ import pantz.mod.core.data.server.tags.PMItemTagsProvider;
 import pantz.mod.core.data.server.tags.PMTrimMaterialTagsProvider;
 import pantz.mod.core.other.PMClientCompat;
 import pantz.mod.core.other.PMCompat;
+import pantz.mod.core.registry.PMBlockEntityTypes;
 import pantz.mod.core.registry.PMBlocks;
 import pantz.mod.core.registry.PMItems;
 
@@ -46,8 +51,10 @@ public class PantzMod {
         ModLoadingContext context = ModLoadingContext.get();
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
         PMBlocks.BLOCKS.register(bus);
+        PMBlockEntityTypes.BLOCK_ENTITY_TYPES.register(bus);
         PMItems.ITEMS.register(bus);
 
+        MinecraftForge.EVENT_BUS.register(this);
         bus.addListener(this::commonSetup);
         bus.addListener(this::clientSetup);
         bus.addListener(this::dataSetup);
@@ -96,7 +103,10 @@ public class PantzMod {
 
     }
 
+
     public static ResourceLocation location(String loc) {
         return new ResourceLocation(MOD_ID, loc);
     }
+
+
 }

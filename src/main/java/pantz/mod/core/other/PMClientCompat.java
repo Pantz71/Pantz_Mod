@@ -17,5 +17,12 @@ public class PMClientCompat {
         ItemBlockRenderTypes.setRenderLayer(PMBlocks.STEEL_DOOR.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(PMBlocks.STEEL_TRAPDOOR.get(), RenderType.cutout());
 
+        ItemBlockRenderTypes.setRenderLayer(PMBlocks.STONE_PEDESTAL.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(PMBlocks.DEEPSLATE_PEDESTAL.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(PMBlocks.BLACKSTONE_PEDESTAL.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(PMBlocks.QUARTZ_PEDESTAL.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(PMBlocks.PURPUR_PEDESTAL.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(PMBlocks.PRISMARINE_PEDESTAL.get(), RenderType.cutout());
+
     }
 }

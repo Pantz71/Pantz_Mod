@@ -18,6 +18,8 @@ public class PMItemTags {
 
     public static final TagKey<Item> EXCAVATORS = itemTag("excavators");
 
+    public static final TagKey<Item> WEAPONS = itemTag("weapons");
+
     public static TagKey<Item> itemTag(String name) {
         return TagUtil.itemTag(PantzMod.MOD_ID, name);
     }

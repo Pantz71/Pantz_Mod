@@ -62,6 +62,13 @@ public class PMLootTableProvider extends LootTableProvider {
             this.add(SULFUR_BRICK_SLAB.get(), this::createSlabItemTable);
             this.dropSelf(SULFUR_BRICK_WALL.get());
             this.dropSelf(CHISELED_SULFUR_BRICKS.get());
+
+            this.dropSelf(STONE_PEDESTAL.get());
+            this.dropSelf(DEEPSLATE_PEDESTAL.get());
+            this.dropSelf(BLACKSTONE_PEDESTAL.get());
+            this.dropSelf(QUARTZ_PEDESTAL.get());
+            this.dropSelf(PURPUR_PEDESTAL.get());
+            this.dropSelf(PRISMARINE_PEDESTAL.get());
         }
 
         private LootTable.Builder createDustOreDrop(Block block, ItemLike item, int min, int max) {

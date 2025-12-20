@@ -5,6 +5,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
+import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
 import pantz.mod.core.PantzMod;
 
@@ -17,4 +18,12 @@ public class PMProperties {
     public static final BlockBehaviour.Properties STEEL_BARS = BlockBehaviour.Properties.copy(Blocks.IRON_BARS).strength(4.0f, 6.0f);
 
     public static final BlockBehaviour.Properties SULFUR_BLOCK = BlockBehaviour.Properties.copy(Blocks.COAL_BLOCK).mapColor(MapColor.COLOR_YELLOW).ignitedByLava();
+
+    public static final BlockBehaviour.Properties PEDESTAL = BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(1.5f, 6.0f).sound(SoundType.STONE);
+    public static final BlockBehaviour.Properties DEEPSLATE_PEDESTAL = BlockBehaviour.Properties.of().mapColor(MapColor.DEEPSLATE).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(3.0f, 6.0f).sound(SoundType.DEEPSLATE);
+    public static final BlockBehaviour.Properties BLACKSTONE_PEDESTAL = BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BLACK).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(1.5f, 6.0f).sound(SoundType.STONE);
+    public static final BlockBehaviour.Properties QUARTZ_PEDESTAL = BlockBehaviour.Properties.of().mapColor(MapColor.QUARTZ).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(1.5f, 6.0f).sound(SoundType.STONE);
+    public static final BlockBehaviour.Properties PURPUR_PEDESTAL = BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_MAGENTA).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(1.5f, 6.0f).sound(SoundType.STONE);
+    public static final BlockBehaviour.Properties PRISMARINE_PEDESTAL = BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_CYAN).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(1.5f, 6.0f).sound(SoundType.STONE);
+
 }
