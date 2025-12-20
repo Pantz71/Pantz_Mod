@@ -36,6 +36,9 @@ public class PMItemTagsProvider extends ItemTagsProvider {
         this.tag(ItemTags.AXES).add(STEEL_AXE.get());
         this.tag(ItemTags.HOES).add(STEEL_HOE.get());
 
+        this.tag(Tags.Items.TOOLS).addTag(EXCAVATORS);
+        this.tag(EXCAVATORS).add(EXCAVATOR.get(), DIAMOND_EXCAVATOR.get(), NETHERITE_EXCAVATOR.get());
+
         this.tag(ItemTags.TRIM_MATERIALS).add(STEEL_INGOT.get(), SULFUR.get());
         this.tag(COALS).add(Items.COAL, Items.CHARCOAL);
 

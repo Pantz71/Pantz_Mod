@@ -16,6 +16,8 @@ public class PMItemTags {
     public static final TagKey<Item> STORAGE_BLOCKS_SULFUR = forgeTag("storage_blocks/sulfur");
     public static final TagKey<Item> ORES_SULFUR = forgeTag("ores/sulfur");
 
+    public static final TagKey<Item> EXCAVATORS = itemTag("excavators");
+
     public static TagKey<Item> itemTag(String name) {
         return TagUtil.itemTag(PantzMod.MOD_ID, name);
     }
