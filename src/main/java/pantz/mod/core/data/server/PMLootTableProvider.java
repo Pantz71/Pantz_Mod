@@ -86,6 +86,8 @@ public class PMLootTableProvider extends LootTableProvider {
             this.dropSelf(PURPUR_PEDESTAL.get());
             this.dropSelf(PRISMARINE_PEDESTAL.get());
 
+            this.dropSelf(ENDER_SCANNER.get());
+
 
         }
 

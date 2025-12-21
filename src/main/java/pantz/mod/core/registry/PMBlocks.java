@@ -10,6 +10,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraftforge.registries.RegistryObject;
+import pantz.mod.common.block.EnderScannerBlock;
 import pantz.mod.common.block.NetherClusterBlock;
 import pantz.mod.common.block.SulfurBlock;
 import pantz.mod.common.block.PedestalBlock;
@@ -51,6 +52,8 @@ public class PMBlocks {
     public static final RegistryObject<Block> PURPUR_PEDESTAL = BLOCKS.createBlock("purpur_pedestal", () -> new PedestalBlock(PMProperties.PURPUR_PEDESTAL));
     public static final RegistryObject<Block> PRISMARINE_PEDESTAL = BLOCKS.createBlock("prismarine_pedestal", () -> new PedestalBlock(PMProperties.PRISMARINE_PEDESTAL));
 
+    public static final RegistryObject<Block> ENDER_SCANNER = BLOCKS.createBlock("ender_scanner", () -> new EnderScannerBlock(PMProperties.ENDER_SCANNER));
+
 
     public static void setupTabs() {
         CreativeModeTabContentsPopulator.mod(PantzMod.MOD_ID)
@@ -69,6 +72,7 @@ public class PMBlocks {
 
                 .tab(REDSTONE_BLOCKS)
                 .addItemsAfter(of(Blocks.LECTERN), STONE_PEDESTAL)
+                .addItemsAfter(of(Blocks.TARGET), ENDER_SCANNER)
 
         ;
     }

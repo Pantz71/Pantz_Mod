@@ -237,7 +237,6 @@ public class PedestalBlock extends HorizontalDirectionalBlock implements EntityB
         return SUPPORT;
     }
 
-
     @Override
     public RenderShape getRenderShape(BlockState state) {
         return RenderShape.MODEL;

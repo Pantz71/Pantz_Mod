@@ -37,6 +37,9 @@ public class PMProperties {
     public static final BlockBehaviour.Properties MEDIUM_SULFUR_BUD = BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_YELLOW).forceSolidOn().noOcclusion().randomTicks().sound(SoundType.MEDIUM_AMETHYST_BUD).strength(1.5F).pushReaction(PushReaction.DESTROY).lightLevel(light -> 6).randomTicks();
     public static final BlockBehaviour.Properties LARGE_SULFUR_BUD = BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_YELLOW).forceSolidOn().noOcclusion().randomTicks().sound(SoundType.LARGE_AMETHYST_BUD).strength(1.5F).pushReaction(PushReaction.DESTROY).lightLevel(light -> 9).randomTicks();
 
+    public static final BlockBehaviour.Properties ENDER_SCANNER = BlockBehaviour.Properties.copy(Blocks.OBSIDIAN).strength(3.0f, 1200.0f);
+
+
     public static ToIntFunction<BlockState> litBlockEmission(int value) {
         return lit -> lit.getValue(BlockStateProperties.LIT) ? value : 0;
     }

@@ -26,11 +26,13 @@ import pantz.mod.client.renderer.be.PedestalRenderer;
 import pantz.mod.core.data.client.PMBlockStateProvider;
 import pantz.mod.core.data.client.PMItemModelProvider;
 import pantz.mod.core.data.client.PMSpriteSourceProvider;
+import pantz.mod.core.data.server.PMAdvancementProvider;
 import pantz.mod.core.data.server.PMDatapackBuiltinEntriesProvider;
 import pantz.mod.core.data.server.PMLootTableProvider;
 import pantz.mod.core.data.server.PMRecipeProvider;
 import pantz.mod.core.data.server.modifiers.PMLootModifierProvider;
 import pantz.mod.core.data.server.tags.PMBlockTagsProvider;
+import pantz.mod.core.data.server.tags.PMEntityTypeTagsProvider;
 import pantz.mod.core.data.server.tags.PMItemTagsProvider;
 import pantz.mod.core.data.server.tags.PMTrimMaterialTagsProvider;
 import pantz.mod.core.other.PMClientCompat;
@@ -97,7 +99,10 @@ public class PantzMod {
         PMBlockTagsProvider blockTags = new PMBlockTagsProvider(output, provider, helper);
         gen.addProvider(server, blockTags);
         gen.addProvider(server, new PMItemTagsProvider(output, provider, blockTags.contentsGetter(), helper));
+        gen.addProvider(server, new PMEntityTypeTagsProvider(output, provider, helper));
         gen.addProvider(server, new PMTrimMaterialTagsProvider(output, provider, helper));
+
+        gen.addProvider(server, PMAdvancementProvider.create(output, provider, helper));
 
         gen.addProvider(server, new PMLootModifierProvider(output, provider));
 

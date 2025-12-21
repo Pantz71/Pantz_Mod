@@ -1,4 +1,5 @@
 {
+  "_steel": "steel",
   "block.pantz_mod.steel_block": "Steel Block",
   "block.pantz_mod.steel_door": "Steel Door",
   "block.pantz_mod.steel_trapdoor": "Steel Trapdoor",
@@ -20,7 +21,7 @@
 
   "trim_material.pantz_mod.steel": "Steel Material",
 
-
+  "_sulfur": "sulfur",
   "block.pantz_mod.nether_sulfur_ore": "Nether Sulfur Ore",
   "block.pantz_mod.sulfur_block": "Sulfur Block",
   "block.pantz_mod.sulfur_bricks": "Sulfur Bricks",
@@ -39,6 +40,7 @@
 
   "trim_material.pantz_mod.sulfur": "Sulfur Material",
 
+  "_tools": "tools",
   "item.pantz_mod.trowel": "Trowel",
 
   "item.pantz_mod.honey_deserializer": "Honey Deserializer",
@@ -47,11 +49,16 @@
   "item.pantz_mod.diamond_excavator": "Diamond Excavator",
   "item.pantz_mod.netherite_excavator": "Netherite Excavator",
 
+  "_pedestal": "pedestal",
   "block.pantz_mod.stone_pedestal": "Stone Pedestal",
   "block.pantz_mod.deepslate_pedestal": "Deepslate Pedestal",
   "block.pantz_mod.blackstone_pedestal": "Blackstone Pedestal",
   "block.pantz_mod.quartz_pedestal": "Quartz Pedestal",
   "block.pantz_mod.purpur_pedestal": "Purpur Pedestal",
-  "block.pantz_mod.prismarine_pedestal": "Prismarine Pedestal"
+  "block.pantz_mod.prismarine_pedestal": "Prismarine Pedestal",
 
+  "_ender_scanner": "ender scanner",
+  "block.pantz_mod.ender_scanner": "Ender Scanner",
+  "advancements.pantz_mod.adventure.look_at_scanner.title": "Eye See You",
+  "advancements.pantz_mod.adventure.look_at_scanner.description": "Look directly into the middle of Ender Scanner's eye until it emits full power"
 }

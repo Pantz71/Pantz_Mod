@@ -20,17 +20,23 @@ public class PMConfig {
         public final BooleanValue flintAndSteel;
 
         public final IntValue waxedBlocksDetectionRadius;
+        public final IntValue enderScannerDetectionRadius;
 
         Common(Builder builder) {
-            builder.push("recipes");
+            builder.push("Recipes");
             flintAndSteel = builder.comment("Change Flint and Steel recipe from using Iron to Steel")
                     .define("Using steel for flint and steel", true);
             builder.pop();
 
-            builder.push("tools");
+            builder.push("Tools");
             waxedBlocksDetectionRadius = builder.comment("How far can the Honey Deserializer detect waxed blocks?")
                     .defineInRange("Honey Deserializer detection radius", 16, 0, Integer.MAX_VALUE);
 
+            builder.pop();
+
+            builder.push("Redstone");
+            enderScannerDetectionRadius = builder.comment("How far can the Ender Scanners detect players looking at them?")
+                    .defineInRange("Ender Scanner detection radius", 64, 0, Integer.MAX_VALUE);
             builder.pop();
 
         }

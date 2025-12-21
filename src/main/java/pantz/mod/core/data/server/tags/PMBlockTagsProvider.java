@@ -25,10 +25,13 @@ public class PMBlockTagsProvider extends BlockTagsProvider {
         this.tag(PEDESTALS).add(STONE_PEDESTAL.get(), BLACKSTONE_PEDESTAL.get(), DEEPSLATE_PEDESTAL.get(), QUARTZ_PEDESTAL.get(), PURPUR_PEDESTAL.get(), PRISMARINE_PEDESTAL.get());
 
         this.tag(BlockTags.MINEABLE_WITH_PICKAXE).addTag(PEDESTALS).add(STEEL_BLOCK.get(), STEEL_BARS.get(), STEEL_DOOR.get(), STEEL_TRAPDOOR.get(),
-                SULFUR_BLOCK.get(), SULFUR_BRICKS.get(), SULFUR_BRICK_STAIRS.get(), SULFUR_BRICK_SLAB.get(), NETHER_SULFUR_ORE.get());
+                SULFUR_BLOCK.get(), SULFUR_BRICKS.get(), SULFUR_BRICK_STAIRS.get(), SULFUR_BRICK_SLAB.get(), NETHER_SULFUR_ORE.get(),
+                ENDER_SCANNER.get());
 
         this.tag(BlockTags.NEEDS_STONE_TOOL).add(STEEL_BLOCK.get(), STEEL_BARS.get(), STEEL_DOOR.get(), STEEL_TRAPDOOR.get(),
                 SULFUR_BLOCK.get(), SULFUR_BRICKS.get(), SULFUR_BRICK_STAIRS.get(), SULFUR_BRICK_SLAB.get(), SULFUR_BRICK_WALL.get(), NETHER_SULFUR_ORE.get());
+
+        this.tag(BlockTags.NEEDS_DIAMOND_TOOL).add(ENDER_SCANNER.get());
 
         this.tag(BlockTags.STAIRS).add(SULFUR_BRICK_STAIRS.get());
         this.tag(BlockTags.SLABS).add(SULFUR_BRICK_SLAB.get());

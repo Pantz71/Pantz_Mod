@@ -44,6 +44,22 @@ public class PMBlockStateProvider extends BlueprintBlockStateProvider {
         this.pedestalBlock(QUARTZ_PEDESTAL);
         this.pedestalBlock(PURPUR_PEDESTAL);
         this.pedestalBlock(PRISMARINE_PEDESTAL);
+
+        this.enderScannerBlock(ENDER_SCANNER);
+    }
+
+    private void enderScannerBlock(RegistryObject<Block> block) {
+        for (int power = 0; power <= 15; power++) {
+            String modelName = power == 0 ? name(block.get())
+                    : name(block.get()) + "_" + power;
+            ResourceLocation texture = modLoc("block/" + modelName);
+            getVariantBuilder(block.get())
+                    .partialState().with(BlockStateProperties.POWER, power)
+                    .modelForState()
+                    .modelFile(models().cubeAll(modelName, texture))
+                    .addModel();
+        }
+        blockItem(block);
     }
 
     private void litableBlock(RegistryObject<Block> block, String suffix) {
