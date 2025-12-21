@@ -44,7 +44,7 @@ public class RedstoneConfiguratorBlock extends Block {
         if (!level.isClientSide()) {
             int currentPower = state.getValue(POWER);
             int nextPower = (currentPower + 1) % 16;
-            level.setBlock(pos, state.setValue(POWER, nextPower), 3);
+            level.setBlockAndUpdate(pos, state.setValue(POWER, nextPower));
             level.updateNeighborsAt(pos, this);
         }
         return InteractionResult.sidedSuccess(level.isClientSide());
