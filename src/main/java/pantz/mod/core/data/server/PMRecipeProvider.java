@@ -115,6 +115,22 @@ public class PMRecipeProvider extends BlueprintRecipeProvider {
         pedestalBuilder(PRISMARINE_PEDESTAL.get(), Blocks.PRISMARINE, Blocks.PRISMARINE_SLAB).save(consumer);
         pedestalBuilder(PURPUR_PEDESTAL.get(), Blocks.PURPUR_BLOCK, Blocks.PURPUR_SLAB).save(consumer);
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, ENDER_SCANNER.get())
+                .define('O', Tags.Items.OBSIDIAN).define('R', Tags.Items.DUSTS_REDSTONE).define('E', Items.ENDER_EYE)
+                .pattern("ORO")
+                .pattern("RER")
+                .pattern("ORO")
+                .unlockedBy(getHasName(Items.ENDER_EYE), has(Items.ENDER_EYE))
+                .save(consumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, REDSTONE_CONFIGURATOR.get())
+                .define('#', Tags.Items.STORAGE_BLOCKS_REDSTONE).define('S', PMItemTags.INGOTS_STEEL)
+                .pattern("SSS")
+                .pattern("S#S")
+                .pattern("SSS")
+                .unlockedBy(getHasName(Blocks.REDSTONE_BLOCK), has(Tags.Items.STORAGE_BLOCKS_REDSTONE))
+                .save(consumer);
+
     }
 
     private void oreRecipes(Consumer<FinishedRecipe> consumer, RecipeCategory category, ItemLike input, ItemLike output, float experience, int time) {

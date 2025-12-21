@@ -11,6 +11,7 @@ import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.RegistryObject;
 import pantz.mod.common.block.PedestalBlock;
+import pantz.mod.common.block.RedstoneConfiguratorBlock;
 import pantz.mod.common.utils.CarpetColor;
 import pantz.mod.core.PantzMod;
 import pantz.mod.core.other.PMBlockFamilies;
@@ -46,6 +47,38 @@ public class PMBlockStateProvider extends BlueprintBlockStateProvider {
         this.pedestalBlock(PRISMARINE_PEDESTAL);
 
         this.enderScannerBlock(ENDER_SCANNER);
+        this.redstoneConfiguratorBlock(REDSTONE_CONFIGURATOR);
+    }
+
+    private void redstoneConfiguratorBlock(RegistryObject<Block> block) {
+        String name = name(block.get());
+        ResourceLocation texture = blockTexture(block.get());
+        for (int power = 0; power <= 15; power++) {
+            String modelName = power == 0 ? name : name + "_" + power;
+            ResourceLocation frontTexture = power == 0 ? texture : suffix(texture, "_" + power);
+
+            ModelFile model = models()
+                    .withExistingParent(modelName, modLoc("block/template_redstone_configurator"))
+                    .texture("front", frontTexture);
+            for (Direction dir : Direction.values()) {
+                int rotX = 0;
+                int rotY = 0;
+                switch (dir) {
+                    case UP -> rotX = 90;
+                    case DOWN -> rotX = 270;
+                    case NORTH -> rotY = 180;
+                    case SOUTH -> {}
+                    case WEST -> rotY = 90;
+                    case EAST -> rotY = 270;
+                }
+                getVariantBuilder(block.get()).partialState()
+                        .with(RedstoneConfiguratorBlock.FACING, dir)
+                        .with(RedstoneConfiguratorBlock.POWER, power)
+                        .modelForState().modelFile(model)
+                        .rotationX(rotX).rotationY(rotY).addModel();
+            }
+        }
+        blockItem(block);
     }
 
     private void enderScannerBlock(RegistryObject<Block> block) {

@@ -10,6 +10,10 @@
     "pantz_mod:sulfur_brick_stairs",
     "pantz_mod:sulfur_brick_slab",
     "pantz_mod:nether_sulfur_ore",
+    "pantz_mod:sulfur_cluster",
+    "pantz_mod:small_sulfur_bud",
+    "pantz_mod:medium_sulfur_bud",
+    "pantz_mod:large_sulfur_bud",
     "pantz_mod:ender_scanner"
   ]
 }

@@ -38,6 +38,7 @@ public class PMProperties {
     public static final BlockBehaviour.Properties LARGE_SULFUR_BUD = BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_YELLOW).forceSolidOn().noOcclusion().randomTicks().sound(SoundType.LARGE_AMETHYST_BUD).strength(1.5F).pushReaction(PushReaction.DESTROY).lightLevel(light -> 9).randomTicks();
 
     public static final BlockBehaviour.Properties ENDER_SCANNER = BlockBehaviour.Properties.copy(Blocks.OBSIDIAN).strength(3.0f, 1200.0f);
+    public static final BlockBehaviour.Properties REDSTONE_CONFIGURATOR = BlockBehaviour.Properties.of().strength(3.5F, 6.0f).sound(SoundType.METAL).instrument(NoteBlockInstrument.XYLOPHONE).mapColor(MapColor.METAL);
 
 
     public static ToIntFunction<BlockState> litBlockEmission(int value) {
