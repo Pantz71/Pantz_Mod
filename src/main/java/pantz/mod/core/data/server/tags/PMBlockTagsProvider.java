@@ -34,6 +34,8 @@ public class PMBlockTagsProvider extends BlockTagsProvider {
         this.tag(BlockTags.SLABS).add(SULFUR_BRICK_SLAB.get());
         this.tag(BlockTags.WALLS).add(SULFUR_BRICK_WALL.get());
 
+        this.tag(BlockTags.INFINIBURN_NETHER).add(SULFUR_BLOCK.get(), SULFUR_BRICKS.get());
+
         this.tag(Tags.Blocks.STORAGE_BLOCKS).addTag(STORAGE_BLOCKS_STEEL).addTag(STORAGE_BLOCKS_SULFUR);
         this.tag(STORAGE_BLOCKS_STEEL).add(STEEL_BLOCK.get());
         this.tag(STORAGE_BLOCKS_SULFUR).add(SULFUR_BLOCK.get());

@@ -17,10 +17,11 @@ public class PMItemTags {
     public static final TagKey<Item> ORES_SULFUR = forgeTag("ores/sulfur");
     public static final TagKey<Item> GEMS_SULFUR = forgeTag("gems/sulfur");
 
+    public static final TagKey<Item> TOOLS_TROWEL = forgeTag("tools/trowel");
+
     public static final TagKey<Item> EXCAVATORS = itemTag("excavators");
-
+    public static final TagKey<Item> TOOLS = itemTag("tools");
     public static final TagKey<Item> WEAPONS = itemTag("weapons");
-
     public static final TagKey<Item> PEDESTALS = itemTag("pedestals");
 
     public static TagKey<Item> itemTag(String name) {

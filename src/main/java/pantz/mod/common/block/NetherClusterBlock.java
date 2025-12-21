@@ -8,10 +8,7 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.Mirror;
-import net.minecraft.world.level.block.Rotation;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -81,16 +78,21 @@ public class NetherClusterBlock extends Block {
             Block next = getNextGrowthStage(this);
             if (next == null) return;
 
-            level.setBlock(pos, next.defaultBlockState().setValue(FACING, state.getValue(FACING)).setValue(WATERLOGGED, state.getValue(WATERLOGGED)), Block.UPDATE_ALL);
+            BlockPos belowPos = pos.below();
+            BlockState belowState = level.getBlockState(belowPos);
+
+            if (belowState.getBlock() instanceof SulfurBlock block && block.isLit(belowState)) {
+                level.setBlock(pos, next.defaultBlockState().setValue(FACING, state.getValue(FACING)).setValue(WATERLOGGED, state.getValue(WATERLOGGED)), Block.UPDATE_ALL);
+            }
         }
     }
 
     @Override
     @Nullable
-    public BlockState getStateForPlacement(BlockPlaceContext pContext) {
-        LevelAccessor levelaccessor = pContext.getLevel();
-        BlockPos blockpos = pContext.getClickedPos();
-        return this.defaultBlockState().setValue(WATERLOGGED, Boolean.valueOf(levelaccessor.getFluidState(blockpos).getType() == Fluids.WATER)).setValue(FACING, pContext.getClickedFace());
+    public BlockState getStateForPlacement(BlockPlaceContext context) {
+        LevelAccessor level = context.getLevel();
+        BlockPos blockpos = context.getClickedPos();
+        return this.defaultBlockState().setValue(WATERLOGGED, level.getFluidState(blockpos).getType() == Fluids.WATER).setValue(FACING, context.getClickedFace());
     }
 
     @Override

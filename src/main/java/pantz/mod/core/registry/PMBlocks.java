@@ -7,6 +7,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraftforge.registries.RegistryObject;
 import pantz.mod.common.block.NetherClusterBlock;
 import pantz.mod.common.block.SulfurBlock;
@@ -16,6 +18,7 @@ import pantz.mod.core.other.PMConstant;
 import pantz.mod.core.other.PMProperties;
 
 import java.util.function.Predicate;
+import java.util.function.ToIntFunction;
 
 import static net.minecraft.world.item.CreativeModeTabs.*;
 import static net.minecraft.world.item.crafting.Ingredient.of;

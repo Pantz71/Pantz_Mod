@@ -20,7 +20,7 @@ public class PMFeatures {
 
     public static class PMConfiguredFeatures {
         public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_SULFUR = createKey("ore_sulfur");
-        public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_SULFUR_BLOCK = createKey("ore_sulfur_BLOCK");
+        public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_SULFUR_BLOCK = createKey("ore_sulfur_block");
 
         public static void bootstrap(BootstapContext<ConfiguredFeature<?, ?>> context) {
             RuleTest netherrack = new TagMatchTest(Tags.Blocks.NETHERRACK);

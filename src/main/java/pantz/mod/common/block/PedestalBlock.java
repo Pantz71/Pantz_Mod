@@ -40,6 +40,10 @@ public class PedestalBlock extends HorizontalDirectionalBlock implements EntityB
             Block.box(3, 2, 3, 13, 13, 13),
             Block.box(1, 13, 1, 15, 16, 15)
     );
+    private static final VoxelShape TOP_SUPPORT = Block.box(0, 15, 0, 16, 16, 16);
+    private static final VoxelShape BOTTOM_SUPPORT = Block.box(0, 0, 0, 16, 1, 16);
+    private static final VoxelShape SUPPORT = Shapes.or(TOP_SUPPORT, BOTTOM_SUPPORT);
+
     public PedestalBlock(Properties pProperties) {
         super(pProperties);
         this.registerDefaultState(this.getStateDefinition().any().setValue(FACING, Direction.NORTH).setValue(CARPET, CarpetColor.NONE));
@@ -226,6 +230,11 @@ public class PedestalBlock extends HorizontalDirectionalBlock implements EntityB
     @Override
     public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
         return SHAPE;
+    }
+
+    @Override
+    public VoxelShape getBlockSupportShape(BlockState pState, BlockGetter pLevel, BlockPos pPos) {
+        return SUPPORT;
     }
 
     @Override

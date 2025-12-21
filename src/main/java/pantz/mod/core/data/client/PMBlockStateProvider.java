@@ -3,7 +3,9 @@ package pantz.mod.core.data.client;
 import com.teamabnormals.blueprint.core.data.client.BlueprintBlockStateProvider;
 import net.minecraft.core.Direction;
 import net.minecraft.data.PackOutput;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -26,7 +28,7 @@ public class PMBlockStateProvider extends BlueprintBlockStateProvider {
         this.ironBarsBlock(STEEL_BARS);
         this.doorBlocks(STEEL_DOOR.get(), STEEL_TRAPDOOR.get());
 
-        this.block(SULFUR_BLOCK);
+        this.litableBlock(SULFUR_BLOCK, "_lit");
         this.blockFamily(PMBlockFamilies.SULFUR_BRICKS_FAMILY);
         this.block(NETHER_SULFUR_ORE);
         this.block(CHISELED_SULFUR_BRICKS);
@@ -42,6 +44,17 @@ public class PMBlockStateProvider extends BlueprintBlockStateProvider {
         this.pedestalBlock(QUARTZ_PEDESTAL);
         this.pedestalBlock(PURPUR_PEDESTAL);
         this.pedestalBlock(PRISMARINE_PEDESTAL);
+    }
+
+    private void litableBlock(RegistryObject<Block> block, String suffix) {
+        ResourceLocation unlit = blockTexture(block.get());
+        ResourceLocation lit = suffix(unlit, suffix);
+        getVariantBuilder(block.get())
+                .partialState().with(BlockStateProperties.LIT, false)
+                .modelForState().modelFile(models().cubeAll(name(block.get()), unlit)).addModel()
+                .partialState().with(BlockStateProperties.LIT, true)
+                .modelForState().modelFile(models().cubeAll(name(block.get()) + suffix, lit)).addModel();
+        blockItem(block);
     }
 
     private void pedestalBlock(RegistryObject<Block> block) {
