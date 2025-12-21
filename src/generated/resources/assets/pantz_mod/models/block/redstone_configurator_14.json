@@ -1,0 +1,6 @@
+{
+  "parent": "pantz_mod:block/template_redstone_configurator",
+  "textures": {
+    "front": "pantz_mod:block/redstone_configurator_14"
+  }
+}

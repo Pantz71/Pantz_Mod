@@ -1,0 +1,52 @@
+{
+  "variants": {
+    "power=0": {
+      "model": "pantz_mod:block/ender_scanner"
+    },
+    "power=1": {
+      "model": "pantz_mod:block/ender_scanner_1"
+    },
+    "power=10": {
+      "model": "pantz_mod:block/ender_scanner_10"
+    },
+    "power=11": {
+      "model": "pantz_mod:block/ender_scanner_11"
+    },
+    "power=12": {
+      "model": "pantz_mod:block/ender_scanner_12"
+    },
+    "power=13": {
+      "model": "pantz_mod:block/ender_scanner_13"
+    },
+    "power=14": {
+      "model": "pantz_mod:block/ender_scanner_14"
+    },
+    "power=15": {
+      "model": "pantz_mod:block/ender_scanner_15"
+    },
+    "power=2": {
+      "model": "pantz_mod:block/ender_scanner_2"
+    },
+    "power=3": {
+      "model": "pantz_mod:block/ender_scanner_3"
+    },
+    "power=4": {
+      "model": "pantz_mod:block/ender_scanner_4"
+    },
+    "power=5": {
+      "model": "pantz_mod:block/ender_scanner_5"
+    },
+    "power=6": {
+      "model": "pantz_mod:block/ender_scanner_6"
+    },
+    "power=7": {
+      "model": "pantz_mod:block/ender_scanner_7"
+    },
+    "power=8": {
+      "model": "pantz_mod:block/ender_scanner_8"
+    },
+    "power=9": {
+      "model": "pantz_mod:block/ender_scanner_9"
+    }
+  }
+}

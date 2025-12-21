@@ -1,0 +1,29 @@
+{
+  "parent": "minecraft:adventure/root",
+  "criteria": {
+    "look_at_scanner": {
+      "trigger": "pantz_mod:look_at_scanner"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.pantz_mod.adventure.look_at_scanner.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "pantz_mod:ender_scanner"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.pantz_mod.adventure.look_at_scanner.title"
+    }
+  },
+  "requirements": [
+    [
+      "look_at_scanner"
+    ]
+  ],
+  "sends_telemetry_event": true
+}
