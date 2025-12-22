@@ -131,6 +131,15 @@ public class PMRecipeProvider extends BlueprintRecipeProvider {
                 .unlockedBy(getHasName(Blocks.REDSTONE_BLOCK), has(Tags.Items.STORAGE_BLOCKS_REDSTONE))
                 .save(consumer);
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, WEATHER_DETECTOR.get())
+                .define('_', Blocks.SMOOTH_STONE_SLAB).define('#', Tags.Items.INGOTS_COPPER)
+                .define('G', Tags.Items.GLASS_COLORLESS)
+                .pattern("GGG")
+                .pattern("###")
+                .pattern("___")
+                .unlockedBy(getHasName(Items.COPPER_INGOT), has(Tags.Items.INGOTS_COPPER))
+                .save(consumer);
+
     }
 
     private void oreRecipes(Consumer<FinishedRecipe> consumer, RecipeCategory category, ItemLike input, ItemLike output, float experience, int time) {

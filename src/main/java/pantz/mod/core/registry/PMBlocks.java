@@ -51,6 +51,7 @@ public class PMBlocks {
 
     public static final RegistryObject<Block> ENDER_SCANNER = BLOCKS.createBlock("ender_scanner", () -> new EnderScannerBlock(PMProperties.ENDER_SCANNER));
     public static final RegistryObject<Block> REDSTONE_CONFIGURATOR = BLOCKS.createBlock("redstone_configurator", () -> new RedstoneConfiguratorBlock(PMProperties.REDSTONE_CONFIGURATOR));
+    public static final RegistryObject<Block> WEATHER_DETECTOR = BLOCKS.createBlock("weather_detector", () -> new WeatherDetectorBlock(PMProperties.WEATHER_DETECTOR));
 
 
     public static void setupTabs() {
@@ -72,6 +73,7 @@ public class PMBlocks {
                 .addItemsAfter(of(Blocks.LECTERN), STONE_PEDESTAL)
                 .addItemsAfter(of(Blocks.TARGET), ENDER_SCANNER)
                 .addItemsAfter(of(Blocks.REDSTONE_BLOCK), REDSTONE_CONFIGURATOR)
+                .addItemsAfter(of(Blocks.DAYLIGHT_DETECTOR), WEATHER_DETECTOR)
 
         ;
     }

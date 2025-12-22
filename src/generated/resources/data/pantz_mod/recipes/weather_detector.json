@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "key": {
+    "#": {
+      "tag": "forge:ingots/copper"
+    },
+    "G": {
+      "tag": "forge:glass/colorless"
+    },
+    "_": {
+      "item": "minecraft:smooth_stone_slab"
+    }
+  },
+  "pattern": [
+    "GGG",
+    "###",
+    "___"
+  ],
+  "result": {
+    "item": "pantz_mod:weather_detector"
+  },
+  "show_notification": true
+}

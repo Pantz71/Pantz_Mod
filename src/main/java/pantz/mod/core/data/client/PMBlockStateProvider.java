@@ -48,6 +48,8 @@ public class PMBlockStateProvider extends BlueprintBlockStateProvider {
 
         this.enderScannerBlock(ENDER_SCANNER);
         this.redstoneConfiguratorBlock(REDSTONE_CONFIGURATOR);
+
+        this.blockItem(WEATHER_DETECTOR);
     }
 
     private void redstoneConfiguratorBlock(RegistryObject<Block> block) {
