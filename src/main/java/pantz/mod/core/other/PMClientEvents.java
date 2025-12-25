@@ -24,6 +24,7 @@ import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
+import pantz.mod.client.renderer.be.EntityDetectorRenderer;
 import pantz.mod.client.renderer.be.PedestalRenderer;
 import pantz.mod.common.item.AreaDiggerItem;
 import pantz.mod.core.PMConfig;
@@ -218,6 +219,7 @@ public class PMClientEvents {
         @SubscribeEvent
         public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
             event.registerBlockEntityRenderer(PMBlockEntityTypes.PEDESTAL.get(), PedestalRenderer::new);
+            event.registerBlockEntityRenderer(PMBlockEntityTypes.ENTITY_DETECTOR.get(), EntityDetectorRenderer::new);
         }
     }
 

@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "inverted=false": {
+      "model": "pantz_mod:block/entity_detector"
+    },
+    "inverted=true": {
+      "model": "pantz_mod:block/entity_detector_inverted"
+    }
+  }
+}

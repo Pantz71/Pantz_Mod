@@ -40,6 +40,7 @@ public class PMProperties {
     public static final BlockBehaviour.Properties ENDER_SCANNER = BlockBehaviour.Properties.copy(Blocks.OBSIDIAN).strength(3.0f, 1200.0f);
     public static final BlockBehaviour.Properties REDSTONE_CONFIGURATOR = BlockBehaviour.Properties.of().strength(3.5F, 6.0f).sound(SoundType.METAL).instrument(NoteBlockInstrument.XYLOPHONE).mapColor(MapColor.METAL);
     public static final BlockBehaviour.Properties WEATHER_DETECTOR = BlockBehaviour.Properties.of().requiresCorrectToolForDrops().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).strength(0.2F).sound(SoundType.STONE);
+    public static final BlockBehaviour.Properties ENTITY_DETECTOR = BlockBehaviour.Properties.of().requiresCorrectToolForDrops().mapColor(MapColor.TERRACOTTA_LIGHT_BLUE).instrument(NoteBlockInstrument.BASEDRUM).strength(0.2F).sound(SoundType.STONE);
 
 
     public static ToIntFunction<BlockState> litBlockEmission(int value) {

@@ -4,6 +4,15 @@
   "advancements.pantz_mod.adventure.look_at_scanner.title": "Eye See You",
   "advancements.pantz_mod.adventure.look_at_scanner.description": "Look directly into the middle of Ender Scanner's eye until it emits full power",
 
+  "_misc": "misc",
+  "tooltip.pantz_mod.entity_filter.none": "None",
+  "tooltip.pantz_mod.entity_filter.unknown": "Unknown",
+  "tooltip.pantz_mod.entity_filter": "Entity: %s",
+  "message.pantz_mod.entity_filter.added": "Added to filter: %s",
+  "message.pantz_mod.entity_filter.removed": "Removed from filter: %s",
+  "message.pantz_mod.entity_filter.duplicate": "Already in filter: %s",
+  "message.pantz_mod.entity_filter.applied": "Applied filter to Entity Detector (%s entries)",
+
   "_steel": "steel",
   "block.pantz_mod.steel_block": "Steel Block",
   "block.pantz_mod.steel_door": "Steel Door",
@@ -47,8 +56,8 @@
 
   "_tools": "tools",
   "item.pantz_mod.trowel": "Trowel",
-
   "item.pantz_mod.honey_deserializer": "Honey Deserializer",
+  "item.pantz_mod.entity_filter": "Entity Filter",
 
   "item.pantz_mod.excavator": "Excavator",
   "item.pantz_mod.diamond_excavator": "Diamond Excavator",
@@ -65,5 +74,6 @@
   "_redstone": "redstone",
   "block.pantz_mod.ender_scanner": "Ender Scanner",
   "block.pantz_mod.redstone_configurator": "Redstone Configurator",
-  "block.pantz_mod.weather_detector": "Weather Detector"
+  "block.pantz_mod.weather_detector": "Weather Detector",
+  "block.pantz_mod.entity_detector": "Entity Detector"
 }

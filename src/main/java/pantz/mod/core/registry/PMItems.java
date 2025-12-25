@@ -3,11 +3,15 @@ package pantz.mod.core.registry;
 import com.teamabnormals.blueprint.core.util.PropertyUtil;
 import com.teamabnormals.blueprint.core.util.item.CreativeModeTabContentsPopulator;
 import com.teamabnormals.blueprint.core.util.registry.ItemSubRegistryHelper;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.*;
+import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.registries.RegistryObject;
 import pantz.mod.common.item.AreaDiggerItem;
+import pantz.mod.common.item.EntityFilterItem;
 import pantz.mod.common.item.TrowelItem;
+import pantz.mod.core.PMConfig;
 import pantz.mod.core.PantzMod;
 import pantz.mod.core.other.PMTiers.*;
 
@@ -45,6 +49,8 @@ public class PMItems {
     public static final RegistryObject<Item> DIAMOND_EXCAVATOR = ITEMS.createItem("diamond_excavator", () -> new AreaDiggerItem(-3f, -3f, Tiers.DIAMOND, BlockTags.MINEABLE_WITH_SHOVEL, new Item.Properties()));
     public static final RegistryObject<Item> NETHERITE_EXCAVATOR = ITEMS.createItem("netherite_excavator", () -> new AreaDiggerItem(-4f, -2.5f, Tiers.NETHERITE, BlockTags.MINEABLE_WITH_SHOVEL, new Item.Properties()));
 
+    public static final RegistryObject<Item> ENTITY_FILTER = ITEMS.createItem("entity_filter", () -> new EntityFilterItem(PropertyUtil.stacksOnce()));
+
     private static Supplier<Item> basicItem() {
         return () -> new Item(new Item.Properties());
     }
@@ -71,5 +77,14 @@ public class PMItems {
                 .addItemsAfter(of(Items.NETHERITE_HOE), NETHERITE_EXCAVATOR)
 
         ;
+
+        CreativeModeTabContentsPopulator.mod(PantzMod.MOD_ID + "_config")
+                .predicate(event -> modPredicate(event, TOOLS_AND_UTILITIES) && PMConfig.Common.COMMON.enableEntityFilter.get())
+                .addItemsAfter(of(Items.NAME_TAG), ENTITY_FILTER)
+                ;
+    }
+
+    public static boolean modPredicate(BuildCreativeModeTabContentsEvent event, ResourceKey<CreativeModeTab> tab) {
+        return event.getTabKey() == tab;
     }
 }

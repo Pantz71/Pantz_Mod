@@ -21,6 +21,10 @@ public class PMConfig {
 
         public final IntValue waxedBlocksDetectionRadius;
         public final IntValue enderScannerDetectionRadius;
+        public final IntValue entityDetectorDetectionRadius;
+
+        @ConfigKey("entity_filter")
+        public final BooleanValue enableEntityFilter;
 
         Common(Builder builder) {
             builder.push("Recipes");
@@ -32,11 +36,18 @@ public class PMConfig {
             waxedBlocksDetectionRadius = builder.comment("How far can the Honey Deserializer detect waxed blocks?")
                     .defineInRange("Honey Deserializer detection radius", 16, 0, Integer.MAX_VALUE);
 
+            enableEntityFilter = builder.comment("Allow filter entities feature of Entity Detector?")
+                    .define("Entity filtering", true);
+
             builder.pop();
 
             builder.push("Redstone");
             enderScannerDetectionRadius = builder.comment("How far can the Ender Scanners detect players looking at them?")
                     .defineInRange("Ender Scanner detection radius", 64, 0, Integer.MAX_VALUE);
+
+            entityDetectorDetectionRadius = builder.comment("How far can the Entity Detector detect entities?")
+                    .defineInRange("Entity Detector detection radius", 64, 0, Integer.MAX_VALUE);
+
             builder.pop();
 
         }

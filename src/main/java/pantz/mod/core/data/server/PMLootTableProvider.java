@@ -89,6 +89,7 @@ public class PMLootTableProvider extends LootTableProvider {
             this.dropSelf(ENDER_SCANNER.get());
             this.dropSelf(REDSTONE_CONFIGURATOR.get());
             this.dropSelf(WEATHER_DETECTOR.get());
+            this.dropSelf(ENTITY_DETECTOR.get());
 
 
         }

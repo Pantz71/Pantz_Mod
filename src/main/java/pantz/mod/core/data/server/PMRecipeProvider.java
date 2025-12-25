@@ -15,6 +15,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.crafting.conditions.ModLoadedCondition;
+import net.minecraftforge.common.crafting.conditions.NotCondition;
 import pantz.mod.core.PantzMod;
 import pantz.mod.core.other.PMBlockFamilies;
 import pantz.mod.core.other.PMConstant;
@@ -24,12 +25,15 @@ import java.util.function.Consumer;
 
 import static net.minecraft.data.recipes.RecipeCategory.*;
 import static pantz.mod.core.PMConfig.Common.COMMON;
+import static pantz.mod.core.PantzMod.location;
 import static pantz.mod.core.registry.PMBlocks.*;
 import static pantz.mod.core.registry.PMItems.*;
 
 public class PMRecipeProvider extends BlueprintRecipeProvider {
     private static final ModLoadedCondition CAVERNS_AND_CHASMS = new ModLoadedCondition(PMConstant.CAVERNS_AND_CHASMS);
+    private static final NotCondition NOT_CAVERNS_AND_CHASMS = new NotCondition(CAVERNS_AND_CHASMS);
     private static final ConfigValueCondition FLINT_AND_STEEL = config(COMMON.flintAndSteel, "flint_and_steel");
+    private static final ConfigValueCondition ENTITY_FILTERING = config(COMMON.enableEntityFilter, "entity_filter");
 
     public PMRecipeProvider(PackOutput output) {
         super(PantzMod.MOD_ID, output);
@@ -140,6 +144,35 @@ public class PMRecipeProvider extends BlueprintRecipeProvider {
                 .unlockedBy(getHasName(Items.COPPER_INGOT), has(Tags.Items.INGOTS_COPPER))
                 .save(consumer);
 
+        conditionalRecipe(consumer, ENTITY_FILTERING, RecipeCategory.TOOLS,
+                ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ENTITY_FILTER.get())
+                        .define('#', Items.PAPER).define('$', Items.ROTTEN_FLESH)
+                        .define('&', Items.STRING).define('*', Items.SPIDER_EYE)
+                        .define('/', Items.BONE)
+                        .pattern(" $ ")
+                        .pattern("&#*")
+                        .pattern(" / ")
+                        .unlockedBy(getHasName(Items.PAPER), has(Items.PAPER)));
+
+        conditionalRecipe(consumer, NOT_CAVERNS_AND_CHASMS, RecipeCategory.REDSTONE,
+                ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, ENTITY_DETECTOR.get())
+                        .define('_', Tags.Items.INGOTS_IRON).define('7', Tags.Items.GEMS_LAPIS)
+                        .define('#', Blocks.GLASS)
+                        .pattern("###")
+                        .pattern("777")
+                        .pattern("___")
+                        .unlockedBy(getHasName(Items.LAPIS_LAZULI), has(Tags.Items.GEMS_LAPIS)));
+
+        conditionalRecipe(consumer, CAVERNS_AND_CHASMS, RecipeCategory.REDSTONE,
+                ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, ENTITY_DETECTOR.get())
+                        .define('_', PMItemTags.INGOTS_SILVER).define('7', Tags.Items.GEMS_LAPIS)
+                        .define('#', Blocks.GLASS)
+                        .pattern("###")
+                        .pattern("777")
+                        .pattern("___")
+                        .unlockedBy(getHasName(Items.LAPIS_LAZULI), has(Tags.Items.GEMS_LAPIS)),
+                location("entity_detector_from_silver_ingots"));
+
     }
 
     private void oreRecipes(Consumer<FinishedRecipe> consumer, RecipeCategory category, ItemLike input, ItemLike output, float experience, int time) {
@@ -240,7 +273,7 @@ public class PMRecipeProvider extends BlueprintRecipeProvider {
     }
 
     public static ConfigValueCondition config(ForgeConfigSpec.ConfigValue<?> value, String key, boolean inverted) {
-        return new ConfigValueCondition(PantzMod.location("config"), value, key, Maps.newHashMap(), inverted);
+        return new ConfigValueCondition(location("config"), value, key, Maps.newHashMap(), inverted);
     }
 
     public static ConfigValueCondition config(ForgeConfigSpec.ConfigValue<?> value, String key) {

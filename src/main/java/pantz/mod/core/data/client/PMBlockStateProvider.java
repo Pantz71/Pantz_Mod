@@ -50,6 +50,7 @@ public class PMBlockStateProvider extends BlueprintBlockStateProvider {
         this.redstoneConfiguratorBlock(REDSTONE_CONFIGURATOR);
 
         this.blockItem(WEATHER_DETECTOR);
+        this.blockItem(ENTITY_DETECTOR);
     }
 
     private void redstoneConfiguratorBlock(RegistryObject<Block> block) {
