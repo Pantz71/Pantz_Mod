@@ -186,7 +186,7 @@ public class PMRecipeProvider extends BlueprintRecipeProvider {
                 Items.LIGHT_BLUE_DYE, Items.LIGHT_GRAY_DYE, Items.LIME_DYE, Items.MAGENTA_DYE, Items.ORANGE_DYE,
                 Items.PINK_DYE, Items.PURPLE_DYE, Items.RED_DYE, Items.YELLOW_DYE, Items.WHITE_DYE);
 
-        List<Item> lamps = List.of(BLACK_REDSTONE_LAMP.get().asItem(), BLUE_REDSTONE_LAMP.get().asItem(), BROWN_REDSTONE_LAMP.get().asItem(), CYAN_REDSTONE_LAMP.get().asItem(), GRAY_REDSTONE_LAMP.get().asItem(), GREEN_REDSTONE_LAMP.get().asItem(),
+        List<Item> lamps = List.of(Blocks.REDSTONE_LAMP.asItem(), BLACK_REDSTONE_LAMP.get().asItem(), BLUE_REDSTONE_LAMP.get().asItem(), BROWN_REDSTONE_LAMP.get().asItem(), CYAN_REDSTONE_LAMP.get().asItem(), GRAY_REDSTONE_LAMP.get().asItem(), GREEN_REDSTONE_LAMP.get().asItem(),
                 LIGHT_BLUE_REDSTONE_LAMP.get().asItem(), LIGHT_GRAY_REDSTONE_LAMP.get().asItem(), LIME_REDSTONE_LAMP.get().asItem(), MAGENTA_REDSTONE_LAMP.get().asItem(), ORANGE_REDSTONE_LAMP.get().asItem(),
                 PINK_REDSTONE_LAMP.get().asItem(), PURPLE_REDSTONE_LAMP.get().asItem(), RED_REDSTONE_LAMP.get().asItem(), YELLOW_REDSTONE_LAMP.get().asItem(), WHITE_REDSTONE_LAMP.get().asItem());
 

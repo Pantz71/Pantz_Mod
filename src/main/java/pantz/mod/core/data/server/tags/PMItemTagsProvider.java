@@ -70,5 +70,6 @@ public class PMItemTagsProvider extends ItemTagsProvider {
         this.copy(Tags.Blocks.ORES_IN_GROUND_NETHERRACK, Tags.Items.ORES_IN_GROUND_NETHERRACK);
 
         this.copy(PMBlockTags.PEDESTALS, PEDESTALS);
+        this.copy(PMBlockTags.REDSTONE_LAMPS, REDSTONE_LAMPS);
     }
 }

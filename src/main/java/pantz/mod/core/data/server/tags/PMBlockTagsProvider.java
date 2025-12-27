@@ -4,6 +4,7 @@ package pantz.mod.core.data.server.tags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -52,5 +53,13 @@ public class PMBlockTagsProvider extends BlockTagsProvider {
 
         this.tag(Tags.Blocks.ORE_RATES_SINGULAR).add(NETHER_SULFUR_ORE.get());
         this.tag(Tags.Blocks.ORES_IN_GROUND_NETHERRACK).add(NETHER_SULFUR_ORE.get());
+
+        this.tag(REDSTONE_LAMPS).add(WHITE_REDSTONE_LAMP.get(), GRAY_REDSTONE_LAMP.get(),
+                LIGHT_GRAY_REDSTONE_LAMP.get(), WHITE_REDSTONE_LAMP.get(),
+                BROWN_REDSTONE_LAMP.get(), PINK_REDSTONE_LAMP.get(), PURPLE_REDSTONE_LAMP.get(),
+                MAGENTA_REDSTONE_LAMP.get(), BLUE_REDSTONE_LAMP.get(), CYAN_REDSTONE_LAMP.get(),
+                LIGHT_BLUE_REDSTONE_LAMP.get(), GREEN_REDSTONE_LAMP.get(), LIME_REDSTONE_LAMP.get(),
+                YELLOW_REDSTONE_LAMP.get(), ORANGE_REDSTONE_LAMP.get(), RED_REDSTONE_LAMP.get(),
+                Blocks.REDSTONE_LAMP);
     }
 }

@@ -11,6 +11,8 @@ public class PMBlockTags {
     public static final TagKey<Block> STORAGE_BLOCKS_SULFUR = forgeTag("storage_blocks/sulfur");
     public static final TagKey<Block> ORES_SULFUR = forgeTag("ores/sulfur");
 
+    public static final TagKey<Block> REDSTONE_LAMPS = forgeTag("redstone_lamps");
+
     public static final TagKey<Block> NON_WAXED_BLOCKS = blockTag("non_waxed_blocks");
     public static final TagKey<Block> PEDESTALS = blockTag("pedestals");
 

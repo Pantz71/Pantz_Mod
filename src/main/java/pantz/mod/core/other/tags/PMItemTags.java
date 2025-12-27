@@ -20,6 +20,8 @@ public class PMItemTags {
 
     public static final TagKey<Item> TOOLS_TROWEL = forgeTag("tools/trowel");
 
+    public static final TagKey<Item> REDSTONE_LAMPS = forgeTag("redstone_lamps");
+
     public static final TagKey<Item> EXCAVATORS = itemTag("excavators");
     public static final TagKey<Item> TOOLS = itemTag("tools");
     public static final TagKey<Item> WEAPONS = itemTag("weapons");
