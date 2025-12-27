@@ -11,6 +11,7 @@ import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.RegistryObject;
 import pantz.mod.common.block.PedestalBlock;
+import pantz.mod.common.block.PowerDisplayerBlock;
 import pantz.mod.common.block.RedstoneConfiguratorBlock;
 import pantz.mod.common.utils.CarpetColor;
 import pantz.mod.core.PantzMod;
@@ -34,10 +35,10 @@ public class PMBlockStateProvider extends BlueprintBlockStateProvider {
         this.block(NETHER_SULFUR_ORE);
         this.block(CHISELED_SULFUR_BRICKS);
 
-        this.crossBlock(SMALL_SULFUR_BUD);
-        this.crossBlock(MEDIUM_SULFUR_BUD);
-        this.crossBlock(LARGE_SULFUR_BUD);
-        this.crossBlock(SULFUR_CLUSTER);
+        this.clusterBlock(SMALL_SULFUR_BUD);
+        this.clusterBlock(MEDIUM_SULFUR_BUD);
+        this.clusterBlock(LARGE_SULFUR_BUD);
+        this.clusterBlock(SULFUR_CLUSTER);
 
         this.pedestalBlock(STONE_PEDESTAL);
         this.pedestalBlock(DEEPSLATE_PEDESTAL);
@@ -51,6 +52,24 @@ public class PMBlockStateProvider extends BlueprintBlockStateProvider {
 
         this.blockItem(WEATHER_DETECTOR);
         this.blockItem(ENTITY_DETECTOR);
+        this.powerDisplayerBlock(POWER_DISPLAYER);
+
+        this.redstoneLampBlock(WHITE_REDSTONE_LAMP);
+        this.redstoneLampBlock(ORANGE_REDSTONE_LAMP);
+        this.redstoneLampBlock(MAGENTA_REDSTONE_LAMP);
+        this.redstoneLampBlock(LIGHT_BLUE_REDSTONE_LAMP);
+        this.redstoneLampBlock(YELLOW_REDSTONE_LAMP);
+        this.redstoneLampBlock(LIME_REDSTONE_LAMP);
+        this.redstoneLampBlock(PINK_REDSTONE_LAMP);
+        this.redstoneLampBlock(GRAY_REDSTONE_LAMP);
+        this.redstoneLampBlock(LIGHT_GRAY_REDSTONE_LAMP);
+        this.redstoneLampBlock(CYAN_REDSTONE_LAMP);
+        this.redstoneLampBlock(PURPLE_REDSTONE_LAMP);
+        this.redstoneLampBlock(BLUE_REDSTONE_LAMP);
+        this.redstoneLampBlock(BROWN_REDSTONE_LAMP);
+        this.redstoneLampBlock(GREEN_REDSTONE_LAMP);
+        this.redstoneLampBlock(RED_REDSTONE_LAMP);
+        this.redstoneLampBlock(BLACK_REDSTONE_LAMP);
     }
 
     private void redstoneConfiguratorBlock(RegistryObject<Block> block) {
@@ -98,6 +117,10 @@ public class PMBlockStateProvider extends BlueprintBlockStateProvider {
         blockItem(block);
     }
 
+    private void redstoneLampBlock(RegistryObject<Block> block) {
+        litableBlock(block, "_on");
+    }
+
     private void litableBlock(RegistryObject<Block> block, String suffix) {
         ResourceLocation unlit = blockTexture(block.get());
         ResourceLocation lit = suffix(unlit, suffix);
@@ -133,5 +156,58 @@ public class PMBlockStateProvider extends BlueprintBlockStateProvider {
                     .build();
         });
         blockItem(block);
+    }
+
+    public void clusterBlock(RegistryObject<Block> block) {
+        String name = name(block.get());
+        ModelFile model = models().cross(name, blockTexture(block.get()));
+
+        for (Direction dir : Direction.values()) {
+            int rotX = 0;
+            int rotY = 0;
+
+            switch (dir) {
+                case DOWN -> rotX = 180;
+                case NORTH -> rotX = 90;
+                case SOUTH -> { rotX = 90; rotY = 180; }
+                case EAST  -> { rotX = 90; rotY = 90; }
+                case WEST  -> { rotX = 90; rotY = 270; }
+                case UP -> {}
+            }
+
+            getVariantBuilder(block.get()).partialState().with(BlockStateProperties.FACING, dir).modelForState()
+                    .modelFile(model).rotationX(rotX).rotationY(rotY).addModel();
+        }
+        generatedItem(block.get(), blockTexture(block.get()));
+    }
+
+    private void powerDisplayerBlock(RegistryObject<Block> block) {
+        String name = name(block.get());
+        ResourceLocation texture = blockTexture(block.get());
+        for (int power = 0; power <= 15; power++) {
+            String modelName = power == 0 ? name : name + "_" + power;
+            ResourceLocation frontTexture = power == 0 ? texture : suffix(texture, "_" + power);
+            ModelFile model = models()
+                    .withExistingParent(modelName, modLoc("block/template_power_displayer"))
+                    .texture("front", frontTexture);
+
+            for (Direction dir : Direction.values()) {
+                int rotX = 0;
+                int rotY = 0;
+                switch (dir) {
+                    case UP -> rotX = 90;
+                    case DOWN -> rotX = 270;
+                    case NORTH -> rotY = 180;
+                    case SOUTH -> {}
+                    case WEST -> rotY = 90;
+                    case EAST -> rotY = 270;
+                }
+                getVariantBuilder(block.get()).partialState()
+                        .with(PowerDisplayerBlock.FACING, dir).with(PowerDisplayerBlock.POWER, power)
+                        .modelForState().modelFile(model)
+                        .rotationX(rotX).rotationY(rotY).addModel();
+            }
+        }
+        generatedItem(block.get(), texture);
     }
 }

@@ -1,0 +1,6 @@
+{
+  "parent": "pantz_mod:block/template_power_displayer",
+  "textures": {
+    "front": "pantz_mod:block/power_displayer"
+  }
+}

@@ -21,6 +21,7 @@ import pantz.mod.core.other.PMBlockFamilies;
 import pantz.mod.core.other.PMConstant;
 import pantz.mod.core.other.tags.PMItemTags;
 
+import java.util.List;
 import java.util.function.Consumer;
 
 import static net.minecraft.data.recipes.RecipeCategory.*;
@@ -172,6 +173,24 @@ public class PMRecipeProvider extends BlueprintRecipeProvider {
                         .pattern("___")
                         .unlockedBy(getHasName(Items.LAPIS_LAZULI), has(Tags.Items.GEMS_LAPIS)),
                 location("entity_detector_from_silver_ingots"));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, POWER_DISPLAYER.get())
+                .define('T', Blocks.TUFF).define('/', Tags.Items.GEMS_AMETHYST)
+                .pattern("TTT")
+                .pattern("///")
+                .pattern("TTT")
+                .unlockedBy(getHasName(Items.AMETHYST_SHARD), has(Tags.Items.GEMS_AMETHYST))
+                .save(consumer);
+
+        List<Item> dyes = List.of(Items.BLACK_DYE, Items.BLUE_DYE, Items.BROWN_DYE, Items.CYAN_DYE, Items.GRAY_DYE, Items.GREEN_DYE,
+                Items.LIGHT_BLUE_DYE, Items.LIGHT_GRAY_DYE, Items.LIME_DYE, Items.MAGENTA_DYE, Items.ORANGE_DYE,
+                Items.PINK_DYE, Items.PURPLE_DYE, Items.RED_DYE, Items.YELLOW_DYE, Items.WHITE_DYE);
+
+        List<Item> lamps = List.of(BLACK_REDSTONE_LAMP.get().asItem(), BLUE_REDSTONE_LAMP.get().asItem(), BROWN_REDSTONE_LAMP.get().asItem(), CYAN_REDSTONE_LAMP.get().asItem(), GRAY_REDSTONE_LAMP.get().asItem(), GREEN_REDSTONE_LAMP.get().asItem(),
+                LIGHT_BLUE_REDSTONE_LAMP.get().asItem(), LIGHT_GRAY_REDSTONE_LAMP.get().asItem(), LIME_REDSTONE_LAMP.get().asItem(), MAGENTA_REDSTONE_LAMP.get().asItem(), ORANGE_REDSTONE_LAMP.get().asItem(),
+                PINK_REDSTONE_LAMP.get().asItem(), PURPLE_REDSTONE_LAMP.get().asItem(), RED_REDSTONE_LAMP.get().asItem(), YELLOW_REDSTONE_LAMP.get().asItem(), WHITE_REDSTONE_LAMP.get().asItem());
+
+        colorBlockWithDye(consumer, dyes, lamps, "redstone_lamps");
 
     }
 

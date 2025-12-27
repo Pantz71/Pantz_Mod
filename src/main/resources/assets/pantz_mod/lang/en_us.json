@@ -75,5 +75,23 @@
   "block.pantz_mod.ender_scanner": "Ender Scanner",
   "block.pantz_mod.redstone_configurator": "Redstone Configurator",
   "block.pantz_mod.weather_detector": "Weather Detector",
-  "block.pantz_mod.entity_detector": "Entity Detector"
+  "block.pantz_mod.entity_detector": "Entity Detector",
+  "block.pantz_mod.power_displayer": "Power Displayer",
+
+  "block.pantz_mod.red_redstone_lamp": "Red Redstone Lamp",
+  "block.pantz_mod.orange_redstone_lamp": "Orange Redstone Lamp",
+  "block.pantz_mod.yellow_redstone_lamp": "Yellow Redstone Lamp",
+  "block.pantz_mod.lime_redstone_lamp": "Lime Redstone Lamp",
+  "block.pantz_mod.green_redstone_lamp": "Green Redstone Lamp",
+  "block.pantz_mod.blue_redstone_lamp": "Blue Redstone Lamp",
+  "block.pantz_mod.cyan_redstone_lamp": "Cyan Redstone Lamp",
+  "block.pantz_mod.light_blue_redstone_lamp": "Light Blue Redstone Lamp",
+  "block.pantz_mod.purple_redstone_lamp": "Purple Redstone Lamp",
+  "block.pantz_mod.magenta_redstone_lamp": "Magenta Redstone Lamp",
+  "block.pantz_mod.pink_redstone_lamp": "Pink Redstone Lamp",
+  "block.pantz_mod.brown_redstone_lamp": "Brown Redstone Lamp",
+  "block.pantz_mod.black_redstone_lamp": "Black Redstone Lamp",
+  "block.pantz_mod.gray_redstone_lamp": "Gray Redstone Lamp",
+  "block.pantz_mod.light_gray_redstone_lamp": "Light Gray Redstone Lamp",
+  "block.pantz_mod.white_redstone_lamp": "White Redstone Lamp"
 }

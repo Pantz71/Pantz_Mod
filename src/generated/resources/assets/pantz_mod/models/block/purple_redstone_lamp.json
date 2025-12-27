@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "pantz_mod:block/purple_redstone_lamp"
+  }
+}

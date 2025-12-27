@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "key": {
+    "/": {
+      "tag": "forge:gems/amethyst"
+    },
+    "T": {
+      "item": "minecraft:tuff"
+    }
+  },
+  "pattern": [
+    "TTT",
+    "///",
+    "TTT"
+  ],
+  "result": {
+    "item": "pantz_mod:power_displayer"
+  },
+  "show_notification": true
+}

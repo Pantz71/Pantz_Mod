@@ -90,6 +90,24 @@ public class PMLootTableProvider extends LootTableProvider {
             this.dropSelf(REDSTONE_CONFIGURATOR.get());
             this.dropSelf(WEATHER_DETECTOR.get());
             this.dropSelf(ENTITY_DETECTOR.get());
+            this.dropSelf(POWER_DISPLAYER.get());
+
+            this.dropSelf(WHITE_REDSTONE_LAMP.get());
+            this.dropSelf(ORANGE_REDSTONE_LAMP.get());
+            this.dropSelf(MAGENTA_REDSTONE_LAMP.get());
+            this.dropSelf(LIGHT_BLUE_REDSTONE_LAMP.get());
+            this.dropSelf(YELLOW_REDSTONE_LAMP.get());
+            this.dropSelf(LIME_REDSTONE_LAMP.get());
+            this.dropSelf(PINK_REDSTONE_LAMP.get());
+            this.dropSelf(GRAY_REDSTONE_LAMP.get());
+            this.dropSelf(LIGHT_GRAY_REDSTONE_LAMP.get());
+            this.dropSelf(CYAN_REDSTONE_LAMP.get());
+            this.dropSelf(PURPLE_REDSTONE_LAMP.get());
+            this.dropSelf(BLUE_REDSTONE_LAMP.get());
+            this.dropSelf(BROWN_REDSTONE_LAMP.get());
+            this.dropSelf(GREEN_REDSTONE_LAMP.get());
+            this.dropSelf(RED_REDSTONE_LAMP.get());
+            this.dropSelf(BLACK_REDSTONE_LAMP.get());
 
 
         }

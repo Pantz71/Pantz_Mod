@@ -1,7 +1,30 @@
 {
   "variants": {
-    "": {
+    "facing=down": {
+      "model": "pantz_mod:block/small_sulfur_bud",
+      "x": 180
+    },
+    "facing=east": {
+      "model": "pantz_mod:block/small_sulfur_bud",
+      "x": 90,
+      "y": 90
+    },
+    "facing=north": {
+      "model": "pantz_mod:block/small_sulfur_bud",
+      "x": 90
+    },
+    "facing=south": {
+      "model": "pantz_mod:block/small_sulfur_bud",
+      "x": 90,
+      "y": 180
+    },
+    "facing=up": {
       "model": "pantz_mod:block/small_sulfur_bud"
+    },
+    "facing=west": {
+      "model": "pantz_mod:block/small_sulfur_bud",
+      "x": 90,
+      "y": 270
     }
   }
 }
