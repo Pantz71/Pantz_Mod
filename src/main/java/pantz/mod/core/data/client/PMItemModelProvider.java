@@ -5,6 +5,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import pantz.mod.core.PantzMod;
 
+import static pantz.mod.core.registry.PMBlocks.*;
 import static pantz.mod.core.registry.PMItems.*;
 
 public class PMItemModelProvider extends BlueprintItemModelProvider {
@@ -16,6 +17,11 @@ public class PMItemModelProvider extends BlueprintItemModelProvider {
     protected void registerModels() {
         this.generatedItem(STEEL_INGOT, STEEL_NUGGET, STEEL_HORSE_ARMOR,
                 SULFUR_DUST, SULFUR_CRYSTAL, HONEY_DESERIALIZER, ENTITY_FILTER);
+
+        this.generatedItem(NOT_GATE,
+                AND_GATE, OR_GATE, NOR_GATE, NAND_GATE, XNOR_GATE, XOR_GATE,
+                ADVANCED_AND_GATE, ADVANCED_OR_GATE, ADVANCED_NOR_GATE, ADVANCED_NAND_GATE, ADVANCED_XNOR_GATE, ADVANCED_XOR_GATE,
+                MAJORITY_GATE, MINORITY_GATE);
 
         this.trimmableArmorItem(STEEL_HELMET, STEEL_CHESTPLATE, STEEL_LEGGINGS, STEEL_BOOTS);
 

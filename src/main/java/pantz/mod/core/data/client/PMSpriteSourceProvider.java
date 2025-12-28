@@ -28,7 +28,7 @@ public class PMSpriteSourceProvider extends SpriteSourceProvider {
                 ));
 
         this.atlas(ClayworksTrims.DECORATED_POT_ATLAS)
-                .addSource(BlueprintTrims.materialPatternPermutations(
+                .addSource(ClayworksTrims.materialPatternPermutations(
                         PMTrimMaterials.STEEL,
                         PMTrimMaterials.SULFUR
                 ));

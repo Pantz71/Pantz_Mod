@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "key": {
+    "C": {
+      "tag": "forge:gems/amethyst"
+    },
+    "R": {
+      "tag": "forge:dusts/redstone"
+    },
+    "S": {
+      "item": "minecraft:stone"
+    },
+    "i": {
+      "item": "minecraft:redstone_torch"
+    }
+  },
+  "pattern": [
+    " C ",
+    "RiR",
+    "SSS"
+  ],
+  "result": {
+    "item": "pantz_mod:or_gate"
+  },
+  "show_notification": true
+}

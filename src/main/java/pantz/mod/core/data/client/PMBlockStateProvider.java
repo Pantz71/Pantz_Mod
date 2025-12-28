@@ -70,6 +70,7 @@ public class PMBlockStateProvider extends BlueprintBlockStateProvider {
         this.redstoneLampBlock(GREEN_REDSTONE_LAMP);
         this.redstoneLampBlock(RED_REDSTONE_LAMP);
         this.redstoneLampBlock(BLACK_REDSTONE_LAMP);
+
     }
 
     private void redstoneConfiguratorBlock(RegistryObject<Block> block) {

@@ -4,9 +4,12 @@
   "group": "redstone_lamps",
   "ingredients": [
     {
-      "item": "minecraft:black_dye"
+      "item": "minecraft:blue_dye"
     },
     [
+      {
+        "item": "minecraft:redstone_lamp"
+      },
       {
         "item": "pantz_mod:blue_redstone_lamp"
       },

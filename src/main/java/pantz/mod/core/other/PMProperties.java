@@ -45,6 +45,7 @@ public class PMProperties {
     public static final BlockBehaviour.Properties WEATHER_DETECTOR = BlockBehaviour.Properties.of().requiresCorrectToolForDrops().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).strength(0.2F).sound(SoundType.STONE);
     public static final BlockBehaviour.Properties ENTITY_DETECTOR = BlockBehaviour.Properties.of().requiresCorrectToolForDrops().mapColor(MapColor.TERRACOTTA_LIGHT_BLUE).instrument(NoteBlockInstrument.BASEDRUM).strength(0.2F).sound(SoundType.STONE);
     public static final BlockBehaviour.Properties POWER_DISPLAYER = BlockBehaviour.Properties.of().strength(0.3F).sound(SoundType.TUFF).instrument(NoteBlockInstrument.BASEDRUM).mapColor(MapColor.TERRACOTTA_GRAY);
+    public static final BlockBehaviour.Properties DIODE = BlockBehaviour.Properties.of().instabreak().sound(SoundType.WOOD).pushReaction(PushReaction.DESTROY);
 
     public static final BlockBehaviour.Properties REDSTONE_LAMP = BlockBehaviour.Properties.of().lightLevel(litBlockEmission(15)).strength(0.3F).sound(SoundType.GLASS).isValidSpawn(PMProperties::always);
 

@@ -61,5 +61,9 @@ public class PMBlockTagsProvider extends BlockTagsProvider {
                 LIGHT_BLUE_REDSTONE_LAMP.get(), GREEN_REDSTONE_LAMP.get(), LIME_REDSTONE_LAMP.get(),
                 YELLOW_REDSTONE_LAMP.get(), ORANGE_REDSTONE_LAMP.get(), RED_REDSTONE_LAMP.get(),
                 Blocks.REDSTONE_LAMP);
+
+        this.tag(LOGIC_GATES).add(NOT_GATE.get(), AND_GATE.get(), OR_GATE.get(), NAND_GATE.get(), NOR_GATE.get(), XOR_GATE.get(), XNOR_GATE.get(),
+                ADVANCED_AND_GATE.get(), ADVANCED_OR_GATE.get(), ADVANCED_NAND_GATE.get(), ADVANCED_NOR_GATE.get(), ADVANCED_XOR_GATE.get(), ADVANCED_XNOR_GATE.get(),
+                MAJORITY_GATE.get(), MINORITY_GATE.get());
     }
 }

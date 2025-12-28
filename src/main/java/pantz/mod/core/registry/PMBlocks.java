@@ -8,16 +8,14 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraftforge.registries.RegistryObject;
 import pantz.mod.common.block.*;
+import pantz.mod.common.utils.LogicGateConditions;
 import pantz.mod.core.PantzMod;
 import pantz.mod.core.other.PMConstant;
 import pantz.mod.core.other.PMProperties;
 
 import java.util.function.Predicate;
-import java.util.function.ToIntFunction;
 
 import static net.minecraft.world.item.CreativeModeTabs.*;
 import static net.minecraft.world.item.crafting.Ingredient.of;
@@ -55,6 +53,25 @@ public class PMBlocks {
     public static final RegistryObject<Block> WEATHER_DETECTOR = BLOCKS.createBlock("weather_detector", () -> new WeatherDetectorBlock(PMProperties.WEATHER_DETECTOR));
     public static final RegistryObject<Block> ENTITY_DETECTOR = BLOCKS.createBlock("entity_detector", () -> new EntityDetectorBlock(PMProperties.ENTITY_DETECTOR));
     public static final RegistryObject<Block> POWER_DISPLAYER = BLOCKS.createBlock("power_displayer", () -> new PowerDisplayerBlock(PMProperties.POWER_DISPLAYER));
+
+    public static final RegistryObject<Block> NOT_GATE = BLOCKS.createBlock("not_gate", () -> new NotGateBlock(PMProperties.DIODE));
+
+    public static final RegistryObject<Block> AND_GATE = BLOCKS.createBlock("and_gate", () -> new LogicGateBlock(PMProperties.DIODE, LogicGateConditions.AND));
+    public static final RegistryObject<Block> OR_GATE = BLOCKS.createBlock("or_gate", () -> new LogicGateBlock(PMProperties.DIODE, LogicGateConditions.OR));
+    public static final RegistryObject<Block> NOR_GATE = BLOCKS.createBlock("nor_gate", () -> new LogicGateBlock(PMProperties.DIODE, LogicGateConditions.NOR));
+    public static final RegistryObject<Block> NAND_GATE = BLOCKS.createBlock("nand_gate", () -> new LogicGateBlock(PMProperties.DIODE, LogicGateConditions.NAND));
+    public static final RegistryObject<Block> XNOR_GATE = BLOCKS.createBlock("xnor_gate", () -> new LogicGateBlock(PMProperties.DIODE, LogicGateConditions.XNOR));
+    public static final RegistryObject<Block> XOR_GATE = BLOCKS.createBlock("xor_gate", () -> new LogicGateBlock(PMProperties.DIODE, LogicGateConditions.XOR));
+
+    public static final RegistryObject<Block> ADVANCED_AND_GATE = BLOCKS.createBlock("advanced_and_gate", () -> new AdvancedLogicGateBlock(PMProperties.DIODE, LogicGateConditions.ADVANCED_AND));
+    public static final RegistryObject<Block> ADVANCED_OR_GATE = BLOCKS.createBlock("advanced_or_gate", () -> new AdvancedLogicGateBlock(PMProperties.DIODE, LogicGateConditions.ADVANCED_OR));
+    public static final RegistryObject<Block> ADVANCED_NOR_GATE = BLOCKS.createBlock("advanced_nor_gate", () -> new AdvancedLogicGateBlock(PMProperties.DIODE, LogicGateConditions.ADVANCED_NOR));
+    public static final RegistryObject<Block> ADVANCED_NAND_GATE = BLOCKS.createBlock("advanced_nand_gate", () -> new AdvancedLogicGateBlock(PMProperties.DIODE, LogicGateConditions.ADVANCED_NAND));
+    public static final RegistryObject<Block> ADVANCED_XNOR_GATE = BLOCKS.createBlock("advanced_xnor_gate", () -> new AdvancedLogicGateBlock(PMProperties.DIODE, LogicGateConditions.ADVANCED_XNOR));
+    public static final RegistryObject<Block> ADVANCED_XOR_GATE = BLOCKS.createBlock("advanced_xor_gate", () -> new AdvancedLogicGateBlock(PMProperties.DIODE, LogicGateConditions.ADVANCED_XOR));
+
+    public static final RegistryObject<Block> MAJORITY_GATE = BLOCKS.createBlock("majority_gate", () -> new AdvancedLogicGateBlock(PMProperties.DIODE, LogicGateConditions.MAJORITY));
+    public static final RegistryObject<Block> MINORITY_GATE = BLOCKS.createBlock("minority_gate", () -> new AdvancedLogicGateBlock(PMProperties.DIODE, LogicGateConditions.MINORITY));
 
     public static final RegistryObject<Block> WHITE_REDSTONE_LAMP = BLOCKS.createBlock("white_redstone_lamp", () -> new RedstoneLampBlock(PMProperties.REDSTONE_LAMP.mapColor(DyeColor.WHITE)));
     public static final RegistryObject<Block> ORANGE_REDSTONE_LAMP = BLOCKS.createBlock("orange_redstone_lamp", () -> new RedstoneLampBlock(PMProperties.REDSTONE_LAMP.mapColor(DyeColor.ORANGE)));
@@ -96,6 +113,8 @@ public class PMBlocks {
                 .addItemsAfter(of(Blocks.TARGET), ENDER_SCANNER)
                 .addItemsAfter(of(Blocks.REDSTONE_BLOCK), REDSTONE_CONFIGURATOR, POWER_DISPLAYER)
                 .addItemsAfter(of(Blocks.DAYLIGHT_DETECTOR), WEATHER_DETECTOR, ENTITY_DETECTOR)
+                .addItemsAfter(of(Blocks.COMPARATOR), NOT_GATE, AND_GATE, OR_GATE, NAND_GATE, NOR_GATE, XOR_GATE, XNOR_GATE,
+                        ADVANCED_AND_GATE, ADVANCED_OR_GATE, ADVANCED_NAND_GATE, ADVANCED_NOR_GATE, ADVANCED_XOR_GATE, ADVANCED_XNOR_GATE, MAJORITY_GATE, MINORITY_GATE)
 
                 .tab(COLORED_BLOCKS)
                 .addItems(() -> Blocks.REDSTONE_LAMP, WHITE_REDSTONE_LAMP, ORANGE_REDSTONE_LAMP, MAGENTA_REDSTONE_LAMP,

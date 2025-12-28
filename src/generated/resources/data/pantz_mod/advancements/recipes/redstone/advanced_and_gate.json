@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_needed_dye": {
+    "has_redstone_torch": {
       "conditions": {
         "items": [
           {
             "items": [
-              "minecraft:white_dye"
+              "minecraft:redstone_torch"
             ]
           }
         ]
@@ -15,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:dye_white_redstone_lamp"
+        "recipe": "pantz_mod:advanced_and_gate"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_needed_dye",
+      "has_redstone_torch",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "minecraft:dye_white_redstone_lamp"
+      "pantz_mod:advanced_and_gate"
     ]
   },
   "sends_telemetry_event": false

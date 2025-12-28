@@ -92,6 +92,22 @@ public class PMLootTableProvider extends LootTableProvider {
             this.dropSelf(ENTITY_DETECTOR.get());
             this.dropSelf(POWER_DISPLAYER.get());
 
+            this.dropSelf(NOT_GATE.get());
+            this.dropSelf(AND_GATE.get());
+            this.dropSelf(OR_GATE.get());
+            this.dropSelf(NOR_GATE.get());
+            this.dropSelf(NAND_GATE.get());
+            this.dropSelf(XNOR_GATE.get());
+            this.dropSelf(XOR_GATE.get());
+            this.dropSelf(ADVANCED_AND_GATE.get());
+            this.dropSelf(ADVANCED_OR_GATE.get());
+            this.dropSelf(ADVANCED_NOR_GATE.get());
+            this.dropSelf(ADVANCED_NAND_GATE.get());
+            this.dropSelf(ADVANCED_XNOR_GATE.get());
+            this.dropSelf(ADVANCED_XOR_GATE.get());
+            this.dropSelf(MAJORITY_GATE.get());
+            this.dropSelf(MINORITY_GATE.get());
+
             this.dropSelf(WHITE_REDSTONE_LAMP.get());
             this.dropSelf(ORANGE_REDSTONE_LAMP.get());
             this.dropSelf(MAGENTA_REDSTONE_LAMP.get());

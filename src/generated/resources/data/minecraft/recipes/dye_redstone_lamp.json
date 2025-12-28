@@ -4,7 +4,7 @@
   "group": "redstone_lamps",
   "ingredients": [
     {
-      "item": "minecraft:white_dye"
+      "item": "minecraft:black_dye"
     },
     [
       {
@@ -51,10 +51,13 @@
       },
       {
         "item": "pantz_mod:yellow_redstone_lamp"
+      },
+      {
+        "item": "pantz_mod:white_redstone_lamp"
       }
     ]
   ],
   "result": {
-    "item": "pantz_mod:white_redstone_lamp"
+    "item": "minecraft:redstone_lamp"
   }
 }

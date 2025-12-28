@@ -71,5 +71,6 @@ public class PMItemTagsProvider extends ItemTagsProvider {
 
         this.copy(PMBlockTags.PEDESTALS, PEDESTALS);
         this.copy(PMBlockTags.REDSTONE_LAMPS, REDSTONE_LAMPS);
+        this.copy(PMBlockTags.LOGIC_GATES, LOGIC_GATES);
     }
 }

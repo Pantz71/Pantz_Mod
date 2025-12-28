@@ -1,0 +1,19 @@
+{
+  "values": [
+    "pantz_mod:not_gate",
+    "pantz_mod:and_gate",
+    "pantz_mod:or_gate",
+    "pantz_mod:nand_gate",
+    "pantz_mod:nor_gate",
+    "pantz_mod:xor_gate",
+    "pantz_mod:xnor_gate",
+    "pantz_mod:advanced_and_gate",
+    "pantz_mod:advanced_or_gate",
+    "pantz_mod:advanced_nand_gate",
+    "pantz_mod:advanced_nor_gate",
+    "pantz_mod:advanced_xor_gate",
+    "pantz_mod:advanced_xnor_gate",
+    "pantz_mod:majority_gate",
+    "pantz_mod:minority_gate"
+  ]
+}

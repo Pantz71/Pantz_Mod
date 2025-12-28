@@ -145,8 +145,8 @@ public class PMRecipeProvider extends BlueprintRecipeProvider {
                 .unlockedBy(getHasName(Items.COPPER_INGOT), has(Tags.Items.INGOTS_COPPER))
                 .save(consumer);
 
-        conditionalRecipe(consumer, ENTITY_FILTERING, RecipeCategory.TOOLS,
-                ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ENTITY_FILTER.get())
+        conditionalRecipe(consumer, ENTITY_FILTERING, TOOLS,
+                ShapedRecipeBuilder.shaped(TOOLS, ENTITY_FILTER.get())
                         .define('#', Items.PAPER).define('$', Items.ROTTEN_FLESH)
                         .define('&', Items.STRING).define('*', Items.SPIDER_EYE)
                         .define('/', Items.BONE)
@@ -155,8 +155,8 @@ public class PMRecipeProvider extends BlueprintRecipeProvider {
                         .pattern(" / ")
                         .unlockedBy(getHasName(Items.PAPER), has(Items.PAPER)));
 
-        conditionalRecipe(consumer, NOT_CAVERNS_AND_CHASMS, RecipeCategory.REDSTONE,
-                ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, ENTITY_DETECTOR.get())
+        conditionalRecipe(consumer, NOT_CAVERNS_AND_CHASMS, REDSTONE,
+                ShapedRecipeBuilder.shaped(REDSTONE, ENTITY_DETECTOR.get())
                         .define('_', Tags.Items.INGOTS_IRON).define('7', Tags.Items.GEMS_LAPIS)
                         .define('#', Blocks.GLASS)
                         .pattern("###")
@@ -164,8 +164,8 @@ public class PMRecipeProvider extends BlueprintRecipeProvider {
                         .pattern("___")
                         .unlockedBy(getHasName(Items.LAPIS_LAZULI), has(Tags.Items.GEMS_LAPIS)));
 
-        conditionalRecipe(consumer, CAVERNS_AND_CHASMS, RecipeCategory.REDSTONE,
-                ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, ENTITY_DETECTOR.get())
+        conditionalRecipe(consumer, CAVERNS_AND_CHASMS, REDSTONE,
+                ShapedRecipeBuilder.shaped(REDSTONE, ENTITY_DETECTOR.get())
                         .define('_', PMItemTags.INGOTS_SILVER).define('7', Tags.Items.GEMS_LAPIS)
                         .define('#', Blocks.GLASS)
                         .pattern("###")
@@ -174,13 +174,15 @@ public class PMRecipeProvider extends BlueprintRecipeProvider {
                         .unlockedBy(getHasName(Items.LAPIS_LAZULI), has(Tags.Items.GEMS_LAPIS)),
                 location("entity_detector_from_silver_ingots"));
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, POWER_DISPLAYER.get())
+        ShapedRecipeBuilder.shaped(REDSTONE, POWER_DISPLAYER.get())
                 .define('T', Blocks.TUFF).define('/', Tags.Items.GEMS_AMETHYST)
                 .pattern("TTT")
                 .pattern("///")
                 .pattern("TTT")
                 .unlockedBy(getHasName(Items.AMETHYST_SHARD), has(Tags.Items.GEMS_AMETHYST))
                 .save(consumer);
+
+        logicGates(consumer);
 
         List<Item> dyes = List.of(Items.BLACK_DYE, Items.BLUE_DYE, Items.BROWN_DYE, Items.CYAN_DYE, Items.GRAY_DYE, Items.GREEN_DYE,
                 Items.LIGHT_BLUE_DYE, Items.LIGHT_GRAY_DYE, Items.LIME_DYE, Items.MAGENTA_DYE, Items.ORANGE_DYE,
@@ -192,6 +194,93 @@ public class PMRecipeProvider extends BlueprintRecipeProvider {
 
         colorBlockWithDye(consumer, dyes, lamps, "redstone_lamps");
 
+    }
+
+    private static void logicGates(Consumer<FinishedRecipe> consumer) {
+        ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, NOT_GATE.get())
+                .define('S', Blocks.STONE).define('Q', Tags.Items.GEMS_QUARTZ)
+                .define('R', Tags.Items.DUSTS_REDSTONE).define('T', Items.REDSTONE_TORCH)
+                .pattern("QRT")
+                .pattern("SSS")
+                .unlockedBy(getHasName(Items.REDSTONE_TORCH), has(Items.REDSTONE_TORCH))
+                .save(consumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, AND_GATE.get())
+                .define('S', Blocks.STONE)
+                .define('R', Tags.Items.DUSTS_REDSTONE).define('i', Items.REDSTONE_TORCH)
+                .define('C', Tags.Items.INGOTS_COPPER)
+                .pattern(" C ")
+                .pattern("iRi")
+                .pattern("SSS")
+                .unlockedBy(getHasName(Items.REDSTONE_TORCH), has(Items.REDSTONE_TORCH))
+                .save(consumer);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, OR_GATE.get())
+                .define('S', Blocks.STONE).define('R', Tags.Items.DUSTS_REDSTONE)
+                .define('i', Items.REDSTONE_TORCH).define('C', Tags.Items.GEMS_AMETHYST)
+                .pattern(" C ")
+                .pattern("RiR")
+                .pattern("SSS")
+                .unlockedBy(getHasName(Items.REDSTONE_TORCH), has(Items.REDSTONE_TORCH))
+                .save(consumer);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.REDSTONE, NOR_GATE.get())
+                .requires(NOT_GATE.get()).requires(OR_GATE.get())
+                .requires(Ingredient.of(Tags.Items.GEMS_AMETHYST), 2)
+                .requires(Ingredient.of(Tags.Items.GEMS_QUARTZ), 2)
+                .unlockedBy(getHasName(Items.REDSTONE_TORCH), has(Items.REDSTONE_TORCH))
+                .save(consumer);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.REDSTONE, NAND_GATE.get())
+                .requires(NOT_GATE.get()).requires(AND_GATE.get())
+                .requires(Ingredient.of(Tags.Items.INGOTS_COPPER), 2)
+                .requires(Ingredient.of(Tags.Items.GEMS_QUARTZ), 2)
+                .unlockedBy(getHasName(Items.REDSTONE_TORCH), has(Items.REDSTONE_TORCH))
+                .save(consumer);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.REDSTONE, XNOR_GATE.get())
+                .requires(NOR_GATE.get()).requires(Tags.Items.INGOTS_IRON)
+                .requires(Tags.Items.GEMS_AMETHYST)
+                .requires(Tags.Items.GEMS_QUARTZ)
+                .unlockedBy(getHasName(Items.REDSTONE_TORCH), has(Items.REDSTONE_TORCH))
+                .save(consumer);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.REDSTONE, XOR_GATE.get())
+                .requires(OR_GATE.get()).requires(Tags.Items.INGOTS_IRON)
+                .requires(Tags.Items.GEMS_AMETHYST)
+                .unlockedBy(getHasName(Items.REDSTONE_TORCH), has(Items.REDSTONE_TORCH))
+                .save(consumer);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.REDSTONE, MAJORITY_GATE.get())
+                .requires(OR_GATE.get()).requires(AND_GATE.get())
+                .requires(PMItemTags.INGOTS_STEEL)
+                .requires(Tags.Items.GEMS_AMETHYST)
+                .requires(Tags.Items.INGOTS_COPPER)
+                .unlockedBy(getHasName(Items.REDSTONE_TORCH), has(Items.REDSTONE_TORCH))
+                .save(consumer);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.REDSTONE, MINORITY_GATE.get())
+                .requires(NOT_GATE.get()).requires(AND_GATE.get())
+                .requires(PMItemTags.INGOTS_STEEL)
+                .requires(Tags.Items.GEMS_QUARTZ)
+                .requires(Tags.Items.INGOTS_COPPER)
+                .unlockedBy(getHasName(Items.REDSTONE_TORCH), has(Items.REDSTONE_TORCH))
+                .save(consumer);
+
+        advancedLogicGate(AND_GATE.get(), ADVANCED_AND_GATE.get()).save(consumer);
+        advancedLogicGate(NAND_GATE.get(), ADVANCED_NAND_GATE.get()).save(consumer);
+        advancedLogicGate(OR_GATE.get(), ADVANCED_OR_GATE.get()).save(consumer);
+        advancedLogicGate(NOR_GATE.get(), ADVANCED_NOR_GATE.get()).save(consumer);
+        advancedLogicGate(XOR_GATE.get(), ADVANCED_XOR_GATE.get()).save(consumer);
+        advancedLogicGate(XNOR_GATE.get(), ADVANCED_XNOR_GATE.get()).save(consumer);
+
+    }
+
+    private static RecipeBuilder advancedLogicGate(ItemLike gate, ItemLike advGate) {
+        return ShapelessRecipeBuilder.shapeless(RecipeCategory.REDSTONE, advGate)
+                .requires(gate).requires(Tags.Items.DUSTS_REDSTONE)
+                .requires(Items.REDSTONE_TORCH).requires(Ingredient.of(PMItemTags.INGOTS_STEEL), 2)
+                .unlockedBy(getHasName(Items.REDSTONE_TORCH), has(Items.REDSTONE_TORCH));
     }
 
     private void oreRecipes(Consumer<FinishedRecipe> consumer, RecipeCategory category, ItemLike input, ItemLike output, float experience, int time) {

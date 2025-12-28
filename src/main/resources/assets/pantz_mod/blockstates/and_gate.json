@@ -1,0 +1,54 @@
+{
+  "variants": {
+    "facing=north,input_left=false,input_right=false,powered=false": { "model": "pantz_mod:block/and_gate", "y": 180 },
+    "facing=north,input_left=false,input_right=false,powered=true":  { "model": "pantz_mod:block/and_gate", "y": 180 },
+
+    "facing=north,input_left=true,input_right=false,powered=false":  { "model": "pantz_mod:block/and_gate_left", "y": 180 },
+    "facing=north,input_left=true,input_right=false,powered=true":   { "model": "pantz_mod:block/and_gate_left", "y": 180 },
+
+    "facing=north,input_left=false,input_right=true,powered=false":  { "model": "pantz_mod:block/and_gate_right", "y": 180 },
+    "facing=north,input_left=false,input_right=true,powered=true":   { "model": "pantz_mod:block/and_gate_right", "y": 180 },
+
+    "facing=north,input_left=true,input_right=true,powered=false":   { "model": "pantz_mod:block/and_gate_powered", "y": 180 },
+    "facing=north,input_left=true,input_right=true,powered=true":    { "model": "pantz_mod:block/and_gate_powered", "y": 180 },
+
+
+    "facing=east,input_left=false,input_right=false,powered=false":  { "model": "pantz_mod:block/and_gate", "y": 270 },
+    "facing=east,input_left=false,input_right=false,powered=true":   { "model": "pantz_mod:block/and_gate", "y": 270 },
+
+    "facing=east,input_left=true,input_right=false,powered=false":   { "model": "pantz_mod:block/and_gate_left", "y": 270 },
+    "facing=east,input_left=true,input_right=false,powered=true":    { "model": "pantz_mod:block/and_gate_left", "y": 270 },
+
+    "facing=east,input_left=false,input_right=true,powered=false":   { "model": "pantz_mod:block/and_gate_right", "y": 270 },
+    "facing=east,input_left=false,input_right=true,powered=true":    { "model": "pantz_mod:block/and_gate_right", "y": 270 },
+
+    "facing=east,input_left=true,input_right=true,powered=false":    { "model": "pantz_mod:block/and_gate_powered", "y": 270 },
+    "facing=east,input_left=true,input_right=true,powered=true":     { "model": "pantz_mod:block/and_gate_powered", "y": 270 },
+
+
+    "facing=south,input_left=false,input_right=false,powered=false": { "model": "pantz_mod:block/and_gate" },
+    "facing=south,input_left=false,input_right=false,powered=true":  { "model": "pantz_mod:block/and_gate" },
+
+    "facing=south,input_left=true,input_right=false,powered=false":  { "model": "pantz_mod:block/and_gate_left" },
+    "facing=south,input_left=true,input_right=false,powered=true":   { "model": "pantz_mod:block/and_gate_left" },
+
+    "facing=south,input_left=false,input_right=true,powered=false":  { "model": "pantz_mod:block/and_gate_right" },
+    "facing=south,input_left=false,input_right=true,powered=true":   { "model": "pantz_mod:block/and_gate_right" },
+
+    "facing=south,input_left=true,input_right=true,powered=false":   { "model": "pantz_mod:block/and_gate_powered" },
+    "facing=south,input_left=true,input_right=true,powered=true":    { "model": "pantz_mod:block/and_gate_powered" },
+
+
+    "facing=west,input_left=false,input_right=false,powered=false":  { "model": "pantz_mod:block/and_gate", "y": 90 },
+    "facing=west,input_left=false,input_right=false,powered=true":   { "model": "pantz_mod:block/and_gate", "y": 90 },
+
+    "facing=west,input_left=true,input_right=false,powered=false":   { "model": "pantz_mod:block/and_gate_left", "y": 90 },
+    "facing=west,input_left=true,input_right=false,powered=true":    { "model": "pantz_mod:block/and_gate_left", "y": 90 },
+
+    "facing=west,input_left=false,input_right=true,powered=false":   { "model": "pantz_mod:block/and_gate_right", "y": 90 },
+    "facing=west,input_left=false,input_right=true,powered=true":    { "model": "pantz_mod:block/and_gate_right", "y": 90 },
+
+    "facing=west,input_left=true,input_right=true,powered=false":    { "model": "pantz_mod:block/and_gate_powered", "y": 90 },
+    "facing=west,input_left=true,input_right=true,powered=true":     { "model": "pantz_mod:block/and_gate_powered", "y": 90 }
+  }
+}
