@@ -1,10 +1,10 @@
 package pantz.mod.core.registry;
 
 import com.teamabnormals.blueprint.core.util.item.CreativeModeTabContentsPopulator;
-import com.teamabnormals.blueprint.core.util.registry.BlockSubRegistryHelper;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Rarity;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -14,6 +14,7 @@ import pantz.mod.common.utils.LogicGateConditions;
 import pantz.mod.core.PantzMod;
 import pantz.mod.core.other.PMConstant;
 import pantz.mod.core.other.PMProperties;
+import pantz.mod.core.registry.helper.PMBlockSubRegistryHelper;
 
 import java.util.function.Predicate;
 
@@ -21,7 +22,7 @@ import static net.minecraft.world.item.CreativeModeTabs.*;
 import static net.minecraft.world.item.crafting.Ingredient.of;
 
 public class PMBlocks {
-    public static final BlockSubRegistryHelper BLOCKS = PantzMod.REGISTRY_HELPER.getBlockSubHelper();
+    public static final PMBlockSubRegistryHelper BLOCKS = PantzMod.REGISTRY_HELPER.getBlockSubHelper();
 
     public static final RegistryObject<Block> STEEL_BLOCK = BLOCKS.createBlock("steel_block", () -> new Block(PMProperties.STEEL_BLOCK));
     public static final RegistryObject<Block> STEEL_BARS = BLOCKS.createBlock("steel_bars", () -> new IronBarsBlock(PMProperties.STEEL_BARS));
@@ -73,6 +74,31 @@ public class PMBlocks {
     public static final RegistryObject<Block> MAJORITY_GATE = BLOCKS.createBlock("majority_gate", () -> new AdvancedLogicGateBlock(PMProperties.DIODE, LogicGateConditions.MAJORITY));
     public static final RegistryObject<Block> MINORITY_GATE = BLOCKS.createBlock("minority_gate", () -> new AdvancedLogicGateBlock(PMProperties.DIODE, LogicGateConditions.MINORITY));
 
+    public static final RegistryObject<Block> EARTH_GLOBE = BLOCKS.createCustomRarityBlock("earth_globe", Rarity.UNCOMMON, () -> new GlobeBlock(PMProperties.GLOBE, PantzMod.location("planets/earth")));
+    public static final RegistryObject<Block> MERCURY_GLOBE = BLOCKS.createCustomRarityBlock("mercury_globe", Rarity.UNCOMMON, () -> new GlobeBlock(PMProperties.GLOBE, PantzMod.location("planets/mercury")));
+    public static final RegistryObject<Block> VENUS_GLOBE = BLOCKS.createCustomRarityBlock("venus_globe", Rarity.UNCOMMON, () -> new GlobeBlock(PMProperties.GLOBE, PantzMod.location("planets/venus")));
+    public static final RegistryObject<Block> MARS_GLOBE = BLOCKS.createCustomRarityBlock("mars_globe", Rarity.UNCOMMON, () -> new GlobeBlock(PMProperties.GLOBE, PantzMod.location("planets/mars")));
+
+    public static final RegistryObject<Block> JUPITER_GLOBE = BLOCKS.createCustomRarityBlock("jupiter_globe", Rarity.UNCOMMON, () -> new GlobeBlock(PMProperties.GAS_GLOBE, PantzMod.location("large_planets/jupiter")));
+    public static final RegistryObject<Block> SATURN_GLOBE = BLOCKS.createCustomRarityBlock("saturn_globe", Rarity.UNCOMMON, () -> new GlobeBlock(PMProperties.GAS_GLOBE, PantzMod.location("large_planets/saturn")));
+    public static final RegistryObject<Block> URANUS_GLOBE = BLOCKS.createCustomRarityBlock("uranus_globe", Rarity.UNCOMMON, () -> new GlobeBlock(PMProperties.GLOBE, PantzMod.location("large_planets/uranus")));
+    public static final RegistryObject<Block> NEPTUNE_GLOBE = BLOCKS.createCustomRarityBlock("neptune_globe", Rarity.UNCOMMON, () -> new GlobeBlock(PMProperties.GLOBE, PantzMod.location("large_planets/neptune")));
+
+    public static final RegistryObject<Block> PLUTO_GLOBE = BLOCKS.createCustomRarityBlock("pluto_globe", Rarity.UNCOMMON, () -> new GlobeBlock(PMProperties.GLOBE, PantzMod.location("dwarf_planets/pluto")));
+    public static final RegistryObject<Block> CERES_GLOBE = BLOCKS.createCustomRarityBlock("ceres_globe", Rarity.UNCOMMON, () -> new GlobeBlock(PMProperties.GLOBE, PantzMod.location("dwarf_planets/ceres")));
+    public static final RegistryObject<Block> MAKEMAKE_GLOBE = BLOCKS.createCustomRarityBlock("makemake_globe", Rarity.UNCOMMON, () -> new GlobeBlock(PMProperties.GLOBE, PantzMod.location("dwarf_planets/makemake")));
+
+    public static final RegistryObject<Block> MOON_GLOBE = BLOCKS.createCustomRarityBlock("moon_globe", Rarity.UNCOMMON, () -> new GlobeBlock(PMProperties.GLOBE, PantzMod.location("moons/moon")));
+    public static final RegistryObject<Block> IO_GLOBE = BLOCKS.createCustomRarityBlock("io_globe", Rarity.UNCOMMON, () -> new GlobeBlock(PMProperties.GLOBE, PantzMod.location("moons/io")));
+    public static final RegistryObject<Block> EUROPA_GLOBE = BLOCKS.createCustomRarityBlock("europa_globe", Rarity.UNCOMMON, () -> new GlobeBlock(PMProperties.GLOBE, PantzMod.location("moons/europa")));
+    public static final RegistryObject<Block> CALLISTO_GLOBE = BLOCKS.createCustomRarityBlock("callisto_globe", Rarity.UNCOMMON, () -> new GlobeBlock(PMProperties.GLOBE, PantzMod.location("moons/callisto")));
+    public static final RegistryObject<Block> GANYMEDE_GLOBE = BLOCKS.createCustomRarityBlock("ganymede_globe", Rarity.UNCOMMON, () -> new GlobeBlock(PMProperties.GLOBE, PantzMod.location("moons/ganymede")));
+
+    public static final RegistryObject<Block> SUN_GLOBE = BLOCKS.createCustomRarityBlock("sun_globe", Rarity.RARE, () -> new GlobeBlock(PMProperties.STAR_GLOBE, PantzMod.location("stars/sun")));
+    public static final RegistryObject<Block> BLUE_SUN_GLOBE = BLOCKS.createCustomRarityBlock("blue_sun_globe", Rarity.RARE, () -> new GlobeBlock(PMProperties.STAR_GLOBE, PantzMod.location("stars/blue_sun")));
+
+    public static final RegistryObject<Block> IRIS_GLOBE = BLOCKS.createCustomRarityBlock("iris_globe", Rarity.EPIC, () -> new GlobeBlock(PMProperties.GLOBE, PantzMod.location("large_planets/iris")));
+
     public static final RegistryObject<Block> WHITE_REDSTONE_LAMP = BLOCKS.createBlock("white_redstone_lamp", () -> new RedstoneLampBlock(PMProperties.REDSTONE_LAMP.mapColor(DyeColor.WHITE)));
     public static final RegistryObject<Block> ORANGE_REDSTONE_LAMP = BLOCKS.createBlock("orange_redstone_lamp", () -> new RedstoneLampBlock(PMProperties.REDSTONE_LAMP.mapColor(DyeColor.ORANGE)));
     public static final RegistryObject<Block> MAGENTA_REDSTONE_LAMP = BLOCKS.createBlock("magenta_redstone_lamp", () -> new RedstoneLampBlock(PMProperties.REDSTONE_LAMP.mapColor(DyeColor.MAGENTA)));
@@ -104,6 +130,7 @@ public class PMBlocks {
 
                 .tab(FUNCTIONAL_BLOCKS)
                 .addItemsAfter(of(Blocks.DAMAGED_ANVIL), STONE_PEDESTAL, DEEPSLATE_PEDESTAL, BLACKSTONE_PEDESTAL, QUARTZ_PEDESTAL, PRISMARINE_PEDESTAL, PURPUR_PEDESTAL)
+                .addItemsAfter(of(Blocks.BELL), MERCURY_GLOBE, VENUS_GLOBE, EARTH_GLOBE, MARS_GLOBE, JUPITER_GLOBE, SATURN_GLOBE, URANUS_GLOBE, NEPTUNE_GLOBE, PLUTO_GLOBE, CERES_GLOBE, MAKEMAKE_GLOBE, MOON_GLOBE, IO_GLOBE, EUROPA_GLOBE, CALLISTO_GLOBE, GANYMEDE_GLOBE, SUN_GLOBE, BLUE_SUN_GLOBE, IRIS_GLOBE)
                 .addItemsAfter(of(Blocks.REDSTONE_LAMP), WHITE_REDSTONE_LAMP, ORANGE_REDSTONE_LAMP, MAGENTA_REDSTONE_LAMP,
                         LIGHT_BLUE_REDSTONE_LAMP, YELLOW_REDSTONE_LAMP, LIME_REDSTONE_LAMP, PINK_REDSTONE_LAMP, GRAY_REDSTONE_LAMP, LIGHT_GRAY_REDSTONE_LAMP,
                         CYAN_REDSTONE_LAMP, PURPLE_REDSTONE_LAMP, BLUE_REDSTONE_LAMP, BROWN_REDSTONE_LAMP, GREEN_REDSTONE_LAMP, RED_REDSTONE_LAMP, BLACK_REDSTONE_LAMP)
@@ -125,6 +152,6 @@ public class PMBlocks {
     }
 
     public static Predicate<ItemStack> modLoaded(ItemLike item, String... modids) {
-        return stack -> of(item).test(stack) && BlockSubRegistryHelper.areModsLoaded(modids);
+        return stack -> of(item).test(stack) && PMBlockSubRegistryHelper.areModsLoaded(modids);
     }
 }

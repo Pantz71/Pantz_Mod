@@ -8,6 +8,9 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.common.MinecraftForge;
@@ -21,6 +24,8 @@ import net.minecraftforge.fml.config.ModConfig.*;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.registries.ForgeRegistries;
+import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import pantz.mod.client.renderer.be.PedestalRenderer;
 import pantz.mod.core.data.client.PMBlockStateProvider;
@@ -40,13 +45,14 @@ import pantz.mod.core.other.PMCompat;
 import pantz.mod.core.registry.PMBlockEntityTypes;
 import pantz.mod.core.registry.PMBlocks;
 import pantz.mod.core.registry.PMItems;
+import pantz.mod.core.registry.helper.PMBlockSubRegistryHelper;
 
 import java.util.concurrent.CompletableFuture;
 
 @Mod(PantzMod.MOD_ID)
 public class PantzMod {
     public static final String MOD_ID = "pantz_mod";
-    public static final RegistryHelper REGISTRY_HELPER = new RegistryHelper(MOD_ID);
+    public static final RegistryHelper REGISTRY_HELPER = RegistryHelper.create(MOD_ID, helper -> helper.putSubHelper(ForgeRegistries.BLOCKS, new PMBlockSubRegistryHelper(helper)));
     private static final Logger LOGGER = LogUtils.getLogger();
 
     public PantzMod() {
@@ -113,5 +119,10 @@ public class PantzMod {
         return new ResourceLocation(MOD_ID, loc);
     }
 
+    @SuppressWarnings("unchecked")
+    @Nullable
+    public static <E extends BlockEntity, A extends BlockEntity> BlockEntityTicker<A> createTickerHelper(BlockEntityType<A> pServerType, BlockEntityType<E> pClientType, BlockEntityTicker<? super E> pTicker) {
+        return pClientType == pServerType ? (BlockEntityTicker<A>)pTicker : null;
+    }
 
 }

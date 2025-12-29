@@ -24,7 +24,9 @@ import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
+import pantz.mod.client.model.block.*;
 import pantz.mod.client.renderer.be.EntityDetectorRenderer;
+import pantz.mod.client.renderer.be.GlobeRenderer;
 import pantz.mod.client.renderer.be.PedestalRenderer;
 import pantz.mod.common.item.AreaDiggerItem;
 import pantz.mod.core.PMConfig;
@@ -220,6 +222,18 @@ public class PMClientEvents {
         public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
             event.registerBlockEntityRenderer(PMBlockEntityTypes.PEDESTAL.get(), PedestalRenderer::new);
             event.registerBlockEntityRenderer(PMBlockEntityTypes.ENTITY_DETECTOR.get(), EntityDetectorRenderer::new);
+            event.registerBlockEntityRenderer(PMBlockEntityTypes.GLOBE.get(), GlobeRenderer::new);
+        }
+
+        @SubscribeEvent
+        public static void registerLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
+            event.registerLayerDefinition(PMModelLayers.GLOBE, GlobeModel::createModel);
+            event.registerLayerDefinition(PMModelLayers.LARGE_GLOBE, LargeGlobeModel::createModel);
+            event.registerLayerDefinition(PMModelLayers.GIANT_GLOBE, GiantGlobeModel::createModel);
+            event.registerLayerDefinition(PMModelLayers.SMALL_GLOBE, SmallGlobeModel::createModel);
+            event.registerLayerDefinition(PMModelLayers.TINY_GLOBE, TinyGlobeModel::createModel);
+            event.registerLayerDefinition(PMModelLayers.SATURN_GLOBE, SaturnGlobeModel::createModel);
+            event.registerLayerDefinition(PMModelLayers.URANUS_GLOBE, UranusGlobeModel::createModel);
         }
     }
 

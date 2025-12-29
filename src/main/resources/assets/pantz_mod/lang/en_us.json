@@ -93,6 +93,31 @@
   "block.pantz_mod.advanced_xor_gate": "Advanced XOR Gate",
   "block.pantz_mod.majority_gate": "MAJORITY Gate",
   "block.pantz_mod.minority_gate": "MINORITY Gate",
+
+  "block.pantz_mod.mercury_globe": "Mercury Globe",
+  "block.pantz_mod.earth_globe": "Earth Globe",
+  "block.pantz_mod.venus_globe": "Venus Globe",
+  "block.pantz_mod.mars_globe": "Mars Globe",
+
+  "block.pantz_mod.jupiter_globe": "Jupiter Globe",
+  "block.pantz_mod.saturn_globe": "Saturn Globe",
+  "block.pantz_mod.uranus_globe": "Uranus Globe",
+  "block.pantz_mod.neptune_globe": "Neptune Globe",
+
+  "block.pantz_mod.pluto_globe": "Pluto Globe",
+  "block.pantz_mod.ceres_globe": "Ceres Globe",
+  "block.pantz_mod.makemake_globe": "Makemake Globe",
+
+  "block.pantz_mod.moon_globe": "Moon Globe",
+  "block.pantz_mod.io_globe": "Io Globe",
+  "block.pantz_mod.europa_globe": "Europa Globe",
+  "block.pantz_mod.callisto_globe": "Callisto Globe",
+  "block.pantz_mod.ganymede_globe": "Ganymede Globe",
+
+  "block.pantz_mod.sun_globe": "Sun Globe",
+  "block.pantz_mod.blue_sun_globe": "Blue Sun Globe",
+
+  "block.pantz_mod.iris_globe": "Iris Globe",
   
   "block.pantz_mod.red_redstone_lamp": "Red Redstone Lamp",
   "block.pantz_mod.orange_redstone_lamp": "Orange Redstone Lamp",

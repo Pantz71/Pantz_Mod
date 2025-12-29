@@ -108,6 +108,26 @@ public class PMLootTableProvider extends LootTableProvider {
             this.dropSelf(MAJORITY_GATE.get());
             this.dropSelf(MINORITY_GATE.get());
 
+            this.dropSelf(EARTH_GLOBE.get());
+            this.dropSelf(MERCURY_GLOBE.get());
+            this.dropSelf(VENUS_GLOBE.get());
+            this.dropSelf(MARS_GLOBE.get());
+            this.dropSelf(JUPITER_GLOBE.get());
+            this.dropSelf(SATURN_GLOBE.get());
+            this.dropSelf(URANUS_GLOBE.get());
+            this.dropSelf(NEPTUNE_GLOBE.get());
+            this.dropSelf(PLUTO_GLOBE.get());
+            this.dropSelf(CERES_GLOBE.get());
+            this.dropSelf(MAKEMAKE_GLOBE.get());
+            this.dropSelf(MOON_GLOBE.get());
+            this.dropSelf(IO_GLOBE.get());
+            this.dropSelf(EUROPA_GLOBE.get());
+            this.dropSelf(CALLISTO_GLOBE.get());
+            this.dropSelf(GANYMEDE_GLOBE.get());
+            this.dropSelf(SUN_GLOBE.get());
+            this.dropSelf(BLUE_SUN_GLOBE.get());
+            this.dropSelf(IRIS_GLOBE.get());
+
             this.dropSelf(WHITE_REDSTONE_LAMP.get());
             this.dropSelf(ORANGE_REDSTONE_LAMP.get());
             this.dropSelf(MAGENTA_REDSTONE_LAMP.get());

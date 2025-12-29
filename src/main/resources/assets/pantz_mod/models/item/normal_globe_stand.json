@@ -1,0 +1,65 @@
+{
+	"format_version": "1.21.6",
+	"credit": "Made with Blockbench",
+	"parent": "minecraft:block/block",
+	"render_type": "cutout",
+	"texture_size": [80, 80],
+	"textures": {
+		"particle": "#stand",
+		"globe": "#globe",
+		"stand": "#stand"
+	},
+	"elements": [
+		{
+			"name": "stand1",
+			"from": [4, 0, 4],
+			"to": [12, 1, 12],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 0.5, 8]},
+			"faces": {
+				"north": {"uv": [0, 1.6, 1.6, 1.8], "texture": "#stand"},
+				"east": {"uv": [0, 1.6, 1.6, 1.8], "texture": "#stand"},
+				"south": {"uv": [0, 1.6, 1.6, 1.8], "texture": "#stand"},
+				"west": {"uv": [0, 1.6, 1.6, 1.8], "texture": "#stand"},
+				"up": {"uv": [0, 0, 1.6, 1.6], "texture": "#stand"},
+				"down": {"uv": [0, 0, 1.6, 1.6], "texture": "#stand"}
+			}
+		},
+		{
+			"name": "stand2",
+			"from": [6, 1, 6],
+			"to": [10, 2, 10],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 1.5, 8]},
+			"faces": {
+				"north": {"uv": [0.4, 3, 1.2, 3.2], "texture": "#stand"},
+				"east": {"uv": [0.4, 3, 1.2, 3.2], "texture": "#stand"},
+				"south": {"uv": [0.4, 3, 1.2, 3.2], "texture": "#stand"},
+				"west": {"uv": [0.4, 3, 1.2, 3.2], "texture": "#stand"},
+				"up": {"uv": [0.4, 2.2, 1.2, 3], "texture": "#stand"},
+				"down": {"uv": [0.4, 2.2, 1.2, 3], "texture": "#stand"}
+			}
+		},
+		{
+			"from": [8, 2, 1],
+			"to": [8, 16, 16],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 9, 8]},
+			"faces": {
+				"east": {"uv": [1.6, 0, 4.6, 2.8], "rotation": 180, "texture": "#stand"},
+				"west": {"uv": [1.6, 0, 4.6, 2.8], "texture": "#stand"}
+			}
+		},
+		{
+			"name": "globe",
+			"from": [3, 4, 2],
+			"to": [13, 14, 12],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 9, 7]},
+			"faces": {
+				"north": {"uv": [2, 2, 4, 4], "texture": "#globe"},
+				"east": {"uv": [0, 2, 2, 4], "texture": "#globe"},
+				"south": {"uv": [6, 2, 8, 4], "texture": "#globe"},
+				"west": {"uv": [4, 2, 6, 4], "texture": "#globe"},
+				"up": {"uv": [2, 0, 4, 2], "texture": "#globe"},
+				"down": {"uv": [4, 0, 6, 2], "texture": "#globe"}
+			}
+		}
+	]
+}

@@ -5,11 +5,13 @@ import net.minecraft.core.Direction;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.RegistryObject;
+import pantz.mod.common.block.GlobeBlock;
 import pantz.mod.common.block.PedestalBlock;
 import pantz.mod.common.block.PowerDisplayerBlock;
 import pantz.mod.common.block.RedstoneConfiguratorBlock;
@@ -49,10 +51,29 @@ public class PMBlockStateProvider extends BlueprintBlockStateProvider {
 
         this.enderScannerBlock(ENDER_SCANNER);
         this.redstoneConfiguratorBlock(REDSTONE_CONFIGURATOR);
-
         this.blockItem(WEATHER_DETECTOR);
         this.blockItem(ENTITY_DETECTOR);
         this.powerDisplayerBlock(POWER_DISPLAYER);
+
+        this.globeBlock(MERCURY_GLOBE, "normal", "normal", "golden");
+        this.globeBlock(VENUS_GLOBE, "normal", "normal", "golden");
+        this.globeBlock(EARTH_GLOBE, "normal", "normal", "golden");
+        this.globeBlock(MARS_GLOBE, "normal", "normal", "golden");
+        this.globeBlock(JUPITER_GLOBE, "large", "normal", "copper");
+        this.globeBlock(SATURN_GLOBE, "saturn", "normal", "copper");
+        this.globeBlock(URANUS_GLOBE, "uranus", "normal", "iron");
+        this.globeBlock(NEPTUNE_GLOBE, "large", "normal", "iron");
+        this.globeBlock(MOON_GLOBE, "small", "normal", "emerald");
+        this.globeBlock(IO_GLOBE, "small", "normal", "emerald");
+        this.globeBlock(EUROPA_GLOBE, "small", "normal", "emerald");
+        this.globeBlock(GANYMEDE_GLOBE, "small", "normal", "emerald");
+        this.globeBlock(CALLISTO_GLOBE, "small", "normal", "emerald");
+        this.globeBlock(PLUTO_GLOBE, "tiny", "normal", "quartz");
+        this.globeBlock(CERES_GLOBE, "tiny", "normal", "quartz");
+        this.globeBlock(MAKEMAKE_GLOBE, "tiny", "normal", "quartz");
+        this.globeBlock(SUN_GLOBE, "giant", "giant", "amethyst");
+        this.globeBlock(BLUE_SUN_GLOBE, "giant", "giant", "amethyst");
+        this.globeBlock(IRIS_GLOBE, "large", "normal", "diamond");
 
         this.redstoneLampBlock(WHITE_REDSTONE_LAMP);
         this.redstoneLampBlock(ORANGE_REDSTONE_LAMP);
@@ -210,5 +231,30 @@ public class PMBlockStateProvider extends BlueprintBlockStateProvider {
             }
         }
         generatedItem(block.get(), texture);
+    }
+
+    private void globeBlock(RegistryObject<Block> block, String model, String stand, String standTexture) {
+        globeBlock(block, modLoc("item/" + model + "_globe_stand"), modLoc("block/" + stand + "_globe_stand"), modLoc("block/" + standTexture + "_globe_stand"));
+    }
+
+    private void globeBlock(RegistryObject<Block> block, ResourceLocation model, ResourceLocation stand, ResourceLocation standTexture) {
+        getVariantBuilder(block.get()).forAllStatesExcept(state -> {
+            Direction facing = state.getValue(HorizontalDirectionalBlock.FACING);
+            return ConfiguredModel.builder()
+                    .modelFile(models()
+                            .withExistingParent(name(block.get()), stand)
+                            .texture("stand", standTexture))
+                    .rotationY((int) facing.toYRot())
+                    .build();
+        }, BlockStateProperties.WATERLOGGED);
+
+        ResourceLocation texturePath = PantzMod.location("planets/earth");
+        if (block.get() instanceof GlobeBlock globeBlock) {
+            texturePath = globeBlock.getTexture();
+        }
+
+        this.itemModels().withExistingParent(name(block.get()), model)
+                .texture("stand", standTexture)
+                .texture("globe", prefix("block/globe/", texturePath));
     }
 }
