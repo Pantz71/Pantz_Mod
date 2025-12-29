@@ -1,0 +1,7 @@
+{
+  "parent": "pantz_mod:item/giant_globe_stand",
+  "textures": {
+    "globe": "pantz_mod:block/globe/stars/sun",
+    "stand": "pantz_mod:block/amethyst_globe_stand"
+  }
+}

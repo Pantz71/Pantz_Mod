@@ -1,0 +1,6 @@
+{
+  "parent": "pantz_mod:block/normal_globe_stand",
+  "textures": {
+    "stand": "pantz_mod:block/emerald_globe_stand"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "parent": "pantz_mod:item/normal_globe_stand",
+  "textures": {
+    "globe": "pantz_mod:block/globe/planets/mercury",
+    "stand": "pantz_mod:block/golden_globe_stand"
+  }
+}

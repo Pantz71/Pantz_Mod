@@ -1,0 +1,34 @@
+{
+  "variants": {
+    "facing=east,powered=false": {
+      "model": "pantz_mod:block/neptune_globe",
+      "y": 270
+    },
+    "facing=east,powered=true": {
+      "model": "pantz_mod:block/neptune_globe",
+      "y": 270
+    },
+    "facing=north,powered=false": {
+      "model": "pantz_mod:block/neptune_globe",
+      "y": 180
+    },
+    "facing=north,powered=true": {
+      "model": "pantz_mod:block/neptune_globe",
+      "y": 180
+    },
+    "facing=south,powered=false": {
+      "model": "pantz_mod:block/neptune_globe"
+    },
+    "facing=south,powered=true": {
+      "model": "pantz_mod:block/neptune_globe"
+    },
+    "facing=west,powered=false": {
+      "model": "pantz_mod:block/neptune_globe",
+      "y": 90
+    },
+    "facing=west,powered=true": {
+      "model": "pantz_mod:block/neptune_globe",
+      "y": 90
+    }
+  }
+}
