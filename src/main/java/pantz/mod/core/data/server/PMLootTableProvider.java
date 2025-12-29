@@ -25,6 +25,7 @@ import net.minecraft.world.level.storage.loot.predicates.MatchTool;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 import pantz.mod.core.PantzMod;
 import pantz.mod.core.registry.PMItems;
 
@@ -55,19 +56,47 @@ public class PMLootTableProvider extends LootTableProvider {
 
         @Override
         protected void generate() {
-            this.dropSelf(STEEL_BLOCK.get());
-            this.dropSelf(STEEL_BARS.get());
-            this.add(STEEL_DOOR.get(), this::createDoorTable);
-            this.dropSelf(STEEL_TRAPDOOR.get());
+            // dropSelf
+            for (RegistryObject<?> block : new RegistryObject[]{
+                    STEEL_BLOCK, STEEL_BARS, STEEL_TRAPDOOR,
+                    SULFUR_BLOCK, SULFUR_BRICKS, SULFUR_BRICK_STAIRS, SULFUR_BRICK_WALL, CHISELED_SULFUR_BRICKS,
+                    STONE_PEDESTAL, DEEPSLATE_PEDESTAL, BLACKSTONE_PEDESTAL, QUARTZ_PEDESTAL, PURPUR_PEDESTAL, PRISMARINE_PEDESTAL,
+                    ENDER_SCANNER, REDSTONE_CONFIGURATOR, WEATHER_DETECTOR, ENTITY_DETECTOR, POWER_DISPLAYER,
+                    NOT_GATE, AND_GATE, OR_GATE, NAND_GATE, NOR_GATE, XOR_GATE, XNOR_GATE,
+                    ADVANCED_AND_GATE, ADVANCED_OR_GATE, ADVANCED_NAND_GATE, ADVANCED_NOR_GATE, ADVANCED_XOR_GATE, ADVANCED_XNOR_GATE, MAJORITY_GATE, MINORITY_GATE,
+                    MERCURY_GLOBE, VENUS_GLOBE, EARTH_GLOBE, MARS_GLOBE, JUPITER_GLOBE, SATURN_GLOBE, URANUS_GLOBE, NEPTUNE_GLOBE,
+                    PLUTO_GLOBE, CERES_GLOBE, MAKEMAKE_GLOBE, MOON_GLOBE, IO_GLOBE, EUROPA_GLOBE, CALLISTO_GLOBE, GANYMEDE_GLOBE,
+                    SUN_GLOBE, BLUE_SUN_GLOBE, IRIS_GLOBE,
+                    RED_REDSTONE_LAMP, ORANGE_REDSTONE_LAMP, YELLOW_REDSTONE_LAMP, LIME_REDSTONE_LAMP, GREEN_REDSTONE_LAMP, BLUE_REDSTONE_LAMP, CYAN_REDSTONE_LAMP,
+                    LIGHT_BLUE_REDSTONE_LAMP, PURPLE_REDSTONE_LAMP, MAGENTA_REDSTONE_LAMP, PINK_REDSTONE_LAMP, BROWN_REDSTONE_LAMP, BLACK_REDSTONE_LAMP, GRAY_REDSTONE_LAMP, LIGHT_GRAY_REDSTONE_LAMP, WHITE_REDSTONE_LAMP,
 
-            this.add(NETHER_SULFUR_ORE.get(), this.createDustOreDrop(NETHER_SULFUR_ORE.get(), PMItems.SULFUR_CRYSTAL.get(), 3, 7));
-            this.dropSelf(SULFUR_BLOCK.get());
-            this.dropSelf(SULFUR_BRICKS.get());
-            this.dropSelf(SULFUR_BRICK_STAIRS.get());
-            this.add(SULFUR_BRICK_SLAB.get(), this::createSlabItemTable);
-            this.dropSelf(SULFUR_BRICK_WALL.get());
-            this.dropSelf(CHISELED_SULFUR_BRICKS.get());
+            }) {
+                this.dropSelf((Block) block.get());
+            }
 
+            // door
+            for (RegistryObject<?> block : new RegistryObject[]{
+                    STEEL_DOOR
+            }) {
+                this.add((Block) block.get(), this::createDoorTable);
+            }
+
+            // slab
+            for (RegistryObject<?> block : new RegistryObject[]{
+                    SULFUR_BRICK_SLAB
+            }) {
+                this.add((Block) block.get(), this::createSlabItemTable);
+            }
+
+            // silk touch
+            for (RegistryObject<?> block : new RegistryObject[]{
+                    SMALL_SULFUR_BUD, MEDIUM_SULFUR_BUD, LARGE_SULFUR_BUD
+            }) {
+                this.dropWhenSilkTouch((Block) block.get());
+            }
+
+            this.add(NETHER_SULFUR_ORE.get(), this.createDustOreDrop(NETHER_SULFUR_ORE.get(), PMItems.SULFUR_DUST.get(), 3, 7));
+            
             this.add(SULFUR_CLUSTER.get(), createSilkTouchDispatchTable(SULFUR_CLUSTER.get(), LootItem.lootTableItem(PMItems.SULFUR_CRYSTAL.get())
                     .apply(SetItemCountFunction.setCount(ConstantValue.exactly(4.0F)))
                     .apply(ApplyBonusCount.addOreBonusCount(Enchantments.BLOCK_FORTUNE))
@@ -75,75 +104,6 @@ public class PMLootTableProvider extends LootTableProvider {
                     .otherwise(this.applyExplosionDecay(SULFUR_CLUSTER.get(), LootItem.lootTableItem(PMItems.SULFUR_CRYSTAL.get())
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(2.0F)))))));
 
-            this.dropWhenSilkTouch(SMALL_SULFUR_BUD.get());
-            this.dropWhenSilkTouch(MEDIUM_SULFUR_BUD.get());
-            this.dropWhenSilkTouch(LARGE_SULFUR_BUD.get());
-
-            this.dropSelf(STONE_PEDESTAL.get());
-            this.dropSelf(DEEPSLATE_PEDESTAL.get());
-            this.dropSelf(BLACKSTONE_PEDESTAL.get());
-            this.dropSelf(QUARTZ_PEDESTAL.get());
-            this.dropSelf(PURPUR_PEDESTAL.get());
-            this.dropSelf(PRISMARINE_PEDESTAL.get());
-
-            this.dropSelf(ENDER_SCANNER.get());
-            this.dropSelf(REDSTONE_CONFIGURATOR.get());
-            this.dropSelf(WEATHER_DETECTOR.get());
-            this.dropSelf(ENTITY_DETECTOR.get());
-            this.dropSelf(POWER_DISPLAYER.get());
-
-            this.dropSelf(NOT_GATE.get());
-            this.dropSelf(AND_GATE.get());
-            this.dropSelf(OR_GATE.get());
-            this.dropSelf(NOR_GATE.get());
-            this.dropSelf(NAND_GATE.get());
-            this.dropSelf(XNOR_GATE.get());
-            this.dropSelf(XOR_GATE.get());
-            this.dropSelf(ADVANCED_AND_GATE.get());
-            this.dropSelf(ADVANCED_OR_GATE.get());
-            this.dropSelf(ADVANCED_NOR_GATE.get());
-            this.dropSelf(ADVANCED_NAND_GATE.get());
-            this.dropSelf(ADVANCED_XNOR_GATE.get());
-            this.dropSelf(ADVANCED_XOR_GATE.get());
-            this.dropSelf(MAJORITY_GATE.get());
-            this.dropSelf(MINORITY_GATE.get());
-
-            this.dropSelf(EARTH_GLOBE.get());
-            this.dropSelf(MERCURY_GLOBE.get());
-            this.dropSelf(VENUS_GLOBE.get());
-            this.dropSelf(MARS_GLOBE.get());
-            this.dropSelf(JUPITER_GLOBE.get());
-            this.dropSelf(SATURN_GLOBE.get());
-            this.dropSelf(URANUS_GLOBE.get());
-            this.dropSelf(NEPTUNE_GLOBE.get());
-            this.dropSelf(PLUTO_GLOBE.get());
-            this.dropSelf(CERES_GLOBE.get());
-            this.dropSelf(MAKEMAKE_GLOBE.get());
-            this.dropSelf(MOON_GLOBE.get());
-            this.dropSelf(IO_GLOBE.get());
-            this.dropSelf(EUROPA_GLOBE.get());
-            this.dropSelf(CALLISTO_GLOBE.get());
-            this.dropSelf(GANYMEDE_GLOBE.get());
-            this.dropSelf(SUN_GLOBE.get());
-            this.dropSelf(BLUE_SUN_GLOBE.get());
-            this.dropSelf(IRIS_GLOBE.get());
-
-            this.dropSelf(WHITE_REDSTONE_LAMP.get());
-            this.dropSelf(ORANGE_REDSTONE_LAMP.get());
-            this.dropSelf(MAGENTA_REDSTONE_LAMP.get());
-            this.dropSelf(LIGHT_BLUE_REDSTONE_LAMP.get());
-            this.dropSelf(YELLOW_REDSTONE_LAMP.get());
-            this.dropSelf(LIME_REDSTONE_LAMP.get());
-            this.dropSelf(PINK_REDSTONE_LAMP.get());
-            this.dropSelf(GRAY_REDSTONE_LAMP.get());
-            this.dropSelf(LIGHT_GRAY_REDSTONE_LAMP.get());
-            this.dropSelf(CYAN_REDSTONE_LAMP.get());
-            this.dropSelf(PURPLE_REDSTONE_LAMP.get());
-            this.dropSelf(BLUE_REDSTONE_LAMP.get());
-            this.dropSelf(BROWN_REDSTONE_LAMP.get());
-            this.dropSelf(GREEN_REDSTONE_LAMP.get());
-            this.dropSelf(RED_REDSTONE_LAMP.get());
-            this.dropSelf(BLACK_REDSTONE_LAMP.get());
 
 
         }
