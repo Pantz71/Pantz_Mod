@@ -8,9 +8,7 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.*;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.registries.RegistryObject;
-import pantz.mod.common.item.AreaDiggerItem;
-import pantz.mod.common.item.EntityFilterItem;
-import pantz.mod.common.item.TrowelItem;
+import pantz.mod.common.item.*;
 import pantz.mod.core.PMConfig;
 import pantz.mod.core.PantzMod;
 import pantz.mod.core.other.PMTiers.*;
@@ -51,6 +49,7 @@ public class PMItems {
 
     public static final RegistryObject<Item> ENTITY_FILTER = ITEMS.createItem("entity_filter", () -> new EntityFilterItem(PropertyUtil.stacksOnce()));
 
+
     private static Supplier<Item> basicItem() {
         return () -> new Item(new Item.Properties());
     }
@@ -68,6 +67,7 @@ public class PMItems {
                 .addItemsBefore(of(Items.GOLDEN_HELMET), STEEL_HELMET, STEEL_CHESTPLATE, STEEL_LEGGINGS, STEEL_BOOTS)
                 .addItemsBefore(of(Items.GOLDEN_HORSE_ARMOR), STEEL_HORSE_ARMOR)
 
+
                 .tab(TOOLS_AND_UTILITIES)
                 .addItemsBefore(of(Items.GOLDEN_SHOVEL), STEEL_SHOVEL, STEEL_PICKAXE, STEEL_AXE, STEEL_HOE, EXCAVATOR)
                 .addItemsAfter(of(Items.SHEARS), TROWEL)
@@ -75,6 +75,7 @@ public class PMItems {
 
                 .addItemsAfter(of(Items.DIAMOND_HOE), DIAMOND_EXCAVATOR)
                 .addItemsAfter(of(Items.NETHERITE_HOE), NETHERITE_EXCAVATOR)
+
 
         ;
 

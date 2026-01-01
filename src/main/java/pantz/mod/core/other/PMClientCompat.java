@@ -25,5 +25,6 @@ public class PMClientCompat {
         }) {
             ItemBlockRenderTypes.setRenderLayer((Block) block.get(), RenderType.cutout());
         }
+
     }
 }

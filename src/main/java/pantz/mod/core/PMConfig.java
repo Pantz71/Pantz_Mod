@@ -26,6 +26,11 @@ public class PMConfig {
         @ConfigKey("entity_filter")
         public final BooleanValue enableEntityFilter;
 
+        public final IntValue spectreSwordCapacity;
+        public final IntValue spectreWandCapacity;
+        public final IntValue spectreDetectorRevelationRadius;
+        public final IntValue spectreCubeRevelationRadius;
+
         Common(Builder builder) {
             builder.push("Recipes");
             flintAndSteel = builder.comment("Change Flint and Steel recipe from using Iron to Steel")
@@ -38,6 +43,18 @@ public class PMConfig {
 
             enableEntityFilter = builder.comment("Allow filter entities feature of Entity Detector?")
                     .define("Entity filtering", true);
+
+            spectreSwordCapacity = builder.comment("How many Spectre Souls can Spectre Sword carry?")
+                    .defineInRange("Spectre Sword Capacity", 1000, 0, Integer.MAX_VALUE);
+
+            spectreWandCapacity = builder.comment("How many Spectre Souls can Spectre Wand carry?")
+                    .defineInRange("Spectre Wand Capacity", 1000, 0, Integer.MAX_VALUE);
+
+            spectreDetectorRevelationRadius = builder.comment("How far can the Spectre Detector reveal Spectre Blocks?")
+                    .defineInRange("Spectre Detector revelation radius", 32, 0, Integer.MAX_VALUE);
+
+            spectreCubeRevelationRadius = builder.comment("How far can the Spectre Cube reveal Spectre Blocks?")
+                    .defineInRange("Spectre Cube revelation radius", 32, 0, Integer.MAX_VALUE);
 
             builder.pop();
 

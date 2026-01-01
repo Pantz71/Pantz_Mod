@@ -134,5 +134,7 @@
   "block.pantz_mod.black_redstone_lamp": "Black Redstone Lamp",
   "block.pantz_mod.gray_redstone_lamp": "Gray Redstone Lamp",
   "block.pantz_mod.light_gray_redstone_lamp": "Light Gray Redstone Lamp",
-  "block.pantz_mod.white_redstone_lamp": "White Redstone Lamp"
+  "block.pantz_mod.white_redstone_lamp": "White Redstone Lamp",
+
+  "_functional": "functional"
 }

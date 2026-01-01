@@ -1,6 +1,7 @@
 {
   "parent": "pantz_mod:block/normal_globe_stand",
   "textures": {
+    "particle": "minecraft:block/iron_block",
     "stand": "pantz_mod:block/iron_globe_stand"
   }
 }

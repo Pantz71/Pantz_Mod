@@ -68,8 +68,7 @@ public class PMLootTableProvider extends LootTableProvider {
                     PLUTO_GLOBE, CERES_GLOBE, MAKEMAKE_GLOBE, MOON_GLOBE, IO_GLOBE, EUROPA_GLOBE, CALLISTO_GLOBE, GANYMEDE_GLOBE,
                     SUN_GLOBE, BLUE_SUN_GLOBE, IRIS_GLOBE,
                     RED_REDSTONE_LAMP, ORANGE_REDSTONE_LAMP, YELLOW_REDSTONE_LAMP, LIME_REDSTONE_LAMP, GREEN_REDSTONE_LAMP, BLUE_REDSTONE_LAMP, CYAN_REDSTONE_LAMP,
-                    LIGHT_BLUE_REDSTONE_LAMP, PURPLE_REDSTONE_LAMP, MAGENTA_REDSTONE_LAMP, PINK_REDSTONE_LAMP, BROWN_REDSTONE_LAMP, BLACK_REDSTONE_LAMP, GRAY_REDSTONE_LAMP, LIGHT_GRAY_REDSTONE_LAMP, WHITE_REDSTONE_LAMP,
-
+                    LIGHT_BLUE_REDSTONE_LAMP, PURPLE_REDSTONE_LAMP, MAGENTA_REDSTONE_LAMP, PINK_REDSTONE_LAMP, BROWN_REDSTONE_LAMP, BLACK_REDSTONE_LAMP, GRAY_REDSTONE_LAMP, LIGHT_GRAY_REDSTONE_LAMP, WHITE_REDSTONE_LAMP
             }) {
                 this.dropSelf((Block) block.get());
             }
@@ -103,7 +102,6 @@ public class PMLootTableProvider extends LootTableProvider {
                     .when(MatchTool.toolMatches(ItemPredicate.Builder.item().of(ItemTags.CLUSTER_MAX_HARVESTABLES)))
                     .otherwise(this.applyExplosionDecay(SULFUR_CLUSTER.get(), LootItem.lootTableItem(PMItems.SULFUR_CRYSTAL.get())
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(2.0F)))))));
-
 
 
         }

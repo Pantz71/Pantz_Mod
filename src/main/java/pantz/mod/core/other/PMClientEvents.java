@@ -1,13 +1,15 @@
 package pantz.mod.core.other;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.block.BlockModelShaper;
+import net.minecraft.client.resources.model.BakedModel;
+import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -19,6 +21,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
+import net.minecraftforge.client.event.ModelEvent;
 import net.minecraftforge.client.event.RenderHighlightEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -33,10 +36,10 @@ import pantz.mod.core.PMConfig;
 import pantz.mod.core.PantzMod;
 import pantz.mod.core.other.tags.PMBlockTags;
 import pantz.mod.core.registry.PMBlockEntityTypes;
+import pantz.mod.core.registry.PMBlocks;
 import pantz.mod.core.registry.PMItems;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class PMClientEvents {
 
@@ -44,7 +47,6 @@ public class PMClientEvents {
     public static class PMForgeClientEvents {
         private static int particleCounter = 0;
         private static final int cooldown = 5;
-
         private static final String[] PRIORITIES = { "copper", "exposed", "weathered", "oxidized" };
 
         @SubscribeEvent
@@ -110,7 +112,6 @@ public class PMClientEvents {
                     1f, 1f, 1f, 1f
             );
         }
-
 
         private static void spawnWaxParticles(Minecraft mc) {
             LocalPlayer player = mc.player;

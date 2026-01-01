@@ -3,13 +3,16 @@ package pantz.mod.core.other;
 import com.teamabnormals.blueprint.core.api.BlueprintArmorMaterial;
 import com.teamabnormals.blueprint.core.api.BlueprintItemTier;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.crafting.Ingredient;
 import pantz.mod.core.PantzMod;
 import pantz.mod.core.other.tags.PMItemTags;
+import pantz.mod.core.registry.PMItems;
 
 public class PMTiers {
     public static class PMItemTiers {
         public static final BlueprintItemTier STEEL = new BlueprintItemTier(2, 780, 7.0f, 3f, 12, () -> Ingredient.of(PMItemTags.INGOTS_STEEL));
+
     }
 
     public static class PMArmorMaterials {
