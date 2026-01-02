@@ -54,7 +54,6 @@ public class GlobeBlock extends HorizontalDirectionalBlock implements EntityBloc
         return texture;
     }
 
-
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
         return SHAPE;

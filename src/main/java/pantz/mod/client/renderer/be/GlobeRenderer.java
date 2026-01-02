@@ -64,33 +64,33 @@ public class GlobeRenderer implements BlockEntityRenderer<GlobeBlockEntity> {
                 ? RenderType.entityTranslucent(texture)
                 : RenderType.entityCutout(texture);
 
-        VertexConsumer vb = buffer.getBuffer(renderType);
+        VertexConsumer vertexConsumer = buffer.getBuffer(renderType);
         if (modelToUse instanceof GlobeModel model) {
-            model.renderToBuffer(poseStack, vb, renderLight, overlay, 1.0f, 1.0f, 1.0f, 1.0f);
+            model.renderToBuffer(poseStack, vertexConsumer, renderLight, overlay, 1.0f, 1.0f, 1.0f, 1.0f);
         }
 
         if (modelToUse instanceof SmallGlobeModel model) {
-            model.renderToBuffer(poseStack, vb, renderLight, overlay, 1.0f, 1.0f, 1.0f, 1.0f);
+            model.renderToBuffer(poseStack, vertexConsumer, renderLight, overlay, 1.0f, 1.0f, 1.0f, 1.0f);
         }
 
         if (modelToUse instanceof TinyGlobeModel model) {
-            model.renderToBuffer(poseStack, vb, renderLight, overlay, 1.0f, 1.0f, 1.0f, 1.0f);
+            model.renderToBuffer(poseStack, vertexConsumer, renderLight, overlay, 1.0f, 1.0f, 1.0f, 1.0f);
         }
 
         if (modelToUse instanceof SaturnGlobeModel model) {
-            model.renderToBuffer(poseStack, vb, renderLight, overlay, 1.0f, 1.0f, 1.0f, 1.0f);
+            model.renderToBuffer(poseStack, vertexConsumer, renderLight, overlay, 1.0f, 1.0f, 1.0f, 1.0f);
         }
 
         if (modelToUse instanceof LargeGlobeModel model) {
-            model.renderToBuffer(poseStack, vb, renderLight, overlay, 1.0f, 1.0f, 1.0f, 1.0f);
+            model.renderToBuffer(poseStack, vertexConsumer, renderLight, overlay, 1.0f, 1.0f, 1.0f, 1.0f);
         }
 
         if (modelToUse instanceof GiantGlobeModel model) {
-            model.renderToBuffer(poseStack, vb, renderLight, overlay, 1.0f, 1.0f, 1.0f, 1.0f);
+            model.renderToBuffer(poseStack, vertexConsumer, renderLight, overlay, 1.0f, 1.0f, 1.0f, 1.0f);
         }
 
         if (modelToUse instanceof UranusGlobeModel model) {
-            model.renderToBuffer(poseStack, vb, renderLight, overlay, 1.0f, 1.0f, 1.0f, 1.0f);
+            model.renderToBuffer(poseStack, vertexConsumer, renderLight, overlay, 1.0f, 1.0f, 1.0f, 1.0f);
         }
         poseStack.popPose();
 

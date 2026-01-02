@@ -94,31 +94,6 @@ public class GlobeBlockEntity extends BlockEntity {
         }
     }
 
-    public static void serverTick(Level level, BlockPos pos, BlockState state, GlobeBlockEntity be) {
-        if (level.isClientSide()) return;
-
-        boolean powered = state.getValue(GlobeBlock.POWERED);
-
-        if (powered) {
-            if (!be.isRotating()) {
-                be.setRotating(true);
-                be.setChanged();
-                level.sendBlockUpdated(pos, state, state, 3);
-            }
-            return;
-        }
-
-        if (be.getSpinTick() > 0) {
-            be.decreaseSpinTick();
-            if (be.getSpinTick() <= 0) {
-                be.setSpinTick(0);
-                be.setRotating(false);
-                be.setChanged();
-                level.sendBlockUpdated(pos, state, state, 3);
-            }
-        }
-    }
-
     public float getRotation(float partialTicks) {
         if (this.getBlockState().getValue(GlobeBlock.POWERED)) {
             return (rotation + ROTATE_SPEED * partialTicks) % 360f;
