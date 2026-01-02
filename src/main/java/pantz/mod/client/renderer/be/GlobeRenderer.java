@@ -58,7 +58,7 @@ public class GlobeRenderer implements BlockEntityRenderer<GlobeBlockEntity> {
         poseStack.mulPose(Axis.YP.rotationDegrees(rot));
         ResourceLocation texture = new ResourceLocation(textureLoc.getNamespace(), "textures/block/globe/" + textureLoc.getPath() + ".png");
 
-        boolean glow = textureLoc.getPath().startsWith("stars/");
+        boolean glow = be.isGlow();
         int renderLight = glow ? 0xF000F0 : light;
         RenderType renderType = glow
                 ? RenderType.entityTranslucent(texture)

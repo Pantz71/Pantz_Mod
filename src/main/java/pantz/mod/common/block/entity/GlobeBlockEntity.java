@@ -17,6 +17,7 @@ public class GlobeBlockEntity extends BlockEntity {
     private boolean rotating = false;
     private int spinTick = 0;
     private ResourceLocation texture;
+    private boolean glow;
 
     private transient boolean clientSpinning;
     private transient int clientSpinTicks;
@@ -42,6 +43,16 @@ public class GlobeBlockEntity extends BlockEntity {
 
     public ResourceLocation getTexture() {
         return texture != null ? texture : PantzMod.location("block/globe/planets/earth");
+    }
+
+    public boolean isGlow() {
+        return glow;
+    }
+
+    public void setGlow(boolean value) {
+        if (glow != value) {
+            glow = value;
+        }
     }
 
     public void spin(Level level) {
@@ -167,6 +178,7 @@ public class GlobeBlockEntity extends BlockEntity {
         rotating = tag.getBoolean("Rotating");
         rotation = tag.getFloat("Rotation");
         spinTick = tag.getInt("SpinTick");
+        glow = tag.getBoolean("Glow");
     }
 
     @Override
@@ -175,6 +187,7 @@ public class GlobeBlockEntity extends BlockEntity {
         tag.putBoolean("Rotating", isRotating());
         tag.putFloat("Rotation", getRotation());
         tag.putInt("SpinTick", getSpinTick());
+        tag.putBoolean("Glow", isGlow());
     }
 
     @Override

@@ -6,6 +6,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -37,7 +39,7 @@ public class GlobeBlock extends HorizontalDirectionalBlock implements EntityBloc
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
     public static final VoxelShape SHAPE = Shapes.or(
-            Block.box(4, 0, 4, 12, 10, 12)
+            Block.box(2, 0, 2, 14, 12, 14)
     );
 
     private final ResourceLocation texture;
@@ -61,8 +63,12 @@ public class GlobeBlock extends HorizontalDirectionalBlock implements EntityBloc
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         BlockEntity be = level.getBlockEntity(pos);
+        ItemStack stack = player.getItemInHand(hand);
         if (be instanceof GlobeBlockEntity globe) {
             globe.spin(level);
+            if (stack.is(Items.GLOW_INK_SAC) && player.isShiftKeyDown()) {
+                globe.setGlow(true);
+            }
         }
         return InteractionResult.SUCCESS;
     }
