@@ -30,6 +30,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import pantz.mod.client.model.block.*;
 import pantz.mod.client.renderer.be.EntityDetectorRenderer;
 import pantz.mod.client.renderer.be.GlobeRenderer;
+import pantz.mod.client.renderer.be.ItemStandRenderer;
 import pantz.mod.client.renderer.be.PedestalRenderer;
 import pantz.mod.common.item.AreaDiggerItem;
 import pantz.mod.core.PMConfig;
@@ -224,6 +225,7 @@ public class PMClientEvents {
             event.registerBlockEntityRenderer(PMBlockEntityTypes.PEDESTAL.get(), PedestalRenderer::new);
             event.registerBlockEntityRenderer(PMBlockEntityTypes.ENTITY_DETECTOR.get(), EntityDetectorRenderer::new);
             event.registerBlockEntityRenderer(PMBlockEntityTypes.GLOBE.get(), GlobeRenderer::new);
+            event.registerBlockEntityRenderer(PMBlockEntityTypes.ITEM_STAND.get(), ItemStandRenderer::new);
         }
 
         @SubscribeEvent

@@ -194,6 +194,21 @@ public class PMRecipeProvider extends BlueprintRecipeProvider {
 
         colorBlockWithDye(consumer, dyes, lamps, "redstone_lamps");
 
+        ShapedRecipeBuilder.shaped(DECORATIONS, ITEM_STAND.get())
+                .define('#', Blocks.SMOOTH_STONE_SLAB)
+                .define('/', Items.STICK)
+                .pattern("/")
+                .pattern("#")
+                .unlockedBy(getHasName(Blocks.SMOOTH_STONE_SLAB), has(Blocks.SMOOTH_STONE_SLAB))
+                .save(consumer);
+
+        ShapelessRecipeBuilder.shapeless(DECORATIONS, GLOW_ITEM_STAND.get())
+                .requires(ITEM_STAND.get())
+                .requires(Items.GLOW_INK_SAC)
+                .unlockedBy(getHasName(ITEM_STAND.get()), has(ITEM_STAND.get()))
+                .unlockedBy(getHasName(Items.GLOW_INK_SAC), has(Items.GLOW_INK_SAC))
+                .save(consumer);
+
     }
 
     private static void logicGates(Consumer<FinishedRecipe> consumer) {

@@ -3,14 +3,8 @@ package pantz.mod.core.registry;
 import com.teamabnormals.blueprint.core.util.registry.BlockEntitySubRegistryHelper;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.registries.RegistryObject;
-import pantz.mod.common.block.EnderScannerBlock;
-import pantz.mod.common.block.EntityDetectorBlock;
-import pantz.mod.common.block.GlobeBlock;
-import pantz.mod.common.block.PedestalBlock;
-import pantz.mod.common.block.entity.EnderScannerBlockEntity;
-import pantz.mod.common.block.entity.EntityDetectorBlockEntity;
-import pantz.mod.common.block.entity.GlobeBlockEntity;
-import pantz.mod.common.block.entity.PedestalBlockEntity;
+import pantz.mod.common.block.*;
+import pantz.mod.common.block.entity.*;
 import pantz.mod.core.PantzMod;
 
 public class PMBlockEntityTypes {
@@ -20,5 +14,6 @@ public class PMBlockEntityTypes {
     public static final RegistryObject<BlockEntityType<EnderScannerBlockEntity>> ENDER_SCANNER = BLOCK_ENTITY_TYPES.createBlockEntity("ender_scanner", EnderScannerBlockEntity::new, EnderScannerBlock.class);
     public static final RegistryObject<BlockEntityType<EntityDetectorBlockEntity>> ENTITY_DETECTOR = BLOCK_ENTITY_TYPES.createBlockEntity("entity_detector", EntityDetectorBlockEntity::new, EntityDetectorBlock.class);
     public static final RegistryObject<BlockEntityType<GlobeBlockEntity>> GLOBE = BLOCK_ENTITY_TYPES.createBlockEntity("globe", GlobeBlockEntity::new, GlobeBlock.class);
+    public static final RegistryObject<BlockEntityType<ItemStandBlockEntity>> ITEM_STAND = BLOCK_ENTITY_TYPES.createBlockEntity("item_stand", ItemStandBlockEntity::new, ItemStandBlock.class);
 
 }

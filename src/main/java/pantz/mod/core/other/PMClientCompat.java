@@ -26,5 +26,7 @@ public class PMClientCompat {
             ItemBlockRenderTypes.setRenderLayer((Block) block.get(), RenderType.cutout());
         }
 
+        ItemBlockRenderTypes.setRenderLayer(ITEM_STAND.get(), RenderType.cutoutMipped());
+        ItemBlockRenderTypes.setRenderLayer(GLOW_ITEM_STAND.get(), RenderType.cutoutMipped());
     }
 }
