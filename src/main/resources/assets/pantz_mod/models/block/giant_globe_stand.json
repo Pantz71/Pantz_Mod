@@ -42,7 +42,7 @@
 			"to": [8, 18, 16],
 			"rotation": {"angle": 0, "axis": "y", "origin": [8, 9, 8]},
 			"faces": {
-				"east": {"uv": [1.6, 0, 4.6, 3.2], "texture": "#stand"},
+				"east": {"uv": [1.6, 0, 4.6, 3.2], "rotation": 180, "texture": "#stand"},
 				"west": {"uv": [1.6, 0, 4.6, 3.2], "texture": "#stand"}
 			}
 		}

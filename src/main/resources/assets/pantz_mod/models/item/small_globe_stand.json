@@ -6,8 +6,8 @@
 	"texture_size": [80, 80],
 	"textures": {
 		"particle": "#stand",
-		"globe": "#globe",
-		"stand": "#stand"
+		"stand": "#stand",
+		"globe": "#globe"
 	},
 	"elements": [
 		{
@@ -53,12 +53,12 @@
 			"to": [12, 13, 11],
 			"rotation": {"angle": 0, "axis": "y", "origin": [8, 9, 7]},
 			"faces": {
-				"north": {"uv": [2, 2, 4, 4], "texture": "#globe"},
-				"east": {"uv": [0, 2, 2, 4], "texture": "#globe"},
-				"south": {"uv": [6, 2, 8, 4], "texture": "#globe"},
-				"west": {"uv": [4, 2, 6, 4], "texture": "#globe"},
-				"up": {"uv": [2, 0, 4, 2], "texture": "#globe"},
-				"down": {"uv": [4, 0, 6, 2], "texture": "#globe"}
+				"north": {"uv": [1.6, 0, 3.2, 1.6], "texture": "#globe"},
+				"east": {"uv": [0, 1.6, 1.6, 3.2], "texture": "#globe"},
+				"south": {"uv": [4.8, 1.6, 6.4, 3.2], "texture": "#globe"},
+				"west": {"uv": [3.2, 1.6, 4.8, 3.2], "texture": "#globe"},
+				"up": {"uv": [3.2, 0, 4.8, 1.6], "texture": "#globe"},
+				"down": {"uv": [1.6, 1.6, 3.2, 3.2], "texture": "#globe"}
 			}
 		}
 	]
