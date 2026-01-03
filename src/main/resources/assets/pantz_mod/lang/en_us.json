@@ -3,6 +3,9 @@
   "_advancement": "advancement",
   "advancements.pantz_mod.adventure.look_at_scanner.title": "Eye See You",
   "advancements.pantz_mod.adventure.look_at_scanner.description": "Look directly into the middle of Ender Scanner's eye until it emits full power",
+  "advancements.pantz_mod.end.redirect_teleportation.title": "Dynamic Wormhole",
+  "advancements.pantz_mod.end.redirect_teleportation.description": "Redirect an Ender Pearl's teleportation using an Enderporter",
+
 
   "_misc": "misc",
   "tooltip.pantz_mod.entity_filter.none": "None",
@@ -17,6 +20,8 @@
   "subtitle.pantz_mod.trash_can.open": "Trash lid opens",
   "subtitle.pantz_mod.trash_can.close": "Trash lid closes",
   "subtitle.pantz_mod.trash_can.destroy": "Trash can destroys items",
+  "subtitles.pantz_mod.enderporter.charge": "Enderporter is charged",
+  "subtitles.pantz_mod.enderporter.deplete": "Enderporter depletes",
 
   "_steel": "steel",
   "block.pantz_mod.steel_block": "Steel Block",
@@ -146,5 +151,6 @@
   "_functional": "functional",
   "block.pantz_mod.item_stand": "Item Stand",
   "block.pantz_mod.glow_item_stand": "Glow Item Stand",
-  "block.pantz_mod.trash_can": "Trash Can"
+  "block.pantz_mod.trash_can": "Trash Can",
+  "block.pantz_mod.enderporter": "Enderporter"
 }

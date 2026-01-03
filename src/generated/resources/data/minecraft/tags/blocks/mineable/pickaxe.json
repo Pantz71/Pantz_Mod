@@ -16,6 +16,8 @@
     "pantz_mod:large_sulfur_bud",
     "pantz_mod:ender_scanner",
     "pantz_mod:weather_detector",
-    "pantz_mod:entity_detector"
+    "pantz_mod:entity_detector",
+    "pantz_mod:trash_can",
+    "pantz_mod:enderporter"
   ]
 }

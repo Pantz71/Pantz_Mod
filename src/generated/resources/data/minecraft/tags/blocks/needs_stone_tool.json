@@ -16,6 +16,7 @@
     "pantz_mod:large_sulfur_bud",
     "pantz_mod:redstone_configurator",
     "pantz_mod:entity_detector",
-    "pantz_mod:trash_can"
+    "pantz_mod:trash_can",
+    "pantz_mod:enderporter"
   ]
 }

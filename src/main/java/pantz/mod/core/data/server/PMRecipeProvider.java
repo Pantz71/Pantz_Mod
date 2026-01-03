@@ -36,6 +36,7 @@ public class PMRecipeProvider extends BlueprintRecipeProvider {
     private static final NotCondition NOT_CAVERNS_AND_CHASMS = new NotCondition(CAVERNS_AND_CHASMS);
     private static final ConfigValueCondition FLINT_AND_STEEL = config(COMMON.flintAndSteel, "flint_and_steel");
     private static final ConfigValueCondition ENTITY_FILTERING = config(COMMON.enableEntityFilter, "entity_filter");
+    private static final ConfigValueCondition REQUIRE_CACTUS_KEY = config(COMMON.enableCactusKey, "cactus_key");
 
     public PMRecipeProvider(PackOutput output) {
         super(PantzMod.MOD_ID, output);
@@ -220,13 +221,20 @@ public class PMRecipeProvider extends BlueprintRecipeProvider {
                 .unlockedBy(getHasName(Blocks.CHEST), has(BlueprintItemTags.WOODEN_CHESTS))
                 .save(consumer);
 
-        ShapedRecipeBuilder.shaped(TOOLS, CACTUS_KEY.get())
-                .define('#', Tags.Items.INGOTS_IRON).define('*', Tags.Items.NUGGETS_IRON)
-                .define('$', Blocks.CACTUS)
-                .pattern(" ##")
-                .pattern(" $#")
-                .pattern("*  ")
-                .unlockedBy(getHasName(Blocks.CACTUS), has(Blocks.CACTUS))
+        conditionalRecipe(consumer, REQUIRE_CACTUS_KEY, TOOLS,
+                ShapedRecipeBuilder.shaped(TOOLS, CACTUS_KEY.get())
+                        .define('#', Tags.Items.INGOTS_IRON).define('*', Tags.Items.NUGGETS_IRON)
+                        .define('$', Blocks.CACTUS)
+                        .pattern(" ##")
+                        .pattern(" $#")
+                        .pattern("*  ")
+                        .unlockedBy(getHasName(Blocks.CACTUS), has(Blocks.CACTUS)));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.TRANSPORTATION, ENDERPORTER.get())
+                .define('#', Tags.Items.INGOTS_IRON).define('/', Items.ECHO_SHARD)
+                .pattern("///")
+                .pattern("###")
+                .unlockedBy(getHasName(Items.ECHO_SHARD), has(Items.ECHO_SHARD))
                 .save(consumer);
 
 

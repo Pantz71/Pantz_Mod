@@ -120,6 +120,7 @@ public class PMBlocks {
     public static final RegistryObject<Block> ITEM_STAND = BLOCKS.createBlock("item_stand", () -> new ItemStandBlock(PMProperties.ITEM_STAND));
     public static final RegistryObject<Block> GLOW_ITEM_STAND = BLOCKS.createBlock("glow_item_stand", () -> new ItemStandBlock(PMProperties.ITEM_STAND));
     public static final RegistryObject<Block> TRASH_CAN = BLOCKS.createBlock("trash_can", () -> new TrashCanBlock(PMProperties.TRASH_CAN));
+    public static final RegistryObject<Block> ENDERPORTER = BLOCKS.createBlock("enderporter", () -> new EnderporterBlock(PMProperties.ENDERPORTER));
 
     public static void setupTabs() {
         CreativeModeTabContentsPopulator.mod(PantzMod.MOD_ID)
@@ -141,6 +142,7 @@ public class PMBlocks {
                         LIGHT_BLUE_REDSTONE_LAMP, YELLOW_REDSTONE_LAMP, LIME_REDSTONE_LAMP, PINK_REDSTONE_LAMP, GRAY_REDSTONE_LAMP, LIGHT_GRAY_REDSTONE_LAMP,
                         CYAN_REDSTONE_LAMP, PURPLE_REDSTONE_LAMP, BLUE_REDSTONE_LAMP, BROWN_REDSTONE_LAMP, GREEN_REDSTONE_LAMP, RED_REDSTONE_LAMP, BLACK_REDSTONE_LAMP)
                 .addItemsAfter(of(Items.CHEST), TRASH_CAN)
+                .addItemsAfter(of(Blocks.RESPAWN_ANCHOR), ENDERPORTER)
 
                 .tab(REDSTONE_BLOCKS)
                 .addItemsAfter(of(Blocks.LECTERN), STONE_PEDESTAL)

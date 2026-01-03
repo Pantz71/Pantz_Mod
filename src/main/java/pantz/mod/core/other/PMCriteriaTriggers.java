@@ -9,6 +9,7 @@ import pantz.mod.core.PantzMod;
 @Mod.EventBusSubscriber(modid = PantzMod.MOD_ID)
 public class PMCriteriaTriggers {
     public static final EmptyTrigger LOOK_AT_SCANNER = CriteriaTriggers.register(new EmptyTrigger(name("look_at_scanner")));
+    public static final EmptyTrigger REDIRECT_TELEPORTATION = CriteriaTriggers.register(new EmptyTrigger(name("redirect_teleportation")));
 
     private static ResourceLocation name(String name) {
         return PantzMod.location(name);

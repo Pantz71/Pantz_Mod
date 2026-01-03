@@ -6,6 +6,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.common.data.ForgeAdvancementProvider;
@@ -29,6 +30,11 @@ public class PMAdvancementProvider implements AdvancementGenerator {
                 PMBlocks.ENDER_SCANNER.get(), FrameType.TASK, true, true, false)
                 .addCriterion("look_at_scanner", PMCriteriaTriggers.LOOK_AT_SCANNER.createInstance())
                 .save(consumer, advancement("adventure/look_at_scanner"));
+
+        createAdvancement("redirect_teleportation", "end", new ResourceLocation("end/root"),
+                Items.ENDER_PEARL, FrameType.TASK, true, true, false)
+                .addCriterion("redirect_teleportation", PMCriteriaTriggers.REDIRECT_TELEPORTATION.createInstance())
+                .save(consumer, advancement("end/redirect_teleportation"));
 
     }
 

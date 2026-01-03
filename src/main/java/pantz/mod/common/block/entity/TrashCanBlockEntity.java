@@ -3,8 +3,9 @@ package pantz.mod.common.block.entity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.Connection;
 import net.minecraft.network.chat.Component;
-import net.minecraft.sounds.SoundEvents;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.*;
 import net.minecraft.world.entity.player.Inventory;
@@ -52,7 +53,7 @@ public class TrashCanBlockEntity extends BlockEntity implements MenuProvider, Na
         }
 
         @Override
-        public ItemStack getItem(int index) {
+        public @NotNull ItemStack getItem(int index) {
             return itemStackHandler.getStackInSlot(index);
         }
 
@@ -75,6 +76,22 @@ public class TrashCanBlockEntity extends BlockEntity implements MenuProvider, Na
         @Override
         public void stopOpen(Player pPlayer) {
             stopOpenContainer(pPlayer);
+        }
+
+        @Override
+        public ItemStack removeItem(int slot, int amount) {
+            ItemStack stack = itemStackHandler.extractItem(slot, amount, false);
+            if (!stack.isEmpty()) {
+                setChanged();
+            }
+            return stack;
+        }
+
+        @Override
+        public ItemStack removeItemNoUpdate(int slot) {
+            ItemStack stack = itemStackHandler.getStackInSlot(slot);
+            itemStackHandler.setStackInSlot(slot, ItemStack.EMPTY);
+            return stack;
         }
     };
 
@@ -149,6 +166,9 @@ public class TrashCanBlockEntity extends BlockEntity implements MenuProvider, Na
             itemStackHandler.setStackInSlot(i, ItemStack.EMPTY);
         }
         setChanged();
+        if (level != null) {
+            level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), 3);
+        }
     }
 
     public Container getContainer() {
@@ -209,5 +229,27 @@ public class TrashCanBlockEntity extends BlockEntity implements MenuProvider, Na
         if (tag.contains("CustomName", 8)) {
             customName = Component.Serializer.fromJson(tag.getString("CustomName"));
         }
+    }
+
+    @Override
+    public CompoundTag getUpdateTag() {
+        CompoundTag tag = new CompoundTag();
+        saveAdditional(tag);
+        return tag;
+    }
+
+    @Override
+    public void handleUpdateTag(CompoundTag tag) {
+        load(tag);
+    }
+
+    @Override
+    public ClientboundBlockEntityDataPacket getUpdatePacket() {
+        return ClientboundBlockEntityDataPacket.create(this);
+    }
+
+    @Override
+    public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
+        load(pkt.getTag());
     }
 }

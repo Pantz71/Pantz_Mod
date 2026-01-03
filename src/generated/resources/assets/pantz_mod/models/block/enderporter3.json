@@ -1,0 +1,7 @@
+{
+  "parent": "pantz_mod:block/template_enderporter",
+  "textures": {
+    "side": "pantz_mod:block/enderporter_side3",
+    "top": "pantz_mod:block/enderporter_top_on"
+  }
+}

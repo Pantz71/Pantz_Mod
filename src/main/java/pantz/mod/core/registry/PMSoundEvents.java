@@ -11,4 +11,7 @@ public class PMSoundEvents {
     public static final RegistryObject<SoundEvent> TRASH_CAN_OPEN = SOUND_EVENTS.createSoundEvent("block.trash_can.open");
     public static final RegistryObject<SoundEvent> TRASH_CAN_CLOSE = SOUND_EVENTS.createSoundEvent("block.trash_can.close");
     public static final RegistryObject<SoundEvent> TRASH_CAN_DESTROY = SOUND_EVENTS.createSoundEvent("block.trash_can.destroy");
+
+    public static final RegistryObject<SoundEvent> ENDERPORTER_CHARGE = SOUND_EVENTS.createSoundEvent("block.enderporter.charge");
+    public static final RegistryObject<SoundEvent> ENDERPORTER_DEPLETE = SOUND_EVENTS.createSoundEvent("block.enderporter.deplete");
 }

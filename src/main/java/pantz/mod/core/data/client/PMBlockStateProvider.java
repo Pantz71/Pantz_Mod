@@ -12,10 +12,7 @@ import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.RegistryObject;
-import pantz.mod.common.block.GlobeBlock;
-import pantz.mod.common.block.PedestalBlock;
-import pantz.mod.common.block.PowerDisplayerBlock;
-import pantz.mod.common.block.RedstoneConfiguratorBlock;
+import pantz.mod.common.block.*;
 import pantz.mod.common.utils.CarpetColor;
 import pantz.mod.core.PantzMod;
 import pantz.mod.core.other.PMBlockFamilies;
@@ -96,6 +93,7 @@ public class PMBlockStateProvider extends BlueprintBlockStateProvider {
         this.generatedItem(ITEM_STAND.get(), "item");
         this.generatedItem(GLOW_ITEM_STAND.get(), "item");
         this.blockItem(TRASH_CAN);
+        this.enderporterBlock(ENDERPORTER);
 
     }
 
@@ -266,5 +264,27 @@ public class PMBlockStateProvider extends BlueprintBlockStateProvider {
         this.itemModels().withExistingParent(name(block.get()), model)
                 .texture("stand", standTexture)
                 .texture("globe", prefix("block/globe/", texturePath));
+    }
+
+    private void enderporterBlock(RegistryObject<Block> block) {
+        String name = name(block.get());
+        for (int charge = 0; charge <= 4; charge++) {
+            String textureName = name + "_side" + charge;
+            String topTextureName = charge > 0 ? "_on" : "";
+            String modelName = charge == 0 ? name : name + charge;
+            ResourceLocation texture = modLoc("block/" + textureName);
+            ResourceLocation topTexture = modLoc("block/" + "enderporter_top" + topTextureName);
+
+            ModelFile model = models()
+                    .withExistingParent(modelName, modLoc("block/template_enderporter"))
+                    .texture("top", topTexture)
+                    .texture("side", texture);
+
+            getVariantBuilder(block.get()).partialState()
+                    .with(EnderporterBlock.ENDERPORTER_CHARGE, charge)
+                    .modelForState().modelFile(model).addModel();
+
+        }
+        blockItem(block.get());
     }
 }

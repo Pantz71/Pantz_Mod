@@ -16,5 +16,20 @@
       "pantz_mod:block/trash_can/destroy"
     ],
     "subtitle": "subtitle.pantz_mod.trash_can.destroy"
+  },
+  "block.enderporter.charge": {
+    "sounds": [
+      "block/respawn_anchor/charge1",
+      "block/respawn_anchor/charge2",
+      "block/respawn_anchor/charge3"
+    ],
+    "subtitle": "subtitles.pantz_mod.enderporter.charge"
+  },
+  "block.enderporter.deplete": {
+    "sounds": [
+      "block/respawn_anchor/deplete1",
+      "block/respawn_anchor/deplete2"
+    ],
+    "subtitle": "subtitles.pantz_mod.enderporter.deplete"
   }
 }

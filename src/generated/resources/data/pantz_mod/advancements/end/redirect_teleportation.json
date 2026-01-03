@@ -1,0 +1,29 @@
+{
+  "parent": "minecraft:end/root",
+  "criteria": {
+    "redirect_teleportation": {
+      "trigger": "pantz_mod:redirect_teleportation"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.pantz_mod.end.redirect_teleportation.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "minecraft:ender_pearl"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.pantz_mod.end.redirect_teleportation.title"
+    }
+  },
+  "requirements": [
+    [
+      "redirect_teleportation"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

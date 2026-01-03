@@ -3,20 +3,24 @@ package pantz.mod.core.other;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.ThrownEnderpearl;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.event.entity.EntityTeleportEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import pantz.mod.common.item.AreaDiggerItem;
 import pantz.mod.common.item.EntityFilterItem;
+import pantz.mod.common.utils.EnderporterUtils;
 import pantz.mod.core.PantzMod;
 
 import java.util.List;
@@ -65,6 +69,18 @@ public class PMEvents {
             if (!level.getBlockState(pos).isAir() && stack.isCorrectToolForDrops(level.getBlockState(pos))) {
                 level.destroyBlock(pos, !player.isCreative());
             }
+        }
+    }
+
+    @SubscribeEvent
+    public static void onEnderpearlLands(EntityTeleportEvent.EnderPearl event) {
+        ThrownEnderpearl pearl = event.getPearlEntity();
+        ServerPlayer player = event.getPlayer();
+        ServerLevel level = player.serverLevel();
+
+        boolean teleported = EnderporterUtils.redirectTeleport(pearl, level, player);
+        if (teleported) {
+            event.setCanceled(true);
         }
     }
 }

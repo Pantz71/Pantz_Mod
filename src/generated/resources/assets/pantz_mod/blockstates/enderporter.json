@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "enderporter_charge=0": {
+      "model": "pantz_mod:block/enderporter"
+    },
+    "enderporter_charge=1": {
+      "model": "pantz_mod:block/enderporter1"
+    },
+    "enderporter_charge=2": {
+      "model": "pantz_mod:block/enderporter2"
+    },
+    "enderporter_charge=3": {
+      "model": "pantz_mod:block/enderporter3"
+    },
+    "enderporter_charge=4": {
+      "model": "pantz_mod:block/enderporter4"
+    }
+  }
+}

@@ -1,35 +1,47 @@
 {
-  "parent": "minecraft:recipes/root",
-  "criteria": {
-    "has_cactus": {
-      "conditions": {
-        "items": [
-          {
-            "items": [
-              "minecraft:cactus"
-            ]
+  "advancements": [
+    {
+      "advancement": {
+        "parent": "minecraft:recipes/root",
+        "criteria": {
+          "has_cactus": {
+            "conditions": {
+              "items": [
+                {
+                  "items": [
+                    "minecraft:cactus"
+                  ]
+                }
+              ]
+            },
+            "trigger": "minecraft:inventory_changed"
+          },
+          "has_the_recipe": {
+            "conditions": {
+              "recipe": "pantz_mod:cactus_key"
+            },
+            "trigger": "minecraft:recipe_unlocked"
           }
-        ]
+        },
+        "requirements": [
+          [
+            "has_cactus",
+            "has_the_recipe"
+          ]
+        ],
+        "rewards": {
+          "recipes": [
+            "pantz_mod:cactus_key"
+          ]
+        },
+        "sends_telemetry_event": false
       },
-      "trigger": "minecraft:inventory_changed"
-    },
-    "has_the_recipe": {
-      "conditions": {
-        "recipe": "pantz_mod:cactus_key"
-      },
-      "trigger": "minecraft:recipe_unlocked"
+      "conditions": [
+        {
+          "type": "pantz_mod:config",
+          "value": "cactus_key"
+        }
+      ]
     }
-  },
-  "requirements": [
-    [
-      "has_cactus",
-      "has_the_recipe"
-    ]
-  ],
-  "rewards": {
-    "recipes": [
-      "pantz_mod:cactus_key"
-    ]
-  },
-  "sends_telemetry_event": false
+  ]
 }

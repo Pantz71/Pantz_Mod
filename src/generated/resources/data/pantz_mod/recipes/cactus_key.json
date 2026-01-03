@@ -1,24 +1,37 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "equipment",
-  "key": {
-    "#": {
-      "tag": "forge:ingots/iron"
-    },
-    "$": {
-      "item": "minecraft:cactus"
-    },
-    "*": {
-      "tag": "forge:nuggets/iron"
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "pantz_mod:config",
+          "value": "cactus_key"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "category": "equipment",
+        "key": {
+          "#": {
+            "tag": "forge:ingots/iron"
+          },
+          "$": {
+            "item": "minecraft:cactus"
+          },
+          "*": {
+            "tag": "forge:nuggets/iron"
+          }
+        },
+        "pattern": [
+          " ##",
+          " $#",
+          "*  "
+        ],
+        "result": {
+          "item": "pantz_mod:cactus_key"
+        },
+        "show_notification": true
+      }
     }
-  },
-  "pattern": [
-    " ##",
-    " $#",
-    "*  "
-  ],
-  "result": {
-    "item": "pantz_mod:cactus_key"
-  },
-  "show_notification": true
+  ]
 }
