@@ -16,7 +16,7 @@ public class PMItemModelProvider extends BlueprintItemModelProvider {
     @Override
     protected void registerModels() {
         this.generatedItem(STEEL_INGOT, STEEL_NUGGET, STEEL_HORSE_ARMOR,
-                SULFUR_DUST, SULFUR_CRYSTAL, HONEY_DESERIALIZER, ENTITY_FILTER);
+                SULFUR_DUST, SULFUR_CRYSTAL, HONEY_DESERIALIZER, ENTITY_FILTER, CACTUS_KEY);
 
         this.generatedItem(NOT_GATE,
                 AND_GATE, OR_GATE, NOR_GATE, NAND_GATE, XNOR_GATE, XOR_GATE,

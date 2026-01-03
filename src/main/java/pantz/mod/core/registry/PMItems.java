@@ -48,6 +48,7 @@ public class PMItems {
     public static final RegistryObject<Item> NETHERITE_EXCAVATOR = ITEMS.createItem("netherite_excavator", () -> new AreaDiggerItem(-4f, -2.5f, Tiers.NETHERITE, BlockTags.MINEABLE_WITH_SHOVEL, new Item.Properties()));
 
     public static final RegistryObject<Item> ENTITY_FILTER = ITEMS.createItem("entity_filter", () -> new EntityFilterItem(PropertyUtil.stacksOnce()));
+    public static final RegistryObject<Item> CACTUS_KEY = ITEMS.createItem("cactus_key", () -> new CactusKeyItem(PropertyUtil.stacksOnce()));
 
 
     private static Supplier<Item> basicItem() {
@@ -67,11 +68,10 @@ public class PMItems {
                 .addItemsBefore(of(Items.GOLDEN_HELMET), STEEL_HELMET, STEEL_CHESTPLATE, STEEL_LEGGINGS, STEEL_BOOTS)
                 .addItemsBefore(of(Items.GOLDEN_HORSE_ARMOR), STEEL_HORSE_ARMOR)
 
-
                 .tab(TOOLS_AND_UTILITIES)
                 .addItemsBefore(of(Items.GOLDEN_SHOVEL), STEEL_SHOVEL, STEEL_PICKAXE, STEEL_AXE, STEEL_HOE, EXCAVATOR)
                 .addItemsAfter(of(Items.SHEARS), TROWEL)
-                .addItemsAfter(of(Items.BRUSH), HONEY_DESERIALIZER)
+                .addItemsAfter(of(Items.BRUSH), HONEY_DESERIALIZER, CACTUS_KEY)
 
                 .addItemsAfter(of(Items.DIAMOND_HOE), DIAMOND_EXCAVATOR)
                 .addItemsAfter(of(Items.NETHERITE_HOE), NETHERITE_EXCAVATOR)

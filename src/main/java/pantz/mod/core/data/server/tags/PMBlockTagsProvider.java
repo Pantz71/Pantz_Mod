@@ -4,11 +4,14 @@ package pantz.mod.core.data.server.tags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.*;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.Nullable;
+import pantz.mod.common.block.LogicGateBlock;
+import pantz.mod.common.block.NotGateBlock;
+import pantz.mod.common.block.PedestalBlock;
 import pantz.mod.core.PantzMod;
 
 import java.util.concurrent.CompletableFuture;
@@ -23,8 +26,6 @@ public class PMBlockTagsProvider extends BlockTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider provider) {
-        this.tag(PEDESTALS).add(STONE_PEDESTAL.get(), BLACKSTONE_PEDESTAL.get(), DEEPSLATE_PEDESTAL.get(), QUARTZ_PEDESTAL.get(), PURPUR_PEDESTAL.get(), PRISMARINE_PEDESTAL.get());
-
         this.tag(BlockTags.MINEABLE_WITH_PICKAXE).addTag(PEDESTALS).add(STEEL_BLOCK.get(), STEEL_BARS.get(), STEEL_DOOR.get(), STEEL_TRAPDOOR.get(),
                 SULFUR_BLOCK.get(), SULFUR_BRICKS.get(), SULFUR_BRICK_STAIRS.get(), SULFUR_BRICK_SLAB.get(), NETHER_SULFUR_ORE.get(),
                 SULFUR_CLUSTER.get(), SMALL_SULFUR_BUD.get(), MEDIUM_SULFUR_BUD.get(), LARGE_SULFUR_BUD.get(),
@@ -33,13 +34,9 @@ public class PMBlockTagsProvider extends BlockTagsProvider {
         this.tag(BlockTags.NEEDS_STONE_TOOL).add(STEEL_BLOCK.get(), STEEL_BARS.get(), STEEL_DOOR.get(), STEEL_TRAPDOOR.get(),
                 SULFUR_BLOCK.get(), SULFUR_BRICKS.get(), SULFUR_BRICK_STAIRS.get(), SULFUR_BRICK_SLAB.get(), SULFUR_BRICK_WALL.get(), NETHER_SULFUR_ORE.get(),
                 SULFUR_CLUSTER.get(), SMALL_SULFUR_BUD.get(), MEDIUM_SULFUR_BUD.get(), LARGE_SULFUR_BUD.get(),
-                REDSTONE_CONFIGURATOR.get(), ENTITY_DETECTOR.get());
+                REDSTONE_CONFIGURATOR.get(), ENTITY_DETECTOR.get(), TRASH_CAN.get());
 
         this.tag(BlockTags.NEEDS_DIAMOND_TOOL).add(ENDER_SCANNER.get());
-
-        this.tag(BlockTags.STAIRS).add(SULFUR_BRICK_STAIRS.get());
-        this.tag(BlockTags.SLABS).add(SULFUR_BRICK_SLAB.get());
-        this.tag(BlockTags.WALLS).add(SULFUR_BRICK_WALL.get());
 
         this.tag(BlockTags.INFINIBURN_NETHER).add(SULFUR_BLOCK.get(), SULFUR_BRICKS.get());
         this.tag(BlockTags.INSIDE_STEP_SOUND_BLOCKS).add(SMALL_SULFUR_BUD.get());
@@ -54,16 +51,27 @@ public class PMBlockTagsProvider extends BlockTagsProvider {
         this.tag(Tags.Blocks.ORE_RATES_SINGULAR).add(NETHER_SULFUR_ORE.get());
         this.tag(Tags.Blocks.ORES_IN_GROUND_NETHERRACK).add(NETHER_SULFUR_ORE.get());
 
-        this.tag(REDSTONE_LAMPS).add(WHITE_REDSTONE_LAMP.get(), GRAY_REDSTONE_LAMP.get(),
-                LIGHT_GRAY_REDSTONE_LAMP.get(), WHITE_REDSTONE_LAMP.get(),
-                BROWN_REDSTONE_LAMP.get(), PINK_REDSTONE_LAMP.get(), PURPLE_REDSTONE_LAMP.get(),
-                MAGENTA_REDSTONE_LAMP.get(), BLUE_REDSTONE_LAMP.get(), CYAN_REDSTONE_LAMP.get(),
-                LIGHT_BLUE_REDSTONE_LAMP.get(), GREEN_REDSTONE_LAMP.get(), LIME_REDSTONE_LAMP.get(),
-                YELLOW_REDSTONE_LAMP.get(), ORANGE_REDSTONE_LAMP.get(), RED_REDSTONE_LAMP.get(),
-                Blocks.REDSTONE_LAMP);
-
-        this.tag(LOGIC_GATES).add(NOT_GATE.get(), AND_GATE.get(), OR_GATE.get(), NAND_GATE.get(), NOR_GATE.get(), XOR_GATE.get(), XNOR_GATE.get(),
-                ADVANCED_AND_GATE.get(), ADVANCED_OR_GATE.get(), ADVANCED_NAND_GATE.get(), ADVANCED_NOR_GATE.get(), ADVANCED_XOR_GATE.get(), ADVANCED_XNOR_GATE.get(),
-                MAJORITY_GATE.get(), MINORITY_GATE.get());
+        BLOCKS.getDeferredRegister().getEntries().forEach((registry -> {
+            Block block = registry.get();
+            if (block instanceof RedstoneLampBlock) {
+                this.tag(REDSTONE_LAMPS).add(block, Blocks.REDSTONE_LAMP);
+            }
+            if (block instanceof PedestalBlock) {
+                this.tag(PEDESTALS).add(block);
+            }
+            if (block instanceof LogicGateBlock || block instanceof NotGateBlock) {
+                this.tag(LOGIC_GATES).add(block);
+            }
+            if (block instanceof SlabBlock) {
+                this.tag(BlockTags.SLABS).add(block);
+            }
+            if (block instanceof StairBlock) {
+                this.tag(BlockTags.STAIRS).add(block);
+            }
+            if (block instanceof WallBlock) {
+                this.tag(BlockTags.WALLS).add(block);
+            }
+        }
+        ));
     }
 }

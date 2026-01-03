@@ -12,6 +12,11 @@
   "message.pantz_mod.entity_filter.removed": "Removed from filter: %s",
   "message.pantz_mod.entity_filter.duplicate": "Already in filter: %s",
   "message.pantz_mod.entity_filter.applied": "Applied filter to Entity Detector (%s entries)",
+  "message.pantz_mod.trash": "Successfully destroyed all items inside Trash Can",
+
+  "subtitle.pantz_mod.trash_can.open": "Trash lid opens",
+  "subtitle.pantz_mod.trash_can.close": "Trash lid closes",
+  "subtitle.pantz_mod.trash_can.destroy": "Trash can destroys items",
 
   "_steel": "steel",
   "block.pantz_mod.steel_block": "Steel Block",
@@ -62,6 +67,8 @@
   "item.pantz_mod.excavator": "Excavator",
   "item.pantz_mod.diamond_excavator": "Diamond Excavator",
   "item.pantz_mod.netherite_excavator": "Netherite Excavator",
+
+  "item.pantz_mod.cactus_key": "Cactus Key",
 
   "_pedestal": "pedestal",
   "block.pantz_mod.stone_pedestal": "Stone Pedestal",
@@ -138,5 +145,6 @@
 
   "_functional": "functional",
   "block.pantz_mod.item_stand": "Item Stand",
-  "block.pantz_mod.glow_item_stand": "Glow Item Stand"
+  "block.pantz_mod.glow_item_stand": "Glow Item Stand",
+  "block.pantz_mod.trash_can": "Trash Can"
 }

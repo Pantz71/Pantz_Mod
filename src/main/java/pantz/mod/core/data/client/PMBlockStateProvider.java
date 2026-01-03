@@ -95,6 +95,7 @@ public class PMBlockStateProvider extends BlueprintBlockStateProvider {
 
         this.generatedItem(ITEM_STAND.get(), "item");
         this.generatedItem(GLOW_ITEM_STAND.get(), "item");
+        this.blockItem(TRASH_CAN);
 
     }
 

@@ -31,6 +31,9 @@ public class PMConfig {
         public final IntValue spectreDetectorRevelationRadius;
         public final IntValue spectreCubeRevelationRadius;
 
+        @ConfigKey("cactus_key")
+        public final BooleanValue enableCactusKey;
+
         Common(Builder builder) {
             builder.push("Recipes");
             flintAndSteel = builder.comment("Change Flint and Steel recipe from using Iron to Steel")
@@ -55,6 +58,9 @@ public class PMConfig {
 
             spectreCubeRevelationRadius = builder.comment("How far can the Spectre Cube reveal Spectre Blocks?")
                     .defineInRange("Spectre Cube revelation radius", 32, 0, Integer.MAX_VALUE);
+
+            enableCactusKey = builder.comment("Allow Trash Can to require players to hold a Cactus Key instead of empty hand")
+                    .define("Cactus Key", true);
 
             builder.pop();
 

@@ -3,6 +3,7 @@ package pantz.mod.core.data.server;
 import com.google.common.collect.Maps;
 import com.teamabnormals.blueprint.core.api.conditions.ConfigValueCondition;
 import com.teamabnormals.blueprint.core.data.server.BlueprintRecipeProvider;
+import com.teamabnormals.blueprint.core.other.tags.BlueprintItemTags;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
@@ -208,6 +209,26 @@ public class PMRecipeProvider extends BlueprintRecipeProvider {
                 .unlockedBy(getHasName(ITEM_STAND.get()), has(ITEM_STAND.get()))
                 .unlockedBy(getHasName(Items.GLOW_INK_SAC), has(Items.GLOW_INK_SAC))
                 .save(consumer);
+
+        ShapedRecipeBuilder.shaped(DECORATIONS, TRASH_CAN.get())
+                .define('I', PMItemTags.INGOTS_STEEL).define('#', BlueprintItemTags.WOODEN_CHESTS)
+                .define('$', Blocks.CACTUS)
+                .pattern("I#I")
+                .pattern("I$I")
+                .pattern("III")
+                .unlockedBy(getHasName(Blocks.CACTUS), has(Blocks.CACTUS))
+                .unlockedBy(getHasName(Blocks.CHEST), has(BlueprintItemTags.WOODEN_CHESTS))
+                .save(consumer);
+
+        ShapedRecipeBuilder.shaped(TOOLS, CACTUS_KEY.get())
+                .define('#', Tags.Items.INGOTS_IRON).define('*', Tags.Items.NUGGETS_IRON)
+                .define('$', Blocks.CACTUS)
+                .pattern(" ##")
+                .pattern(" $#")
+                .pattern("*  ")
+                .unlockedBy(getHasName(Blocks.CACTUS), has(Blocks.CACTUS))
+                .save(consumer);
+
 
     }
 

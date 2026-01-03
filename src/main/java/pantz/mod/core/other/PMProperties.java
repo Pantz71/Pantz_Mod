@@ -53,6 +53,7 @@ public class PMProperties {
     public static final BlockBehaviour.Properties REDSTONE_LAMP = BlockBehaviour.Properties.of().lightLevel(litBlockEmission(15)).strength(0.3F).sound(SoundType.GLASS).isValidSpawn(PMProperties::always);
 
     public static final BlockBehaviour.Properties ITEM_STAND = BlockBehaviour.Properties.of().mapColor(MapColor.STONE).requiresCorrectToolForDrops().instabreak().noOcclusion();
+    public static final BlockBehaviour.Properties TRASH_CAN = BlockBehaviour.Properties.of().strength(4.5f, 6f).sound(SoundType.NETHERITE_BLOCK).instrument(NoteBlockInstrument.BASEDRUM).mapColor(MapColor.COLOR_GRAY);
 
     public static boolean never(BlockState state, BlockGetter blockGetter, BlockPos pos) {
         return false;
