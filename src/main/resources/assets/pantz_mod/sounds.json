@@ -1,0 +1,20 @@
+{
+  "block.trash_can.open": {
+    "sounds": [
+      "pantz_mod:block/trash_can/open"
+    ],
+    "subtitle": "subtitle.pantz_mod.trash_can.open"
+  },
+  "block.trash_can.close": {
+    "sounds": [
+      "pantz_mod:block/trash_can/close"
+    ],
+    "subtitle": "subtitle.pantz_mod.trash_can.close"
+  },
+  "block.trash_can.destroy": {
+    "sounds": [
+      "pantz_mod:block/trash_can/destroy"
+    ],
+    "subtitle": "subtitle.pantz_mod.trash_can.destroy"
+  }
+}
