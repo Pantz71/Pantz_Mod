@@ -45,6 +45,15 @@ public class GlobeBlockEntity extends BlockEntity {
         return texture != null ? texture : PantzMod.location("block/globe/planets/earth");
     }
 
+    public int getPower() {
+        if (isGlow()) {
+            return 7;
+        } else if (isRotating()) {
+            return 15;
+        }
+        return 0;
+    }
+
     public boolean isGlow() {
         return glow;
     }
