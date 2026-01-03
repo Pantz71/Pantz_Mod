@@ -45,6 +45,7 @@ import pantz.mod.core.other.PMCompat;
 import pantz.mod.core.registry.PMBlockEntityTypes;
 import pantz.mod.core.registry.PMBlocks;
 import pantz.mod.core.registry.PMItems;
+import pantz.mod.core.registry.PMSoundEvents;
 import pantz.mod.core.registry.helper.PMBlockSubRegistryHelper;
 
 import java.util.concurrent.CompletableFuture;
@@ -61,7 +62,7 @@ public class PantzMod {
         PMBlocks.BLOCKS.register(bus);
         PMBlockEntityTypes.BLOCK_ENTITY_TYPES.register(bus);
         PMItems.ITEMS.register(bus);
-
+        PMSoundEvents.SOUND_EVENTS.register(bus);
         MinecraftForge.EVENT_BUS.register(this);
         bus.addListener(this::commonSetup);
         bus.addListener(this::clientSetup);

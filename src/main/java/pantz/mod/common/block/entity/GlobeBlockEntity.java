@@ -53,6 +53,10 @@ public class GlobeBlockEntity extends BlockEntity {
         if (glow != value) {
             glow = value;
         }
+        setChanged();
+        if (level != null) {
+            level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), 3);
+        }
     }
 
     public void spin(Level level) {

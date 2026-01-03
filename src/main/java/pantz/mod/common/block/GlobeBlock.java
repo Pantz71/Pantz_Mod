@@ -3,6 +3,8 @@ package pantz.mod.common.block;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -64,9 +66,14 @@ public class GlobeBlock extends HorizontalDirectionalBlock implements EntityBloc
         BlockEntity be = level.getBlockEntity(pos);
         ItemStack stack = player.getItemInHand(hand);
         if (be instanceof GlobeBlockEntity globe) {
-            globe.spin(level);
-            if (stack.is(Items.GLOW_INK_SAC) && player.isShiftKeyDown()) {
+            if (stack.is(Items.GLOW_INK_SAC) && !globe.isGlow()) {
                 globe.setGlow(true);
+                level.playSound(null, pos, SoundEvents.GLOW_INK_SAC_USE, SoundSource.BLOCKS);
+                if (!player.isCreative()) {
+                    stack.shrink(1);
+                }
+            } else {
+                globe.spin(level);
             }
         }
         return InteractionResult.SUCCESS;
