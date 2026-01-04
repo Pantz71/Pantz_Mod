@@ -3,13 +3,14 @@
   "category": "misc",
   "key": {
     "#": {
-      "tag": "forge:ingots/iron"
+      "tag": "forge:ingots/steel"
     },
     "/": {
       "item": "minecraft:echo_shard"
     }
   },
   "pattern": [
+    "###",
     "///",
     "###"
   ],
