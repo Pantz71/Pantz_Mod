@@ -6,7 +6,7 @@
         "items": [
           {
             "items": [
-              "minecraft:purple_dye"
+              "minecraft:magenta_dye"
             ]
           }
         ]
@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:dye_pink_redstone_lamp"
+        "recipe": "minecraft:dye_magenta_redstone_lamp"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -28,7 +28,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:dye_pink_redstone_lamp"
+      "minecraft:dye_magenta_redstone_lamp"
     ]
   },
   "sends_telemetry_event": false

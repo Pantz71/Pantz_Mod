@@ -1,15 +1,12 @@
 {
   "type": "minecraft:crafting_shapeless",
-  "category": "building",
+  "category": "redstone",
   "group": "redstone_lamps",
   "ingredients": [
     {
-      "item": "minecraft:orange_dye"
+      "item": "minecraft:magenta_dye"
     },
     [
-      {
-        "item": "minecraft:redstone_lamp"
-      },
       {
         "item": "pantz_mod:black_redstone_lamp"
       },
@@ -54,6 +51,9 @@
       },
       {
         "item": "pantz_mod:white_redstone_lamp"
+      },
+      {
+        "item": "minecraft:redstone_lamp"
       }
     ]
   ],
