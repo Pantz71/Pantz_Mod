@@ -8,6 +8,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
@@ -20,7 +21,10 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
+import org.jetbrains.annotations.Nullable;
 
 public class RopeLadderBlock extends LadderBlock {
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
@@ -64,18 +68,47 @@ public class RopeLadderBlock extends LadderBlock {
     }
 
     @Override
-    public void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean moving) {
-        if (!level.isClientSide()) {
-            level.scheduleTick(pos, this, 1);
-        }
+    public BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor level, BlockPos currentPos, BlockPos neighborPos) {
+        return state.setValue(TOP, isTop(level, currentPos)).setValue(BOTTOM, isBottom(level, currentPos));
     }
 
     @Override
-    public BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor level, BlockPos currentPos, BlockPos neighborPos) {
-        if (!level.isClientSide()) {
-            level.scheduleTick(currentPos, this, 1);
+    @Nullable
+    public BlockState getStateForPlacement(BlockPlaceContext context) {
+        if (!context.replacingClickedOnBlock()) {
+            BlockState state = context.getLevel()
+                    .getBlockState(context.getClickedPos()
+                            .relative(context.getClickedFace().getOpposite()));
+
+            if (state.is(this) && state.getValue(FACING) == context.getClickedFace()) {
+                return null;
+            }
         }
-        return super.updateShape(state, direction, neighborState, level, currentPos, neighborPos);
+
+        Level level = context.getLevel();
+        BlockPos pos = context.getClickedPos();
+        FluidState fluid = level.getFluidState(pos);
+
+        for (Direction direction : context.getNearestLookingDirections()) {
+            if (direction.getAxis().isHorizontal()) {
+                Direction facing = direction.getOpposite();
+
+                boolean top = isTop(level, pos);
+                boolean bottom = isBottom(level, pos);
+
+                BlockState state = this.defaultBlockState()
+                        .setValue(FACING, facing)
+                        .setValue(WATERLOGGED, fluid.getType() == Fluids.WATER)
+                        .setValue(TOP, top)
+                        .setValue(BOTTOM, bottom);
+
+                if (state.canSurvive(level, pos)) {
+                    return state;
+                }
+            }
+        }
+
+        return null;
     }
 
     private boolean canAttachTo(BlockGetter pBlockReader, BlockPos pPos, Direction pDirection) {
