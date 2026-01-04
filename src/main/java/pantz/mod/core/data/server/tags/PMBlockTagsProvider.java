@@ -73,7 +73,7 @@ public class PMBlockTagsProvider extends BlockTagsProvider {
                 this.tag(BlockTags.WALLS).add(block);
             }
             if (block instanceof LadderBlock) {
-                this.tag(BlueprintBlockTags.LADDERS).add(block);
+                this.tag(BlueprintBlockTags.WOODEN_LADDERS).add(block);
             }
         }
         ));
