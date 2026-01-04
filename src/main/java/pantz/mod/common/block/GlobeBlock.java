@@ -81,7 +81,7 @@ public class GlobeBlock extends HorizontalDirectionalBlock implements EntityBloc
 
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-        return PantzMod.createTickerHelper(type, PMBlockEntityTypes.GLOBE.get(), !level.isClientSide() ? null : GlobeBlockEntity::clientTick);
+        return PantzMod.createTickerHelper(type, PMBlockEntityTypes.GLOBE.get(), !level.isClientSide() ? GlobeBlockEntity::serverTick : GlobeBlockEntity::clientTick);
     }
 
     @Override
