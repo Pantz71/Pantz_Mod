@@ -232,6 +232,7 @@ public class PMRecipeProvider extends BlueprintRecipeProvider {
 
         ShapedRecipeBuilder.shaped(RecipeCategory.TRANSPORTATION, ENDERPORTER.get())
                 .define('#', Tags.Items.INGOTS_IRON).define('/', Items.ECHO_SHARD)
+                .pattern("###")
                 .pattern("///")
                 .pattern("###")
                 .unlockedBy(getHasName(Items.ECHO_SHARD), has(Items.ECHO_SHARD))
