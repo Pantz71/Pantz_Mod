@@ -94,6 +94,7 @@ public class PMBlockStateProvider extends BlueprintBlockStateProvider {
         this.generatedItem(GLOW_ITEM_STAND.get(), "item");
         this.blockItem(TRASH_CAN);
         this.enderporterBlock(ENDERPORTER);
+        this.ropeLadderBlock(ROPE_LADDER);
 
     }
 
@@ -287,4 +288,47 @@ public class PMBlockStateProvider extends BlueprintBlockStateProvider {
         }
         blockItem(block.get());
     }
+
+    private void ropeLadderBlock(RegistryObject<Block> block) {
+        String name = name(block.get());
+        ResourceLocation texture = blockTexture(block.get());
+
+        ModelFile model = models()
+                .withExistingParent(name, mcLoc("block/ladder"))
+                .texture("particle", texture)
+                .texture("texture", texture);
+
+        ModelFile topModel = models()
+                .withExistingParent(name + "_top", mcLoc("block/ladder"))
+                .texture("particle", suffix(texture, "_top"))
+                .texture("texture", suffix(texture, "_top"));
+
+        ModelFile bottomModel = models()
+                .withExistingParent(name + "_bottom", mcLoc("block/ladder"))
+                .texture("particle", suffix(texture, "_bottom"))
+                .texture("texture", suffix(texture, "_bottom"));
+
+        for (Direction dir : Direction.Plane.HORIZONTAL) {
+            int rotY = switch (dir) {
+                case SOUTH -> 180;
+                case WEST  -> 270;
+                case EAST  -> 90;
+                default    -> 0;
+            };
+
+            for (boolean top : new boolean[]{false, true}) {
+                for (boolean bottom : new boolean[]{false, true}) {
+
+                    ModelFile modelFile = top ? topModel : bottom ? bottomModel : model;
+
+                    getVariantBuilder(block.get()).partialState()
+                            .with(RopeLadderBlock.FACING, dir).with(RopeLadderBlock.TOP, top).with(RopeLadderBlock.BOTTOM, bottom)
+                            .modelForState().modelFile(modelFile).rotationY(rotY).addModel();
+                }
+            }
+        }
+
+        generatedItem(block.get(), texture);
+    }
+
 }

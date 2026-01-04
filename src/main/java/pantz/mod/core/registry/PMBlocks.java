@@ -121,6 +121,7 @@ public class PMBlocks {
     public static final RegistryObject<Block> GLOW_ITEM_STAND = BLOCKS.createBlock("glow_item_stand", () -> new ItemStandBlock(PMProperties.ITEM_STAND));
     public static final RegistryObject<Block> TRASH_CAN = BLOCKS.createBlock("trash_can", () -> new TrashCanBlock(PMProperties.TRASH_CAN));
     public static final RegistryObject<Block> ENDERPORTER = BLOCKS.createBlock("enderporter", () -> new EnderporterBlock(PMProperties.ENDERPORTER));
+    public static final RegistryObject<Block> ROPE_LADDER = BLOCKS.createBlock("rope_ladder", () -> new RopeLadderBlock(BlockBehaviour.Properties.copy(Blocks.LADDER)));
 
     public static void setupTabs() {
         CreativeModeTabContentsPopulator.mod(PantzMod.MOD_ID)
@@ -136,23 +137,23 @@ public class PMBlocks {
 
                 .tab(FUNCTIONAL_BLOCKS)
                 .addItemsBefore(of(Items.PAINTING), ITEM_STAND, GLOW_ITEM_STAND)
+                .addItemsBefore(of(Blocks.SCAFFOLDING), ROPE_LADDER)
+                .addItemsBefore(of(Blocks.BARREL), TRASH_CAN)
                 .addItemsAfter(of(Blocks.DAMAGED_ANVIL), STONE_PEDESTAL, DEEPSLATE_PEDESTAL, BLACKSTONE_PEDESTAL, QUARTZ_PEDESTAL, PRISMARINE_PEDESTAL, PURPUR_PEDESTAL)
                 .addItemsAfter(of(Blocks.BELL), MERCURY_GLOBE, VENUS_GLOBE, EARTH_GLOBE, MARS_GLOBE, JUPITER_GLOBE, SATURN_GLOBE, URANUS_GLOBE, NEPTUNE_GLOBE, PLUTO_GLOBE, CERES_GLOBE, MAKEMAKE_GLOBE, MOON_GLOBE, IO_GLOBE, EUROPA_GLOBE, CALLISTO_GLOBE, GANYMEDE_GLOBE, SUN_GLOBE, BLUE_SUN_GLOBE, IRIS_GLOBE)
                 .addItemsAfter(of(Blocks.REDSTONE_LAMP), WHITE_REDSTONE_LAMP, ORANGE_REDSTONE_LAMP, MAGENTA_REDSTONE_LAMP,
                         LIGHT_BLUE_REDSTONE_LAMP, YELLOW_REDSTONE_LAMP, LIME_REDSTONE_LAMP, PINK_REDSTONE_LAMP, GRAY_REDSTONE_LAMP, LIGHT_GRAY_REDSTONE_LAMP,
                         CYAN_REDSTONE_LAMP, PURPLE_REDSTONE_LAMP, BLUE_REDSTONE_LAMP, BROWN_REDSTONE_LAMP, GREEN_REDSTONE_LAMP, RED_REDSTONE_LAMP, BLACK_REDSTONE_LAMP)
-                .addItemsAfter(of(Items.CHEST), TRASH_CAN)
                 .addItemsAfter(of(Blocks.RESPAWN_ANCHOR), ENDERPORTER)
 
                 .tab(REDSTONE_BLOCKS)
-                .addItemsAfter(of(Blocks.LECTERN), STONE_PEDESTAL)
-                .addItemsAfter(of(Blocks.TARGET), ENDER_SCANNER)
+                .addItemsBefore(of(Blocks.DAYLIGHT_DETECTOR), EARTH_GLOBE, STONE_PEDESTAL)
+                .addItemsBefore(of(Blocks.LEVER), ENDER_SCANNER)
+                .addItemsBefore(of(Blocks.JUKEBOX), TRASH_CAN)
                 .addItemsAfter(of(Blocks.REDSTONE_BLOCK), REDSTONE_CONFIGURATOR, POWER_DISPLAYER)
                 .addItemsAfter(of(Blocks.DAYLIGHT_DETECTOR), WEATHER_DETECTOR, ENTITY_DETECTOR)
                 .addItemsAfter(of(Blocks.COMPARATOR), NOT_GATE, AND_GATE, OR_GATE, NAND_GATE, NOR_GATE, XOR_GATE, XNOR_GATE,
                         ADVANCED_AND_GATE, ADVANCED_OR_GATE, ADVANCED_NAND_GATE, ADVANCED_NOR_GATE, ADVANCED_XOR_GATE, ADVANCED_XNOR_GATE, MAJORITY_GATE, MINORITY_GATE)
-                .addItemsAfter(of(Blocks.DROPPER), EARTH_GLOBE)
-                .addItemsAfter(of(Blocks.TRAPPED_CHEST), TRASH_CAN)
 
                 .tab(COLORED_BLOCKS)
                 .addItems(() -> Blocks.REDSTONE_LAMP, WHITE_REDSTONE_LAMP, ORANGE_REDSTONE_LAMP, MAGENTA_REDSTONE_LAMP,

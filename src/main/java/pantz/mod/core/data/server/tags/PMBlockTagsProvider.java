@@ -1,6 +1,7 @@
 package pantz.mod.core.data.server.tags;
 
 
+import com.teamabnormals.blueprint.core.other.tags.BlueprintBlockTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
@@ -70,6 +71,9 @@ public class PMBlockTagsProvider extends BlockTagsProvider {
             }
             if (block instanceof WallBlock) {
                 this.tag(BlockTags.WALLS).add(block);
+            }
+            if (block instanceof LadderBlock) {
+                this.tag(BlueprintBlockTags.LADDERS).add(block);
             }
         }
         ));

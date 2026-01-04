@@ -7,8 +7,11 @@ import com.teamabnormals.blueprint.core.other.tags.BlueprintItemTags;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
@@ -113,7 +116,7 @@ public class PMRecipeProvider extends BlueprintRecipeProvider {
 
         excavator(consumer, EXCAVATOR.get(), STEEL_INGOT.get(), PMItemTags.INGOTS_STEEL);
         excavator(consumer, DIAMOND_EXCAVATOR.get(), Items.DIAMOND, Tags.Items.GEMS_DIAMOND);
-        netheriteSmithing(consumer, DIAMOND_EXCAVATOR.get(), TOOLS, NETHERITE_EXCAVATOR.get());
+        netheriteSmithingRecipe(consumer, DIAMOND_EXCAVATOR.get(), TOOLS, NETHERITE_EXCAVATOR.get());
 
         pedestalBuilder(STONE_PEDESTAL.get(), Blocks.STONE, Blocks.STONE_SLAB).save(consumer);
         pedestalBuilder(DEEPSLATE_PEDESTAL.get(), Blocks.POLISHED_DEEPSLATE, Blocks.POLISHED_DEEPSLATE_SLAB).save(consumer);
@@ -190,11 +193,11 @@ public class PMRecipeProvider extends BlueprintRecipeProvider {
                 Items.LIGHT_BLUE_DYE, Items.LIGHT_GRAY_DYE, Items.LIME_DYE, Items.MAGENTA_DYE, Items.ORANGE_DYE,
                 Items.PINK_DYE, Items.PURPLE_DYE, Items.RED_DYE, Items.YELLOW_DYE, Items.WHITE_DYE);
 
-        List<Item> lamps = List.of(Blocks.REDSTONE_LAMP.asItem(), BLACK_REDSTONE_LAMP.get().asItem(), BLUE_REDSTONE_LAMP.get().asItem(), BROWN_REDSTONE_LAMP.get().asItem(), CYAN_REDSTONE_LAMP.get().asItem(), GRAY_REDSTONE_LAMP.get().asItem(), GREEN_REDSTONE_LAMP.get().asItem(),
+        List<Item> lamps = List.of(BLACK_REDSTONE_LAMP.get().asItem(), BLUE_REDSTONE_LAMP.get().asItem(), BROWN_REDSTONE_LAMP.get().asItem(), CYAN_REDSTONE_LAMP.get().asItem(), GRAY_REDSTONE_LAMP.get().asItem(), GREEN_REDSTONE_LAMP.get().asItem(),
                 LIGHT_BLUE_REDSTONE_LAMP.get().asItem(), LIGHT_GRAY_REDSTONE_LAMP.get().asItem(), LIME_REDSTONE_LAMP.get().asItem(), MAGENTA_REDSTONE_LAMP.get().asItem(), ORANGE_REDSTONE_LAMP.get().asItem(),
-                PINK_REDSTONE_LAMP.get().asItem(), PURPLE_REDSTONE_LAMP.get().asItem(), RED_REDSTONE_LAMP.get().asItem(), YELLOW_REDSTONE_LAMP.get().asItem(), WHITE_REDSTONE_LAMP.get().asItem());
+                PINK_REDSTONE_LAMP.get().asItem(), PURPLE_REDSTONE_LAMP.get().asItem(), RED_REDSTONE_LAMP.get().asItem(), YELLOW_REDSTONE_LAMP.get().asItem(), WHITE_REDSTONE_LAMP.get().asItem(), Items.REDSTONE_LAMP);
 
-        colorBlockWithDye(consumer, dyes, lamps, "redstone_lamps");
+        colorBlockWithDye(consumer, dyes, lamps, REDSTONE, "redstone_lamps");
 
         ShapedRecipeBuilder.shaped(DECORATIONS, ITEM_STAND.get())
                 .define('#', Blocks.SMOOTH_STONE_SLAB)
@@ -230,12 +233,20 @@ public class PMRecipeProvider extends BlueprintRecipeProvider {
                         .pattern("*  ")
                         .unlockedBy(getHasName(Blocks.CACTUS), has(Blocks.CACTUS)));
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.TRANSPORTATION, ENDERPORTER.get())
-                .define('#', Tags.Items.INGOTS_IRON).define('/', Items.ECHO_SHARD)
+        ShapedRecipeBuilder.shaped(TRANSPORTATION, ENDERPORTER.get())
+                .define('#', PMItemTags.INGOTS_STEEL).define('/', Items.ECHO_SHARD)
                 .pattern("###")
                 .pattern("///")
                 .pattern("###")
                 .unlockedBy(getHasName(Items.ECHO_SHARD), has(Items.ECHO_SHARD))
+                .save(consumer);
+
+        ShapedRecipeBuilder.shaped(DECORATIONS, ROPE_LADDER.get())
+                .define('/', Tags.Items.RODS_WOODEN).define('%', Tags.Items.STRING)
+                .pattern("% %")
+                .pattern("///")
+                .pattern("% %")
+                .unlockedBy(getHasName(Items.STRING), has(Tags.Items.STRING))
                 .save(consumer);
 
 
@@ -423,6 +434,16 @@ public class PMRecipeProvider extends BlueprintRecipeProvider {
                 .unlockedBy(getHasName(ingot), has(ingotTag))
                 .save(consumer);
 
+    }
+
+    protected void colorBlockWithDye(Consumer<FinishedRecipe> consumer, List<Item> dyes, List<Item> dyeableItems, RecipeCategory category, String group) {
+        for(int i = 0; i < dyes.size(); ++i) {
+            Item item = dyes.get(i);
+            Item item1 = dyeableItems.get(i);
+            ShapelessRecipeBuilder.shapeless(category, item1).requires(item)
+                    .requires(Ingredient.of(dyeableItems.stream().filter(items -> !items.equals(item1)).map(ItemStack::new)))
+                    .group(group).unlockedBy("has_needed_dye", has(item)).save(consumer, "dye_" + getItemName(item1));
+        }
     }
 
     public static ConfigValueCondition config(ForgeConfigSpec.ConfigValue<?> value, String key, boolean inverted) {

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "%": {
+      "tag": "forge:string"
+    },
+    "/": {
+      "tag": "forge:rods/wooden"
+    }
+  },
+  "pattern": [
+    "% %",
+    "///",
+    "% %"
+  ],
+  "result": {
+    "item": "pantz_mod:rope_ladder"
+  },
+  "show_notification": true
+}

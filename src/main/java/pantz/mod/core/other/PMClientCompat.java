@@ -18,10 +18,12 @@ public class PMClientCompat {
     private static void registerRenderLayers() {
         for (RegistryObject<?> block : new RegistryObject[]{
                 STEEL_BARS, STEEL_DOOR, STEEL_TRAPDOOR,
+                SULFUR_CLUSTER, SMALL_SULFUR_BUD, MEDIUM_SULFUR_BUD, LARGE_SULFUR_BUD,
                 STONE_PEDESTAL, DEEPSLATE_PEDESTAL, BLACKSTONE_PEDESTAL, QUARTZ_PEDESTAL, PURPUR_PEDESTAL, PRISMARINE_PEDESTAL,
                 NOT_GATE, AND_GATE, OR_GATE, NOR_GATE, NAND_GATE, XNOR_GATE, XOR_GATE,
                 ADVANCED_AND_GATE, ADVANCED_OR_GATE, ADVANCED_NOR_GATE, ADVANCED_NAND_GATE, ADVANCED_XNOR_GATE, ADVANCED_XOR_GATE,
-                MAJORITY_GATE, MINORITY_GATE
+                MAJORITY_GATE, MINORITY_GATE,
+                ROPE_LADDER
         }) {
             ItemBlockRenderTypes.setRenderLayer((Block) block.get(), RenderType.cutout());
         }

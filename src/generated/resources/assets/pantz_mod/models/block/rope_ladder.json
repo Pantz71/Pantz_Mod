@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/ladder",
+  "textures": {
+    "particle": "pantz_mod:block/rope_ladder",
+    "texture": "pantz_mod:block/rope_ladder"
+  }
+}

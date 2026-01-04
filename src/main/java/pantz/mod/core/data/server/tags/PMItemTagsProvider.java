@@ -1,5 +1,7 @@
 package pantz.mod.core.data.server.tags;
 
+import com.teamabnormals.blueprint.core.other.tags.BlueprintBlockTags;
+import com.teamabnormals.blueprint.core.other.tags.BlueprintItemTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
@@ -72,5 +74,7 @@ public class PMItemTagsProvider extends ItemTagsProvider {
         this.copy(PMBlockTags.PEDESTALS, PEDESTALS);
         this.copy(PMBlockTags.REDSTONE_LAMPS, REDSTONE_LAMPS);
         this.copy(PMBlockTags.LOGIC_GATES, LOGIC_GATES);
+
+        this.copy(BlueprintBlockTags.LADDERS, BlueprintItemTags.LADDERS);
     }
 }
