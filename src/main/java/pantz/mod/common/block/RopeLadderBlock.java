@@ -69,6 +69,9 @@ public class RopeLadderBlock extends LadderBlock {
 
     @Override
     public BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor level, BlockPos currentPos, BlockPos neighborPos) {
+        if (!state.canSurvive(level, currentPos)) {
+            level.scheduleTick(currentPos, this, 1);
+        }
         return state.setValue(TOP, isTop(level, currentPos)).setValue(BOTTOM, isBottom(level, currentPos));
     }
 
@@ -118,9 +121,8 @@ public class RopeLadderBlock extends LadderBlock {
 
     @Override
     public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
-        Direction direction = state.getValue(FACING);
-        return this.canAttachTo(level, pos.relative(direction.getOpposite()), direction) ||
-                !isTop(level, pos);
+        Direction facing = state.getValue(FACING);
+        return this.canAttachTo(level, pos.relative(facing.getOpposite()), facing) || !isTop(level, pos);
     }
 
     private InteractionResult retractLadder(BlockPos pos, Level level, Player player) {
