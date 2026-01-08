@@ -362,8 +362,8 @@ public class PMRecipeProvider extends BlueprintRecipeProvider {
     }
 
     private static RecipeBuilder mineralGlassBuilder(ItemLike glass, TagKey<Item> ingredient, RecipeCategory category) {
-        return ShapedRecipeBuilder.shaped(category, glass, 8).define('#', Tags.Items.GLASS_COLORLESS).define('@', ingredient)
-                .pattern("###").pattern("#@#").pattern("###");
+        return ShapedRecipeBuilder.shaped(category, glass, 2).define('#', Tags.Items.GLASS_COLORLESS).define('@', ingredient)
+                .pattern(" # ").pattern("#@#").pattern(" # ");
     }
 
     private static RecipeBuilder pedestalBuilder(ItemLike pedestal, ItemLike block, ItemLike slab) {
