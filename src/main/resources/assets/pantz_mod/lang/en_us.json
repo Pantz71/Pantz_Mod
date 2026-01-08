@@ -153,5 +153,11 @@
   "block.pantz_mod.glow_item_stand": "Glow Item Stand",
   "block.pantz_mod.trash_can": "Trash Can",
   "block.pantz_mod.enderporter": "Enderporter",
-  "block.pantz_mod.rope_ladder": "Rope Ladder"
+  "block.pantz_mod.rope_ladder": "Rope Ladder",
+
+  "block.pantz_mod.quartz_glass": "Quartz Glass",
+  "block.pantz_mod.quartz_glass_pane": "Quartz Glass Pane",
+  "block.pantz_mod.lapis_glass": "Lapis Glass",
+  "block.pantz_mod.lapis_glass_pane": "Lapis Glass Pane",
+  "block.pantz_mod.tinted_glass_pane": "Tinted Glass Pane"
 }

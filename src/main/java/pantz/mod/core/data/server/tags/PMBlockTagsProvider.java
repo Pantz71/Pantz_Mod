@@ -52,6 +52,11 @@ public class PMBlockTagsProvider extends BlockTagsProvider {
         this.tag(Tags.Blocks.ORE_RATES_SINGULAR).add(NETHER_SULFUR_ORE.get());
         this.tag(Tags.Blocks.ORES_IN_GROUND_NETHERRACK).add(NETHER_SULFUR_ORE.get());
 
+        this.tag(GLASS_QUARTZ).add(QUARTZ_GLASS.get());
+        this.tag(GLASS_LAPIS).add(LAPIS_GLASS.get());
+        this.tag(GLASS_PANES_QUARTZ).add(QUARTZ_GLASS_PANE.get());
+        this.tag(GLASS_PANES_LAPIS).add(LAPIS_GLASS_PANE.get());
+
         BLOCKS.getDeferredRegister().getEntries().forEach((registry -> {
             Block block = registry.get();
             if (block instanceof RedstoneLampBlock) {

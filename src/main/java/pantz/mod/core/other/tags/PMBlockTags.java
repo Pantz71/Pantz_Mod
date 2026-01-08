@@ -13,6 +13,11 @@ public class PMBlockTags {
 
     public static final TagKey<Block> REDSTONE_LAMPS = forgeTag("redstone_lamps");
 
+    public static final TagKey<Block> GLASS_QUARTZ = forgeTag("glass/quartz");
+    public static final TagKey<Block> GLASS_PANES_QUARTZ = forgeTag("glass_panes/quartz");
+    public static final TagKey<Block> GLASS_LAPIS = forgeTag("glass/lapis");
+    public static final TagKey<Block> GLASS_PANES_LAPIS = forgeTag("glass_panes/lapis");
+
     public static final TagKey<Block> NON_WAXED_BLOCKS = blockTag("non_waxed_blocks");
     public static final TagKey<Block> PEDESTALS = blockTag("pedestals");
     public static final TagKey<Block> LOGIC_GATES = blockTag("logic_gates");

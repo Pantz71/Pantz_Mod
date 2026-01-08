@@ -28,7 +28,12 @@ public class PMClientCompat {
             ItemBlockRenderTypes.setRenderLayer((Block) block.get(), RenderType.cutout());
         }
 
-        ItemBlockRenderTypes.setRenderLayer(ITEM_STAND.get(), RenderType.cutoutMipped());
-        ItemBlockRenderTypes.setRenderLayer(GLOW_ITEM_STAND.get(), RenderType.cutoutMipped());
+        for (RegistryObject<?> block : new RegistryObject[]{
+                ITEM_STAND, GLOW_ITEM_STAND,
+                QUARTZ_GLASS, QUARTZ_GLASS_PANE, LAPIS_GLASS, LAPIS_GLASS_PANE
+        }) {
+            ItemBlockRenderTypes.setRenderLayer((Block) block.get(), RenderType.cutoutMipped());
+        }
     }
+
 }

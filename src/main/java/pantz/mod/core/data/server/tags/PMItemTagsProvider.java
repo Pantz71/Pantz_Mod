@@ -75,6 +75,12 @@ public class PMItemTagsProvider extends ItemTagsProvider {
         this.copy(PMBlockTags.REDSTONE_LAMPS, REDSTONE_LAMPS);
         this.copy(PMBlockTags.LOGIC_GATES, LOGIC_GATES);
 
+        this.copy(PMBlockTags.GLASS_QUARTZ, GLASS_QUARTZ);
+        this.copy(PMBlockTags.GLASS_LAPIS, GLASS_LAPIS);
+        this.copy(PMBlockTags.GLASS_PANES_QUARTZ, GLASS_PANES_QUARTZ);
+        this.copy(PMBlockTags.GLASS_PANES_LAPIS, GLASS_PANES_LAPIS);
+
         this.copy(BlueprintBlockTags.WOODEN_LADDERS, BlueprintItemTags.WOODEN_LADDERS);
+
     }
 }

@@ -249,6 +249,10 @@ public class PMRecipeProvider extends BlueprintRecipeProvider {
                 .unlockedBy(getHasName(Items.STRING), has(Tags.Items.STRING))
                 .save(consumer);
 
+        mineralGlassBuilder(QUARTZ_GLASS.get(), Tags.Items.GEMS_QUARTZ, BUILDING_BLOCKS).unlockedBy(getHasName(Items.QUARTZ), has(Tags.Items.GEMS_QUARTZ)).save(consumer);
+        mineralGlassBuilder(LAPIS_GLASS.get(), Tags.Items.GEMS_LAPIS, BUILDING_BLOCKS).unlockedBy(getHasName(Items.LAPIS_LAZULI), has(Tags.Items.GEMS_LAPIS)).save(consumer);
+        glassPaneBuilder(QUARTZ_GLASS_PANE.get(), QUARTZ_GLASS.get(), DECORATIONS).unlockedBy(getHasName(QUARTZ_GLASS.get()), has(PMItemTags.GLASS_QUARTZ)).save(consumer);
+        glassPaneBuilder(LAPIS_GLASS_PANE.get(), LAPIS_GLASS.get(), DECORATIONS).unlockedBy(getHasName(LAPIS_GLASS.get()), has(PMItemTags.GLASS_LAPIS)).save(consumer);
 
     }
 
@@ -350,6 +354,16 @@ public class PMRecipeProvider extends BlueprintRecipeProvider {
 
     public static RecipeBuilder excavatorBuilder(RecipeCategory category, ItemLike result, Ingredient material, int count) {
         return ShapedRecipeBuilder.shaped(category, result, count).define('#', material).define('/', Tags.Items.RODS_WOODEN).pattern(" ##").pattern(" /#").pattern("/  ");
+    }
+
+    private static RecipeBuilder glassPaneBuilder(ItemLike glassPane, ItemLike glass, RecipeCategory category) {
+        return ShapedRecipeBuilder.shaped(category, glassPane, 16).define('#', glass)
+                .pattern("###").pattern("###");
+    }
+
+    private static RecipeBuilder mineralGlassBuilder(ItemLike glass, TagKey<Item> ingredient, RecipeCategory category) {
+        return ShapedRecipeBuilder.shaped(category, glass, 8).define('#', Tags.Items.GLASS_COLORLESS).define('@', ingredient)
+                .pattern("###").pattern("#@#").pattern("###");
     }
 
     private static RecipeBuilder pedestalBuilder(ItemLike pedestal, ItemLike block, ItemLike slab) {

@@ -81,7 +81,7 @@ public class PedestalBlockEntity extends BlockEntity {
         }
     }
 
-    public int getRedstoneSignal() {
+    public int getPower() {
         ItemStack stack = getItem();
         if (!stack.isEmpty()) {
             return 15;

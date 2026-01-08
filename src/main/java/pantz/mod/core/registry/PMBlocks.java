@@ -123,6 +123,11 @@ public class PMBlocks {
     public static final RegistryObject<Block> ENDERPORTER = BLOCKS.createBlock("enderporter", () -> new EnderporterBlock(PMProperties.ENDERPORTER));
     public static final RegistryObject<Block> ROPE_LADDER = BLOCKS.createBlock("rope_ladder", () -> new RopeLadderBlock(BlockBehaviour.Properties.copy(Blocks.LADDER)));
 
+    public static final RegistryObject<Block> QUARTZ_GLASS = BLOCKS.createBlock("quartz_glass", () -> new QuartzGlassBlock(PMProperties.QUARTZ_GLASS));
+    public static final RegistryObject<Block> QUARTZ_GLASS_PANE = BLOCKS.createBlock("quartz_glass_pane", () -> new QuartzGlassPaneBlock(PMProperties.QUARTZ_GLASS_PANE));
+    public static final RegistryObject<Block> LAPIS_GLASS = BLOCKS.createBlock("lapis_glass", () -> new LapisGlassBlock(PMProperties.LAPIS_GLASS));
+    public static final RegistryObject<Block> LAPIS_GLASS_PANE = BLOCKS.createBlock("lapis_glass_pane", () -> new LapisGlassPaneBlock(PMProperties.LAPIS_GLASS_PANE));
+
     public static void setupTabs() {
         CreativeModeTabContentsPopulator.mod(PantzMod.MOD_ID)
                 .tab(BUILDING_BLOCKS)
@@ -136,6 +141,7 @@ public class PMBlocks {
                 .addItemsAfter(of(Blocks.NETHER_QUARTZ_ORE), NETHER_SULFUR_ORE)
 
                 .tab(FUNCTIONAL_BLOCKS)
+                .addItemsBefore(of(Blocks.TINTED_GLASS), QUARTZ_GLASS, QUARTZ_GLASS_PANE, LAPIS_GLASS, LAPIS_GLASS_PANE)
                 .addItemsBefore(of(Items.PAINTING), ITEM_STAND, GLOW_ITEM_STAND)
                 .addItemsBefore(of(Blocks.SCAFFOLDING), ROPE_LADDER)
                 .addItemsBefore(of(Blocks.BARREL), TRASH_CAN)
@@ -147,7 +153,7 @@ public class PMBlocks {
                 .addItemsAfter(of(Blocks.RESPAWN_ANCHOR), ENDERPORTER)
 
                 .tab(REDSTONE_BLOCKS)
-                .addItemsBefore(of(Blocks.DAYLIGHT_DETECTOR), EARTH_GLOBE, STONE_PEDESTAL)
+                .addItemsBefore(of(Blocks.DAYLIGHT_DETECTOR), EARTH_GLOBE)
                 .addItemsBefore(of(Blocks.LEVER), ENDER_SCANNER)
                 .addItemsBefore(of(Blocks.JUKEBOX), TRASH_CAN)
                 .addItemsAfter(of(Blocks.REDSTONE_BLOCK), REDSTONE_CONFIGURATOR, POWER_DISPLAYER)
@@ -156,9 +162,12 @@ public class PMBlocks {
                         ADVANCED_AND_GATE, ADVANCED_OR_GATE, ADVANCED_NAND_GATE, ADVANCED_NOR_GATE, ADVANCED_XOR_GATE, ADVANCED_XNOR_GATE, MAJORITY_GATE, MINORITY_GATE)
 
                 .tab(COLORED_BLOCKS)
+                .addItemsBefore(of(Blocks.TINTED_GLASS), QUARTZ_GLASS, LAPIS_GLASS)
+                .addItemsBefore(of(Blocks.WHITE_STAINED_GLASS_PANE), QUARTZ_GLASS_PANE, LAPIS_GLASS_PANE)
                 .addItems(() -> Blocks.REDSTONE_LAMP, WHITE_REDSTONE_LAMP, ORANGE_REDSTONE_LAMP, MAGENTA_REDSTONE_LAMP,
                         LIGHT_BLUE_REDSTONE_LAMP, YELLOW_REDSTONE_LAMP, LIME_REDSTONE_LAMP, PINK_REDSTONE_LAMP, GRAY_REDSTONE_LAMP, LIGHT_GRAY_REDSTONE_LAMP,
                         CYAN_REDSTONE_LAMP, PURPLE_REDSTONE_LAMP, BLUE_REDSTONE_LAMP, BROWN_REDSTONE_LAMP, GREEN_REDSTONE_LAMP, RED_REDSTONE_LAMP, BLACK_REDSTONE_LAMP)
+
 
         ;
     }

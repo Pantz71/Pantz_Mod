@@ -1,15 +1,19 @@
 package pantz.mod.core.data.client;
 
 import com.teamabnormals.blueprint.core.data.client.BlueprintBlockStateProvider;
+import com.teamabnormals.blueprint.core.data.client.BlueprintItemModelProvider;
 import net.minecraft.core.Direction;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
+import net.minecraft.world.level.block.PipeBlock;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraftforge.client.model.generators.BlockModelBuilder;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ModelFile;
+import net.minecraftforge.client.model.generators.MultiPartBlockStateBuilder;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.RegistryObject;
 import pantz.mod.common.block.*;
@@ -95,6 +99,11 @@ public class PMBlockStateProvider extends BlueprintBlockStateProvider {
         this.blockItem(TRASH_CAN);
         this.enderporterBlock(ENDERPORTER);
         this.ropeLadderBlock(ROPE_LADDER);
+
+        this.block(QUARTZ_GLASS);
+        this.block(LAPIS_GLASS);
+        this.glassPaneBlock(QUARTZ_GLASS_PANE, QUARTZ_GLASS);
+        this.glassPaneBlock(LAPIS_GLASS_PANE, LAPIS_GLASS);
 
     }
 
@@ -331,4 +340,34 @@ public class PMBlockStateProvider extends BlueprintBlockStateProvider {
         generatedItem(block.get(), texture);
     }
 
+    public void glassPaneBlock(RegistryObject<Block> pane, RegistryObject<Block> glass) {
+        Block block = pane.get();
+        String name = name(block);
+
+        ResourceLocation texture = blockTexture(glass.get());
+        ResourceLocation edgeTexture = texture.withSuffix("_pane_top");
+
+        ModelFile post = glassPaneBlock(name, "post").texture("pane", texture).texture("edge", edgeTexture);
+        ModelFile side = glassPaneBlock(name, "side").texture("pane", texture).texture("edge", edgeTexture);
+        ModelFile sideAlt = glassPaneBlock(name, "side_alt").texture("pane", texture).texture("edge", edgeTexture);
+        ModelFile noSide = glassPaneBlock(name, "noside").texture("pane", texture);
+        ModelFile noSideAlt = glassPaneBlock(name, "noside_alt").texture("pane", texture);
+
+        this.glassPaneBlock(block, post, side, sideAlt, noSide, noSideAlt);
+        this.generatedItem(block, prefix("block/", BlueprintItemModelProvider.key(glass.get())));
+    }
+
+    public void glassPaneBlock(Block block, ModelFile post, ModelFile side, ModelFile sideAlt, ModelFile noSide, ModelFile noSideAlt) {
+        MultiPartBlockStateBuilder builder = getMultipartBuilder(block).part().modelFile(post).addModel().end();
+        PipeBlock.PROPERTY_BY_DIRECTION.forEach((dir, value) -> {
+            if (dir.getAxis().isHorizontal()) {
+                builder.part().modelFile(dir == Direction.SOUTH || dir == Direction.WEST ? sideAlt : side).rotationY(dir.getAxis() == Direction.Axis.X ? 90 : 0).addModel().condition(value, true).end();
+                builder.part().modelFile(dir == Direction.SOUTH || dir == Direction.EAST ? noSideAlt : noSide).rotationY(dir == Direction.WEST ? 270 : dir == Direction.SOUTH ? 90 : 0).addModel().condition(value, false).end();
+            }
+        });
+    }
+
+    public BlockModelBuilder glassPaneBlock(String name, String suffix) {
+        return models().getBuilder(name + "_" + suffix).parent(new ModelFile.UncheckedModelFile(new ResourceLocation("block/template_glass_pane_" + suffix)));
+    }
 }

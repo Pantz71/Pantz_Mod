@@ -170,7 +170,7 @@ public class PedestalBlock extends HorizontalDirectionalBlock implements EntityB
     public int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos) {
         BlockEntity be = level.getBlockEntity(pos);
         if (be instanceof PedestalBlockEntity pedestal) {
-            return pedestal.getRedstoneSignal();
+            return pedestal.getPower();
         }
         return 0;
     }
@@ -181,35 +181,10 @@ public class PedestalBlock extends HorizontalDirectionalBlock implements EntityB
     }
 
     @Override
-    public boolean isSignalSource(BlockState state) {
-        return true;
-    }
-
-    @Override
-    public int getSignal(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
-        BlockEntity be = level.getBlockEntity(pos);
-        if (be instanceof PedestalBlockEntity pedestal) {
-            return pedestal.getRedstoneSignal();
-        }
-        return 0;
-    }
-
-    @Override
-    public int getDirectSignal(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
-        return getSignal(state, level, pos, direction);
-    }
-
-    @Override
-    public void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean isMoving) {
-        level.updateNeighbourForOutputSignal(pos, this);
-    }
-
-    @Override
     public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
         if (state.getBlock() != newState.getBlock()) {
             if (level.getBlockEntity(pos) instanceof PedestalBlockEntity pedestal) {
                 pedestal.drops();
-                level.updateNeighbourForOutputSignal(pos, this);
             }
             CarpetColor carpetColor = state.getValue(PedestalBlock.CARPET);
             if (carpetColor != CarpetColor.NONE) {
@@ -218,13 +193,6 @@ public class PedestalBlock extends HorizontalDirectionalBlock implements EntityB
             }
         }
         super.onRemove(state, level, pos, newState, movedByPiston);
-    }
-
-
-    @Override
-    public void neighborChanged(BlockState state, Level level, BlockPos pos, Block blockIn, BlockPos fromPos, boolean isMoving) {
-        super.neighborChanged(state, level, pos, blockIn, fromPos, isMoving);
-        level.updateNeighbourForOutputSignal(pos, this);
     }
 
     @Override
