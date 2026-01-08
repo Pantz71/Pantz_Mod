@@ -80,6 +80,9 @@ public class PMItemTagsProvider extends ItemTagsProvider {
         this.copy(PMBlockTags.GLASS_PANES_QUARTZ, GLASS_PANES_QUARTZ);
         this.copy(PMBlockTags.GLASS_PANES_LAPIS, GLASS_PANES_LAPIS);
 
+        this.copy(Tags.Blocks.GLASS, Tags.Items.GLASS);
+        this.copy(Tags.Blocks.GLASS_PANES, Tags.Items.GLASS_PANES);
+
         this.copy(BlueprintBlockTags.WOODEN_LADDERS, BlueprintItemTags.WOODEN_LADDERS);
 
     }

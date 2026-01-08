@@ -57,6 +57,9 @@ public class PMBlockTagsProvider extends BlockTagsProvider {
         this.tag(GLASS_PANES_QUARTZ).add(QUARTZ_GLASS_PANE.get());
         this.tag(GLASS_PANES_LAPIS).add(LAPIS_GLASS_PANE.get());
 
+        this.tag(Tags.Blocks.GLASS).addTag(GLASS_QUARTZ).addTag(GLASS_LAPIS);
+        this.tag(Tags.Blocks.GLASS_PANES).addTag(GLASS_PANES_QUARTZ).addTag(GLASS_PANES_LAPIS);
+
         BLOCKS.getDeferredRegister().getEntries().forEach((registry -> {
             Block block = registry.get();
             if (block instanceof RedstoneLampBlock) {
