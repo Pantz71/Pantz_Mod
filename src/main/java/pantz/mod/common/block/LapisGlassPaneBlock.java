@@ -22,6 +22,11 @@ public class LapisGlassPaneBlock extends StainedGlassPaneBlock {
     }
 
     @Override
+    public boolean propagatesSkylightDown(BlockState pState, BlockGetter pReader, BlockPos pPos) {
+        return true;
+    }
+
+    @Override
     public boolean isPathfindable(BlockState pState, BlockGetter pLevel, BlockPos pPos, PathComputationType pType) {
         return true;
     }

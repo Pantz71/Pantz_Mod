@@ -13,7 +13,6 @@ import net.minecraft.world.phys.shapes.EntityCollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-@SuppressWarnings("deprecation")
 public class LapisGlassBlock extends StainedGlassBlock {
     public LapisGlassBlock(DyeColor pDyeColor, Properties pProperties) {
         super(pDyeColor, pProperties);
