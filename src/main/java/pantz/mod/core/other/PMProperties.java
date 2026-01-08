@@ -60,7 +60,6 @@ public class PMProperties {
     public static final BlockBehaviour.Properties QUARTZ_GLASS_PANE = BlockBehaviour.Properties.copy(Blocks.GLASS_PANE).strength(0.5f).mapColor(MapColor.QUARTZ).noCollission();
     public static final BlockBehaviour.Properties LAPIS_GLASS = BlockBehaviour.Properties.copy(Blocks.GLASS).strength(0.5f).mapColor(MapColor.LAPIS);
     public static final BlockBehaviour.Properties LAPIS_GLASS_PANE = BlockBehaviour.Properties.copy(Blocks.GLASS_PANE).strength(0.5f).mapColor(MapColor.LAPIS);
-    public static final BlockBehaviour.Properties TINTED_GLASS_PANE = BlockBehaviour.Properties.copy(Blocks.GLASS_PANE).mapColor(MapColor.COLOR_GRAY);
 
     public static boolean never(BlockState state, BlockGetter blockGetter, BlockPos pos) {
         return false;
