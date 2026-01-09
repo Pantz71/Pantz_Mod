@@ -73,6 +73,10 @@
   "item.pantz_mod.diamond_excavator": "Diamond Excavator",
   "item.pantz_mod.netherite_excavator": "Netherite Excavator",
 
+  "item.pantz_mod.hammer": "Hammer",
+  "item.pantz_mod.diamond_hammer": "Diamond Hammer",
+  "item.pantz_mod.netherite_hammer": "Netherite Hammer",
+
   "item.pantz_mod.cactus_key": "Cactus Key",
 
   "_pedestal": "pedestal",

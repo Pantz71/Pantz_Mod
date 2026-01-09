@@ -28,6 +28,7 @@ public class PMItemTags {
     public static final TagKey<Item> GLASS_PANES_LAPIS = forgeTag("glass_panes/lapis");
 
     public static final TagKey<Item> EXCAVATORS = itemTag("excavators");
+    public static final TagKey<Item> HAMMERS = itemTag("hammers");
     public static final TagKey<Item> TOOLS = itemTag("tools");
     public static final TagKey<Item> WEAPONS = itemTag("weapons");
     public static final TagKey<Item> PEDESTALS = itemTag("pedestals");

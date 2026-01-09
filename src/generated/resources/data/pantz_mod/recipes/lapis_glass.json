@@ -10,12 +10,12 @@
     }
   },
   "pattern": [
-    "###",
+    " # ",
     "#@#",
-    "###"
+    " # "
   ],
   "result": {
-    "count": 8,
+    "count": 2,
     "item": "pantz_mod:lapis_glass"
   },
   "show_notification": true

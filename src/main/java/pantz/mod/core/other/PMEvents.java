@@ -59,6 +59,7 @@ public class PMEvents {
     public static void onBlockBreak(BlockEvent.BreakEvent event) {
         Player player = event.getPlayer();
         ItemStack stack = player.getMainHandItem();
+        InteractionHand hand = player.getUsedItemHand();
         if (!(stack.getItem() instanceof AreaDiggerItem)) return;
         if (!(event.getLevel() instanceof ServerLevel level)) return;
 
@@ -68,6 +69,7 @@ public class PMEvents {
         for (BlockPos pos : blocks) {
             if (!level.getBlockState(pos).isAir() && stack.isCorrectToolForDrops(level.getBlockState(pos))) {
                 level.destroyBlock(pos, !player.isCreative());
+                stack.hurtAndBreak(3, player, p -> p.broadcastBreakEvent(hand));
             }
         }
     }

@@ -47,6 +47,10 @@ public class PMItems {
     public static final RegistryObject<Item> DIAMOND_EXCAVATOR = ITEMS.createItem("diamond_excavator", () -> new AreaDiggerItem(-3f, -3f, Tiers.DIAMOND, BlockTags.MINEABLE_WITH_SHOVEL, new Item.Properties()));
     public static final RegistryObject<Item> NETHERITE_EXCAVATOR = ITEMS.createItem("netherite_excavator", () -> new AreaDiggerItem(-4f, -2.5f, Tiers.NETHERITE, BlockTags.MINEABLE_WITH_SHOVEL, new Item.Properties()));
 
+    public static final RegistryObject<Item> HAMMER = ITEMS.createItem("hammer", () -> new AreaDiggerItem(-3f, -3f, PMItemTiers.STEEL, BlockTags.MINEABLE_WITH_PICKAXE, new Item.Properties()));
+    public static final RegistryObject<Item> DIAMOND_HAMMER = ITEMS.createItem("diamond_hammer", () -> new AreaDiggerItem(-3f, -3f, Tiers.DIAMOND, BlockTags.MINEABLE_WITH_PICKAXE, new Item.Properties()));
+    public static final RegistryObject<Item> NETHERITE_HAMMER = ITEMS.createItem("netherite_hammer", () -> new AreaDiggerItem(-4f, -2.5f, Tiers.NETHERITE, BlockTags.MINEABLE_WITH_PICKAXE, new Item.Properties()));
+
     public static final RegistryObject<Item> ENTITY_FILTER = ITEMS.createItem("entity_filter", () -> new EntityFilterItem(PropertyUtil.stacksOnce()));
     public static final RegistryObject<Item> CACTUS_KEY = ITEMS.createItem("cactus_key", () -> new CactusKeyItem(PropertyUtil.stacksOnce()));
 
@@ -69,12 +73,12 @@ public class PMItems {
                 .addItemsBefore(of(Items.GOLDEN_HORSE_ARMOR), STEEL_HORSE_ARMOR)
 
                 .tab(TOOLS_AND_UTILITIES)
-                .addItemsBefore(of(Items.GOLDEN_SHOVEL), STEEL_SHOVEL, STEEL_PICKAXE, STEEL_AXE, STEEL_HOE, EXCAVATOR)
+                .addItemsBefore(of(Items.GOLDEN_SHOVEL), STEEL_SHOVEL, STEEL_PICKAXE, STEEL_AXE, STEEL_HOE, EXCAVATOR, HAMMER)
                 .addItemsAfter(of(Items.SHEARS), TROWEL)
-                .addItemsAfter(of(Items.BRUSH), HONEY_DESERIALIZER, CACTUS_KEY)
+                .addItemsAfter(of(Items.BRUSH), HONEY_DESERIALIZER)
 
-                .addItemsAfter(of(Items.DIAMOND_HOE), DIAMOND_EXCAVATOR)
-                .addItemsAfter(of(Items.NETHERITE_HOE), NETHERITE_EXCAVATOR)
+                .addItemsAfter(of(Items.DIAMOND_HOE), DIAMOND_EXCAVATOR, DIAMOND_HAMMER)
+                .addItemsAfter(of(Items.NETHERITE_HOE), NETHERITE_EXCAVATOR, NETHERITE_HAMMER)
 
 
         ;
@@ -82,6 +86,8 @@ public class PMItems {
         CreativeModeTabContentsPopulator.mod(PantzMod.MOD_ID + "_config")
                 .predicate(event -> modPredicate(event, TOOLS_AND_UTILITIES) && PMConfig.Common.COMMON.enableEntityFilter.get())
                 .addItemsAfter(of(Items.NAME_TAG), ENTITY_FILTER)
+                .predicate(event -> modPredicate(event, TOOLS_AND_UTILITIES) && PMConfig.Common.COMMON.enableCactusKey.get())
+                .addItemsAfter(of(Items.BRUSH), CACTUS_KEY)
                 ;
     }
 
