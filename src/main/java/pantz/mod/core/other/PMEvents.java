@@ -69,9 +69,9 @@ public class PMEvents {
         for (BlockPos pos : blocks) {
             if (!level.getBlockState(pos).isAir() && stack.isCorrectToolForDrops(level.getBlockState(pos))) {
                 level.destroyBlock(pos, !player.isCreative());
-                stack.hurtAndBreak(3, player, p -> p.broadcastBreakEvent(hand));
             }
         }
+        stack.hurtAndBreak(3, player, p -> p.broadcastBreakEvent(hand));
     }
 
     @SubscribeEvent

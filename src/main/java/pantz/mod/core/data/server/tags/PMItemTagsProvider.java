@@ -40,7 +40,7 @@ public class PMItemTagsProvider extends ItemTagsProvider {
         this.tag(ItemTags.AXES).add(STEEL_AXE.get());
         this.tag(ItemTags.HOES).add(STEEL_HOE.get());
 
-        this.tag(Tags.Items.TOOLS).addTag(EXCAVATORS).addTag(TOOLS_TROWEL);
+        this.tag(Tags.Items.TOOLS).addTag(EXCAVATORS).addTag(HAMMERS).addTag(TOOLS_TROWEL);
         this.tag(EXCAVATORS).add(EXCAVATOR.get(), DIAMOND_EXCAVATOR.get(), NETHERITE_EXCAVATOR.get());
         this.tag(HAMMERS).add(HAMMER.get(), DIAMOND_HAMMER.get(), NETHERITE_HAMMER.get());
         this.tag(TOOLS_TROWEL).add(TROWEL.get());
