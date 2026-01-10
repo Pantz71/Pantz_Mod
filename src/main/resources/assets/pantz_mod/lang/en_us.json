@@ -79,6 +79,11 @@
 
   "item.pantz_mod.cactus_key": "Cactus Key",
 
+  "item.pantz_mod.dynamite": "Dynamite",
+  "item.pantz_mod.combat_dynamite": "Combat Dynamite",
+  "item.pantz_mod.fiery_dynamite": "Fiery Dynamite",
+  "entity.pantz_mod.dynamite": "Dynamite",
+
   "_pedestal": "pedestal",
   "block.pantz_mod.stone_pedestal": "Stone Pedestal",
   "block.pantz_mod.deepslate_pedestal": "Deepslate Pedestal",

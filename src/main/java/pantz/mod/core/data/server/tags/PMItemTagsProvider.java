@@ -44,6 +44,7 @@ public class PMItemTagsProvider extends ItemTagsProvider {
         this.tag(EXCAVATORS).add(EXCAVATOR.get(), DIAMOND_EXCAVATOR.get(), NETHERITE_EXCAVATOR.get());
         this.tag(HAMMERS).add(HAMMER.get(), DIAMOND_HAMMER.get(), NETHERITE_HAMMER.get());
         this.tag(TOOLS_TROWEL).add(TROWEL.get());
+        this.tag(DYNAMITES).add(DYNAMITE.get(), COMBAT_DYNAMITE.get(), FIERY_DYNAMITE.get());
 
         this.tag(TOOLS).addTag(Tags.Items.TOOLS);
         this.tag(WEAPONS).addTag(ItemTags.SWORDS).addTag(Tags.Items.TOOLS_TRIDENTS);

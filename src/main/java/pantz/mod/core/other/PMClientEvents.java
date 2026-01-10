@@ -8,6 +8,7 @@ import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.block.BlockModelShaper;
+import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.core.BlockPos;
@@ -38,11 +39,35 @@ import pantz.mod.core.PantzMod;
 import pantz.mod.core.other.tags.PMBlockTags;
 import pantz.mod.core.registry.PMBlockEntityTypes;
 import pantz.mod.core.registry.PMBlocks;
+import pantz.mod.core.registry.PMEntityTypes;
 import pantz.mod.core.registry.PMItems;
 
 import java.util.*;
 
 public class PMClientEvents {
+
+    @Mod.EventBusSubscriber(modid = PantzMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+    public static class PMModClientEvents {
+        @SubscribeEvent
+        public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
+            event.registerBlockEntityRenderer(PMBlockEntityTypes.PEDESTAL.get(), PedestalRenderer::new);
+            event.registerBlockEntityRenderer(PMBlockEntityTypes.ENTITY_DETECTOR.get(), EntityDetectorRenderer::new);
+            event.registerBlockEntityRenderer(PMBlockEntityTypes.GLOBE.get(), GlobeRenderer::new);
+            event.registerBlockEntityRenderer(PMBlockEntityTypes.ITEM_STAND.get(), ItemStandRenderer::new);
+            event.registerEntityRenderer(PMEntityTypes.DYNAMITE.get(), ThrownItemRenderer::new);
+        }
+
+        @SubscribeEvent
+        public static void registerLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
+            event.registerLayerDefinition(PMModelLayers.GLOBE, GlobeModel::createModel);
+            event.registerLayerDefinition(PMModelLayers.LARGE_GLOBE, LargeGlobeModel::createModel);
+            event.registerLayerDefinition(PMModelLayers.GIANT_GLOBE, GiantGlobeModel::createModel);
+            event.registerLayerDefinition(PMModelLayers.SMALL_GLOBE, SmallGlobeModel::createModel);
+            event.registerLayerDefinition(PMModelLayers.TINY_GLOBE, TinyGlobeModel::createModel);
+            event.registerLayerDefinition(PMModelLayers.SATURN_GLOBE, SaturnGlobeModel::createModel);
+            event.registerLayerDefinition(PMModelLayers.URANUS_GLOBE, UranusGlobeModel::createModel);
+        }
+    }
 
     @Mod.EventBusSubscriber(modid = PantzMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
     public static class PMForgeClientEvents {
@@ -215,28 +240,6 @@ public class PMClientEvents {
                 }
             }
             return false;
-        }
-    }
-
-    @Mod.EventBusSubscriber(modid = PantzMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
-    public static class PMModClientEvents {
-        @SubscribeEvent
-        public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
-            event.registerBlockEntityRenderer(PMBlockEntityTypes.PEDESTAL.get(), PedestalRenderer::new);
-            event.registerBlockEntityRenderer(PMBlockEntityTypes.ENTITY_DETECTOR.get(), EntityDetectorRenderer::new);
-            event.registerBlockEntityRenderer(PMBlockEntityTypes.GLOBE.get(), GlobeRenderer::new);
-            event.registerBlockEntityRenderer(PMBlockEntityTypes.ITEM_STAND.get(), ItemStandRenderer::new);
-        }
-
-        @SubscribeEvent
-        public static void registerLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
-            event.registerLayerDefinition(PMModelLayers.GLOBE, GlobeModel::createModel);
-            event.registerLayerDefinition(PMModelLayers.LARGE_GLOBE, LargeGlobeModel::createModel);
-            event.registerLayerDefinition(PMModelLayers.GIANT_GLOBE, GiantGlobeModel::createModel);
-            event.registerLayerDefinition(PMModelLayers.SMALL_GLOBE, SmallGlobeModel::createModel);
-            event.registerLayerDefinition(PMModelLayers.TINY_GLOBE, TinyGlobeModel::createModel);
-            event.registerLayerDefinition(PMModelLayers.SATURN_GLOBE, SaturnGlobeModel::createModel);
-            event.registerLayerDefinition(PMModelLayers.URANUS_GLOBE, UranusGlobeModel::createModel);
         }
     }
 

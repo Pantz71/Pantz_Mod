@@ -34,6 +34,7 @@ public class PMItemTags {
     public static final TagKey<Item> PEDESTALS = itemTag("pedestals");
     public static final TagKey<Item> ENDER_SCANNER_IMMUNITIES = itemTag("ender_scanner_immunities");
     public static final TagKey<Item> LOGIC_GATES = itemTag("logic_gates");
+    public static final TagKey<Item> DYNAMITES = itemTag("dynamites");
 
     public static TagKey<Item> itemTag(String name) {
         return TagUtil.itemTag(PantzMod.MOD_ID, name);

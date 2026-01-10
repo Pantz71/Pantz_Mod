@@ -9,6 +9,7 @@ import net.minecraft.world.item.*;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.registries.RegistryObject;
 import pantz.mod.common.item.*;
+import pantz.mod.common.utils.DynamiteType;
 import pantz.mod.core.PMConfig;
 import pantz.mod.core.PantzMod;
 import pantz.mod.core.other.PMTiers.*;
@@ -54,6 +55,9 @@ public class PMItems {
     public static final RegistryObject<Item> ENTITY_FILTER = ITEMS.createItem("entity_filter", () -> new EntityFilterItem(PropertyUtil.stacksOnce()));
     public static final RegistryObject<Item> CACTUS_KEY = ITEMS.createItem("cactus_key", () -> new CactusKeyItem(PropertyUtil.stacksOnce()));
 
+    public static final RegistryObject<Item> DYNAMITE = ITEMS.createItem("dynamite", () -> new DynamiteItem(new Item.Properties(), DynamiteType.GENERIC));
+    public static final RegistryObject<Item> COMBAT_DYNAMITE = ITEMS.createItem("combat_dynamite", () -> new DynamiteItem(new Item.Properties(), DynamiteType.COMBAT));
+    public static final RegistryObject<Item> FIERY_DYNAMITE = ITEMS.createItem("fiery_dynamite", () -> new DynamiteItem(new Item.Properties(), DynamiteType.FIERY));
 
     private static Supplier<Item> basicItem() {
         return () -> new Item(new Item.Properties());
@@ -71,6 +75,7 @@ public class PMItems {
                 .addItemsBefore(of(Items.GOLDEN_AXE), STEEL_AXE)
                 .addItemsBefore(of(Items.GOLDEN_HELMET), STEEL_HELMET, STEEL_CHESTPLATE, STEEL_LEGGINGS, STEEL_BOOTS)
                 .addItemsBefore(of(Items.GOLDEN_HORSE_ARMOR), STEEL_HORSE_ARMOR)
+                .addItemsAfter(of(Items.SNOWBALL), DYNAMITE, COMBAT_DYNAMITE, FIERY_DYNAMITE)
 
                 .tab(TOOLS_AND_UTILITIES)
                 .addItemsBefore(of(Items.GOLDEN_SHOVEL), STEEL_SHOVEL, STEEL_PICKAXE, STEEL_AXE, STEEL_HOE, EXCAVATOR, HAMMER)

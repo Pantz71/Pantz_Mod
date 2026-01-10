@@ -258,6 +258,23 @@ public class PMRecipeProvider extends BlueprintRecipeProvider {
         glassPaneBuilder(QUARTZ_GLASS_PANE.get(), QUARTZ_GLASS.get(), DECORATIONS).unlockedBy(getHasName(QUARTZ_GLASS.get()), has(PMItemTags.GLASS_QUARTZ)).save(consumer);
         glassPaneBuilder(LAPIS_GLASS_PANE.get(), LAPIS_GLASS.get(), DECORATIONS).unlockedBy(getHasName(LAPIS_GLASS.get()), has(PMItemTags.GLASS_LAPIS)).save(consumer);
 
+        ShapelessRecipeBuilder.shapeless(TOOLS, DYNAMITE.get(), 3)
+                .requires(Items.PAPER).requires(Ingredient.of(Tags.Items.GUNPOWDER), 2)
+                .requires(Tags.Items.DYES_RED)
+                .unlockedBy(getHasName(Items.GUNPOWDER), has(Tags.Items.GUNPOWDER))
+                .save(consumer);
+
+        ShapelessRecipeBuilder.shapeless(COMBAT, COMBAT_DYNAMITE.get(), 3)
+                .requires(Items.PAPER).requires(Ingredient.of(Tags.Items.GUNPOWDER), 2)
+                .requires(Tags.Items.DYES_PURPLE).requires(Tags.Items.NUGGETS_IRON)
+                .unlockedBy(getHasName(Items.GUNPOWDER), has(Tags.Items.GUNPOWDER))
+                .save(consumer);
+
+        ShapelessRecipeBuilder.shapeless(TOOLS, FIERY_DYNAMITE.get(), 3)
+                .requires(Items.PAPER).requires(Ingredient.of(Tags.Items.GUNPOWDER), 3)
+                .requires(PMItemTags.DUSTS_SULFUR)
+                .unlockedBy(getHasName(Items.GUNPOWDER), has(Tags.Items.GUNPOWDER))
+                .save(consumer);
     }
 
     private static void logicGates(Consumer<FinishedRecipe> consumer) {
