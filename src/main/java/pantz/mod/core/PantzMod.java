@@ -36,10 +36,7 @@ import pantz.mod.core.data.server.PMDatapackBuiltinEntriesProvider;
 import pantz.mod.core.data.server.PMLootTableProvider;
 import pantz.mod.core.data.server.PMRecipeProvider;
 import pantz.mod.core.data.server.modifiers.PMLootModifierProvider;
-import pantz.mod.core.data.server.tags.PMBlockTagsProvider;
-import pantz.mod.core.data.server.tags.PMEntityTypeTagsProvider;
-import pantz.mod.core.data.server.tags.PMItemTagsProvider;
-import pantz.mod.core.data.server.tags.PMTrimMaterialTagsProvider;
+import pantz.mod.core.data.server.tags.*;
 import pantz.mod.core.other.PMClientCompat;
 import pantz.mod.core.other.PMCompat;
 import pantz.mod.core.registry.*;
@@ -107,6 +104,7 @@ public class PantzMod {
         gen.addProvider(server, blockTags);
         gen.addProvider(server, new PMItemTagsProvider(output, provider, blockTags.contentsGetter(), helper));
         gen.addProvider(server, new PMEntityTypeTagsProvider(output, provider, helper));
+        gen.addProvider(server, new PMBiomeTagsProvider(output, provider, helper));
         gen.addProvider(server, new PMTrimMaterialTagsProvider(output, provider, helper));
 
         gen.addProvider(server, PMAdvancementProvider.create(output, provider, helper));

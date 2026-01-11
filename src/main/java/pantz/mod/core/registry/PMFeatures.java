@@ -4,10 +4,16 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.util.random.SimpleWeightedRandomList;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.RandomPatchConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConfiguration;
+import net.minecraft.world.level.levelgen.feature.stateproviders.WeightedStateProvider;
 import net.minecraft.world.level.levelgen.placement.*;
 import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTest;
 import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
@@ -25,7 +31,7 @@ public class PMFeatures {
         public static void bootstrap(BootstapContext<ConfiguredFeature<?, ?>> context) {
             RuleTest netherrack = new TagMatchTest(Tags.Blocks.NETHERRACK);
             register(context, ORE_SULFUR, Feature.ORE, new OreConfiguration(netherrack, PMBlocks.NETHER_SULFUR_ORE.get().defaultBlockState(), 16));
-            register(context, ORE_SULFUR_BLOCK, Feature.ORE, new OreConfiguration(netherrack, PMBlocks.SULFUR_BLOCK.get().defaultBlockState(), 20, 0f));
+            register(context, ORE_SULFUR_BLOCK, Feature.ORE, new OreConfiguration(netherrack, PMBlocks.SULFUR_BLOCK.get().defaultBlockState(), 5, 0f));
 
         }
 
@@ -46,7 +52,8 @@ public class PMFeatures {
         public static void bootstrap(BootstapContext<PlacedFeature> context) {
             register(context, ORE_SULFUR_NETHER, PMConfiguredFeatures.ORE_SULFUR, commonOrePlacement(16, PlacementUtils.RANGE_10_10));
             register(context, ORE_SULFUR_DELTAS, PMConfiguredFeatures.ORE_SULFUR, commonOrePlacement(32, PlacementUtils.RANGE_10_10));
-            register(context, ORE_SULFUR_BLOCK, PMConfiguredFeatures.ORE_SULFUR_BLOCK, commonOrePlacement(20, PlacementUtils.HEIGHTMAP_WORLD_SURFACE));
+            register(context, ORE_SULFUR_BLOCK, PMConfiguredFeatures.ORE_SULFUR_BLOCK, commonOrePlacement(5, PlacementUtils.RANGE_8_8));
+
         }
 
         private static List<PlacementModifier> orePlacement(PlacementModifier pCountPlacement, PlacementModifier pHeightRange) {
