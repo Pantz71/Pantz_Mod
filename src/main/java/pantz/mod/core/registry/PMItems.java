@@ -19,6 +19,7 @@ import java.util.function.Supplier;
 import static net.minecraft.world.item.CreativeModeTabs.*;
 import static net.minecraft.world.item.crafting.Ingredient.of;
 
+// item count: 27
 public class PMItems {
     public static final ItemSubRegistryHelper ITEMS = PantzMod.REGISTRY_HELPER.getItemSubHelper();
 
