@@ -70,21 +70,25 @@ public class PMLootTableProvider extends LootTableProvider {
                     RED_REDSTONE_LAMP, ORANGE_REDSTONE_LAMP, YELLOW_REDSTONE_LAMP, LIME_REDSTONE_LAMP, GREEN_REDSTONE_LAMP, BLUE_REDSTONE_LAMP, CYAN_REDSTONE_LAMP,
                     LIGHT_BLUE_REDSTONE_LAMP, PURPLE_REDSTONE_LAMP, MAGENTA_REDSTONE_LAMP, PINK_REDSTONE_LAMP, BROWN_REDSTONE_LAMP, BLACK_REDSTONE_LAMP, GRAY_REDSTONE_LAMP, LIGHT_GRAY_REDSTONE_LAMP, WHITE_REDSTONE_LAMP,
                     ITEM_STAND, GLOW_ITEM_STAND, TRASH_CAN, ENDERPORTER, ROPE_LADDER,
-                    QUARTZ_GLASS, QUARTZ_GLASS_PANE, LAPIS_GLASS, LAPIS_GLASS_PANE
+                    QUARTZ_GLASS, QUARTZ_GLASS_PANE, LAPIS_GLASS, LAPIS_GLASS_PANE,
+                    SNOW_BRICKS, SNOW_BRICK_STAIRS, SNOW_BRICK_WALL,
+                    PACKED_ICE_BRICKS, PACKED_ICE_BRICK_STAIRS, PACKED_ICE_BRICK_WALL, CHISELED_PACKED_ICE_BRICKS,
+                    BLUE_ICE_BRICKS, BLUE_ICE_BRICK_STAIRS, BLUE_ICE_BRICK_WALL, CHISELED_BLUE_ICE_BRICKS,
+                    PACKED_ICE_TRAPDOOR, BLUE_ICE_TRAPDOOR, ICE_LANTERN
             }) {
                 this.dropSelf((Block) block.get());
             }
 
             // door
             for (RegistryObject<?> block : new RegistryObject[]{
-                    STEEL_DOOR
+                    STEEL_DOOR, PACKED_ICE_DOOR, BLUE_ICE_DOOR
             }) {
                 this.add((Block) block.get(), this::createDoorTable);
             }
 
             // slab
             for (RegistryObject<?> block : new RegistryObject[]{
-                    SULFUR_BRICK_SLAB
+                    SULFUR_BRICK_SLAB, SNOW_BRICK_SLAB, PACKED_ICE_BRICK_SLAB, BLUE_ICE_BRICK_SLAB
             }) {
                 this.add((Block) block.get(), this::createSlabItemTable);
             }

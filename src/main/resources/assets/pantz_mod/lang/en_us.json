@@ -167,5 +167,31 @@
   "block.pantz_mod.quartz_glass": "Quartz Glass",
   "block.pantz_mod.quartz_glass_pane": "Quartz Glass Pane",
   "block.pantz_mod.lapis_glass": "Lapis Glass",
-  "block.pantz_mod.lapis_glass_pane": "Lapis Glass Pane"
+  "block.pantz_mod.lapis_glass_pane": "Lapis Glass Pane",
+  
+  "_decoration": "decoration",
+  "block.pantz_mod.snow_bricks": "Snow Bricks",
+  "block.pantz_mod.snow_brick_stairs": "Snow Brick Stairs",
+  "block.pantz_mod.snow_brick_slab": "Snow Brick Slab",
+  "block.pantz_mod.snow_brick_wall": "Snow Brick Wall",
+
+  "block.pantz_mod.packed_ice_bricks": "Packed Ice Bricks",
+  "block.pantz_mod.packed_ice_brick_stairs": "Packed Ice Brick Stairs",
+  "block.pantz_mod.packed_ice_brick_slab": "Packed Ice Brick Slab",
+  "block.pantz_mod.packed_ice_brick_wall": "Packed Ice Brick Wall",
+  "block.pantz_mod.chiseled_packed_ice_bricks": "Chiseled Packed Ice Bricks",
+
+  "block.pantz_mod.packed_ice_door": "Packed Ice Door",
+  "block.pantz_mod.packed_ice_trapdoor": "Packed Ice Trapdoor",
+
+  "block.pantz_mod.blue_ice_bricks": "Blue Ice Bricks",
+  "block.pantz_mod.blue_ice_brick_stairs": "Blue Ice Brick Stairs",
+  "block.pantz_mod.blue_ice_brick_slab": "Blue Ice Brick Slab",
+  "block.pantz_mod.blue_ice_brick_wall": "Blue Ice Brick Wall",
+  "block.pantz_mod.chiseled_blue_ice_bricks": "Chiseled Blue Ice Bricks",
+
+  "block.pantz_mod.blue_ice_door": "Blue Ice Door",
+  "block.pantz_mod.blue_ice_trapdoor": "Blue Ice Trapdoor",
+
+  "block.pantz_mod.ice_lantern": "Ice Lantern"
 }

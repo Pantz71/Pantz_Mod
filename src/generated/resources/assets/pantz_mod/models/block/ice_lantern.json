@@ -1,0 +1,7 @@
+{
+  "parent": "pantz_mod:block/template_ice_lantern",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "texture": "pantz_mod:block/ice_lantern"
+  }
+}

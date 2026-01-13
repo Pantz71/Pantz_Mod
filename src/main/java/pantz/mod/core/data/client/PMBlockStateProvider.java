@@ -5,10 +5,7 @@ import com.teamabnormals.blueprint.core.data.client.BlueprintItemModelProvider;
 import net.minecraft.core.Direction;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.HorizontalDirectionalBlock;
-import net.minecraft.world.level.block.PipeBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraftforge.client.model.generators.BlockModelBuilder;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
@@ -105,6 +102,14 @@ public class PMBlockStateProvider extends BlueprintBlockStateProvider {
         this.glassPaneBlock(QUARTZ_GLASS_PANE, QUARTZ_GLASS);
         this.glassPaneBlock(LAPIS_GLASS_PANE, LAPIS_GLASS);
 
+        this.blockFamily(PMBlockFamilies.SNOW_BRICKS_FAMILY);
+        this.blockFamily(PMBlockFamilies.PACKED_ICE_BRICKS_FAMILY);
+        this.blockFamily(PMBlockFamilies.BLUE_ICE_BRICKS_FAMILY);
+        this.block(CHISELED_PACKED_ICE_BRICKS);
+        this.block(CHISELED_BLUE_ICE_BRICKS);
+        this.doorBlocks(PACKED_ICE_DOOR.get(), PACKED_ICE_TRAPDOOR.get());
+        this.doorBlocks(BLUE_ICE_DOOR.get(), BLUE_ICE_TRAPDOOR.get());
+        this.iceLanternBlock(ICE_LANTERN);
     }
 
     private void redstoneConfiguratorBlock(RegistryObject<Block> block) {
@@ -369,5 +374,43 @@ public class PMBlockStateProvider extends BlueprintBlockStateProvider {
 
     public BlockModelBuilder glassPaneBlock(String name, String suffix) {
         return models().getBuilder(name + "_" + suffix).parent(new ModelFile.UncheckedModelFile(new ResourceLocation("block/template_glass_pane_" + suffix)));
+    }
+
+    private void iceLanternBlock(RegistryObject<Block> block) {
+        String baseName = name(block.get()), hangingSuffix = "_hanging", litSuffix = "_on";
+        ResourceLocation baseParent = modLoc("block/template_ice_lantern"), hangingParent = modLoc("block/template" + hangingSuffix + "_ice_lantern");
+        ResourceLocation baseTexture = blockTexture(block.get()), litTexture = suffix(baseTexture, litSuffix);
+
+        for (boolean hanging : new boolean[]{false, true}) {
+            for (boolean lit : new boolean[]{false, true}) {
+                String name;
+                ResourceLocation texture, parent;
+
+                if (hanging && lit) {
+                    parent = hangingParent;
+                    name = baseName + litSuffix + hangingSuffix;
+                    texture = litTexture;
+                } else if (hanging) {
+                    parent = hangingParent;
+                    name = baseName + hangingSuffix;
+                    texture = baseTexture;
+                } else if (lit) {
+                    parent = baseParent;
+                    name = baseName + litSuffix;
+                    texture = litTexture;
+                } else {
+                    parent = baseParent;
+                    name = baseName;
+                    texture = baseTexture;
+                }
+
+                getVariantBuilder(block.get())
+                        .partialState().with(IceLanternBlock.HANGING, hanging).with(IceLanternBlock.LIT, lit)
+                        .modelForState().modelFile(models().withExistingParent(name, parent).texture("texture", texture).renderType("cutout")).addModel();
+
+            }
+        }
+
+        generatedItem(block.get(), "item");
     }
 }

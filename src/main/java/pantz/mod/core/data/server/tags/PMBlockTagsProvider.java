@@ -30,7 +30,11 @@ public class PMBlockTagsProvider extends BlockTagsProvider {
         this.tag(BlockTags.MINEABLE_WITH_PICKAXE).addTag(PEDESTALS).add(STEEL_BLOCK.get(), STEEL_BARS.get(), STEEL_DOOR.get(), STEEL_TRAPDOOR.get(),
                 SULFUR_BLOCK.get(), SULFUR_BRICKS.get(), SULFUR_BRICK_STAIRS.get(), SULFUR_BRICK_SLAB.get(), NETHER_SULFUR_ORE.get(),
                 SULFUR_CLUSTER.get(), SMALL_SULFUR_BUD.get(), MEDIUM_SULFUR_BUD.get(), LARGE_SULFUR_BUD.get(),
-                ENDER_SCANNER.get(), WEATHER_DETECTOR.get(), ENTITY_DETECTOR.get(), TRASH_CAN.get(), ENDERPORTER.get());
+                ENDER_SCANNER.get(), WEATHER_DETECTOR.get(), ENTITY_DETECTOR.get(), TRASH_CAN.get(), ENDERPORTER.get(),
+                SNOW_BRICKS.get(), SNOW_BRICK_STAIRS.get(), SNOW_BRICK_SLAB.get(),
+                PACKED_ICE_BRICKS.get(), PACKED_ICE_BRICK_STAIRS.get(), PACKED_ICE_BRICK_SLAB.get(), CHISELED_PACKED_ICE_BRICKS.get(),
+                BLUE_ICE_BRICKS.get(), BLUE_ICE_BRICK_STAIRS.get(), BLUE_ICE_BRICK_SLAB.get(), CHISELED_BLUE_ICE_BRICKS.get(),
+                PACKED_ICE_DOOR.get(), PACKED_ICE_TRAPDOOR.get(), BLUE_ICE_DOOR.get(), BLUE_ICE_TRAPDOOR.get(), ICE_LANTERN.get());
 
         this.tag(BlockTags.NEEDS_STONE_TOOL).add(STEEL_BLOCK.get(), STEEL_BARS.get(), STEEL_DOOR.get(), STEEL_TRAPDOOR.get(),
                 SULFUR_BLOCK.get(), SULFUR_BRICKS.get(), SULFUR_BRICK_STAIRS.get(), SULFUR_BRICK_SLAB.get(), SULFUR_BRICK_WALL.get(), NETHER_SULFUR_ORE.get(),
@@ -79,6 +83,12 @@ public class PMBlockTagsProvider extends BlockTagsProvider {
             }
             if (block instanceof WallBlock) {
                 this.tag(BlockTags.WALLS).add(block);
+            }
+            if (block instanceof DoorBlock) {
+                this.tag(BlockTags.DOORS).add(block);
+            }
+            if (block instanceof TrapDoorBlock) {
+                this.tag(BlockTags.TRAPDOORS).add(block);
             }
             if (block instanceof LadderBlock) {
                 this.tag(BlueprintBlockTags.WOODEN_LADDERS).add(block);

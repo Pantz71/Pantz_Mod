@@ -22,6 +22,7 @@ import java.util.function.Predicate;
 import static net.minecraft.world.item.CreativeModeTabs.*;
 import static net.minecraft.world.item.crafting.Ingredient.of;
 
+// block count: 104
 public class PMBlocks {
     public static final PMBlockSubRegistryHelper BLOCKS = PantzMod.REGISTRY_HELPER.getBlockSubHelper();
 
@@ -128,9 +129,37 @@ public class PMBlocks {
     public static final RegistryObject<Block> LAPIS_GLASS = BLOCKS.createBlock("lapis_glass", () -> new LapisGlassBlock(PMProperties.LAPIS_GLASS));
     public static final RegistryObject<Block> LAPIS_GLASS_PANE = BLOCKS.createBlock("lapis_glass_pane", () -> new LapisGlassPaneBlock(PMProperties.LAPIS_GLASS_PANE));
 
+    public static final RegistryObject<Block> SNOW_BRICKS = BLOCKS.createBlock("snow_bricks", () -> new Block(PMProperties.SNOW_BRICKS));
+    public static final RegistryObject<Block> SNOW_BRICK_STAIRS = BLOCKS.createBlock("snow_brick_stairs", () -> new StairBlock(() -> SNOW_BRICKS.get().defaultBlockState(), PMProperties.SNOW_BRICKS));
+    public static final RegistryObject<Block> SNOW_BRICK_SLAB = BLOCKS.createBlock("snow_brick_slab", () -> new SlabBlock(PMProperties.SNOW_BRICKS));
+    public static final RegistryObject<Block> SNOW_BRICK_WALL = BLOCKS.createBlock("snow_brick_wall", () -> new WallBlock(PMProperties.SNOW_BRICKS));
+
+    public static final RegistryObject<Block> PACKED_ICE_BRICKS = BLOCKS.createBlock("packed_ice_bricks", () -> new Block(PMProperties.PACKED_ICE_BRICKS));
+    public static final RegistryObject<Block> PACKED_ICE_BRICK_STAIRS = BLOCKS.createBlock("packed_ice_brick_stairs", () -> new StairBlock(() -> PACKED_ICE_BRICKS.get().defaultBlockState(), PMProperties.PACKED_ICE_BRICKS));
+    public static final RegistryObject<Block> PACKED_ICE_BRICK_SLAB = BLOCKS.createBlock("packed_ice_brick_slab", () -> new SlabBlock(PMProperties.PACKED_ICE_BRICKS));
+    public static final RegistryObject<Block> PACKED_ICE_BRICK_WALL = BLOCKS.createBlock("packed_ice_brick_wall", () -> new WallBlock(PMProperties.PACKED_ICE_BRICKS));
+    public static final RegistryObject<Block> CHISELED_PACKED_ICE_BRICKS = BLOCKS.createBlock("chiseled_packed_ice_bricks", () -> new Block(PMProperties.PACKED_ICE_BRICKS));
+
+    public static final RegistryObject<Block> PACKED_ICE_DOOR = BLOCKS.createBlock("packed_ice_door", () -> new DoorBlock(PMProperties.ICE_DOOR, PMProperties.ICE));
+    public static final RegistryObject<Block> PACKED_ICE_TRAPDOOR = BLOCKS.createBlock("packed_ice_trapdoor", () -> new TrapDoorBlock(PMProperties.ICE_TRAPDOOR, PMProperties.ICE));
+
+    public static final RegistryObject<Block> BLUE_ICE_BRICKS = BLOCKS.createBlock("blue_ice_bricks", () -> new Block(PMProperties.BLUE_ICE_BRICKS));
+    public static final RegistryObject<Block> BLUE_ICE_BRICK_STAIRS = BLOCKS.createBlock("blue_ice_brick_stairs", () -> new StairBlock(() -> BLUE_ICE_BRICKS.get().defaultBlockState(), PMProperties.BLUE_ICE_BRICKS));
+    public static final RegistryObject<Block> BLUE_ICE_BRICK_SLAB = BLOCKS.createBlock("blue_ice_brick_slab", () -> new SlabBlock(PMProperties.BLUE_ICE_BRICKS));
+    public static final RegistryObject<Block> BLUE_ICE_BRICK_WALL = BLOCKS.createBlock("blue_ice_brick_wall", () -> new WallBlock(PMProperties.BLUE_ICE_BRICKS));
+    public static final RegistryObject<Block> CHISELED_BLUE_ICE_BRICKS = BLOCKS.createBlock("chiseled_blue_ice_bricks", () -> new Block(PMProperties.BLUE_ICE_BRICKS));
+
+    public static final RegistryObject<Block> BLUE_ICE_DOOR = BLOCKS.createBlock("blue_ice_door", () -> new DoorBlock(PMProperties.ICE_DOOR, PMProperties.ICE));
+    public static final RegistryObject<Block> BLUE_ICE_TRAPDOOR = BLOCKS.createBlock("blue_ice_trapdoor", () -> new TrapDoorBlock(PMProperties.ICE_TRAPDOOR, PMProperties.ICE));
+
+    public static final RegistryObject<Block> ICE_LANTERN = BLOCKS.createBlock("ice_lantern", () -> new IceLanternBlock(PMProperties.ICE_LANTERN));
+
     public static void setupTabs() {
         CreativeModeTabContentsPopulator.mod(PantzMod.MOD_ID)
                 .tab(BUILDING_BLOCKS)
+                .addItemsBefore(of(Blocks.NETHERRACK), () -> Blocks.SNOW_BLOCK, SNOW_BRICKS, SNOW_BRICK_STAIRS, SNOW_BRICK_SLAB, SNOW_BRICK_WALL, () -> Blocks.PACKED_ICE, PACKED_ICE_BRICKS, PACKED_ICE_BRICK_STAIRS, PACKED_ICE_BRICK_SLAB, PACKED_ICE_BRICK_WALL, CHISELED_PACKED_ICE_BRICKS, PACKED_ICE_DOOR, PACKED_ICE_TRAPDOOR,
+                        () -> Blocks.BLUE_ICE, BLUE_ICE_BRICKS, BLUE_ICE_BRICK_STAIRS, BLUE_ICE_BRICK_SLAB, BLUE_ICE_BRICK_WALL, CHISELED_BLUE_ICE_BRICKS, BLUE_ICE_DOOR, BLUE_ICE_TRAPDOOR)
+
                 .addItemsBefore(of(Blocks.GOLD_BLOCK), STEEL_BLOCK)
                 .addItemsBefore(modLoaded(Blocks.GOLD_BLOCK, PMConstant.CAVERNS_AND_CHASMS), STEEL_BARS)
                 .addItemsBefore(of(Blocks.GOLD_BLOCK), STEEL_DOOR, STEEL_TRAPDOOR)
@@ -145,6 +174,7 @@ public class PMBlocks {
                 .addItemsBefore(of(Items.PAINTING), ITEM_STAND, GLOW_ITEM_STAND)
                 .addItemsBefore(of(Blocks.SCAFFOLDING), ROPE_LADDER)
                 .addItemsBefore(of(Blocks.BARREL), TRASH_CAN)
+                .addItemsBefore(of(Blocks.CHAIN), ICE_LANTERN)
                 .addItemsAfter(of(Blocks.DAMAGED_ANVIL), STONE_PEDESTAL, DEEPSLATE_PEDESTAL, BLACKSTONE_PEDESTAL, QUARTZ_PEDESTAL, PRISMARINE_PEDESTAL, PURPUR_PEDESTAL)
                 .addItemsAfter(of(Blocks.BELL), MERCURY_GLOBE, VENUS_GLOBE, EARTH_GLOBE, MARS_GLOBE, JUPITER_GLOBE, SATURN_GLOBE, URANUS_GLOBE, NEPTUNE_GLOBE, PLUTO_GLOBE, CERES_GLOBE, MAKEMAKE_GLOBE, MOON_GLOBE, IO_GLOBE, EUROPA_GLOBE, CALLISTO_GLOBE, GANYMEDE_GLOBE, SUN_GLOBE, BLUE_SUN_GLOBE, IRIS_GLOBE)
                 .addItemsAfter(of(Blocks.REDSTONE_LAMP), WHITE_REDSTONE_LAMP, ORANGE_REDSTONE_LAMP, MAGENTA_REDSTONE_LAMP,

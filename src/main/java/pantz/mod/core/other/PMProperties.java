@@ -19,6 +19,7 @@ import java.util.function.ToIntFunction;
 
 public class PMProperties {
     public static final BlockSetType STEEL = BlockSetType.register(new BlockSetType(PantzMod.MOD_ID + ":steel", false, SoundType.METAL, SoundEvents.IRON_DOOR_CLOSE, SoundEvents.IRON_DOOR_OPEN, SoundEvents.IRON_TRAPDOOR_CLOSE, SoundEvents.IRON_TRAPDOOR_OPEN, SoundEvents.METAL_PRESSURE_PLATE_CLICK_OFF, SoundEvents.METAL_PRESSURE_PLATE_CLICK_ON, SoundEvents.STONE_BUTTON_CLICK_OFF, SoundEvents.STONE_BUTTON_CLICK_ON));
+    public static final BlockSetType ICE = BlockSetType.register(new BlockSetType(PantzMod.MOD_ID + ":ice", true, SoundType.GLASS, SoundEvents.WOODEN_DOOR_CLOSE, SoundEvents.WOODEN_DOOR_OPEN, SoundEvents.WOODEN_TRAPDOOR_CLOSE, SoundEvents.WOODEN_TRAPDOOR_OPEN,  SoundEvents.STONE_PRESSURE_PLATE_CLICK_OFF, SoundEvents.STONE_PRESSURE_PLATE_CLICK_ON, SoundEvents.STONE_BUTTON_CLICK_OFF, SoundEvents.STONE_BUTTON_CLICK_ON));
 
     public static final BlockBehaviour.Properties STEEL_BLOCK = BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).strength(3.0f, 6.0f).mapColor(MapColor.COLOR_GRAY);
     public static final BlockBehaviour.Properties STEEL_DOOR = BlockBehaviour.Properties.copy(Blocks.IRON_DOOR).mapColor(MapColor.COLOR_GRAY);
@@ -35,10 +36,10 @@ public class PMProperties {
     public static final BlockBehaviour.Properties PURPUR_PEDESTAL = BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_MAGENTA).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(1.5f, 6.0f).sound(SoundType.STONE);
     public static final BlockBehaviour.Properties PRISMARINE_PEDESTAL = BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_CYAN).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(1.5f, 6.0f).sound(SoundType.STONE);
 
-    public static final BlockBehaviour.Properties SULFUR_CLUSTER = BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_YELLOW).forceSolidOn().noOcclusion().randomTicks().sound(SoundType.AMETHYST_CLUSTER).strength(1.5F).pushReaction(PushReaction.DESTROY).lightLevel(light -> 12).randomTicks();
-    public static final BlockBehaviour.Properties SMALL_SULFUR_BUD = BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_YELLOW).forceSolidOn().noOcclusion().randomTicks().sound(SoundType.SMALL_AMETHYST_BUD).strength(1.5F).pushReaction(PushReaction.DESTROY).lightLevel(light -> 3).randomTicks();
-    public static final BlockBehaviour.Properties MEDIUM_SULFUR_BUD = BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_YELLOW).forceSolidOn().noOcclusion().randomTicks().sound(SoundType.MEDIUM_AMETHYST_BUD).strength(1.5F).pushReaction(PushReaction.DESTROY).lightLevel(light -> 6).randomTicks();
-    public static final BlockBehaviour.Properties LARGE_SULFUR_BUD = BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_YELLOW).forceSolidOn().noOcclusion().randomTicks().sound(SoundType.LARGE_AMETHYST_BUD).strength(1.5F).pushReaction(PushReaction.DESTROY).lightLevel(light -> 9).randomTicks();
+    public static final BlockBehaviour.Properties SULFUR_CLUSTER = BlockBehaviour.Properties.of().randomTicks().mapColor(MapColor.COLOR_YELLOW).forceSolidOn().noOcclusion().sound(SoundType.AMETHYST_CLUSTER).strength(1.5F).pushReaction(PushReaction.DESTROY).lightLevel(light -> 12);
+    public static final BlockBehaviour.Properties SMALL_SULFUR_BUD = BlockBehaviour.Properties.of().randomTicks().mapColor(MapColor.COLOR_YELLOW).forceSolidOn().noOcclusion().sound(SoundType.SMALL_AMETHYST_BUD).strength(1.5F).pushReaction(PushReaction.DESTROY).lightLevel(light -> 3);
+    public static final BlockBehaviour.Properties MEDIUM_SULFUR_BUD = BlockBehaviour.Properties.of().randomTicks().mapColor(MapColor.COLOR_YELLOW).forceSolidOn().noOcclusion().sound(SoundType.MEDIUM_AMETHYST_BUD).strength(1.5F).pushReaction(PushReaction.DESTROY).lightLevel(light -> 6);
+    public static final BlockBehaviour.Properties LARGE_SULFUR_BUD = BlockBehaviour.Properties.of().randomTicks().mapColor(MapColor.COLOR_YELLOW).forceSolidOn().noOcclusion().sound(SoundType.LARGE_AMETHYST_BUD).strength(1.5F).pushReaction(PushReaction.DESTROY).lightLevel(light -> 9);
 
     public static final BlockBehaviour.Properties ENDER_SCANNER = BlockBehaviour.Properties.copy(Blocks.OBSIDIAN).strength(3.0f, 1200.0f);
     public static final BlockBehaviour.Properties REDSTONE_CONFIGURATOR = BlockBehaviour.Properties.of().strength(3.5F, 6.0f).sound(SoundType.METAL).instrument(NoteBlockInstrument.XYLOPHONE).mapColor(MapColor.METAL);
@@ -60,6 +61,14 @@ public class PMProperties {
     public static final BlockBehaviour.Properties QUARTZ_GLASS_PANE = BlockBehaviour.Properties.copy(Blocks.GLASS_PANE).strength(0.5f).mapColor(MapColor.QUARTZ).noCollission();
     public static final BlockBehaviour.Properties LAPIS_GLASS = BlockBehaviour.Properties.copy(Blocks.GLASS).strength(0.5f).mapColor(MapColor.LAPIS);
     public static final BlockBehaviour.Properties LAPIS_GLASS_PANE = BlockBehaviour.Properties.copy(Blocks.GLASS_PANE).strength(0.5f).mapColor(MapColor.LAPIS);
+
+    public static final BlockBehaviour.Properties SNOW_BRICKS = BlockBehaviour.Properties.of().sound(SoundType.SNOW).mapColor(MapColor.SNOW).instrument(NoteBlockInstrument.GUITAR).strength(3.0f, 2.0f);
+    public static final BlockBehaviour.Properties PACKED_ICE_BRICKS = BlockBehaviour.Properties.of().sound(SoundType.GLASS).mapColor(MapColor.ICE).instrument(NoteBlockInstrument.CHIME).strength(3.0f, 2.0f);
+    public static final BlockBehaviour.Properties BLUE_ICE_BRICKS = BlockBehaviour.Properties.of().sound(SoundType.GLASS).mapColor(MapColor.ICE).strength(5.2f, 3.0f);
+
+    public static final BlockBehaviour.Properties ICE_DOOR = BlockBehaviour.Properties.copy(Blocks.IRON_DOOR).mapColor(MapColor.ICE).strength(3.0f);
+    public static final BlockBehaviour.Properties ICE_TRAPDOOR = BlockBehaviour.Properties.copy(Blocks.IRON_TRAPDOOR).mapColor(MapColor.ICE).strength(5.2f);
+    public static final BlockBehaviour.Properties ICE_LANTERN = BlockBehaviour.Properties.copy(Blocks.LANTERN).lightLevel(litBlockEmission(15)).strength(3.0f).mapColor(MapColor.ICE).sound(SoundType.GLASS);
 
     public static boolean never(BlockState state, BlockGetter blockGetter, BlockPos pos) {
         return false;

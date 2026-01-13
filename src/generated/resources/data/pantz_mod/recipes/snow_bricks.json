@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "#": {
+      "item": "minecraft:stone_bricks"
+    },
+    "S": {
+      "item": "minecraft:snow_block"
+    }
+  },
+  "pattern": [
+    "S#",
+    "##"
+  ],
+  "result": {
+    "count": 4,
+    "item": "pantz_mod:snow_bricks"
+  },
+  "show_notification": true
+}

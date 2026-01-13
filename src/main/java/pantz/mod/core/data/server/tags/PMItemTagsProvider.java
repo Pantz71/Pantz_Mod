@@ -5,6 +5,7 @@ import com.teamabnormals.blueprint.core.other.tags.BlueprintItemTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
@@ -72,6 +73,12 @@ public class PMItemTagsProvider extends ItemTagsProvider {
 
         this.copy(Tags.Blocks.ORE_RATES_SINGULAR, Tags.Items.ORE_RATES_SINGULAR);
         this.copy(Tags.Blocks.ORES_IN_GROUND_NETHERRACK, Tags.Items.ORES_IN_GROUND_NETHERRACK);
+
+        this.copy(BlockTags.SLABS, ItemTags.SLABS);
+        this.copy(BlockTags.STAIRS, ItemTags.STAIRS);
+        this.copy(BlockTags.WALLS, ItemTags.WALLS);
+        this.copy(BlockTags.DOORS, ItemTags.DOORS);
+        this.copy(BlockTags.TRAPDOORS, ItemTags.TRAPDOORS);
 
         this.copy(PMBlockTags.PEDESTALS, PEDESTALS);
         this.copy(PMBlockTags.REDSTONE_LAMPS, REDSTONE_LAMPS);

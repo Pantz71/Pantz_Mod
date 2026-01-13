@@ -275,6 +275,54 @@ public class PMRecipeProvider extends BlueprintRecipeProvider {
                 .requires(PMItemTags.DUSTS_SULFUR)
                 .unlockedBy(getHasName(Items.GUNPOWDER), has(Tags.Items.GUNPOWDER))
                 .save(consumer);
+
+        generateRecipes(consumer, PMBlockFamilies.SNOW_BRICKS_FAMILY);
+        generateRecipes(consumer, PMBlockFamilies.PACKED_ICE_BRICKS_FAMILY);
+        generateRecipes(consumer, PMBlockFamilies.BLUE_ICE_BRICKS_FAMILY);
+
+        polished(consumer, RecipeCategory.BUILDING_BLOCKS, PACKED_ICE_BRICKS.get(), Blocks.PACKED_ICE);
+        polished(consumer, RecipeCategory.BUILDING_BLOCKS, BLUE_ICE_BRICKS.get(), Blocks.BLUE_ICE);
+        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, SNOW_BRICKS.get(), 4)
+                .define('S', Blocks.SNOW_BLOCK).define('#', Blocks.STONE_BRICKS)
+                .pattern("S#").pattern("##")
+                .unlockedBy(getHasName(Blocks.SNOW_BLOCK), has(Blocks.SNOW_BLOCK))
+                .save(consumer);
+
+        doorBuilder(PACKED_ICE_DOOR.get(), Ingredient.of(Blocks.PACKED_ICE)).unlockedBy(getHasName(Blocks.PACKED_ICE), has(Blocks.PACKED_ICE)).save(consumer);
+        trapdoorBuilder(PACKED_ICE_TRAPDOOR.get(), Ingredient.of(Blocks.PACKED_ICE)).unlockedBy(getHasName(Blocks.PACKED_ICE), has(Blocks.PACKED_ICE)).save(consumer);
+
+        doorBuilder(BLUE_ICE_DOOR.get(), Ingredient.of(Blocks.BLUE_ICE)).unlockedBy(getHasName(Blocks.BLUE_ICE), has(Blocks.BLUE_ICE)).save(consumer);
+        trapdoorBuilder(BLUE_ICE_TRAPDOOR.get(), Ingredient.of(Blocks.BLUE_ICE)).unlockedBy(getHasName(Blocks.BLUE_ICE), has(Blocks.BLUE_ICE)).save(consumer);
+
+        stonecutterRecipe(consumer, RecipeCategory.BUILDING_BLOCKS, SNOW_BRICK_STAIRS.get(), SNOW_BRICKS.get());
+        stonecutterRecipe(consumer, RecipeCategory.BUILDING_BLOCKS, SNOW_BRICK_SLAB.get(), SNOW_BRICKS.get(), 2);
+        stonecutterRecipe(consumer, RecipeCategory.DECORATIONS, SNOW_BRICK_WALL.get(), SNOW_BRICKS.get());
+
+        stonecutterRecipe(consumer, RecipeCategory.BUILDING_BLOCKS, PACKED_ICE_BRICKS.get(), Blocks.PACKED_ICE);
+        stonecutterRecipe(consumer, RecipeCategory.BUILDING_BLOCKS, PACKED_ICE_BRICK_STAIRS.get(), Blocks.PACKED_ICE);
+        stonecutterRecipe(consumer, RecipeCategory.BUILDING_BLOCKS, PACKED_ICE_BRICK_SLAB.get(), Blocks.PACKED_ICE, 2);
+        stonecutterRecipe(consumer, RecipeCategory.BUILDING_BLOCKS, PACKED_ICE_BRICK_WALL.get(), Blocks.PACKED_ICE);
+
+        stonecutterRecipe(consumer, RecipeCategory.BUILDING_BLOCKS, PACKED_ICE_BRICK_STAIRS.get(), PACKED_ICE_BRICKS.get());
+        stonecutterRecipe(consumer, RecipeCategory.BUILDING_BLOCKS, PACKED_ICE_BRICK_SLAB.get(), PACKED_ICE_BRICKS.get(), 2);
+        stonecutterRecipe(consumer, RecipeCategory.DECORATIONS, PACKED_ICE_BRICK_WALL.get(), PACKED_ICE_BRICKS.get());
+
+        stonecutterRecipe(consumer, RecipeCategory.BUILDING_BLOCKS, BLUE_ICE_BRICKS.get(), Blocks.BLUE_ICE);
+        stonecutterRecipe(consumer, RecipeCategory.BUILDING_BLOCKS, BLUE_ICE_BRICK_STAIRS.get(), Blocks.BLUE_ICE);
+        stonecutterRecipe(consumer, RecipeCategory.BUILDING_BLOCKS, BLUE_ICE_BRICK_SLAB.get(), Blocks.BLUE_ICE, 2);
+        stonecutterRecipe(consumer, RecipeCategory.BUILDING_BLOCKS, BLUE_ICE_BRICK_WALL.get(), Blocks.BLUE_ICE);
+
+        stonecutterRecipe(consumer, RecipeCategory.BUILDING_BLOCKS, BLUE_ICE_BRICK_STAIRS.get(), BLUE_ICE_BRICKS.get());
+        stonecutterRecipe(consumer, RecipeCategory.BUILDING_BLOCKS, BLUE_ICE_BRICK_SLAB.get(), BLUE_ICE_BRICKS.get(), 2);
+        stonecutterRecipe(consumer, RecipeCategory.DECORATIONS, BLUE_ICE_BRICK_WALL.get(), BLUE_ICE_BRICKS.get());
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ICE_LANTERN.get())
+                .define('*', Tags.Items.NUGGETS_IRON).define('#', Blocks.BLUE_ICE)
+                .pattern("***")
+                .pattern("*#*")
+                .pattern("***")
+                .unlockedBy(getHasName(Items.IRON_INGOT), has(Tags.Items.INGOTS_IRON))
+                .save(consumer);
     }
 
     private static void logicGates(Consumer<FinishedRecipe> consumer) {

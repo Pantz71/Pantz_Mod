@@ -68,22 +68,18 @@ public class NetherClusterBlock extends Block {
         if (pState.getValue(WATERLOGGED)) {
             pLevel.scheduleTick(pPos, Fluids.WATER, Fluids.WATER.getTickDelay(pLevel));
         }
-
         return pDirection == pState.getValue(FACING).getOpposite() && !pState.canSurvive(pLevel, pPos) ? Blocks.AIR.defaultBlockState() : super.updateShape(pState, pDirection, pNeighborState, pLevel, pPos, pNeighborPos);
     }
 
     @Override
     public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-        if (random.nextInt(5) == 0) {
-            Block next = getNextGrowthStage(this);
-            if (next == null) return;
+        Block next = getNextGrowthStage(this);
+        if (next == null) return;
+        BlockPos belowPos = pos.below();
+        BlockState belowState = level.getBlockState(belowPos);
 
-            BlockPos belowPos = pos.below();
-            BlockState belowState = level.getBlockState(belowPos);
-
-            if (belowState.getBlock() instanceof SulfurBlock block && block.isLit(belowState)) {
-                level.setBlock(pos, next.defaultBlockState().setValue(FACING, state.getValue(FACING)).setValue(WATERLOGGED, state.getValue(WATERLOGGED)), Block.UPDATE_ALL);
-            }
+        if (belowState.getBlock() instanceof SulfurBlock block && block.isLit(belowState)) {
+            level.setBlock(pos, next.defaultBlockState().setValue(FACING, state.getValue(FACING)).setValue(WATERLOGGED, state.getValue(WATERLOGGED)), Block.UPDATE_ALL);
         }
     }
 

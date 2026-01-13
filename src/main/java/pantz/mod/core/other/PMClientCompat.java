@@ -23,7 +23,8 @@ public class PMClientCompat {
                 NOT_GATE, AND_GATE, OR_GATE, NOR_GATE, NAND_GATE, XNOR_GATE, XOR_GATE,
                 ADVANCED_AND_GATE, ADVANCED_OR_GATE, ADVANCED_NOR_GATE, ADVANCED_NAND_GATE, ADVANCED_XNOR_GATE, ADVANCED_XOR_GATE,
                 MAJORITY_GATE, MINORITY_GATE,
-                ROPE_LADDER
+                ROPE_LADDER,
+                PACKED_ICE_DOOR, PACKED_ICE_TRAPDOOR, BLUE_ICE_DOOR, BLUE_ICE_TRAPDOOR, ICE_LANTERN
         }) {
             ItemBlockRenderTypes.setRenderLayer((Block) block.get(), RenderType.cutout());
         }

@@ -18,6 +18,22 @@
     "pantz_mod:weather_detector",
     "pantz_mod:entity_detector",
     "pantz_mod:trash_can",
-    "pantz_mod:enderporter"
+    "pantz_mod:enderporter",
+    "pantz_mod:snow_bricks",
+    "pantz_mod:snow_brick_stairs",
+    "pantz_mod:snow_brick_slab",
+    "pantz_mod:packed_ice_bricks",
+    "pantz_mod:packed_ice_brick_stairs",
+    "pantz_mod:packed_ice_brick_slab",
+    "pantz_mod:chiseled_packed_ice_bricks",
+    "pantz_mod:blue_ice_bricks",
+    "pantz_mod:blue_ice_brick_stairs",
+    "pantz_mod:blue_ice_brick_slab",
+    "pantz_mod:chiseled_blue_ice_bricks",
+    "pantz_mod:packed_ice_door",
+    "pantz_mod:packed_ice_trapdoor",
+    "pantz_mod:blue_ice_door",
+    "pantz_mod:blue_ice_trapdoor",
+    "pantz_mod:ice_lantern"
   ]
 }
