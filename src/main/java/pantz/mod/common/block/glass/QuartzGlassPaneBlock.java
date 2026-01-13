@@ -12,7 +12,7 @@ import net.minecraft.world.phys.shapes.EntityCollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class QuartzGlassPaneBlock extends StainedGlassPaneBlock {
+public class QuartzGlassPaneBlock extends MagicGlassPaneBlock {
     public QuartzGlassPaneBlock(DyeColor pDyeColor, Properties pProperties) {
         super(pDyeColor, pProperties);
     }
@@ -22,21 +22,13 @@ public class QuartzGlassPaneBlock extends StainedGlassPaneBlock {
     }
 
     @Override
-    public boolean propagatesSkylightDown(BlockState pState, BlockGetter pReader, BlockPos pPos) {
-        return true;
-    }
-
-    @Override
     public boolean isPathfindable(BlockState pState, BlockGetter pLevel, BlockPos pPos, PathComputationType pType) {
         return false;
     }
 
     @Override
-    public VoxelShape getCollisionShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
-        if (context instanceof EntityCollisionContext ecc && ecc.getEntity() instanceof Player) {
-            return Shapes.empty();
-        }
-        return Shapes.block();
+    public boolean isAllowedToPass(CollisionContext context) {
+        return context instanceof EntityCollisionContext ecc && ecc.getEntity() instanceof Player;
     }
 
     @Override

@@ -12,7 +12,7 @@ import net.minecraft.world.phys.shapes.EntityCollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class QuartzGlassBlock extends StainedGlassBlock {
+public class QuartzGlassBlock extends MagicGlassBlock {
     public QuartzGlassBlock(DyeColor pDyeColor, Properties pProperties) {
         super(pDyeColor, pProperties);
     }
@@ -27,15 +27,12 @@ public class QuartzGlassBlock extends StainedGlassBlock {
     }
 
     @Override
-    public VoxelShape getCollisionShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
-        if (context instanceof EntityCollisionContext ecc && ecc.getEntity() instanceof Player) {
-            return Shapes.empty();
-        }
-        return Shapes.block();
+    public boolean isOcclusionShapeFullBlock(BlockState state, BlockGetter world, BlockPos pos) {
+        return false;
     }
 
     @Override
-    public boolean isOcclusionShapeFullBlock(BlockState state, BlockGetter world, BlockPos pos) {
-        return false;
+    public boolean isAllowedToPass(CollisionContext context) {
+        return context instanceof EntityCollisionContext ecc && ecc.getEntity() instanceof Player;
     }
 }

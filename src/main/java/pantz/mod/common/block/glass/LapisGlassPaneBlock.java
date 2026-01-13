@@ -1,7 +1,10 @@
 package pantz.mod.common.block.glass;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.StainedGlassPaneBlock;
@@ -12,7 +15,7 @@ import net.minecraft.world.phys.shapes.EntityCollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class LapisGlassPaneBlock extends StainedGlassPaneBlock {
+public class LapisGlassPaneBlock extends MagicGlassPaneBlock {
     public LapisGlassPaneBlock(DyeColor pDyeColor, Properties pProperties) {
         super(pDyeColor, pProperties);
     }
@@ -22,20 +25,12 @@ public class LapisGlassPaneBlock extends StainedGlassPaneBlock {
     }
 
     @Override
-    public boolean propagatesSkylightDown(BlockState pState, BlockGetter pReader, BlockPos pPos) {
-        return true;
-    }
-
-    @Override
     public boolean isPathfindable(BlockState pState, BlockGetter pLevel, BlockPos pPos, PathComputationType pType) {
         return true;
     }
 
     @Override
-    public VoxelShape getCollisionShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
-        if (context instanceof EntityCollisionContext ecc && ecc.getEntity() instanceof Player) {
-            return Shapes.block();
-        }
-        return Shapes.empty();
+    public boolean isAllowedToPass(CollisionContext context) {
+        return context instanceof EntityCollisionContext ecc && ecc.getEntity() instanceof LivingEntity;
     }
 }
