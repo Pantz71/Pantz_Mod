@@ -1,4 +1,4 @@
-package pantz.mod.common.block;
+package pantz.mod.common.block.glass;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Player;

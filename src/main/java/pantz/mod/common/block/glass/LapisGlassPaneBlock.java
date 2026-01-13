@@ -1,4 +1,4 @@
-package pantz.mod.common.block;
+package pantz.mod.common.block.glass;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Player;
@@ -12,13 +12,13 @@ import net.minecraft.world.phys.shapes.EntityCollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class QuartzGlassPaneBlock extends StainedGlassPaneBlock {
-    public QuartzGlassPaneBlock(DyeColor pDyeColor, Properties pProperties) {
+public class LapisGlassPaneBlock extends StainedGlassPaneBlock {
+    public LapisGlassPaneBlock(DyeColor pDyeColor, Properties pProperties) {
         super(pDyeColor, pProperties);
     }
 
-    public QuartzGlassPaneBlock(Properties pProperties) {
-        super(DyeColor.WHITE, pProperties);
+    public LapisGlassPaneBlock(Properties pProperties) {
+        super(DyeColor.BLUE, pProperties);
     }
 
     @Override
@@ -28,19 +28,14 @@ public class QuartzGlassPaneBlock extends StainedGlassPaneBlock {
 
     @Override
     public boolean isPathfindable(BlockState pState, BlockGetter pLevel, BlockPos pPos, PathComputationType pType) {
-        return false;
+        return true;
     }
 
     @Override
     public VoxelShape getCollisionShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
         if (context instanceof EntityCollisionContext ecc && ecc.getEntity() instanceof Player) {
-            return Shapes.empty();
+            return Shapes.block();
         }
-        return Shapes.block();
-    }
-
-    @Override
-    public boolean isOcclusionShapeFullBlock(BlockState state, BlockGetter world, BlockPos pos) {
-        return false;
+        return Shapes.empty();
     }
 }
