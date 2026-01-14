@@ -22,9 +22,7 @@ public class MagicGlassBlock extends StainedGlassBlock implements CollidableBloc
 
     @Override
     public VoxelShape getCollisionShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-        if (isAllowedToPass(context)) {
-            return Shapes.empty();
-        }
-        return Shapes.block();
+        return isAllowedToPass(context) ? Shapes.empty() : Shapes.block();
     }
+
 }

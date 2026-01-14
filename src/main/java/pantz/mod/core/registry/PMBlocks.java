@@ -11,10 +11,7 @@ import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraftforge.registries.RegistryObject;
 import pantz.mod.common.block.*;
-import pantz.mod.common.block.glass.LapisGlassBlock;
-import pantz.mod.common.block.glass.LapisGlassPaneBlock;
-import pantz.mod.common.block.glass.QuartzGlassBlock;
-import pantz.mod.common.block.glass.QuartzGlassPaneBlock;
+import pantz.mod.common.block.glass.*;
 import pantz.mod.common.utils.LogicGateConditions;
 import pantz.mod.core.PantzMod;
 import pantz.mod.core.other.PMConstant;
@@ -132,6 +129,8 @@ public class PMBlocks {
     public static final RegistryObject<Block> QUARTZ_GLASS_PANE = BLOCKS.createBlock("quartz_glass_pane", () -> new QuartzGlassPaneBlock(PMProperties.QUARTZ_GLASS_PANE));
     public static final RegistryObject<Block> LAPIS_GLASS = BLOCKS.createBlock("lapis_glass", () -> new LapisGlassBlock(PMProperties.LAPIS_GLASS));
     public static final RegistryObject<Block> LAPIS_GLASS_PANE = BLOCKS.createBlock("lapis_glass_pane", () -> new LapisGlassPaneBlock(PMProperties.LAPIS_GLASS_PANE));
+    public static final RegistryObject<Block> REDSTONE_GLASS = BLOCKS.createBlock("redstone_glass", () -> new RedstoneGlassBlock(PMProperties.REDSTONE_GLASS));
+    public static final RegistryObject<Block> REDSTONE_GLASS_PANE = BLOCKS.createBlock("redstone_glass_pane", () -> new RedstoneGlassPaneBlock(PMProperties.REDSTONE_GLASS_PANE));
 
     public static final RegistryObject<Block> SNOW_BRICKS = BLOCKS.createBlock("snow_bricks", () -> new Block(PMProperties.SNOW_BRICKS));
     public static final RegistryObject<Block> SNOW_BRICK_STAIRS = BLOCKS.createBlock("snow_brick_stairs", () -> new StairBlock(() -> SNOW_BRICKS.get().defaultBlockState(), PMProperties.SNOW_BRICKS));
@@ -174,7 +173,7 @@ public class PMBlocks {
                 .addItemsAfter(of(Blocks.NETHER_QUARTZ_ORE), NETHER_SULFUR_ORE)
 
                 .tab(FUNCTIONAL_BLOCKS)
-                .addItemsBefore(of(Blocks.TINTED_GLASS), QUARTZ_GLASS, QUARTZ_GLASS_PANE, LAPIS_GLASS, LAPIS_GLASS_PANE)
+                .addItemsBefore(of(Blocks.TINTED_GLASS), QUARTZ_GLASS, QUARTZ_GLASS_PANE, LAPIS_GLASS, LAPIS_GLASS_PANE, REDSTONE_GLASS, REDSTONE_GLASS_PANE)
                 .addItemsBefore(of(Items.PAINTING), ITEM_STAND, GLOW_ITEM_STAND)
                 .addItemsBefore(of(Blocks.SCAFFOLDING), ROPE_LADDER)
                 .addItemsBefore(of(Blocks.BARREL), TRASH_CAN)
@@ -196,8 +195,8 @@ public class PMBlocks {
                         ADVANCED_AND_GATE, ADVANCED_OR_GATE, ADVANCED_NAND_GATE, ADVANCED_NOR_GATE, ADVANCED_XOR_GATE, ADVANCED_XNOR_GATE, MAJORITY_GATE, MINORITY_GATE)
 
                 .tab(COLORED_BLOCKS)
-                .addItemsBefore(of(Blocks.TINTED_GLASS), QUARTZ_GLASS, LAPIS_GLASS)
-                .addItemsBefore(of(Blocks.WHITE_STAINED_GLASS_PANE), QUARTZ_GLASS_PANE, LAPIS_GLASS_PANE)
+                .addItemsBefore(of(Blocks.TINTED_GLASS), QUARTZ_GLASS, LAPIS_GLASS, REDSTONE_GLASS)
+                .addItemsBefore(of(Blocks.WHITE_STAINED_GLASS_PANE), QUARTZ_GLASS_PANE, LAPIS_GLASS_PANE, REDSTONE_GLASS_PANE)
                 .addItems(() -> Blocks.REDSTONE_LAMP, WHITE_REDSTONE_LAMP, ORANGE_REDSTONE_LAMP, MAGENTA_REDSTONE_LAMP,
                         LIGHT_BLUE_REDSTONE_LAMP, YELLOW_REDSTONE_LAMP, LIME_REDSTONE_LAMP, PINK_REDSTONE_LAMP, GRAY_REDSTONE_LAMP, LIGHT_GRAY_REDSTONE_LAMP,
                         CYAN_REDSTONE_LAMP, PURPLE_REDSTONE_LAMP, BLUE_REDSTONE_LAMP, BROWN_REDSTONE_LAMP, GREEN_REDSTONE_LAMP, RED_REDSTONE_LAMP, BLACK_REDSTONE_LAMP)

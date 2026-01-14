@@ -255,8 +255,10 @@ public class PMRecipeProvider extends BlueprintRecipeProvider {
 
         mineralGlassBuilder(QUARTZ_GLASS.get(), Tags.Items.GEMS_QUARTZ, BUILDING_BLOCKS).unlockedBy(getHasName(Items.QUARTZ), has(Tags.Items.GEMS_QUARTZ)).save(consumer);
         mineralGlassBuilder(LAPIS_GLASS.get(), Tags.Items.GEMS_LAPIS, BUILDING_BLOCKS).unlockedBy(getHasName(Items.LAPIS_LAZULI), has(Tags.Items.GEMS_LAPIS)).save(consumer);
+        mineralGlassBuilder(REDSTONE_GLASS.get(), Tags.Items.DUSTS_REDSTONE, BUILDING_BLOCKS).unlockedBy(getHasName(Items.REDSTONE), has(Tags.Items.DUSTS_REDSTONE)).save(consumer);
         glassPaneBuilder(QUARTZ_GLASS_PANE.get(), QUARTZ_GLASS.get(), DECORATIONS).unlockedBy(getHasName(QUARTZ_GLASS.get()), has(PMItemTags.GLASS_QUARTZ)).save(consumer);
         glassPaneBuilder(LAPIS_GLASS_PANE.get(), LAPIS_GLASS.get(), DECORATIONS).unlockedBy(getHasName(LAPIS_GLASS.get()), has(PMItemTags.GLASS_LAPIS)).save(consumer);
+        glassPaneBuilder(REDSTONE_GLASS_PANE.get(), REDSTONE_GLASS.get(), DECORATIONS).unlockedBy(getHasName(REDSTONE_GLASS.get()), has(PMItemTags.GLASS_REDSTONE)).save(consumer);
 
         ShapelessRecipeBuilder.shapeless(TOOLS, DYNAMITE.get(), 3)
                 .requires(Items.PAPER).requires(Ingredient.of(Tags.Items.GUNPOWDER), 2)

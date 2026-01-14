@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "#": {
+      "tag": "forge:glass/colorless"
+    },
+    "@": {
+      "tag": "forge:dusts/redstone"
+    }
+  },
+  "pattern": [
+    " # ",
+    "#@#",
+    " # "
+  ],
+  "result": {
+    "count": 2,
+    "item": "pantz_mod:redstone_glass"
+  },
+  "show_notification": true
+}

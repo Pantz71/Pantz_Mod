@@ -58,11 +58,13 @@ public class PMBlockTagsProvider extends BlockTagsProvider {
 
         this.tag(GLASS_QUARTZ).add(QUARTZ_GLASS.get());
         this.tag(GLASS_LAPIS).add(LAPIS_GLASS.get());
+        this.tag(GLASS_REDSTONE).add(REDSTONE_GLASS.get());
         this.tag(GLASS_PANES_QUARTZ).add(QUARTZ_GLASS_PANE.get());
         this.tag(GLASS_PANES_LAPIS).add(LAPIS_GLASS_PANE.get());
+        this.tag(GLASS_PANES_REDSTONE).add(REDSTONE_GLASS_PANE.get());
 
-        this.tag(Tags.Blocks.GLASS).addTag(GLASS_QUARTZ).addTag(GLASS_LAPIS);
-        this.tag(Tags.Blocks.GLASS_PANES).addTag(GLASS_PANES_QUARTZ).addTag(GLASS_PANES_LAPIS);
+        this.tag(Tags.Blocks.GLASS).addTag(GLASS_QUARTZ).addTag(GLASS_LAPIS).addTag(GLASS_REDSTONE);
+        this.tag(Tags.Blocks.GLASS_PANES).addTag(GLASS_PANES_QUARTZ).addTag(GLASS_PANES_LAPIS).addTag(GLASS_PANES_REDSTONE);
 
         BLOCKS.getDeferredRegister().getEntries().forEach((registry -> {
             Block block = registry.get();

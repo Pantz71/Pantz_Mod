@@ -86,8 +86,10 @@ public class PMItemTagsProvider extends ItemTagsProvider {
 
         this.copy(PMBlockTags.GLASS_QUARTZ, GLASS_QUARTZ);
         this.copy(PMBlockTags.GLASS_LAPIS, GLASS_LAPIS);
+        this.copy(PMBlockTags.GLASS_REDSTONE, GLASS_REDSTONE);
         this.copy(PMBlockTags.GLASS_PANES_QUARTZ, GLASS_PANES_QUARTZ);
         this.copy(PMBlockTags.GLASS_PANES_LAPIS, GLASS_PANES_LAPIS);
+        this.copy(PMBlockTags.GLASS_PANES_REDSTONE, GLASS_PANES_REDSTONE);
 
         this.copy(Tags.Blocks.GLASS, Tags.Items.GLASS);
         this.copy(Tags.Blocks.GLASS_PANES, Tags.Items.GLASS_PANES);

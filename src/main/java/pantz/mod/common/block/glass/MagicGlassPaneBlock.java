@@ -29,7 +29,13 @@ public class MagicGlassPaneBlock extends StainedGlassPaneBlock implements Collid
         return Shapes.block();
     }
 
+    @Override
     public boolean propagatesSkylightDown(BlockState pState, BlockGetter pReader, BlockPos pPos) {
         return true;
+    }
+
+    @Override
+    public float getShadeBrightness(BlockState pState, BlockGetter pLevel, BlockPos pPos) {
+        return 1.0F;
     }
 }

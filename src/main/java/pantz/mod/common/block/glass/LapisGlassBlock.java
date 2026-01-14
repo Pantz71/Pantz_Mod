@@ -14,6 +14,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.EntityCollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.w3c.dom.Entity;
 
 public class LapisGlassBlock extends MagicGlassBlock {
     public LapisGlassBlock(DyeColor pDyeColor, Properties pProperties) {
@@ -31,6 +32,6 @@ public class LapisGlassBlock extends MagicGlassBlock {
 
     @Override
     public boolean isAllowedToPass(CollisionContext context) {
-        return context instanceof EntityCollisionContext ecc && ecc.getEntity() instanceof LivingEntity;
+        return context instanceof EntityCollisionContext ecc && ecc.getEntity() instanceof Entity && !(ecc.getEntity() instanceof Player);
     }
 }

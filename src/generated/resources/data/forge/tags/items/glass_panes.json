@@ -1,6 +1,7 @@
 {
   "values": [
     "#forge:glass_panes/quartz",
-    "#forge:glass_panes/lapis"
+    "#forge:glass_panes/lapis",
+    "#forge:glass_panes/redstone"
   ]
 }

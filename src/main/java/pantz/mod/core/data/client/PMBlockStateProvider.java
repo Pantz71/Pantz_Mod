@@ -99,8 +99,10 @@ public class PMBlockStateProvider extends BlueprintBlockStateProvider {
 
         this.block(QUARTZ_GLASS);
         this.block(LAPIS_GLASS);
+        this.block(REDSTONE_GLASS);
         this.glassPaneBlock(QUARTZ_GLASS_PANE, QUARTZ_GLASS);
         this.glassPaneBlock(LAPIS_GLASS_PANE, LAPIS_GLASS);
+        this.glassPaneBlock(REDSTONE_GLASS_PANE, REDSTONE_GLASS);
 
         this.blockFamily(PMBlockFamilies.SNOW_BRICKS_FAMILY);
         this.blockFamily(PMBlockFamilies.PACKED_ICE_BRICKS_FAMILY);

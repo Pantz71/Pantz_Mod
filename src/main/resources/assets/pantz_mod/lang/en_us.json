@@ -168,6 +168,8 @@
   "block.pantz_mod.quartz_glass_pane": "Quartz Glass Pane",
   "block.pantz_mod.lapis_glass": "Lapis Glass",
   "block.pantz_mod.lapis_glass_pane": "Lapis Glass Pane",
+  "block.pantz_mod.redstone_glass": "Redstone Glass",
+  "block.pantz_mod.redstone_glass_pane": "Redstone Glass Pane",
   
   "_decoration": "decoration",
   "block.pantz_mod.snow_bricks": "Snow Bricks",

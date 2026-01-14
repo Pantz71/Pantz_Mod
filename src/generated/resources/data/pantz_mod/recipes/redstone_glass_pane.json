@@ -3,19 +3,16 @@
   "category": "misc",
   "key": {
     "#": {
-      "item": "minecraft:blue_ice"
-    },
-    "*": {
-      "tag": "forge:nuggets/iron"
+      "item": "pantz_mod:redstone_glass"
     }
   },
   "pattern": [
-    "***",
-    "*#*",
-    "***"
+    "###",
+    "###"
   ],
   "result": {
-    "item": "pantz_mod:ice_lantern"
+    "count": 16,
+    "item": "pantz_mod:redstone_glass_pane"
   },
   "show_notification": true
 }

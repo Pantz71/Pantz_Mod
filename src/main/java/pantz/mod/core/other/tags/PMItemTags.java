@@ -26,6 +26,8 @@ public class PMItemTags {
     public static final TagKey<Item> GLASS_PANES_QUARTZ = forgeTag("glass_panes/quartz");
     public static final TagKey<Item> GLASS_LAPIS = forgeTag("glass/lapis");
     public static final TagKey<Item> GLASS_PANES_LAPIS = forgeTag("glass_panes/lapis");
+    public static final TagKey<Item> GLASS_REDSTONE = forgeTag("glass/redstone");
+    public static final TagKey<Item> GLASS_PANES_REDSTONE = forgeTag("glass_panes/redstone");
 
     public static final TagKey<Item> EXCAVATORS = itemTag("excavators");
     public static final TagKey<Item> HAMMERS = itemTag("hammers");
