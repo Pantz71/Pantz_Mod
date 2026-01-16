@@ -1,13 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_sulfur_block": {
+    "has_steel_ingot": {
       "conditions": {
         "items": [
           {
-            "items": [
-              "pantz_mod:sulfur_block"
-            ]
+            "tag": "forge:nuggets/steel"
           }
         ]
       },
@@ -15,20 +13,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "pantz_mod:sulfur_crystal_from_sulfur_block"
+        "recipe": "pantz_mod:steel_lantern"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_sulfur_block",
+      "has_steel_ingot",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "pantz_mod:sulfur_crystal_from_sulfur_block"
+      "pantz_mod:steel_lantern"
     ]
   },
   "sends_telemetry_event": false

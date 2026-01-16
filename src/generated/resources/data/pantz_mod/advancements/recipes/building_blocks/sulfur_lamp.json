@@ -1,11 +1,13 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_sulfur_shard": {
+    "has_glowstone": {
       "conditions": {
         "items": [
           {
-            "tag": "forge:dusts/sulfur"
+            "items": [
+              "minecraft:glowstone"
+            ]
           }
         ]
       },
@@ -13,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:gunpowder"
+        "recipe": "pantz_mod:sulfur_lamp"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_sulfur_shard",
+      "has_glowstone",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "minecraft:gunpowder"
+      "pantz_mod:sulfur_lamp"
     ]
   },
   "sends_telemetry_event": false

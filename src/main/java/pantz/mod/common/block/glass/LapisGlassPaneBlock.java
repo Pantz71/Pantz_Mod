@@ -1,20 +1,13 @@
 package pantz.mod.common.block.glass;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.block.StainedGlassPaneBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.EntityCollisionContext;
-import net.minecraft.world.phys.shapes.Shapes;
-import net.minecraft.world.phys.shapes.VoxelShape;
-import org.w3c.dom.Entity;
 
 public class LapisGlassPaneBlock extends MagicGlassPaneBlock {
     public LapisGlassPaneBlock(DyeColor pDyeColor, Properties pProperties) {
@@ -32,6 +25,6 @@ public class LapisGlassPaneBlock extends MagicGlassPaneBlock {
 
     @Override
     public boolean isAllowedToPass(CollisionContext context) {
-        return context instanceof EntityCollisionContext ecc && ecc.getEntity() instanceof Entity && !(ecc.getEntity() instanceof Player);
+        return context instanceof EntityCollisionContext ecc && !(ecc.getEntity() instanceof Player);
     }
 }

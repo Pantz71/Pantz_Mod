@@ -28,6 +28,7 @@
   "block.pantz_mod.steel_door": "Steel Door",
   "block.pantz_mod.steel_trapdoor": "Steel Trapdoor",
   "block.pantz_mod.steel_bars": "Steel Bars",
+  "block.pantz_mod.steel_lantern": "Steel Lantern",
 
   "item.pantz_mod.steel_ingot": "Steel Ingot",
   "item.pantz_mod.steel_nugget": "Steel Nugget",
@@ -58,9 +59,10 @@
   "block.pantz_mod.medium_sulfur_bud": "Medium Sulfur Bud",
   "block.pantz_mod.large_sulfur_bud": "large Sulfur Bud",
   "block.pantz_mod.sulfur_cluster": "Sulfur Cluster",
+  "block.pantz_mod.sulfur_lamp": "Sulfur Lamp",
 
   "item.pantz_mod.sulfur_dust": "Sulfur Dust",
-  "item.pantz_mod.sulfur_crystal": "Sulfur Crystal",
+  "item.pantz_mod.sulfur_shard": "Sulfur Shard",
 
   "trim_material.pantz_mod.sulfur": "Sulfur Material",
 

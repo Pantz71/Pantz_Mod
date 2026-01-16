@@ -5,7 +5,9 @@
       "conditions": {
         "items": [
           {
-            "tag": "forge:dusts/sulfur"
+            "items": [
+              "pantz_mod:sulfur_shard"
+            ]
           }
         ]
       },
@@ -13,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:gunpowder"
+        "recipe": "pantz_mod:sulfur_dust_from_sulfur_shard"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +28,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:gunpowder"
+      "pantz_mod:sulfur_dust_from_sulfur_shard"
     ]
   },
   "sends_telemetry_event": false

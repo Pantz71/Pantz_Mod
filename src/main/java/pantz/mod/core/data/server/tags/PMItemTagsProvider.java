@@ -50,7 +50,7 @@ public class PMItemTagsProvider extends ItemTagsProvider {
         this.tag(TOOLS).addTag(Tags.Items.TOOLS);
         this.tag(WEAPONS).addTag(ItemTags.SWORDS).addTag(Tags.Items.TOOLS_TRIDENTS);
 
-        this.tag(ItemTags.TRIM_MATERIALS).add(STEEL_INGOT.get(), SULFUR_DUST.get());
+        this.tag(ItemTags.TRIM_MATERIALS).add(STEEL_INGOT.get(), SULFUR_SHARD.get());
         this.tag(COALS).add(Items.COAL, Items.CHARCOAL);
 
         this.tag(ENDER_SCANNER_IMMUNITIES).add(Items.CARVED_PUMPKIN);
@@ -61,7 +61,7 @@ public class PMItemTagsProvider extends ItemTagsProvider {
         this.tag(Tags.Items.GEMS).addTag(GEMS_SULFUR);
 
         this.tag(DUSTS_SULFUR).add(SULFUR_DUST.get());
-        this.tag(GEMS_SULFUR).add(SULFUR_CRYSTAL.get());
+        this.tag(GEMS_SULFUR).add(SULFUR_SHARD.get());
         this.tag(INGOTS_STEEL).add(STEEL_INGOT.get());
         this.tag(NUGGETS_STEEL).add(STEEL_NUGGET.get());
 

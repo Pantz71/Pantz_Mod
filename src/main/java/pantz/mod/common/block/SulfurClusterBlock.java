@@ -22,7 +22,7 @@ import pantz.mod.core.registry.PMBlocks;
 
 import javax.annotation.Nullable;
 
-public class NetherClusterBlock extends Block {
+public class SulfurClusterBlock extends Block {
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     public static final DirectionProperty FACING = BlockStateProperties.FACING;
     private final VoxelShape northShape;
@@ -32,7 +32,7 @@ public class NetherClusterBlock extends Block {
     private final VoxelShape upShape;
     private final VoxelShape downShape;
     
-    public NetherClusterBlock(int pSize, int pOffset, Properties pProperties) {
+    public SulfurClusterBlock(int pSize, int pOffset, Properties pProperties) {
         super(pProperties);
         this.registerDefaultState(this.getStateDefinition().any().setValue(WATERLOGGED, false).setValue(FACING, Direction.UP));
         this.upShape = Block.box(pOffset, 0.0D, pOffset, 16 - pOffset, pSize, 16 - pOffset);

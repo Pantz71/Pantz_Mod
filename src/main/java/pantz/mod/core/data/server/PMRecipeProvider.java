@@ -7,8 +7,6 @@ import com.teamabnormals.blueprint.core.other.tags.BlueprintItemTags;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -47,6 +45,7 @@ public class PMRecipeProvider extends BlueprintRecipeProvider {
 
     @Override
     public void buildRecipes(Consumer<FinishedRecipe> consumer) {
+        ///   ////////////////////////////////////////////////////////////////////////////
         ShapedRecipeBuilder.shaped(MISC, STEEL_INGOT.get())
                 .define('I', Tags.Items.INGOTS_IRON).define('C', PMItemTags.COALS)
                 .pattern(" I ")
@@ -68,6 +67,14 @@ public class PMRecipeProvider extends BlueprintRecipeProvider {
                         .pattern("###")
                         .unlockedBy(getHasName(STEEL_INGOT.get()), has(PMItemTags.INGOTS_STEEL)));
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, STEEL_LANTERN.get())
+                .define('*', PMItemTags.NUGGETS_STEEL).define('#', Items.BLAZE_POWDER)
+                .pattern("***")
+                .pattern("*#*")
+                .pattern("***")
+                .unlockedBy(getHasName(STEEL_INGOT.get()), has(PMItemTags.NUGGETS_STEEL))
+                .save(consumer);
+
         conditionalRecipe(consumer, FLINT_AND_STEEL, TOOLS,
                 ShapelessRecipeBuilder.shapeless(TOOLS, Items.FLINT_AND_STEEL)
                         .requires(PMItemTags.INGOTS_STEEL)
@@ -76,14 +83,20 @@ public class PMRecipeProvider extends BlueprintRecipeProvider {
                         .unlockedBy(getHasName(Items.OBSIDIAN), has(Tags.Items.OBSIDIAN)));
 
         toolsAndArmor(consumer, STEEL_SWORD.get(), STEEL_SHOVEL.get(), STEEL_PICKAXE.get(), STEEL_AXE.get(), STEEL_HOE.get(), STEEL_HELMET.get(), STEEL_CHESTPLATE.get(), STEEL_LEGGINGS.get(), STEEL_BOOTS.get(), STEEL_INGOT.get(), PMItemTags.INGOTS_STEEL);
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(STEEL_PICKAXE.get(), STEEL_SHOVEL.get(), STEEL_AXE.get(), STEEL_HOE.get(), STEEL_SWORD.get(), STEEL_HELMET.get(), STEEL_CHESTPLATE.get(), STEEL_LEGGINGS.get(), STEEL_BOOTS.get(), STEEL_HORSE_ARMOR.get()), RecipeCategory.MISC, STEEL_NUGGET.get(), 0.1F, 200).unlockedBy("has_steel_pickaxe", has(STEEL_PICKAXE.get())).unlockedBy("has_steel_shovel", has(STEEL_SHOVEL.get())).unlockedBy("has_steel_axe", has(STEEL_AXE.get())).unlockedBy("has_steel_hoe", has(STEEL_HOE.get())).unlockedBy("has_steel_sword", has(STEEL_SWORD.get())).unlockedBy("has_steel_helmet", has(STEEL_HELMET.get())).unlockedBy("has_steel_chestplate", has(STEEL_CHESTPLATE.get())).unlockedBy("has_steel_leggings", has(STEEL_LEGGINGS.get())).unlockedBy("has_steel_boots", has(STEEL_BOOTS.get())).unlockedBy("has_steel_horse_armor", has(STEEL_HORSE_ARMOR.get())).save(consumer, location(getSmeltingRecipeName(STEEL_NUGGET.get())));
+        SimpleCookingRecipeBuilder.blasting(Ingredient.of(STEEL_PICKAXE.get(), STEEL_SHOVEL.get(), STEEL_AXE.get(), STEEL_HOE.get(), STEEL_SWORD.get(), STEEL_HELMET.get(), STEEL_CHESTPLATE.get(), STEEL_LEGGINGS.get(), STEEL_BOOTS.get(), STEEL_HORSE_ARMOR.get()), RecipeCategory.MISC, STEEL_NUGGET.get(), 0.1F, 100).unlockedBy("has_steel_pickaxe", has(STEEL_PICKAXE.get())).unlockedBy("has_steel_shovel", has(STEEL_SHOVEL.get())).unlockedBy("has_steel_axe", has(STEEL_AXE.get())).unlockedBy("has_steel_hoe", has(STEEL_HOE.get())).unlockedBy("has_steel_sword", has(STEEL_SWORD.get())).unlockedBy("has_steel_helmet", has(STEEL_HELMET.get())).unlockedBy("has_steel_chestplate", has(STEEL_CHESTPLATE.get())).unlockedBy("has_steel_leggings", has(STEEL_LEGGINGS.get())).unlockedBy("has_steel_boots", has(STEEL_BOOTS.get())).unlockedBy("has_steel_horse_armor", has(STEEL_HORSE_ARMOR.get())).save(consumer, location(getBlastingRecipeName(STEEL_NUGGET.get())));
 
+        ///   ////////////////////////////////////////////////////////////////////////////
+
+        ///   ////////////////////////////////////////////////////////////////////////////
         polished(consumer, BUILDING_BLOCKS, SULFUR_BRICKS.get(), SULFUR_BLOCK.get());
-        storageRecipesWithCustomUnpacking(consumer, MISC, SULFUR_CRYSTAL.get(), BUILDING_BLOCKS, SULFUR_BLOCK.get(), "sulfur_crystal_from_sulfur_block", "sulfur_crystal");
+        storageRecipesWithCustomUnpacking(consumer, MISC, SULFUR_SHARD.get(), BUILDING_BLOCKS, SULFUR_BLOCK.get(), "sulfur_shard_from_sulfur_block", "sulfur_crystal");
 
         ShapelessRecipeBuilder.shapeless(MISC, Items.GUNPOWDER, 2)
                 .requires(Ingredient.of(PMItemTags.DUSTS_SULFUR), 2).requires(PMItemTags.COALS)
-                .unlockedBy(getHasName(SULFUR_CRYSTAL.get()), has(PMItemTags.DUSTS_SULFUR)).save(consumer);
+                .unlockedBy(getHasName(SULFUR_SHARD.get()), has(PMItemTags.DUSTS_SULFUR)).save(consumer);
 
+        lampRecipe(consumer, SULFUR_LAMP.get(), PMItemTags.GEMS_SULFUR);
         generateRecipes(consumer, PMBlockFamilies.SULFUR_BRICKS_FAMILY);
 
         stonecutterRecipe(consumer, BUILDING_BLOCKS, SULFUR_BRICKS.get(), SULFUR_BLOCK.get());
@@ -96,9 +109,11 @@ public class PMRecipeProvider extends BlueprintRecipeProvider {
         stonecutterRecipe(consumer, BUILDING_BLOCKS, SULFUR_BRICK_WALL.get(), SULFUR_BRICKS.get());
         stonecutterRecipe(consumer, BUILDING_BLOCKS, CHISELED_SULFUR_BRICKS.get(), SULFUR_BRICKS.get());
 
-        conversionRecipe(consumer, SULFUR_DUST.get(), SULFUR_CRYSTAL.get(), null, 2);
+        conversionRecipe(consumer, SULFUR_DUST.get(), SULFUR_SHARD.get(), null, 2);
         oreRecipes(consumer, MISC, NETHER_SULFUR_ORE.get(), SULFUR_DUST.get(), 0.2f, 200);
+        ///   ////////////////////////////////////////////////////////////////////////////
 
+        ///   ////////////////////////////////////////////////////////////////////////////
         ShapedRecipeBuilder.shaped(TOOLS, TROWEL.get())
                 .define('#', PMItemTags.INGOTS_STEEL).define('/', Tags.Items.RODS_WOODEN)
                 .pattern(" #")
@@ -113,7 +128,9 @@ public class PMRecipeProvider extends BlueprintRecipeProvider {
                 .pattern(" # ")
                 .unlockedBy(getHasName(Items.COPPER_INGOT), has(Tags.Items.INGOTS_COPPER))
                 .save(consumer);
+        ///   ////////////////////////////////////////////////////////////////////////////
 
+        ///   ////////////////////////////////////////////////////////////////////////////
         excavator(consumer, EXCAVATOR.get(), STEEL_INGOT.get(), PMItemTags.INGOTS_STEEL);
         excavator(consumer, DIAMOND_EXCAVATOR.get(), Items.DIAMOND, Tags.Items.GEMS_DIAMOND);
         netheriteSmithingRecipe(consumer, DIAMOND_EXCAVATOR.get(), TOOLS, NETHERITE_EXCAVATOR.get());
@@ -121,14 +138,9 @@ public class PMRecipeProvider extends BlueprintRecipeProvider {
         hammer(consumer, HAMMER.get(), STEEL_INGOT.get(), PMItemTags.INGOTS_STEEL);
         hammer(consumer, DIAMOND_HAMMER.get(), Items.DIAMOND, Tags.Items.GEMS_DIAMOND);
         netheriteSmithingRecipe(consumer, DIAMOND_HAMMER.get(), TOOLS, NETHERITE_HAMMER.get());
+        ///   ////////////////////////////////////////////////////////////////////////////
 
-        pedestalBuilder(STONE_PEDESTAL.get(), Blocks.STONE, Blocks.STONE_SLAB).save(consumer);
-        pedestalBuilder(DEEPSLATE_PEDESTAL.get(), Blocks.POLISHED_DEEPSLATE, Blocks.POLISHED_DEEPSLATE_SLAB).save(consumer);
-        pedestalBuilder(BLACKSTONE_PEDESTAL.get(), Blocks.POLISHED_BLACKSTONE, Blocks.POLISHED_BLACKSTONE_SLAB).save(consumer);
-        pedestalBuilder(QUARTZ_PEDESTAL.get(), Ingredient.of(Blocks.QUARTZ_BLOCK, Blocks.QUARTZ_PILLAR), Ingredient.of(Blocks.QUARTZ_SLAB)).unlockedBy(getHasName(Blocks.QUARTZ_PILLAR), has(Blocks.QUARTZ_PILLAR)).unlockedBy(getHasName(Blocks.QUARTZ_BLOCK), has(Blocks.QUARTZ_BLOCK)).save(consumer);
-        pedestalBuilder(PRISMARINE_PEDESTAL.get(), Blocks.PRISMARINE, Blocks.PRISMARINE_SLAB).save(consumer);
-        pedestalBuilder(PURPUR_PEDESTAL.get(), Blocks.PURPUR_BLOCK, Blocks.PURPUR_SLAB).save(consumer);
-
+        ///   ////////////////////////////////////////////////////////////////////////////
         ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, ENDER_SCANNER.get())
                 .define('O', Tags.Items.OBSIDIAN).define('R', Tags.Items.DUSTS_REDSTONE).define('E', Items.ENDER_EYE)
                 .pattern("ORO")
@@ -202,6 +214,15 @@ public class PMRecipeProvider extends BlueprintRecipeProvider {
                 PINK_REDSTONE_LAMP.get().asItem(), PURPLE_REDSTONE_LAMP.get().asItem(), RED_REDSTONE_LAMP.get().asItem(), YELLOW_REDSTONE_LAMP.get().asItem(), WHITE_REDSTONE_LAMP.get().asItem(), Items.REDSTONE_LAMP);
 
         colorBlockWithDye(consumer, dyes, lamps, REDSTONE, "redstone_lamps");
+        ///   ////////////////////////////////////////////////////////////////////////////
+
+        ///   ////////////////////////////////////////////////////////////////////////////
+        pedestalBuilder(STONE_PEDESTAL.get(), Blocks.STONE, Blocks.STONE_SLAB).save(consumer);
+        pedestalBuilder(DEEPSLATE_PEDESTAL.get(), Blocks.POLISHED_DEEPSLATE, Blocks.POLISHED_DEEPSLATE_SLAB).save(consumer);
+        pedestalBuilder(BLACKSTONE_PEDESTAL.get(), Blocks.POLISHED_BLACKSTONE, Blocks.POLISHED_BLACKSTONE_SLAB).save(consumer);
+        pedestalBuilder(QUARTZ_PEDESTAL.get(), Ingredient.of(Blocks.QUARTZ_BLOCK, Blocks.QUARTZ_PILLAR), Ingredient.of(Blocks.QUARTZ_SLAB)).unlockedBy(getHasName(Blocks.QUARTZ_PILLAR), has(Blocks.QUARTZ_PILLAR)).unlockedBy(getHasName(Blocks.QUARTZ_BLOCK), has(Blocks.QUARTZ_BLOCK)).save(consumer);
+        pedestalBuilder(PRISMARINE_PEDESTAL.get(), Blocks.PRISMARINE, Blocks.PRISMARINE_SLAB).save(consumer);
+        pedestalBuilder(PURPUR_PEDESTAL.get(), Blocks.PURPUR_BLOCK, Blocks.PURPUR_SLAB).save(consumer);
 
         ShapedRecipeBuilder.shaped(DECORATIONS, ITEM_STAND.get())
                 .define('#', Blocks.SMOOTH_STONE_SLAB)
@@ -259,7 +280,9 @@ public class PMRecipeProvider extends BlueprintRecipeProvider {
         glassPaneBuilder(QUARTZ_GLASS_PANE.get(), QUARTZ_GLASS.get(), DECORATIONS).unlockedBy(getHasName(QUARTZ_GLASS.get()), has(PMItemTags.GLASS_QUARTZ)).save(consumer);
         glassPaneBuilder(LAPIS_GLASS_PANE.get(), LAPIS_GLASS.get(), DECORATIONS).unlockedBy(getHasName(LAPIS_GLASS.get()), has(PMItemTags.GLASS_LAPIS)).save(consumer);
         glassPaneBuilder(REDSTONE_GLASS_PANE.get(), REDSTONE_GLASS.get(), DECORATIONS).unlockedBy(getHasName(REDSTONE_GLASS.get()), has(PMItemTags.GLASS_REDSTONE)).save(consumer);
+        ///   ////////////////////////////////////////////////////////////////////////////
 
+        ///   ////////////////////////////////////////////////////////////////////////////
         ShapelessRecipeBuilder.shapeless(TOOLS, DYNAMITE.get(), 3)
                 .requires(Items.PAPER).requires(Ingredient.of(Tags.Items.GUNPOWDER), 2)
                 .requires(Tags.Items.DYES_RED)
@@ -277,16 +300,18 @@ public class PMRecipeProvider extends BlueprintRecipeProvider {
                 .requires(PMItemTags.DUSTS_SULFUR)
                 .unlockedBy(getHasName(Items.GUNPOWDER), has(Tags.Items.GUNPOWDER))
                 .save(consumer);
+        ///   ////////////////////////////////////////////////////////////////////////////
 
+        ///   ////////////////////////////////////////////////////////////////////////////
         generateRecipes(consumer, PMBlockFamilies.SNOW_BRICKS_FAMILY);
         generateRecipes(consumer, PMBlockFamilies.PACKED_ICE_BRICKS_FAMILY);
         generateRecipes(consumer, PMBlockFamilies.BLUE_ICE_BRICKS_FAMILY);
 
         polished(consumer, RecipeCategory.BUILDING_BLOCKS, PACKED_ICE_BRICKS.get(), Blocks.PACKED_ICE);
         polished(consumer, RecipeCategory.BUILDING_BLOCKS, BLUE_ICE_BRICKS.get(), Blocks.BLUE_ICE);
-        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, SNOW_BRICKS.get(), 4)
+        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, SNOW_BRICKS.get(), 8)
                 .define('S', Blocks.SNOW_BLOCK).define('#', Blocks.STONE_BRICKS)
-                .pattern("S#").pattern("##")
+                .pattern("###").pattern("#S#").pattern("###")
                 .unlockedBy(getHasName(Blocks.SNOW_BLOCK), has(Blocks.SNOW_BLOCK))
                 .save(consumer);
 
@@ -304,19 +329,23 @@ public class PMRecipeProvider extends BlueprintRecipeProvider {
         stonecutterRecipe(consumer, RecipeCategory.BUILDING_BLOCKS, PACKED_ICE_BRICK_STAIRS.get(), Blocks.PACKED_ICE);
         stonecutterRecipe(consumer, RecipeCategory.BUILDING_BLOCKS, PACKED_ICE_BRICK_SLAB.get(), Blocks.PACKED_ICE, 2);
         stonecutterRecipe(consumer, RecipeCategory.BUILDING_BLOCKS, PACKED_ICE_BRICK_WALL.get(), Blocks.PACKED_ICE);
+        stonecutterRecipe(consumer, RecipeCategory.BUILDING_BLOCKS, CHISELED_PACKED_ICE_BRICKS.get(), Blocks.PACKED_ICE);
 
         stonecutterRecipe(consumer, RecipeCategory.BUILDING_BLOCKS, PACKED_ICE_BRICK_STAIRS.get(), PACKED_ICE_BRICKS.get());
         stonecutterRecipe(consumer, RecipeCategory.BUILDING_BLOCKS, PACKED_ICE_BRICK_SLAB.get(), PACKED_ICE_BRICKS.get(), 2);
         stonecutterRecipe(consumer, RecipeCategory.DECORATIONS, PACKED_ICE_BRICK_WALL.get(), PACKED_ICE_BRICKS.get());
+        stonecutterRecipe(consumer, RecipeCategory.DECORATIONS, CHISELED_PACKED_ICE_BRICKS.get(), PACKED_ICE_BRICKS.get());
 
         stonecutterRecipe(consumer, RecipeCategory.BUILDING_BLOCKS, BLUE_ICE_BRICKS.get(), Blocks.BLUE_ICE);
         stonecutterRecipe(consumer, RecipeCategory.BUILDING_BLOCKS, BLUE_ICE_BRICK_STAIRS.get(), Blocks.BLUE_ICE);
         stonecutterRecipe(consumer, RecipeCategory.BUILDING_BLOCKS, BLUE_ICE_BRICK_SLAB.get(), Blocks.BLUE_ICE, 2);
         stonecutterRecipe(consumer, RecipeCategory.BUILDING_BLOCKS, BLUE_ICE_BRICK_WALL.get(), Blocks.BLUE_ICE);
+        stonecutterRecipe(consumer, RecipeCategory.BUILDING_BLOCKS, CHISELED_BLUE_ICE_BRICKS.get(), Blocks.BLUE_ICE);
 
         stonecutterRecipe(consumer, RecipeCategory.BUILDING_BLOCKS, BLUE_ICE_BRICK_STAIRS.get(), BLUE_ICE_BRICKS.get());
         stonecutterRecipe(consumer, RecipeCategory.BUILDING_BLOCKS, BLUE_ICE_BRICK_SLAB.get(), BLUE_ICE_BRICKS.get(), 2);
         stonecutterRecipe(consumer, RecipeCategory.DECORATIONS, BLUE_ICE_BRICK_WALL.get(), BLUE_ICE_BRICKS.get());
+        stonecutterRecipe(consumer, RecipeCategory.DECORATIONS, CHISELED_BLUE_ICE_BRICKS.get(), BLUE_ICE_BRICKS.get());
 
         ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ICE_LANTERN.get())
                 .define('*', Tags.Items.NUGGETS_IRON).define('#', Blocks.BLUE_ICE)
@@ -325,6 +354,8 @@ public class PMRecipeProvider extends BlueprintRecipeProvider {
                 .pattern("***")
                 .unlockedBy(getHasName(Items.IRON_INGOT), has(Tags.Items.INGOTS_IRON))
                 .save(consumer);
+        ///   ////////////////////////////////////////////////////////////////////////////
+
     }
 
     private static void logicGates(Consumer<FinishedRecipe> consumer) {
@@ -407,6 +438,10 @@ public class PMRecipeProvider extends BlueprintRecipeProvider {
 
     }
 
+    public static void lampRecipe(Consumer<FinishedRecipe> consumer, ItemLike output, TagKey<Item> input) {
+        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, output).define('#', input).define('G', Blocks.GLOWSTONE).pattern(" # ").pattern("#G#").pattern(" # ").unlockedBy("has_glowstone", has(Blocks.GLOWSTONE)).save(consumer);
+    }
+
     private static RecipeBuilder advancedLogicGate(ItemLike gate, ItemLike advGate) {
         return ShapelessRecipeBuilder.shapeless(RecipeCategory.REDSTONE, advGate)
                 .requires(gate).requires(Tags.Items.DUSTS_REDSTONE)
@@ -441,8 +476,8 @@ public class PMRecipeProvider extends BlueprintRecipeProvider {
     }
 
     private static RecipeBuilder mineralGlassBuilder(ItemLike glass, TagKey<Item> ingredient, RecipeCategory category) {
-        return ShapedRecipeBuilder.shaped(category, glass, 2).define('#', Tags.Items.GLASS_COLORLESS).define('@', ingredient)
-                .pattern(" # ").pattern("#@#").pattern(" # ");
+        return ShapedRecipeBuilder.shaped(category, glass, 8).define('#', Tags.Items.GLASS_COLORLESS).define('@', ingredient)
+                .pattern("###").pattern("#@#").pattern("###");
     }
 
     private static RecipeBuilder pedestalBuilder(ItemLike pedestal, ItemLike block, ItemLike slab) {

@@ -23,7 +23,7 @@ import java.util.function.Predicate;
 import static net.minecraft.world.item.CreativeModeTabs.*;
 import static net.minecraft.world.item.crafting.Ingredient.of;
 
-// block count: 104
+// block count: 108
 public class PMBlocks {
     public static final PMBlockSubRegistryHelper BLOCKS = PantzMod.REGISTRY_HELPER.getBlockSubHelper();
 
@@ -31,6 +31,7 @@ public class PMBlocks {
     public static final RegistryObject<Block> STEEL_BARS = BLOCKS.createBlock("steel_bars", () -> new IronBarsBlock(PMProperties.STEEL_BARS));
     public static final RegistryObject<Block> STEEL_DOOR = BLOCKS.createBlock("steel_door", () -> new DoorBlock(PMProperties.STEEL_DOOR, PMProperties.STEEL));
     public static final RegistryObject<Block> STEEL_TRAPDOOR = BLOCKS.createBlock("steel_trapdoor", () -> new TrapDoorBlock(PMProperties.STEEL_TRAPDOOR, PMProperties.STEEL));
+    public static final RegistryObject<Block> STEEL_LANTERN = BLOCKS.createBlock("steel_lantern", () -> new SteelLanternBlock(PMProperties.STEEL_LANTERN));
 
     public static final RegistryObject<Block> NETHER_SULFUR_ORE = BLOCKS.createBlock("nether_sulfur_ore", () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(Blocks.NETHER_QUARTZ_ORE), UniformInt.of(2, 4)));
     public static final RegistryObject<Block> SULFUR_BLOCK = BLOCKS.createBlock("sulfur_block", () -> new SulfurBlock(PMProperties.SULFUR_BLOCK));
@@ -39,11 +40,12 @@ public class PMBlocks {
     public static final RegistryObject<Block> SULFUR_BRICK_SLAB = BLOCKS.createBlock("sulfur_brick_slab", () -> new SlabBlock(PMProperties.SULFUR_BRICKS));
     public static final RegistryObject<Block> SULFUR_BRICK_WALL = BLOCKS.createBlock("sulfur_brick_wall", () -> new WallBlock(PMProperties.SULFUR_BRICKS));
     public static final RegistryObject<Block> CHISELED_SULFUR_BRICKS = BLOCKS.createBlock("chiseled_sulfur_bricks", () -> new Block(PMProperties.SULFUR_BRICKS));
+    public static final RegistryObject<Block> SULFUR_LAMP = BLOCKS.createBlock("sulfur_lamp", () -> new Block(PMProperties.SULFUR_LAMP));
 
-    public static final RegistryObject<Block> SMALL_SULFUR_BUD = BLOCKS.createBlock("small_sulfur_bud", () -> new NetherClusterBlock(3, 4, PMProperties.SMALL_SULFUR_BUD));
-    public static final RegistryObject<Block> MEDIUM_SULFUR_BUD = BLOCKS.createBlock("medium_sulfur_bud", () -> new NetherClusterBlock(4, 3, PMProperties.MEDIUM_SULFUR_BUD));
-    public static final RegistryObject<Block> LARGE_SULFUR_BUD = BLOCKS.createBlock("large_sulfur_bud", () -> new NetherClusterBlock(5, 3, PMProperties.LARGE_SULFUR_BUD));
-    public static final RegistryObject<Block> SULFUR_CLUSTER = BLOCKS.createBlock("sulfur_cluster", () -> new NetherClusterBlock(7, 5, PMProperties.SULFUR_CLUSTER));
+    public static final RegistryObject<Block> SMALL_SULFUR_BUD = BLOCKS.createBlock("small_sulfur_bud", () -> new SulfurClusterBlock(3, 4, PMProperties.SMALL_SULFUR_BUD));
+    public static final RegistryObject<Block> MEDIUM_SULFUR_BUD = BLOCKS.createBlock("medium_sulfur_bud", () -> new SulfurClusterBlock(4, 3, PMProperties.MEDIUM_SULFUR_BUD));
+    public static final RegistryObject<Block> LARGE_SULFUR_BUD = BLOCKS.createBlock("large_sulfur_bud", () -> new SulfurClusterBlock(5, 3, PMProperties.LARGE_SULFUR_BUD));
+    public static final RegistryObject<Block> SULFUR_CLUSTER = BLOCKS.createBlock("sulfur_cluster", () -> new SulfurClusterBlock(7, 5, PMProperties.SULFUR_CLUSTER));
 
     public static final RegistryObject<Block> STONE_PEDESTAL = BLOCKS.createBlock("stone_pedestal", () -> new PedestalBlock(PMProperties.PEDESTAL));
     public static final RegistryObject<Block> DEEPSLATE_PEDESTAL = BLOCKS.createBlock("deepslate_pedestal", () -> new PedestalBlock(PMProperties.DEEPSLATE_PEDESTAL));
@@ -166,7 +168,7 @@ public class PMBlocks {
                 .addItemsBefore(of(Blocks.GOLD_BLOCK), STEEL_BLOCK)
                 .addItemsBefore(modLoaded(Blocks.GOLD_BLOCK, PMConstant.CAVERNS_AND_CHASMS), STEEL_BARS)
                 .addItemsBefore(of(Blocks.GOLD_BLOCK), STEEL_DOOR, STEEL_TRAPDOOR)
-                .addItemsBefore(of(Blocks.AMETHYST_BLOCK), SULFUR_BLOCK, SULFUR_BRICKS, CHISELED_SULFUR_BRICKS, SULFUR_BRICK_STAIRS, SULFUR_BRICK_SLAB, SULFUR_BRICK_WALL)
+                .addItemsBefore(of(Blocks.AMETHYST_BLOCK), SULFUR_BLOCK, SULFUR_BRICKS, CHISELED_SULFUR_BRICKS, SULFUR_BRICK_STAIRS, SULFUR_BRICK_SLAB, SULFUR_BRICK_WALL, SULFUR_LAMP)
 
                 .tab(NATURAL_BLOCKS)
                 .addItemsBefore(of(Blocks.AMETHYST_BLOCK), SULFUR_BLOCK, SMALL_SULFUR_BUD, MEDIUM_SULFUR_BUD, LARGE_SULFUR_BUD, SULFUR_CLUSTER)
@@ -177,7 +179,7 @@ public class PMBlocks {
                 .addItemsBefore(of(Items.PAINTING), ITEM_STAND, GLOW_ITEM_STAND)
                 .addItemsBefore(of(Blocks.SCAFFOLDING), ROPE_LADDER)
                 .addItemsBefore(of(Blocks.BARREL), TRASH_CAN)
-                .addItemsBefore(of(Blocks.CHAIN), ICE_LANTERN)
+                .addItemsBefore(of(Blocks.CHAIN), STEEL_LANTERN, ICE_LANTERN)
                 .addItemsAfter(of(Blocks.DAMAGED_ANVIL), STONE_PEDESTAL, DEEPSLATE_PEDESTAL, BLACKSTONE_PEDESTAL, QUARTZ_PEDESTAL, PRISMARINE_PEDESTAL, PURPUR_PEDESTAL)
                 .addItemsAfter(of(Blocks.BELL), MERCURY_GLOBE, VENUS_GLOBE, EARTH_GLOBE, MARS_GLOBE, JUPITER_GLOBE, SATURN_GLOBE, URANUS_GLOBE, NEPTUNE_GLOBE, PLUTO_GLOBE, CERES_GLOBE, MAKEMAKE_GLOBE, MOON_GLOBE, IO_GLOBE, EUROPA_GLOBE, CALLISTO_GLOBE, GANYMEDE_GLOBE, SUN_GLOBE, BLUE_SUN_GLOBE, IRIS_GLOBE)
                 .addItemsAfter(of(Blocks.REDSTONE_LAMP), WHITE_REDSTONE_LAMP, ORANGE_REDSTONE_LAMP, MAGENTA_REDSTONE_LAMP,

@@ -1,0 +1,7 @@
+{
+  "parent": "pantz_mod:block/template_hanging_steel_lantern",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "texture": "pantz_mod:block/steel_lantern"
+  }
+}

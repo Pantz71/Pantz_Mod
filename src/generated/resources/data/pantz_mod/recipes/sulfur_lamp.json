@@ -3,16 +3,19 @@
   "category": "building",
   "key": {
     "#": {
-      "item": "pantz_mod:sulfur_shard"
+      "tag": "forge:gems/sulfur"
+    },
+    "G": {
+      "item": "minecraft:glowstone"
     }
   },
   "pattern": [
-    "###",
-    "###",
-    "###"
+    " # ",
+    "#G#",
+    " # "
   ],
   "result": {
-    "item": "pantz_mod:sulfur_block"
+    "item": "pantz_mod:sulfur_lamp"
   },
   "show_notification": true
 }

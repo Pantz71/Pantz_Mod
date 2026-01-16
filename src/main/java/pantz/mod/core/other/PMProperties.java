@@ -25,9 +25,11 @@ public class PMProperties {
     public static final BlockBehaviour.Properties STEEL_DOOR = BlockBehaviour.Properties.of().requiresCorrectToolForDrops().strength(5.0F).noOcclusion().pushReaction(PushReaction.DESTROY).mapColor(MapColor.COLOR_GRAY);
     public static final BlockBehaviour.Properties STEEL_TRAPDOOR = BlockBehaviour.Properties.of().requiresCorrectToolForDrops().strength(5.0F).noOcclusion().isValidSpawn(PMProperties::never).mapColor(MapColor.COLOR_GRAY);
     public static final BlockBehaviour.Properties STEEL_BARS = BlockBehaviour.Properties.of().requiresCorrectToolForDrops().strength(5.0F, 6.0F).sound(SoundType.METAL).noOcclusion();
+    public static final BlockBehaviour.Properties STEEL_LANTERN = BlockBehaviour.Properties.of().mapColor(MapColor.METAL).forceSolidOn().requiresCorrectToolForDrops().strength(3.5F).sound(SoundType.LANTERN).lightLevel(litBlockEmission(15));
 
     public static final BlockBehaviour.Properties SULFUR_BLOCK = BlockBehaviour.Properties.of().instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(5.0F, 6.0F).mapColor(MapColor.COLOR_YELLOW).sound(SoundType.AMETHYST).lightLevel(litBlockEmission(12)).ignitedByLava().randomTicks();
     public static final BlockBehaviour.Properties SULFUR_BRICKS = BlockBehaviour.Properties.of().instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(5.0F, 6.0F).mapColor(MapColor.COLOR_YELLOW).sound(SoundType.AMETHYST).ignitedByLava();
+    public static final BlockBehaviour.Properties SULFUR_LAMP = BlockBehaviour.Properties.of().instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(5.0F, 6.0F).mapColor(MapColor.COLOR_YELLOW).sound(SoundType.AMETHYST).lightLevel(light -> 15).ignitedByLava();
 
     public static final BlockBehaviour.Properties PEDESTAL = BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(1.5f, 6.0f).sound(SoundType.STONE);
     public static final BlockBehaviour.Properties DEEPSLATE_PEDESTAL = BlockBehaviour.Properties.of().mapColor(MapColor.DEEPSLATE).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(3.0f, 6.0f).sound(SoundType.DEEPSLATE);

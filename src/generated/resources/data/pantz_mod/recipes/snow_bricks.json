@@ -10,11 +10,12 @@
     }
   },
   "pattern": [
-    "S#",
-    "##"
+    "###",
+    "#S#",
+    "###"
   ],
   "result": {
-    "count": 4,
+    "count": 8,
     "item": "pantz_mod:snow_bricks"
   },
   "show_notification": true

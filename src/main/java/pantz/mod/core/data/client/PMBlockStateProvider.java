@@ -30,11 +30,13 @@ public class PMBlockStateProvider extends BlueprintBlockStateProvider {
         this.block(STEEL_BLOCK);
         this.ironBarsBlock(STEEL_BARS);
         this.doorBlocks(STEEL_DOOR.get(), STEEL_TRAPDOOR.get());
+        this.litableLanternBlock(STEEL_LANTERN, modLoc("block/template_steel_lantern"), modLoc("block/template_hanging_steel_lantern"));
 
         this.litableBlock(SULFUR_BLOCK, "_lit");
         this.blockFamily(PMBlockFamilies.SULFUR_BRICKS_FAMILY);
         this.block(NETHER_SULFUR_ORE);
         this.block(CHISELED_SULFUR_BRICKS);
+        this.block(SULFUR_LAMP);
 
         this.clusterBlock(SMALL_SULFUR_BUD);
         this.clusterBlock(MEDIUM_SULFUR_BUD);
@@ -111,7 +113,7 @@ public class PMBlockStateProvider extends BlueprintBlockStateProvider {
         this.block(CHISELED_BLUE_ICE_BRICKS);
         this.doorBlocks(PACKED_ICE_DOOR.get(), PACKED_ICE_TRAPDOOR.get());
         this.doorBlocks(BLUE_ICE_DOOR.get(), BLUE_ICE_TRAPDOOR.get());
-        this.iceLanternBlock(ICE_LANTERN);
+        this.litableLanternBlock(ICE_LANTERN, modLoc("block/template_ice_lantern"), modLoc("block/template_hanging_ice_lantern"));
     }
 
     private void redstoneConfiguratorBlock(RegistryObject<Block> block) {
@@ -378,9 +380,8 @@ public class PMBlockStateProvider extends BlueprintBlockStateProvider {
         return models().getBuilder(name + "_" + suffix).parent(new ModelFile.UncheckedModelFile(new ResourceLocation("block/template_glass_pane_" + suffix)));
     }
 
-    private void iceLanternBlock(RegistryObject<Block> block) {
+    private void litableLanternBlock(RegistryObject<Block> block, ResourceLocation baseParent, ResourceLocation hangingParent) {
         String baseName = name(block.get()), hangingSuffix = "_hanging", litSuffix = "_on";
-        ResourceLocation baseParent = modLoc("block/template_ice_lantern"), hangingParent = modLoc("block/template" + hangingSuffix + "_ice_lantern");
         ResourceLocation baseTexture = blockTexture(block.get()), litTexture = suffix(baseTexture, litSuffix);
 
         for (boolean hanging : new boolean[]{false, true}) {

@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_sulfur_crystal": {
+    "has_sulfur_shard": {
       "conditions": {
         "items": [
           {
             "items": [
-              "pantz_mod:sulfur_crystal"
+              "pantz_mod:sulfur_shard"
             ]
           }
         ]
@@ -22,7 +22,7 @@
   },
   "requirements": [
     [
-      "has_sulfur_crystal",
+      "has_sulfur_shard",
       "has_the_recipe"
     ]
   ],

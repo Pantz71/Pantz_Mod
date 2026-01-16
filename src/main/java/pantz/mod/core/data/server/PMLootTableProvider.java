@@ -9,7 +9,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
@@ -58,8 +57,8 @@ public class PMLootTableProvider extends LootTableProvider {
         protected void generate() {
             // dropSelf
             for (RegistryObject<?> block : new RegistryObject[]{
-                    STEEL_BLOCK, STEEL_BARS, STEEL_TRAPDOOR,
-                    SULFUR_BLOCK, SULFUR_BRICKS, SULFUR_BRICK_STAIRS, SULFUR_BRICK_WALL, CHISELED_SULFUR_BRICKS,
+                    STEEL_BLOCK, STEEL_BARS, STEEL_TRAPDOOR, STEEL_LANTERN,
+                    SULFUR_BLOCK, SULFUR_BRICKS, SULFUR_BRICK_STAIRS, SULFUR_BRICK_WALL, CHISELED_SULFUR_BRICKS, SULFUR_LAMP,
                     STONE_PEDESTAL, DEEPSLATE_PEDESTAL, BLACKSTONE_PEDESTAL, QUARTZ_PEDESTAL, PURPUR_PEDESTAL, PRISMARINE_PEDESTAL,
                     ENDER_SCANNER, REDSTONE_CONFIGURATOR, WEATHER_DETECTOR, ENTITY_DETECTOR, POWER_DISPLAYER,
                     NOT_GATE, AND_GATE, OR_GATE, NAND_GATE, NOR_GATE, XOR_GATE, XNOR_GATE,
@@ -102,11 +101,11 @@ public class PMLootTableProvider extends LootTableProvider {
 
             this.add(NETHER_SULFUR_ORE.get(), this.createDustOreDrop(NETHER_SULFUR_ORE.get(), PMItems.SULFUR_DUST.get(), 3, 7));
             
-            this.add(SULFUR_CLUSTER.get(), createSilkTouchDispatchTable(SULFUR_CLUSTER.get(), LootItem.lootTableItem(PMItems.SULFUR_CRYSTAL.get())
+            this.add(SULFUR_CLUSTER.get(), createSilkTouchDispatchTable(SULFUR_CLUSTER.get(), LootItem.lootTableItem(PMItems.SULFUR_SHARD.get())
                     .apply(SetItemCountFunction.setCount(ConstantValue.exactly(4.0F)))
                     .apply(ApplyBonusCount.addOreBonusCount(Enchantments.BLOCK_FORTUNE))
                     .when(MatchTool.toolMatches(ItemPredicate.Builder.item().of(ItemTags.CLUSTER_MAX_HARVESTABLES)))
-                    .otherwise(this.applyExplosionDecay(SULFUR_CLUSTER.get(), LootItem.lootTableItem(PMItems.SULFUR_CRYSTAL.get())
+                    .otherwise(this.applyExplosionDecay(SULFUR_CLUSTER.get(), LootItem.lootTableItem(PMItems.SULFUR_SHARD.get())
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(2.0F)))))));
 
 
