@@ -5,10 +5,13 @@ import net.minecraft.core.BlockSource;
 import net.minecraft.core.Direction;
 import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
 import net.minecraft.core.dispenser.DispenseItemBehavior;
+import net.minecraft.core.dispenser.OptionalDispenseItemBehavior;
+import net.minecraft.world.entity.animal.horse.AbstractHorse;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.DispenserBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.AABB;
 import pantz.mod.common.block.RopeLadderBlock;
 
 public class PMDispenserBehaviors {
@@ -60,6 +63,22 @@ public class PMDispenserBehaviors {
 
             stack.shrink(1);
             return stack;
+        }
+    };
+
+    public static OptionalDispenseItemBehavior EQUIP_HORSE_ARMOR = new OptionalDispenseItemBehavior() {
+        @Override
+        protected ItemStack execute(BlockSource source, ItemStack stack) {
+            BlockPos pos = source.getPos().relative(source.getBlockState().getValue(DispenserBlock.FACING));
+            for (AbstractHorse abstractHorse : source.getLevel().getEntitiesOfClass(AbstractHorse.class, new AABB(pos), horse -> horse.isAlive() && horse.canWearArmor())) {
+                if (abstractHorse.isArmor(stack) && !abstractHorse.isWearingArmor() && abstractHorse.isTamed()) {
+                    abstractHorse.getSlot(401).set(stack.split(1));
+                    this.setSuccess(true);
+                    return stack;
+                }
+            }
+
+            return super.execute(source, stack);
         }
     };
 }

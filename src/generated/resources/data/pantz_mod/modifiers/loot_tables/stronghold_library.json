@@ -1,0 +1,28 @@
+{
+  "modifiers": [
+    {
+      "type": "entries",
+      "config": {
+        "entries": [
+          {
+            "type": "minecraft:item",
+            "name": "pantz_mod:earth_globe",
+            "weight": 2
+          },
+          {
+            "type": "minecraft:item",
+            "name": "pantz_mod:callisto_globe"
+          },
+          {
+            "type": "minecraft:item",
+            "name": "pantz_mod:sun_globe"
+          }
+        ],
+        "index": 1,
+        "replace": false
+      }
+    }
+  ],
+  "priority": "normal",
+  "selector": "minecraft:chests/stronghold_library"
+}

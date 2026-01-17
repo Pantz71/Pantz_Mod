@@ -1,0 +1,63 @@
+{
+  "modifiers": [
+    {
+      "type": "entries",
+      "config": {
+        "entries": [
+          {
+            "type": "minecraft:item",
+            "functions": [
+              {
+                "add": false,
+                "count": {
+                  "type": "minecraft:uniform",
+                  "max": 4.0,
+                  "min": 1.0
+                },
+                "function": "minecraft:set_count"
+              }
+            ],
+            "name": "pantz_mod:sulfur_shard",
+            "weight": 15
+          },
+          {
+            "type": "minecraft:item",
+            "functions": [
+              {
+                "add": false,
+                "count": {
+                  "type": "minecraft:uniform",
+                  "max": 7.0,
+                  "min": 2.0
+                },
+                "function": "minecraft:set_count"
+              }
+            ],
+            "name": "pantz_mod:sulfur_dust",
+            "weight": 15
+          },
+          {
+            "type": "minecraft:item",
+            "functions": [
+              {
+                "add": false,
+                "count": {
+                  "type": "minecraft:uniform",
+                  "max": 4.0,
+                  "min": 1.0
+                },
+                "function": "minecraft:set_count"
+              }
+            ],
+            "name": "pantz_mod:dynamite",
+            "weight": 3
+          }
+        ],
+        "index": 1,
+        "replace": false
+      }
+    }
+  ],
+  "priority": "normal",
+  "selector": "minecraft:chests/bastion_hoglin_stable"
+}

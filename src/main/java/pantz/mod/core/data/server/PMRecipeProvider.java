@@ -569,7 +569,7 @@ public class PMRecipeProvider extends BlueprintRecipeProvider {
             Item item1 = dyeableItems.get(i);
             ShapelessRecipeBuilder.shapeless(category, item1).requires(item)
                     .requires(Ingredient.of(dyeableItems.stream().filter(items -> !items.equals(item1)).map(ItemStack::new)))
-                    .group(group).unlockedBy("has_needed_dye", has(item)).save(consumer, "dye_" + getItemName(item1));
+                    .group(group).unlockedBy("has_needed_dye", has(item)).save(consumer, new ResourceLocation(this.getModID(), "dye_" + getItemName(item1)));
         }
     }
 

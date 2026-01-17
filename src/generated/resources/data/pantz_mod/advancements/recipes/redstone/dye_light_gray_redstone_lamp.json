@@ -6,7 +6,7 @@
         "items": [
           {
             "items": [
-              "minecraft:green_dye"
+              "minecraft:light_gray_dye"
             ]
           }
         ]
@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:dye_green_redstone_lamp"
+        "recipe": "pantz_mod:dye_light_gray_redstone_lamp"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -28,7 +28,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:dye_green_redstone_lamp"
+      "pantz_mod:dye_light_gray_redstone_lamp"
     ]
   },
   "sends_telemetry_event": false
