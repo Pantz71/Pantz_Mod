@@ -5,7 +5,16 @@
   "advancements.pantz_mod.adventure.look_at_scanner.description": "Look directly into the middle of Ender Scanner's eye until it emits full power",
   "advancements.pantz_mod.end.redirect_teleportation.title": "Dynamic Wormhole",
   "advancements.pantz_mod.end.redirect_teleportation.description": "Redirect an Ender Pearl's teleportation using an Enderporter",
-
+  "advancements.pantz_mod.adventure.obtain_moon_globe.title": "Minions! Tonight We Steal the Moon!",
+  "advancements.pantz_mod.adventure.obtain_moon_globe.description": "Obtain a Moon Globe",
+  "advancements.pantz_mod.nether.obtain_jupiter_globe.title": "An Open Wound",
+  "advancements.pantz_mod.nether.obtain_jupiter_globe.description": "Obtain a Jupiter Globe",
+  "advancements.pantz_mod.nether.obtain_saturn_globe.title": "The Gateway",
+  "advancements.pantz_mod.nether.obtain_saturn_globe.description": "Obtain a Saturn Globe",
+  "advancements.pantz_mod.nether.obtain_neptune_globe.title": "The Lens",
+  "advancements.pantz_mod.nether.obtain_neptune_globe.description": "Obtain a Neptune Globe",
+  "advancements.pantz_mod.end.obtain_iris_globe.title": "The Hungry Eye",
+  "advancements.pantz_mod.end.obtain_iris_globe.description": "Obtain an Iris Globe",
 
   "_misc": "misc",
   "tooltip.pantz_mod.entity_filter.none": "None",
@@ -24,7 +33,7 @@
   "subtitles.pantz_mod.enderporter.deplete": "Enderporter depletes",
 
   "_steel": "steel",
-  "block.pantz_mod.steel_block": "Steel Block",
+  "block.pantz_mod.steel_block": "Block of Steel",
   "block.pantz_mod.steel_door": "Steel Door",
   "block.pantz_mod.steel_trapdoor": "Steel Trapdoor",
   "block.pantz_mod.steel_bars": "Steel Bars",
@@ -48,7 +57,7 @@
 
   "_sulfur": "sulfur",
   "block.pantz_mod.nether_sulfur_ore": "Nether Sulfur Ore",
-  "block.pantz_mod.sulfur_block": "Sulfur Block",
+  "block.pantz_mod.sulfur_block": "Block of Sulfur",
   "block.pantz_mod.sulfur_bricks": "Sulfur Bricks",
   "block.pantz_mod.sulfur_brick_stairs": "Sulfur Brick Stairs",
   "block.pantz_mod.sulfur_brick_slab": "Sulfur Brick Slab",
@@ -70,6 +79,7 @@
   "item.pantz_mod.trowel": "Trowel",
   "item.pantz_mod.honey_deserializer": "Honey Deserializer",
   "item.pantz_mod.entity_filter": "Entity Filter",
+  "item.pantz_mod.cactus_key": "Cactus Key",
 
   "item.pantz_mod.excavator": "Excavator",
   "item.pantz_mod.diamond_excavator": "Diamond Excavator",
@@ -78,8 +88,6 @@
   "item.pantz_mod.hammer": "Hammer",
   "item.pantz_mod.diamond_hammer": "Diamond Hammer",
   "item.pantz_mod.netherite_hammer": "Netherite Hammer",
-
-  "item.pantz_mod.cactus_key": "Cactus Key",
 
   "item.pantz_mod.dynamite": "Dynamite",
   "item.pantz_mod.combat_dynamite": "Combat Dynamite",

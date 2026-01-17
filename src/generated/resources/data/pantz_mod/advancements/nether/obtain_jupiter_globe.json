@@ -1,0 +1,38 @@
+{
+  "parent": "minecraft:nether/find_fortress",
+  "criteria": {
+    "jupiter_globe": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "pantz_mod:jupiter_globe"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.pantz_mod.nether.obtain_jupiter_globe.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "pantz_mod:jupiter_globe"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.pantz_mod.nether.obtain_jupiter_globe.title"
+    }
+  },
+  "requirements": [
+    [
+      "jupiter_globe"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

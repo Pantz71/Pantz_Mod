@@ -1,0 +1,38 @@
+{
+  "parent": "minecraft:end/find_end_city",
+  "criteria": {
+    "iris_globe": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "pantz_mod:iris_globe"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.pantz_mod.end.obtain_iris_globe.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "pantz_mod:iris_globe"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.pantz_mod.end.obtain_iris_globe.title"
+    }
+  },
+  "requirements": [
+    [
+      "iris_globe"
+    ]
+  ],
+  "sends_telemetry_event": true
+}
