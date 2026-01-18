@@ -46,7 +46,7 @@ public class PMEvents {
             player.swing(InteractionHand.MAIN_HAND);
             ((EntityFilterItem) stack.getItem()).addMobToStack(stack, type);
             player.displayClientMessage(
-                    Component.translatable("message.pantz_mod.entity_filter.added", type.getDescription()),
+                    Component.translatable("message.pantz_mod.entity.added", type.getDescription()),
                     true
             );
 
