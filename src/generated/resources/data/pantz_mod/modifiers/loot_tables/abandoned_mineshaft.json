@@ -6,11 +6,13 @@
         "entries": [
           {
             "type": "minecraft:item",
-            "name": "pantz_mod:ganymede_globe"
+            "name": "pantz_mod:ganymede_globe",
+            "weight": 10
           },
           {
             "type": "minecraft:item",
-            "name": "pantz_mod:ceres_globe"
+            "name": "pantz_mod:ceres_globe",
+            "weight": 10
           }
         ],
         "index": 0,

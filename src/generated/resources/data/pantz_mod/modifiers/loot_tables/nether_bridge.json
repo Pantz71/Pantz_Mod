@@ -6,16 +6,13 @@
         "entries": [
           {
             "type": "minecraft:item",
-            "name": "pantz_mod:jupiter_globe"
+            "name": "pantz_mod:jupiter_globe",
+            "weight": 8
           },
           {
             "type": "minecraft:item",
-            "name": "pantz_mod:saturn_globe"
-          },
-          {
-            "type": "minecraft:item",
-            "name": "pantz_mod:steel_horse_armor",
-            "weight": 10
+            "name": "pantz_mod:saturn_globe",
+            "weight": 8
           }
         ],
         "index": 1,
@@ -73,6 +70,11 @@
             ],
             "name": "pantz_mod:dynamite",
             "weight": 3
+          },
+          {
+            "type": "minecraft:item",
+            "name": "pantz_mod:steel_horse_armor",
+            "weight": 10
           }
         ],
         "index": 0,

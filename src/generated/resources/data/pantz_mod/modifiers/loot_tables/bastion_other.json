@@ -18,7 +18,7 @@
               }
             ],
             "name": "pantz_mod:sulfur_shard",
-            "weight": 15
+            "weight": 20
           },
           {
             "type": "minecraft:item",
@@ -34,7 +34,7 @@
               }
             ],
             "name": "pantz_mod:sulfur_dust",
-            "weight": 15
+            "weight": 25
           },
           {
             "type": "minecraft:item",

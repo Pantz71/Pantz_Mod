@@ -12,7 +12,6 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -36,7 +35,6 @@ public class EntityFilterItem extends Item {
     public EntityFilterItem(Properties props) {
         super(props);
     }
-
 
 
     public boolean addMobToStack(ItemStack stack, EntityType<?> type) {
@@ -95,27 +93,27 @@ public class EntityFilterItem extends Item {
         if (player.isShiftKeyDown()) {
             Set<ResourceLocation> filterMobs = getMobsFromStack(stack);
             if (!filterMobs.isEmpty()) {
-                List<ResourceLocation> detectorMobs = detector.getMobList();
+                List<ResourceLocation> detectorMobs = detector.getEntityList();
                 for (ResourceLocation mob : filterMobs) {
                     if (!detectorMobs.contains(mob)) detectorMobs.add(mob);
                 }
-                detector.setFilterMobs(detectorMobs);
+                detector.setFilteredEntities(detectorMobs);
                 player.displayClientMessage(
-                        Component.translatable("message.pantz_mod.entity_filter.applied", filterMobs.size()),
+                        Component.translatable("message.pantz_mod.entity.applied", filterMobs.size()),
                         true);
             }
         } else {
-            List<ResourceLocation> mobList = detector.getMobList();
+            List<ResourceLocation> mobList = detector.getEntityList();
             if (!mobList.isEmpty()) {
                 ResourceLocation removed = mobList.get(mobList.size() - 1);
-                detector.removeLastMob();
+                detector.removeLastEntity();
 
                 Component mobName = ForgeRegistries.ENTITY_TYPES.getValue(removed) != null
                         ? ForgeRegistries.ENTITY_TYPES.getValue(removed).getDescription()
-                        : Component.translatable("tooltip.pantz_mod.entity_filter.unknown").withStyle(ChatFormatting.DARK_PURPLE);
+                        : Component.translatable("tooltip.pantz_mod.entity.unknown").withStyle(ChatFormatting.DARK_PURPLE);
 
                 player.displayClientMessage(
-                        Component.translatable("message.pantz_mod.entity_filter.removed", mobName),
+                        Component.translatable("message.pantz_mod.entity.removed", mobName),
                         true);
             }
         }
@@ -144,7 +142,7 @@ public class EntityFilterItem extends Item {
                 Component mobName = (type != null) ? type.getDescription() : Component.literal(removed.toString());
 
                 player.displayClientMessage(
-                        Component.translatable("message.pantz_mod.entity_filter.removed", mobName),
+                        Component.translatable("message.pantz_mod.entity.removed", mobName),
                         true
                 );
             }
@@ -182,12 +180,12 @@ public class EntityFilterItem extends Item {
         Set<ResourceLocation> set = getMobsFromStack(stack);
 
         if (set.isEmpty()) {
-            tooltip.add(Component.translatable("tooltip.pantz_mod.entity_filter", Component.translatable("tooltip.pantz_mod.entity_filter.none")).withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.translatable("tooltip.pantz_mod.entity", Component.translatable("tooltip.pantz_mod.entity.none")).withStyle(ChatFormatting.GRAY));
         } else {
             for (ResourceLocation id : set) {
                 EntityType<?> type = ForgeRegistries.ENTITY_TYPES.getValue(id);
                 Component name = (type != null) ? type.getDescription() : Component.literal(id.toString());
-                tooltip.add(Component.translatable("tooltip.pantz_mod.entity_filter", name).withStyle(ChatFormatting.GREEN));
+                tooltip.add(Component.translatable("tooltip.pantz_mod.entity", name).withStyle(ChatFormatting.GREEN));
             }
         }
 

@@ -101,7 +101,7 @@ public class EntityDetectorBlock extends BaseEntityBlock {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-        if (level.isClientSide) return null;
+        if (level.isClientSide()) return null;
         return (lvl, pos, st, be) -> {
             if (be instanceof EntityDetectorBlockEntity detector) {
                 EntityDetectorBlockEntity.serverTick(lvl, pos, st, detector);

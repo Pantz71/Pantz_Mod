@@ -35,7 +35,7 @@
               }
             ],
             "name": "pantz_mod:sulfur_shard",
-            "weight": 15
+            "weight": 25
           },
           {
             "type": "minecraft:item",
@@ -51,7 +51,7 @@
               }
             ],
             "name": "pantz_mod:sulfur_dust",
-            "weight": 15
+            "weight": 25
           },
           {
             "type": "minecraft:item",
@@ -144,6 +144,38 @@
             ],
             "name": "pantz_mod:steel_pickaxe",
             "weight": 6
+          },
+          {
+            "type": "minecraft:item",
+            "functions": [
+              {
+                "add": false,
+                "damage": {
+                  "type": "minecraft:uniform",
+                  "max": 1.0,
+                  "min": 0.8
+                },
+                "function": "minecraft:set_damage"
+              }
+            ],
+            "name": "pantz_mod:steel_chestplate",
+            "weight": 8
+          },
+          {
+            "type": "minecraft:item",
+            "functions": [
+              {
+                "add": false,
+                "damage": {
+                  "type": "minecraft:uniform",
+                  "max": 1.0,
+                  "min": 0.8
+                },
+                "function": "minecraft:set_damage"
+              }
+            ],
+            "name": "pantz_mod:steel_helmet",
+            "weight": 8
           }
         ],
         "index": 0,

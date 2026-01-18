@@ -36,7 +36,7 @@ public class PMItems {
     public static final RegistryObject<Item> STEEL_CHESTPLATE = ITEMS.createItem("steel_chestplate", () -> new ArmorItem(PMArmorMaterials.STEEL, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
     public static final RegistryObject<Item> STEEL_LEGGINGS = ITEMS.createItem("steel_leggings", () -> new ArmorItem(PMArmorMaterials.STEEL, ArmorItem.Type.LEGGINGS, new Item.Properties()));
     public static final RegistryObject<Item> STEEL_BOOTS = ITEMS.createItem("steel_boots", () -> new ArmorItem(PMArmorMaterials.STEEL, ArmorItem.Type.BOOTS, new Item.Properties()));
-    public static final RegistryObject<Item> STEEL_HORSE_ARMOR = ITEMS.createItem("steel_horse_armor", () -> new HorseArmorItem(6, "steel", PropertyUtil.stacksOnce()));
+    public static final RegistryObject<Item> STEEL_HORSE_ARMOR = ITEMS.createItem("steel_horse_armor", () -> new HorseArmorItem(6, PantzMod.location("textures/entity/horse/armor/horse_armor_silver.png"), PropertyUtil.stacksOnce()));
 
     public static final RegistryObject<Item> SULFUR_DUST = ITEMS.createItem("sulfur_dust", basicItem());
     public static final RegistryObject<Item> SULFUR_SHARD = ITEMS.createItem("sulfur_shard", basicItem());

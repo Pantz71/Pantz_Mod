@@ -3,6 +3,7 @@ package pantz.mod.core.data.server;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.FrameType;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
+import net.minecraft.advancements.critereon.ItemUsedOnLocationTrigger;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.network.chat.Component;
@@ -16,6 +17,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import pantz.mod.core.PantzMod;
 import pantz.mod.core.other.PMCriteriaTriggers;
 import pantz.mod.core.registry.PMBlocks;
+import pantz.mod.core.registry.PMItems;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -57,6 +59,11 @@ public class PMAdvancementProvider implements AdvancementGenerator {
         createItemAdvancement("obtain_iris_globe", "end", new ResourceLocation("end/find_end_city"),
                 PMBlocks.IRIS_GLOBE.get(), FrameType.TASK, true, true, false)
                 .save(consumer, advancement("end/obtain_iris_globe"));
+
+        createAdvancement("use_dynamite", "adventure", new ResourceLocation("adventure/root"),
+                PMItems.DYNAMITE.get(), FrameType.TASK, true, true, false)
+                .addCriterion("dynamite", PMCriteriaTriggers.USE_DYNAMITE.createInstance())
+                .save(consumer, advancement("adventure/use_dynamite"));
     }
 
     private static Advancement.Builder createAdvancement(String name, String category, Advancement parent, ItemLike icon, FrameType frame, boolean showToast, boolean announceToChat, boolean hidden) {

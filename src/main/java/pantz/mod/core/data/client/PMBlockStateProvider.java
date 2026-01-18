@@ -126,12 +126,9 @@ public class PMBlockStateProvider extends BlueprintBlockStateProvider {
             ModelFile model = models()
                     .withExistingParent(modelName, modLoc("block/template_redstone_configurator"))
                     .texture("front", frontTexture);
-            for (Direction dir : Direction.values()) {
-                int rotX = 0;
+            for (Direction dir : Direction.Plane.HORIZONTAL) {
                 int rotY = 0;
                 switch (dir) {
-                    case UP -> rotX = 90;
-                    case DOWN -> rotX = 270;
                     case NORTH -> rotY = 180;
                     case SOUTH -> {}
                     case WEST -> rotY = 90;
@@ -141,7 +138,7 @@ public class PMBlockStateProvider extends BlueprintBlockStateProvider {
                         .with(RedstoneConfiguratorBlock.FACING, dir)
                         .with(RedstoneConfiguratorBlock.POWER, power)
                         .modelForState().modelFile(model)
-                        .rotationX(rotX).rotationY(rotY).addModel();
+                        .rotationY(rotY).addModel();
             }
         }
         blockItem(block);

@@ -8,7 +8,9 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -19,12 +21,13 @@ import net.minecraft.world.phys.BlockHitResult;
 import javax.annotation.Nullable;
 
 public class RedstoneConfiguratorBlock extends Block {
-    public static final DirectionProperty FACING = BlockStateProperties.FACING;
+    public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     public static final IntegerProperty POWER = BlockStateProperties.POWER;
 
     public RedstoneConfiguratorBlock(Properties props) {
         super(props);
-        this.registerDefaultState(this.getStateDefinition().any().setValue(FACING, Direction.NORTH)
+        this.registerDefaultState(this.getStateDefinition().any()
+                .setValue(FACING, Direction.NORTH)
                 .setValue(POWER, 0));
     }
 
@@ -36,22 +39,28 @@ public class RedstoneConfiguratorBlock extends Block {
     @Nullable
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
-        return this.defaultBlockState().setValue(FACING, context.getNearestLookingDirection());
+        return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection());
     }
 
     @Override
-    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+    public InteractionResult use(BlockState state, Level level, BlockPos pos,
+                                 Player player, InteractionHand hand, BlockHitResult hit) {
         if (!level.isClientSide()) {
-            int currentPower = state.getValue(POWER);
-            int nextPower = (currentPower + 1) % 16;
-            level.setBlockAndUpdate(pos, state.setValue(POWER, nextPower));
+            int nextPower = (state.getValue(POWER) + 1) % 16;
+            BlockState newState = state.setValue(POWER, nextPower);
+
+            level.setBlock(pos, newState, 3);
+
+            Direction back = state.getValue(FACING).getOpposite();
+
+            level.updateNeighborsAt(pos.relative(back), this);
             level.updateNeighborsAt(pos, this);
         }
         return InteractionResult.sidedSuccess(level.isClientSide());
     }
 
     @Override
-    public boolean isSignalSource(BlockState state) {
+    public boolean isSignalSource(BlockState pState) {
         return true;
     }
 
@@ -61,7 +70,7 @@ public class RedstoneConfiguratorBlock extends Block {
     }
 
     @Override
-    public int getDirectSignal(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
-        return getSignal(state, level, pos, direction);
+    public boolean getWeakChanges(BlockState state, LevelReader level, BlockPos pos) {
+        return true;
     }
 }

@@ -49,7 +49,8 @@
                 "function": "minecraft:set_count"
               }
             ],
-            "name": "pantz_mod:combat_dynamite"
+            "name": "pantz_mod:combat_dynamite",
+            "weight": 2
           },
           {
             "type": "minecraft:item",
