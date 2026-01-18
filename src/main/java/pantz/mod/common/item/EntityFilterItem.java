@@ -91,7 +91,7 @@ public class EntityFilterItem extends Item {
         if (!(be instanceof EntityDetectorBlockEntity detector)) return InteractionResult.PASS;
 
         if (player.isShiftKeyDown()) {
-            Set<ResourceLocation> filterMobs = getMobsFromStack(stack);
+            Set<ResourceLocation> filterMobs = getEntitiesFromStack(stack);
             if (!filterMobs.isEmpty()) {
                 List<ResourceLocation> detectorMobs = detector.getEntityList();
                 for (ResourceLocation mob : filterMobs) {
@@ -132,10 +132,10 @@ public class EntityFilterItem extends Item {
         if (hit.getType() != HitResult.Type.MISS) {
             return InteractionResultHolder.pass(stack);
         }
-        Set<ResourceLocation> mobs = getMobsFromStack(stack);
+        Set<ResourceLocation> mobs = getEntitiesFromStack(stack);
         if (!mobs.isEmpty()) {
             ResourceLocation removed = removeLast(mobs);
-            saveMobsToStack(stack, mobs);
+            saveEntitiesToStack(stack, mobs);
 
             if (removed != null) {
                 EntityType<?> type = ForgeRegistries.ENTITY_TYPES.getValue(removed);
@@ -154,7 +154,7 @@ public class EntityFilterItem extends Item {
 
 
 
-    private void saveMobsToStack(ItemStack stack, Set<ResourceLocation> mobs) {
+    private void saveEntitiesToStack(ItemStack stack, Set<ResourceLocation> mobs) {
         CompoundTag tag = stack.getOrCreateTag();
         ListTag list = new ListTag();
         for (ResourceLocation id : mobs) {
@@ -163,7 +163,7 @@ public class EntityFilterItem extends Item {
         tag.put(FILTER_KEY, list);
     }
 
-    public static Set<ResourceLocation> getMobsFromStack(ItemStack stack) {
+    public static Set<ResourceLocation> getEntitiesFromStack(ItemStack stack) {
         Set<ResourceLocation> out = new LinkedHashSet<>();
         CompoundTag tag = stack.getTag();
         if (tag != null && tag.contains(FILTER_KEY, Tag.TAG_LIST)) {
@@ -177,7 +177,7 @@ public class EntityFilterItem extends Item {
 
     @Override
     public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
-        Set<ResourceLocation> set = getMobsFromStack(stack);
+        Set<ResourceLocation> set = getEntitiesFromStack(stack);
 
         if (set.isEmpty()) {
             tooltip.add(Component.translatable("tooltip.pantz_mod.entity", Component.translatable("tooltip.pantz_mod.entity.none")).withStyle(ChatFormatting.GRAY));
