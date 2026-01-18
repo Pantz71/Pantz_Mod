@@ -39,6 +39,7 @@ public class Dynamite extends ThrowableItemProjectile {
         }
     }
 
+
     public DynamiteType getDynamiteType() {
         ItemStack stack = this.getItemRaw();
         if (stack.getItem() instanceof DynamiteItem dynamiteItem) {

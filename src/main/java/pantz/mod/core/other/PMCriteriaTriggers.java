@@ -10,6 +10,7 @@ import pantz.mod.core.PantzMod;
 public class PMCriteriaTriggers {
     public static final EmptyTrigger LOOK_AT_SCANNER = CriteriaTriggers.register(new EmptyTrigger(name("look_at_scanner")));
     public static final EmptyTrigger REDIRECT_TELEPORTATION = CriteriaTriggers.register(new EmptyTrigger(name("redirect_teleportation")));
+    public static final EmptyTrigger USE_DYNAMITE = CriteriaTriggers.register(new EmptyTrigger(name("use_dynamite")));
 
     private static ResourceLocation name(String name) {
         return PantzMod.location(name);

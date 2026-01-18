@@ -1,5 +1,6 @@
 package pantz.mod.common.item;
 
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -9,6 +10,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import pantz.mod.common.entity.projectile.Dynamite;
 import pantz.mod.common.utils.DynamiteType;
+import pantz.mod.core.other.PMCriteriaTriggers;
 
 public class DynamiteItem extends Item {
     private final DynamiteType type;
@@ -33,6 +35,9 @@ public class DynamiteItem extends Item {
         }
         player.getCooldowns().addCooldown(this, 20);
         player.awardStat(Stats.ITEM_USED.get(this));
+        if (player instanceof ServerPlayer serverPlayer) {
+            PMCriteriaTriggers.USE_DYNAMITE.trigger(serverPlayer);
+        }
         if (!player.isCreative()) {
             stack.shrink(1);
         }
