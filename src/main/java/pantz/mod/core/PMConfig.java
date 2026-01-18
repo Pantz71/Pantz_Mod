@@ -56,13 +56,13 @@ public class PMConfig {
                     .defineInRange("Ender Scanner detection radius", 64, 0, Integer.MAX_VALUE);
 
             entityDetectorDetectionRadius = builder.comment("How far can the Entity Detector detect entities?")
-                    .defineInRange("Entity Detector detection radius", 64, 0, Integer.MAX_VALUE);
+                    .defineInRange("Entity Detector detection radius", 16, 0, Integer.MAX_VALUE);
 
             builder.pop();
 
             builder.push("Functional");
             enderporterDetectionRadius = builder.comment("How far can the Enderporter detect thrown Ender Pearls?")
-                    .defineInRange("Enderporter detection radius", 32, 0, Integer.MAX_VALUE);
+                    .defineInRange("Enderporter detection radius", 16, 0, Integer.MAX_VALUE);
 
             builder.pop();
 
