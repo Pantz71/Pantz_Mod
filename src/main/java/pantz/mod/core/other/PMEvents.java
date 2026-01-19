@@ -92,10 +92,9 @@ public class PMEvents {
     private static void putCarpetOn(RightClickBlock event, ItemStack held, BlockState state, BlockPos pos, Player player, Level level) {
         CarpetColor color = PedestalUtils.getCarpetColor(held.getItem());
         if (color == CarpetColor.NONE) return;
-
+        player.swing(InteractionHand.MAIN_HAND);
         if (!level.isClientSide()) {
             level.setBlock(pos, state.setValue(PedestalBlock.CARPET, color), 3);
-            player.swing(InteractionHand.MAIN_HAND);
             if (!player.isCreative()) {
                 held.shrink(1);
             }
@@ -105,9 +104,9 @@ public class PMEvents {
 
     private static void takeCarpetOff(RightClickBlock event, BlockState state, BlockPos pos, Player player, Level level) {
         CarpetColor color = state.getValue(PedestalBlock.CARPET);
+        player.swing(InteractionHand.MAIN_HAND);
         if (!level.isClientSide()) {
             ItemStack carpet = new ItemStack(PedestalUtils.getCarpetForColor(color));
-            player.swing(InteractionHand.MAIN_HAND);
             if (!player.addItem(carpet)) {
                 player.drop(carpet, false);
             }
