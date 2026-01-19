@@ -22,6 +22,7 @@ import pantz.mod.core.registry.PMBlocks;
 
 import javax.annotation.Nullable;
 
+@SuppressWarnings("deprecation")
 public class SulfurClusterBlock extends Block {
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     public static final DirectionProperty FACING = BlockStateProperties.FACING;

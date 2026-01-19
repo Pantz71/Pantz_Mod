@@ -54,39 +54,6 @@ public class PedestalBlock extends HorizontalDirectionalBlock implements EntityB
         builder.add(FACING, WATERLOGGED, CARPET);
     }
 
-    private InteractionResult decorateWithCarpet(BlockState state, Level level, BlockPos pos, Player player) {
-        ItemStack offhand = player.getOffhandItem();
-        ItemStack mainhand = player.getMainHandItem();
-        if (offhand.is(ItemTags.WOOL_CARPETS) && state.getValue(CARPET) == CarpetColor.NONE) {
-            CarpetColor selectedColor = PedestalUtils.getCarpetColor(offhand.getItem());
-            if (selectedColor != CarpetColor.NONE) {
-                if (!level.isClientSide()) {
-                    if (state.getValue(CARPET) != CarpetColor.NONE) {
-                        return InteractionResult.CONSUME;
-                    }
-                    level.setBlock(pos, state.setValue(CARPET, selectedColor), 3);
-                    if (!player.isCreative()) {
-                        offhand.shrink(1);
-                    }
-                }
-                return InteractionResult.sidedSuccess(level.isClientSide());
-            }
-
-        } else if (mainhand.isEmpty() && state.getValue(CARPET) != CarpetColor.NONE && !player.isShiftKeyDown()) {
-            if (!level.isClientSide()) {
-                CarpetColor carpetColor = state.getValue(CARPET);
-                ItemStack carpetItem = new ItemStack(PedestalUtils.getCarpetForColor(carpetColor));
-                if (!player.addItem(carpetItem)) {
-                    player.drop(carpetItem, false);
-                }
-
-                level.setBlock(pos, state.setValue(CARPET, CarpetColor.NONE), 3);
-            }
-            return InteractionResult.sidedSuccess(level.isClientSide());
-        }
-        return InteractionResult.PASS;
-    }
-
     private InteractionResult putItemOn(Player player, InteractionHand hand, ItemStack stack, PedestalBlockEntity pedestal, Level level, BlockPos pos, BlockState state) {
         ItemStack onPedestal = pedestal.getItem();
         boolean isSneaking = player.isShiftKeyDown();
@@ -134,11 +101,6 @@ public class PedestalBlock extends HorizontalDirectionalBlock implements EntityB
 
         boolean isSneaking = player.isShiftKeyDown();
         ItemStack stack = player.getItemInHand(hand);
-
-        InteractionResult decorateWithCarpet = decorateWithCarpet(state, level, pos, player);
-        if (decorateWithCarpet.consumesAction()) {
-            return decorateWithCarpet;
-        }
 
         if (isSneaking) {
             pedestal.setSpinning(!pedestal.isSpinning());
