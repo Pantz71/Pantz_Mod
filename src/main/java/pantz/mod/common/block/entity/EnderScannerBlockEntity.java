@@ -49,7 +49,7 @@ public class EnderScannerBlockEntity extends BlockEntity {
 
     // Check vectors
     public int getPowerFromLooking(Level level, BlockPos pos) {
-        AABB box = new AABB(pos);
+        AABB box = new AABB(pos).inflate(0.01);
         int distance = PMConfig.Common.COMMON.enderScannerDetectionRadius.get();
         List<LivingEntity> entities = level.getEntitiesOfClass(LivingEntity.class, box.inflate(distance));
 
@@ -60,7 +60,7 @@ public class EnderScannerBlockEntity extends BlockEntity {
 
             Vec3 eyePos = entity.getEyePosition(1.0f);
             Vec3 lookAngle = entity.getLookAngle().normalize();
-            Vec3 endPoint = eyePos.add(lookAngle.scale(8.0));
+            Vec3 endPoint = eyePos.add(lookAngle.scale(distance));
 
             Optional<Vec3> hitOptional = box.clip(eyePos, endPoint);
             if (hitOptional.isEmpty()) continue;

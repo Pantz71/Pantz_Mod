@@ -116,18 +116,25 @@ public class PowerDisplayerBlock extends Block implements SimpleWaterloggedBlock
 
     private int getPowerFromBehind(Level level, BlockPos pos, Direction facing) {
         Direction behindDir = facing.getOpposite();
-        BlockPos behind = pos.relative(behindDir);
-        BlockState state = level.getBlockState(behind);
+        BlockPos behindPos = pos.relative(behindDir);
+        BlockState behindState = level.getBlockState(behindPos);
+        Block behindBlock = behindState.getBlock();
 
-        int power = level.getDirectSignal(behind, facing);
-
-        if (state.getBlock() instanceof RedStoneWireBlock) {
-            int wirePower = state.getValue(BlockStateProperties.POWER);
-            if (wirePower > 0) {
-                return clampPower(wirePower);
-            }
+        if (behindBlock instanceof RedStoneWireBlock) {
+            return clampPower(behindState.getValue(BlockStateProperties.POWER));
         }
-        return clampPower(power);
+
+        if (!behindState.isSignalSource()) {
+            return 0;
+        }
+
+        int directSignal = behindState.getDirectSignal(level, behindPos, facing.getOpposite());
+        if (directSignal > 0) {
+            return clampPower(directSignal);
+        }
+
+        int signal = behindState.getSignal(level, behindPos, facing.getOpposite());
+        return clampPower(signal);
     }
 
     private static int clampPower(int value) {
