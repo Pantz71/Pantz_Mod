@@ -3,6 +3,7 @@ package pantz.mod.common.block;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
@@ -121,7 +122,7 @@ public class PowerDisplayerBlock extends Block implements SimpleWaterloggedBlock
         Block behindBlock = behindState.getBlock();
 
         if (behindBlock instanceof RedStoneWireBlock) {
-            return clampPower(behindState.getValue(BlockStateProperties.POWER));
+            return Mth.clamp(behindState.getValue(BlockStateProperties.POWER), 0 ,15);
         }
 
         if (!behindState.isSignalSource()) {
@@ -130,19 +131,13 @@ public class PowerDisplayerBlock extends Block implements SimpleWaterloggedBlock
 
         int directSignal = behindState.getDirectSignal(level, behindPos, facing.getOpposite());
         if (directSignal > 0) {
-            return clampPower(directSignal);
+            return Mth.clamp(directSignal, 0, 15);
         }
 
         int signal = behindState.getSignal(level, behindPos, facing.getOpposite());
-        return clampPower(signal);
+        return Mth.clamp(signal, 0, 15);
     }
 
-    private static int clampPower(int value) {
-        if (value < 0) {
-            return 0;
-        }
-        return Math.min(value, 15);
-    }
 
     @Override
     public RenderShape getRenderShape(BlockState pState) {

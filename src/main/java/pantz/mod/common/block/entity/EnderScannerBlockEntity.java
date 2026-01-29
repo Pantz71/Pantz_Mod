@@ -53,7 +53,7 @@ public class EnderScannerBlockEntity extends BlockEntity {
         int distance = PMConfig.Common.COMMON.enderScannerDetectionRadius.get();
         List<LivingEntity> entities = level.getEntitiesOfClass(LivingEntity.class, box.inflate(distance));
 
-        double maxPrecision = 0;
+        double bestPercision = 0;
 
         for (LivingEntity entity : entities) {
             boolean isImmune = false;
@@ -120,9 +120,9 @@ public class EnderScannerBlockEntity extends BlockEntity {
             // System.out.println("✔ Precision: " + precision);
             // System.out.println("✔ Power: " + (int)(precision * 15));
 
-            maxPrecision = Math.max(maxPrecision, precision);
+            bestPercision = Math.max(bestPercision, precision);
         }
 
-        return maxPrecision > 0.05 ? (int)(maxPrecision * 15) : 0;
+        return bestPercision > 0.05 ? Mth.clamp(Math.round((float)(bestPercision * 15)), 0, 15) : 0;
     }
 }

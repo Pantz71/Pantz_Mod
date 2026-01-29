@@ -53,7 +53,7 @@ public class PMConfig {
 
             builder.push("Redstone");
             enderScannerDetectionRadius = builder.comment("How far can the Ender Scanners detect players looking at them?")
-                    .defineInRange("Ender Scanner detection radius", 64, 0, Integer.MAX_VALUE);
+                    .defineInRange("Ender Scanner detection radius", 16, 0, Integer.MAX_VALUE);
 
             entityDetectorDetectionRadius = builder.comment("How far can the Entity Detector detect entities?")
                     .defineInRange("Entity Detector detection radius", 16, 0, Integer.MAX_VALUE);
