@@ -101,14 +101,14 @@ public class EnderScannerBlockEntity extends BlockEntity {
             Vec3 faceCenter = Vec3.atCenterOf(pos).add(Vec3.atLowerCornerOf(hitFace.getNormal()).scale(0.5));
 
             // Determine the power output
-            double distance1 = faceCenter.distanceTo(hit);
+            double faceDistance = faceCenter.distanceTo(hit);
             double maxDist = 0.65;
 
             double precision;
-            if (distance1 <= 0.05) {
+            if (faceDistance <= 0.05) {
                 precision = 1.0;
             } else {
-                double raw = 1.0 - (distance1 / maxDist);
+                double raw = 1.0 - (faceDistance / maxDist);
                 precision = Math.pow(Mth.clamp(raw, 0, 1), 1.2);
             }
             precision = Mth.clamp(precision, 0, 1);
@@ -116,7 +116,7 @@ public class EnderScannerBlockEntity extends BlockEntity {
             // Log
             // System.out.println("✔ HitFace: " + hitFace);
             // System.out.println("✔ EyePos: " + eyePos + " → HitPos: " + hit);
-            // System.out.println("✔ FaceCenter: " + faceCenter + " → Dist: " + distance1);
+            // System.out.println("✔ FaceCenter: " + faceCenter + " → Dist: " + faceDistance);
             // System.out.println("✔ Precision: " + precision);
             // System.out.println("✔ Power: " + (int)(precision * 15));
 
