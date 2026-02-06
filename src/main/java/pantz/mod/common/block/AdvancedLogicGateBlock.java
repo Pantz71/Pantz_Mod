@@ -35,17 +35,11 @@ public class AdvancedLogicGateBlock extends LogicGateBlock {
     public BlockState updateInputs(LevelAccessor level, BlockPos pos, BlockState state) {
         Direction facing = state.getValue(FACING);
 
-        BlockPos rightPos = pos.relative(facing.getCounterClockWise());
-        BlockPos leftPos = pos.relative(facing.getClockWise());
-        BlockPos backPos = pos.relative(facing);
+        boolean left = level.hasSignal(pos.relative(facing.getClockWise()), facing.getClockWise());
+        boolean right = level.hasSignal(pos.relative(facing.getCounterClockWise()), facing.getCounterClockWise());
+        boolean back = level.hasSignal(pos.relative(facing), facing.getCounterClockWise());
 
-        boolean left = level.hasSignal(leftPos, facing.getClockWise());
-        boolean right = level.hasSignal(rightPos, facing.getCounterClockWise());
-        boolean back = level.hasSignal(backPos, facing);
-
-        boolean powered = this.logic.apply(back, left, right);
-
-        return state.setValue(INPUT_LEFT, left).setValue(INPUT_RIGHT, right).setValue(INPUT_BACK, back).setValue(POWERED, powered);
+        return state.setValue(INPUT_LEFT, left).setValue(INPUT_RIGHT, right).setValue(INPUT_BACK, back);
     }
 
     @Override

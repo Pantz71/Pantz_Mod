@@ -39,14 +39,13 @@ public class LogicGateBlock extends DiodeBlock {
         super.onPlace(state, level, pos, oldState, isMoving);
 
         if (!level.isClientSide()) {
-            BlockState updated = updateInputs(level, pos, state);
-            level.setBlock(pos, updated, 2);
+            level.scheduleTick(pos, this, 1);
         }
     }
 
     @Override
     protected int getDelay(BlockState blockState) {
-        return 1;
+        return 2;
     }
 
     @Override
@@ -64,6 +63,7 @@ public class LogicGateBlock extends DiodeBlock {
 
     @Override
     public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+        super.tick(state, level, pos, random);
         BlockState updatedInputs = updateInputs(level, pos, state);
 
         if (!updatedInputs.equals(state)) {
@@ -74,15 +74,10 @@ public class LogicGateBlock extends DiodeBlock {
     public BlockState updateInputs(LevelAccessor level, BlockPos pos, BlockState state) {
         Direction facing = state.getValue(FACING);
 
-        BlockPos rightPos = pos.relative(facing.getCounterClockWise());
-        BlockPos leftPos = pos.relative(facing.getClockWise());
+        boolean left = level.hasSignal(pos.relative(facing.getClockWise()), facing.getClockWise());
+        boolean right = level.hasSignal(pos.relative(facing.getCounterClockWise()), facing.getCounterClockWise());
 
-        boolean left = level.hasSignal(leftPos, facing.getClockWise());
-        boolean right = level.hasSignal(rightPos, facing.getCounterClockWise());
-
-        boolean powered = this.logic.apply(left, right);
-
-        return state.setValue(INPUT_LEFT, left).setValue(INPUT_RIGHT, right).setValue(POWERED, powered);
+        return state.setValue(INPUT_LEFT, left).setValue(INPUT_RIGHT, right);
     }
 
     @Override
