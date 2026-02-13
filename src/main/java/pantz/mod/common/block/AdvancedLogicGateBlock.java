@@ -37,7 +37,7 @@ public class AdvancedLogicGateBlock extends LogicGateBlock {
 
         boolean left = level.hasSignal(pos.relative(facing.getClockWise()), facing.getClockWise());
         boolean right = level.hasSignal(pos.relative(facing.getCounterClockWise()), facing.getCounterClockWise());
-        boolean back = level.hasSignal(pos.relative(facing), facing.getCounterClockWise());
+        boolean back = level.hasSignal(pos.relative(facing), facing);
 
         return state.setValue(INPUT_LEFT, left).setValue(INPUT_RIGHT, right).setValue(INPUT_BACK, back);
     }
