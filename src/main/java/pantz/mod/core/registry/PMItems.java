@@ -59,6 +59,8 @@ public class PMItems {
     public static final RegistryObject<Item> COMBAT_DYNAMITE = ITEMS.createItem("combat_dynamite", () -> new DynamiteItem(new Item.Properties(), DynamiteType.COMBAT));
     public static final RegistryObject<Item> FIERY_DYNAMITE = ITEMS.createItem("fiery_dynamite", () -> new DynamiteItem(new Item.Properties(), DynamiteType.FIERY));
 
+    public static final RegistryObject<Item> RED_ENVELOPE = ITEMS.createItem("red_envelope", () -> new RedEnvelopeItem(new Item.Properties().stacksTo(16)));
+
     private static Supplier<Item> basicItem() {
         return () -> new Item(new Item.Properties());
     }
@@ -84,6 +86,8 @@ public class PMItems {
 
                 .addItemsAfter(of(Items.DIAMOND_HOE), DIAMOND_EXCAVATOR, DIAMOND_HAMMER)
                 .addItemsAfter(of(Items.NETHERITE_HOE), NETHERITE_EXCAVATOR, NETHERITE_HAMMER)
+
+                .addItemsAfter(of(Items.WRITABLE_BOOK), RED_ENVELOPE)
 
 
         ;

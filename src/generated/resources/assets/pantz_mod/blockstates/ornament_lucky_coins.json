@@ -1,0 +1,34 @@
+{
+  "variants": {
+    "facing=east,half=lower": {
+      "model": "pantz_mod:block/ornament_lucky_coins_bottom",
+      "y": 90
+    },
+    "facing=east,half=upper": {
+      "model": "pantz_mod:block/ornament_lucky_coins_top",
+      "y": 90
+    },
+    "facing=north,half=lower": {
+      "model": "pantz_mod:block/ornament_lucky_coins_bottom"
+    },
+    "facing=north,half=upper": {
+      "model": "pantz_mod:block/ornament_lucky_coins_top"
+    },
+    "facing=south,half=lower": {
+      "model": "pantz_mod:block/ornament_lucky_coins_bottom",
+      "y": 180
+    },
+    "facing=south,half=upper": {
+      "model": "pantz_mod:block/ornament_lucky_coins_top",
+      "y": 180
+    },
+    "facing=west,half=lower": {
+      "model": "pantz_mod:block/ornament_lucky_coins_bottom",
+      "y": 270
+    },
+    "facing=west,half=upper": {
+      "model": "pantz_mod:block/ornament_lucky_coins_top",
+      "y": 270
+    }
+  }
+}

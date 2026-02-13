@@ -74,6 +74,9 @@ public class PMProperties {
     public static final BlockBehaviour.Properties ICE_TRAPDOOR = BlockBehaviour.Properties.of().requiresCorrectToolForDrops().sound(SoundType.GLASS).mapColor(MapColor.ICE).strength(3.0f, 5.0f);
     public static final BlockBehaviour.Properties ICE_LANTERN = BlockBehaviour.Properties.of().requiresCorrectToolForDrops().sound(SoundType.GLASS).lightLevel(litBlockEmission(15)).strength(3.0f).mapColor(MapColor.ICE);
 
+    public static final BlockBehaviour.Properties PAPER_LANTERN = BlockBehaviour.Properties.of().lightLevel(light -> 15).strength(0.3f).sound(SoundType.WOOL).mapColor(MapColor.GOLD).forceSolidOn().ignitedByLava();
+    public static final BlockBehaviour.Properties ORNAMENT = BlockBehaviour.Properties.of().instabreak().sound(SoundType.WOOL).mapColor(MapColor.COLOR_RED).ignitedByLava().isSuffocating(PMProperties::never).isViewBlocking(PMProperties::never).isRedstoneConductor(PMProperties::never).isValidSpawn(PMProperties::never).noCollission().pushReaction(PushReaction.DESTROY);
+
     public static boolean never(BlockState state, BlockGetter blockGetter, BlockPos pos) {
         return false;
     }

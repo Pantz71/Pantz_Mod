@@ -96,6 +96,8 @@
   "item.pantz_mod.fiery_dynamite": "Fiery Dynamite",
   "entity.pantz_mod.dynamite": "Dynamite",
 
+  "item.pantz_mod.red_envelope": "Red Envelope",
+
   "_pedestal": "pedestal",
   "block.pantz_mod.stone_pedestal": "Stone Pedestal",
   "block.pantz_mod.deepslate_pedestal": "Deepslate Pedestal",
@@ -182,7 +184,27 @@
   "block.pantz_mod.lapis_glass_pane": "Lapis Glass Pane",
   "block.pantz_mod.redstone_glass": "Redstone Glass",
   "block.pantz_mod.redstone_glass_pane": "Redstone Glass Pane",
-  
+
+  "block.pantz_mod.red_paper_lantern": "Red Paper Lantern",
+  "block.pantz_mod.orange_paper_lantern": "Orange Paper Lantern",
+  "block.pantz_mod.yellow_paper_lantern": "Yellow Paper Lantern",
+  "block.pantz_mod.lime_paper_lantern": "Lime Paper Lantern",
+  "block.pantz_mod.green_paper_lantern": "Green Paper Lantern",
+  "block.pantz_mod.blue_paper_lantern": "Blue Paper Lantern",
+  "block.pantz_mod.cyan_paper_lantern": "Cyan Paper Lantern",
+  "block.pantz_mod.light_blue_paper_lantern": "Light Blue Paper Lantern",
+  "block.pantz_mod.purple_paper_lantern": "Purple Paper Lantern",
+  "block.pantz_mod.magenta_paper_lantern": "Magenta Paper Lantern",
+  "block.pantz_mod.pink_paper_lantern": "Pink Paper Lantern",
+  "block.pantz_mod.brown_paper_lantern": "Brown Paper Lantern",
+  "block.pantz_mod.black_paper_lantern": "Black Paper Lantern",
+  "block.pantz_mod.gray_paper_lantern": "Gray Paper Lantern",
+  "block.pantz_mod.light_gray_paper_lantern": "Light Gray Paper Lantern",
+  "block.pantz_mod.white_paper_lantern": "White Paper Lantern",
+
+  "block.pantz_mod.ornament_firecrackers": "Ornament Firecrackers",
+  "block.pantz_mod.ornament_lucky_coins": "Ornament Lucky Coins",
+
   "_decoration": "decoration",
   "block.pantz_mod.snow_bricks": "Snow Bricks",
   "block.pantz_mod.snow_brick_stairs": "Snow Brick Stairs",

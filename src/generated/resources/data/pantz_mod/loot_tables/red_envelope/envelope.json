@@ -1,0 +1,31 @@
+{
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:loot_table",
+          "name": "pantz_mod:red_envelope/common"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "chance": 0.25,
+          "condition": "minecraft:random_chance"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:loot_table",
+          "name": "pantz_mod:red_envelope/rare"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "pantz_mod:red_envelope/envelope"
+}

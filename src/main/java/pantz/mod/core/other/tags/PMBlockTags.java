@@ -24,6 +24,8 @@ public class PMBlockTags {
     public static final TagKey<Block> PEDESTALS = blockTag("pedestals");
     public static final TagKey<Block> LOGIC_GATES = blockTag("logic_gates");
 
+    public static final TagKey<Block> PAPER_LANTERNS = blockTag("paper_lanterns");
+
     private static TagKey<Block> blockTag(String name) {
         return TagUtil.blockTag(PantzMod.MOD_ID, name);
     }

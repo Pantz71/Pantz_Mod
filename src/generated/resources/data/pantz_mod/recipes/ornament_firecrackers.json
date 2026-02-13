@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "minecraft:paper"
+    },
+    "R": {
+      "item": "minecraft:red_dye"
+    },
+    "S": {
+      "tag": "forge:string"
+    }
+  },
+  "pattern": [
+    "#S#",
+    "#R#",
+    "#S#"
+  ],
+  "result": {
+    "item": "pantz_mod:ornament_firecrackers"
+  },
+  "show_notification": true
+}

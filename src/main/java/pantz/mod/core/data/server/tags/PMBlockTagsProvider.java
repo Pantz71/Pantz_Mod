@@ -12,6 +12,7 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.Nullable;
 import pantz.mod.common.block.LogicGateBlock;
 import pantz.mod.common.block.NotGateBlock;
+import pantz.mod.common.block.PaperLanternBlock;
 import pantz.mod.common.block.PedestalBlock;
 import pantz.mod.core.PantzMod;
 
@@ -70,6 +71,9 @@ public class PMBlockTagsProvider extends BlockTagsProvider {
             Block block = registry.get();
             if (block instanceof RedstoneLampBlock) {
                 this.tag(REDSTONE_LAMPS).add(block, Blocks.REDSTONE_LAMP);
+            }
+            if (block instanceof PaperLanternBlock) {
+                this.tag(PAPER_LANTERNS).add(block);
             }
             if (block instanceof PedestalBlock) {
                 this.tag(PEDESTALS).add(block);

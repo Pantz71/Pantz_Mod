@@ -2,6 +2,7 @@ package pantz.mod.core.registry;
 
 import com.teamabnormals.blueprint.core.util.item.CreativeModeTabContentsPopulator;
 import net.minecraft.util.valueproviders.UniformInt;
+import net.minecraft.world.entity.raid.Raid;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -159,6 +160,26 @@ public class PMBlocks {
 
     public static final RegistryObject<Block> ICE_LANTERN = BLOCKS.createBlock("ice_lantern", () -> new IceLanternBlock(PMProperties.ICE_LANTERN));
 
+    public static final RegistryObject<Block> WHITE_PAPER_LANTERN = BLOCKS.createBlock("white_paper_lantern", () -> new PaperLanternBlock(PMProperties.PAPER_LANTERN));
+    public static final RegistryObject<Block> ORANGE_PAPER_LANTERN = BLOCKS.createBlock("orange_paper_lantern", () -> new PaperLanternBlock(PMProperties.PAPER_LANTERN));
+    public static final RegistryObject<Block> MAGENTA_PAPER_LANTERN = BLOCKS.createBlock("magenta_paper_lantern", () -> new PaperLanternBlock(PMProperties.PAPER_LANTERN));
+    public static final RegistryObject<Block> LIGHT_BLUE_PAPER_LANTERN = BLOCKS.createBlock("light_blue_paper_lantern", () -> new PaperLanternBlock(PMProperties.PAPER_LANTERN));
+    public static final RegistryObject<Block> YELLOW_PAPER_LANTERN = BLOCKS.createBlock("yellow_paper_lantern", () -> new PaperLanternBlock(PMProperties.PAPER_LANTERN));
+    public static final RegistryObject<Block> LIME_PAPER_LANTERN = BLOCKS.createBlock("lime_paper_lantern", () -> new PaperLanternBlock(PMProperties.PAPER_LANTERN));
+    public static final RegistryObject<Block> PINK_PAPER_LANTERN = BLOCKS.createBlock("pink_paper_lantern", () -> new PaperLanternBlock(PMProperties.PAPER_LANTERN));
+    public static final RegistryObject<Block> GRAY_PAPER_LANTERN = BLOCKS.createBlock("gray_paper_lantern", () -> new PaperLanternBlock(PMProperties.PAPER_LANTERN));
+    public static final RegistryObject<Block> LIGHT_GRAY_PAPER_LANTERN = BLOCKS.createBlock("light_gray_paper_lantern", () -> new PaperLanternBlock(PMProperties.PAPER_LANTERN));
+    public static final RegistryObject<Block> CYAN_PAPER_LANTERN = BLOCKS.createBlock("cyan_paper_lantern", () -> new PaperLanternBlock(PMProperties.PAPER_LANTERN));
+    public static final RegistryObject<Block> PURPLE_PAPER_LANTERN = BLOCKS.createBlock("purple_paper_lantern", () -> new PaperLanternBlock(PMProperties.PAPER_LANTERN));
+    public static final RegistryObject<Block> BLUE_PAPER_LANTERN = BLOCKS.createBlock("blue_paper_lantern", () -> new PaperLanternBlock(PMProperties.PAPER_LANTERN));
+    public static final RegistryObject<Block> BROWN_PAPER_LANTERN = BLOCKS.createBlock("brown_paper_lantern", () -> new PaperLanternBlock(PMProperties.PAPER_LANTERN));
+    public static final RegistryObject<Block> GREEN_PAPER_LANTERN = BLOCKS.createBlock("green_paper_lantern", () -> new PaperLanternBlock(PMProperties.PAPER_LANTERN));
+    public static final RegistryObject<Block> RED_PAPER_LANTERN = BLOCKS.createBlock("red_paper_lantern", () -> new PaperLanternBlock(PMProperties.PAPER_LANTERN));
+    public static final RegistryObject<Block> BLACK_PAPER_LANTERN = BLOCKS.createBlock("black_paper_lantern", () -> new PaperLanternBlock(PMProperties.PAPER_LANTERN));
+
+    public static final RegistryObject<Block> ORNAMENT_FIRECRACKERS = BLOCKS.createBlock("ornament_firecrackers", () -> new DoubleOrnamentBlock(PMProperties.ORNAMENT));
+    public static final RegistryObject<Block> ORNAMENT_LUCKY_COINS = BLOCKS.createBlock("ornament_lucky_coins", () -> new DoubleOrnamentBlock(PMProperties.ORNAMENT));
+
     public static void setupTabs() {
         CreativeModeTabContentsPopulator.mod(PantzMod.MOD_ID)
                 .tab(BUILDING_BLOCKS)
@@ -179,13 +200,17 @@ public class PMBlocks {
                 .addItemsBefore(of(Items.PAINTING), ITEM_STAND, GLOW_ITEM_STAND)
                 .addItemsBefore(of(Blocks.SCAFFOLDING), ROPE_LADDER)
                 .addItemsBefore(of(Blocks.BARREL), TRASH_CAN)
-                .addItemsBefore(of(Blocks.CHAIN), STEEL_LANTERN, ICE_LANTERN)
+                .addItemsBefore(of(Blocks.CHAIN), STEEL_LANTERN, ICE_LANTERN,
+                        WHITE_PAPER_LANTERN, ORANGE_PAPER_LANTERN, MAGENTA_PAPER_LANTERN,
+                        LIGHT_BLUE_PAPER_LANTERN, YELLOW_PAPER_LANTERN, LIME_PAPER_LANTERN, PINK_PAPER_LANTERN, GRAY_PAPER_LANTERN, LIGHT_GRAY_PAPER_LANTERN,
+                        CYAN_PAPER_LANTERN, PURPLE_PAPER_LANTERN, BLUE_PAPER_LANTERN, BROWN_PAPER_LANTERN, GREEN_PAPER_LANTERN, RED_PAPER_LANTERN, BLACK_PAPER_LANTERN)
                 .addItemsAfter(of(Blocks.DAMAGED_ANVIL), STONE_PEDESTAL, DEEPSLATE_PEDESTAL, BLACKSTONE_PEDESTAL, QUARTZ_PEDESTAL, PRISMARINE_PEDESTAL, PURPUR_PEDESTAL)
                 .addItemsAfter(of(Blocks.BELL), MERCURY_GLOBE, VENUS_GLOBE, EARTH_GLOBE, MARS_GLOBE, JUPITER_GLOBE, SATURN_GLOBE, URANUS_GLOBE, NEPTUNE_GLOBE, PLUTO_GLOBE, CERES_GLOBE, MAKEMAKE_GLOBE, MOON_GLOBE, IO_GLOBE, EUROPA_GLOBE, CALLISTO_GLOBE, GANYMEDE_GLOBE, SUN_GLOBE, BLUE_SUN_GLOBE, IRIS_GLOBE)
                 .addItemsAfter(of(Blocks.REDSTONE_LAMP), WHITE_REDSTONE_LAMP, ORANGE_REDSTONE_LAMP, MAGENTA_REDSTONE_LAMP,
                         LIGHT_BLUE_REDSTONE_LAMP, YELLOW_REDSTONE_LAMP, LIME_REDSTONE_LAMP, PINK_REDSTONE_LAMP, GRAY_REDSTONE_LAMP, LIGHT_GRAY_REDSTONE_LAMP,
                         CYAN_REDSTONE_LAMP, PURPLE_REDSTONE_LAMP, BLUE_REDSTONE_LAMP, BROWN_REDSTONE_LAMP, GREEN_REDSTONE_LAMP, RED_REDSTONE_LAMP, BLACK_REDSTONE_LAMP)
                 .addItemsAfter(of(Blocks.RESPAWN_ANCHOR), ENDERPORTER)
+                .addItemsAfter(of(Raid.getLeaderBannerInstance()), ORNAMENT_FIRECRACKERS, ORNAMENT_LUCKY_COINS)
 
                 .tab(REDSTONE_BLOCKS)
                 .addItemsBefore(of(Blocks.DAYLIGHT_DETECTOR), EARTH_GLOBE)
@@ -201,7 +226,10 @@ public class PMBlocks {
                 .addItemsBefore(of(Blocks.WHITE_STAINED_GLASS_PANE), QUARTZ_GLASS_PANE, LAPIS_GLASS_PANE, REDSTONE_GLASS_PANE)
                 .addItems(() -> Blocks.REDSTONE_LAMP, WHITE_REDSTONE_LAMP, ORANGE_REDSTONE_LAMP, MAGENTA_REDSTONE_LAMP,
                         LIGHT_BLUE_REDSTONE_LAMP, YELLOW_REDSTONE_LAMP, LIME_REDSTONE_LAMP, PINK_REDSTONE_LAMP, GRAY_REDSTONE_LAMP, LIGHT_GRAY_REDSTONE_LAMP,
-                        CYAN_REDSTONE_LAMP, PURPLE_REDSTONE_LAMP, BLUE_REDSTONE_LAMP, BROWN_REDSTONE_LAMP, GREEN_REDSTONE_LAMP, RED_REDSTONE_LAMP, BLACK_REDSTONE_LAMP)
+                        CYAN_REDSTONE_LAMP, PURPLE_REDSTONE_LAMP, BLUE_REDSTONE_LAMP, BROWN_REDSTONE_LAMP, GREEN_REDSTONE_LAMP, RED_REDSTONE_LAMP, BLACK_REDSTONE_LAMP,
+                        WHITE_PAPER_LANTERN, ORANGE_PAPER_LANTERN, MAGENTA_PAPER_LANTERN,
+                        LIGHT_BLUE_PAPER_LANTERN, YELLOW_PAPER_LANTERN, LIME_PAPER_LANTERN, PINK_PAPER_LANTERN, GRAY_PAPER_LANTERN, LIGHT_GRAY_PAPER_LANTERN,
+                        CYAN_PAPER_LANTERN, PURPLE_PAPER_LANTERN, BLUE_PAPER_LANTERN, BROWN_PAPER_LANTERN, GREEN_PAPER_LANTERN, RED_PAPER_LANTERN, BLACK_PAPER_LANTERN)
 
 
         ;

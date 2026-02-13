@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "minecraft:paper"
+    },
+    "G": {
+      "tag": "forge:ingots/gold"
+    },
+    "R": {
+      "item": "minecraft:red_dye"
+    },
+    "S": {
+      "tag": "forge:string"
+    }
+  },
+  "pattern": [
+    "#S#",
+    "GRG",
+    "#S#"
+  ],
+  "result": {
+    "item": "pantz_mod:ornament_lucky_coins"
+  },
+  "show_notification": true
+}

@@ -355,6 +355,40 @@ public class PMRecipeProvider extends BlueprintRecipeProvider {
                 .save(consumer);
         ///   ////////////////////////////////////////////////////////////////////////////
 
+        ///   ////////////////////////////////////////////////////////////////////////////
+
+        ShapedRecipeBuilder.shaped(DECORATIONS, WHITE_PAPER_LANTERN.get())
+                .define('#', Items.PAPER).define('i', Blocks.TORCH)
+                .pattern("###")
+                .pattern("#i#")
+                .pattern("###")
+                .unlockedBy(getHasName(Items.PAPER), has(Items.PAPER))
+                .save(consumer);
+
+        List<Item> paperLanterns = List.of(BLACK_PAPER_LANTERN.get().asItem(), BLUE_PAPER_LANTERN.get().asItem(), BROWN_PAPER_LANTERN.get().asItem(), CYAN_PAPER_LANTERN.get().asItem(), GRAY_PAPER_LANTERN.get().asItem(), GREEN_PAPER_LANTERN.get().asItem(),
+                LIGHT_BLUE_PAPER_LANTERN.get().asItem(), LIGHT_GRAY_PAPER_LANTERN.get().asItem(), LIME_PAPER_LANTERN.get().asItem(), MAGENTA_PAPER_LANTERN.get().asItem(), ORANGE_PAPER_LANTERN.get().asItem(),
+                PINK_PAPER_LANTERN.get().asItem(), PURPLE_PAPER_LANTERN.get().asItem(), RED_PAPER_LANTERN.get().asItem(), YELLOW_PAPER_LANTERN.get().asItem(), WHITE_PAPER_LANTERN.get().asItem());
+
+        colorBlockWithDye(consumer, dyes, paperLanterns, DECORATIONS, "paper_lanterns");
+
+        ShapedRecipeBuilder.shaped(DECORATIONS, ORNAMENT_FIRECRACKERS.get())
+                .define('#', Items.PAPER).define('R', Items.RED_DYE)
+                .define('S', Tags.Items.STRING)
+                .pattern("#S#")
+                .pattern("#R#")
+                .pattern("#S#")
+                .unlockedBy(getHasName(Items.PAPER), has(Items.PAPER))
+                .save(consumer);
+
+        ShapedRecipeBuilder.shaped(DECORATIONS, ORNAMENT_LUCKY_COINS.get())
+                .define('#', Items.PAPER).define('R', Items.RED_DYE)
+                .define('S', Tags.Items.STRING).define('G', Tags.Items.INGOTS_GOLD)
+                .pattern("#S#")
+                .pattern("GRG")
+                .pattern("#S#")
+                .unlockedBy(getHasName(Items.PAPER), has(Items.PAPER))
+                .save(consumer);
+
     }
 
     private static void logicGates(Consumer<FinishedRecipe> consumer) {

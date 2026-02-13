@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "hanging=false": {
+      "model": "pantz_mod:block/green_paper_lantern"
+    },
+    "hanging=true": {
+      "model": "pantz_mod:block/green_paper_lantern_hanging"
+    }
+  }
+}

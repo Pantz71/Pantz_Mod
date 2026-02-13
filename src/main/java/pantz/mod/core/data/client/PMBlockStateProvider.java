@@ -7,6 +7,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraftforge.client.model.generators.BlockModelBuilder;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ModelFile;
@@ -114,6 +115,26 @@ public class PMBlockStateProvider extends BlueprintBlockStateProvider {
         this.doorBlocks(PACKED_ICE_DOOR.get(), PACKED_ICE_TRAPDOOR.get());
         this.doorBlocks(BLUE_ICE_DOOR.get(), BLUE_ICE_TRAPDOOR.get());
         this.litableLanternBlock(ICE_LANTERN, modLoc("block/template_ice_lantern"), modLoc("block/template_hanging_ice_lantern"));
+
+        this.paperLanternBlock(WHITE_PAPER_LANTERN);
+        this.paperLanternBlock(ORANGE_PAPER_LANTERN);
+        this.paperLanternBlock(MAGENTA_PAPER_LANTERN);
+        this.paperLanternBlock(LIGHT_BLUE_PAPER_LANTERN);
+        this.paperLanternBlock(YELLOW_PAPER_LANTERN);
+        this.paperLanternBlock(LIME_PAPER_LANTERN);
+        this.paperLanternBlock(PINK_PAPER_LANTERN);
+        this.paperLanternBlock(GRAY_PAPER_LANTERN);
+        this.paperLanternBlock(LIGHT_GRAY_PAPER_LANTERN);
+        this.paperLanternBlock(CYAN_PAPER_LANTERN);
+        this.paperLanternBlock(PURPLE_PAPER_LANTERN);
+        this.paperLanternBlock(BLUE_PAPER_LANTERN);
+        this.paperLanternBlock(BROWN_PAPER_LANTERN);
+        this.paperLanternBlock(GREEN_PAPER_LANTERN);
+        this.paperLanternBlock(RED_PAPER_LANTERN);
+        this.paperLanternBlock(BLACK_PAPER_LANTERN);
+
+        this.doubleOrnamentBlock(ORNAMENT_FIRECRACKERS, modLoc("block/ornament_firecrackers"));
+        this.doubleOrnamentBlock(ORNAMENT_LUCKY_COINS, modLoc("block/ornament_lucky_coins"));
     }
 
     private void redstoneConfiguratorBlock(RegistryObject<Block> block) {
@@ -411,6 +432,52 @@ public class PMBlockStateProvider extends BlueprintBlockStateProvider {
             }
         }
 
+        generatedItem(block.get(), "item");
+    }
+
+    private void doubleOrnamentBlock(RegistryObject<Block> block, ResourceLocation model) {
+        String name = name(block.get());
+
+        ModelFile lowerModel = models().withExistingParent(name + "_bottom", suffix(model, "_lower"));
+        ModelFile upperModel = models().withExistingParent(name + "_top", suffix(model, "_upper"));
+
+
+        for (DoubleBlockHalf half : DoubleBlockHalf.values()) {
+            ModelFile modelFile = half == DoubleBlockHalf.UPPER ? upperModel : lowerModel;
+
+            for (Direction direction : Direction.Plane.HORIZONTAL) {
+                int rotY = switch (direction) {
+                    case SOUTH -> 180;
+                    case WEST  -> 270;
+                    case EAST  -> 90;
+                    default    -> 0;
+                };
+
+
+                getVariantBuilder(block.get()).partialState()
+                        .with(DoubleOrnamentBlock.HALF, half)
+                        .with(DoubleOrnamentBlock.FACING, direction)
+                        .modelForState().modelFile(modelFile)
+                        .rotationY(rotY).addModel();
+            }
+        }
+        generatedItem(block.get(), "item");
+    }
+
+    private void paperLanternBlock(RegistryObject<Block> block) {
+        String name = name(block.get());
+        ResourceLocation texture = blockTexture(block.get());
+
+        ModelFile baseModel = models().withExistingParent(name, modLoc("block/template_paper_lantern")).texture("texture", texture);
+        ModelFile hangingModel = models().withExistingParent(name + "_hanging", modLoc("block/template_hanging_paper_lantern")).texture("texture", texture);
+
+        for (boolean hanging : new boolean[]{false, true}) {
+            ModelFile modelFile = hanging ? hangingModel : baseModel;
+            getVariantBuilder(block.get()).partialState()
+                    .with(PaperLanternBlock.HANGING, hanging)
+                    .modelForState().modelFile(modelFile)
+                    .addModel();
+        }
         generatedItem(block.get(), "item");
     }
 }

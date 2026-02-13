@@ -38,6 +38,8 @@ public class PMItemTags {
     public static final TagKey<Item> LOGIC_GATES = itemTag("logic_gates");
     public static final TagKey<Item> DYNAMITES = itemTag("dynamites");
 
+    public static final TagKey<Item> PAPER_LANTERNS = itemTag("paper_lanterns");
+
     public static TagKey<Item> itemTag(String name) {
         return TagUtil.itemTag(PantzMod.MOD_ID, name);
     }
