@@ -153,14 +153,9 @@ public class PMLootTableProvider extends LootTableProvider {
                                     LootPool.lootPool()
                                             .setRolls(ConstantValue.exactly(1.0f))
 
-                                            .add(LootItem.lootTableItem(Items.EMERALD).setWeight(8))
-                                            .apply(SetItemCountFunction.setCount(UniformGenerator.between(5, 35)))
-
-                                            .add(LootItem.lootTableItem(Items.GOLD_INGOT).setWeight(3))
-                                            .apply(SetItemCountFunction.setCount(UniformGenerator.between(5, 15)))
-
-                                            .add(LootItem.lootTableItem(Items.LAPIS_LAZULI).setWeight(2))
-                                            .apply(SetItemCountFunction.setCount(UniformGenerator.between(5, 30)))
+                                            .add(LootItem.lootTableItem(Items.EMERALD).setWeight(8).apply(SetItemCountFunction.setCount(UniformGenerator.between(5, 35))))
+                                            .add(LootItem.lootTableItem(Items.GOLD_INGOT).setWeight(3).apply(SetItemCountFunction.setCount(UniformGenerator.between(5, 15))))
+                                            .add(LootItem.lootTableItem(Items.LAPIS_LAZULI).setWeight(2).apply(SetItemCountFunction.setCount(UniformGenerator.between(5, 30))))
                             )
             );
 
@@ -170,17 +165,11 @@ public class PMLootTableProvider extends LootTableProvider {
                                     LootPool.lootPool()
                                             .setRolls(ConstantValue.exactly(1.0f))
 
-                                            .add(LootItem.lootTableItem(Items.NETHERITE_SCRAP).setWeight(5))
-                                            .apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 5)))
+                                            .add(LootItem.lootTableItem(Items.NETHERITE_SCRAP).setWeight(5).apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 5))))
+                                            .add(LootItem.lootTableItem(Items.DIAMOND).setWeight(10).apply(SetItemCountFunction.setCount(UniformGenerator.between(2, 6))))
+                                            .add(LootItem.lootTableItem(Items.EXPERIENCE_BOTTLE).setWeight(3).apply(SetItemCountFunction.setCount(UniformGenerator.between(5, 10))))
+                                            .add(LootItem.lootTableItem(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE).setWeight(1).apply(SetItemCountFunction.setCount(ConstantValue.exactly(1))))
 
-                                            .add(LootItem.lootTableItem(Items.DIAMOND).setWeight(10))
-                                            .apply(SetItemCountFunction.setCount(UniformGenerator.between(2, 6)))
-
-                                            .add(LootItem.lootTableItem(Items.EXPERIENCE_BOTTLE).setWeight(3))
-                                            .apply(SetItemCountFunction.setCount(UniformGenerator.between(5, 10)))
-
-                                            .add(LootItem.lootTableItem(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE).setWeight(1))
-                                            .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1)))
                             )
             );
             consumer.accept(ENVELOPE,
