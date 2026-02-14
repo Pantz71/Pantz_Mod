@@ -1,0 +1,19 @@
+{
+  "modifiers": [
+    {
+      "type": "entries",
+      "config": {
+        "entries": [
+          {
+            "type": "minecraft:item",
+            "name": "pantz_mod:red_envelope"
+          }
+        ],
+        "index": 0,
+        "replace": false
+      }
+    }
+  ],
+  "priority": "normal",
+  "selector": "minecraft:gameplay/hero_of_the_village/librarian_gift"
+}

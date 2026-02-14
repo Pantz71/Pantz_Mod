@@ -5,6 +5,7 @@ import com.teamabnormals.blueprint.common.loot.modification.modifiers.LootPoolEn
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
@@ -206,6 +207,12 @@ public class PMLootModifierProvider extends LootModifierProvider {
                         List.of(
                                 lootPool(STEEL_INGOT.get(), 15, 1, 7),
                                 lootPool(STEEL_HORSE_ARMOR.get(), 3)
+                        )));
+
+        this.entry("librarian_gift").selects(BuiltInLootTables.LIBRARIAN_GIFT)
+                .addModifier(new LootPoolEntriesModifier(false, 0,
+                        List.of(
+                                lootPool(RED_ENVELOPE.get(), 1)
                         )));
     }
 

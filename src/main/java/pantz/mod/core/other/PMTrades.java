@@ -36,7 +36,8 @@ public class PMTrades {
         );
 
         TradeUtil.addRareWandererTrades(event,
-                new BlueprintTrade(2, ENTITY_FILTER.get(), 1, 2, 15)
+                new BlueprintTrade(2, ENTITY_FILTER.get(), 1, 2, 15),
+                new BlueprintTrade(5, RED_ENVELOPE.get(), 1, 2, 30)
         );
 
     }
