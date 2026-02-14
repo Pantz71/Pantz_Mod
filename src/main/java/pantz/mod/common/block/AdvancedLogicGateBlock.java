@@ -33,13 +33,15 @@ public class AdvancedLogicGateBlock extends LogicGateBlock {
 
     @Override
     public BlockState updateInputs(LevelAccessor level, BlockPos pos, BlockState state) {
-        Direction facing = state.getValue(FACING);
+        Direction back = state.getValue(FACING);
+        Direction right = state.getValue(FACING).getCounterClockWise();
+        Direction left = state.getValue(FACING).getClockWise();
 
-        boolean left = level.hasSignal(pos.relative(facing.getClockWise()), facing.getClockWise());
-        boolean right = level.hasSignal(pos.relative(facing.getCounterClockWise()), facing.getCounterClockWise());
-        boolean back = level.hasSignal(pos.relative(facing), facing);
+        boolean inputBack = getPowerFromInputs(level, pos, back) > 0;
+        boolean inputLeft = getPowerFromInputs(level, pos, left) > 0;
+        boolean inputRight = getPowerFromInputs(level, pos, right) > 0;
 
-        return state.setValue(INPUT_LEFT, left).setValue(INPUT_RIGHT, right).setValue(INPUT_BACK, back);
+        return state.setValue(INPUT_LEFT, inputLeft).setValue(INPUT_RIGHT, inputRight).setValue(INPUT_BACK, inputBack);
     }
 
     @Override

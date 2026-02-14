@@ -35,49 +35,42 @@ public class LogicGateBlock extends DiodeBlock {
     }
 
     @Override
+    protected int getDelay(BlockState blockState) {
+        return 1;
+    }
+
+    @Override
     public void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean isMoving) {
         super.onPlace(state, level, pos, oldState, isMoving);
 
         if (!level.isClientSide()) {
-            level.scheduleTick(pos, this, 1);
+            BlockState updated = updateInputs(level, pos, state);
+            level.setBlock(pos, updated, 2);
+            this.checkTickOnNeighbor(level, pos, updated);
         }
     }
 
     @Override
-    protected int getDelay(BlockState blockState) {
-        return 2;
-    }
+    public void neighborChanged(BlockState state, Level level, BlockPos pos, Block block, BlockPos fromPos, boolean isMoving) {
+        super.neighborChanged(state, level, pos, block, fromPos, isMoving);
 
-    @Override
-    public BlockState updateShape(BlockState state, Direction dir, BlockState neighborState,
-                                  LevelAccessor level, BlockPos pos, BlockPos neighborPos) {
         if (!level.isClientSide()) {
-            BlockState updatedInputs = updateInputs(level, pos, state);
-
-            if (!updatedInputs.equals(state)) {
-                level.scheduleTick(pos, this, 1);
+            BlockState updateInputs = updateInputs(level, pos, state);
+            if (!updateInputs.equals(state)) {
+                level.setBlock(pos, updateInputs, 2);
             }
-        }
-        return super.updateShape(state, dir, neighborState, level, pos, neighborPos);
-    }
-
-    @Override
-    public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-        super.tick(state, level, pos, random);
-        BlockState updatedInputs = updateInputs(level, pos, state);
-
-        if (!updatedInputs.equals(state)) {
-            level.setBlock(pos, updatedInputs, Block.UPDATE_CLIENTS | Block.UPDATE_NEIGHBORS);
+            this.checkTickOnNeighbor(level, pos, updateInputs);
         }
     }
 
     public BlockState updateInputs(LevelAccessor level, BlockPos pos, BlockState state) {
-        Direction facing = state.getValue(FACING);
+        Direction right = state.getValue(FACING).getCounterClockWise();
+        Direction left = state.getValue(FACING).getClockWise();
 
-        boolean left = level.hasSignal(pos.relative(facing.getClockWise()), facing.getClockWise());
-        boolean right = level.hasSignal(pos.relative(facing.getCounterClockWise()), facing.getCounterClockWise());
+        boolean inputLeft = getPowerFromInputs(level, pos, left) > 0;
+        boolean inputRight = getPowerFromInputs(level, pos, right) > 0;
 
-        return state.setValue(INPUT_LEFT, left).setValue(INPUT_RIGHT, right);
+        return state.setValue(INPUT_LEFT, inputLeft).setValue(INPUT_RIGHT, inputRight);
     }
 
     @Override
@@ -111,14 +104,15 @@ public class LogicGateBlock extends DiodeBlock {
         }
     }
 
-    public static int getPowerFromInputs(Level level, BlockPos pos, Direction direction) {
+    public static int getPowerFromInputs(LevelAccessor level, BlockPos pos, Direction direction) {
         BlockPos side = pos.relative(direction);
         int signal = level.getSignal(side, direction);
+
         if (signal >= 15) {
             return signal;
-        } else {
-            BlockState state = level.getBlockState(side);
-            return Math.max(signal, state.getBlock() instanceof RedStoneWireBlock ? state.getValue(RedStoneWireBlock.POWER) : 0);
         }
+
+        BlockState state = level.getBlockState(side);
+        return Math.max(signal, state.getBlock() instanceof RedStoneWireBlock ? state.getValue(RedStoneWireBlock.POWER) : 0);
     }
 }
