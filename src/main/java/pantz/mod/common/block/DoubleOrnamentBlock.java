@@ -74,7 +74,7 @@ public class DoubleOrnamentBlock extends DoublePlantBlock implements SimpleWater
     @Override
     public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
         if (state.getValue(HALF) == DoubleBlockHalf.UPPER) {
-            return level.getBlockState(pos.above()).isFaceSturdy(level, pos.above(), Direction.DOWN);
+            return Block.canSupportCenter(level, pos.above(), Direction.DOWN);
         } else {
             BlockState above = level.getBlockState(pos.above());
             return above.is(this) && above.getValue(HALF) == DoubleBlockHalf.UPPER;
