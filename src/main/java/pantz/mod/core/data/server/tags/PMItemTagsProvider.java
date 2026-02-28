@@ -54,6 +54,7 @@ public class PMItemTagsProvider extends ItemTagsProvider {
         this.tag(COALS).add(Items.COAL, Items.CHARCOAL);
 
         this.tag(ENDER_SCANNER_IMMUNITIES).add(Items.CARVED_PUMPKIN);
+        this.tag(KEYS).add(KEY.get());
 
         this.tag(Tags.Items.INGOTS).addTag(INGOTS_STEEL);
         this.tag(Tags.Items.NUGGETS).addTag(NUGGETS_STEEL);

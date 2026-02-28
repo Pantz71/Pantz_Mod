@@ -37,6 +37,8 @@ public class PMBlockTagsProvider extends BlockTagsProvider {
                 BLUE_ICE_BRICKS.get(), BLUE_ICE_BRICK_STAIRS.get(), BLUE_ICE_BRICK_SLAB.get(), CHISELED_BLUE_ICE_BRICKS.get(),
                 PACKED_ICE_DOOR.get(), PACKED_ICE_TRAPDOOR.get(), BLUE_ICE_DOOR.get(), BLUE_ICE_TRAPDOOR.get(), ICE_LANTERN.get());
 
+        this.tag(BlockTags.MINEABLE_WITH_AXE).add(LOCK.get(), UNIVERSAL_LOCK.get());
+
         this.tag(BlockTags.NEEDS_STONE_TOOL).add(STEEL_BLOCK.get(), STEEL_BARS.get(), STEEL_DOOR.get(), STEEL_TRAPDOOR.get(), STEEL_LANTERN.get(),
                 SULFUR_BLOCK.get(), SULFUR_BRICKS.get(), SULFUR_BRICK_STAIRS.get(), SULFUR_BRICK_SLAB.get(), SULFUR_BRICK_WALL.get(), NETHER_SULFUR_ORE.get(), SULFUR_LAMP.get(),
                 SULFUR_CLUSTER.get(), SMALL_SULFUR_BUD.get(), MEDIUM_SULFUR_BUD.get(), LARGE_SULFUR_BUD.get(),

@@ -61,6 +61,8 @@ public class PMItems {
 
     public static final RegistryObject<Item> RED_ENVELOPE = ITEMS.createItem("red_envelope", () -> new RedEnvelopeItem(new Item.Properties().stacksTo(16)));
 
+    public static final RegistryObject<Item> KEY = ITEMS.createItem("key", () -> new Item(new Item.Properties()));
+
     private static Supplier<Item> basicItem() {
         return () -> new Item(new Item.Properties());
     }
@@ -88,7 +90,7 @@ public class PMItems {
                 .addItemsAfter(of(Items.NETHERITE_HOE), NETHERITE_EXCAVATOR, NETHERITE_HAMMER)
 
                 .addItemsAfter(of(Items.WRITABLE_BOOK), RED_ENVELOPE)
-
+                .addItemsAfter(of(Items.BRUSH), KEY)
 
         ;
 

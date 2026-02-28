@@ -70,12 +70,15 @@ public class PMProperties {
     public static final BlockBehaviour.Properties PACKED_ICE_BRICKS = BlockBehaviour.Properties.of().sound(SoundType.GLASS).mapColor(MapColor.ICE).instrument(NoteBlockInstrument.CHIME).strength(3.0f, 2.0f);
     public static final BlockBehaviour.Properties BLUE_ICE_BRICKS = BlockBehaviour.Properties.of().sound(SoundType.GLASS).mapColor(MapColor.ICE).strength(5.2f, 3.0f);
 
-    public static final BlockBehaviour.Properties ICE_DOOR = BlockBehaviour.Properties.of().requiresCorrectToolForDrops().sound(SoundType.GLASS).mapColor(MapColor.ICE).strength(3.0f, 5.0f);
-    public static final BlockBehaviour.Properties ICE_TRAPDOOR = BlockBehaviour.Properties.of().requiresCorrectToolForDrops().sound(SoundType.GLASS).mapColor(MapColor.ICE).strength(3.0f, 5.0f);
+    public static final BlockBehaviour.Properties ICE_DOOR = BlockBehaviour.Properties.of().sound(SoundType.GLASS).mapColor(MapColor.ICE).strength(3.0f, 5.0f);
+    public static final BlockBehaviour.Properties ICE_TRAPDOOR = BlockBehaviour.Properties.of().sound(SoundType.GLASS).mapColor(MapColor.ICE).strength(3.0f, 5.0f);
     public static final BlockBehaviour.Properties ICE_LANTERN = BlockBehaviour.Properties.of().requiresCorrectToolForDrops().sound(SoundType.GLASS).lightLevel(litBlockEmission(15)).strength(3.0f).mapColor(MapColor.ICE);
 
     public static final BlockBehaviour.Properties PAPER_LANTERN = BlockBehaviour.Properties.of().lightLevel(light -> 15).strength(0.3f).sound(SoundType.WOOL).mapColor(MapColor.GOLD).forceSolidOn().ignitedByLava();
     public static final BlockBehaviour.Properties ORNAMENT = BlockBehaviour.Properties.of().instabreak().sound(SoundType.WOOL).mapColor(MapColor.COLOR_RED).ignitedByLava().isSuffocating(PMProperties::never).isViewBlocking(PMProperties::never).isRedstoneConductor(PMProperties::never).isValidSpawn(PMProperties::never).noCollission().pushReaction(PushReaction.DESTROY);
+
+    public static final BlockBehaviour.Properties LOCK = BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).strength(3.0f, 4.5f).instrument(NoteBlockInstrument.BASS).sound(SoundType.WOOD);
+    public static final BlockBehaviour.Properties UNIVERSAL_LOCK = BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_PURPLE).strength(3.0f, 4.5f).instrument(NoteBlockInstrument.BASS).sound(SoundType.WOOD);
 
     public static boolean never(BlockState state, BlockGetter blockGetter, BlockPos pos) {
         return false;

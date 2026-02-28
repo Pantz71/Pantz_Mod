@@ -21,7 +21,9 @@ import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import pantz.mod.common.block.LockBlock;
 import pantz.mod.common.block.PedestalBlock;
+import pantz.mod.common.block.entity.LockableBlockEntity;
 import pantz.mod.common.block.entity.PedestalBlockEntity;
 import pantz.mod.common.item.AreaDiggerItem;
 import pantz.mod.common.item.EntityFilterItem;
@@ -31,6 +33,7 @@ import pantz.mod.common.utils.PedestalUtils;
 import pantz.mod.core.PantzMod;
 
 import java.util.List;
+import java.util.UUID;
 
 
 @Mod.EventBusSubscriber(modid = PantzMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
@@ -73,18 +76,46 @@ public class PMEvents {
 
         if (!player.isShiftKeyDown()) return;
 
+        decoratePedestal(event, player, level, pos, hand);
+        setKey(event, player, level, pos, hand);
+    }
+
+    private static void setKey(RightClickBlock event, Player player, Level level, BlockPos pos, InteractionHand hand) {
+        if (!(level.getBlockEntity(pos) instanceof LockableBlockEntity lock)) return;
+        if (!(level.getBlockState(pos).getBlock() instanceof LockBlock lockBlock)) return;
+
+        ItemStack stack = player.getItemInHand(hand);
+        ItemStack keyItem = lock.getItem();
+        UUID owner = player.getUUID();
+        UUID lockOwner = lock.getOwner();
+
+        if (keyItem.isEmpty() && lockBlock.isValidItem(stack)) {
+            lock.setItem(stack, owner);
+            player.swing(InteractionHand.MAIN_HAND);
+            cancel(event);
+        } else if (!keyItem.isEmpty() && stack.isEmpty() && lockOwner != null && lockOwner.equals(owner)) {
+            lock.removeItem(lockOwner);
+            player.swing(InteractionHand.MAIN_HAND);
+            cancel(event);
+        }
+
+    }
+
+    private static void decoratePedestal(RightClickBlock event, Player player, Level level, BlockPos pos, InteractionHand hand) {
+        if (!(level.getBlockEntity(pos) instanceof PedestalBlockEntity pedestal)) return;
+
         BlockState state = level.getBlockState(pos);
         if (!(state.getBlock() instanceof PedestalBlock)) return;
-
-        if (!(level.getBlockEntity(pos) instanceof PedestalBlockEntity pedestal)) return;
 
         if (!pedestal.getItem().isEmpty()) return;
 
         ItemStack held = player.getItemInHand(hand);
 
         if (held.is(ItemTags.WOOL_CARPETS) && state.getValue(PedestalBlock.CARPET) == CarpetColor.NONE) {
+            player.swing(InteractionHand.MAIN_HAND);
             putCarpetOn(event, held, state, pos, player, level);
-        } else if (held.isEmpty() && state.getValue(PedestalBlock.CARPET) != CarpetColor.NONE){
+        } else if (held.isEmpty() && state.getValue(PedestalBlock.CARPET) != CarpetColor.NONE) {
+            player.swing(InteractionHand.MAIN_HAND);
             takeCarpetOff(event, state, pos, player, level);
         }
     }
@@ -92,7 +123,6 @@ public class PMEvents {
     private static void putCarpetOn(RightClickBlock event, ItemStack held, BlockState state, BlockPos pos, Player player, Level level) {
         CarpetColor color = PedestalUtils.getCarpetColor(held.getItem());
         if (color == CarpetColor.NONE) return;
-        player.swing(InteractionHand.MAIN_HAND);
         if (!level.isClientSide()) {
             level.setBlock(pos, state.setValue(PedestalBlock.CARPET, color), 3);
             if (!player.isCreative()) {
@@ -104,7 +134,6 @@ public class PMEvents {
 
     private static void takeCarpetOff(RightClickBlock event, BlockState state, BlockPos pos, Player player, Level level) {
         CarpetColor color = state.getValue(PedestalBlock.CARPET);
-        player.swing(InteractionHand.MAIN_HAND);
         if (!level.isClientSide()) {
             ItemStack carpet = new ItemStack(PedestalUtils.getCarpetForColor(color));
             if (!player.addItem(carpet)) {

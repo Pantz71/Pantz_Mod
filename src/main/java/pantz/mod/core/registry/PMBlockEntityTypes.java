@@ -16,5 +16,6 @@ public class PMBlockEntityTypes {
     public static final RegistryObject<BlockEntityType<GlobeBlockEntity>> GLOBE = BLOCK_ENTITY_TYPES.createBlockEntity("globe", GlobeBlockEntity::new, GlobeBlock.class);
     public static final RegistryObject<BlockEntityType<ItemStandBlockEntity>> ITEM_STAND = BLOCK_ENTITY_TYPES.createBlockEntity("item_stand", ItemStandBlockEntity::new, ItemStandBlock.class);
     public static final RegistryObject<BlockEntityType<TrashCanBlockEntity>> TRASH_CAN = BLOCK_ENTITY_TYPES.createBlockEntity("trash_can", TrashCanBlockEntity::new, TrashCanBlock.class);
+    public static final RegistryObject<BlockEntityType<LockableBlockEntity>> LOCKABLE = BLOCK_ENTITY_TYPES.createBlockEntity("lock", LockableBlockEntity::new, LockBlock.class);
 
 }

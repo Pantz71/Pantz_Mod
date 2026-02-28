@@ -135,6 +135,9 @@ public class PMBlockStateProvider extends BlueprintBlockStateProvider {
 
         this.doubleOrnamentBlock(ORNAMENT_FIRECRACKERS, modLoc("block/ornament_firecrackers"));
         this.doubleOrnamentBlock(ORNAMENT_LUCKY_COINS, modLoc("block/ornament_lucky_coins"));
+
+        this.lockBlock(LOCK);
+        this.lockBlock(UNIVERSAL_LOCK);
     }
 
     private void redstoneConfiguratorBlock(RegistryObject<Block> block) {
@@ -479,5 +482,17 @@ public class PMBlockStateProvider extends BlueprintBlockStateProvider {
                     .addModel();
         }
         generatedItem(block.get(), "item");
+    }
+
+    private void lockBlock(RegistryObject<Block> block) {
+        String name = name(block.get());
+        ResourceLocation texture = blockTexture(block.get());
+
+        getVariantBuilder(block.get())
+                .partialState().with(BlockStateProperties.POWERED, false)
+                .modelForState().modelFile(models().cubeAll(name, texture)).addModel()
+                .partialState().with(BlockStateProperties.POWERED, true)
+                .modelForState().modelFile(models().cubeAll(name + "_powered", texture)).addModel();
+        blockItem(block);
     }
 }

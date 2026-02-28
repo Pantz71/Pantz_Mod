@@ -98,6 +98,8 @@
 
   "item.pantz_mod.red_envelope": "Red Envelope",
 
+  "item.pantz_mod.key": "Key",
+
   "_pedestal": "pedestal",
   "block.pantz_mod.stone_pedestal": "Stone Pedestal",
   "block.pantz_mod.deepslate_pedestal": "Deepslate Pedestal",
@@ -170,6 +172,9 @@
   "block.pantz_mod.gray_redstone_lamp": "Gray Redstone Lamp",
   "block.pantz_mod.light_gray_redstone_lamp": "Light Gray Redstone Lamp",
   "block.pantz_mod.white_redstone_lamp": "White Redstone Lamp",
+
+  "block.pantz_mod.lock": "Lock",
+  "block.pantz_mod.universal_lock": "Universal Lock",
 
   "_functional": "functional",
   "block.pantz_mod.item_stand": "Item Stand",

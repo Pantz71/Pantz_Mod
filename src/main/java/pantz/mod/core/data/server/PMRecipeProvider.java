@@ -7,6 +7,7 @@ import com.teamabnormals.blueprint.core.other.tags.BlueprintItemTags;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -22,6 +23,7 @@ import pantz.mod.core.PantzMod;
 import pantz.mod.core.other.PMBlockFamilies;
 import pantz.mod.core.other.PMConstant;
 import pantz.mod.core.other.tags.PMItemTags;
+import pantz.mod.core.registry.PMBlocks;
 
 import java.util.List;
 import java.util.function.Consumer;
@@ -387,6 +389,34 @@ public class PMRecipeProvider extends BlueprintRecipeProvider {
                 .pattern("GRG")
                 .pattern("#S#")
                 .unlockedBy(getHasName(Items.PAPER), has(Items.PAPER))
+                .save(consumer);
+        ///   ////////////////////////////////////////////////////////////////////////////
+
+        ///   ////////////////////////////////////////////////////////////////////////////
+        ShapedRecipeBuilder.shaped(REDSTONE, LOCK.get())
+                .define('I', PMItemTags.INGOTS_STEEL).define('#', ItemTags.PLANKS)
+                .define('R', Tags.Items.DUSTS_REDSTONE)
+                .pattern("I#I")
+                .pattern("#R#")
+                .pattern("I#I")
+                .unlockedBy(getHasName(Items.REDSTONE), has(Tags.Items.DUSTS_REDSTONE))
+                .save(consumer);
+
+        ShapedRecipeBuilder.shaped(REDSTONE, UNIVERSAL_LOCK.get())
+                .define('L', LOCK.get()).define('A', Tags.Items.GEMS_AMETHYST)
+                .define('Q', Tags.Items.GEMS_QUARTZ)
+                .pattern("QAQ")
+                .pattern("ALA")
+                .pattern("QAQ")
+                .unlockedBy(getHasName(LOCK.get()), has(LOCK.get()))
+                .save(consumer);
+
+        ShapedRecipeBuilder.shaped(TOOLS, KEY.get())
+                .define('I', Tags.Items.INGOTS_GOLD).define('*', Tags.Items.NUGGETS_GOLD)
+                .pattern("*I*")
+                .pattern(" * ")
+                .pattern(" * ")
+                .unlockedBy(getHasName(Items.GOLD_INGOT), has(Tags.Items.INGOTS_GOLD))
                 .save(consumer);
 
     }
