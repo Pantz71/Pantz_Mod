@@ -31,18 +31,18 @@ public class PMBlockTagsProvider extends BlockTagsProvider {
         this.tag(BlockTags.MINEABLE_WITH_PICKAXE).addTag(PEDESTALS).add(STEEL_BLOCK.get(), STEEL_BARS.get(), STEEL_DOOR.get(), STEEL_TRAPDOOR.get(), STEEL_LANTERN.get(),
                 SULFUR_BLOCK.get(), SULFUR_BRICKS.get(), SULFUR_BRICK_STAIRS.get(), SULFUR_BRICK_SLAB.get(), NETHER_SULFUR_ORE.get(), SULFUR_LAMP.get(),
                 SULFUR_CLUSTER.get(), SMALL_SULFUR_BUD.get(), MEDIUM_SULFUR_BUD.get(), LARGE_SULFUR_BUD.get(),
-                ENDER_SCANNER.get(), WEATHER_DETECTOR.get(), ENTITY_DETECTOR.get(), TRASH_CAN.get(), ENDERPORTER.get(),
+                ENDER_SCANNER.get(), WEATHER_DETECTOR.get(), ENTITY_DETECTOR.get(), TRASH_CAN.get(), ENDERPORTER.get(), REDSTONE_CONFIGURATOR.get(),
                 SNOW_BRICKS.get(), SNOW_BRICK_STAIRS.get(), SNOW_BRICK_SLAB.get(),
                 PACKED_ICE_BRICKS.get(), PACKED_ICE_BRICK_STAIRS.get(), PACKED_ICE_BRICK_SLAB.get(), CHISELED_PACKED_ICE_BRICKS.get(),
                 BLUE_ICE_BRICKS.get(), BLUE_ICE_BRICK_STAIRS.get(), BLUE_ICE_BRICK_SLAB.get(), CHISELED_BLUE_ICE_BRICKS.get(),
-                PACKED_ICE_DOOR.get(), PACKED_ICE_TRAPDOOR.get(), BLUE_ICE_DOOR.get(), BLUE_ICE_TRAPDOOR.get(), ICE_LANTERN.get());
+                PACKED_ICE_DOOR.get(), PACKED_ICE_TRAPDOOR.get(), BLUE_ICE_DOOR.get(), BLUE_ICE_TRAPDOOR.get(), ICE_LANTERN.get(),
+                SAFE.get());
 
         this.tag(BlockTags.MINEABLE_WITH_AXE).add(LOCK.get(), UNIVERSAL_LOCK.get());
-
         this.tag(BlockTags.NEEDS_STONE_TOOL).add(STEEL_BLOCK.get(), STEEL_BARS.get(), STEEL_DOOR.get(), STEEL_TRAPDOOR.get(), STEEL_LANTERN.get(),
                 SULFUR_BLOCK.get(), SULFUR_BRICKS.get(), SULFUR_BRICK_STAIRS.get(), SULFUR_BRICK_SLAB.get(), SULFUR_BRICK_WALL.get(), NETHER_SULFUR_ORE.get(), SULFUR_LAMP.get(),
                 SULFUR_CLUSTER.get(), SMALL_SULFUR_BUD.get(), MEDIUM_SULFUR_BUD.get(), LARGE_SULFUR_BUD.get(),
-                REDSTONE_CONFIGURATOR.get(), ENTITY_DETECTOR.get(), TRASH_CAN.get(), ENDERPORTER.get());
+                REDSTONE_CONFIGURATOR.get(), ENTITY_DETECTOR.get(), TRASH_CAN.get(), ENDERPORTER.get(), SAFE.get());
 
         this.tag(BlockTags.NEEDS_DIAMOND_TOOL).add(ENDER_SCANNER.get());
 

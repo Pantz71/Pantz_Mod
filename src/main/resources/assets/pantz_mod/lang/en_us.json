@@ -26,13 +26,21 @@
   "message.pantz_mod.entity.removed": "Removed from filter: %s",
   "message.pantz_mod.entity.duplicate": "Already in filter: %s",
   "message.pantz_mod.entity.applied": "Applied filter to Entity Detector (%s entries)",
-  "message.pantz_mod.trash": "Successfully destroyed all items inside Trash Can",
+  "message.pantz_mod.trash": "Successfully destroyed all items inside Trash Can!",
+  "message.pantz_mod.set_key": "Set key as %s",
+  "message.pantz_mod.remove_key": "Key removed!",
+  "message.pantz_mod.ownership": "Only the owner can change the key!",
 
-  "subtitle.pantz_mod.trash_can.open": "Trash lid opens",
-  "subtitle.pantz_mod.trash_can.close": "Trash lid closes",
-  "subtitle.pantz_mod.trash_can.destroy": "Trash can destroys items",
+  "subtitles.pantz_mod.trash_can.open": "Trash lid opens",
+  "subtitles.pantz_mod.trash_can.close": "Trash lid closes",
+  "subtitles.pantz_mod.trash_can.destroy": "Trash can destroys items",
   "subtitles.pantz_mod.enderporter.charge": "Enderporter is charged",
   "subtitles.pantz_mod.enderporter.deplete": "Enderporter depletes",
+  "subtitles.pantz_mod.lockable.key_lock": "Key is used",
+  "subtitles.pantz_mod.lockable.key_set": "Key is set",
+  "subtitles.pantz_mod.safe.open": "Safe door opens",
+  "subtitles.pantz_mod.safe.close": "Safe door closes",
+  "subtitles.pantz_mod.safe.locked": "Safe locked",
 
   "_steel": "steel",
   "block.pantz_mod.steel_block": "Block of Steel",
@@ -175,6 +183,7 @@
 
   "block.pantz_mod.lock": "Lock",
   "block.pantz_mod.universal_lock": "Universal Lock",
+  "block.pantz_mod.safe": "Safe",
 
   "_functional": "functional",
   "block.pantz_mod.item_stand": "Item Stand",

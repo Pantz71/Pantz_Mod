@@ -182,6 +182,8 @@ public class PMBlocks {
 
     public static final RegistryObject<Block> LOCK = BLOCKS.createBlock("lock", () -> new LockBlock(PMProperties.LOCK));
     public static final RegistryObject<Block> UNIVERSAL_LOCK = BLOCKS.createBlock("universal_lock", () -> new UniversalLockBlock(PMProperties.UNIVERSAL_LOCK));
+    public static final RegistryObject<Block> SAFE = BLOCKS.createBlock("safe", () -> new SafeBlock(PMProperties.SAFE));
+
     public static void setupTabs() {
         CreativeModeTabContentsPopulator.mod(PantzMod.MOD_ID)
                 .tab(BUILDING_BLOCKS)

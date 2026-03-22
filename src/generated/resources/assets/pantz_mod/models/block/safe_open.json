@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/orientable_vertical",
+  "textures": {
+    "front": "pantz_mod:block/safe_side",
+    "side": "pantz_mod:block/safe_front_open"
+  }
+}

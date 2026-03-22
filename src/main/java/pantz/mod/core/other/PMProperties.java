@@ -79,6 +79,7 @@ public class PMProperties {
 
     public static final BlockBehaviour.Properties LOCK = BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).strength(3.0f, 4.5f).instrument(NoteBlockInstrument.BASS).sound(SoundType.WOOD);
     public static final BlockBehaviour.Properties UNIVERSAL_LOCK = BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_PURPLE).strength(3.0f, 4.5f).instrument(NoteBlockInstrument.BASS).sound(SoundType.WOOD);
+    public static final BlockBehaviour.Properties SAFE = BlockBehaviour.Properties.of().requiresCorrectToolForDrops().mapColor(MapColor.COLOR_LIGHT_GRAY).strength(50.0f, 2000.0f).pushReaction(PushReaction.BLOCK).instrument(NoteBlockInstrument.BASEDRUM).sound(SoundType.NETHERITE_BLOCK);
 
     public static boolean never(BlockState state, BlockGetter blockGetter, BlockPos pos) {
         return false;

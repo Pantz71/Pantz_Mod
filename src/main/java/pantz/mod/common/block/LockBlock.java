@@ -2,7 +2,8 @@ package pantz.mod.common.block;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -19,12 +20,12 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
-import pantz.mod.common.block.entity.LockableBlockEntity;
+import pantz.mod.common.block.entity.LockBlockEntity;
+import pantz.mod.common.utils.ILockableBlock;
 import pantz.mod.core.other.tags.PMItemTags;
+import pantz.mod.core.registry.PMSoundEvents;
 
-import java.util.UUID;
-
-public class LockBlock extends BaseEntityBlock {
+public class LockBlock extends BaseEntityBlock implements ILockableBlock {
     public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
     public LockBlock(Properties pProperties) {
         super(pProperties);
@@ -34,50 +35,37 @@ public class LockBlock extends BaseEntityBlock {
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
 
-        if (!(level.getBlockEntity(pos) instanceof LockableBlockEntity lock)) {
+        if (!(level.getBlockEntity(pos) instanceof LockBlockEntity lock)) {
             return InteractionResult.PASS;
         }
 
-        ItemStack stack = player.getItemInHand(hand);
-        ItemStack keyItem = lock.getItem();
+        ItemStack held = player.getItemInHand(hand);
 
-        if (!keyItem.isEmpty() && isSameItem(keyItem, stack)) {
+        if (lock.getKeyItem() == null) {
+            return InteractionResult.PASS;
+        }
+
+        boolean item = held.is(lock.getKeyItem());
+        boolean key = item && lock.getLockCode().unlocksWith(held);
+
+        if (!key) {
             if (!level.isClientSide()) {
-                level.setBlock(pos, state.cycle(POWERED), 3);
+                player.displayClientMessage(Component.translatable("container.isLocked", state.getBlock().getName()), true);
             }
             return InteractionResult.sidedSuccess(level.isClientSide());
         }
 
-        return InteractionResult.PASS;
+        level.playSound(null, pos, PMSoundEvents.KEY_LOCK.get(), SoundSource.BLOCKS);
+        if (!level.isClientSide()) {
+            level.setBlock(pos, state.cycle(POWERED), 3);
+        }
+
+        return InteractionResult.sidedSuccess(level.isClientSide());
     }
 
+    @Override
     public boolean isValidItem(ItemStack stack) {
         return stack.is(PMItemTags.KEYS);
-    }
-
-    protected boolean isSameItem(ItemStack stored, ItemStack held) {
-        if (!stored.is(held.getItem())) return false;
-
-        CompoundTag storedTag = stored.getTag();
-        CompoundTag heldTag = held.getTag();
-
-        if (storedTag == null && heldTag == null) return true;
-        if (storedTag == null || heldTag == null) return false;
-
-        CompoundTag cleanStored = storedTag.copy();
-        CompoundTag cleanHeld = heldTag.copy();
-
-        cleanStored.remove("Damage");
-        cleanStored.remove("Unbreakable");
-        cleanStored.remove("RepairCost");
-        cleanStored.remove("HideFlags");
-
-        cleanHeld.remove("Damage");
-        cleanHeld.remove("Unbreakable");
-        cleanHeld.remove("RepairCost");
-        cleanHeld.remove("HideFlags");
-
-        return cleanStored.equals(cleanHeld);
     }
 
     @Override
@@ -97,7 +85,7 @@ public class LockBlock extends BaseEntityBlock {
 
     @Override
     public @Nullable BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new LockableBlockEntity(pos, state);
+        return new LockBlockEntity(pos, state);
     }
 
     @Override

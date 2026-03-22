@@ -3,19 +3,19 @@
     "sounds": [
       "pantz_mod:block/trash_can/open"
     ],
-    "subtitle": "subtitle.pantz_mod.trash_can.open"
+    "subtitle": "subtitles.pantz_mod.trash_can.open"
   },
   "block.trash_can.close": {
     "sounds": [
       "pantz_mod:block/trash_can/close"
     ],
-    "subtitle": "subtitle.pantz_mod.trash_can.close"
+    "subtitle": "subtitles.pantz_mod.trash_can.close"
   },
   "block.trash_can.destroy": {
     "sounds": [
       "pantz_mod:block/trash_can/destroy"
     ],
-    "subtitle": "subtitle.pantz_mod.trash_can.destroy"
+    "subtitle": "subtitles.pantz_mod.trash_can.destroy"
   },
   "block.enderporter.charge": {
     "sounds": [
@@ -31,5 +31,35 @@
       "block/respawn_anchor/deplete2"
     ],
     "subtitle": "subtitles.pantz_mod.enderporter.deplete"
+  },
+  "block.lockable.key_lock": {
+    "sounds": [
+      "pantz_mod:block/lockable/key_lock"
+    ],
+    "subtitle": "subtitles.pantz_mod.lockable.key_lock"
+  },
+  "block.lockable.key_set": {
+    "sounds": [
+      "pantz_mod:block/lockable/key_set"
+    ],
+    "subtitle": "subtitles.pantz_mod.lockable.key_set"
+  },
+  "block.safe.open": {
+    "sounds": [
+      "pantz_mod:block/safe/open"
+    ],
+    "subtitle": "subtitles.pantz_mod.safe.open"
+  },
+  "block.safe.close": {
+    "sounds": [
+      "pantz_mod:block/safe/close"
+    ],
+    "subtitle": "subtitles.pantz_mod.safe.close"
+  },
+  "block.safe.locked": {
+    "sounds": [
+      "pantz_mod:block/safe/locked"
+    ],
+    "subtitle": "subtitles.pantz_mod.safe.locked"
   }
 }

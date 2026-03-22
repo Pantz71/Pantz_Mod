@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "key": {
+    "A": {
+      "tag": "forge:gems/amethyst"
+    },
+    "L": {
+      "item": "pantz_mod:lock"
+    },
+    "Q": {
+      "tag": "forge:gems/quartz"
+    }
+  },
+  "pattern": [
+    "QAQ",
+    "ALA",
+    "QAQ"
+  ],
+  "result": {
+    "item": "pantz_mod:universal_lock"
+  },
+  "show_notification": true
+}

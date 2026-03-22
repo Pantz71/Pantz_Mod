@@ -4,6 +4,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -23,14 +24,13 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import pantz.mod.common.block.LockBlock;
 import pantz.mod.common.block.PedestalBlock;
-import pantz.mod.common.block.entity.LockableBlockEntity;
+import pantz.mod.common.block.entity.LockBlockEntity;
 import pantz.mod.common.block.entity.PedestalBlockEntity;
 import pantz.mod.common.item.AreaDiggerItem;
 import pantz.mod.common.item.EntityFilterItem;
-import pantz.mod.common.utils.CarpetColor;
-import pantz.mod.common.utils.EnderporterUtils;
-import pantz.mod.common.utils.PedestalUtils;
+import pantz.mod.common.utils.*;
 import pantz.mod.core.PantzMod;
+import pantz.mod.core.registry.PMSoundEvents;
 
 import java.util.List;
 import java.util.UUID;
@@ -81,24 +81,36 @@ public class PMEvents {
     }
 
     private static void setKey(RightClickBlock event, Player player, Level level, BlockPos pos, InteractionHand hand) {
-        if (!(level.getBlockEntity(pos) instanceof LockableBlockEntity lock)) return;
-        if (!(level.getBlockState(pos).getBlock() instanceof LockBlock lockBlock)) return;
+        if (!(level.getBlockEntity(pos) instanceof Lockable lockable)) return;
+        if (!(level.getBlockState(pos).getBlock() instanceof ILockableBlock lockableBlock)) return;
 
         ItemStack stack = player.getItemInHand(hand);
-        ItemStack keyItem = lock.getItem();
-        UUID owner = player.getUUID();
-        UUID lockOwner = lock.getOwner();
 
-        if (keyItem.isEmpty() && lockBlock.isValidItem(stack)) {
-            lock.setItem(stack, owner);
-            player.swing(InteractionHand.MAIN_HAND);
+        ItemStack storedKey = lockable.getItem();
+        UUID playerId = player.getUUID();
+        UUID owner = lockable.getOwner();
+
+        if (storedKey.isEmpty() && lockableBlock.isValidItem(stack) && owner == null) {
+            lockable.setItem(stack, playerId);
+            player.displayClientMessage(Component.translatable("message.pantz_mod.set_key", stack.getHoverName()), true);
+            level.playSound(null, pos, PMSoundEvents.KEY_SET.get(), SoundSource.BLOCKS);
+            player.swing(hand);
             cancel(event);
-        } else if (!keyItem.isEmpty() && stack.isEmpty() && lockOwner != null && lockOwner.equals(owner)) {
-            lock.removeItem(lockOwner);
-            player.swing(InteractionHand.MAIN_HAND);
-            cancel(event);
+            return;
         }
 
+        if (!storedKey.isEmpty() && stack.equals(storedKey) && owner != null) {
+            if (!owner.equals(playerId)) {
+                player.displayClientMessage(Component.translatable("message.pantz_mod.ownership"), true);
+                player.swing(hand);
+                cancel(event);
+            } else {
+                lockable.removeItem(playerId);
+                player.displayClientMessage(Component.translatable("message.pantz_mod.remove_key"), true);
+                player.swing(hand);
+                cancel(event);
+            }
+        }
     }
 
     private static void decoratePedestal(RightClickBlock event, Player player, Level level, BlockPos pos, InteractionHand hand) {

@@ -1,0 +1,38 @@
+{
+  "variants": {
+    "open=false": [
+      {
+        "model": "pantz_mod:block/safe",
+        "y": 180
+      },
+      {
+        "model": "pantz_mod:block/safe",
+        "y": 270
+      },
+      {
+        "model": "pantz_mod:block/safe"
+      },
+      {
+        "model": "pantz_mod:block/safe",
+        "y": 90
+      }
+    ],
+    "open=true": [
+      {
+        "model": "pantz_mod:block/safe_open",
+        "y": 180
+      },
+      {
+        "model": "pantz_mod:block/safe_open",
+        "y": 270
+      },
+      {
+        "model": "pantz_mod:block/safe_open"
+      },
+      {
+        "model": "pantz_mod:block/safe_open",
+        "y": 90
+      }
+    ]
+  }
+}

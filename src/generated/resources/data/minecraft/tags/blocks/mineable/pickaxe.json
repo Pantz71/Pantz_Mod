@@ -21,6 +21,7 @@
     "pantz_mod:entity_detector",
     "pantz_mod:trash_can",
     "pantz_mod:enderporter",
+    "pantz_mod:redstone_configurator",
     "pantz_mod:snow_bricks",
     "pantz_mod:snow_brick_stairs",
     "pantz_mod:snow_brick_slab",
@@ -36,6 +37,7 @@
     "pantz_mod:packed_ice_trapdoor",
     "pantz_mod:blue_ice_door",
     "pantz_mod:blue_ice_trapdoor",
-    "pantz_mod:ice_lantern"
+    "pantz_mod:ice_lantern",
+    "pantz_mod:safe"
   ]
 }

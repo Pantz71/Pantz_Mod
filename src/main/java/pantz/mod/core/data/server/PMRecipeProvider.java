@@ -411,6 +411,14 @@ public class PMRecipeProvider extends BlueprintRecipeProvider {
                 .unlockedBy(getHasName(LOCK.get()), has(LOCK.get()))
                 .save(consumer);
 
+        ShapedRecipeBuilder.shaped(DECORATIONS, SAFE.get())
+                .define('I', PMItemTags.INGOTS_STEEL).define('O', Tags.Items.OBSIDIAN)
+                .pattern("III")
+                .pattern("O O")
+                .pattern("III")
+                .unlockedBy(getHasName(STEEL_INGOT.get()), has(PMItemTags.INGOTS_STEEL))
+                .save(consumer);
+
         ShapedRecipeBuilder.shaped(TOOLS, KEY.get())
                 .define('I', Tags.Items.INGOTS_GOLD).define('*', Tags.Items.NUGGETS_GOLD)
                 .pattern("*I*")

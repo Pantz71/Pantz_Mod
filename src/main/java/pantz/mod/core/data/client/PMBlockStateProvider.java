@@ -138,6 +138,7 @@ public class PMBlockStateProvider extends BlueprintBlockStateProvider {
 
         this.lockBlock(LOCK);
         this.lockBlock(UNIVERSAL_LOCK);
+        this.safeBlock(SAFE);
     }
 
     private void redstoneConfiguratorBlock(RegistryObject<Block> block) {
@@ -347,13 +348,8 @@ public class PMBlockStateProvider extends BlueprintBlockStateProvider {
                 .texture("particle", suffix(texture, "_bottom"))
                 .texture("texture", suffix(texture, "_bottom"));
 
-        for (Direction dir : Direction.Plane.HORIZONTAL) {
-            int rotY = switch (dir) {
-                case SOUTH -> 180;
-                case WEST  -> 270;
-                case EAST  -> 90;
-                default    -> 0;
-            };
+        for (Direction direction : Direction.Plane.HORIZONTAL) {
+            int rotY = (int) direction.toYRot();
 
             for (boolean top : new boolean[]{false, true}) {
                 for (boolean bottom : new boolean[]{false, true}) {
@@ -361,7 +357,7 @@ public class PMBlockStateProvider extends BlueprintBlockStateProvider {
                     ModelFile modelFile = top ? topModel : bottom ? bottomModel : model;
 
                     getVariantBuilder(block.get()).partialState()
-                            .with(RopeLadderBlock.FACING, dir).with(RopeLadderBlock.TOP, top).with(RopeLadderBlock.BOTTOM, bottom)
+                            .with(RopeLadderBlock.FACING, direction).with(RopeLadderBlock.TOP, top).with(RopeLadderBlock.BOTTOM, bottom)
                             .modelForState().modelFile(modelFile).rotationY(rotY).addModel();
                 }
             }
@@ -449,13 +445,7 @@ public class PMBlockStateProvider extends BlueprintBlockStateProvider {
             ModelFile modelFile = half == DoubleBlockHalf.UPPER ? upperModel : lowerModel;
 
             for (Direction direction : Direction.Plane.HORIZONTAL) {
-                int rotY = switch (direction) {
-                    case SOUTH -> 180;
-                    case WEST  -> 270;
-                    case EAST  -> 90;
-                    default    -> 0;
-                };
-
+                int rotY = (int) direction.toYRot();
 
                 getVariantBuilder(block.get()).partialState()
                         .with(DoubleOrnamentBlock.HALF, half)
@@ -488,11 +478,39 @@ public class PMBlockStateProvider extends BlueprintBlockStateProvider {
         String name = name(block.get());
         ResourceLocation texture = blockTexture(block.get());
 
-        getVariantBuilder(block.get())
-                .partialState().with(BlockStateProperties.POWERED, false)
-                .modelForState().modelFile(models().cubeAll(name, texture)).addModel()
-                .partialState().with(BlockStateProperties.POWERED, true)
-                .modelForState().modelFile(models().cubeAll(name + "_powered", texture)).addModel();
+        for (boolean open : new boolean[]{false, true}) {
+            ModelFile baseModel = models().cubeAll(name, texture);
+            ModelFile poweredModel = models().cubeAll(name + "_powered", suffix(texture, "_powered"));
+            ModelFile modelFile = open ? poweredModel : baseModel;
+
+            getVariantBuilder(block.get())
+                    .partialState().with(BlockStateProperties.POWERED, open)
+                    .modelForState().modelFile(modelFile).addModel();
+        }
         blockItem(block);
+    }
+
+    private void safeBlock(RegistryObject<Block> block) {
+        String name = name(block.get());
+        ResourceLocation texture = blockTexture(block.get());
+        ResourceLocation frontTexture = suffix(texture, "_front");
+        ResourceLocation sideTexture = suffix(texture, "_side");
+
+        ModelFile baseModel = models().orientable(name, sideTexture, frontTexture, sideTexture);
+        ModelFile openModel = models().orientable(name + "_open", sideTexture, suffix(frontTexture, "_open"), sideTexture);
+
+        for (boolean open : new boolean[]{false, true}) {
+            ModelFile modelFile = open ? openModel : baseModel;
+
+            for (Direction direction : Direction.Plane.HORIZONTAL) {
+                int rotY = (int) direction.toYRot();
+
+                getVariantBuilder(block.get())
+                        .partialState().with(SafeBlock.FACING, direction)
+                        .partialState().with(SafeBlock.OPEN, open)
+                        .addModels(new ConfiguredModel(modelFile, 0, rotY, false));
+            }
+        }
+        blockItem(block.get());
     }
 }

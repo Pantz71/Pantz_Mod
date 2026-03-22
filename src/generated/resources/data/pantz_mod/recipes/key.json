@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "*": {
+      "tag": "forge:nuggets/gold"
+    },
+    "I": {
+      "tag": "forge:ingots/gold"
+    }
+  },
+  "pattern": [
+    "*I*",
+    " * ",
+    " * "
+  ],
+  "result": {
+    "item": "pantz_mod:key"
+  },
+  "show_notification": true
+}
