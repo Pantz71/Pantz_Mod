@@ -108,11 +108,6 @@ public class TrashCanBlockEntity extends RandomizableContainerBlockEntity {
     }
 
     @Override
-    public boolean stillValid(Player player) {
-        return getBlockState().getBlock() instanceof TrashCanBlock;
-    }
-
-    @Override
     protected Component getDefaultName() {
         return Component.translatable("block.pantz_mod.trash_can");
     }

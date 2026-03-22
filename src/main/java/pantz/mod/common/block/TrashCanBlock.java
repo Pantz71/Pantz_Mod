@@ -90,6 +90,7 @@ public class TrashCanBlock extends BaseEntityBlock {
             BlockEntity be = level.getBlockEntity(pos);
             if (be instanceof TrashCanBlockEntity trash) {
                 trash.drops();
+                level.updateNeighbourForOutputSignal(pos, this);
             }
             super.onRemove(state, level, pos, newState, isMoving);
         }

@@ -2,33 +2,33 @@
   "variants": {
     "facing=east,half=lower": {
       "model": "pantz_mod:block/ornament_firecrackers_bottom",
-      "y": 90
+      "y": 270
     },
     "facing=east,half=upper": {
       "model": "pantz_mod:block/ornament_firecrackers_top",
-      "y": 90
+      "y": 270
     },
     "facing=north,half=lower": {
-      "model": "pantz_mod:block/ornament_firecrackers_bottom"
-    },
-    "facing=north,half=upper": {
-      "model": "pantz_mod:block/ornament_firecrackers_top"
-    },
-    "facing=south,half=lower": {
       "model": "pantz_mod:block/ornament_firecrackers_bottom",
       "y": 180
     },
-    "facing=south,half=upper": {
+    "facing=north,half=upper": {
       "model": "pantz_mod:block/ornament_firecrackers_top",
       "y": 180
+    },
+    "facing=south,half=lower": {
+      "model": "pantz_mod:block/ornament_firecrackers_bottom"
+    },
+    "facing=south,half=upper": {
+      "model": "pantz_mod:block/ornament_firecrackers_top"
     },
     "facing=west,half=lower": {
       "model": "pantz_mod:block/ornament_firecrackers_bottom",
-      "y": 270
+      "y": 90
     },
     "facing=west,half=upper": {
       "model": "pantz_mod:block/ornament_firecrackers_top",
-      "y": 270
+      "y": 90
     }
   }
 }
