@@ -183,6 +183,7 @@ public class PMBlocks {
     public static final RegistryObject<Block> LOCK = BLOCKS.createBlock("lock", () -> new LockBlock(PMProperties.LOCK));
     public static final RegistryObject<Block> UNIVERSAL_LOCK = BLOCKS.createBlock("universal_lock", () -> new UniversalLockBlock(PMProperties.UNIVERSAL_LOCK));
     public static final RegistryObject<Block> SAFE = BLOCKS.createBlock("safe", () -> new SafeBlock(PMProperties.SAFE));
+    public static final RegistryObject<Block> RANDOMIZER = BLOCKS.createBlock("randomizer", () -> new RandomizerBlock(PMProperties.DIODE));
 
     public static void setupTabs() {
         CreativeModeTabContentsPopulator.mod(PantzMod.MOD_ID)
@@ -223,7 +224,7 @@ public class PMBlocks {
                 .addItemsAfter(of(Blocks.REDSTONE_BLOCK), REDSTONE_CONFIGURATOR, POWER_DISPLAYER)
                 .addItemsAfter(of(Blocks.TARGET), LOCK, UNIVERSAL_LOCK)
                 .addItemsAfter(of(Blocks.DAYLIGHT_DETECTOR), WEATHER_DETECTOR, ENTITY_DETECTOR)
-                .addItemsAfter(of(Blocks.COMPARATOR), NOT_GATE, AND_GATE, OR_GATE, NAND_GATE, NOR_GATE, XOR_GATE, XNOR_GATE,
+                .addItemsAfter(of(Blocks.COMPARATOR), RANDOMIZER, NOT_GATE, AND_GATE, OR_GATE, NAND_GATE, NOR_GATE, XOR_GATE, XNOR_GATE,
                         ADVANCED_AND_GATE, ADVANCED_OR_GATE, ADVANCED_NAND_GATE, ADVANCED_NOR_GATE, ADVANCED_XOR_GATE, ADVANCED_XNOR_GATE, MAJORITY_GATE, MINORITY_GATE)
 
                 .tab(COLORED_BLOCKS)

@@ -183,7 +183,7 @@
 
   "block.pantz_mod.lock": "Lock",
   "block.pantz_mod.universal_lock": "Universal Lock",
-  "block.pantz_mod.safe": "Safe",
+  "block.pantz_mod.randomizer": "Redstone Randomizer",
 
   "_functional": "functional",
   "block.pantz_mod.item_stand": "Item Stand",
@@ -218,6 +218,8 @@
 
   "block.pantz_mod.ornament_firecrackers": "Ornament Firecrackers",
   "block.pantz_mod.ornament_lucky_coins": "Ornament Lucky Coins",
+
+  "block.pantz_mod.safe": "Safe",
 
   "_decoration": "decoration",
   "block.pantz_mod.snow_bricks": "Snow Bricks",
