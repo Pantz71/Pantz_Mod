@@ -2,6 +2,7 @@ package pantz.mod.common.block;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -108,5 +109,20 @@ public class RandomizerBlock extends DiodeBlock {
     @Override
     protected int getDelay(BlockState pState) {
         return 2;
+    }
+
+    @Override
+    public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
+        if (state.getValue(POWERED)) {
+            Direction direction = state.getValue(FACING);
+            double x = pos.getX() + 0.5 + (random.nextDouble() - 0.5) * 0.2;
+            double y = pos.getY() + 0.4 + (random.nextDouble() - 0.5) * 0.2;
+            double z = pos.getZ() + 0.5 + (random.nextDouble() - 0.5) * 0.2;
+
+            double offsetX = direction.getStepX() * 0.1;
+            double offsetZ = direction.getStepZ() * 0.1;
+
+            level.addParticle(DustParticleOptions.REDSTONE, x + offsetX, y, z + offsetZ, 0.0, 0.0, 0.0);
+        }
     }
 }
