@@ -36,7 +36,7 @@ public class LogicGateBlock extends DiodeBlock {
 
     @Override
     protected int getDelay(BlockState blockState) {
-        return 1;
+        return 2;
     }
 
     @Override

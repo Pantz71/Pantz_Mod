@@ -139,6 +139,7 @@ public class PMBlockStateProvider extends BlueprintBlockStateProvider {
         this.lockBlock(LOCK);
         this.lockBlock(UNIVERSAL_LOCK);
         this.safeBlock(SAFE);
+        this.equalizerBlock(EQUALIZER);
     }
 
     private void redstoneConfiguratorBlock(RegistryObject<Block> block) {
@@ -513,4 +514,39 @@ public class PMBlockStateProvider extends BlueprintBlockStateProvider {
         }
         blockItem(block.get());
     }
+
+    private void equalizerBlock(RegistryObject<Block> block) {
+        String name = name(block.get());
+        ResourceLocation texture = blockTexture(block.get());
+
+        for (int power = 0; power <= 15; power++) {
+            ResourceLocation topTexture = power == 0 ? texture : suffix(texture, "_" + power);
+
+            String modelName = power == 0 ? name : name + "_" + power;
+
+            ModelFile offModel = models().withExistingParent(modelName, modLoc("block/template_equalizer"))
+                    .texture("top", topTexture);
+
+            ModelFile onModel = models().withExistingParent(modelName + "_powered", modLoc("block/template_equalizer_powered"))
+                    .texture("top", topTexture);
+
+            for (Direction dir : Direction.Plane.HORIZONTAL) {
+                int rotY = (int) dir.toYRot();
+
+                for (boolean powered : new boolean[]{false, true}) {
+                    ModelFile model = powered ? onModel : offModel;
+
+                    getVariantBuilder(block.get()).partialState()
+                            .with(EqualizerBlock.FACING, dir)
+                            .with(EqualizerBlock.POWER, power)
+                            .with(EqualizerBlock.POWERED, powered)
+                            .modelForState().modelFile(model)
+                            .rotationY(rotY).addModel();
+                }
+            }
+        }
+
+        generatedItem(block.get(), "item");
+    }
+
 }

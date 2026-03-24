@@ -435,6 +435,14 @@ public class PMRecipeProvider extends BlueprintRecipeProvider {
                 .unlockedBy(getHasName(Items.REDSTONE_TORCH), has(Items.REDSTONE_TORCH))
                 .save(consumer);
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, EQUALIZER.get())
+                .define('S', Blocks.STONE).define('E', Tags.Items.GEMS_EMERALD)
+                .define('T', Items.REDSTONE_TORCH).define('R', Tags.Items.DUSTS_REDSTONE)
+                .pattern("RET")
+                .pattern("SSS")
+                .unlockedBy(getHasName(Items.REDSTONE_TORCH), has(Items.REDSTONE_TORCH))
+                .save(consumer);
+
     }
 
     private static void logicGates(Consumer<FinishedRecipe> consumer) {

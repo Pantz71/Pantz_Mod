@@ -1,9 +1,9 @@
 {
 	"textures": {
 		"particle": "pantz_mod:block/randomizer_front",
-		"base": "pantz_mod:block/randomizer_front",
+		"top": "pantz_mod:block/randomizer_front",
 		"crystal": "pantz_mod:block/randomizer_prismarine",
-		"bottom": "block/smooth_stone",
+		"base": "block/smooth_stone",
 		"unlit": "block/redstone_torch_off",
 		"lit": "block/redstone_torch"
 	},
@@ -12,12 +12,12 @@
 			"from": [0, 0, 0],
 			"to": [16, 2, 16],
 			"faces": {
-				"north": {"uv": [0, 14, 16, 16], "texture": "#bottom"},
-				"east": {"uv": [0, 14, 16, 16], "texture": "#bottom"},
-				"south": {"uv": [0, 14, 16, 16], "texture": "#bottom"},
-				"west": {"uv": [0, 14, 16, 16], "texture": "#bottom"},
-				"up": {"uv": [0, 0, 16, 16], "texture": "#base"},
-				"down": {"uv": [0, 0, 16, 16], "texture": "#bottom"}
+				"north": {"uv": [0, 14, 16, 16], "texture": "#base"},
+				"east": {"uv": [0, 14, 16, 16], "texture": "#base"},
+				"south": {"uv": [0, 14, 16, 16], "texture": "#base"},
+				"west": {"uv": [0, 14, 16, 16], "texture": "#base"},
+				"up": {"uv": [0, 0, 16, 16], "texture": "#top"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#base"}
 			}
 		},
 		{
