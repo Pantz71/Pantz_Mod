@@ -88,16 +88,6 @@ public class ItemStandBlock extends HorizontalDirectionalBlock implements Entity
     }
 
     @Override
-    public BlockState rotate(BlockState state, Rotation rotation) {
-        return state.setValue(FACING, rotation.rotate(state.getValue(FACING)));
-    }
-
-    @Override
-    public BlockState mirror(BlockState state, Mirror mirror) {
-        return state.rotate(mirror.getRotation(state.getValue(FACING)));
-    }
-
-    @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         BlockEntity be = level.getBlockEntity(pos);
         if (!(be instanceof ItemStandBlockEntity stand)) return InteractionResult.PASS;
@@ -118,7 +108,9 @@ public class ItemStandBlock extends HorizontalDirectionalBlock implements Entity
         if (held.getItem() instanceof BlockItem blockItem &&
                 blockItem.getBlock().defaultBlockState().is(Blocks.GLASS)) {
             if (!state.getValue(GLASS)) {
-                if (!level.isClientSide() && !player.isCreative()) held.shrink(1);
+                if (!level.isClientSide() && !player.isCreative()) {
+                    held.shrink(1);
+                }
                 level.setBlock(pos, state.setValue(GLASS, true), 3);
                 return InteractionResult.sidedSuccess(level.isClientSide());
             }
@@ -127,7 +119,9 @@ public class ItemStandBlock extends HorizontalDirectionalBlock implements Entity
         if (stack.isEmpty() && !held.isEmpty()) {
             if (!level.isClientSide()) {
                 stand.setItem(held.copyWithCount(1));
-                if (!player.isCreative()) held.shrink(1);
+                if (!player.isCreative()) {
+                    held.shrink(1);
+                }
                 level.sendBlockUpdated(pos, state, state, 3);
             }
             return InteractionResult.sidedSuccess(level.isClientSide());

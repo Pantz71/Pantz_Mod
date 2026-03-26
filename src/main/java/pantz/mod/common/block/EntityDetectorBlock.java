@@ -58,7 +58,7 @@ public class EntityDetectorBlock extends BaseEntityBlock {
             if (be instanceof EntityDetectorBlockEntity detector) {
                 detector.tick();
             }
-            return InteractionResult.sidedSuccess(level.isClientSide());
+            return InteractionResult.SUCCESS;
         }
         return InteractionResult.sidedSuccess(level.isClientSide());
     }
