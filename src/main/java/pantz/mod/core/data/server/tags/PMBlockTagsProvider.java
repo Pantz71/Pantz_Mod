@@ -36,7 +36,7 @@ public class PMBlockTagsProvider extends BlockTagsProvider {
                 PACKED_ICE_BRICKS.get(), PACKED_ICE_BRICK_STAIRS.get(), PACKED_ICE_BRICK_SLAB.get(), CHISELED_PACKED_ICE_BRICKS.get(),
                 BLUE_ICE_BRICKS.get(), BLUE_ICE_BRICK_STAIRS.get(), BLUE_ICE_BRICK_SLAB.get(), CHISELED_BLUE_ICE_BRICKS.get(),
                 PACKED_ICE_DOOR.get(), PACKED_ICE_TRAPDOOR.get(), BLUE_ICE_DOOR.get(), BLUE_ICE_TRAPDOOR.get(), ICE_LANTERN.get(),
-                SAFE.get());
+                SAFE.get(), SPIKE.get());
 
         this.tag(BlockTags.MINEABLE_WITH_AXE).add(LOCK.get(), UNIVERSAL_LOCK.get());
         this.tag(BlockTags.NEEDS_STONE_TOOL).add(STEEL_BLOCK.get(), STEEL_BARS.get(), STEEL_DOOR.get(), STEEL_TRAPDOOR.get(), STEEL_LANTERN.get(),

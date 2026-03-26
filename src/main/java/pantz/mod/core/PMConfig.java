@@ -22,6 +22,7 @@ public class PMConfig {
         public final IntValue enderScannerDetectionRadius;
         public final IntValue entityDetectorDetectionRadius;
         public final IntValue enderporterDetectionRadius;
+        public final IntValue spikeMaxEffects;
 
         @ConfigKey("flint_and_steel")
         public final BooleanValue flintAndSteel;
@@ -57,6 +58,9 @@ public class PMConfig {
 
             entityDetectorDetectionRadius = builder.comment("How far can the Entity Detector detect entities?")
                     .defineInRange("Entity Detector detection radius", 16, 0, Integer.MAX_VALUE);
+
+            spikeMaxEffects = builder.comment("How many effects can the Spike have?")
+                    .defineInRange("Max Spike effects", 5, 0, Integer.MAX_VALUE);
 
             builder.pop();
 

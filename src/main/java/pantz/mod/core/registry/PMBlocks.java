@@ -185,6 +185,7 @@ public class PMBlocks {
     public static final RegistryObject<Block> SAFE = BLOCKS.createBlock("safe", () -> new SafeBlock(PMProperties.SAFE));
     public static final RegistryObject<Block> RANDOMIZER = BLOCKS.createBlock("randomizer", () -> new RandomizerBlock(PMProperties.DIODE));
     public static final RegistryObject<Block> EQUALIZER = BLOCKS.createBlock("equalizer", () -> new EqualizerBlock(PMProperties.DIODE));
+    public static final RegistryObject<Block> SPIKE = BLOCKS.createBlock("spike", () -> new SpikeBlock(PMProperties.SPIKE));
 
     public static void setupTabs() {
         CreativeModeTabContentsPopulator.mod(PantzMod.MOD_ID)
@@ -222,6 +223,7 @@ public class PMBlocks {
                 .addItemsBefore(of(Blocks.DAYLIGHT_DETECTOR), EARTH_GLOBE)
                 .addItemsBefore(of(Blocks.LEVER), ENDER_SCANNER)
                 .addItemsBefore(of(Blocks.JUKEBOX), TRASH_CAN)
+                .addItemsBefore(of(Blocks.TNT), SPIKE)
                 .addItemsAfter(of(Blocks.REDSTONE_BLOCK), REDSTONE_CONFIGURATOR, POWER_DISPLAYER)
                 .addItemsAfter(of(Blocks.TARGET), LOCK, UNIVERSAL_LOCK)
                 .addItemsAfter(of(Blocks.DAYLIGHT_DETECTOR), WEATHER_DETECTOR, ENTITY_DETECTOR)

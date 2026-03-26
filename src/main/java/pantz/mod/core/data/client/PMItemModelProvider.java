@@ -17,7 +17,7 @@ public class PMItemModelProvider extends BlueprintItemModelProvider {
     protected void registerModels() {
         this.generatedItem(STEEL_INGOT, STEEL_NUGGET, STEEL_HORSE_ARMOR,
                 SULFUR_DUST, SULFUR_SHARD, HONEY_DESERIALIZER, ENTITY_FILTER, CACTUS_KEY,
-                DYNAMITE, COMBAT_DYNAMITE, FIERY_DYNAMITE, RED_ENVELOPE, KEY);
+                DYNAMITE, COMBAT_DYNAMITE, FIERY_DYNAMITE, RED_ENVELOPE, KEY, SPIKE);
 
         this.generatedItem(RANDOMIZER, NOT_GATE,
                 AND_GATE, OR_GATE, NOR_GATE, NAND_GATE, XNOR_GATE, XOR_GATE,

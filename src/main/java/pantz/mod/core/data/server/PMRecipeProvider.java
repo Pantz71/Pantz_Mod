@@ -443,6 +443,13 @@ public class PMRecipeProvider extends BlueprintRecipeProvider {
                 .unlockedBy(getHasName(Items.REDSTONE_TORCH), has(Items.REDSTONE_TORCH))
                 .save(consumer);
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, SPIKE.get())
+                .define('S', Blocks.COBBLESTONE).define('d', Blocks.POINTED_DRIPSTONE)
+                .pattern("ddd")
+                .pattern("SSS")
+                .unlockedBy(getHasName(Blocks.POINTED_DRIPSTONE), has(Blocks.POINTED_DRIPSTONE))
+                .save(consumer);
+
     }
 
     private static void logicGates(Consumer<FinishedRecipe> consumer) {

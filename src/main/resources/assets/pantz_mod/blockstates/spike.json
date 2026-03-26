@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "powered=false": {
+      "model": "pantz_mod:block/spike"
+    },
+    "powered=true": {
+      "model": "pantz_mod:block/spike_powered"
+    }
+  }
+}
