@@ -140,14 +140,4 @@ public class SpikeBlockEntity extends BlockEntity {
     public void handleUpdateTag(CompoundTag tag) {
         this.load(tag);
     }
-
-    @Override
-    public ClientboundBlockEntityDataPacket getUpdatePacket() {
-        return ClientboundBlockEntityDataPacket.create(this);
-    }
-
-    @Override
-    public void onDataPacket(Connection connection, ClientboundBlockEntityDataPacket pkt) {
-        this.load(pkt.getTag());
-    }
 }
