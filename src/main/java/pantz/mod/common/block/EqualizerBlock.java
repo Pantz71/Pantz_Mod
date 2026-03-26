@@ -73,13 +73,8 @@ public class EqualizerBlock extends DiodeBlock {
     protected boolean shouldTurnOn(Level level, BlockPos pos, BlockState state) {
         int input = this.getInputSignal(level, pos, state);
         int required = state.getValue(POWER);
-        boolean powered = state.getValue(POWERED);
 
-        if (powered) {
-            return input == required;
-        } else {
-            return input == required;
-        }
+        return input == required;
     }
 
     @Override
