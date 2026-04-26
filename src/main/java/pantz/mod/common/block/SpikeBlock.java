@@ -132,7 +132,7 @@ public class SpikeBlock extends BaseEntityBlock {
     @Nullable
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
         return level.isClientSide()
-                ? createTickerHelper(type, PMBlockEntityTypes.SPIKE.get(), SpikeBlockEntity::clientTick)
+                ? createTickerHelper(type, PMBlockEntityTypes.SPIKE.get(), SpikeBlockEntity::tick)
                 : null;
     }
 

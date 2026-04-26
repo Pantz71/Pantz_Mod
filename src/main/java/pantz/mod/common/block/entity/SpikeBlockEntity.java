@@ -5,7 +5,6 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
-import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
@@ -30,7 +29,7 @@ public class SpikeBlockEntity extends BlockEntity {
         super(PMBlockEntityTypes.SPIKE.get(), pPos, pBlockState);
     }
 
-    public static void clientTick(Level level, BlockPos pos, BlockState state, SpikeBlockEntity spike) {
+    public static void tick(Level level, BlockPos pos, BlockState state, SpikeBlockEntity spike) {
         if (!state.getValue(SpikeBlock.POWERED)) return;
 
         List<MobEffectInstance> effects = spike.getEffects();
