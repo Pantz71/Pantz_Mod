@@ -36,13 +36,13 @@ public class GlobeBlockEntity extends BlockEntity {
         setRotating(false);
         setSpinTick(0);
 
-        clientSpinning = false;
-        clientSpinTicks = 0;
-        clientRotation = 0f;
+        this.clientSpinning = false;
+        this.clientSpinTicks = 0;
+        this.clientRotation = 0f;
     }
 
     public ResourceLocation getTexture() {
-        return texture != null ? texture : PantzMod.location("block/globe/planets/earth");
+        return this.texture != null ? this.texture : PantzMod.location("block/globe/planets/earth");
     }
 
     public int getPower() {
@@ -55,16 +55,16 @@ public class GlobeBlockEntity extends BlockEntity {
     }
 
     public boolean isGlow() {
-        return glow;
+        return this.glow;
     }
 
     public void setGlow(boolean value) {
-        if (glow != value) {
-            glow = value;
+        if (this.glow != value) {
+            this.glow = value;
         }
         setChanged();
-        if (level != null) {
-            level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), 3);
+        if (this.level != null) {
+            this.level.sendBlockUpdated(this.worldPosition, getBlockState(), getBlockState(), 3);
         }
     }
 
@@ -75,13 +75,13 @@ public class GlobeBlockEntity extends BlockEntity {
             setSpinTick(SPIN_TICKS);
             setRotating(true);
             setChanged();
-            level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), 3);
+            level.sendBlockUpdated(this.worldPosition, getBlockState(), getBlockState(), 3);
         } else {
-            if (!clientSpinning) {
-                clientSpinTicks = SPIN_TICKS;
-                clientRotation = rotation;
-                clientSpinning = true;
-                spinTick = SPIN_TICKS;
+            if (!this.clientSpinning) {
+                this.clientSpinTicks = SPIN_TICKS;
+                this.clientRotation = this.rotation;
+                this.clientSpinning = true;
+                this.spinTick = SPIN_TICKS;
             }
         }
     }
@@ -107,44 +107,63 @@ public class GlobeBlockEntity extends BlockEntity {
         }
     }
 
-    public static void serverTick(Level level, BlockPos pos, BlockState state, GlobeBlockEntity be) {
-        if (level.isClientSide()) return;
+    public static void tick(Level level, BlockPos pos, BlockState state, GlobeBlockEntity be) {
+        if (!level.isClientSide()) {
+            boolean powered = state.getValue(GlobeBlock.POWERED);
 
-        boolean powered = state.getValue(GlobeBlock.POWERED);
-
-        if (powered) {
-            if (!be.isRotating()) {
-                be.setRotating(true);
-                be.setChanged();
-                level.sendBlockUpdated(pos, state, state, 3);
+            if (powered) {
+                if (!be.isRotating()) {
+                    be.setRotating(true);
+                    be.setChanged();
+                    level.sendBlockUpdated(pos, state, state, 3);
+                }
+                return;
             }
-            return;
-        }
 
-        if (be.getSpinTick() > 0) {
-            be.decreaseSpinTick();
-            if (be.getSpinTick() <= 0) {
-                be.setSpinTick(0);
-                be.setRotating(false);
-                be.setChanged();
-                level.sendBlockUpdated(pos, state, state, 3);
+            if (be.getSpinTick() > 0) {
+                be.decreaseSpinTick();
+                if (be.getSpinTick() <= 0) {
+                    be.setSpinTick(0);
+                    be.setRotating(false);
+                    be.setChanged();
+                    level.sendBlockUpdated(pos, state, state, 3);
+                }
+            }
+        } else {
+            if (state.getValue(GlobeBlock.POWERED)) {
+                be.setRotation(rotate(be));
+                return;
+            }
+
+            if (be.clientSpinning && be.clientSpinTicks > 0) {
+                be.spinTick = Math.max(0, be.spinTick - 1);
+                int elapsed = be.clientSpinTicks - be.spinTick;
+                float progress = Math.min(1f, (float) elapsed / (float) be.clientSpinTicks);
+                float easing = 1f - (float) Math.pow(1f - progress, 3);
+                float newRotation = be.clientRotation + easing * FULL_SPIN;
+                be.setRotation(newRotation % 360f);
+
+                if (be.spinTick <= 0) {
+                    be.clientSpinning = false;
+                    be.clientSpinTicks = 0;
+                }
             }
         }
     }
 
     public float getRotation(float partialTicks) {
         if (this.getBlockState().getValue(GlobeBlock.POWERED)) {
-            return (rotation + ROTATE_SPEED * partialTicks) % 360f;
+            return (this.rotation + ROTATE_SPEED * partialTicks) % 360f;
         }
 
-        if (clientSpinning && clientSpinTicks > 0) {
-            int elapsed = clientSpinTicks - getSpinTick();
-            float progress = (elapsed + partialTicks) / (float) clientSpinTicks;
+        if (this.clientSpinning && this.clientSpinTicks > 0) {
+            int elapsed = this.clientSpinTicks - getSpinTick();
+            float progress = (elapsed + partialTicks) / (float) this.clientSpinTicks;
             progress = Math.max(0f, Math.min(1f, progress));
             float eased = 1f - (float) Math.pow(1f - progress, 3);
-            return (clientRotation + eased * FULL_SPIN) % 360f;
+            return (this.clientRotation + eased * FULL_SPIN) % 360f;
         }
-        return rotation;
+        return this.rotation;
     }
 
     public static float rotate(GlobeBlockEntity be) {
@@ -152,46 +171,46 @@ public class GlobeBlockEntity extends BlockEntity {
     }
 
     public float getRotation() {
-        return rotation;
+        return this.rotation;
     }
 
     public boolean isRotating() {
-        return rotating;
+        return this.rotating;
     }
 
     public int getSpinTick() {
-        return spinTick;
+        return this.spinTick;
     }
 
     public void decreaseSpinTick() {
-        spinTick--;
+        this.spinTick--;
     }
 
     public void setRotating(boolean value) {
-        if (rotating != value) {
-            rotating = value;
+        if (this.rotating != value) {
+            this.rotating = value;
         }
     }
 
     public void setRotation(float value) {
-        if (rotation != value) {
-            rotation = value;
+        if (this.rotation != value) {
+            this.rotation = value;
         }
     }
 
     public void setSpinTick(int tick) {
-        if (spinTick != tick) {
-            spinTick = tick;
+        if (this.spinTick != tick) {
+            this.spinTick = tick;
         }
     }
 
     @Override
     public void load(CompoundTag tag) {
         super.load(tag);
-        rotating = tag.getBoolean("Rotating");
-        rotation = tag.getFloat("Rotation");
-        spinTick = tag.getInt("SpinTick");
-        glow = tag.getBoolean("Glow");
+        this.rotating = tag.getBoolean("Rotating");
+        this.rotation = tag.getFloat("Rotation");
+        this.spinTick = tag.getInt("SpinTick");
+        this.glow = tag.getBoolean("Glow");
     }
 
     @Override

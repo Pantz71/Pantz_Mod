@@ -8,9 +8,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.BaseEntityBlock;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.RenderShape;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -23,7 +21,7 @@ import pantz.mod.common.block.entity.SafeBlockEntity;
 import pantz.mod.common.utils.ILockableBlock;
 import pantz.mod.core.other.tags.PMItemTags;
 
-public class SafeBlock extends BaseEntityBlock implements ILockableBlock {
+public class SafeBlock extends HorizontalDirectionalBlock implements ILockableBlock, EntityBlock {
     public static final BooleanProperty OPEN = BlockStateProperties.OPEN;
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 
