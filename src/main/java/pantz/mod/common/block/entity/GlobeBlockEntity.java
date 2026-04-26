@@ -86,27 +86,6 @@ public class GlobeBlockEntity extends BlockEntity {
         }
     }
 
-    public static void clientTick(Level level, BlockPos pos, BlockState state, GlobeBlockEntity be) {
-        if (state.getValue(GlobeBlock.POWERED)) {
-            be.setRotation(rotate(be));
-            return;
-        }
-
-        if (be.clientSpinning && be.clientSpinTicks > 0) {
-            be.spinTick = Math.max(0, be.spinTick - 1);
-            int elapsed = be.clientSpinTicks - be.spinTick;
-            float progress = Math.min(1f, (float) elapsed / (float) be.clientSpinTicks);
-            float easing = 1f - (float) Math.pow(1f - progress, 3);
-            float newRotation = be.clientRotation + easing * FULL_SPIN;
-            be.setRotation(newRotation % 360f);
-
-            if (be.spinTick <= 0) {
-                be.clientSpinning = false;
-                be.clientSpinTicks = 0;
-            }
-        }
-    }
-
     public static void tick(Level level, BlockPos pos, BlockState state, GlobeBlockEntity be) {
         if (!level.isClientSide()) {
             boolean powered = state.getValue(GlobeBlock.POWERED);
