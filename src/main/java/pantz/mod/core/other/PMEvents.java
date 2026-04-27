@@ -31,6 +31,7 @@ import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import pantz.mod.common.block.ItemStandBlock;
 import pantz.mod.common.block.LockBlock;
 import pantz.mod.common.block.PedestalBlock;
 import pantz.mod.common.block.entity.LockBlockEntity;
@@ -84,11 +85,13 @@ public class PMEvents {
         Level level = event.getLevel();
         BlockPos pos = event.getPos();
         InteractionHand hand = event.getHand();
+        BlockState state = level.getBlockState(pos);
 
         if (!player.isShiftKeyDown()) return;
 
         decoratePedestal(event, player, level, pos, hand);
         setKey(event, player, level, pos, hand);
+        putGlassBoxOn(event, level, pos, state, player, hand);
     }
 
     @SubscribeEvent
@@ -116,6 +119,22 @@ public class PMEvents {
                 }
 
                 spike.setChanged();
+            }
+        }
+    }
+
+    private static void putGlassBoxOn(RightClickBlock event, Level level, BlockPos pos, BlockState state, Player player, InteractionHand hand) {
+        if (!(state.getBlock() instanceof ItemStandBlock itemStand)) return;
+        ItemStack stack = player.getItemInHand(hand);
+
+        if (player.isShiftKeyDown() && itemStand.isGlass(stack) && !state.getValue(ItemStandBlock.GLASS)) {
+            if (!level.isClientSide()) {
+                player.swing(hand);
+                if (!player.isCreative()) {
+                    stack.shrink(1);
+                }
+                level.setBlock(pos, state.setValue(ItemStandBlock.GLASS, true), 3);
+                cancel(event);
             }
         }
     }
@@ -164,10 +183,10 @@ public class PMEvents {
         ItemStack held = player.getItemInHand(hand);
 
         if (held.is(ItemTags.WOOL_CARPETS) && state.getValue(PedestalBlock.CARPET) == CarpetColor.NONE) {
-            player.swing(InteractionHand.MAIN_HAND);
+            player.swing(hand);
             putCarpetOn(event, held, state, pos, player, level);
         } else if (held.isEmpty() && state.getValue(PedestalBlock.CARPET) != CarpetColor.NONE) {
-            player.swing(InteractionHand.MAIN_HAND);
+            player.swing(hand);
             takeCarpetOff(event, state, pos, player, level);
         }
     }
