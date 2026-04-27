@@ -3,120 +3,89 @@ package pantz.mod.client.renderer.be;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
+import net.minecraft.client.model.Model;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
+import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import pantz.mod.client.model.block.*;
 import pantz.mod.common.block.GlobeBlock;
 import pantz.mod.common.block.entity.GlobeBlockEntity;
+import pantz.mod.core.PantzMod;
 import pantz.mod.core.other.PMModelLayers;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class GlobeRenderer implements BlockEntityRenderer<GlobeBlockEntity> {
-    private final GlobeModel globeModel;
-    private final SmallGlobeModel smallGlobeModel;
-    private final TinyGlobeModel tinyGlobeModel;
-    private final SaturnGlobeModel saturnGlobeModel;
-    private final LargeGlobeModel largeGlobeModel;
-    private final GiantGlobeModel giantGlobeModel;
-    private final UranusGlobeModel uranusGlobeModel;
+    private final Map<String, Model> modelCache = new HashMap<>();
 
     public GlobeRenderer(BlockEntityRendererProvider.Context ctx) {
-        this.globeModel = new GlobeModel(ctx.bakeLayer(PMModelLayers.GLOBE));
-        this.smallGlobeModel = new SmallGlobeModel(ctx.bakeLayer(PMModelLayers.SMALL_GLOBE));
-        this.tinyGlobeModel = new TinyGlobeModel(ctx.bakeLayer(PMModelLayers.TINY_GLOBE));
-        this.saturnGlobeModel = new SaturnGlobeModel(ctx.bakeLayer(PMModelLayers.SATURN_GLOBE));
-        this.largeGlobeModel = new LargeGlobeModel(ctx.bakeLayer(PMModelLayers.LARGE_GLOBE));
-        this.giantGlobeModel = new GiantGlobeModel(ctx.bakeLayer(PMModelLayers.GIANT_GLOBE));
-        this.uranusGlobeModel = new UranusGlobeModel(ctx.bakeLayer(PMModelLayers.URANUS_GLOBE));
+        modelCache.put("default", new GlobeModel(ctx.bakeLayer(PMModelLayers.GLOBE)));
+        modelCache.put("small", new SmallGlobeModel(ctx.bakeLayer(PMModelLayers.SMALL_GLOBE)));
+        modelCache.put("tiny", new TinyGlobeModel(ctx.bakeLayer(PMModelLayers.TINY_GLOBE)));
+        modelCache.put("saturn", new SaturnGlobeModel(ctx.bakeLayer(PMModelLayers.SATURN_GLOBE)));
+        modelCache.put("large", new LargeGlobeModel(ctx.bakeLayer(PMModelLayers.LARGE_GLOBE)));
+        modelCache.put("giant", new GiantGlobeModel(ctx.bakeLayer(PMModelLayers.GIANT_GLOBE)));
+        modelCache.put("uranus", new UranusGlobeModel(ctx.bakeLayer(PMModelLayers.URANUS_GLOBE)));
     }
 
     @Override
     public void render(GlobeBlockEntity be, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int light, int overlay) {
+        ResourceLocation texture = be.getRenderTexture();
+        Model model = getModelForLocation(be.getTexture());
+
+        if (model == null) return;
+
         poseStack.pushPose();
-        ResourceLocation textureLoc = be.getTexture();
 
-        Object modelToUse = getGlobeModel(textureLoc);
+        Direction facing = be.getBlockState().getValue(GlobeBlock.FACING);
+        rotateDirection(poseStack, facing);
 
-        switch (be.getBlockState().getValue(GlobeBlock.FACING)) {
-            case NORTH -> {
-                poseStack.translate(0.5, 0.0625, 0.5625);
-                poseStack.mulPose(Axis.YP.rotationDegrees(180f));
-            }
-            case SOUTH -> poseStack.translate(0.5, 0.0625, 0.4375);
-            case WEST -> {
-                poseStack.translate(0.5625, 0.0625, 0.5);
-                poseStack.mulPose(Axis.YP.rotationDegrees(90f));
-            }
-            case EAST -> {
-                poseStack.translate(0.4375, 0.0625, 0.5);
-                poseStack.mulPose(Axis.YN.rotationDegrees(90f));
-            }
-        }
         float rot = be.getRotation(partialTicks);
         poseStack.mulPose(Axis.YP.rotationDegrees(rot));
-        ResourceLocation texture = new ResourceLocation(textureLoc.getNamespace(), "textures/block/globe/" + textureLoc.getPath() + ".png");
 
         boolean glow = be.isGlow();
         int renderLight = glow ? 0xF000F0 : light;
-        RenderType renderType = glow
-                ? RenderType.entityTranslucent(texture)
-                : RenderType.entityCutout(texture);
+        RenderType type = glow ? RenderType.entityTranslucent(texture) : RenderType.entityCutout(texture);
 
-        VertexConsumer vertexConsumer = buffer.getBuffer(renderType);
-        if (modelToUse instanceof GlobeModel model) {
-            model.renderToBuffer(poseStack, vertexConsumer, renderLight, overlay, 1.0f, 1.0f, 1.0f, 1.0f);
-        }
+        model.renderToBuffer(poseStack, buffer.getBuffer(type), renderLight, overlay, 1.0f, 1.0f, 1.0f, 1.0f);
 
-        if (modelToUse instanceof SmallGlobeModel model) {
-            model.renderToBuffer(poseStack, vertexConsumer, renderLight, overlay, 1.0f, 1.0f, 1.0f, 1.0f);
-        }
-
-        if (modelToUse instanceof TinyGlobeModel model) {
-            model.renderToBuffer(poseStack, vertexConsumer, renderLight, overlay, 1.0f, 1.0f, 1.0f, 1.0f);
-        }
-
-        if (modelToUse instanceof SaturnGlobeModel model) {
-            model.renderToBuffer(poseStack, vertexConsumer, renderLight, overlay, 1.0f, 1.0f, 1.0f, 1.0f);
-        }
-
-        if (modelToUse instanceof LargeGlobeModel model) {
-            model.renderToBuffer(poseStack, vertexConsumer, renderLight, overlay, 1.0f, 1.0f, 1.0f, 1.0f);
-        }
-
-        if (modelToUse instanceof GiantGlobeModel model) {
-            model.renderToBuffer(poseStack, vertexConsumer, renderLight, overlay, 1.0f, 1.0f, 1.0f, 1.0f);
-        }
-
-        if (modelToUse instanceof UranusGlobeModel model) {
-            model.renderToBuffer(poseStack, vertexConsumer, renderLight, overlay, 1.0f, 1.0f, 1.0f, 1.0f);
-        }
         poseStack.popPose();
-
-
     }
 
-    private Object getGlobeModel(ResourceLocation textureLoc) {
-        Object modelToUse;
-        if (textureLoc.getPath().endsWith("/uranus")) {
-            modelToUse = uranusGlobeModel;
-        } else if (textureLoc.getPath().endsWith("/saturn")) {
-            modelToUse = saturnGlobeModel;
-        } else if (textureLoc.getPath().startsWith("stars/")) {
-            modelToUse = giantGlobeModel;
-        } else if (textureLoc.getPath().startsWith("large_planets/") && !(textureLoc.getPath().endsWith("/uranus") || textureLoc.getPath().endsWith("/saturn"))) {
-            modelToUse = largeGlobeModel;
-        } else if (textureLoc.getPath().startsWith("planets/")) {
-            modelToUse = globeModel;
-        } else if (textureLoc.getPath().startsWith("moons/")) {
-            modelToUse = smallGlobeModel;
-        } else if (textureLoc.getPath().startsWith("dwarf_planets/")) {
-            modelToUse = tinyGlobeModel;
-        } else {
-            modelToUse = globeModel;
+    private void rotateDirection(PoseStack poseStack, Direction facing) {
+        poseStack.translate(0.5, 0.0625, 0.5);
+        switch (facing) {
+            case NORTH -> {
+                poseStack.translate(0, 0, 0.0625);
+                poseStack.mulPose(Axis.YP.rotationDegrees(180f));
+            }
+            case SOUTH -> poseStack.translate(0, 0, -0.0625);
+            case WEST -> {
+                poseStack.translate(0.0625, 0, 0);
+                poseStack.mulPose(Axis.YP.rotationDegrees(90f));
+            }
+            case EAST -> {
+                poseStack.translate(-0.0625, 0, 0);
+                poseStack.mulPose(Axis.YP.rotationDegrees(270f));
+            }
         }
-        return modelToUse;
+    }
+
+    private Model getModelForLocation(ResourceLocation loc) {
+        String path = loc.getPath();
+
+        if (path.endsWith("/uranus")) return modelCache.get("uranus");
+        if (path.endsWith("/saturn")) return modelCache.get("saturn");
+        if (path.startsWith("stars/")) return modelCache.get("giant");
+        if (path.startsWith("large_planets/")) return modelCache.get("large");
+        if (path.startsWith("moons/")) return modelCache.get("small");
+        if (path.startsWith("dwarf_planets/")) return modelCache.get("tiny");
+
+        return modelCache.get("default");
     }
 
     @Override

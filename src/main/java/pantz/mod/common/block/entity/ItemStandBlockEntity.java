@@ -94,9 +94,7 @@ public class ItemStandBlockEntity extends BlockEntity {
 
     @Override
     public CompoundTag getUpdateTag() {
-        CompoundTag tag = new CompoundTag();
-        saveAdditional(tag);
-        return tag;
+        return saveWithoutMetadata();
     }
 
     @Override

@@ -64,19 +64,23 @@ public class GlobeBlock extends HorizontalDirectionalBlock implements EntityBloc
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         BlockEntity be = level.getBlockEntity(pos);
-        ItemStack stack = player.getItemInHand(hand);
         if (be instanceof GlobeBlockEntity globe) {
+            ItemStack stack = player.getItemInHand(hand);
+
             if (stack.is(Items.GLOW_INK_SAC) && !globe.isGlow()) {
-                globe.setGlow(true);
-                level.playSound(null, pos, SoundEvents.GLOW_INK_SAC_USE, SoundSource.BLOCKS);
-                if (!player.isCreative()) {
-                    stack.shrink(1);
+                if (!level.isClientSide()) {
+                    globe.setGlow(true);
+                    level.playSound(null, pos, SoundEvents.GLOW_INK_SAC_USE, SoundSource.BLOCKS, 1.0F, 1.0F);
+                    if (!player.isCreative()) stack.shrink(1);
                 }
             } else {
-                globe.spin(level);
+                if (!level.isClientSide()) {
+                    globe.spin();
+                }
             }
+            return InteractionResult.sidedSuccess(level.isClientSide());
         }
-        return InteractionResult.SUCCESS;
+        return InteractionResult.PASS;
     }
 
     @Override
