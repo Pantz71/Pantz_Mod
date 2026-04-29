@@ -56,67 +56,49 @@ public class PedestalBlock extends HorizontalDirectionalBlock implements EntityB
 
     private InteractionResult putItemOn(Player player, InteractionHand hand, ItemStack stack, PedestalBlockEntity pedestal, Level level, BlockPos pos, BlockState state) {
         ItemStack onPedestal = pedestal.getItem();
-        boolean isSneaking = player.isShiftKeyDown();
-        if (!isSneaking) {
-            if (stack.isEmpty() && !onPedestal.isEmpty()) {
-                player.setItemInHand(hand, onPedestal);
-                pedestal.setItem(ItemStack.EMPTY);
-                level.sendBlockUpdated(pos, state, state, 3);
-                return InteractionResult.SUCCESS;
-            }
 
-            if (!stack.isEmpty() && !onPedestal.isEmpty()) {
-                if (stack.getCount() > 1) {
-                    if (player.getInventory().add(onPedestal)) {
-                        ItemStack copy = stack.copy();
-                        copy.setCount(1);
-                        pedestal.setItem(copy);
-                        level.sendBlockUpdated(pos, state, state, 3);
-                        stack.shrink(1);
-                    }
-                } else {
-                    pedestal.setItem(stack);
-                    player.setItemInHand(hand, onPedestal);
-                }
-                return InteractionResult.SUCCESS;
-            }
-
-            if (!stack.isEmpty()) {
-                ItemStack copy = stack.copy();
-                copy.setCount(1);
-                pedestal.setItem(copy);
-                level.sendBlockUpdated(pos, state, state, 3);
-                if (!player.isCreative()) {
-                    stack.shrink(1);
-                }
-                return InteractionResult.SUCCESS;
-            }
+        if (stack.isEmpty() && !onPedestal.isEmpty()) {
+            player.setItemInHand(hand, onPedestal.copy());
+            pedestal.setItem(ItemStack.EMPTY);
         }
-        return InteractionResult.PASS;
+        else if (!stack.isEmpty()) {
+            ItemStack copy = stack.copy();
+            copy.setCount(1);
+
+            if (!onPedestal.isEmpty()) {
+                if (!player.getInventory().add(onPedestal.copy())) {
+                    player.drop(onPedestal.copy(), false);
+                }
+                stack.shrink(1);
+            }
+
+            pedestal.setItem(copy);
+            if (!player.isCreative()) {
+                stack.shrink(1);
+            }
+        } else {
+            return InteractionResult.PASS;
+        }
+
+        if (!level.isClientSide()) {
+            level.sendBlockUpdated(pos, state, state, 3);
+        }
+        return InteractionResult.sidedSuccess(level.isClientSide());
     }
 
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
         if (!(level.getBlockEntity(pos) instanceof PedestalBlockEntity pedestal)) return InteractionResult.PASS;
-
-        boolean isSneaking = player.isShiftKeyDown();
         ItemStack stack = player.getItemInHand(hand);
 
-        if (isSneaking) {
+        if (player.isShiftKeyDown()) {
             pedestal.setSpinning(!pedestal.isSpinning());
             level.sendBlockUpdated(pos, state, state, 3);
             return InteractionResult.SUCCESS;
         }
 
-        InteractionResult putItemOn = putItemOn(player, hand, stack, pedestal, level, pos, state);
-        if (putItemOn.consumesAction()) {
-            return putItemOn;
-        }
-
-        return InteractionResult.PASS;
+        return putItemOn(player, hand, stack, pedestal, level, pos, state);
     }
-
-
 
     @Override
     public @Nullable BlockState getStateForPlacement(BlockPlaceContext ctx) {
@@ -139,6 +121,11 @@ public class PedestalBlock extends HorizontalDirectionalBlock implements EntityB
 
     @Override
     public boolean hasAnalogOutputSignal(BlockState pState) {
+        return true;
+    }
+
+    @Override
+    public boolean hasDynamicShape() {
         return true;
     }
 
