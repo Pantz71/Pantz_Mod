@@ -23,7 +23,6 @@ import pantz.mod.core.PantzMod;
 import pantz.mod.core.other.PMBlockFamilies;
 import pantz.mod.core.other.PMConstant;
 import pantz.mod.core.other.tags.PMItemTags;
-import pantz.mod.core.registry.PMBlocks;
 
 import java.util.List;
 import java.util.function.Consumer;
@@ -427,7 +426,7 @@ public class PMRecipeProvider extends BlueprintRecipeProvider {
                 .unlockedBy(getHasName(Items.GOLD_INGOT), has(Tags.Items.INGOTS_GOLD))
                 .save(consumer);
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, RANDOMIZER.get())
+        ShapedRecipeBuilder.shaped(REDSTONE, RANDOMIZER.get())
                 .define('S', Blocks.STONE).define('Q', Tags.Items.GEMS_PRISMARINE)
                 .define('T', Items.REDSTONE_TORCH)
                 .pattern("TQT")
@@ -435,7 +434,7 @@ public class PMRecipeProvider extends BlueprintRecipeProvider {
                 .unlockedBy(getHasName(Items.REDSTONE_TORCH), has(Items.REDSTONE_TORCH))
                 .save(consumer);
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, EQUALIZER.get())
+        ShapedRecipeBuilder.shaped(REDSTONE, EQUALIZER.get())
                 .define('S', Blocks.STONE).define('E', Tags.Items.GEMS_EMERALD)
                 .define('T', Items.REDSTONE_TORCH).define('R', Tags.Items.DUSTS_REDSTONE)
                 .pattern("RET")
@@ -443,11 +442,20 @@ public class PMRecipeProvider extends BlueprintRecipeProvider {
                 .unlockedBy(getHasName(Items.REDSTONE_TORCH), has(Items.REDSTONE_TORCH))
                 .save(consumer);
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, SPIKE.get())
+        ShapedRecipeBuilder.shaped(REDSTONE, SPIKE.get())
                 .define('S', Blocks.COBBLESTONE).define('d', Blocks.POINTED_DRIPSTONE)
                 .pattern("ddd")
                 .pattern("SSS")
                 .unlockedBy(getHasName(Blocks.POINTED_DRIPSTONE), has(Blocks.POINTED_DRIPSTONE))
+                .save(consumer);
+
+        ShapedRecipeBuilder.shaped(DECORATIONS, SPRINKLER.get())
+                .define('I', PMItemTags.INGOTS_STEEL).define('W', ItemTags.PLANKS)
+                .define('_', ItemTags.SLABS)
+                .pattern("IWI")
+                .pattern(" W ")
+                .pattern("___")
+                .unlockedBy(getHasName(STEEL_INGOT.get()), has(PMItemTags.INGOTS_STEEL))
                 .save(consumer);
 
     }

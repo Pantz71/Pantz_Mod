@@ -19,5 +19,6 @@ public class PMBlockEntityTypes {
     public static final RegistryObject<BlockEntityType<LockBlockEntity>> LOCK = BLOCK_ENTITY_TYPES.createBlockEntity("lock", LockBlockEntity::new, LockBlock.class);
     public static final RegistryObject<BlockEntityType<SafeBlockEntity>> SAFE = BLOCK_ENTITY_TYPES.createBlockEntity("safe", SafeBlockEntity::new, SafeBlock.class);
     public static final RegistryObject<BlockEntityType<SpikeBlockEntity>> SPIKE = BLOCK_ENTITY_TYPES.createBlockEntity("spike", SpikeBlockEntity::new, SpikeBlock.class);
+    public static final RegistryObject<BlockEntityType<SprinklerBlockEntity>> SPRINKLER = BLOCK_ENTITY_TYPES.createBlockEntity("sprinkler", SprinklerBlockEntity::new, SprinklerBlock.class);
 
 }

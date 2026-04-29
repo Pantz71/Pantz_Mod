@@ -140,6 +140,7 @@ public class PMBlockStateProvider extends BlueprintBlockStateProvider {
         this.lockBlock(UNIVERSAL_LOCK);
         this.safeBlock(SAFE);
         this.equalizerBlock(EQUALIZER);
+        this.blockItem(SPRINKLER);
     }
 
     private void redstoneConfiguratorBlock(RegistryObject<Block> block) {

@@ -1,13 +1,21 @@
 package pantz.mod.core.other;
 
+import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.level.block.Block;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.RegisterColorHandlersEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.RegistryObject;
+import pantz.mod.core.PantzMod;
+import pantz.mod.core.registry.PMBlocks;
 import pantz.mod.core.registry.datapack.PMTrimMaterials;
 
 import static pantz.mod.core.registry.PMBlocks.*;
 
+@Mod.EventBusSubscriber(modid = PantzMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class PMClientCompat {
     public static void registerClientCompat() {
         registerRenderLayers();
@@ -40,6 +48,11 @@ public class PMClientCompat {
         }) {
             ItemBlockRenderTypes.setRenderLayer((Block) block.get(), RenderType.cutoutMipped());
         }
+    }
+
+    @SubscribeEvent
+    public static void registerBlockColors(RegisterColorHandlersEvent.Block event) {
+        event.register((state, level, pos, index) -> level != null && pos != null ? BiomeColors.getAverageWaterColor(level, pos) : -1, SPRINKLER.get());
     }
 
 

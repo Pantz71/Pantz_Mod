@@ -81,6 +81,7 @@ public class PMProperties {
     public static final BlockBehaviour.Properties UNIVERSAL_LOCK = BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_PURPLE).strength(3.0f, 4.5f).instrument(NoteBlockInstrument.BASS).sound(SoundType.WOOD);
     public static final BlockBehaviour.Properties SAFE = BlockBehaviour.Properties.of().requiresCorrectToolForDrops().mapColor(MapColor.COLOR_LIGHT_GRAY).strength(50.0f, 2000.0f).pushReaction(PushReaction.BLOCK).instrument(NoteBlockInstrument.BASEDRUM).sound(SoundType.NETHERITE_BLOCK);
     public static final BlockBehaviour.Properties SPIKE = BlockBehaviour.Properties.of().requiresCorrectToolForDrops().mapColor(MapColor.COLOR_GRAY).strength(3.0f, 5.0f).sound(SoundType.STONE).isSuffocating(PMProperties::never).isViewBlocking(PMProperties::never).isRedstoneConductor(PMProperties::never).isValidSpawn(PMProperties::never);
+    public static final BlockBehaviour.Properties SPRINKLER = BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BROWN).strength(3.0f, 4.5f).sound(SoundType.WOOD).isSuffocating(PMProperties::never).isViewBlocking(PMProperties::never).isRedstoneConductor(PMProperties::never).isValidSpawn(PMProperties::never);
 
     public static boolean never(BlockState state, BlockGetter blockGetter, BlockPos pos) {
         return false;

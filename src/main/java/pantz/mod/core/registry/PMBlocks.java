@@ -186,6 +186,7 @@ public class PMBlocks {
     public static final RegistryObject<Block> RANDOMIZER = BLOCKS.createBlock("randomizer", () -> new RandomizerBlock(PMProperties.DIODE));
     public static final RegistryObject<Block> EQUALIZER = BLOCKS.createBlock("equalizer", () -> new EqualizerBlock(PMProperties.DIODE));
     public static final RegistryObject<Block> SPIKE = BLOCKS.createBlock("spike", () -> new SpikeBlock(PMProperties.SPIKE));
+    public static final RegistryObject<Block> SPRINKLER = BLOCKS.createBlock("sprinkler", () -> new SprinklerBlock(PMProperties.SPRINKLER));
 
     public static void setupTabs() {
         CreativeModeTabContentsPopulator.mod(PantzMod.MOD_ID)
@@ -206,7 +207,7 @@ public class PMBlocks {
                 .addItemsBefore(of(Blocks.TINTED_GLASS), QUARTZ_GLASS, QUARTZ_GLASS_PANE, LAPIS_GLASS, LAPIS_GLASS_PANE, REDSTONE_GLASS, REDSTONE_GLASS_PANE)
                 .addItemsBefore(of(Items.PAINTING), ITEM_STAND, GLOW_ITEM_STAND)
                 .addItemsBefore(of(Blocks.SCAFFOLDING), ROPE_LADDER)
-                .addItemsBefore(of(Blocks.BARREL), TRASH_CAN)
+                .addItemsBefore(of(Blocks.BARREL), TRASH_CAN, SAFE)
                 .addItemsBefore(of(Blocks.CHAIN), STEEL_LANTERN, ICE_LANTERN,
                         WHITE_PAPER_LANTERN, ORANGE_PAPER_LANTERN, MAGENTA_PAPER_LANTERN,
                         LIGHT_BLUE_PAPER_LANTERN, YELLOW_PAPER_LANTERN, LIME_PAPER_LANTERN, PINK_PAPER_LANTERN, GRAY_PAPER_LANTERN, LIGHT_GRAY_PAPER_LANTERN,
@@ -218,6 +219,7 @@ public class PMBlocks {
                         CYAN_REDSTONE_LAMP, PURPLE_REDSTONE_LAMP, BLUE_REDSTONE_LAMP, BROWN_REDSTONE_LAMP, GREEN_REDSTONE_LAMP, RED_REDSTONE_LAMP, BLACK_REDSTONE_LAMP)
                 .addItemsAfter(of(Blocks.RESPAWN_ANCHOR), ENDERPORTER)
                 .addItemsAfter(of(Raid.getLeaderBannerInstance()), ORNAMENT_FIRECRACKERS, ORNAMENT_LUCKY_COINS)
+                .addItemsAfter(of(Blocks.RESPAWN_ANCHOR), SPRINKLER)
 
                 .tab(REDSTONE_BLOCKS)
                 .addItemsBefore(of(Blocks.DAYLIGHT_DETECTOR), EARTH_GLOBE)

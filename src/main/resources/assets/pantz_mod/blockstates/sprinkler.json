@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "filled=false": {
+      "model": "pantz_mod:block/sprinkler"
+    },
+    "filled=true": {
+      "model": "pantz_mod:block/sprinkler_full"
+    }
+  }
+}

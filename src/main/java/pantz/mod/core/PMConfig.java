@@ -23,6 +23,8 @@ public class PMConfig {
         public final IntValue entityDetectorDetectionRadius;
         public final IntValue enderporterDetectionRadius;
         public final IntValue spikeMaxEffects;
+        public final DoubleValue sprinklerBoostChance;
+        public final DoubleValue sprinklerGrowthMultiplier;
 
         @ConfigKey("flint_and_steel")
         public final BooleanValue flintAndSteel;
@@ -67,6 +69,12 @@ public class PMConfig {
             builder.push("Functional");
             enderporterDetectionRadius = builder.comment("How far can the Enderporter detect thrown Ender Pearls?")
                     .defineInRange("Enderporter detection radius", 16, 0, Integer.MAX_VALUE);
+
+            sprinklerBoostChance = builder.comment("The odds for Sprinkler to boost crop every tick")
+                    .defineInRange("Sprinkler boost chance", 0.0000003d, 0.0d, 1.0d);
+
+            sprinklerGrowthMultiplier = builder.comment("The multiplier for Sprinkler to boost crop growth")
+                    .defineInRange("Sprinkler Growth Multiplier", 1.1112d, 0d, Double.MAX_VALUE);
 
             builder.pop();
 
