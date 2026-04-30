@@ -69,9 +69,9 @@ public class EntityFilterItem extends Item {
             }
         }
         if (detector.hasFilters()) {
-            ResourceLocation removedId = detector.removeLastEntity();
-            if (removedId != null) {
-                Component entityName = ForgeRegistries.ENTITY_TYPES.getValue(removedId).getDescription();
+            ResourceLocation entityId = detector.removeLastEntity();
+            if (entityId != null) {
+                Component entityName = ForgeRegistries.ENTITY_TYPES.getValue(entityId).getDescription();
                 player.displayClientMessage(Component.translatable("message.pantz_mod.detector.removed", entityName), true);
             }
             return InteractionResult.SUCCESS;
