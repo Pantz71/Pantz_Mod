@@ -4,12 +4,12 @@
       "advancement": {
         "parent": "minecraft:recipes/root",
         "criteria": {
-          "has_paper": {
+          "has_rotten_flesh": {
             "conditions": {
               "items": [
                 {
                   "items": [
-                    "minecraft:paper"
+                    "minecraft:rotten_flesh"
                   ]
                 }
               ]
@@ -25,7 +25,7 @@
         },
         "requirements": [
           [
-            "has_paper",
+            "has_rotten_flesh",
             "has_the_recipe"
           ]
         ],

@@ -13,25 +13,16 @@
         "category": "equipment",
         "key": {
           "#": {
-            "item": "minecraft:paper"
+            "tag": "forge:ingots/steel"
           },
           "$": {
             "item": "minecraft:rotten_flesh"
-          },
-          "&": {
-            "item": "minecraft:string"
-          },
-          "*": {
-            "item": "minecraft:spider_eye"
-          },
-          "/": {
-            "item": "minecraft:bone"
           }
         },
         "pattern": [
-          " $ ",
-          "&#*",
-          " / "
+          " # ",
+          "#$#",
+          " # "
         ],
         "result": {
           "item": "pantz_mod:entity_filter"

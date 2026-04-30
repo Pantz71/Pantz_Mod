@@ -168,13 +168,11 @@ public class PMRecipeProvider extends BlueprintRecipeProvider {
 
         conditionalRecipe(consumer, ENTITY_FILTERING, TOOLS,
                 ShapedRecipeBuilder.shaped(TOOLS, ENTITY_FILTER.get())
-                        .define('#', Items.PAPER).define('$', Items.ROTTEN_FLESH)
-                        .define('&', Items.STRING).define('*', Items.SPIDER_EYE)
-                        .define('/', Items.BONE)
-                        .pattern(" $ ")
-                        .pattern("&#*")
-                        .pattern(" / ")
-                        .unlockedBy(getHasName(Items.PAPER), has(Items.PAPER)));
+                        .define('#', PMItemTags.INGOTS_STEEL).define('$', Items.ROTTEN_FLESH)
+                        .pattern(" # ")
+                        .pattern("#$#")
+                        .pattern(" # ")
+                        .unlockedBy(getHasName(Items.ROTTEN_FLESH), has(Items.ROTTEN_FLESH)));
 
         conditionalRecipe(consumer, NOT_CAVERNS_AND_CHASMS, REDSTONE,
                 ShapedRecipeBuilder.shaped(REDSTONE, ENTITY_DETECTOR.get())

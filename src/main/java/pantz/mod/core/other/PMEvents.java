@@ -1,6 +1,7 @@
 package pantz.mod.core.other;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -10,7 +11,6 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ThrownEnderpearl;
@@ -32,6 +32,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import pantz.mod.common.block.ItemStandBlock;
 import pantz.mod.common.block.PedestalBlock;
+import pantz.mod.common.block.entity.EntityDetectorBlockEntity;
 import pantz.mod.common.block.entity.PedestalBlockEntity;
 import pantz.mod.common.block.entity.SpikeBlockEntity;
 import pantz.mod.common.item.AreaDiggerItem;
@@ -52,25 +53,20 @@ public class PMEvents {
     public static void onEntityInteract(EntityInteract event) {
         Player player = event.getEntity();
         Level level = player.level();
-        ItemStack stack = player.getMainHandItem();
+        ItemStack stack = player.getItemInHand(event.getHand());
 
-        if (!(stack.getItem() instanceof EntityFilterItem)) return;
-
+        if (!(stack.getItem() instanceof EntityFilterItem filterItem)) return;
         if (level.isClientSide()) return;
 
         Entity target = event.getTarget();
-        EntityType<?> type = target.getType();
-
         if (target instanceof LivingEntity) {
-            player.swing(InteractionHand.MAIN_HAND);
-            ((EntityFilterItem) stack.getItem()).addMobToStack(stack, type);
-            player.displayClientMessage(
-                    Component.translatable("message.pantz_mod.entity.added", type.getDescription()),
-                    true
-            );
+            if (filterItem.addMobToStack(stack, target.getType())) {
+                player.swing(event.getHand(), true);
+                player.displayClientMessage(Component.translatable("message.pantz_mod.entity.added", target.getType().getDescription()), true);
 
-            event.setCanceled(true);
-            event.setCancellationResult(InteractionResult.SUCCESS);
+                event.setCanceled(true);
+                event.setCancellationResult(InteractionResult.SUCCESS);
+            }
         }
     }
 

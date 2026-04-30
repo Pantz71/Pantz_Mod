@@ -3,14 +3,19 @@ package pantz.mod.core.other;
 import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.item.ItemProperties;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RegisterColorHandlersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.RegistryObject;
+import pantz.mod.common.item.EntityFilterItem;
 import pantz.mod.core.PantzMod;
 import pantz.mod.core.registry.PMBlocks;
+import pantz.mod.core.registry.PMItems;
 import pantz.mod.core.registry.datapack.PMTrimMaterials;
 
 import static pantz.mod.core.registry.PMBlocks.*;
@@ -19,6 +24,7 @@ import static pantz.mod.core.registry.PMBlocks.*;
 public class PMClientCompat {
     public static void registerClientCompat() {
         registerRenderLayers();
+        registerItemProperties();
         PMTrimMaterials.registerArmorMaterialOverrides();
     }
 
@@ -55,5 +61,12 @@ public class PMClientCompat {
         event.register((state, level, pos, index) -> level != null && pos != null ? BiomeColors.getAverageWaterColor(level, pos) : -1, SPRINKLER.get());
     }
 
-
+        private static void registerItemProperties() {
+            ItemProperties.register(PMItems.ENTITY_FILTER.get(), new ResourceLocation(PantzMod.MOD_ID, "mode"),
+                    (stack, level, entity, seed) -> {
+                        CompoundTag tag = stack.getOrCreateTag();
+                        int mode = tag.getInt(EntityFilterItem.MODE_KEY);
+                        return mode == 0 ? 0.0f : 1.0f;
+                    });
+        }
 }

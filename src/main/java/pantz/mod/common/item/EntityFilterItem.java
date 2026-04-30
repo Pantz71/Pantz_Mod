@@ -1,10 +1,7 @@
 package pantz.mod.common.item;
 
-import net.minecraft.ChatFormatting;
-import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
-import net.minecraft.nbt.StringTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -23,172 +20,130 @@ import net.minecraft.world.phys.HitResult;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.Nullable;
 import pantz.mod.common.block.entity.EntityDetectorBlockEntity;
-import pantz.mod.core.PMConfig;
+import pantz.mod.common.utils.FilterMode;
 
-import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Set;
 
 public class EntityFilterItem extends Item {
-    private static final String FILTER_KEY = "FilteredEntity";
+    public static final String FILTER_KEY = "FilteredEntities";
+    public static final String MODE_KEY = "FilterMode";
 
     public EntityFilterItem(Properties props) {
         super(props);
     }
 
-
     public boolean addMobToStack(ItemStack stack, EntityType<?> type) {
         CompoundTag tag = stack.getOrCreateTag();
-
-        ListTag list;
-        if (tag.contains(FILTER_KEY, Tag.TAG_LIST)) {
-            list = tag.getList(FILTER_KEY, Tag.TAG_STRING);
-        } else {
-            list = new ListTag();
-            tag.put(FILTER_KEY, list);
-        }
-
+        ListTag list = tag.getList(FILTER_KEY, Tag.TAG_COMPOUND);
         String id = EntityType.getKey(type).toString();
 
         for (int i = 0; i < list.size(); i++) {
-            if (list.getString(i).equals(id)) {
-                return false;
-            }
+            if (list.getCompound(i).getString("Id").equals(id)) return false;
         }
 
-        list.add(StringTag.valueOf(id));
+        CompoundTag newEntry = new CompoundTag();
+        newEntry.putString("Id", id);
+        list.add(newEntry);
         tag.put(FILTER_KEY, list);
         return true;
-    }
-
-    private ResourceLocation removeLast(Set<ResourceLocation> set) {
-        ResourceLocation removedMobs = null;
-        if (!set.isEmpty()) {
-            int idx = 0;
-            for (ResourceLocation id : set) {
-                if (idx == set.size() - 1) {
-                    removedMobs = id;
-                }
-                idx++;
-            }
-            set.remove(removedMobs);
-        }
-        return removedMobs;
     }
 
     @Override
     public InteractionResult useOn(UseOnContext ctx) {
         Level level = ctx.getLevel();
-        BlockPos pos = ctx.getClickedPos();
         Player player = ctx.getPlayer();
         ItemStack stack = ctx.getItemInHand();
+        CompoundTag tag = stack.getOrCreateTag();
 
-        if (player == null || level.isClientSide() || !PMConfig.Common.COMMON.enableEntityFilter.get()) {
-            return InteractionResult.PASS;
-        }
+        if (player == null || level.isClientSide()) return InteractionResult.PASS;
 
-        BlockEntity be = level.getBlockEntity(pos);
+        BlockEntity be = level.getBlockEntity(ctx.getClickedPos());
         if (!(be instanceof EntityDetectorBlockEntity detector)) return InteractionResult.PASS;
 
         if (player.isShiftKeyDown()) {
-            Set<ResourceLocation> filterMobs = getEntitiesFromStack(stack);
-            if (!filterMobs.isEmpty()) {
-                List<ResourceLocation> detectorMobs = detector.getEntityList();
-                for (ResourceLocation mob : filterMobs) {
-                    if (!detectorMobs.contains(mob)) detectorMobs.add(mob);
-                }
-                detector.setFilteredEntities(detectorMobs);
-                player.displayClientMessage(
-                        Component.translatable("message.pantz_mod.entity.applied", filterMobs.size()),
-                        true);
-            }
-        } else {
-            List<ResourceLocation> mobList = detector.getEntityList();
-            if (!mobList.isEmpty()) {
-                ResourceLocation removed = mobList.get(mobList.size() - 1);
-                detector.removeLastEntity();
-
-                Component mobName = ForgeRegistries.ENTITY_TYPES.getValue(removed) != null
-                        ? ForgeRegistries.ENTITY_TYPES.getValue(removed).getDescription()
-                        : Component.translatable("tooltip.pantz_mod.entity.unknown").withStyle(ChatFormatting.DARK_PURPLE);
-
-                player.displayClientMessage(
-                        Component.translatable("message.pantz_mod.entity.removed", mobName),
-                        true);
+            ListTag list = tag.getList(FILTER_KEY, Tag.TAG_COMPOUND);
+            if (!list.isEmpty()) {
+                detector.setFilterSettings(FilterMode.byId(stack.getOrCreateTag().getInt(MODE_KEY)), list);
+                player.displayClientMessage(Component.translatable("message.pantz_mod.detector.applied", list.size()), true);
+                return InteractionResult.SUCCESS;
             }
         }
-
-        return InteractionResult.SUCCESS;
+        if (detector.hasFilters()) {
+            ResourceLocation removedId = detector.removeLastEntity();
+            if (removedId != null) {
+                Component entityName = ForgeRegistries.ENTITY_TYPES.getValue(removedId).getDescription();
+                player.displayClientMessage(Component.translatable("message.pantz_mod.detector.removed", entityName), true);
+            }
+            return InteractionResult.SUCCESS;
+        }
+        return InteractionResult.PASS;
     }
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
-
-        if (level.isClientSide() || !PMConfig.Common.COMMON.enableEntityFilter.get() || !player.isShiftKeyDown())
-            return InteractionResultHolder.pass(stack);
+        if (level.isClientSide()) return InteractionResultHolder.pass(stack);
 
         HitResult hit = player.pick(5.0D, 0.0F, false);
-        if (hit.getType() != HitResult.Type.MISS) {
-            return InteractionResultHolder.pass(stack);
-        }
-        Set<ResourceLocation> mobs = getEntitiesFromStack(stack);
-        if (!mobs.isEmpty()) {
-            ResourceLocation removed = removeLast(mobs);
-            saveEntitiesToStack(stack, mobs);
-
-            if (removed != null) {
-                EntityType<?> type = ForgeRegistries.ENTITY_TYPES.getValue(removed);
-                Component mobName = (type != null) ? type.getDescription() : Component.literal(removed.toString());
-
-                player.displayClientMessage(
-                        Component.translatable("message.pantz_mod.entity.removed", mobName),
-                        true
-                );
+        if (hit.getType() == HitResult.Type.MISS) {
+            if (player.isShiftKeyDown()) {
+                cycleMode(stack, player);
+            } else {
+                removeLastEntityFromStack(stack, player);
             }
             return InteractionResultHolder.success(stack);
         }
-
         return InteractionResultHolder.pass(stack);
     }
 
-
-
-    private void saveEntitiesToStack(ItemStack stack, Set<ResourceLocation> mobs) {
+    public void removeLastEntityFromStack(ItemStack stack, Player player) {
         CompoundTag tag = stack.getOrCreateTag();
-        ListTag list = new ListTag();
-        for (ResourceLocation id : mobs) {
-            list.add(StringTag.valueOf(id.toString()));
-        }
-        tag.put(FILTER_KEY, list);
-    }
 
-    public static Set<ResourceLocation> getEntitiesFromStack(ItemStack stack) {
-        Set<ResourceLocation> out = new LinkedHashSet<>();
-        CompoundTag tag = stack.getTag();
-        if (tag != null && tag.contains(FILTER_KEY, Tag.TAG_LIST)) {
-            ListTag list = tag.getList(FILTER_KEY, Tag.TAG_STRING);
-            for (int i = 0; i < list.size(); i++) {
-                out.add(new ResourceLocation(list.getString(i)));
+        if (tag.contains(FILTER_KEY, Tag.TAG_LIST)) {
+            ListTag list = tag.getList(FILTER_KEY, Tag.TAG_COMPOUND);
+
+            if (!list.isEmpty()) {
+                CompoundTag lastEntry = list.getCompound(list.size() - 1);
+                String entityId = lastEntry.getString("Id");
+                Component entityName = ForgeRegistries.ENTITY_TYPES.getValue(new ResourceLocation(entityId)).getDescription();
+                list.remove(list.size() - 1);
+
+                if (list.isEmpty()) {
+                    tag.remove(FILTER_KEY);
+                }
+
+                player.displayClientMessage(Component.translatable("message.pantz_mod.entity.removed", entityName), true);
             }
         }
-        return out;
+    }
+
+    private void cycleMode(ItemStack stack, Player player) {
+        CompoundTag tag = stack.getOrCreateTag();
+        FilterMode currentMode = FilterMode.byId(tag.getInt(MODE_KEY));
+        FilterMode nextMode = currentMode.next();
+
+        tag.putInt(MODE_KEY, nextMode.getId());
+
+        player.displayClientMessage(Component.translatable("message.pantz_mod.mode_change", Component.translatable(nextMode.getTranslationKey()).withStyle(nextMode.getColor())), true);
     }
 
     @Override
     public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
-        Set<ResourceLocation> set = getEntitiesFromStack(stack);
+        CompoundTag tag = stack.getOrCreateTag();
+        ListTag list = tag.getList(FILTER_KEY, Tag.TAG_COMPOUND);
 
-        if (set.isEmpty()) {
-            tooltip.add(Component.translatable("tooltip.pantz_mod.entity", Component.translatable("tooltip.pantz_mod.entity.none")).withStyle(ChatFormatting.GRAY));
+        FilterMode currentMode = FilterMode.byId(tag.getInt(MODE_KEY));
+        tooltip.add(Component.translatable("tooltip.pantz_mod.current_mode", Component.translatable(currentMode.getTranslationKey()).withStyle(currentMode.getColor())));
+
+        if (list.isEmpty()) {
+            tooltip.add(Component.translatable("tooltip.pantz_mod.entity.none"));
         } else {
-            for (ResourceLocation id : set) {
+            for (int i = 0; i < list.size(); i++) {
+                ResourceLocation id = new ResourceLocation(list.getCompound(i).getString("Id"));
                 EntityType<?> type = ForgeRegistries.ENTITY_TYPES.getValue(id);
                 Component name = (type != null) ? type.getDescription() : Component.literal(id.toString());
-                tooltip.add(Component.translatable("tooltip.pantz_mod.entity", name).withStyle(ChatFormatting.GREEN));
+                tooltip.add(Component.translatable("tooltip.pantz_mod.entity", name));
             }
         }
-
-        super.appendHoverText(stack, level, tooltip, flag);
     }
 }
