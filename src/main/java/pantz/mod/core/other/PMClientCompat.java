@@ -61,12 +61,12 @@ public class PMClientCompat {
         event.register((state, level, pos, index) -> level != null && pos != null ? BiomeColors.getAverageWaterColor(level, pos) : -1, SPRINKLER.get());
     }
 
-        private static void registerItemProperties() {
-            ItemProperties.register(PMItems.ENTITY_FILTER.get(), new ResourceLocation(PantzMod.MOD_ID, "mode"),
-                    (stack, level, entity, seed) -> {
-                        CompoundTag tag = stack.getOrCreateTag();
-                        int mode = tag.getInt(EntityFilterItem.MODE_KEY);
-                        return mode == 0 ? 0.0f : 1.0f;
-                    });
-        }
+    private static void registerItemProperties() {
+        ItemProperties.register(PMItems.ENTITY_FILTER.get(), new ResourceLocation(PantzMod.MOD_ID, "mode"),
+                (stack, level, entity, seed) -> {
+            CompoundTag tag = stack.getOrCreateTag();
+            int mode = tag.getInt(EntityFilterItem.MODE_KEY);
+            return mode == 0 ? 0.0f : 1.0f;
+        });
+    }
 }
