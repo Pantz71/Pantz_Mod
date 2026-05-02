@@ -68,10 +68,10 @@ public class SprinklerBlockEntity extends BlockEntity {
 
     private void accelerateCropArea(ServerLevel level, BlockPos pos) {
         RandomSource random = level.getRandom();
-        float boostChance = PMConfig.Common.COMMON.sprinklerBoostChance.get().floatValue();
+        double boostChance = PMConfig.Common.COMMON.sprinklerBoostChance.get();
 
         for (int i = 0; i < 3; i++) {
-            if (random.nextFloat() < boostChance) {
+            if (random.nextDouble() < boostChance) {
                 int dx = random.nextInt(RANGE * 2 + 1) - RANGE;
                 int dz = random.nextInt(RANGE * 2 + 1) - RANGE;
                 int dy = -random.nextInt(VERTICAL_RANGE + 1);
