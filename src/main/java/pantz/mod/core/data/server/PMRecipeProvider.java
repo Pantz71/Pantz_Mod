@@ -470,7 +470,7 @@ public class PMRecipeProvider extends BlueprintRecipeProvider {
 
         ShapedRecipeBuilder.shaped(DECORATIONS, SPRINKLER.get())
                 .define('I', PMItemTags.INGOTS_STEEL).define('W', ItemTags.PLANKS)
-                .define('_', ItemTags.SLABS)
+                .define('_', ItemTags.WOODEN_SLABS)
                 .pattern("IWI")
                 .pattern(" W ")
                 .pattern("___")
