@@ -6,7 +6,7 @@
     "targets": [
       {
         "state": {
-          "Name": "pantz_mod:sulfur_block",
+          "Name": "pantz_mod:sulfur",
           "Properties": {
             "lit": "false"
           }

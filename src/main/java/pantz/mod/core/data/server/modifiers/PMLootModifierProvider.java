@@ -5,7 +5,6 @@ import com.teamabnormals.blueprint.common.loot.modification.modifiers.LootPoolEn
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
@@ -135,7 +134,7 @@ public class PMLootModifierProvider extends LootModifierProvider {
                         )))
                 .addModifier(new LootPoolEntriesModifier(false, 0,
                         List.of(
-                                lootPool(SULFUR_SHARD.get(), 25, 2, 10),
+                                lootPool(SULFUR_CRYSTAL.get(), 25, 2, 10),
                                 lootPool(SULFUR_DUST.get(), 25, 4, 12),
                                 lootPool(DYNAMITE.get(), 3, 2, 5),
                                 damagedEnchantedPool(STEEL_CHESTPLATE.get(), 6, 0.8f, 1f),
@@ -149,7 +148,7 @@ public class PMLootModifierProvider extends LootModifierProvider {
         this.entry("bastion_other").selects(BuiltInLootTables.BASTION_OTHER)
                 .addModifier(new LootPoolEntriesModifier(false, 2,
                         List.of(
-                                lootPool(SULFUR_SHARD.get(), 20, 1, 4),
+                                lootPool(SULFUR_CRYSTAL.get(), 20, 1, 4),
                                 lootPool(SULFUR_DUST.get(), 25, 2, 7),
                                 lootPool(DYNAMITE.get(), 3, 1, 4)
                         )));
@@ -157,7 +156,7 @@ public class PMLootModifierProvider extends LootModifierProvider {
         this.entry("bastion_bridge").selects(BuiltInLootTables.BASTION_BRIDGE)
                 .addModifier(new LootPoolEntriesModifier(false, 1,
                         List.of(
-                                lootPool(SULFUR_SHARD.get(), 15, 3, 7),
+                                lootPool(SULFUR_CRYSTAL.get(), 15, 3, 7),
                                 lootPool(SULFUR_DUST.get(), 15, 6, 10),
                                 lootPool(DYNAMITE.get(), 3, 1, 4)
                         )));
@@ -165,7 +164,7 @@ public class PMLootModifierProvider extends LootModifierProvider {
         this.entry("bastion_hoglin_stable").selects(BuiltInLootTables.BASTION_HOGLIN_STABLE)
                 .addModifier(new LootPoolEntriesModifier(false, 1,
                         List.of(
-                                lootPool(SULFUR_SHARD.get(), 15, 1, 4),
+                                lootPool(SULFUR_CRYSTAL.get(), 15, 1, 4),
                                 lootPool(SULFUR_DUST.get(), 20, 2, 7),
                                 lootPool(DYNAMITE.get(), 3, 1, 4)
                         )));
@@ -178,7 +177,7 @@ public class PMLootModifierProvider extends LootModifierProvider {
                         )))
                 .addModifier(new LootPoolEntriesModifier(false, 0,
                         List.of(
-                                lootPool(SULFUR_SHARD.get(), 15, 2, 10),
+                                lootPool(SULFUR_CRYSTAL.get(), 15, 2, 10),
                                 lootPool(SULFUR_DUST.get(), 15, 4, 12),
                                 lootPool(DYNAMITE.get(), 3, 1, 2),
                                 lootPool(STEEL_HORSE_ARMOR.get(), 10)

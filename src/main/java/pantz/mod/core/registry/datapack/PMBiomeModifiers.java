@@ -4,6 +4,7 @@ import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.tags.BiomeTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.levelgen.GenerationStep.Decoration;
@@ -21,9 +22,10 @@ import java.util.stream.Stream;
 
 public class PMBiomeModifiers {
     public static void bootstrap(BootstapContext<BiomeModifier> context) {
-        addFeature(context, "ore_sulfur_nether", PMBiomeTags.HAS_SULFUR, Decoration.UNDERGROUND_ORES, PMPlacedFeatures.ORE_SULFUR_NETHER);
+        addFeature(context, "ore_sulfur", BiomeTags.IS_OVERWORLD, Decoration.UNDERGROUND_ORES, PMPlacedFeatures.ORE_SULFUR);
+        addFeature(context, "ore_sulfur_nether", PMBiomeTags.HAS_SULFUR_NETHER, Decoration.UNDERGROUND_ORES, PMPlacedFeatures.ORE_SULFUR_NETHER);
         addFeature(context, "ore_sulfur_delta", PMBiomeTags.IS_BASALT_DELTAS, Decoration.UNDERGROUND_ORES, PMPlacedFeatures.ORE_SULFUR_DELTAS);
-        addFeature(context, "ore_sulfur_block", PMBiomeTags.HAS_SULFUR, Decoration.UNDERGROUND_ORES, PMPlacedFeatures.ORE_SULFUR_BLOCK);
+        addFeature(context, "ore_sulfur_block", PMBiomeTags.HAS_SULFUR_NETHER, Decoration.UNDERGROUND_ORES, PMPlacedFeatures.ORE_SULFUR_BLOCK);
     }
 
     @SafeVarargs

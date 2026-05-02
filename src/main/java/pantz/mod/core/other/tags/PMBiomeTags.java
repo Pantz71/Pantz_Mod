@@ -7,7 +7,7 @@ import pantz.mod.core.PantzMod;
 
 public class PMBiomeTags {
     public static final TagKey<Biome> IS_BASALT_DELTAS = forgeTag("is_basalt_deltas");
-    public static final TagKey<Biome> HAS_SULFUR = biomeTag("has_sulfur");
+    public static final TagKey<Biome> HAS_SULFUR_NETHER = biomeTag("has_sulfur_nether");
 
     private static TagKey<Biome> biomeTag(String name) {
         return TagUtil.biomeTag(PantzMod.MOD_ID, name);

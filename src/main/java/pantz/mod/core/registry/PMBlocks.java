@@ -10,6 +10,7 @@ import net.minecraft.world.item.Rarity;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.registries.RegistryObject;
 import pantz.mod.common.block.*;
 import pantz.mod.common.block.glass.*;
@@ -24,7 +25,6 @@ import java.util.function.Predicate;
 import static net.minecraft.world.item.CreativeModeTabs.*;
 import static net.minecraft.world.item.crafting.Ingredient.of;
 
-// block count: 108
 public class PMBlocks {
     public static final PMBlockSubRegistryHelper BLOCKS = PantzMod.REGISTRY_HELPER.getBlockSubHelper();
 
@@ -34,13 +34,20 @@ public class PMBlocks {
     public static final RegistryObject<Block> STEEL_TRAPDOOR = BLOCKS.createBlock("steel_trapdoor", () -> new TrapDoorBlock(PMProperties.STEEL_TRAPDOOR, PMProperties.STEEL));
     public static final RegistryObject<Block> STEEL_LANTERN = BLOCKS.createBlock("steel_lantern", () -> new SteelLanternBlock(PMProperties.STEEL_LANTERN));
 
+    public static final RegistryObject<Block> SULFUR_ORE = BLOCKS.createBlock("sulfur_ore", () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(Blocks.COAL_ORE), UniformInt.of(2, 4)));
+    public static final RegistryObject<Block> DEEPSLATE_SULFUR_ORE = BLOCKS.createBlock("deepslate_sulfur_ore", () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_COAL_ORE), UniformInt.of(2, 4)));
     public static final RegistryObject<Block> NETHER_SULFUR_ORE = BLOCKS.createBlock("nether_sulfur_ore", () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(Blocks.NETHER_QUARTZ_ORE), UniformInt.of(2, 4)));
+    public static final RegistryObject<Block> SULFUR = BLOCKS.createBlock("sulfur", () -> new SulfurBlock(PMProperties.SULFUR));
     public static final RegistryObject<Block> SULFUR_BLOCK = BLOCKS.createBlock("sulfur_block", () -> new SulfurBlock(PMProperties.SULFUR_BLOCK));
-    public static final RegistryObject<Block> SULFUR_BRICKS = BLOCKS.createBlock("sulfur_bricks", () -> new Block(PMProperties.SULFUR_BRICKS));
-    public static final RegistryObject<Block> SULFUR_BRICK_STAIRS = BLOCKS.createBlock("sulfur_brick_stairs", () -> new StairBlock(() -> SULFUR_BRICKS.get().defaultBlockState(), PMProperties.SULFUR_BRICKS));
-    public static final RegistryObject<Block> SULFUR_BRICK_SLAB = BLOCKS.createBlock("sulfur_brick_slab", () -> new SlabBlock(PMProperties.SULFUR_BRICKS));
-    public static final RegistryObject<Block> SULFUR_BRICK_WALL = BLOCKS.createBlock("sulfur_brick_wall", () -> new WallBlock(PMProperties.SULFUR_BRICKS));
-    public static final RegistryObject<Block> CHISELED_SULFUR_BRICKS = BLOCKS.createBlock("chiseled_sulfur_bricks", () -> new Block(PMProperties.SULFUR_BRICKS));
+    public static final RegistryObject<Block> POLISHED_SULFUR = BLOCKS.createBlock("polished_sulfur", () -> new Block(PMProperties.SULFUR_BLOCK));
+    public static final RegistryObject<Block> POLISHED_SULFUR_STAIRS = BLOCKS.createBlock("polished_sulfur_stairs", () -> new StairBlock(() -> POLISHED_SULFUR.get().defaultBlockState(), PMProperties.SULFUR_BLOCK));
+    public static final RegistryObject<Block> POLISHED_SULFUR_SLAB = BLOCKS.createBlock("polished_sulfur_slab", () -> new SlabBlock(PMProperties.SULFUR_BLOCK));
+    public static final RegistryObject<Block> POLISHED_SULFUR_WALL = BLOCKS.createBlock("polished_sulfur_wall", () -> new WallBlock(PMProperties.SULFUR_BLOCK));
+    public static final RegistryObject<Block> SULFUR_BRICKS = BLOCKS.createBlock("sulfur_bricks", () -> new Block(PMProperties.SULFUR_BLOCK));
+    public static final RegistryObject<Block> SULFUR_BRICK_STAIRS = BLOCKS.createBlock("sulfur_brick_stairs", () -> new StairBlock(() -> SULFUR_BRICKS.get().defaultBlockState(), PMProperties.SULFUR_BLOCK));
+    public static final RegistryObject<Block> SULFUR_BRICK_SLAB = BLOCKS.createBlock("sulfur_brick_slab", () -> new SlabBlock(PMProperties.SULFUR_BLOCK));
+    public static final RegistryObject<Block> SULFUR_BRICK_WALL = BLOCKS.createBlock("sulfur_brick_wall", () -> new WallBlock(PMProperties.SULFUR_BLOCK));
+    public static final RegistryObject<Block> CHISELED_SULFUR_BRICKS = BLOCKS.createBlock("chiseled_sulfur_bricks", () -> new Block(PMProperties.SULFUR_BLOCK));
     public static final RegistryObject<Block> SULFUR_LAMP = BLOCKS.createBlock("sulfur_lamp", () -> new Block(PMProperties.SULFUR_LAMP));
 
     public static final RegistryObject<Block> SMALL_SULFUR_BUD = BLOCKS.createBlock("small_sulfur_bud", () -> new SulfurClusterBlock(3, 4, PMProperties.SMALL_SULFUR_BUD));
@@ -197,10 +204,12 @@ public class PMBlocks {
                 .addItemsBefore(of(Blocks.GOLD_BLOCK), STEEL_BLOCK)
                 .addItemsBefore(modLoaded(Blocks.GOLD_BLOCK, PMConstant.CAVERNS_AND_CHASMS), STEEL_BARS)
                 .addItemsBefore(of(Blocks.GOLD_BLOCK), STEEL_DOOR, STEEL_TRAPDOOR)
-                .addItemsBefore(of(Blocks.AMETHYST_BLOCK), SULFUR_BLOCK, SULFUR_BRICKS, CHISELED_SULFUR_BRICKS, SULFUR_BRICK_STAIRS, SULFUR_BRICK_SLAB, SULFUR_BRICK_WALL, SULFUR_LAMP)
+                .addItemsBefore(of(Blocks.AMETHYST_BLOCK), SULFUR_BLOCK, POLISHED_SULFUR, POLISHED_SULFUR_STAIRS, POLISHED_SULFUR_SLAB, POLISHED_SULFUR_WALL,
+                        SULFUR_BRICKS, CHISELED_SULFUR_BRICKS, SULFUR_BRICK_STAIRS, SULFUR_BRICK_SLAB, SULFUR_BRICK_WALL, SULFUR_LAMP)
 
                 .tab(NATURAL_BLOCKS)
-                .addItemsBefore(of(Blocks.AMETHYST_BLOCK), SULFUR_BLOCK, SMALL_SULFUR_BUD, MEDIUM_SULFUR_BUD, LARGE_SULFUR_BUD, SULFUR_CLUSTER)
+                .addItemsBefore(of(Blocks.AMETHYST_BLOCK), SULFUR, SMALL_SULFUR_BUD, MEDIUM_SULFUR_BUD, LARGE_SULFUR_BUD, SULFUR_CLUSTER)
+                .addItemsAfter(of(Blocks.DEEPSLATE_DIAMOND_ORE), SULFUR_ORE, DEEPSLATE_SULFUR_ORE)
                 .addItemsAfter(of(Blocks.NETHER_QUARTZ_ORE), NETHER_SULFUR_ORE)
 
                 .tab(FUNCTIONAL_BLOCKS)
@@ -226,11 +235,12 @@ public class PMBlocks {
                 .addItemsBefore(of(Blocks.LEVER), ENDER_SCANNER)
                 .addItemsBefore(of(Blocks.JUKEBOX), TRASH_CAN)
                 .addItemsBefore(of(Blocks.TNT), SPIKE)
+                .addItemsBefore(modNotLoaded(Blocks.TARGET, PMConstant.CAVERNS_AND_CHASMS), RANDOMIZER)
+                .addItemsBefore(of(Blocks.TARGET), EQUALIZER, NOT_GATE, AND_GATE, OR_GATE, NAND_GATE, NOR_GATE, XOR_GATE, XNOR_GATE,
+                        ADVANCED_AND_GATE, ADVANCED_OR_GATE, ADVANCED_NAND_GATE, ADVANCED_NOR_GATE, ADVANCED_XOR_GATE, ADVANCED_XNOR_GATE, MAJORITY_GATE, MINORITY_GATE)
                 .addItemsAfter(of(Blocks.REDSTONE_BLOCK), REDSTONE_CONFIGURATOR, POWER_DISPLAYER)
                 .addItemsAfter(of(Blocks.TARGET), LOCK, UNIVERSAL_LOCK)
                 .addItemsAfter(of(Blocks.DAYLIGHT_DETECTOR), WEATHER_DETECTOR, ENTITY_DETECTOR)
-                .addItemsAfter(of(Blocks.COMPARATOR), RANDOMIZER, EQUALIZER, NOT_GATE, AND_GATE, OR_GATE, NAND_GATE, NOR_GATE, XOR_GATE, XNOR_GATE,
-                        ADVANCED_AND_GATE, ADVANCED_OR_GATE, ADVANCED_NAND_GATE, ADVANCED_NOR_GATE, ADVANCED_XOR_GATE, ADVANCED_XNOR_GATE, MAJORITY_GATE, MINORITY_GATE)
 
                 .tab(COLORED_BLOCKS)
                 .addItemsBefore(of(Blocks.TINTED_GLASS), QUARTZ_GLASS, LAPIS_GLASS, REDSTONE_GLASS)
@@ -246,7 +256,21 @@ public class PMBlocks {
         ;
     }
 
+    public static Predicate<ItemStack> modNotLoaded(ItemLike item, String... modids) {
+        return stack -> of(item).test(stack) && areModsNotLoaded(modids);
+    }
+
     public static Predicate<ItemStack> modLoaded(ItemLike item, String... modids) {
         return stack -> of(item).test(stack) && PMBlockSubRegistryHelper.areModsLoaded(modids);
+    }
+
+    public static boolean areModsNotLoaded(String... modIds) {
+        if ("true".equals(System.getProperty("blueprint.indev")))
+            return false;
+        ModList modList = ModList.get();
+        for (String mod : modIds)
+            if (modList.isLoaded(mod))
+                return false;
+        return true;
     }
 }

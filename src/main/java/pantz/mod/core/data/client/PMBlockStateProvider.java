@@ -33,8 +33,12 @@ public class PMBlockStateProvider extends BlueprintBlockStateProvider {
         this.doorBlocks(STEEL_DOOR.get(), STEEL_TRAPDOOR.get());
         this.litableLanternBlock(STEEL_LANTERN, modLoc("block/template_steel_lantern"), modLoc("block/template_hanging_steel_lantern"));
 
-        this.litableBlock(SULFUR_BLOCK, "_lit");
+        this.sulfurBlock(SULFUR);
+        this.block(SULFUR_BLOCK);
+        this.blockFamily(PMBlockFamilies.POLISHED_SULFUR_FAMILY);
         this.blockFamily(PMBlockFamilies.SULFUR_BRICKS_FAMILY);
+        this.block(SULFUR_ORE);
+        this.block(DEEPSLATE_SULFUR_ORE);
         this.block(NETHER_SULFUR_ORE);
         this.block(CHISELED_SULFUR_BRICKS);
         this.block(SULFUR_LAMP);
@@ -187,6 +191,16 @@ public class PMBlockStateProvider extends BlueprintBlockStateProvider {
 
     private void redstoneLampBlock(RegistryObject<Block> block) {
         litableBlock(block, "_on");
+    }
+
+    private void sulfurBlock(RegistryObject<Block> block) {
+        ResourceLocation texture = blockTexture(block.get());
+        getVariantBuilder(block.get())
+                .partialState().with(BlockStateProperties.LIT, false)
+                .modelForState().modelFile(models().cubeAll(name(block.get()), texture)).addModel()
+                .partialState().with(BlockStateProperties.LIT, true)
+                .modelForState().modelFile(models().cubeAll(name(block.get()) + "_lit", texture)).addModel();
+        blockItem(block);
     }
 
     private void litableBlock(RegistryObject<Block> block, String suffix) {

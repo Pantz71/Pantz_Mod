@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_sulfur_block": {
+    "has_polished_sulfur": {
       "conditions": {
         "items": [
           {
             "items": [
-              "pantz_mod:sulfur_block"
+              "pantz_mod:polished_sulfur"
             ]
           }
         ]
@@ -22,7 +22,7 @@
   },
   "requirements": [
     [
-      "has_sulfur_block",
+      "has_polished_sulfur",
       "has_the_recipe"
     ]
   ],

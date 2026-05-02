@@ -20,6 +20,6 @@ public class PMBiomeTagsProvider extends BiomeTagsProvider {
     @Override
     protected void addTags(HolderLookup.Provider pProvider) {
         this.tag(IS_BASALT_DELTAS).add(Biomes.BASALT_DELTAS);
-        this.tag(HAS_SULFUR).add(Biomes.NETHER_WASTES);
+        this.tag(HAS_SULFUR_NETHER).add(Biomes.NETHER_WASTES);
     }
 }

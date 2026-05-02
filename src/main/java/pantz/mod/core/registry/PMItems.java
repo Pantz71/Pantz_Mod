@@ -19,7 +19,6 @@ import java.util.function.Supplier;
 import static net.minecraft.world.item.CreativeModeTabs.*;
 import static net.minecraft.world.item.crafting.Ingredient.of;
 
-// item count: 27
 public class PMItems {
     public static final ItemSubRegistryHelper ITEMS = PantzMod.REGISTRY_HELPER.getItemSubHelper();
 
@@ -39,7 +38,7 @@ public class PMItems {
     public static final RegistryObject<Item> STEEL_HORSE_ARMOR = ITEMS.createItem("steel_horse_armor", () -> new HorseArmorItem(6, PantzMod.location("textures/entity/horse/armor/horse_armor_silver.png"), PropertyUtil.stacksOnce()));
 
     public static final RegistryObject<Item> SULFUR_DUST = ITEMS.createItem("sulfur_dust", basicItem());
-    public static final RegistryObject<Item> SULFUR_SHARD = ITEMS.createItem("sulfur_shard", basicItem());
+    public static final RegistryObject<Item> SULFUR_CRYSTAL = ITEMS.createItem("sulfur_crystal", basicItem());
 
     public static final RegistryObject<Item> TROWEL = ITEMS.createItem("trowel", () -> new TrowelItem(new Item.Properties().durability(256)));
     public static final RegistryObject<Item> HONEY_DESERIALIZER = ITEMS.createItem("honey_deserializer", () -> new Item(PropertyUtil.stacksOnce()));
@@ -72,7 +71,7 @@ public class PMItems {
                 .tab(INGREDIENTS)
                 .addItemsAfter(of(Items.IRON_INGOT), STEEL_INGOT)
                 .addItemsAfter(of(Items.IRON_NUGGET), STEEL_NUGGET)
-                .addItemsBefore(of(Items.BLAZE_ROD), SULFUR_SHARD, SULFUR_DUST)
+                .addItemsBefore(of(Items.BLAZE_ROD), SULFUR_CRYSTAL, SULFUR_DUST)
 
                 .tab(COMBAT)
                 .addItemsBefore(of(Items.GOLDEN_SWORD), STEEL_SWORD)

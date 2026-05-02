@@ -2,15 +2,24 @@
   "type": "minecraft:ore",
   "config": {
     "discard_chance_on_air_exposure": 0.0,
-    "size": 16,
+    "size": 32,
     "targets": [
       {
         "state": {
-          "Name": "pantz_mod:nether_sulfur_ore"
+          "Name": "pantz_mod:sulfur_ore"
         },
         "target": {
           "predicate_type": "minecraft:tag_match",
-          "tag": "forge:netherrack"
+          "tag": "minecraft:stone_ore_replaceables"
+        }
+      },
+      {
+        "state": {
+          "Name": "pantz_mod:deepslate_sulfur_ore"
+        },
+        "target": {
+          "predicate_type": "minecraft:tag_match",
+          "tag": "minecraft:deepslate_ore_replaceables"
         }
       }
     ]

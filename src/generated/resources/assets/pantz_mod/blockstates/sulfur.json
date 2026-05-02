@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=false": {
+      "model": "pantz_mod:block/sulfur"
+    },
+    "lit=true": {
+      "model": "pantz_mod:block/sulfur_lit"
+    }
+  }
+}

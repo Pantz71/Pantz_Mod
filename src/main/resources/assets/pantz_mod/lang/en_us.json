@@ -74,8 +74,15 @@
   "trim_material.pantz_mod.steel": "Steel Material",
 
   "_sulfur": "sulfur",
+  "block.pantz_mod.sulfur_ore": "Sulfur Ore",
+  "block.pantz_mod.deepslate_sulfur_ore": "DeepslateSulfur Ore",
   "block.pantz_mod.nether_sulfur_ore": "Nether Sulfur Ore",
+  "block.pantz_mod.sulfur": "Sulfur",
   "block.pantz_mod.sulfur_block": "Block of Sulfur",
+  "block.pantz_mod.polished_sulfur": "Polished Sulfur",
+  "block.pantz_mod.polished_sulfur_stairs": "Polished Sulfur Stairs",
+  "block.pantz_mod.polished_sulfur_slab": "Polished Sulfur Slab",
+  "block.pantz_mod.polished_sulfur_wall": "Polished Sulfur Wall",
   "block.pantz_mod.sulfur_bricks": "Sulfur Bricks",
   "block.pantz_mod.sulfur_brick_stairs": "Sulfur Brick Stairs",
   "block.pantz_mod.sulfur_brick_slab": "Sulfur Brick Slab",
@@ -89,7 +96,7 @@
   "block.pantz_mod.sulfur_lamp": "Sulfur Lamp",
 
   "item.pantz_mod.sulfur_dust": "Sulfur Dust",
-  "item.pantz_mod.sulfur_shard": "Sulfur Shard",
+  "item.pantz_mod.sulfur_crystal": "Sulfur Crystal",
 
   "trim_material.pantz_mod.sulfur": "Sulfur Material",
 

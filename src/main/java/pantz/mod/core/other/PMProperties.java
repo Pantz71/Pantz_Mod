@@ -4,7 +4,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
@@ -27,9 +26,14 @@ public class PMProperties {
     public static final BlockBehaviour.Properties STEEL_BARS = BlockBehaviour.Properties.of().requiresCorrectToolForDrops().strength(5.0F, 6.0F).sound(SoundType.METAL).noOcclusion();
     public static final BlockBehaviour.Properties STEEL_LANTERN = BlockBehaviour.Properties.of().mapColor(MapColor.METAL).forceSolidOn().requiresCorrectToolForDrops().strength(3.5F).sound(SoundType.LANTERN).lightLevel(litBlockEmission(15));
 
-    public static final BlockBehaviour.Properties SULFUR_BLOCK = BlockBehaviour.Properties.of().instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(5.0F, 6.0F).mapColor(MapColor.COLOR_YELLOW).sound(SoundType.AMETHYST).lightLevel(litBlockEmission(12)).ignitedByLava().randomTicks();
-    public static final BlockBehaviour.Properties SULFUR_BRICKS = BlockBehaviour.Properties.of().instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(5.0F, 6.0F).mapColor(MapColor.COLOR_YELLOW).sound(SoundType.AMETHYST).ignitedByLava();
-    public static final BlockBehaviour.Properties SULFUR_LAMP = BlockBehaviour.Properties.of().instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(5.0F, 6.0F).mapColor(MapColor.COLOR_YELLOW).sound(SoundType.AMETHYST).lightLevel(light -> 15).ignitedByLava();
+    public static final BlockBehaviour.Properties SULFUR = BlockBehaviour.Properties.of().instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(5.0F, 6.0F).mapColor(MapColor.COLOR_YELLOW).sound(SoundType.STONE).lightLevel(litBlockEmission(12)).randomTicks();
+    public static final BlockBehaviour.Properties SULFUR_BLOCK = BlockBehaviour.Properties.of().instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(5.0F, 6.0F).mapColor(MapColor.COLOR_YELLOW).sound(SoundType.STONE);
+    public static final BlockBehaviour.Properties SULFUR_LAMP = BlockBehaviour.Properties.of().instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(5.0F, 6.0F).mapColor(MapColor.COLOR_YELLOW).sound(SoundType.STONE).lightLevel(light -> 15);
+
+    public static final BlockBehaviour.Properties SULFUR_CLUSTER = BlockBehaviour.Properties.of().randomTicks().mapColor(MapColor.COLOR_YELLOW).forceSolidOn().noOcclusion().sound(SoundType.AMETHYST_CLUSTER).strength(1.5F).pushReaction(PushReaction.DESTROY).lightLevel(light -> 12);
+    public static final BlockBehaviour.Properties SMALL_SULFUR_BUD = BlockBehaviour.Properties.of().randomTicks().mapColor(MapColor.COLOR_YELLOW).forceSolidOn().noOcclusion().sound(SoundType.SMALL_AMETHYST_BUD).strength(1.5F).pushReaction(PushReaction.DESTROY).lightLevel(light -> 3);
+    public static final BlockBehaviour.Properties MEDIUM_SULFUR_BUD = BlockBehaviour.Properties.of().randomTicks().mapColor(MapColor.COLOR_YELLOW).forceSolidOn().noOcclusion().sound(SoundType.MEDIUM_AMETHYST_BUD).strength(1.5F).pushReaction(PushReaction.DESTROY).lightLevel(light -> 6);
+    public static final BlockBehaviour.Properties LARGE_SULFUR_BUD = BlockBehaviour.Properties.of().randomTicks().mapColor(MapColor.COLOR_YELLOW).forceSolidOn().noOcclusion().sound(SoundType.LARGE_AMETHYST_BUD).strength(1.5F).pushReaction(PushReaction.DESTROY).lightLevel(light -> 9);
 
     public static final BlockBehaviour.Properties PEDESTAL = BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(1.5f, 6.0f).sound(SoundType.STONE);
     public static final BlockBehaviour.Properties DEEPSLATE_PEDESTAL = BlockBehaviour.Properties.of().mapColor(MapColor.DEEPSLATE).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(3.0f, 6.0f).sound(SoundType.DEEPSLATE);
@@ -37,11 +41,6 @@ public class PMProperties {
     public static final BlockBehaviour.Properties QUARTZ_PEDESTAL = BlockBehaviour.Properties.of().mapColor(MapColor.QUARTZ).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(1.5f, 6.0f).sound(SoundType.STONE);
     public static final BlockBehaviour.Properties PURPUR_PEDESTAL = BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_MAGENTA).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(1.5f, 6.0f).sound(SoundType.STONE);
     public static final BlockBehaviour.Properties PRISMARINE_PEDESTAL = BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_CYAN).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(1.5f, 6.0f).sound(SoundType.STONE);
-
-    public static final BlockBehaviour.Properties SULFUR_CLUSTER = BlockBehaviour.Properties.of().randomTicks().mapColor(MapColor.COLOR_YELLOW).forceSolidOn().noOcclusion().sound(SoundType.AMETHYST_CLUSTER).strength(1.5F).pushReaction(PushReaction.DESTROY).lightLevel(light -> 12);
-    public static final BlockBehaviour.Properties SMALL_SULFUR_BUD = BlockBehaviour.Properties.of().randomTicks().mapColor(MapColor.COLOR_YELLOW).forceSolidOn().noOcclusion().sound(SoundType.SMALL_AMETHYST_BUD).strength(1.5F).pushReaction(PushReaction.DESTROY).lightLevel(light -> 3);
-    public static final BlockBehaviour.Properties MEDIUM_SULFUR_BUD = BlockBehaviour.Properties.of().randomTicks().mapColor(MapColor.COLOR_YELLOW).forceSolidOn().noOcclusion().sound(SoundType.MEDIUM_AMETHYST_BUD).strength(1.5F).pushReaction(PushReaction.DESTROY).lightLevel(light -> 6);
-    public static final BlockBehaviour.Properties LARGE_SULFUR_BUD = BlockBehaviour.Properties.of().randomTicks().mapColor(MapColor.COLOR_YELLOW).forceSolidOn().noOcclusion().sound(SoundType.LARGE_AMETHYST_BUD).strength(1.5F).pushReaction(PushReaction.DESTROY).lightLevel(light -> 9);
 
     public static final BlockBehaviour.Properties ENDER_SCANNER = BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BLACK).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(3.0f, 1200.0f);
     public static final BlockBehaviour.Properties REDSTONE_CONFIGURATOR = BlockBehaviour.Properties.of().strength(3.5F, 6.0f).sound(SoundType.METAL).instrument(NoteBlockInstrument.XYLOPHONE).mapColor(MapColor.METAL).isRedstoneConductor(PMProperties::never);

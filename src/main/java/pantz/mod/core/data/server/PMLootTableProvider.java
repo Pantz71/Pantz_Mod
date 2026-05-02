@@ -72,7 +72,8 @@ public class PMLootTableProvider extends LootTableProvider {
             // dropSelf
             for (RegistryObject<?> block : new RegistryObject[]{
                     STEEL_BLOCK, STEEL_BARS, STEEL_TRAPDOOR, STEEL_LANTERN,
-                    SULFUR_BLOCK, SULFUR_BRICKS, SULFUR_BRICK_STAIRS, SULFUR_BRICK_WALL, CHISELED_SULFUR_BRICKS, SULFUR_LAMP,
+                    SULFUR, SULFUR_BLOCK, POLISHED_SULFUR, POLISHED_SULFUR_STAIRS, POLISHED_SULFUR_WALL,
+                    SULFUR_BRICKS, SULFUR_BRICK_STAIRS, SULFUR_BRICK_WALL, CHISELED_SULFUR_BRICKS, SULFUR_LAMP,
                     STONE_PEDESTAL, DEEPSLATE_PEDESTAL, BLACKSTONE_PEDESTAL, QUARTZ_PEDESTAL, PURPUR_PEDESTAL, PRISMARINE_PEDESTAL,
                     ENDER_SCANNER, REDSTONE_CONFIGURATOR, WEATHER_DETECTOR, ENTITY_DETECTOR, POWER_DISPLAYER,
                     RANDOMIZER, EQUALIZER,
@@ -105,7 +106,7 @@ public class PMLootTableProvider extends LootTableProvider {
 
             // slab
             for (RegistryObject<?> block : new RegistryObject[]{
-                    SULFUR_BRICK_SLAB, SNOW_BRICK_SLAB, PACKED_ICE_BRICK_SLAB, BLUE_ICE_BRICK_SLAB
+                    POLISHED_SULFUR_SLAB, SULFUR_BRICK_SLAB, SNOW_BRICK_SLAB, PACKED_ICE_BRICK_SLAB, BLUE_ICE_BRICK_SLAB
             }) {
                 this.add((Block) block.get(), this::createSlabItemTable);
             }
@@ -124,18 +125,20 @@ public class PMLootTableProvider extends LootTableProvider {
                 this.add((Block) block.get(), this.createSinglePropConditionTable((Block) block.get(), DoubleOrnamentBlock.HALF, DoubleBlockHalf.LOWER));
             }
 
-            this.add(NETHER_SULFUR_ORE.get(), this.createDustOreDrop(NETHER_SULFUR_ORE.get(), PMItems.SULFUR_DUST.get(), 3, 7));
-            
-            this.add(SULFUR_CLUSTER.get(), createSilkTouchDispatchTable(SULFUR_CLUSTER.get(), LootItem.lootTableItem(PMItems.SULFUR_SHARD.get())
+            this.add(SULFUR_ORE.get(), this.createSulfurOreDrop(SULFUR_ORE.get(), PMItems.SULFUR_CRYSTAL.get(), 3, 7));
+            this.add(DEEPSLATE_SULFUR_ORE.get(), this.createSulfurOreDrop(DEEPSLATE_SULFUR_ORE.get(), PMItems.SULFUR_CRYSTAL.get(), 3, 7));
+            this.add(NETHER_SULFUR_ORE.get(), this.createSulfurOreDrop(NETHER_SULFUR_ORE.get(), PMItems.SULFUR_CRYSTAL.get(), 1, 4));
+
+            this.add(SULFUR_CLUSTER.get(), createSilkTouchDispatchTable(SULFUR_CLUSTER.get(), LootItem.lootTableItem(PMItems.SULFUR_CRYSTAL.get())
                     .apply(SetItemCountFunction.setCount(ConstantValue.exactly(4.0F)))
                     .apply(ApplyBonusCount.addOreBonusCount(Enchantments.BLOCK_FORTUNE))
                     .when(MatchTool.toolMatches(ItemPredicate.Builder.item().of(ItemTags.CLUSTER_MAX_HARVESTABLES)))
-                    .otherwise(this.applyExplosionDecay(SULFUR_CLUSTER.get(), LootItem.lootTableItem(PMItems.SULFUR_SHARD.get())
+                    .otherwise(this.applyExplosionDecay(SULFUR_CLUSTER.get(), LootItem.lootTableItem(PMItems.SULFUR_CRYSTAL.get())
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(2.0F)))))));
 
         }
 
-        private LootTable.Builder createDustOreDrop(Block block, ItemLike item, int min, int max) {
+        private LootTable.Builder createSulfurOreDrop(Block block, ItemLike item, int min, int max) {
             return createSilkTouchDispatchTable(block, this.applyExplosionDecay(block, LootItem.lootTableItem(item).apply(SetItemCountFunction.setCount(UniformGenerator.between(min, max))).apply(ApplyBonusCount.addOreBonusCount(Enchantments.BLOCK_FORTUNE))));
         }
 

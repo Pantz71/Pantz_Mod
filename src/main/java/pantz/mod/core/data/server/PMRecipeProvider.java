@@ -1,5 +1,6 @@
 package pantz.mod.core.data.server;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Maps;
 import com.teamabnormals.blueprint.core.api.conditions.ConfigValueCondition;
 import com.teamabnormals.blueprint.core.data.server.BlueprintRecipeProvider;
@@ -39,6 +40,8 @@ public class PMRecipeProvider extends BlueprintRecipeProvider {
     private static final ConfigValueCondition FLINT_AND_STEEL = config(COMMON.flintAndSteel, "flint_and_steel");
     private static final ConfigValueCondition ENTITY_FILTERING = config(COMMON.enableEntityFilter, "entity_filter");
     private static final ConfigValueCondition REQUIRE_CACTUS_KEY = config(COMMON.enableCactusKey, "cactus_key");
+
+    public static final ImmutableList<ItemLike> SULFUR_SMELTABLES = ImmutableList.of(SULFUR.get(), SULFUR_ORE.get(), DEEPSLATE_SULFUR_ORE.get(), NETHER_SULFUR_ORE.get());
 
     public PMRecipeProvider(PackOutput output) {
         super(PantzMod.MOD_ID, output);
@@ -89,28 +92,46 @@ public class PMRecipeProvider extends BlueprintRecipeProvider {
         ///   ////////////////////////////////////////////////////////////////////////////
 
         ///   ////////////////////////////////////////////////////////////////////////////
-        polished(consumer, BUILDING_BLOCKS, SULFUR_BRICKS.get(), SULFUR_BLOCK.get());
-        storageRecipesWithCustomUnpacking(consumer, MISC, SULFUR_SHARD.get(), BUILDING_BLOCKS, SULFUR_BLOCK.get(), "sulfur_shard_from_sulfur_block", "sulfur_crystal");
+        polished(consumer, BUILDING_BLOCKS, POLISHED_SULFUR.get(), SULFUR.get());
+        polished(consumer, BUILDING_BLOCKS, SULFUR_BRICKS.get(), POLISHED_SULFUR.get());
+        storageRecipesWithCustomUnpacking(consumer, MISC, SULFUR_CRYSTAL.get(), BUILDING_BLOCKS, SULFUR_BLOCK.get(), "sulfur_shard_from_sulfur_block", "sulfur_crystal");
 
         ShapelessRecipeBuilder.shapeless(MISC, Items.GUNPOWDER, 2)
                 .requires(Ingredient.of(PMItemTags.DUSTS_SULFUR), 2).requires(PMItemTags.COALS)
-                .unlockedBy(getHasName(SULFUR_SHARD.get()), has(PMItemTags.DUSTS_SULFUR)).save(consumer);
+                .unlockedBy(getHasName(SULFUR_CRYSTAL.get()), has(PMItemTags.DUSTS_SULFUR)).save(consumer);
 
         lampRecipe(consumer, SULFUR_LAMP.get(), PMItemTags.GEMS_SULFUR);
+        generateRecipes(consumer, PMBlockFamilies.POLISHED_SULFUR_FAMILY);
         generateRecipes(consumer, PMBlockFamilies.SULFUR_BRICKS_FAMILY);
 
-        stonecutterRecipe(consumer, BUILDING_BLOCKS, SULFUR_BRICKS.get(), SULFUR_BLOCK.get());
-        stonecutterRecipe(consumer, BUILDING_BLOCKS, SULFUR_BRICK_STAIRS.get(), SULFUR_BLOCK.get());
-        stonecutterRecipe(consumer, BUILDING_BLOCKS, SULFUR_BRICK_SLAB.get(), SULFUR_BLOCK.get(), 2);
-        stonecutterRecipe(consumer, BUILDING_BLOCKS, SULFUR_BRICK_WALL.get(), SULFUR_BLOCK.get());
-        stonecutterRecipe(consumer, BUILDING_BLOCKS, CHISELED_SULFUR_BRICKS.get(), SULFUR_BLOCK.get());
+        stonecutterRecipe(consumer, BUILDING_BLOCKS, POLISHED_SULFUR.get(), SULFUR.get());
+        stonecutterRecipe(consumer, BUILDING_BLOCKS, POLISHED_SULFUR_STAIRS.get(), SULFUR.get());
+        stonecutterRecipe(consumer, BUILDING_BLOCKS, POLISHED_SULFUR_SLAB.get(), SULFUR.get(), 2);
+        stonecutterRecipe(consumer, BUILDING_BLOCKS, POLISHED_SULFUR_WALL.get(), SULFUR.get());
+
+        stonecutterRecipe(consumer, BUILDING_BLOCKS, POLISHED_SULFUR_STAIRS.get(), POLISHED_SULFUR.get());
+        stonecutterRecipe(consumer, BUILDING_BLOCKS, POLISHED_SULFUR_SLAB.get(), POLISHED_SULFUR.get(), 2);
+        stonecutterRecipe(consumer, BUILDING_BLOCKS, POLISHED_SULFUR_WALL.get(), POLISHED_SULFUR.get());
+
+        stonecutterRecipe(consumer, BUILDING_BLOCKS, SULFUR_BRICKS.get(), SULFUR.get());
+        stonecutterRecipe(consumer, BUILDING_BLOCKS, SULFUR_BRICK_STAIRS.get(), SULFUR.get());
+        stonecutterRecipe(consumer, BUILDING_BLOCKS, SULFUR_BRICK_SLAB.get(), SULFUR.get(), 2);
+        stonecutterRecipe(consumer, BUILDING_BLOCKS, SULFUR_BRICK_WALL.get(), SULFUR.get());
+        stonecutterRecipe(consumer, BUILDING_BLOCKS, CHISELED_SULFUR_BRICKS.get(), SULFUR.get());
+
+        stonecutterRecipe(consumer, BUILDING_BLOCKS, SULFUR_BRICKS.get(), POLISHED_SULFUR.get());
+        stonecutterRecipe(consumer, BUILDING_BLOCKS, SULFUR_BRICK_STAIRS.get(), POLISHED_SULFUR.get());
+        stonecutterRecipe(consumer, BUILDING_BLOCKS, SULFUR_BRICK_SLAB.get(), POLISHED_SULFUR.get(), 2);
+        stonecutterRecipe(consumer, BUILDING_BLOCKS, SULFUR_BRICK_WALL.get(), POLISHED_SULFUR.get());
+        stonecutterRecipe(consumer, BUILDING_BLOCKS, CHISELED_SULFUR_BRICKS.get(), POLISHED_SULFUR.get());
+
         stonecutterRecipe(consumer, BUILDING_BLOCKS, SULFUR_BRICK_STAIRS.get(), SULFUR_BRICKS.get());
         stonecutterRecipe(consumer, BUILDING_BLOCKS, SULFUR_BRICK_SLAB.get(), SULFUR_BRICKS.get(), 2);
         stonecutterRecipe(consumer, BUILDING_BLOCKS, SULFUR_BRICK_WALL.get(), SULFUR_BRICKS.get());
         stonecutterRecipe(consumer, BUILDING_BLOCKS, CHISELED_SULFUR_BRICKS.get(), SULFUR_BRICKS.get());
 
-        conversionRecipe(consumer, SULFUR_DUST.get(), SULFUR_SHARD.get(), null, 2);
-        oreRecipes(consumer, MISC, NETHER_SULFUR_ORE.get(), SULFUR_DUST.get(), 0.2f, 200);
+        conversionRecipe(consumer, SULFUR_DUST.get(), SULFUR_CRYSTAL.get(), null, 2);
+        oreRecipes(consumer, SULFUR_SMELTABLES, MISC, SULFUR_CRYSTAL.get(), 0.2f, 200, "sulfur");
         ///   ////////////////////////////////////////////////////////////////////////////
 
         ///   ////////////////////////////////////////////////////////////////////////////
@@ -547,11 +568,6 @@ public class PMRecipeProvider extends BlueprintRecipeProvider {
                 .requires(gate).requires(Tags.Items.DUSTS_REDSTONE)
                 .requires(Items.REDSTONE_TORCH).requires(Ingredient.of(PMItemTags.INGOTS_STEEL), 2)
                 .unlockedBy(getHasName(Items.REDSTONE_TORCH), has(Items.REDSTONE_TORCH));
-    }
-
-    private void oreRecipes(Consumer<FinishedRecipe> consumer, RecipeCategory category, ItemLike input, ItemLike output, float experience, int time) {
-        SimpleCookingRecipeBuilder.smelting(Ingredient.of(input), category, output, experience, time).unlockedBy(getHasName(input), has(input)).save(consumer, new ResourceLocation(this.getModID(), getItemName(output) + "_from_smelting_" + getItemName(input)));
-        SimpleCookingRecipeBuilder.blasting(Ingredient.of(input), category, output, experience, time).unlockedBy(getHasName(input), has(input)).save(consumer, new ResourceLocation(this.getModID(), getItemName(output) + "_from_blasting_" + getItemName(input)));
     }
 
     public static void hammer(Consumer<FinishedRecipe> consumer, ItemLike result, ItemLike item, TagKey<Item> material) {

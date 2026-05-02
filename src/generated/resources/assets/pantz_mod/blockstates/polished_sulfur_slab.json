@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "pantz_mod:block/polished_sulfur_slab"
+    },
+    "type=double": {
+      "model": "pantz_mod:block/polished_sulfur"
+    },
+    "type=top": {
+      "model": "pantz_mod:block/polished_sulfur_slab_top"
+    }
+  }
+}
