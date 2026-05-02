@@ -62,7 +62,7 @@ public class PMClientCompat {
     }
 
     private static void registerItemProperties() {
-        ItemProperties.register(PMItems.ENTITY_FILTER.get(), new ResourceLocation(PantzMod.MOD_ID, "mode"),
+        ItemProperties.register(PMItems.ENTITY_FILTER.get(), PantzMod.location("mode"),
                 (stack, level, entity, seed) -> {
             CompoundTag tag = stack.getOrCreateTag();
             int mode = tag.getInt(EntityFilterItem.MODE_KEY);
