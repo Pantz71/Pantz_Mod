@@ -16,8 +16,6 @@ public class PMConfig {
             COMMON = commonSpecPair.getLeft();
         }
 
-
-
         public final IntValue waxedBlocksDetectionRadius;
         public final IntValue enderScannerDetectionRadius;
         public final IntValue entityDetectorDetectionRadius;
