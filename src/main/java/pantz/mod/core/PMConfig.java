@@ -32,11 +32,17 @@ public class PMConfig {
         @ConfigKey("cactus_key")
         public final BooleanValue enableCactusKey;
 
+        @ConfigKey("craftable_sponge")
+        public final BooleanValue craftableSponge;
+
 
         Common(Builder builder) {
             builder.push("Recipes");
             flintAndSteel = builder.comment("Change Flint and Steel recipe from using Iron to Steel")
-                    .define("Using steel for flint and steel", true);
+                    .define("Using steel for Flint and Steel", true);
+
+            craftableSponge = builder.comment("Make Sponge craftable using Bamboo, Honeycomb and Wool")
+                    .define("Craftable Sponge", true);
             builder.pop();
 
             builder.push("Tools");
