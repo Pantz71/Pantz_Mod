@@ -59,6 +59,7 @@ public class PantzMod {
         PMEntityTypes.ENTITY_TYPES.register(bus);
         PMParticleTypes.PARTICLE_TYPES.register(bus);
         PMSoundEvents.SOUND_EVENTS.register(bus);
+        PMRecipes.register(bus);
 
         MinecraftForge.EVENT_BUS.register(this);
         bus.addListener(this::commonSetup);

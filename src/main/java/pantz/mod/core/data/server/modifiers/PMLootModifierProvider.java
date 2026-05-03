@@ -6,6 +6,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
@@ -212,6 +213,12 @@ public class PMLootModifierProvider extends LootModifierProvider {
                 .addModifier(new LootPoolEntriesModifier(false, 0,
                         List.of(
                                 lootPool(RED_ENVELOPE.get(), 1)
+                        )));
+
+        this.entry("piglin_bartering").selects(BuiltInLootTables.PIGLIN_BARTERING)
+                .addModifier(new LootPoolEntriesModifier(false, 0,
+                        List.of(
+                                lootPool(Blocks.GILDED_BLACKSTONE, 30, 4, 10)
                         )));
     }
 

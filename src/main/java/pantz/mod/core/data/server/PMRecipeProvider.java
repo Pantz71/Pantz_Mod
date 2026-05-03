@@ -18,12 +18,14 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.Tags;
+import net.minecraftforge.common.crafting.conditions.ICondition;
 import net.minecraftforge.common.crafting.conditions.ModLoadedCondition;
 import net.minecraftforge.common.crafting.conditions.NotCondition;
 import pantz.mod.core.PantzMod;
 import pantz.mod.core.other.PMBlockFamilies;
 import pantz.mod.core.other.PMConstant;
 import pantz.mod.core.other.tags.PMItemTags;
+import pantz.mod.core.registry.PMRecipes.*;
 
 import java.util.List;
 import java.util.function.Consumer;
@@ -38,8 +40,10 @@ public class PMRecipeProvider extends BlueprintRecipeProvider {
     private static final ModLoadedCondition CAVERNS_AND_CHASMS = new ModLoadedCondition(PMConstant.CAVERNS_AND_CHASMS);
     private static final NotCondition NOT_CAVERNS_AND_CHASMS = new NotCondition(CAVERNS_AND_CHASMS);
     private static final ConfigValueCondition FLINT_AND_STEEL = config(COMMON.flintAndSteel, "flint_and_steel");
+    private static final NotCondition NOT_FLINT_AND_STEEL = new NotCondition(FLINT_AND_STEEL);
     private static final ConfigValueCondition ENTITY_FILTERING = config(COMMON.enableEntityFilter, "entity_filter");
     private static final ConfigValueCondition REQUIRE_CACTUS_KEY = config(COMMON.enableCactusKey, "cactus_key");
+    private static final ConfigValueCondition CRAFTABLE_SPONGE = config(COMMON.craftableSponge, "craftable_sponge");
 
     public static final ImmutableList<ItemLike> SULFUR_SMELTABLES = ImmutableList.of(SULFUR.get(), SULFUR_ORE.get(), DEEPSLATE_SULFUR_ORE.get(), NETHER_SULFUR_ORE.get());
 
@@ -49,7 +53,40 @@ public class PMRecipeProvider extends BlueprintRecipeProvider {
 
     @Override
     public void buildRecipes(Consumer<FinishedRecipe> consumer) {
-        ///   ////////////////////////////////////////////////////////////////////////////
+        // --- Dyes ---
+        List<Item> dyes = List.of(Items.BLACK_DYE, Items.BLUE_DYE, Items.BROWN_DYE, Items.CYAN_DYE, Items.GRAY_DYE, Items.GREEN_DYE,
+                Items.LIGHT_BLUE_DYE, Items.LIGHT_GRAY_DYE, Items.LIME_DYE, Items.MAGENTA_DYE, Items.ORANGE_DYE,
+                Items.PINK_DYE, Items.PURPLE_DYE, Items.RED_DYE, Items.YELLOW_DYE, Items.WHITE_DYE);
+        // ----------------------
+
+        // --- Recipe Tweaks ---
+        conditionalRecipe(consumer, FLINT_AND_STEEL, TOOLS,
+                ShapelessRecipeBuilder.shapeless(TOOLS, Items.FLINT_AND_STEEL)
+                        .requires(PMItemTags.INGOTS_STEEL)
+                        .requires(Items.FLINT)
+                        .unlockedBy(getHasName(Items.FLINT), has(Items.FLINT))
+                        .unlockedBy(getHasName(Items.OBSIDIAN), has(Tags.Items.OBSIDIAN)),
+                PantzMod.location("flint_and_steel"));
+
+        conditionalRecipe(consumer, NOT_FLINT_AND_STEEL, TOOLS,
+                ShapelessRecipeBuilder.shapeless(TOOLS, Items.FLINT_AND_STEEL)
+                        .requires(Tags.Items.INGOTS_IRON)
+                        .requires(Items.FLINT)
+                        .unlockedBy(getHasName(Items.FLINT), has(Items.FLINT))
+                        .unlockedBy(getHasName(Items.OBSIDIAN), has(Tags.Items.OBSIDIAN)));
+
+        conditionalRecipe(consumer, CRAFTABLE_SPONGE, BUILDING_BLOCKS,
+                ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, Blocks.SPONGE)
+                        .define('/', Items.BAMBOO).define('#', ItemTags.WOOL).define('$', Items.HONEYCOMB)
+                        .pattern(" $ ")
+                        .pattern("/#/")
+                        .pattern(" / ")
+                        .unlockedBy("has_wool", has(ItemTags.WOOL)));
+
+        SpecialRecipeBuilder.special(PMRecipeSerializers.POTTERY_SHERD_DUPLICATION.get()).save(consumer, PantzMod.MOD_ID + ":pottery_sherd_duplication");
+        // ----------------------
+
+        // --- Steel ---
         ShapedRecipeBuilder.shaped(MISC, STEEL_INGOT.get())
                 .define('I', Tags.Items.INGOTS_IRON).define('C', PMItemTags.COALS)
                 .pattern(" I ")
@@ -79,19 +116,12 @@ public class PMRecipeProvider extends BlueprintRecipeProvider {
                 .unlockedBy(getHasName(STEEL_INGOT.get()), has(PMItemTags.NUGGETS_STEEL))
                 .save(consumer);
 
-        conditionalRecipe(consumer, FLINT_AND_STEEL, TOOLS,
-                ShapelessRecipeBuilder.shapeless(TOOLS, Items.FLINT_AND_STEEL)
-                        .requires(PMItemTags.INGOTS_STEEL)
-                        .requires(Items.FLINT)
-                        .unlockedBy(getHasName(Items.FLINT), has(Items.FLINT))
-                        .unlockedBy(getHasName(Items.OBSIDIAN), has(Tags.Items.OBSIDIAN)));
-
         toolsAndArmor(consumer, STEEL_SWORD.get(), STEEL_SHOVEL.get(), STEEL_PICKAXE.get(), STEEL_AXE.get(), STEEL_HOE.get(), STEEL_HELMET.get(), STEEL_CHESTPLATE.get(), STEEL_LEGGINGS.get(), STEEL_BOOTS.get(), STEEL_INGOT.get(), PMItemTags.INGOTS_STEEL);
         SimpleCookingRecipeBuilder.smelting(Ingredient.of(STEEL_PICKAXE.get(), STEEL_SHOVEL.get(), STEEL_AXE.get(), STEEL_HOE.get(), STEEL_SWORD.get(), STEEL_HELMET.get(), STEEL_CHESTPLATE.get(), STEEL_LEGGINGS.get(), STEEL_BOOTS.get(), STEEL_HORSE_ARMOR.get()), RecipeCategory.MISC, STEEL_NUGGET.get(), 0.1F, 200).unlockedBy("has_steel_pickaxe", has(STEEL_PICKAXE.get())).unlockedBy("has_steel_shovel", has(STEEL_SHOVEL.get())).unlockedBy("has_steel_axe", has(STEEL_AXE.get())).unlockedBy("has_steel_hoe", has(STEEL_HOE.get())).unlockedBy("has_steel_sword", has(STEEL_SWORD.get())).unlockedBy("has_steel_helmet", has(STEEL_HELMET.get())).unlockedBy("has_steel_chestplate", has(STEEL_CHESTPLATE.get())).unlockedBy("has_steel_leggings", has(STEEL_LEGGINGS.get())).unlockedBy("has_steel_boots", has(STEEL_BOOTS.get())).unlockedBy("has_steel_horse_armor", has(STEEL_HORSE_ARMOR.get())).save(consumer, location(getSmeltingRecipeName(STEEL_NUGGET.get())));
         SimpleCookingRecipeBuilder.blasting(Ingredient.of(STEEL_PICKAXE.get(), STEEL_SHOVEL.get(), STEEL_AXE.get(), STEEL_HOE.get(), STEEL_SWORD.get(), STEEL_HELMET.get(), STEEL_CHESTPLATE.get(), STEEL_LEGGINGS.get(), STEEL_BOOTS.get(), STEEL_HORSE_ARMOR.get()), RecipeCategory.MISC, STEEL_NUGGET.get(), 0.1F, 100).unlockedBy("has_steel_pickaxe", has(STEEL_PICKAXE.get())).unlockedBy("has_steel_shovel", has(STEEL_SHOVEL.get())).unlockedBy("has_steel_axe", has(STEEL_AXE.get())).unlockedBy("has_steel_hoe", has(STEEL_HOE.get())).unlockedBy("has_steel_sword", has(STEEL_SWORD.get())).unlockedBy("has_steel_helmet", has(STEEL_HELMET.get())).unlockedBy("has_steel_chestplate", has(STEEL_CHESTPLATE.get())).unlockedBy("has_steel_leggings", has(STEEL_LEGGINGS.get())).unlockedBy("has_steel_boots", has(STEEL_BOOTS.get())).unlockedBy("has_steel_horse_armor", has(STEEL_HORSE_ARMOR.get())).save(consumer, location(getBlastingRecipeName(STEEL_NUGGET.get())));
-        ///   ////////////////////////////////////////////////////////////////////////////
+        // ----------------------
 
-        ///   ////////////////////////////////////////////////////////////////////////////
+        // --- Sulfur ---
         polished(consumer, BUILDING_BLOCKS, POLISHED_SULFUR.get(), SULFUR.get());
         polished(consumer, BUILDING_BLOCKS, SULFUR_BRICKS.get(), POLISHED_SULFUR.get());
         storageRecipesWithCustomUnpacking(consumer, MISC, SULFUR_CRYSTAL.get(), BUILDING_BLOCKS, SULFUR_BLOCK.get(), "sulfur_shard_from_sulfur_block", "sulfur_crystal");
@@ -132,9 +162,9 @@ public class PMRecipeProvider extends BlueprintRecipeProvider {
 
         conversionRecipe(consumer, SULFUR_DUST.get(), SULFUR_CRYSTAL.get(), null, 2);
         oreRecipes(consumer, SULFUR_SMELTABLES, MISC, SULFUR_CRYSTAL.get(), 0.2f, 200, "sulfur");
-        ///   ////////////////////////////////////////////////////////////////////////////
+        // ----------------------
 
-        ///   ////////////////////////////////////////////////////////////////////////////
+        // --- Tools & Utilities ---
         ShapedRecipeBuilder.shaped(TOOLS, TROWEL.get())
                 .define('#', PMItemTags.INGOTS_STEEL).define('/', Tags.Items.RODS_WOODEN)
                 .pattern(" #")
@@ -149,9 +179,7 @@ public class PMRecipeProvider extends BlueprintRecipeProvider {
                 .pattern(" # ")
                 .unlockedBy(getHasName(Items.COPPER_INGOT), has(Tags.Items.INGOTS_COPPER))
                 .save(consumer);
-        ///   ////////////////////////////////////////////////////////////////////////////
 
-        ///   ////////////////////////////////////////////////////////////////////////////
         excavator(consumer, EXCAVATOR.get(), STEEL_INGOT.get(), PMItemTags.INGOTS_STEEL);
         excavator(consumer, DIAMOND_EXCAVATOR.get(), Items.DIAMOND, Tags.Items.GEMS_DIAMOND);
         netheriteSmithingRecipe(consumer, DIAMOND_EXCAVATOR.get(), TOOLS, NETHERITE_EXCAVATOR.get());
@@ -159,9 +187,44 @@ public class PMRecipeProvider extends BlueprintRecipeProvider {
         hammer(consumer, HAMMER.get(), STEEL_INGOT.get(), PMItemTags.INGOTS_STEEL);
         hammer(consumer, DIAMOND_HAMMER.get(), Items.DIAMOND, Tags.Items.GEMS_DIAMOND);
         netheriteSmithingRecipe(consumer, DIAMOND_HAMMER.get(), TOOLS, NETHERITE_HAMMER.get());
-        ///   ////////////////////////////////////////////////////////////////////////////
 
-        ///   ////////////////////////////////////////////////////////////////////////////
+        conditionalRecipe(consumer, REQUIRE_CACTUS_KEY, TOOLS,
+                ShapedRecipeBuilder.shaped(TOOLS, CACTUS_KEY.get())
+                        .define('#', Tags.Items.INGOTS_IRON).define('*', Tags.Items.NUGGETS_IRON)
+                        .define('$', Blocks.CACTUS)
+                        .pattern(" ##")
+                        .pattern(" $#")
+                        .pattern("*  ")
+                        .unlockedBy(getHasName(Blocks.CACTUS), has(Blocks.CACTUS)));
+
+        ShapelessRecipeBuilder.shapeless(TOOLS, DYNAMITE.get(), 3)
+                .requires(Items.PAPER).requires(Ingredient.of(Tags.Items.GUNPOWDER), 2)
+                .requires(Tags.Items.DYES_RED)
+                .unlockedBy(getHasName(Items.GUNPOWDER), has(Tags.Items.GUNPOWDER))
+                .save(consumer);
+
+        ShapelessRecipeBuilder.shapeless(COMBAT, COMBAT_DYNAMITE.get(), 3)
+                .requires(Items.PAPER).requires(Ingredient.of(Tags.Items.GUNPOWDER), 2)
+                .requires(Tags.Items.DYES_PURPLE).requires(Tags.Items.NUGGETS_IRON)
+                .unlockedBy(getHasName(Items.GUNPOWDER), has(Tags.Items.GUNPOWDER))
+                .save(consumer);
+
+        ShapelessRecipeBuilder.shapeless(TOOLS, FIERY_DYNAMITE.get(), 3)
+                .requires(Items.PAPER).requires(Ingredient.of(Tags.Items.GUNPOWDER), 3)
+                .requires(PMItemTags.DUSTS_SULFUR)
+                .unlockedBy(getHasName(Items.GUNPOWDER), has(Tags.Items.GUNPOWDER))
+                .save(consumer);
+
+        ShapedRecipeBuilder.shaped(TOOLS, KEY.get())
+                .define('I', Tags.Items.INGOTS_GOLD).define('*', Tags.Items.NUGGETS_GOLD)
+                .pattern("*I*")
+                .pattern(" * ")
+                .pattern(" * ")
+                .unlockedBy(getHasName(Items.GOLD_INGOT), has(Tags.Items.INGOTS_GOLD))
+                .save(consumer);
+        // ----------------------
+
+        // --- Redstone ---
         ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, ENDER_SCANNER.get())
                 .define('O', Tags.Items.OBSIDIAN).define('R', Tags.Items.DUSTS_REDSTONE).define('E', Items.ENDER_EYE)
                 .pattern("ORO")
@@ -224,18 +287,56 @@ public class PMRecipeProvider extends BlueprintRecipeProvider {
 
         logicGates(consumer);
 
-        List<Item> dyes = List.of(Items.BLACK_DYE, Items.BLUE_DYE, Items.BROWN_DYE, Items.CYAN_DYE, Items.GRAY_DYE, Items.GREEN_DYE,
-                Items.LIGHT_BLUE_DYE, Items.LIGHT_GRAY_DYE, Items.LIME_DYE, Items.MAGENTA_DYE, Items.ORANGE_DYE,
-                Items.PINK_DYE, Items.PURPLE_DYE, Items.RED_DYE, Items.YELLOW_DYE, Items.WHITE_DYE);
-
         List<Item> lamps = List.of(BLACK_REDSTONE_LAMP.get().asItem(), BLUE_REDSTONE_LAMP.get().asItem(), BROWN_REDSTONE_LAMP.get().asItem(), CYAN_REDSTONE_LAMP.get().asItem(), GRAY_REDSTONE_LAMP.get().asItem(), GREEN_REDSTONE_LAMP.get().asItem(),
                 LIGHT_BLUE_REDSTONE_LAMP.get().asItem(), LIGHT_GRAY_REDSTONE_LAMP.get().asItem(), LIME_REDSTONE_LAMP.get().asItem(), MAGENTA_REDSTONE_LAMP.get().asItem(), ORANGE_REDSTONE_LAMP.get().asItem(),
                 PINK_REDSTONE_LAMP.get().asItem(), PURPLE_REDSTONE_LAMP.get().asItem(), RED_REDSTONE_LAMP.get().asItem(), YELLOW_REDSTONE_LAMP.get().asItem(), WHITE_REDSTONE_LAMP.get().asItem(), Items.REDSTONE_LAMP);
 
         colorBlockWithDye(consumer, dyes, lamps, REDSTONE, "redstone_lamps");
-        ///   ////////////////////////////////////////////////////////////////////////////
 
-        ///   ////////////////////////////////////////////////////////////////////////////
+        ShapedRecipeBuilder.shaped(REDSTONE, LOCK.get())
+                .define('I', PMItemTags.INGOTS_STEEL).define('#', ItemTags.PLANKS)
+                .define('R', Tags.Items.DUSTS_REDSTONE)
+                .pattern("I#I")
+                .pattern("#R#")
+                .pattern("I#I")
+                .unlockedBy(getHasName(Items.REDSTONE), has(Tags.Items.DUSTS_REDSTONE))
+                .save(consumer);
+
+        ShapedRecipeBuilder.shaped(REDSTONE, UNIVERSAL_LOCK.get())
+                .define('L', LOCK.get()).define('A', Tags.Items.GEMS_AMETHYST)
+                .define('Q', Tags.Items.GEMS_QUARTZ)
+                .pattern("QAQ")
+                .pattern("ALA")
+                .pattern("QAQ")
+                .unlockedBy(getHasName(LOCK.get()), has(LOCK.get()))
+                .save(consumer);
+
+        ShapedRecipeBuilder.shaped(REDSTONE, RANDOMIZER.get())
+                .define('S', Blocks.STONE).define('Q', Tags.Items.GEMS_PRISMARINE)
+                .define('T', Items.REDSTONE_TORCH)
+                .pattern("TQT")
+                .pattern("SSS")
+                .unlockedBy(getHasName(Items.REDSTONE_TORCH), has(Items.REDSTONE_TORCH))
+                .save(consumer);
+
+        ShapedRecipeBuilder.shaped(REDSTONE, EQUALIZER.get())
+                .define('S', Blocks.STONE).define('E', Tags.Items.GEMS_EMERALD)
+                .define('T', Items.REDSTONE_TORCH).define('R', Tags.Items.DUSTS_REDSTONE)
+                .pattern("RET")
+                .pattern("SSS")
+                .unlockedBy(getHasName(Items.REDSTONE_TORCH), has(Items.REDSTONE_TORCH))
+                .save(consumer);
+
+        ShapedRecipeBuilder.shaped(REDSTONE, SPIKE.get())
+                .define('S', Blocks.COBBLESTONE).define('d', Blocks.POINTED_DRIPSTONE)
+                .pattern("ddd")
+                .pattern("SSS")
+                .unlockedBy(getHasName(Blocks.POINTED_DRIPSTONE), has(Blocks.POINTED_DRIPSTONE))
+                .save(consumer);
+
+        // ----------------------
+
+        // --- Functional ---
         pedestalBuilder(STONE_PEDESTAL.get(), Blocks.STONE, Blocks.STONE_SLAB).save(consumer);
         pedestalBuilder(DEEPSLATE_PEDESTAL.get(), Blocks.POLISHED_DEEPSLATE, Blocks.POLISHED_DEEPSLATE_SLAB).save(consumer);
         pedestalBuilder(BLACKSTONE_PEDESTAL.get(), Blocks.POLISHED_BLACKSTONE, Blocks.POLISHED_BLACKSTONE_SLAB).save(consumer);
@@ -268,15 +369,6 @@ public class PMRecipeProvider extends BlueprintRecipeProvider {
                 .unlockedBy(getHasName(Blocks.CHEST), has(BlueprintItemTags.WOODEN_CHESTS))
                 .save(consumer);
 
-        conditionalRecipe(consumer, REQUIRE_CACTUS_KEY, TOOLS,
-                ShapedRecipeBuilder.shaped(TOOLS, CACTUS_KEY.get())
-                        .define('#', Tags.Items.INGOTS_IRON).define('*', Tags.Items.NUGGETS_IRON)
-                        .define('$', Blocks.CACTUS)
-                        .pattern(" ##")
-                        .pattern(" $#")
-                        .pattern("*  ")
-                        .unlockedBy(getHasName(Blocks.CACTUS), has(Blocks.CACTUS)));
-
         ShapedRecipeBuilder.shaped(TRANSPORTATION, ENDERPORTER.get())
                 .define('#', PMItemTags.INGOTS_STEEL).define('/', Items.ECHO_SHARD)
                 .pattern("###")
@@ -299,29 +391,58 @@ public class PMRecipeProvider extends BlueprintRecipeProvider {
         glassPaneBuilder(QUARTZ_GLASS_PANE.get(), QUARTZ_GLASS.get(), DECORATIONS).unlockedBy(getHasName(QUARTZ_GLASS.get()), has(PMItemTags.GLASS_QUARTZ)).save(consumer);
         glassPaneBuilder(LAPIS_GLASS_PANE.get(), LAPIS_GLASS.get(), DECORATIONS).unlockedBy(getHasName(LAPIS_GLASS.get()), has(PMItemTags.GLASS_LAPIS)).save(consumer);
         glassPaneBuilder(REDSTONE_GLASS_PANE.get(), REDSTONE_GLASS.get(), DECORATIONS).unlockedBy(getHasName(REDSTONE_GLASS.get()), has(PMItemTags.GLASS_REDSTONE)).save(consumer);
-        ///   ////////////////////////////////////////////////////////////////////////////
 
-        ///   ////////////////////////////////////////////////////////////////////////////
-        ShapelessRecipeBuilder.shapeless(TOOLS, DYNAMITE.get(), 3)
-                .requires(Items.PAPER).requires(Ingredient.of(Tags.Items.GUNPOWDER), 2)
-                .requires(Tags.Items.DYES_RED)
-                .unlockedBy(getHasName(Items.GUNPOWDER), has(Tags.Items.GUNPOWDER))
+        ShapedRecipeBuilder.shaped(DECORATIONS, WHITE_PAPER_LANTERN.get())
+                .define('#', Items.PAPER).define('i', Blocks.TORCH)
+                .pattern("###")
+                .pattern("#i#")
+                .pattern("###")
+                .unlockedBy(getHasName(Items.PAPER), has(Items.PAPER))
                 .save(consumer);
 
-        ShapelessRecipeBuilder.shapeless(COMBAT, COMBAT_DYNAMITE.get(), 3)
-                .requires(Items.PAPER).requires(Ingredient.of(Tags.Items.GUNPOWDER), 2)
-                .requires(Tags.Items.DYES_PURPLE).requires(Tags.Items.NUGGETS_IRON)
-                .unlockedBy(getHasName(Items.GUNPOWDER), has(Tags.Items.GUNPOWDER))
+        List<Item> paperLanterns = List.of(BLACK_PAPER_LANTERN.get().asItem(), BLUE_PAPER_LANTERN.get().asItem(), BROWN_PAPER_LANTERN.get().asItem(), CYAN_PAPER_LANTERN.get().asItem(), GRAY_PAPER_LANTERN.get().asItem(), GREEN_PAPER_LANTERN.get().asItem(),
+                LIGHT_BLUE_PAPER_LANTERN.get().asItem(), LIGHT_GRAY_PAPER_LANTERN.get().asItem(), LIME_PAPER_LANTERN.get().asItem(), MAGENTA_PAPER_LANTERN.get().asItem(), ORANGE_PAPER_LANTERN.get().asItem(),
+                PINK_PAPER_LANTERN.get().asItem(), PURPLE_PAPER_LANTERN.get().asItem(), RED_PAPER_LANTERN.get().asItem(), YELLOW_PAPER_LANTERN.get().asItem(), WHITE_PAPER_LANTERN.get().asItem());
+
+        colorBlockWithDye(consumer, dyes, paperLanterns, DECORATIONS, "paper_lanterns");
+
+        ShapedRecipeBuilder.shaped(DECORATIONS, ORNAMENT_FIRECRACKERS.get())
+                .define('#', Items.PAPER).define('R', Items.RED_DYE)
+                .define('S', Tags.Items.STRING)
+                .pattern("#S#")
+                .pattern("#R#")
+                .pattern("#S#")
+                .unlockedBy(getHasName(Items.PAPER), has(Items.PAPER))
                 .save(consumer);
 
-        ShapelessRecipeBuilder.shapeless(TOOLS, FIERY_DYNAMITE.get(), 3)
-                .requires(Items.PAPER).requires(Ingredient.of(Tags.Items.GUNPOWDER), 3)
-                .requires(PMItemTags.DUSTS_SULFUR)
-                .unlockedBy(getHasName(Items.GUNPOWDER), has(Tags.Items.GUNPOWDER))
+        ShapedRecipeBuilder.shaped(DECORATIONS, ORNAMENT_LUCKY_COINS.get())
+                .define('#', Items.PAPER).define('R', Items.RED_DYE)
+                .define('S', Tags.Items.STRING).define('G', Tags.Items.INGOTS_GOLD)
+                .pattern("#S#")
+                .pattern("GRG")
+                .pattern("#S#")
+                .unlockedBy(getHasName(Items.PAPER), has(Items.PAPER))
                 .save(consumer);
-        ///   ////////////////////////////////////////////////////////////////////////////
 
-        ///   ////////////////////////////////////////////////////////////////////////////
+        ShapedRecipeBuilder.shaped(DECORATIONS, SAFE.get())
+                .define('I', PMItemTags.INGOTS_STEEL).define('O', Tags.Items.OBSIDIAN)
+                .pattern("III")
+                .pattern("O O")
+                .pattern("III")
+                .unlockedBy(getHasName(STEEL_INGOT.get()), has(PMItemTags.INGOTS_STEEL))
+                .save(consumer);
+
+        ShapedRecipeBuilder.shaped(DECORATIONS, SPRINKLER.get())
+                .define('I', PMItemTags.INGOTS_STEEL).define('W', ItemTags.PLANKS)
+                .define('_', ItemTags.WOODEN_SLABS)
+                .pattern("IWI")
+                .pattern(" W ")
+                .pattern("___")
+                .unlockedBy(getHasName(STEEL_INGOT.get()), has(PMItemTags.INGOTS_STEEL))
+                .save(consumer);
+        // ----------------------
+
+        // --- Ice ---
         generateRecipes(consumer, PMBlockFamilies.SNOW_BRICKS_FAMILY);
         generateRecipes(consumer, PMBlockFamilies.PACKED_ICE_BRICKS_FAMILY);
         generateRecipes(consumer, PMBlockFamilies.BLUE_ICE_BRICKS_FAMILY);
@@ -373,109 +494,8 @@ public class PMRecipeProvider extends BlueprintRecipeProvider {
                 .pattern("***")
                 .unlockedBy(getHasName(Items.IRON_INGOT), has(Tags.Items.INGOTS_IRON))
                 .save(consumer);
-        ///   ////////////////////////////////////////////////////////////////////////////
+        // ----------------------
 
-        ///   ////////////////////////////////////////////////////////////////////////////
-
-        ShapedRecipeBuilder.shaped(DECORATIONS, WHITE_PAPER_LANTERN.get())
-                .define('#', Items.PAPER).define('i', Blocks.TORCH)
-                .pattern("###")
-                .pattern("#i#")
-                .pattern("###")
-                .unlockedBy(getHasName(Items.PAPER), has(Items.PAPER))
-                .save(consumer);
-
-        List<Item> paperLanterns = List.of(BLACK_PAPER_LANTERN.get().asItem(), BLUE_PAPER_LANTERN.get().asItem(), BROWN_PAPER_LANTERN.get().asItem(), CYAN_PAPER_LANTERN.get().asItem(), GRAY_PAPER_LANTERN.get().asItem(), GREEN_PAPER_LANTERN.get().asItem(),
-                LIGHT_BLUE_PAPER_LANTERN.get().asItem(), LIGHT_GRAY_PAPER_LANTERN.get().asItem(), LIME_PAPER_LANTERN.get().asItem(), MAGENTA_PAPER_LANTERN.get().asItem(), ORANGE_PAPER_LANTERN.get().asItem(),
-                PINK_PAPER_LANTERN.get().asItem(), PURPLE_PAPER_LANTERN.get().asItem(), RED_PAPER_LANTERN.get().asItem(), YELLOW_PAPER_LANTERN.get().asItem(), WHITE_PAPER_LANTERN.get().asItem());
-
-        colorBlockWithDye(consumer, dyes, paperLanterns, DECORATIONS, "paper_lanterns");
-
-        ShapedRecipeBuilder.shaped(DECORATIONS, ORNAMENT_FIRECRACKERS.get())
-                .define('#', Items.PAPER).define('R', Items.RED_DYE)
-                .define('S', Tags.Items.STRING)
-                .pattern("#S#")
-                .pattern("#R#")
-                .pattern("#S#")
-                .unlockedBy(getHasName(Items.PAPER), has(Items.PAPER))
-                .save(consumer);
-
-        ShapedRecipeBuilder.shaped(DECORATIONS, ORNAMENT_LUCKY_COINS.get())
-                .define('#', Items.PAPER).define('R', Items.RED_DYE)
-                .define('S', Tags.Items.STRING).define('G', Tags.Items.INGOTS_GOLD)
-                .pattern("#S#")
-                .pattern("GRG")
-                .pattern("#S#")
-                .unlockedBy(getHasName(Items.PAPER), has(Items.PAPER))
-                .save(consumer);
-        ///   ////////////////////////////////////////////////////////////////////////////
-
-        ///   ////////////////////////////////////////////////////////////////////////////
-        ShapedRecipeBuilder.shaped(REDSTONE, LOCK.get())
-                .define('I', PMItemTags.INGOTS_STEEL).define('#', ItemTags.PLANKS)
-                .define('R', Tags.Items.DUSTS_REDSTONE)
-                .pattern("I#I")
-                .pattern("#R#")
-                .pattern("I#I")
-                .unlockedBy(getHasName(Items.REDSTONE), has(Tags.Items.DUSTS_REDSTONE))
-                .save(consumer);
-
-        ShapedRecipeBuilder.shaped(REDSTONE, UNIVERSAL_LOCK.get())
-                .define('L', LOCK.get()).define('A', Tags.Items.GEMS_AMETHYST)
-                .define('Q', Tags.Items.GEMS_QUARTZ)
-                .pattern("QAQ")
-                .pattern("ALA")
-                .pattern("QAQ")
-                .unlockedBy(getHasName(LOCK.get()), has(LOCK.get()))
-                .save(consumer);
-
-        ShapedRecipeBuilder.shaped(DECORATIONS, SAFE.get())
-                .define('I', PMItemTags.INGOTS_STEEL).define('O', Tags.Items.OBSIDIAN)
-                .pattern("III")
-                .pattern("O O")
-                .pattern("III")
-                .unlockedBy(getHasName(STEEL_INGOT.get()), has(PMItemTags.INGOTS_STEEL))
-                .save(consumer);
-
-        ShapedRecipeBuilder.shaped(TOOLS, KEY.get())
-                .define('I', Tags.Items.INGOTS_GOLD).define('*', Tags.Items.NUGGETS_GOLD)
-                .pattern("*I*")
-                .pattern(" * ")
-                .pattern(" * ")
-                .unlockedBy(getHasName(Items.GOLD_INGOT), has(Tags.Items.INGOTS_GOLD))
-                .save(consumer);
-
-        ShapedRecipeBuilder.shaped(REDSTONE, RANDOMIZER.get())
-                .define('S', Blocks.STONE).define('Q', Tags.Items.GEMS_PRISMARINE)
-                .define('T', Items.REDSTONE_TORCH)
-                .pattern("TQT")
-                .pattern("SSS")
-                .unlockedBy(getHasName(Items.REDSTONE_TORCH), has(Items.REDSTONE_TORCH))
-                .save(consumer);
-
-        ShapedRecipeBuilder.shaped(REDSTONE, EQUALIZER.get())
-                .define('S', Blocks.STONE).define('E', Tags.Items.GEMS_EMERALD)
-                .define('T', Items.REDSTONE_TORCH).define('R', Tags.Items.DUSTS_REDSTONE)
-                .pattern("RET")
-                .pattern("SSS")
-                .unlockedBy(getHasName(Items.REDSTONE_TORCH), has(Items.REDSTONE_TORCH))
-                .save(consumer);
-
-        ShapedRecipeBuilder.shaped(REDSTONE, SPIKE.get())
-                .define('S', Blocks.COBBLESTONE).define('d', Blocks.POINTED_DRIPSTONE)
-                .pattern("ddd")
-                .pattern("SSS")
-                .unlockedBy(getHasName(Blocks.POINTED_DRIPSTONE), has(Blocks.POINTED_DRIPSTONE))
-                .save(consumer);
-
-        ShapedRecipeBuilder.shaped(DECORATIONS, SPRINKLER.get())
-                .define('I', PMItemTags.INGOTS_STEEL).define('W', ItemTags.PLANKS)
-                .define('_', ItemTags.WOODEN_SLABS)
-                .pattern("IWI")
-                .pattern(" W ")
-                .pattern("___")
-                .unlockedBy(getHasName(STEEL_INGOT.get()), has(PMItemTags.INGOTS_STEEL))
-                .save(consumer);
 
     }
 
@@ -678,6 +698,10 @@ public class PMRecipeProvider extends BlueprintRecipeProvider {
                 .unlockedBy(getHasName(ingot), has(ingotTag))
                 .save(consumer);
 
+    }
+
+    public static void conditionalRecipe(Consumer<FinishedRecipe> consumer, ICondition condition, RecipeCategory category, RecipeBuilder recipe, ResourceLocation id) {
+        BlueprintRecipeProvider.conditionalRecipe(consumer, condition, category, recipe, id);
     }
 
     protected void colorBlockWithDye(Consumer<FinishedRecipe> consumer, List<Item> dyes, List<Item> dyeableItems, RecipeCategory category, String group) {
