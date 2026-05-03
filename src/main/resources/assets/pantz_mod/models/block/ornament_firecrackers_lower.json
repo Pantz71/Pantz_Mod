@@ -1,6 +1,4 @@
 {
-	"format_version": "1.21.11",
-	"credit": "Made with Blockbench",
 	"textures": {
 		"particle": "pantz_mod:block/ornament_firecrackers",
 		"texture": "pantz_mod:block/ornament_firecrackers"

@@ -1,6 +1,4 @@
 {
-	"format_version": "1.21.6",
-	"credit": "Made with Blockbench",
 	"textures": {
 		"particle": "pantz_mod:block/advanced_or_gate_back_right",
 		"top": "pantz_mod:block/advanced_or_gate_back_right",

@@ -1,9 +1,7 @@
 {
-	"format_version": "1.21.11",
-	"credit": "Made with Blockbench",
 	"textures": {
-		"particle": "pantz_mod:block/equalizer_powered",
-		"top": "pantz_mod:block/equalizer_powered",
+		"particle": "pantz_mod:block/equalizer_on",
+		"top": "pantz_mod:block/equalizer_on",
 		"base": "block/smooth_stone",
 		"lit": "block/redstone_torch"
 	},
