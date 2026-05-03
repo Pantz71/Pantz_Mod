@@ -4,11 +4,8 @@
     {
       "conditions": [
         {
-          "type": "forge:not",
-          "value": {
-            "type": "pantz_mod:config",
-            "value": "flint_and_steel"
-          }
+          "type": "pantz_mod:config",
+          "value": "flint_and_steel"
         }
       ],
       "recipe": {
@@ -16,7 +13,7 @@
         "category": "equipment",
         "ingredients": [
           {
-            "tag": "forge:ingots/iron"
+            "tag": "forge:ingots/steel"
           },
           {
             "item": "minecraft:flint"

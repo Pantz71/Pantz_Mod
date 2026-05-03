@@ -28,7 +28,7 @@
           },
           "has_the_recipe": {
             "conditions": {
-              "recipe": "minecraft:flint_and_steel"
+              "recipe": "pantz_mod:flint_and_steel"
             },
             "trigger": "minecraft:recipe_unlocked"
           }
@@ -42,18 +42,15 @@
         ],
         "rewards": {
           "recipes": [
-            "minecraft:flint_and_steel"
+            "pantz_mod:flint_and_steel"
           ]
         },
         "sends_telemetry_event": false
       },
       "conditions": [
         {
-          "type": "forge:not",
-          "value": {
-            "type": "pantz_mod:config",
-            "value": "flint_and_steel"
-          }
+          "type": "pantz_mod:config",
+          "value": "flint_and_steel"
         }
       ]
     }
