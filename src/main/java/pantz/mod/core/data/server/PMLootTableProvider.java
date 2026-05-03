@@ -1,7 +1,10 @@
 package pantz.mod.core.data.server;
 
 import com.google.common.collect.ImmutableList;
+import com.teamabnormals.caverns_and_chasms.common.block.IngotBlock;
+import com.teamabnormals.caverns_and_chasms.common.block.IngotLayer;
 import net.minecraft.advancements.critereon.ItemPredicate;
+import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.data.loot.LootTableProvider;
@@ -25,6 +28,7 @@ import net.minecraft.world.level.storage.loot.entries.LootTableReference;
 import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
+import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition;
 import net.minecraft.world.level.storage.loot.predicates.MatchTool;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
@@ -36,6 +40,7 @@ import pantz.mod.core.PantzMod;
 import pantz.mod.core.other.PMLootContextParamSets;
 import pantz.mod.core.registry.PMItems;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.BiConsumer;
@@ -71,7 +76,7 @@ public class PMLootTableProvider extends LootTableProvider {
         protected void generate() {
             // dropSelf
             for (RegistryObject<?> block : new RegistryObject[]{
-                    STEEL_BLOCK, STEEL_BARS, STEEL_TRAPDOOR, STEEL_LANTERN,
+                    STEEL_BLOCK, STEEL_BARS, STEEL_TRAPDOOR, STEEL_LANTERN, STEEL_BRICKS, STEEL_BRICK_STAIRS, STEEL_BRICK_WALL, CHISELED_STEEL_BRICKS,
                     SULFUR, SULFUR_BLOCK, POLISHED_SULFUR, POLISHED_SULFUR_STAIRS, POLISHED_SULFUR_WALL,
                     SULFUR_BRICKS, SULFUR_BRICK_STAIRS, SULFUR_BRICK_WALL, CHISELED_SULFUR_BRICKS, SULFUR_LAMP,
                     STONE_PEDESTAL, DEEPSLATE_PEDESTAL, BLACKSTONE_PEDESTAL, QUARTZ_PEDESTAL, PURPUR_PEDESTAL, PRISMARINE_PEDESTAL,
@@ -106,7 +111,7 @@ public class PMLootTableProvider extends LootTableProvider {
 
             // slab
             for (RegistryObject<?> block : new RegistryObject[]{
-                    POLISHED_SULFUR_SLAB, SULFUR_BRICK_SLAB, SNOW_BRICK_SLAB, PACKED_ICE_BRICK_SLAB, BLUE_ICE_BRICK_SLAB
+                    POLISHED_SULFUR_SLAB, SULFUR_BRICK_SLAB, SNOW_BRICK_SLAB, PACKED_ICE_BRICK_SLAB, BLUE_ICE_BRICK_SLAB, STEEL_BRICK_SLAB
             }) {
                 this.add((Block) block.get(), this::createSlabItemTable);
             }
@@ -125,6 +130,8 @@ public class PMLootTableProvider extends LootTableProvider {
                 this.add((Block) block.get(), this.createSinglePropConditionTable((Block) block.get(), DoubleOrnamentBlock.HALF, DoubleBlockHalf.LOWER));
             }
 
+            this.add(STEEL_INGOT.get(), this::createIngotDrops);
+
             this.add(SULFUR_ORE.get(), this.createSulfurOreDrop(SULFUR_ORE.get(), PMItems.SULFUR_CRYSTAL.get(), 3, 7));
             this.add(DEEPSLATE_SULFUR_ORE.get(), this.createSulfurOreDrop(DEEPSLATE_SULFUR_ORE.get(), PMItems.SULFUR_CRYSTAL.get(), 3, 7));
             this.add(NETHER_SULFUR_ORE.get(), this.createSulfurOreDrop(NETHER_SULFUR_ORE.get(), PMItems.SULFUR_CRYSTAL.get(), 1, 4));
@@ -136,6 +143,36 @@ public class PMLootTableProvider extends LootTableProvider {
                     .otherwise(this.applyExplosionDecay(SULFUR_CLUSTER.get(), LootItem.lootTableItem(PMItems.SULFUR_CRYSTAL.get())
                             .apply(SetItemCountFunction.setCount(ConstantValue.exactly(2.0F)))))));
 
+        }
+
+        protected LootTable.Builder createIngotDrops(Block block) {
+            return createIngotDrops(block, block.asItem());
+        }
+
+        protected LootTable.Builder createIngotDrops(Block block, Item ingot) {
+            return LootTable.lootTable()
+                    .withPool(LootPool.lootPool()
+                            .setRolls(ConstantValue.exactly(1.0F))
+                            .add(this.applyExplosionDecay(ingot, LootItem.lootTableItem(ingot)
+                                    .apply(List.of(1, 2, 3), i -> SetItemCountFunction.setCount(ConstantValue.exactly(i * 2))
+                                            .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block)
+                                                    .setProperties(StatePropertiesPredicate.Builder.properties()
+                                                            .hasProperty(IngotBlock.LAYERS, i)
+                                                    )
+                                            ))
+                            )).when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(IngotBlock.LAYERS, 0)).invert())
+                    )
+                    .withPool(LootPool.lootPool()
+                            .setRolls(ConstantValue.exactly(1.0F))
+                            .add(this.applyExplosionDecay(ingot, LootItem.lootTableItem(ingot)
+                                    .apply(List.of(IngotLayer.BOTH), layer -> SetItemCountFunction.setCount(ConstantValue.exactly(2))
+                                            .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block)
+                                                    .setProperties(StatePropertiesPredicate.Builder.properties()
+                                                            .hasProperty(IngotBlock.TOP_INGOT, layer)
+                                                    )
+                                            ))
+                            ))
+                    );
         }
 
         private LootTable.Builder createSulfurOreDrop(Block block, ItemLike item, int min, int max) {

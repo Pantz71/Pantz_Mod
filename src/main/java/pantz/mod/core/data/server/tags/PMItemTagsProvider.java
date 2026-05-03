@@ -50,6 +50,7 @@ public class PMItemTagsProvider extends ItemTagsProvider {
         this.tag(TOOLS).addTag(Tags.Items.TOOLS);
         this.tag(WEAPONS).addTag(ItemTags.SWORDS).addTag(Tags.Items.TOOLS_TRIDENTS);
 
+        this.tag(PLACEABLE_ITEMS).add(STEEL_INGOT.get());
         this.tag(ItemTags.TRIM_MATERIALS).add(STEEL_INGOT.get(), SULFUR_CRYSTAL.get());
         this.tag(COALS).add(Items.COAL, Items.CHARCOAL);
 

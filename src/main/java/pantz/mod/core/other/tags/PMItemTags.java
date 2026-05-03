@@ -4,6 +4,7 @@ import com.teamabnormals.blueprint.core.util.TagUtil;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import pantz.mod.core.PantzMod;
+import pantz.mod.core.other.PMConstant;
 
 public class PMItemTags {
 
@@ -40,6 +41,8 @@ public class PMItemTags {
 
     public static final TagKey<Item> PAPER_LANTERNS = itemTag("paper_lanterns");
     public static final TagKey<Item> KEYS = itemTag("keys");
+
+    public static final TagKey<Item> PLACEABLE_ITEMS = TagUtil.itemTag(PMConstant.CAVERNS_AND_CHASMS, "placeable_items");
 
     public static TagKey<Item> itemTag(String name) {
         return TagUtil.itemTag(PantzMod.MOD_ID, name);

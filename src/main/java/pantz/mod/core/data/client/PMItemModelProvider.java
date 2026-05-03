@@ -8,6 +8,7 @@ import net.minecraftforge.client.model.generators.ModelFile.UncheckedModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.RegistryObject;
 import pantz.mod.core.PantzMod;
+import pantz.mod.core.registry.PMItems;
 
 import static pantz.mod.core.registry.PMBlocks.*;
 import static pantz.mod.core.registry.PMItems.*;
@@ -19,7 +20,7 @@ public class PMItemModelProvider extends BlueprintItemModelProvider {
 
     @Override
     protected void registerModels() {
-        this.generatedItem(STEEL_INGOT, STEEL_NUGGET, STEEL_HORSE_ARMOR,
+        this.generatedItem(PMItems.STEEL_INGOT, STEEL_NUGGET, STEEL_HORSE_ARMOR,
                 SULFUR_DUST, SULFUR_CRYSTAL, HONEY_DESERIALIZER, CACTUS_KEY,
                 DYNAMITE, COMBAT_DYNAMITE, FIERY_DYNAMITE, RED_ENVELOPE, KEY, SPIKE);
 

@@ -1,35 +1,50 @@
 {
-  "parent": "minecraft:recipes/root",
-  "criteria": {
-    "has_redstone_torch": {
-      "conditions": {
-        "items": [
-          {
-            "items": [
-              "minecraft:redstone_torch"
-            ]
+  "advancements": [
+    {
+      "advancement": {
+        "parent": "minecraft:recipes/root",
+        "criteria": {
+          "has_redstone_torch": {
+            "conditions": {
+              "items": [
+                {
+                  "items": [
+                    "minecraft:redstone_torch"
+                  ]
+                }
+              ]
+            },
+            "trigger": "minecraft:inventory_changed"
+          },
+          "has_the_recipe": {
+            "conditions": {
+              "recipe": "pantz_mod:randomizer"
+            },
+            "trigger": "minecraft:recipe_unlocked"
           }
-        ]
+        },
+        "requirements": [
+          [
+            "has_redstone_torch",
+            "has_the_recipe"
+          ]
+        ],
+        "rewards": {
+          "recipes": [
+            "pantz_mod:randomizer"
+          ]
+        },
+        "sends_telemetry_event": false
       },
-      "trigger": "minecraft:inventory_changed"
-    },
-    "has_the_recipe": {
-      "conditions": {
-        "recipe": "pantz_mod:randomizer"
-      },
-      "trigger": "minecraft:recipe_unlocked"
+      "conditions": [
+        {
+          "type": "forge:not",
+          "value": {
+            "type": "forge:mod_loaded",
+            "modid": "caverns_and_chasms"
+          }
+        }
+      ]
     }
-  },
-  "requirements": [
-    [
-      "has_redstone_torch",
-      "has_the_recipe"
-    ]
-  ],
-  "rewards": {
-    "recipes": [
-      "pantz_mod:randomizer"
-    ]
-  },
-  "sends_telemetry_event": false
+  ]
 }

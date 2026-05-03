@@ -20,4 +20,10 @@ public class PMBlockSubRegistryHelper extends BlockSubRegistryHelper {
         this.itemRegister.register(name, () -> new BlockItem(block.get(), new Item.Properties().fireResistant().rarity(rarity)));
         return block;
     }
+
+    public <B extends Block> RegistryObject<B> createPlacedItem(String name, Supplier<? extends B> supplier) {
+        RegistryObject<B> block = this.deferredRegister.register(name, supplier);
+        this.itemRegister.register(name + "_placed", () -> new BlockItem(block.get(), new Item.Properties()));
+        return block;
+    }
 }

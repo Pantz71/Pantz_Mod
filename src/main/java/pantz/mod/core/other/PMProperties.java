@@ -25,6 +25,7 @@ public class PMProperties {
     public static final BlockBehaviour.Properties STEEL_TRAPDOOR = BlockBehaviour.Properties.of().requiresCorrectToolForDrops().strength(5.0F).noOcclusion().isValidSpawn(PMProperties::never).mapColor(MapColor.COLOR_GRAY);
     public static final BlockBehaviour.Properties STEEL_BARS = BlockBehaviour.Properties.of().requiresCorrectToolForDrops().strength(5.0F, 6.0F).sound(SoundType.METAL).noOcclusion();
     public static final BlockBehaviour.Properties STEEL_LANTERN = BlockBehaviour.Properties.of().mapColor(MapColor.METAL).forceSolidOn().requiresCorrectToolForDrops().strength(3.5F).sound(SoundType.LANTERN).lightLevel(litBlockEmission(15));
+    public static final BlockBehaviour.Properties STEEL_PLATED_BRICKS = platedBricks(MapColor.METAL, SoundType.METAL);
 
     public static final BlockBehaviour.Properties SULFUR = BlockBehaviour.Properties.of().instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(5.0F, 6.0F).mapColor(MapColor.COLOR_YELLOW).sound(SoundType.STONE).lightLevel(litBlockEmission(12)).randomTicks();
     public static final BlockBehaviour.Properties SULFUR_BLOCK = BlockBehaviour.Properties.of().instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(5.0F, 6.0F).mapColor(MapColor.COLOR_YELLOW).sound(SoundType.STONE);
@@ -96,6 +97,10 @@ public class PMProperties {
 
     public static boolean never(BlockState state, BlockGetter blockGetter, BlockPos pos, EntityType<?> entityType) {
         return false;
+    }
+
+    public static BlockBehaviour.Properties platedBricks(MapColor color, SoundType soundType) {
+        return BlockBehaviour.Properties.of().mapColor(color).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(3.0F, 6.0F).sound(soundType);
     }
 
     public static ToIntFunction<BlockState> litBlockEmission(int value) {

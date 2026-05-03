@@ -56,6 +56,11 @@
   "block.pantz_mod.steel_trapdoor": "Steel Trapdoor",
   "block.pantz_mod.steel_bars": "Steel Bars",
   "block.pantz_mod.steel_lantern": "Steel Lantern",
+  "block.pantz_mod.steel_bricks": "Steel Plated Bricks",
+  "block.pantz_mod.steel_brick_stairs": "Steel Plated Stairs",
+  "block.pantz_mod.steel_brick_slab": "Steel Plated Brick Slab",
+  "block.pantz_mod.steel_brick_wall": "Steel Plated Brick Wall",
+  "block.pantz_mod.chiseled_steel_bricks": "Chiseled Steel Plated Bricks",
 
   "item.pantz_mod.steel_ingot": "Steel Ingot",
   "item.pantz_mod.steel_nugget": "Steel Nugget",

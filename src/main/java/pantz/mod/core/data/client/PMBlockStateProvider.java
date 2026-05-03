@@ -2,9 +2,14 @@ package pantz.mod.core.data.client;
 
 import com.teamabnormals.blueprint.core.data.client.BlueprintBlockStateProvider;
 import com.teamabnormals.blueprint.core.data.client.BlueprintItemModelProvider;
+import com.teamabnormals.caverns_and_chasms.common.block.IngotBlock;
+import com.teamabnormals.caverns_and_chasms.common.block.IngotLayer;
+import com.teamabnormals.caverns_and_chasms.core.CavernsAndChasms;
 import net.minecraft.core.Direction;
+import net.minecraft.core.Direction.Axis;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
@@ -13,6 +18,7 @@ import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.client.model.generators.MultiPartBlockStateBuilder;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import pantz.mod.common.block.*;
 import pantz.mod.common.utils.CarpetColor;
@@ -32,6 +38,10 @@ public class PMBlockStateProvider extends BlueprintBlockStateProvider {
         this.ironBarsBlock(STEEL_BARS);
         this.doorBlocks(STEEL_DOOR.get(), STEEL_TRAPDOOR.get());
         this.litableLanternBlock(STEEL_LANTERN, modLoc("block/template_steel_lantern"), modLoc("block/template_hanging_steel_lantern"));
+
+        this.blockFamily(PMBlockFamilies.STEEL_BRICKS_FAMILY);
+        this.block(CHISELED_STEEL_BRICKS);
+        this.ingotBlock(STEEL_INGOT);
 
         this.sulfurBlock(SULFUR);
         this.block(SULFUR_BLOCK);
@@ -558,4 +568,46 @@ public class PMBlockStateProvider extends BlueprintBlockStateProvider {
         generatedItem(block.get(), "item");
     }
 
+    public void ingotBlock(RegistryObject<Block> registryObject) {
+        Block block = registryObject.get();
+
+        MultiPartBlockStateBuilder builder = this.getMultipartBuilder(block);
+        this.addIngotLayer(builder, block, 1, 1, 2, 3);
+        this.addIngotLayer(builder, block, 2, 2, 3);
+        this.addIngotLayer(builder, block, 3, 3);
+        this.addIngotLayer(builder, block, 4);
+
+        this.placedItemModel(block);
+    }
+
+    public void placedItemModel(Block block) {
+        this.itemModels().withExistingParent(ForgeRegistries.BLOCKS.getKey(block).withSuffix("_placed").getPath(), "item/generated").texture("layer0", ForgeRegistries.ITEMS.getKey(Items.BARRIER).withPrefix("item/"));
+    }
+
+    public void addIngotLayer(MultiPartBlockStateBuilder builder, Block block, int i, Integer... nums) {
+        this.addIngotModel(builder, block, IngotLayer.LEFT, Axis.X, i, nums);
+        this.addIngotModel(builder, block, IngotLayer.RIGHT, Axis.X, i, nums);
+        this.addIngotModel(builder, block, IngotLayer.LEFT, Axis.Z, i, nums);
+        this.addIngotModel(builder, block, IngotLayer.RIGHT, Axis.Z, i, nums);
+    }
+
+    public void addIngotModel(MultiPartBlockStateBuilder builder, Block block, IngotLayer ingotLayer, Axis axis, int layer, Integer... nums) {
+        Axis visualAxis = IngotBlock.getAxisForLayer(layer, axis);
+        String name = "_" + ingotLayer.getSerializedName() + "_" + visualAxis.getSerializedName() + "_layer" + layer;
+
+        ResourceLocation parentLocation = CavernsAndChasms.location("block/template_ingot" + name);
+
+        BlockModelBuilder model = models().getBuilder(name(block) + name)
+                .parent(new ModelFile.UncheckedModelFile(parentLocation))
+                .texture("ingot", blockTexture(block).toString().replace("waxed_", ""));
+
+        if (nums.length > 0) {
+            builder.part().modelFile(model).addModel().useOr()
+                    .nestedGroup().condition(IngotBlock.AXIS, axis).condition(IngotBlock.LAYERS, layer - 1).condition(IngotBlock.TOP_INGOT, ingotLayer, IngotLayer.BOTH).end()
+                    .nestedGroup().condition(IngotBlock.AXIS, axis).condition(IngotBlock.LAYERS, nums).end();
+        } else {
+            builder.part().modelFile(model).addModel()
+                    .condition(IngotBlock.AXIS, axis).condition(IngotBlock.LAYERS, layer - 1).condition(IngotBlock.TOP_INGOT, ingotLayer, IngotLayer.BOTH);
+        }
+    }
 }

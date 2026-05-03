@@ -14,12 +14,14 @@ import net.minecraftforge.fml.ModList;
 import net.minecraftforge.registries.RegistryObject;
 import pantz.mod.common.block.*;
 import pantz.mod.common.block.glass.*;
+import pantz.mod.common.utils.CompatHelper;
 import pantz.mod.common.utils.LogicGateConditions;
 import pantz.mod.core.PantzMod;
 import pantz.mod.core.other.PMConstant;
 import pantz.mod.core.other.PMProperties;
 import pantz.mod.core.registry.helper.PMBlockSubRegistryHelper;
 
+import java.util.List;
 import java.util.function.Predicate;
 
 import static net.minecraft.world.item.CreativeModeTabs.*;
@@ -33,6 +35,14 @@ public class PMBlocks {
     public static final RegistryObject<Block> STEEL_DOOR = BLOCKS.createBlock("steel_door", () -> new DoorBlock(PMProperties.STEEL_DOOR, PMProperties.STEEL));
     public static final RegistryObject<Block> STEEL_TRAPDOOR = BLOCKS.createBlock("steel_trapdoor", () -> new TrapDoorBlock(PMProperties.STEEL_TRAPDOOR, PMProperties.STEEL));
     public static final RegistryObject<Block> STEEL_LANTERN = BLOCKS.createBlock("steel_lantern", () -> new SteelLanternBlock(PMProperties.STEEL_LANTERN));
+
+    public static final RegistryObject<Block> STEEL_BRICKS = BLOCKS.createBlock("steel_bricks", () -> new Block(PMProperties.STEEL_PLATED_BRICKS));
+    public static final RegistryObject<Block> STEEL_BRICK_STAIRS = BLOCKS.createBlock("steel_brick_stairs", () -> new StairBlock(() -> STEEL_BRICKS.get().defaultBlockState(), PMProperties.STEEL_PLATED_BRICKS));
+    public static final RegistryObject<Block> STEEL_BRICK_SLAB = BLOCKS.createBlock("steel_brick_slab", () -> new SlabBlock(PMProperties.STEEL_PLATED_BRICKS));
+    public static final RegistryObject<Block> STEEL_BRICK_WALL = BLOCKS.createBlock("steel_brick_wall", () -> new WallBlock(PMProperties.STEEL_PLATED_BRICKS));
+    public static final RegistryObject<Block> CHISELED_STEEL_BRICKS = BLOCKS.createBlock("chiseled_steel_bricks", () -> new Block(PMProperties.STEEL_PLATED_BRICKS));
+
+    public static final RegistryObject<Block> STEEL_INGOT = BLOCKS.createPlacedItem("steel_ingot", CompatHelper.block(List.of(PMConstant.CAVERNS_AND_CHASMS), $ -> PMConstant.STEEL_INGOT.get(), () -> BlockBehaviour.Properties.copy(STEEL_BLOCK.get())));
 
     public static final RegistryObject<Block> SULFUR_ORE = BLOCKS.createBlock("sulfur_ore", () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(Blocks.COAL_ORE), UniformInt.of(2, 4)));
     public static final RegistryObject<Block> DEEPSLATE_SULFUR_ORE = BLOCKS.createBlock("deepslate_sulfur_ore", () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_COAL_ORE), UniformInt.of(2, 4)));
@@ -202,7 +212,7 @@ public class PMBlocks {
                         () -> Blocks.BLUE_ICE, BLUE_ICE_BRICKS, BLUE_ICE_BRICK_STAIRS, BLUE_ICE_BRICK_SLAB, BLUE_ICE_BRICK_WALL, CHISELED_BLUE_ICE_BRICKS, BLUE_ICE_DOOR, BLUE_ICE_TRAPDOOR)
 
                 .addItemsBefore(of(Blocks.GOLD_BLOCK), STEEL_BLOCK)
-                .addItemsBefore(modLoaded(Blocks.GOLD_BLOCK, PMConstant.CAVERNS_AND_CHASMS), STEEL_BARS)
+                .addItemsBefore(modLoaded(Blocks.GOLD_BLOCK, PMConstant.CAVERNS_AND_CHASMS), STEEL_BRICKS, STEEL_BRICK_STAIRS, STEEL_BRICK_SLAB, STEEL_BRICK_WALL, CHISELED_STEEL_BRICKS, STEEL_BARS)
                 .addItemsBefore(of(Blocks.GOLD_BLOCK), STEEL_DOOR, STEEL_TRAPDOOR)
                 .addItemsBefore(of(Blocks.AMETHYST_BLOCK), SULFUR_BLOCK, POLISHED_SULFUR, POLISHED_SULFUR_STAIRS, POLISHED_SULFUR_SLAB, POLISHED_SULFUR_WALL,
                         SULFUR_BRICKS, CHISELED_SULFUR_BRICKS, SULFUR_BRICK_STAIRS, SULFUR_BRICK_SLAB, SULFUR_BRICK_WALL, SULFUR_LAMP)

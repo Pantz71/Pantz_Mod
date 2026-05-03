@@ -16,6 +16,7 @@ import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.functions.SetItemDamageFunction;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import pantz.mod.core.PantzMod;
+import pantz.mod.core.registry.PMItems;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -33,7 +34,7 @@ public class PMLootModifierProvider extends LootModifierProvider {
         this.entry("simple_dungeon").selects(BuiltInLootTables.SIMPLE_DUNGEON)
                 .addModifier(new LootPoolEntriesModifier(false, 1,
                         List.of(
-                                lootPool(STEEL_INGOT.get(), 5, 1, 3)
+                                lootPool(PMItems.STEEL_INGOT.get(), 5, 1, 3)
                         )))
                 .addModifier(new LootPoolEntriesModifier(false, 0,
                         List.of(
@@ -50,7 +51,7 @@ public class PMLootModifierProvider extends LootModifierProvider {
         this.entry("stronghold_corridor").selects(BuiltInLootTables.STRONGHOLD_CORRIDOR)
                 .addModifier(new LootPoolEntriesModifier(false, 0,
                         List.of(
-                                lootPool(STEEL_INGOT.get(), 5, 2, 6),
+                                lootPool(PMItems.STEEL_INGOT.get(), 5, 2, 6),
                                 lootPool(DYNAMITE.get(), 2, 1, 3),
                                 lootPool(COMBAT_DYNAMITE.get(), 2, 1, 3),
                                 lootPool(STEEL_HORSE_ARMOR.get(), 10)
@@ -58,7 +59,7 @@ public class PMLootModifierProvider extends LootModifierProvider {
         this.entry("stronghold_crossing").selects(BuiltInLootTables.STRONGHOLD_CROSSING)
                 .addModifier(new LootPoolEntriesModifier(false, 0,
                         List.of(
-                                lootPool(STEEL_INGOT.get(), 5, 2, 4),
+                                lootPool(PMItems.STEEL_INGOT.get(), 5, 2, 4),
                                 lootPool(DYNAMITE.get(), 1)
                         )));
 
@@ -70,7 +71,7 @@ public class PMLootModifierProvider extends LootModifierProvider {
                         )))
                 .addModifier(new LootPoolEntriesModifier(false, 1,
                         List.of(
-                                lootPool(STEEL_INGOT.get(), 5, 1, 4),
+                                lootPool(PMItems.STEEL_INGOT.get(), 5, 1, 4),
                                 lootPool(DYNAMITE.get(), 2)
                         )));
 
@@ -81,7 +82,7 @@ public class PMLootModifierProvider extends LootModifierProvider {
                         )))
                 .addModifier(new LootPoolEntriesModifier(false, 0,
                         List.of(
-                                lootPool(STEEL_INGOT.get(), 5, 1, 4),
+                                lootPool(PMItems.STEEL_INGOT.get(), 5, 1, 4),
                                 lootPool(DYNAMITE.get(), 2)
                         )));
 
@@ -92,14 +93,14 @@ public class PMLootModifierProvider extends LootModifierProvider {
                         )))
                 .addModifier(new LootPoolEntriesModifier(false, 0,
                         List.of(
-                                lootPool(STEEL_INGOT.get(), 10, 1, 4),
+                                lootPool(PMItems.STEEL_INGOT.get(), 10, 1, 4),
                                 lootPool(DYNAMITE.get(), 3)
                         )));
 
         this.entry("woodland_mansion").selects(BuiltInLootTables.WOODLAND_MANSION)
                 .addModifier(new LootPoolEntriesModifier(false, 1,
                         List.of(
-                                lootPool(STEEL_INGOT.get(), 3, 1, 5)
+                                lootPool(PMItems.STEEL_INGOT.get(), 3, 1, 5)
                         )))
                 .addModifier(new LootPoolEntriesModifier(false, 3,
                         List.of(
@@ -205,7 +206,7 @@ public class PMLootModifierProvider extends LootModifierProvider {
         this.entry("kousa_sanctum").selects(new ResourceLocation("atmospheric", "chests/kousa_sanctum"))
                 .addModifier(new LootPoolEntriesModifier(false, 0,
                         List.of(
-                                lootPool(STEEL_INGOT.get(), 15, 1, 7),
+                                lootPool(PMItems.STEEL_INGOT.get(), 15, 1, 7),
                                 lootPool(STEEL_HORSE_ARMOR.get(), 3)
                         )));
 

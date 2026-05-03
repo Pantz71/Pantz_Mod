@@ -18,6 +18,7 @@ import net.minecraftforge.event.village.WandererTradesEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import pantz.mod.core.PantzMod;
+import pantz.mod.core.registry.PMItems;
 
 import static pantz.mod.core.registry.PMBlocks.*;
 import static pantz.mod.core.registry.PMItems.*;
@@ -53,7 +54,7 @@ public class PMTrades {
                 new ItemsForEmeralds(STEEL_HELMET.get(), 8, 3, 30, 0.2f),
                 new ItemsForEmeralds(STEEL_LEGGINGS.get(), 8, 3, 30, 0.2f),
                 new ItemsForEmeralds(STEEL_BOOTS.get(), 6, 3, 30, 0.2f),
-                new EmeraldForItems(STEEL_INGOT.get(), 4, 12, 20)
+                new EmeraldForItems(PMItems.STEEL_INGOT.get(), 4, 12, 20)
         );
 
         TradeUtil.addVillagerTrades(event, VillagerProfession.TOOLSMITH, TradeUtil.JOURNEYMAN,
@@ -61,7 +62,7 @@ public class PMTrades {
                 new ItemsForEmeralds(STEEL_PICKAXE.get(), 8, 3, 30, 0.2f),
                 new ItemsForEmeralds(EXCAVATOR.get(), 8, 3, 30, 0.2f),
                 new ItemsForEmeralds(HAMMER.get(), 8, 3, 30, 0.2f),
-                new EmeraldForItems(STEEL_INGOT.get(), 4, 12, 20)
+                new EmeraldForItems(PMItems.STEEL_INGOT.get(), 4, 12, 20)
         );
 
         TradeUtil.addVillagerTrades(event, VillagerProfession.TOOLSMITH, TradeUtil.EXPERT,
@@ -71,23 +72,13 @@ public class PMTrades {
 
         TradeUtil.addVillagerTrades(event, VillagerProfession.WEAPONSMITH, TradeUtil.JOURNEYMAN,
                 new ItemsForEmeralds(STEEL_SWORD.get(), 6, 3, 30, 0.2f),
-                new EmeraldForItems(STEEL_INGOT.get(), 4, 12, 20)
+                new EmeraldForItems(PMItems.STEEL_INGOT.get(), 4, 12, 20)
         );
     }
 
-    static class EmeraldForItems implements VillagerTrades.ItemListing {
-        private final Item item;
-        private final int cost;
-        private final int maxUses;
-        private final int villagerXp;
-        private final float priceMultiplier;
-
+    record EmeraldForItems(ItemLike item, int cost, int maxUses, int villagerXp, float priceMultiplier) implements VillagerTrades.ItemListing {
         public EmeraldForItems(ItemLike pItem, int pCost, int pMaxUses, int pVillagerXp) {
-            this.item = pItem.asItem();
-            this.cost = pCost;
-            this.maxUses = pMaxUses;
-            this.villagerXp = pVillagerXp;
-            this.priceMultiplier = 0.05F;
+            this(pItem, pCost, pMaxUses, pVillagerXp, 0.05f);
         }
 
         public MerchantOffer getOffer(Entity pTrader, RandomSource pRandom) {
@@ -96,23 +87,14 @@ public class PMTrades {
         }
     }
 
-    static class EnchantedItemForEmeralds implements VillagerTrades.ItemListing {
-        private final ItemStack itemStack;
-        private final int baseEmeraldCost;
-        private final int maxUses;
-        private final int villagerXp;
-        private final float priceMultiplier;
-
+    record EnchantedItemForEmeralds(ItemStack itemStack, int baseEmeraldCost, int maxUses, int villagerXp, float priceMultiplier) implements VillagerTrades.ItemListing {
         public EnchantedItemForEmeralds(Item pItem, int pBaseEmeraldCost, int pMaxUses, int pVillagerXp) {
             this(pItem, pBaseEmeraldCost, pMaxUses, pVillagerXp, 0.05F);
         }
 
         public EnchantedItemForEmeralds(Item pItem, int pBaseEmeraldCost, int pMaxUses, int pVillagerXp, float pPriceMultiplier) {
-            this.itemStack = new ItemStack(pItem);
-            this.baseEmeraldCost = pBaseEmeraldCost;
-            this.maxUses = pMaxUses;
-            this.villagerXp = pVillagerXp;
-            this.priceMultiplier = pPriceMultiplier;
+            this(new ItemStack(pItem), pBaseEmeraldCost, pMaxUses, pVillagerXp, pPriceMultiplier);
+
         }
 
         public MerchantOffer getOffer(Entity pTrader, RandomSource pRandom) {
@@ -124,14 +106,7 @@ public class PMTrades {
         }
     }
 
-    static class ItemsForEmeralds implements VillagerTrades.ItemListing {
-        private final ItemStack itemStack;
-        private final int emeraldCost;
-        private final int numberOfItems;
-        private final int maxUses;
-        private final int villagerXp;
-        private final float priceMultiplier;
-
+    record ItemsForEmeralds(ItemStack itemStack, int emeraldCost, int numberOfItems, int maxUses, int villagerXp, float priceMultiplier) implements VillagerTrades.ItemListing {
         public ItemsForEmeralds(Block pBlock, int pEmeraldCost, int pNumberOfItems, int pMaxUses, int pVillagerXp) {
             this(new ItemStack(pBlock), pEmeraldCost, pNumberOfItems, pMaxUses, pVillagerXp);
         }
@@ -152,17 +127,8 @@ public class PMTrades {
             this(pItemStack, pEmeraldCost, pNumberOfItems, pMaxUses, pVillagerXp, 0.05F);
         }
 
-        public ItemsForEmeralds(ItemStack pItemStack, int pEmeraldCost, int pNumberOfItems, int pMaxUses, int pVillagerXp, float pPriceMultiplier) {
-            this.itemStack = pItemStack;
-            this.emeraldCost = pEmeraldCost;
-            this.numberOfItems = pNumberOfItems;
-            this.maxUses = pMaxUses;
-            this.villagerXp = pVillagerXp;
-            this.priceMultiplier = pPriceMultiplier;
-        }
-
         public MerchantOffer getOffer(Entity pTrader, RandomSource pRandom) {
-            return new MerchantOffer(new ItemStack(Items.EMERALD, this.emeraldCost), new ItemStack(this.itemStack.getItem(), this.numberOfItems), this.maxUses, this.villagerXp, this.priceMultiplier);
+                return new MerchantOffer(new ItemStack(Items.EMERALD, this.emeraldCost), new ItemStack(this.itemStack.getItem(), this.numberOfItems), this.maxUses, this.villagerXp, this.priceMultiplier);
+            }
         }
-    }
 }

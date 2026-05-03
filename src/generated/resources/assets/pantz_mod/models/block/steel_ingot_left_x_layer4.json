@@ -1,0 +1,6 @@
+{
+  "parent": "caverns_and_chasms:block/template_ingot_left_x_layer4",
+  "textures": {
+    "ingot": "pantz_mod:block/steel_ingot"
+  }
+}
