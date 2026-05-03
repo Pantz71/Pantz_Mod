@@ -2,7 +2,7 @@
 	"textures": {
 		"particle": "pantz_mod:block/equalizer",
 		"top": "pantz_mod:block/equalizer",
-		"base": "block/smooth_stone",
+		"base": "pantz_mod:block/advanced_logic_gate_bottom",
 		"unlit": "block/redstone_torch_off"
 	},
 	"elements": [

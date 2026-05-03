@@ -311,13 +311,13 @@ public class PMRecipeProvider extends BlueprintRecipeProvider {
                 .unlockedBy(getHasName(LOCK.get()), has(LOCK.get()))
                 .save(consumer);
 
-        ShapedRecipeBuilder.shaped(REDSTONE, RANDOMIZER.get())
-                .define('S', Blocks.STONE).define('Q', Tags.Items.GEMS_PRISMARINE)
-                .define('T', Items.REDSTONE_TORCH)
-                .pattern("TQT")
-                .pattern("SSS")
-                .unlockedBy(getHasName(Items.REDSTONE_TORCH), has(Items.REDSTONE_TORCH))
-                .save(consumer);
+        conditionalRecipe(consumer, new NotCondition(CAVERNS_AND_CHASMS), REDSTONE,
+                ShapedRecipeBuilder.shaped(REDSTONE, RANDOMIZER.get())
+                        .define('S', Blocks.STONE).define('Q', Tags.Items.GEMS_PRISMARINE)
+                        .define('T', Items.REDSTONE_TORCH)
+                        .pattern("TQT")
+                        .pattern("SSS")
+                        .unlockedBy(getHasName(Items.REDSTONE_TORCH), has(Items.REDSTONE_TORCH)));
 
         ShapedRecipeBuilder.shaped(REDSTONE, EQUALIZER.get())
                 .define('S', Blocks.STONE).define('E', Tags.Items.GEMS_EMERALD)
