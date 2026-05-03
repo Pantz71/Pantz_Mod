@@ -2,8 +2,8 @@
 	"format_version": "1.21.6",
 	"credit": "Made with Blockbench",
 	"textures": {
-		"particle": "pantz_mod:block/minority_gate_powered",
-		"top": "pantz_mod:block/minority_gate_powered",
+		"particle": "pantz_mod:block/minority_gate_on",
+		"top": "pantz_mod:block/minority_gate_on",
 		"unlit": "block/redstone_torch_off",
 		"lit": "block/redstone_torch",
 		"slab": "pantz_mod:block/advanced_logic_gate_bottom"

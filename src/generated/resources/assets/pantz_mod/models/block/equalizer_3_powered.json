@@ -1,6 +1,0 @@
-{
-  "parent": "pantz_mod:block/template_equalizer_powered",
-  "textures": {
-    "top": "pantz_mod:block/equalizer_3"
-  }
-}

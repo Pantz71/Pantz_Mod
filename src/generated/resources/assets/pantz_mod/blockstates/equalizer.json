@@ -5,7 +5,7 @@
       "y": 270
     },
     "facing=east,power=0,powered=true": {
-      "model": "pantz_mod:block/equalizer_powered",
+      "model": "pantz_mod:block/equalizer_on",
       "y": 270
     },
     "facing=east,power=1,powered=false": {
@@ -13,7 +13,7 @@
       "y": 270
     },
     "facing=east,power=1,powered=true": {
-      "model": "pantz_mod:block/equalizer_1_powered",
+      "model": "pantz_mod:block/equalizer_1_on",
       "y": 270
     },
     "facing=east,power=10,powered=false": {
@@ -21,7 +21,7 @@
       "y": 270
     },
     "facing=east,power=10,powered=true": {
-      "model": "pantz_mod:block/equalizer_10_powered",
+      "model": "pantz_mod:block/equalizer_10_on",
       "y": 270
     },
     "facing=east,power=11,powered=false": {
@@ -29,7 +29,7 @@
       "y": 270
     },
     "facing=east,power=11,powered=true": {
-      "model": "pantz_mod:block/equalizer_11_powered",
+      "model": "pantz_mod:block/equalizer_11_on",
       "y": 270
     },
     "facing=east,power=12,powered=false": {
@@ -37,7 +37,7 @@
       "y": 270
     },
     "facing=east,power=12,powered=true": {
-      "model": "pantz_mod:block/equalizer_12_powered",
+      "model": "pantz_mod:block/equalizer_12_on",
       "y": 270
     },
     "facing=east,power=13,powered=false": {
@@ -45,7 +45,7 @@
       "y": 270
     },
     "facing=east,power=13,powered=true": {
-      "model": "pantz_mod:block/equalizer_13_powered",
+      "model": "pantz_mod:block/equalizer_13_on",
       "y": 270
     },
     "facing=east,power=14,powered=false": {
@@ -53,7 +53,7 @@
       "y": 270
     },
     "facing=east,power=14,powered=true": {
-      "model": "pantz_mod:block/equalizer_14_powered",
+      "model": "pantz_mod:block/equalizer_14_on",
       "y": 270
     },
     "facing=east,power=15,powered=false": {
@@ -61,7 +61,7 @@
       "y": 270
     },
     "facing=east,power=15,powered=true": {
-      "model": "pantz_mod:block/equalizer_15_powered",
+      "model": "pantz_mod:block/equalizer_15_on",
       "y": 270
     },
     "facing=east,power=2,powered=false": {
@@ -69,7 +69,7 @@
       "y": 270
     },
     "facing=east,power=2,powered=true": {
-      "model": "pantz_mod:block/equalizer_2_powered",
+      "model": "pantz_mod:block/equalizer_2_on",
       "y": 270
     },
     "facing=east,power=3,powered=false": {
@@ -77,7 +77,7 @@
       "y": 270
     },
     "facing=east,power=3,powered=true": {
-      "model": "pantz_mod:block/equalizer_3_powered",
+      "model": "pantz_mod:block/equalizer_3_on",
       "y": 270
     },
     "facing=east,power=4,powered=false": {
@@ -85,7 +85,7 @@
       "y": 270
     },
     "facing=east,power=4,powered=true": {
-      "model": "pantz_mod:block/equalizer_4_powered",
+      "model": "pantz_mod:block/equalizer_4_on",
       "y": 270
     },
     "facing=east,power=5,powered=false": {
@@ -93,7 +93,7 @@
       "y": 270
     },
     "facing=east,power=5,powered=true": {
-      "model": "pantz_mod:block/equalizer_5_powered",
+      "model": "pantz_mod:block/equalizer_5_on",
       "y": 270
     },
     "facing=east,power=6,powered=false": {
@@ -101,7 +101,7 @@
       "y": 270
     },
     "facing=east,power=6,powered=true": {
-      "model": "pantz_mod:block/equalizer_6_powered",
+      "model": "pantz_mod:block/equalizer_6_on",
       "y": 270
     },
     "facing=east,power=7,powered=false": {
@@ -109,7 +109,7 @@
       "y": 270
     },
     "facing=east,power=7,powered=true": {
-      "model": "pantz_mod:block/equalizer_7_powered",
+      "model": "pantz_mod:block/equalizer_7_on",
       "y": 270
     },
     "facing=east,power=8,powered=false": {
@@ -117,7 +117,7 @@
       "y": 270
     },
     "facing=east,power=8,powered=true": {
-      "model": "pantz_mod:block/equalizer_8_powered",
+      "model": "pantz_mod:block/equalizer_8_on",
       "y": 270
     },
     "facing=east,power=9,powered=false": {
@@ -125,7 +125,7 @@
       "y": 270
     },
     "facing=east,power=9,powered=true": {
-      "model": "pantz_mod:block/equalizer_9_powered",
+      "model": "pantz_mod:block/equalizer_9_on",
       "y": 270
     },
     "facing=north,power=0,powered=false": {
@@ -133,7 +133,7 @@
       "y": 180
     },
     "facing=north,power=0,powered=true": {
-      "model": "pantz_mod:block/equalizer_powered",
+      "model": "pantz_mod:block/equalizer_on",
       "y": 180
     },
     "facing=north,power=1,powered=false": {
@@ -141,7 +141,7 @@
       "y": 180
     },
     "facing=north,power=1,powered=true": {
-      "model": "pantz_mod:block/equalizer_1_powered",
+      "model": "pantz_mod:block/equalizer_1_on",
       "y": 180
     },
     "facing=north,power=10,powered=false": {
@@ -149,7 +149,7 @@
       "y": 180
     },
     "facing=north,power=10,powered=true": {
-      "model": "pantz_mod:block/equalizer_10_powered",
+      "model": "pantz_mod:block/equalizer_10_on",
       "y": 180
     },
     "facing=north,power=11,powered=false": {
@@ -157,7 +157,7 @@
       "y": 180
     },
     "facing=north,power=11,powered=true": {
-      "model": "pantz_mod:block/equalizer_11_powered",
+      "model": "pantz_mod:block/equalizer_11_on",
       "y": 180
     },
     "facing=north,power=12,powered=false": {
@@ -165,7 +165,7 @@
       "y": 180
     },
     "facing=north,power=12,powered=true": {
-      "model": "pantz_mod:block/equalizer_12_powered",
+      "model": "pantz_mod:block/equalizer_12_on",
       "y": 180
     },
     "facing=north,power=13,powered=false": {
@@ -173,7 +173,7 @@
       "y": 180
     },
     "facing=north,power=13,powered=true": {
-      "model": "pantz_mod:block/equalizer_13_powered",
+      "model": "pantz_mod:block/equalizer_13_on",
       "y": 180
     },
     "facing=north,power=14,powered=false": {
@@ -181,7 +181,7 @@
       "y": 180
     },
     "facing=north,power=14,powered=true": {
-      "model": "pantz_mod:block/equalizer_14_powered",
+      "model": "pantz_mod:block/equalizer_14_on",
       "y": 180
     },
     "facing=north,power=15,powered=false": {
@@ -189,7 +189,7 @@
       "y": 180
     },
     "facing=north,power=15,powered=true": {
-      "model": "pantz_mod:block/equalizer_15_powered",
+      "model": "pantz_mod:block/equalizer_15_on",
       "y": 180
     },
     "facing=north,power=2,powered=false": {
@@ -197,7 +197,7 @@
       "y": 180
     },
     "facing=north,power=2,powered=true": {
-      "model": "pantz_mod:block/equalizer_2_powered",
+      "model": "pantz_mod:block/equalizer_2_on",
       "y": 180
     },
     "facing=north,power=3,powered=false": {
@@ -205,7 +205,7 @@
       "y": 180
     },
     "facing=north,power=3,powered=true": {
-      "model": "pantz_mod:block/equalizer_3_powered",
+      "model": "pantz_mod:block/equalizer_3_on",
       "y": 180
     },
     "facing=north,power=4,powered=false": {
@@ -213,7 +213,7 @@
       "y": 180
     },
     "facing=north,power=4,powered=true": {
-      "model": "pantz_mod:block/equalizer_4_powered",
+      "model": "pantz_mod:block/equalizer_4_on",
       "y": 180
     },
     "facing=north,power=5,powered=false": {
@@ -221,7 +221,7 @@
       "y": 180
     },
     "facing=north,power=5,powered=true": {
-      "model": "pantz_mod:block/equalizer_5_powered",
+      "model": "pantz_mod:block/equalizer_5_on",
       "y": 180
     },
     "facing=north,power=6,powered=false": {
@@ -229,7 +229,7 @@
       "y": 180
     },
     "facing=north,power=6,powered=true": {
-      "model": "pantz_mod:block/equalizer_6_powered",
+      "model": "pantz_mod:block/equalizer_6_on",
       "y": 180
     },
     "facing=north,power=7,powered=false": {
@@ -237,7 +237,7 @@
       "y": 180
     },
     "facing=north,power=7,powered=true": {
-      "model": "pantz_mod:block/equalizer_7_powered",
+      "model": "pantz_mod:block/equalizer_7_on",
       "y": 180
     },
     "facing=north,power=8,powered=false": {
@@ -245,7 +245,7 @@
       "y": 180
     },
     "facing=north,power=8,powered=true": {
-      "model": "pantz_mod:block/equalizer_8_powered",
+      "model": "pantz_mod:block/equalizer_8_on",
       "y": 180
     },
     "facing=north,power=9,powered=false": {
@@ -253,111 +253,111 @@
       "y": 180
     },
     "facing=north,power=9,powered=true": {
-      "model": "pantz_mod:block/equalizer_9_powered",
+      "model": "pantz_mod:block/equalizer_9_on",
       "y": 180
     },
     "facing=south,power=0,powered=false": {
       "model": "pantz_mod:block/equalizer"
     },
     "facing=south,power=0,powered=true": {
-      "model": "pantz_mod:block/equalizer_powered"
+      "model": "pantz_mod:block/equalizer_on"
     },
     "facing=south,power=1,powered=false": {
       "model": "pantz_mod:block/equalizer_1"
     },
     "facing=south,power=1,powered=true": {
-      "model": "pantz_mod:block/equalizer_1_powered"
+      "model": "pantz_mod:block/equalizer_1_on"
     },
     "facing=south,power=10,powered=false": {
       "model": "pantz_mod:block/equalizer_10"
     },
     "facing=south,power=10,powered=true": {
-      "model": "pantz_mod:block/equalizer_10_powered"
+      "model": "pantz_mod:block/equalizer_10_on"
     },
     "facing=south,power=11,powered=false": {
       "model": "pantz_mod:block/equalizer_11"
     },
     "facing=south,power=11,powered=true": {
-      "model": "pantz_mod:block/equalizer_11_powered"
+      "model": "pantz_mod:block/equalizer_11_on"
     },
     "facing=south,power=12,powered=false": {
       "model": "pantz_mod:block/equalizer_12"
     },
     "facing=south,power=12,powered=true": {
-      "model": "pantz_mod:block/equalizer_12_powered"
+      "model": "pantz_mod:block/equalizer_12_on"
     },
     "facing=south,power=13,powered=false": {
       "model": "pantz_mod:block/equalizer_13"
     },
     "facing=south,power=13,powered=true": {
-      "model": "pantz_mod:block/equalizer_13_powered"
+      "model": "pantz_mod:block/equalizer_13_on"
     },
     "facing=south,power=14,powered=false": {
       "model": "pantz_mod:block/equalizer_14"
     },
     "facing=south,power=14,powered=true": {
-      "model": "pantz_mod:block/equalizer_14_powered"
+      "model": "pantz_mod:block/equalizer_14_on"
     },
     "facing=south,power=15,powered=false": {
       "model": "pantz_mod:block/equalizer_15"
     },
     "facing=south,power=15,powered=true": {
-      "model": "pantz_mod:block/equalizer_15_powered"
+      "model": "pantz_mod:block/equalizer_15_on"
     },
     "facing=south,power=2,powered=false": {
       "model": "pantz_mod:block/equalizer_2"
     },
     "facing=south,power=2,powered=true": {
-      "model": "pantz_mod:block/equalizer_2_powered"
+      "model": "pantz_mod:block/equalizer_2_on"
     },
     "facing=south,power=3,powered=false": {
       "model": "pantz_mod:block/equalizer_3"
     },
     "facing=south,power=3,powered=true": {
-      "model": "pantz_mod:block/equalizer_3_powered"
+      "model": "pantz_mod:block/equalizer_3_on"
     },
     "facing=south,power=4,powered=false": {
       "model": "pantz_mod:block/equalizer_4"
     },
     "facing=south,power=4,powered=true": {
-      "model": "pantz_mod:block/equalizer_4_powered"
+      "model": "pantz_mod:block/equalizer_4_on"
     },
     "facing=south,power=5,powered=false": {
       "model": "pantz_mod:block/equalizer_5"
     },
     "facing=south,power=5,powered=true": {
-      "model": "pantz_mod:block/equalizer_5_powered"
+      "model": "pantz_mod:block/equalizer_5_on"
     },
     "facing=south,power=6,powered=false": {
       "model": "pantz_mod:block/equalizer_6"
     },
     "facing=south,power=6,powered=true": {
-      "model": "pantz_mod:block/equalizer_6_powered"
+      "model": "pantz_mod:block/equalizer_6_on"
     },
     "facing=south,power=7,powered=false": {
       "model": "pantz_mod:block/equalizer_7"
     },
     "facing=south,power=7,powered=true": {
-      "model": "pantz_mod:block/equalizer_7_powered"
+      "model": "pantz_mod:block/equalizer_7_on"
     },
     "facing=south,power=8,powered=false": {
       "model": "pantz_mod:block/equalizer_8"
     },
     "facing=south,power=8,powered=true": {
-      "model": "pantz_mod:block/equalizer_8_powered"
+      "model": "pantz_mod:block/equalizer_8_on"
     },
     "facing=south,power=9,powered=false": {
       "model": "pantz_mod:block/equalizer_9"
     },
     "facing=south,power=9,powered=true": {
-      "model": "pantz_mod:block/equalizer_9_powered"
+      "model": "pantz_mod:block/equalizer_9_on"
     },
     "facing=west,power=0,powered=false": {
       "model": "pantz_mod:block/equalizer",
       "y": 90
     },
     "facing=west,power=0,powered=true": {
-      "model": "pantz_mod:block/equalizer_powered",
+      "model": "pantz_mod:block/equalizer_on",
       "y": 90
     },
     "facing=west,power=1,powered=false": {
@@ -365,7 +365,7 @@
       "y": 90
     },
     "facing=west,power=1,powered=true": {
-      "model": "pantz_mod:block/equalizer_1_powered",
+      "model": "pantz_mod:block/equalizer_1_on",
       "y": 90
     },
     "facing=west,power=10,powered=false": {
@@ -373,7 +373,7 @@
       "y": 90
     },
     "facing=west,power=10,powered=true": {
-      "model": "pantz_mod:block/equalizer_10_powered",
+      "model": "pantz_mod:block/equalizer_10_on",
       "y": 90
     },
     "facing=west,power=11,powered=false": {
@@ -381,7 +381,7 @@
       "y": 90
     },
     "facing=west,power=11,powered=true": {
-      "model": "pantz_mod:block/equalizer_11_powered",
+      "model": "pantz_mod:block/equalizer_11_on",
       "y": 90
     },
     "facing=west,power=12,powered=false": {
@@ -389,7 +389,7 @@
       "y": 90
     },
     "facing=west,power=12,powered=true": {
-      "model": "pantz_mod:block/equalizer_12_powered",
+      "model": "pantz_mod:block/equalizer_12_on",
       "y": 90
     },
     "facing=west,power=13,powered=false": {
@@ -397,7 +397,7 @@
       "y": 90
     },
     "facing=west,power=13,powered=true": {
-      "model": "pantz_mod:block/equalizer_13_powered",
+      "model": "pantz_mod:block/equalizer_13_on",
       "y": 90
     },
     "facing=west,power=14,powered=false": {
@@ -405,7 +405,7 @@
       "y": 90
     },
     "facing=west,power=14,powered=true": {
-      "model": "pantz_mod:block/equalizer_14_powered",
+      "model": "pantz_mod:block/equalizer_14_on",
       "y": 90
     },
     "facing=west,power=15,powered=false": {
@@ -413,7 +413,7 @@
       "y": 90
     },
     "facing=west,power=15,powered=true": {
-      "model": "pantz_mod:block/equalizer_15_powered",
+      "model": "pantz_mod:block/equalizer_15_on",
       "y": 90
     },
     "facing=west,power=2,powered=false": {
@@ -421,7 +421,7 @@
       "y": 90
     },
     "facing=west,power=2,powered=true": {
-      "model": "pantz_mod:block/equalizer_2_powered",
+      "model": "pantz_mod:block/equalizer_2_on",
       "y": 90
     },
     "facing=west,power=3,powered=false": {
@@ -429,7 +429,7 @@
       "y": 90
     },
     "facing=west,power=3,powered=true": {
-      "model": "pantz_mod:block/equalizer_3_powered",
+      "model": "pantz_mod:block/equalizer_3_on",
       "y": 90
     },
     "facing=west,power=4,powered=false": {
@@ -437,7 +437,7 @@
       "y": 90
     },
     "facing=west,power=4,powered=true": {
-      "model": "pantz_mod:block/equalizer_4_powered",
+      "model": "pantz_mod:block/equalizer_4_on",
       "y": 90
     },
     "facing=west,power=5,powered=false": {
@@ -445,7 +445,7 @@
       "y": 90
     },
     "facing=west,power=5,powered=true": {
-      "model": "pantz_mod:block/equalizer_5_powered",
+      "model": "pantz_mod:block/equalizer_5_on",
       "y": 90
     },
     "facing=west,power=6,powered=false": {
@@ -453,7 +453,7 @@
       "y": 90
     },
     "facing=west,power=6,powered=true": {
-      "model": "pantz_mod:block/equalizer_6_powered",
+      "model": "pantz_mod:block/equalizer_6_on",
       "y": 90
     },
     "facing=west,power=7,powered=false": {
@@ -461,7 +461,7 @@
       "y": 90
     },
     "facing=west,power=7,powered=true": {
-      "model": "pantz_mod:block/equalizer_7_powered",
+      "model": "pantz_mod:block/equalizer_7_on",
       "y": 90
     },
     "facing=west,power=8,powered=false": {
@@ -469,7 +469,7 @@
       "y": 90
     },
     "facing=west,power=8,powered=true": {
-      "model": "pantz_mod:block/equalizer_8_powered",
+      "model": "pantz_mod:block/equalizer_8_on",
       "y": 90
     },
     "facing=west,power=9,powered=false": {
@@ -477,7 +477,7 @@
       "y": 90
     },
     "facing=west,power=9,powered=true": {
-      "model": "pantz_mod:block/equalizer_9_powered",
+      "model": "pantz_mod:block/equalizer_9_on",
       "y": 90
     }
   }

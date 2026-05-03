@@ -4,7 +4,7 @@
       "model": "pantz_mod:block/universal_lock"
     },
     "powered=true": {
-      "model": "pantz_mod:block/universal_lock_powered"
+      "model": "pantz_mod:block/universal_lock_on"
     }
   }
 }

@@ -21,8 +21,8 @@
     "facing=north,input_back=false,input_left=true,input_right=true,powered=false": { "model": "pantz_mod:block/minority_gate_left_right", "y": 180 },
     "facing=north,input_back=false,input_left=true,input_right=true,powered=true": { "model": "pantz_mod:block/minority_gate_left_right", "y": 180 },
 
-    "facing=north,input_back=true,input_left=true,input_right=true,powered=false": { "model": "pantz_mod:block/minority_gate_powered", "y": 180 },
-    "facing=north,input_back=true,input_left=true,input_right=true,powered=true": { "model": "pantz_mod:block/minority_gate_powered", "y": 180 },
+    "facing=north,input_back=true,input_left=true,input_right=true,powered=false": { "model": "pantz_mod:block/minority_gate_on", "y": 180 },
+    "facing=north,input_back=true,input_left=true,input_right=true,powered=true": { "model": "pantz_mod:block/minority_gate_on", "y": 180 },
 
 
     "facing=east,input_back=false,input_left=false,input_right=false,powered=false": { "model": "pantz_mod:block/minority_gate", "y": 270 },
@@ -46,8 +46,8 @@
     "facing=east,input_back=false,input_left=true,input_right=true,powered=false": { "model": "pantz_mod:block/minority_gate_left_right", "y": 270 },
     "facing=east,input_back=false,input_left=true,input_right=true,powered=true": { "model": "pantz_mod:block/minority_gate_left_right", "y": 270 },
 
-    "facing=east,input_back=true,input_left=true,input_right=true,powered=false": { "model": "pantz_mod:block/minority_gate_powered", "y": 270 },
-    "facing=east,input_back=true,input_left=true,input_right=true,powered=true": { "model": "pantz_mod:block/minority_gate_powered", "y": 270 },
+    "facing=east,input_back=true,input_left=true,input_right=true,powered=false": { "model": "pantz_mod:block/minority_gate_on", "y": 270 },
+    "facing=east,input_back=true,input_left=true,input_right=true,powered=true": { "model": "pantz_mod:block/minority_gate_on", "y": 270 },
 
 
     "facing=south,input_back=false,input_left=false,input_right=false,powered=false": { "model": "pantz_mod:block/minority_gate" },
@@ -71,8 +71,8 @@
     "facing=south,input_back=false,input_left=true,input_right=true,powered=false": { "model": "pantz_mod:block/minority_gate_left_right" },
     "facing=south,input_back=false,input_left=true,input_right=true,powered=true": { "model": "pantz_mod:block/minority_gate_left_right" },
 
-    "facing=south,input_back=true,input_left=true,input_right=true,powered=false": { "model": "pantz_mod:block/minority_gate_powered" },
-    "facing=south,input_back=true,input_left=true,input_right=true,powered=true": { "model": "pantz_mod:block/minority_gate_powered" },
+    "facing=south,input_back=true,input_left=true,input_right=true,powered=false": { "model": "pantz_mod:block/minority_gate_on" },
+    "facing=south,input_back=true,input_left=true,input_right=true,powered=true": { "model": "pantz_mod:block/minority_gate_on" },
 
 
     "facing=west,input_back=false,input_left=false,input_right=false,powered=false": { "model": "pantz_mod:block/minority_gate", "y": 90 },
@@ -96,7 +96,7 @@
     "facing=west,input_back=false,input_left=true,input_right=true,powered=false": { "model": "pantz_mod:block/minority_gate_left_right", "y": 90 },
     "facing=west,input_back=false,input_left=true,input_right=true,powered=true": { "model": "pantz_mod:block/minority_gate_left_right", "y": 90 },
 
-    "facing=west,input_back=true,input_left=true,input_right=true,powered=false": { "model": "pantz_mod:block/minority_gate_powered", "y": 90 },
-    "facing=west,input_back=true,input_left=true,input_right=true,powered=true": { "model": "pantz_mod:block/minority_gate_powered", "y": 90 }
+    "facing=west,input_back=true,input_left=true,input_right=true,powered=false": { "model": "pantz_mod:block/minority_gate_on", "y": 90 },
+    "facing=west,input_back=true,input_left=true,input_right=true,powered=true": { "model": "pantz_mod:block/minority_gate_on", "y": 90 }
   }
 }

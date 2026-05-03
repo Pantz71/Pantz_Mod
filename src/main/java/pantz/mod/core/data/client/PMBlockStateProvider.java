@@ -496,7 +496,7 @@ public class PMBlockStateProvider extends BlueprintBlockStateProvider {
 
         for (boolean open : new boolean[]{false, true}) {
             ModelFile baseModel = models().cubeAll(name, texture);
-            ModelFile poweredModel = models().cubeAll(name + "_powered", suffix(texture, "_powered"));
+            ModelFile poweredModel = models().cubeAll(name + "_on", suffix(texture, "_on"));
             ModelFile modelFile = open ? poweredModel : baseModel;
 
             getVariantBuilder(block.get())
@@ -532,27 +532,21 @@ public class PMBlockStateProvider extends BlueprintBlockStateProvider {
 
     private void equalizerBlock(RegistryObject<Block> block) {
         String name = name(block.get());
-        ResourceLocation texture = blockTexture(block.get());
 
         for (int power = 0; power <= 15; power++) {
-            ResourceLocation topTexture = power == 0 ? texture : suffix(texture, "_" + power);
-
             String modelName = power == 0 ? name : name + "_" + power;
 
-            ModelFile offModel = models().withExistingParent(modelName, modLoc("block/template_equalizer"))
-                    .texture("top", topTexture);
+            ModelFile baseModel = models().getExistingFile(modLoc("block/" + modelName));
+            ModelFile onModel = models().getExistingFile(modLoc("block/" + modelName + "_on"));
 
-            ModelFile onModel = models().withExistingParent(modelName + "_powered", modLoc("block/template_equalizer_powered"))
-                    .texture("top", topTexture);
-
-            for (Direction dir : Direction.Plane.HORIZONTAL) {
-                int rotY = (int) dir.toYRot();
+            for (Direction direction : Direction.Plane.HORIZONTAL) {
+                int rotY = (int) direction.toYRot();
 
                 for (boolean powered : new boolean[]{false, true}) {
-                    ModelFile model = powered ? onModel : offModel;
+                    ModelFile model = powered ? onModel : baseModel;
 
                     getVariantBuilder(block.get()).partialState()
-                            .with(EqualizerBlock.FACING, dir)
+                            .with(EqualizerBlock.FACING, direction)
                             .with(EqualizerBlock.POWER, power)
                             .with(EqualizerBlock.POWERED, powered)
                             .modelForState().modelFile(model)

@@ -1,7 +1,7 @@
 {
   "variants": {
     "facing=east,powered=false": {
-      "model": "pantz_mod:block/not_gate_powered",
+      "model": "pantz_mod:block/not_gate_on",
       "y": 270
     },
     "facing=east,powered=true": {
@@ -9,7 +9,7 @@
       "y": 270
     },
     "facing=north,powered=false": {
-      "model": "pantz_mod:block/not_gate_powered",
+      "model": "pantz_mod:block/not_gate_on",
       "y": 180
     },
     "facing=north,powered=true": {
@@ -17,13 +17,13 @@
       "y": 180
     },
     "facing=south,powered=false": {
-      "model": "pantz_mod:block/not_gate_powered"
+      "model": "pantz_mod:block/not_gate_on"
     },
     "facing=south,powered=true": {
       "model": "pantz_mod:block/not_gate"
     },
     "facing=west,powered=false": {
-      "model": "pantz_mod:block/not_gate_powered",
+      "model": "pantz_mod:block/not_gate_on",
       "y": 90
     },
     "facing=west,powered=true": {
