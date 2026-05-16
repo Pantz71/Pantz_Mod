@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "count": 2,
-  "ingredient": {
-    "item": "pantz_mod:snow_bricks"
-  },
-  "result": "pantz_mod:snow_brick_slab"
-}

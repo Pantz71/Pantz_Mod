@@ -1,19 +1,25 @@
 {
   "block.trash_can.open": {
     "sounds": [
-      "pantz_mod:block/trash_can/open"
+      "pantz_mod:block/trash_can/open1",
+      "pantz_mod:block/trash_can/open2",
+      "pantz_mod:block/trash_can/open3"
     ],
     "subtitle": "subtitles.pantz_mod.trash_can.open"
   },
   "block.trash_can.close": {
     "sounds": [
-      "pantz_mod:block/trash_can/close"
+      "pantz_mod:block/trash_can/close1",
+      "pantz_mod:block/trash_can/close2",
+      "pantz_mod:block/trash_can/close3"
     ],
     "subtitle": "subtitles.pantz_mod.trash_can.close"
   },
   "block.trash_can.destroy": {
     "sounds": [
-      "pantz_mod:block/trash_can/destroy"
+      "pantz_mod:block/trash_can/destroy1",
+      "pantz_mod:block/trash_can/destroy2",
+      "pantz_mod:block/trash_can/destroy3"
     ],
     "subtitle": "subtitles.pantz_mod.trash_can.destroy"
   },
@@ -34,31 +40,40 @@
   },
   "block.lockable.key_lock": {
     "sounds": [
-      "pantz_mod:block/lockable/key_lock"
+      "pantz_mod:block/lockable/key_lock1",
+      "pantz_mod:block/lockable/key_lock2",
+      "pantz_mod:block/lockable/key_lock3"
     ],
     "subtitle": "subtitles.pantz_mod.lockable.key_lock"
   },
   "block.lockable.key_set": {
     "sounds": [
-      "pantz_mod:block/lockable/key_set"
+      "pantz_mod:block/lockable/key_set1",
+      "pantz_mod:block/lockable/key_set2",
+      "pantz_mod:block/lockable/key_set3"
     ],
     "subtitle": "subtitles.pantz_mod.lockable.key_set"
   },
   "block.safe.open": {
     "sounds": [
-      "pantz_mod:block/safe/open"
+      "pantz_mod:block/safe/open1",
+      "pantz_mod:block/safe/open2",
+      "pantz_mod:block/safe/open3"
     ],
     "subtitle": "subtitles.pantz_mod.safe.open"
   },
   "block.safe.close": {
     "sounds": [
-      "pantz_mod:block/safe/close"
+      "pantz_mod:block/safe/close1",
+      "pantz_mod:block/safe/close2",
+      "pantz_mod:block/safe/close3"
     ],
     "subtitle": "subtitles.pantz_mod.safe.close"
   },
   "block.safe.locked": {
     "sounds": [
-      "pantz_mod:block/safe/locked"
+      "pantz_mod:block/safe/locked1",
+      "pantz_mod:block/safe/locked2"
     ],
     "subtitle": "subtitles.pantz_mod.safe.locked"
   }

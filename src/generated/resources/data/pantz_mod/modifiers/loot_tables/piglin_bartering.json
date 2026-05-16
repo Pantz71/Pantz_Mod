@@ -18,7 +18,39 @@
               }
             ],
             "name": "minecraft:gilded_blackstone",
-            "weight": 30
+            "weight": 40
+          },
+          {
+            "type": "minecraft:item",
+            "functions": [
+              {
+                "add": false,
+                "count": {
+                  "type": "minecraft:uniform",
+                  "max": 16.0,
+                  "min": 8.0
+                },
+                "function": "minecraft:set_count"
+              }
+            ],
+            "name": "minecraft:netherrack",
+            "weight": 40
+          },
+          {
+            "type": "minecraft:item",
+            "functions": [
+              {
+                "add": false,
+                "count": {
+                  "type": "minecraft:uniform",
+                  "max": 8.0,
+                  "min": 2.0
+                },
+                "function": "minecraft:set_count"
+              }
+            ],
+            "name": "minecraft:soul_soil",
+            "weight": 40
           }
         ],
         "index": 0,

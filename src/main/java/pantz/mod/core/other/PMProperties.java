@@ -49,6 +49,7 @@ public class PMProperties {
     public static final BlockBehaviour.Properties ENTITY_DETECTOR = BlockBehaviour.Properties.of().requiresCorrectToolForDrops().mapColor(MapColor.TERRACOTTA_LIGHT_BLUE).instrument(NoteBlockInstrument.BASEDRUM).strength(0.2F).sound(SoundType.STONE);
     public static final BlockBehaviour.Properties POWER_DISPLAYER = BlockBehaviour.Properties.of().strength(0.3F).sound(SoundType.TUFF).instrument(NoteBlockInstrument.BASEDRUM).mapColor(MapColor.TERRACOTTA_GRAY);
     public static final BlockBehaviour.Properties DIODE = BlockBehaviour.Properties.of().instabreak().sound(SoundType.WOOD).pushReaction(PushReaction.DESTROY);
+    public static final BlockBehaviour.Properties ADVANCED_DIODE = BlockBehaviour.Properties.of().instabreak().sound(SoundType.METAL).pushReaction(PushReaction.DESTROY);
     public static final BlockBehaviour.Properties GLOBE = BlockBehaviour.Properties.of().sound(SoundType.METAL).instabreak().noOcclusion();
     public static final BlockBehaviour.Properties GAS_GLOBE = BlockBehaviour.Properties.of().sound(SoundType.COPPER).instabreak().noOcclusion();
     public static final BlockBehaviour.Properties STAR_GLOBE = BlockBehaviour.Properties.of().sound(SoundType.AMETHYST).instabreak().noOcclusion();
@@ -65,14 +66,6 @@ public class PMProperties {
     public static final BlockBehaviour.Properties LAPIS_GLASS_PANE = BlockBehaviour.Properties.of().instrument(NoteBlockInstrument.HAT).strength(0.3F).sound(SoundType.GLASS).noOcclusion().strength(0.5f).mapColor(MapColor.LAPIS);
     public static final BlockBehaviour.Properties REDSTONE_GLASS = BlockBehaviour.Properties.of().instrument(NoteBlockInstrument.HAT).strength(0.3F).sound(SoundType.GLASS).noOcclusion().isValidSpawn(PMProperties::never).isRedstoneConductor(PMProperties::never).isSuffocating(PMProperties::never).isViewBlocking(PMProperties::never).strength(0.5f).mapColor(MapColor.COLOR_RED);
     public static final BlockBehaviour.Properties REDSTONE_GLASS_PANE = BlockBehaviour.Properties.of().instrument(NoteBlockInstrument.HAT).strength(0.3F).sound(SoundType.GLASS).noOcclusion().strength(0.5f).mapColor(MapColor.COLOR_RED);
-
-    public static final BlockBehaviour.Properties SNOW_BRICKS = BlockBehaviour.Properties.of().sound(SoundType.SNOW).mapColor(MapColor.SNOW).instrument(NoteBlockInstrument.GUITAR).strength(3.0f, 2.0f);
-    public static final BlockBehaviour.Properties PACKED_ICE_BRICKS = BlockBehaviour.Properties.of().sound(SoundType.GLASS).mapColor(MapColor.ICE).instrument(NoteBlockInstrument.CHIME).strength(3.0f, 2.0f);
-    public static final BlockBehaviour.Properties BLUE_ICE_BRICKS = BlockBehaviour.Properties.of().sound(SoundType.GLASS).mapColor(MapColor.ICE).strength(5.2f, 3.0f);
-
-    public static final BlockBehaviour.Properties ICE_DOOR = BlockBehaviour.Properties.of().sound(SoundType.GLASS).mapColor(MapColor.ICE).strength(3.0f, 5.0f);
-    public static final BlockBehaviour.Properties ICE_TRAPDOOR = BlockBehaviour.Properties.of().sound(SoundType.GLASS).mapColor(MapColor.ICE).strength(3.0f, 5.0f);
-    public static final BlockBehaviour.Properties ICE_LANTERN = BlockBehaviour.Properties.of().requiresCorrectToolForDrops().sound(SoundType.GLASS).lightLevel(litBlockEmission(15)).strength(3.0f).mapColor(MapColor.ICE);
 
     public static final BlockBehaviour.Properties PAPER_LANTERN = BlockBehaviour.Properties.of().lightLevel(light -> 15).strength(0.3f).sound(SoundType.WOOL).mapColor(MapColor.GOLD).forceSolidOn().ignitedByLava();
     public static final BlockBehaviour.Properties ORNAMENT = BlockBehaviour.Properties.of().instabreak().sound(SoundType.WOOL).mapColor(MapColor.COLOR_RED).ignitedByLava().isSuffocating(PMProperties::never).isViewBlocking(PMProperties::never).isRedstoneConductor(PMProperties::never).isValidSpawn(PMProperties::never).noCollission().pushReaction(PushReaction.DESTROY);

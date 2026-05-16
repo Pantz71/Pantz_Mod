@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "count": 2,
-  "ingredient": {
-    "item": "minecraft:blue_ice"
-  },
-  "result": "pantz_mod:blue_ice_brick_slab"
-}

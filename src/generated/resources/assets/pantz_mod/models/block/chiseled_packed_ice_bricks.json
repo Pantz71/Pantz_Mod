@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/cube_all",
-  "textures": {
-    "all": "pantz_mod:block/chiseled_packed_ice_bricks"
-  }
-}

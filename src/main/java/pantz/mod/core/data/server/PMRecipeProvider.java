@@ -41,9 +41,7 @@ import static pantz.mod.core.registry.PMItems.*;
 
 public class PMRecipeProvider extends BlueprintRecipeProvider {
     private static final ModLoadedCondition CAVERNS_AND_CHASMS = new ModLoadedCondition(PMConstant.CAVERNS_AND_CHASMS);
-    private static final NotCondition NOT_CAVERNS_AND_CHASMS = new NotCondition(CAVERNS_AND_CHASMS);
     private static final ConfigValueCondition FLINT_AND_STEEL = config(COMMON.flintAndSteel, "flint_and_steel");
-    private static final NotCondition NOT_FLINT_AND_STEEL = new NotCondition(FLINT_AND_STEEL);
     private static final ConfigValueCondition ENTITY_FILTERING = config(COMMON.enableEntityFilter, "entity_filter");
     private static final ConfigValueCondition REQUIRE_CACTUS_KEY = config(COMMON.enableCactusKey, "cactus_key");
     private static final ConfigValueCondition CRAFTABLE_SPONGE = config(COMMON.craftableSponge, "craftable_sponge");
@@ -71,7 +69,7 @@ public class PMRecipeProvider extends BlueprintRecipeProvider {
                         .unlockedBy(getHasName(Items.OBSIDIAN), has(Tags.Items.OBSIDIAN)),
                 PantzMod.location("flint_and_steel"));
 
-        conditionalRecipe(consumer, NOT_FLINT_AND_STEEL, TOOLS,
+        conditionalRecipe(consumer, new NotCondition(FLINT_AND_STEEL), TOOLS,
                 ShapelessRecipeBuilder.shapeless(TOOLS, Items.FLINT_AND_STEEL)
                         .requires(Tags.Items.INGOTS_IRON)
                         .requires(Items.FLINT)
@@ -241,7 +239,7 @@ public class PMRecipeProvider extends BlueprintRecipeProvider {
                         .pattern(" # ")
                         .unlockedBy(getHasName(Items.ROTTEN_FLESH), has(Items.ROTTEN_FLESH)));
 
-        conditionalRecipe(consumer, NOT_CAVERNS_AND_CHASMS, REDSTONE,
+        conditionalRecipe(consumer, new NotCondition(CAVERNS_AND_CHASMS), REDSTONE,
                 ShapedRecipeBuilder.shaped(REDSTONE, ENTITY_DETECTOR.get())
                         .define('_', Tags.Items.INGOTS_IRON).define('7', Tags.Items.GEMS_LAPIS)
                         .define('#', Blocks.GLASS)
@@ -368,12 +366,12 @@ public class PMRecipeProvider extends BlueprintRecipeProvider {
                 .unlockedBy(getHasName(Items.STRING), has(Tags.Items.STRING))
                 .save(consumer);
 
-        mineralGlassBuilder(QUARTZ_GLASS.get(), Tags.Items.GEMS_QUARTZ, BUILDING_BLOCKS).unlockedBy(getHasName(Items.QUARTZ), has(Tags.Items.GEMS_QUARTZ)).save(consumer);
-        mineralGlassBuilder(LAPIS_GLASS.get(), Tags.Items.GEMS_LAPIS, BUILDING_BLOCKS).unlockedBy(getHasName(Items.LAPIS_LAZULI), has(Tags.Items.GEMS_LAPIS)).save(consumer);
-        mineralGlassBuilder(REDSTONE_GLASS.get(), Tags.Items.DUSTS_REDSTONE, BUILDING_BLOCKS).unlockedBy(getHasName(Items.REDSTONE), has(Tags.Items.DUSTS_REDSTONE)).save(consumer);
-        glassPaneBuilder(QUARTZ_GLASS_PANE.get(), QUARTZ_GLASS.get(), DECORATIONS).unlockedBy(getHasName(QUARTZ_GLASS.get()), has(PMItemTags.GLASS_QUARTZ)).save(consumer);
-        glassPaneBuilder(LAPIS_GLASS_PANE.get(), LAPIS_GLASS.get(), DECORATIONS).unlockedBy(getHasName(LAPIS_GLASS.get()), has(PMItemTags.GLASS_LAPIS)).save(consumer);
-        glassPaneBuilder(REDSTONE_GLASS_PANE.get(), REDSTONE_GLASS.get(), DECORATIONS).unlockedBy(getHasName(REDSTONE_GLASS.get()), has(PMItemTags.GLASS_REDSTONE)).save(consumer);
+        mineralGlassBuilder(CHORUS_GLASS.get(), Blocks.CHORUS_FLOWER, BUILDING_BLOCKS).unlockedBy(getHasName(Blocks.CHORUS_PLANT), has(Blocks.CHORUS_PLANT)).save(consumer);
+        mineralGlassBuilder(SOUL_GLASS.get(), Blocks.SOUL_SAND, BUILDING_BLOCKS).unlockedBy(getHasName(Blocks.SOUL_SAND), has(Blocks.SOUL_SAND)).save(consumer);
+        mineralGlassBuilder(ECHO_GLASS.get(), Items.ECHO_SHARD, BUILDING_BLOCKS).unlockedBy(getHasName(Items.ECHO_SHARD), has(Items.ECHO_SHARD)).save(consumer);
+        glassPaneBuilder(CHORUS_GLASS_PANE.get(), CHORUS_GLASS.get(), DECORATIONS).unlockedBy(getHasName(CHORUS_GLASS.get()), has(PMItemTags.GLASS_CHORUS)).save(consumer);
+        glassPaneBuilder(SOUL_GLASS_PANE.get(), SOUL_GLASS.get(), DECORATIONS).unlockedBy(getHasName(SOUL_GLASS.get()), has(PMItemTags.GLASS_SOUL)).save(consumer);
+        glassPaneBuilder(ECHO_GLASS_PANE.get(), ECHO_GLASS.get(), DECORATIONS).unlockedBy(getHasName(ECHO_GLASS.get()), has(PMItemTags.GLASS_ECHO)).save(consumer);
 
         ShapedRecipeBuilder.shaped(DECORATIONS, WHITE_PAPER_LANTERN.get())
                 .define('#', Items.PAPER).define('i', Blocks.TORCH)
@@ -426,6 +424,7 @@ public class PMRecipeProvider extends BlueprintRecipeProvider {
         // ----------------------
 
         // --- Ice ---
+        /*
         generateRecipes(consumer, PMBlockFamilies.SNOW_BRICKS_FAMILY);
         generateRecipes(consumer, PMBlockFamilies.PACKED_ICE_BRICKS_FAMILY);
         generateRecipes(consumer, PMBlockFamilies.BLUE_ICE_BRICKS_FAMILY);
@@ -455,6 +454,7 @@ public class PMRecipeProvider extends BlueprintRecipeProvider {
                 .pattern("***")
                 .unlockedBy(getHasName(Items.IRON_INGOT), has(Tags.Items.INGOTS_IRON))
                 .save(consumer);
+         */
         // ----------------------
 
 
@@ -641,7 +641,7 @@ public class PMRecipeProvider extends BlueprintRecipeProvider {
                 .pattern("###").pattern("###");
     }
 
-    private static RecipeBuilder mineralGlassBuilder(ItemLike glass, TagKey<Item> ingredient, RecipeCategory category) {
+    private static RecipeBuilder mineralGlassBuilder(ItemLike glass, ItemLike ingredient, RecipeCategory category) {
         return ShapedRecipeBuilder.shaped(category, glass, 8).define('#', Tags.Items.GLASS_COLORLESS).define('@', ingredient)
                 .pattern("###").pattern("#@#").pattern("###");
     }

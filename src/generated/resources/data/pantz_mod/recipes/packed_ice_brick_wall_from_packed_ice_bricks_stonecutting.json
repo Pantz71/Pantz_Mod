@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "count": 1,
-  "ingredient": {
-    "item": "pantz_mod:packed_ice_bricks"
-  },
-  "result": "pantz_mod:packed_ice_brick_wall"
-}

@@ -87,15 +87,15 @@ public class PMBlocks {
     public static final RegistryObject<Block> XNOR_GATE = BLOCKS.createBlock("xnor_gate", () -> new LogicGateBlock(PMProperties.DIODE, LogicGateConditions.XNOR));
     public static final RegistryObject<Block> XOR_GATE = BLOCKS.createBlock("xor_gate", () -> new LogicGateBlock(PMProperties.DIODE, LogicGateConditions.XOR));
 
-    public static final RegistryObject<Block> ADVANCED_AND_GATE = BLOCKS.createBlock("advanced_and_gate", () -> new AdvancedLogicGateBlock(PMProperties.DIODE, LogicGateConditions.ADVANCED_AND));
-    public static final RegistryObject<Block> ADVANCED_OR_GATE = BLOCKS.createBlock("advanced_or_gate", () -> new AdvancedLogicGateBlock(PMProperties.DIODE, LogicGateConditions.ADVANCED_OR));
-    public static final RegistryObject<Block> ADVANCED_NOR_GATE = BLOCKS.createBlock("advanced_nor_gate", () -> new AdvancedLogicGateBlock(PMProperties.DIODE, LogicGateConditions.ADVANCED_NOR));
-    public static final RegistryObject<Block> ADVANCED_NAND_GATE = BLOCKS.createBlock("advanced_nand_gate", () -> new AdvancedLogicGateBlock(PMProperties.DIODE, LogicGateConditions.ADVANCED_NAND));
-    public static final RegistryObject<Block> ADVANCED_XNOR_GATE = BLOCKS.createBlock("advanced_xnor_gate", () -> new AdvancedLogicGateBlock(PMProperties.DIODE, LogicGateConditions.ADVANCED_XNOR));
-    public static final RegistryObject<Block> ADVANCED_XOR_GATE = BLOCKS.createBlock("advanced_xor_gate", () -> new AdvancedLogicGateBlock(PMProperties.DIODE, LogicGateConditions.ADVANCED_XOR));
+    public static final RegistryObject<Block> ADVANCED_AND_GATE = BLOCKS.createBlock("advanced_and_gate", () -> new AdvancedLogicGateBlock(PMProperties.ADVANCED_DIODE, LogicGateConditions.ADVANCED_AND));
+    public static final RegistryObject<Block> ADVANCED_OR_GATE = BLOCKS.createBlock("advanced_or_gate", () -> new AdvancedLogicGateBlock(PMProperties.ADVANCED_DIODE, LogicGateConditions.ADVANCED_OR));
+    public static final RegistryObject<Block> ADVANCED_NOR_GATE = BLOCKS.createBlock("advanced_nor_gate", () -> new AdvancedLogicGateBlock(PMProperties.ADVANCED_DIODE, LogicGateConditions.ADVANCED_NOR));
+    public static final RegistryObject<Block> ADVANCED_NAND_GATE = BLOCKS.createBlock("advanced_nand_gate", () -> new AdvancedLogicGateBlock(PMProperties.ADVANCED_DIODE, LogicGateConditions.ADVANCED_NAND));
+    public static final RegistryObject<Block> ADVANCED_XNOR_GATE = BLOCKS.createBlock("advanced_xnor_gate", () -> new AdvancedLogicGateBlock(PMProperties.ADVANCED_DIODE, LogicGateConditions.ADVANCED_XNOR));
+    public static final RegistryObject<Block> ADVANCED_XOR_GATE = BLOCKS.createBlock("advanced_xor_gate", () -> new AdvancedLogicGateBlock(PMProperties.ADVANCED_DIODE, LogicGateConditions.ADVANCED_XOR));
 
-    public static final RegistryObject<Block> MAJORITY_GATE = BLOCKS.createBlock("majority_gate", () -> new AdvancedLogicGateBlock(PMProperties.DIODE, LogicGateConditions.MAJORITY));
-    public static final RegistryObject<Block> MINORITY_GATE = BLOCKS.createBlock("minority_gate", () -> new AdvancedLogicGateBlock(PMProperties.DIODE, LogicGateConditions.MINORITY));
+    public static final RegistryObject<Block> MAJORITY_GATE = BLOCKS.createBlock("majority_gate", () -> new AdvancedLogicGateBlock(PMProperties.ADVANCED_DIODE, LogicGateConditions.MAJORITY));
+    public static final RegistryObject<Block> MINORITY_GATE = BLOCKS.createBlock("minority_gate", () -> new AdvancedLogicGateBlock(PMProperties.ADVANCED_DIODE, LogicGateConditions.MINORITY));
 
     public static final RegistryObject<Block> EARTH_GLOBE = BLOCKS.createCustomRarityBlock("earth_globe", Rarity.UNCOMMON, () -> new GlobeBlock(PMProperties.GLOBE, PantzMod.location("planets/earth")));
     public static final RegistryObject<Block> MERCURY_GLOBE = BLOCKS.createCustomRarityBlock("mercury_globe", Rarity.UNCOMMON, () -> new GlobeBlock(PMProperties.GLOBE, PantzMod.location("planets/mercury")));
@@ -145,37 +145,12 @@ public class PMBlocks {
     public static final RegistryObject<Block> ENDERPORTER = BLOCKS.createBlock("enderporter", () -> new EnderporterBlock(PMProperties.ENDERPORTER));
     public static final RegistryObject<Block> ROPE_LADDER = BLOCKS.createBlock("rope_ladder", () -> new RopeLadderBlock(BlockBehaviour.Properties.copy(Blocks.LADDER)));
 
-    public static final RegistryObject<Block> QUARTZ_GLASS = BLOCKS.createBlock("quartz_glass", () -> new QuartzGlassBlock(PMProperties.QUARTZ_GLASS));
-    public static final RegistryObject<Block> QUARTZ_GLASS_PANE = BLOCKS.createBlock("quartz_glass_pane", () -> new QuartzGlassPaneBlock(PMProperties.QUARTZ_GLASS_PANE));
-    public static final RegistryObject<Block> LAPIS_GLASS = BLOCKS.createBlock("lapis_glass", () -> new LapisGlassBlock(PMProperties.LAPIS_GLASS));
-    public static final RegistryObject<Block> LAPIS_GLASS_PANE = BLOCKS.createBlock("lapis_glass_pane", () -> new LapisGlassPaneBlock(PMProperties.LAPIS_GLASS_PANE));
-    public static final RegistryObject<Block> REDSTONE_GLASS = BLOCKS.createBlock("redstone_glass", () -> new RedstoneGlassBlock(PMProperties.REDSTONE_GLASS));
-    public static final RegistryObject<Block> REDSTONE_GLASS_PANE = BLOCKS.createBlock("redstone_glass_pane", () -> new RedstoneGlassPaneBlock(PMProperties.REDSTONE_GLASS_PANE));
-
-    public static final RegistryObject<Block> SNOW_BRICKS = BLOCKS.createBlock("snow_bricks", () -> new Block(PMProperties.SNOW_BRICKS));
-    public static final RegistryObject<Block> SNOW_BRICK_STAIRS = BLOCKS.createBlock("snow_brick_stairs", () -> new StairBlock(() -> SNOW_BRICKS.get().defaultBlockState(), PMProperties.SNOW_BRICKS));
-    public static final RegistryObject<Block> SNOW_BRICK_SLAB = BLOCKS.createBlock("snow_brick_slab", () -> new SlabBlock(PMProperties.SNOW_BRICKS));
-    public static final RegistryObject<Block> SNOW_BRICK_WALL = BLOCKS.createBlock("snow_brick_wall", () -> new WallBlock(PMProperties.SNOW_BRICKS));
-
-    public static final RegistryObject<Block> PACKED_ICE_BRICKS = BLOCKS.createBlock("packed_ice_bricks", () -> new Block(PMProperties.PACKED_ICE_BRICKS));
-    public static final RegistryObject<Block> PACKED_ICE_BRICK_STAIRS = BLOCKS.createBlock("packed_ice_brick_stairs", () -> new StairBlock(() -> PACKED_ICE_BRICKS.get().defaultBlockState(), PMProperties.PACKED_ICE_BRICKS));
-    public static final RegistryObject<Block> PACKED_ICE_BRICK_SLAB = BLOCKS.createBlock("packed_ice_brick_slab", () -> new SlabBlock(PMProperties.PACKED_ICE_BRICKS));
-    public static final RegistryObject<Block> PACKED_ICE_BRICK_WALL = BLOCKS.createBlock("packed_ice_brick_wall", () -> new WallBlock(PMProperties.PACKED_ICE_BRICKS));
-    public static final RegistryObject<Block> CHISELED_PACKED_ICE_BRICKS = BLOCKS.createBlock("chiseled_packed_ice_bricks", () -> new Block(PMProperties.PACKED_ICE_BRICKS));
-
-    public static final RegistryObject<Block> PACKED_ICE_DOOR = BLOCKS.createBlock("packed_ice_door", () -> new DoorBlock(PMProperties.ICE_DOOR, PMProperties.ICE));
-    public static final RegistryObject<Block> PACKED_ICE_TRAPDOOR = BLOCKS.createBlock("packed_ice_trapdoor", () -> new TrapDoorBlock(PMProperties.ICE_TRAPDOOR, PMProperties.ICE));
-
-    public static final RegistryObject<Block> BLUE_ICE_BRICKS = BLOCKS.createBlock("blue_ice_bricks", () -> new Block(PMProperties.BLUE_ICE_BRICKS));
-    public static final RegistryObject<Block> BLUE_ICE_BRICK_STAIRS = BLOCKS.createBlock("blue_ice_brick_stairs", () -> new StairBlock(() -> BLUE_ICE_BRICKS.get().defaultBlockState(), PMProperties.BLUE_ICE_BRICKS));
-    public static final RegistryObject<Block> BLUE_ICE_BRICK_SLAB = BLOCKS.createBlock("blue_ice_brick_slab", () -> new SlabBlock(PMProperties.BLUE_ICE_BRICKS));
-    public static final RegistryObject<Block> BLUE_ICE_BRICK_WALL = BLOCKS.createBlock("blue_ice_brick_wall", () -> new WallBlock(PMProperties.BLUE_ICE_BRICKS));
-    public static final RegistryObject<Block> CHISELED_BLUE_ICE_BRICKS = BLOCKS.createBlock("chiseled_blue_ice_bricks", () -> new Block(PMProperties.BLUE_ICE_BRICKS));
-
-    public static final RegistryObject<Block> BLUE_ICE_DOOR = BLOCKS.createBlock("blue_ice_door", () -> new DoorBlock(PMProperties.ICE_DOOR, PMProperties.ICE));
-    public static final RegistryObject<Block> BLUE_ICE_TRAPDOOR = BLOCKS.createBlock("blue_ice_trapdoor", () -> new TrapDoorBlock(PMProperties.ICE_TRAPDOOR, PMProperties.ICE));
-
-    public static final RegistryObject<Block> ICE_LANTERN = BLOCKS.createBlock("ice_lantern", () -> new IceLanternBlock(PMProperties.ICE_LANTERN));
+    public static final RegistryObject<Block> CHORUS_GLASS = BLOCKS.createBlock("chorus_glass", () -> new ChorusGlassBlock(PMProperties.QUARTZ_GLASS));
+    public static final RegistryObject<Block> CHORUS_GLASS_PANE = BLOCKS.createBlock("chorus_glass_pane", () -> new ChorusGlassPaneBlock(PMProperties.QUARTZ_GLASS_PANE));
+    public static final RegistryObject<Block> SOUL_GLASS = BLOCKS.createBlock("soul_glass", () -> new SoulGlassBlock(PMProperties.LAPIS_GLASS));
+    public static final RegistryObject<Block> SOUL_GLASS_PANE = BLOCKS.createBlock("soul_glass_pane", () -> new SoulGlassPaneBlock(PMProperties.LAPIS_GLASS_PANE));
+    public static final RegistryObject<Block> ECHO_GLASS = BLOCKS.createBlock("echo_glass", () -> new EchoGlassBlock(PMProperties.REDSTONE_GLASS));
+    public static final RegistryObject<Block> ECHO_GLASS_PANE = BLOCKS.createBlock("echo_glass_pane", () -> new EchoGlassPaneBlock(PMProperties.REDSTONE_GLASS_PANE));
 
     public static final RegistryObject<Block> WHITE_PAPER_LANTERN = BLOCKS.createBlock("white_paper_lantern", () -> new PaperLanternBlock(PMProperties.PAPER_LANTERN));
     public static final RegistryObject<Block> ORANGE_PAPER_LANTERN = BLOCKS.createBlock("orange_paper_lantern", () -> new PaperLanternBlock(PMProperties.PAPER_LANTERN));
@@ -205,12 +180,13 @@ public class PMBlocks {
     public static final RegistryObject<Block> SPIKE = BLOCKS.createBlock("spike", () -> new SpikeBlock(PMProperties.SPIKE));
     public static final RegistryObject<Block> SPRINKLER = BLOCKS.createBlock("sprinkler", () -> new SprinklerBlock(PMProperties.SPRINKLER));
 
+    // TODO: Update texture for Steel Door, Steel Trapdoor, Dynamites, Magic Glasses
+    // TODO: Port Warden Defeated Loot condition to NeoForge
+    // TODO: Update ORNAMENT_LUCKY_COINS' model
+    // TODO: Remove Packed Ice Bricks, Blue Ice Bricks, Snow Bricks on NeoForge
     public static void setupTabs() {
         CreativeModeTabContentsPopulator.mod(PantzMod.MOD_ID)
                 .tab(BUILDING_BLOCKS)
-                .addItemsBefore(of(Blocks.NETHERRACK), () -> Blocks.SNOW_BLOCK, SNOW_BRICKS, SNOW_BRICK_STAIRS, SNOW_BRICK_SLAB, SNOW_BRICK_WALL, () -> Blocks.PACKED_ICE, PACKED_ICE_BRICKS, PACKED_ICE_BRICK_STAIRS, PACKED_ICE_BRICK_SLAB, PACKED_ICE_BRICK_WALL, CHISELED_PACKED_ICE_BRICKS, PACKED_ICE_DOOR, PACKED_ICE_TRAPDOOR,
-                        () -> Blocks.BLUE_ICE, BLUE_ICE_BRICKS, BLUE_ICE_BRICK_STAIRS, BLUE_ICE_BRICK_SLAB, BLUE_ICE_BRICK_WALL, CHISELED_BLUE_ICE_BRICKS, BLUE_ICE_DOOR, BLUE_ICE_TRAPDOOR)
-
                 .addItemsBefore(of(Blocks.GOLD_BLOCK), STEEL_BLOCK)
                 .addItemsBefore(modLoaded(Blocks.GOLD_BLOCK, PMConstant.CAVERNS_AND_CHASMS), STEEL_BRICKS, STEEL_BRICK_STAIRS, STEEL_BRICK_SLAB, STEEL_BRICK_WALL, CHISELED_STEEL_BRICKS, STEEL_BARS)
                 .addItemsBefore(of(Blocks.GOLD_BLOCK), STEEL_DOOR, STEEL_TRAPDOOR)
@@ -223,11 +199,11 @@ public class PMBlocks {
                 .addItemsAfter(of(Blocks.NETHER_QUARTZ_ORE), NETHER_SULFUR_ORE)
 
                 .tab(FUNCTIONAL_BLOCKS)
-                .addItemsBefore(of(Blocks.TINTED_GLASS), QUARTZ_GLASS, QUARTZ_GLASS_PANE, LAPIS_GLASS, LAPIS_GLASS_PANE, REDSTONE_GLASS, REDSTONE_GLASS_PANE)
+                .addItemsBefore(of(Blocks.TINTED_GLASS), CHORUS_GLASS, CHORUS_GLASS_PANE, SOUL_GLASS, SOUL_GLASS_PANE, ECHO_GLASS, ECHO_GLASS_PANE)
                 .addItemsBefore(of(Items.PAINTING), ITEM_STAND, GLOW_ITEM_STAND)
                 .addItemsBefore(of(Blocks.SCAFFOLDING), ROPE_LADDER)
                 .addItemsBefore(of(Blocks.BARREL), TRASH_CAN, SAFE)
-                .addItemsBefore(of(Blocks.CHAIN), STEEL_LANTERN, ICE_LANTERN,
+                .addItemsBefore(of(Blocks.CHAIN), STEEL_LANTERN,
                         WHITE_PAPER_LANTERN, ORANGE_PAPER_LANTERN, MAGENTA_PAPER_LANTERN,
                         LIGHT_BLUE_PAPER_LANTERN, YELLOW_PAPER_LANTERN, LIME_PAPER_LANTERN, PINK_PAPER_LANTERN, GRAY_PAPER_LANTERN, LIGHT_GRAY_PAPER_LANTERN,
                         CYAN_PAPER_LANTERN, PURPLE_PAPER_LANTERN, BLUE_PAPER_LANTERN, BROWN_PAPER_LANTERN, GREEN_PAPER_LANTERN, RED_PAPER_LANTERN, BLACK_PAPER_LANTERN)
@@ -253,8 +229,8 @@ public class PMBlocks {
                 .addItemsAfter(of(Blocks.DAYLIGHT_DETECTOR), WEATHER_DETECTOR, ENTITY_DETECTOR)
 
                 .tab(COLORED_BLOCKS)
-                .addItemsBefore(of(Blocks.TINTED_GLASS), QUARTZ_GLASS, LAPIS_GLASS, REDSTONE_GLASS)
-                .addItemsBefore(of(Blocks.WHITE_STAINED_GLASS_PANE), QUARTZ_GLASS_PANE, LAPIS_GLASS_PANE, REDSTONE_GLASS_PANE)
+                .addItemsBefore(of(Blocks.TINTED_GLASS), CHORUS_GLASS, SOUL_GLASS, ECHO_GLASS)
+                .addItemsBefore(of(Blocks.WHITE_STAINED_GLASS_PANE), CHORUS_GLASS_PANE, SOUL_GLASS_PANE, ECHO_GLASS_PANE)
                 .addItems(() -> Blocks.REDSTONE_LAMP, WHITE_REDSTONE_LAMP, ORANGE_REDSTONE_LAMP, MAGENTA_REDSTONE_LAMP,
                         LIGHT_BLUE_REDSTONE_LAMP, YELLOW_REDSTONE_LAMP, LIME_REDSTONE_LAMP, PINK_REDSTONE_LAMP, GRAY_REDSTONE_LAMP, LIGHT_GRAY_REDSTONE_LAMP,
                         CYAN_REDSTONE_LAMP, PURPLE_REDSTONE_LAMP, BLUE_REDSTONE_LAMP, BROWN_REDSTONE_LAMP, GREEN_REDSTONE_LAMP, RED_REDSTONE_LAMP, BLACK_REDSTONE_LAMP,

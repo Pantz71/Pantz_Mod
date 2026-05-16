@@ -29,22 +29,18 @@ public class PMBlockTagsProvider extends BlockTagsProvider {
     @Override
     protected void addTags(HolderLookup.Provider provider) {
         this.tag(BlockTags.MINEABLE_WITH_PICKAXE).addTag(PEDESTALS).add(STEEL_BLOCK.get(), STEEL_BARS.get(), STEEL_DOOR.get(), STEEL_TRAPDOOR.get(), STEEL_LANTERN.get(),
-                STEEL_BRICKS.get(), STEEL_BRICK_STAIRS.get(), STEEL_BRICK_SLAB.get(), STEEL_BRICK_WALL.get(), CHISELED_SULFUR_BRICKS.get(), STEEL_INGOT.get(),
+                STEEL_BRICKS.get(), STEEL_BRICK_STAIRS.get(), STEEL_BRICK_SLAB.get(), STEEL_BRICK_WALL.get(), STEEL_INGOT.get(),
                 SULFUR.get(), SULFUR_BLOCK.get(), POLISHED_SULFUR.get(), POLISHED_SULFUR_STAIRS.get(), POLISHED_SULFUR_SLAB.get(), POLISHED_SULFUR_WALL.get(),
-                SULFUR_BRICKS.get(), SULFUR_BRICK_STAIRS.get(), SULFUR_BRICK_SLAB.get(), NETHER_SULFUR_ORE.get(), SULFUR_LAMP.get(),
+                SULFUR_BRICKS.get(), SULFUR_BRICK_STAIRS.get(), SULFUR_BRICK_SLAB.get(), CHISELED_SULFUR_BRICKS.get(), NETHER_SULFUR_ORE.get(), SULFUR_LAMP.get(),
                 SULFUR_CLUSTER.get(), SMALL_SULFUR_BUD.get(), MEDIUM_SULFUR_BUD.get(), LARGE_SULFUR_BUD.get(),
                 ENDER_SCANNER.get(), WEATHER_DETECTOR.get(), ENTITY_DETECTOR.get(), TRASH_CAN.get(), ENDERPORTER.get(), REDSTONE_CONFIGURATOR.get(),
-                SNOW_BRICKS.get(), SNOW_BRICK_STAIRS.get(), SNOW_BRICK_SLAB.get(),
-                PACKED_ICE_BRICKS.get(), PACKED_ICE_BRICK_STAIRS.get(), PACKED_ICE_BRICK_SLAB.get(), CHISELED_PACKED_ICE_BRICKS.get(),
-                BLUE_ICE_BRICKS.get(), BLUE_ICE_BRICK_STAIRS.get(), BLUE_ICE_BRICK_SLAB.get(), CHISELED_BLUE_ICE_BRICKS.get(),
-                PACKED_ICE_DOOR.get(), PACKED_ICE_TRAPDOOR.get(), BLUE_ICE_DOOR.get(), BLUE_ICE_TRAPDOOR.get(), ICE_LANTERN.get(),
                 SAFE.get(), SPIKE.get());
 
         this.tag(BlockTags.MINEABLE_WITH_AXE).add(LOCK.get(), UNIVERSAL_LOCK.get(), SPRINKLER.get());
         this.tag(BlockTags.NEEDS_STONE_TOOL).add(STEEL_BLOCK.get(), STEEL_BARS.get(), STEEL_DOOR.get(), STEEL_TRAPDOOR.get(), STEEL_LANTERN.get(),
-                STEEL_BRICKS.get(), STEEL_BRICK_STAIRS.get(), STEEL_BRICK_SLAB.get(), STEEL_BRICK_WALL.get(), CHISELED_SULFUR_BRICKS.get(), STEEL_INGOT.get(),
+                STEEL_BRICKS.get(), STEEL_BRICK_STAIRS.get(), STEEL_BRICK_SLAB.get(), STEEL_BRICK_WALL.get(), STEEL_INGOT.get(),
                 SULFUR.get(), SULFUR_BLOCK.get(), POLISHED_SULFUR.get(), POLISHED_SULFUR_STAIRS.get(), POLISHED_SULFUR_SLAB.get(), POLISHED_SULFUR_WALL.get(),
-                SULFUR_BRICKS.get(), SULFUR_BRICK_STAIRS.get(), SULFUR_BRICK_SLAB.get(), NETHER_SULFUR_ORE.get(), SULFUR_LAMP.get(),
+                SULFUR_BRICKS.get(), SULFUR_BRICK_STAIRS.get(), SULFUR_BRICK_SLAB.get(), CHISELED_SULFUR_BRICKS.get(), NETHER_SULFUR_ORE.get(), SULFUR_LAMP.get(),
                 SULFUR_CLUSTER.get(), SMALL_SULFUR_BUD.get(), MEDIUM_SULFUR_BUD.get(), LARGE_SULFUR_BUD.get(),
                 REDSTONE_CONFIGURATOR.get(), ENTITY_DETECTOR.get(), TRASH_CAN.get(), ENDERPORTER.get(), SAFE.get());
 
@@ -66,15 +62,15 @@ public class PMBlockTagsProvider extends BlockTagsProvider {
         this.tag(Tags.Blocks.ORES_IN_GROUND_DEEPSLATE).add(DEEPSLATE_SULFUR_ORE.get());
         this.tag(Tags.Blocks.ORES_IN_GROUND_NETHERRACK).add(NETHER_SULFUR_ORE.get());
 
-        this.tag(GLASS_QUARTZ).add(QUARTZ_GLASS.get());
-        this.tag(GLASS_LAPIS).add(LAPIS_GLASS.get());
-        this.tag(GLASS_REDSTONE).add(REDSTONE_GLASS.get());
-        this.tag(GLASS_PANES_QUARTZ).add(QUARTZ_GLASS_PANE.get());
-        this.tag(GLASS_PANES_LAPIS).add(LAPIS_GLASS_PANE.get());
-        this.tag(GLASS_PANES_REDSTONE).add(REDSTONE_GLASS_PANE.get());
+        this.tag(GLASS_CHORUS).add(CHORUS_GLASS.get());
+        this.tag(GLASS_SOUL).add(SOUL_GLASS.get());
+        this.tag(GLASS_ECHO).add(ECHO_GLASS.get());
+        this.tag(GLASS_PANES_CHORUS).add(CHORUS_GLASS_PANE.get());
+        this.tag(GLASS_PANES_SOUL).add(SOUL_GLASS_PANE.get());
+        this.tag(GLASS_PANES_ECHO).add(ECHO_GLASS_PANE.get());
 
-        this.tag(Tags.Blocks.GLASS).addTag(GLASS_QUARTZ).addTag(GLASS_LAPIS).addTag(GLASS_REDSTONE);
-        this.tag(Tags.Blocks.GLASS_PANES).addTag(GLASS_PANES_QUARTZ).addTag(GLASS_PANES_LAPIS).addTag(GLASS_PANES_REDSTONE);
+        this.tag(Tags.Blocks.GLASS).addTag(GLASS_CHORUS).addTag(GLASS_SOUL).addTag(GLASS_ECHO);
+        this.tag(Tags.Blocks.GLASS_PANES).addTag(GLASS_PANES_CHORUS).addTag(GLASS_PANES_SOUL).addTag(GLASS_PANES_ECHO);
 
         BLOCKS.getDeferredRegister().getEntries().forEach((registry -> {
             Block block = registry.get();

@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "#": {
+      "tag": "forge:glass/colorless"
+    },
+    "@": {
+      "item": "minecraft:chorus_flower"
+    }
+  },
+  "pattern": [
+    "###",
+    "#@#",
+    "###"
+  ],
+  "result": {
+    "count": 8,
+    "item": "pantz_mod:chorus_glass"
+  },
+  "show_notification": true
+}

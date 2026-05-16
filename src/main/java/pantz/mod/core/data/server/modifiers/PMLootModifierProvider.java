@@ -2,10 +2,13 @@ package pantz.mod.core.data.server.modifiers;
 
 import com.teamabnormals.blueprint.common.loot.modification.LootModifierProvider;
 import com.teamabnormals.blueprint.common.loot.modification.modifiers.LootPoolEntriesModifier;
+import net.minecraft.advancements.critereon.LocationPredicate;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
@@ -14,7 +17,10 @@ import net.minecraft.world.level.storage.loot.functions.EnchantRandomlyFunction;
 import net.minecraft.world.level.storage.loot.functions.EnchantWithLevelsFunction;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.functions.SetItemDamageFunction;
+import net.minecraft.world.level.storage.loot.predicates.LocationCheck;
+import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
+import pantz.mod.common.loot.WardenDefeatedCondition;
 import pantz.mod.core.PantzMod;
 import pantz.mod.core.registry.PMItems;
 
@@ -25,6 +31,9 @@ import static pantz.mod.core.registry.PMBlocks.*;
 import static pantz.mod.core.registry.PMItems.*;
 
 public class PMLootModifierProvider extends LootModifierProvider {
+    private static final LootItemCondition.Builder WARDEN_DEFEATED = WardenDefeatedCondition.wardenDefeated();
+    private static final LootItemCondition.Builder IN_DEEP_DARK = LocationCheck.checkLocation(LocationPredicate.Builder.location().setBiome(Biomes.DEEP_DARK));
+
     public PMLootModifierProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider) {
         super(PantzMod.MOD_ID, output, lookupProvider);
     }
@@ -219,8 +228,17 @@ public class PMLootModifierProvider extends LootModifierProvider {
         this.entry("piglin_bartering").selects(BuiltInLootTables.PIGLIN_BARTERING)
                 .addModifier(new LootPoolEntriesModifier(false, 0,
                         List.of(
-                                lootPool(Blocks.GILDED_BLACKSTONE, 30, 4, 10)
+                                lootPool(Blocks.GILDED_BLACKSTONE, 40, 4, 10),
+                                lootPool(Blocks.NETHERRACK, 40, 8, 16),
+                                lootPool(Blocks.SOUL_SOIL, 40, 2, 8)
                         )));
+
+        this.entry("fishing/treasure").selects(BuiltInLootTables.FISHING_TREASURE)
+                .addModifier(new LootPoolEntriesModifier(false, 0,
+                        List.of(
+                                LootItem.lootTableItem(Items.ECHO_SHARD).when(WARDEN_DEFEATED.and(IN_DEEP_DARK)).build()
+                        )));
+
     }
 
     private static LootPoolEntryContainer lootPool(ItemLike item, int weight) {

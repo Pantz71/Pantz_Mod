@@ -12,6 +12,7 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.monster.warden.Warden;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ThrownEnderpearl;
 import net.minecraft.world.entity.projectile.ThrownPotion;
@@ -25,6 +26,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.entity.EntityTeleportEvent;
 import net.minecraftforge.event.entity.ProjectileImpactEvent;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.*;
 import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.eventbus.api.Event;
@@ -32,12 +34,12 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import pantz.mod.common.block.ItemStandBlock;
 import pantz.mod.common.block.PedestalBlock;
-import pantz.mod.common.block.entity.EntityDetectorBlockEntity;
 import pantz.mod.common.block.entity.PedestalBlockEntity;
 import pantz.mod.common.block.entity.SpikeBlockEntity;
 import pantz.mod.common.item.AreaDiggerItem;
 import pantz.mod.common.item.EntityFilterItem;
 import pantz.mod.common.utils.*;
+import pantz.mod.common.world.WardenWorldData;
 import pantz.mod.core.PantzMod;
 import pantz.mod.core.registry.PMSoundEvents;
 
@@ -48,6 +50,18 @@ import java.util.UUID;
 @Mod.EventBusSubscriber(modid = PantzMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class PMEvents {
 
+    @SubscribeEvent
+    public static void onLivingDeath(LivingDeathEvent event) {
+        if (!(event.getEntity() instanceof Warden)) return;
+        if (!(event.getSource().getEntity() instanceof Player player)) return;
+
+        Level level = player.level();
+        if (level.isClientSide()) return;
+
+        WardenWorldData data = WardenWorldData.get(level);
+        data.addPlayer(player.getUUID());
+        System.out.println(player.getName() + " has killed the Warden");
+    }
 
     @SubscribeEvent
     public static void onEntityInteract(EntityInteract event) {

@@ -114,21 +114,12 @@ public class PMBlockStateProvider extends BlueprintBlockStateProvider {
         this.enderporterBlock(ENDERPORTER);
         this.ropeLadderBlock(ROPE_LADDER);
 
-        this.block(QUARTZ_GLASS);
-        this.block(LAPIS_GLASS);
-        this.block(REDSTONE_GLASS);
-        this.glassPaneBlock(QUARTZ_GLASS_PANE, QUARTZ_GLASS);
-        this.glassPaneBlock(LAPIS_GLASS_PANE, LAPIS_GLASS);
-        this.glassPaneBlock(REDSTONE_GLASS_PANE, REDSTONE_GLASS);
-
-        this.blockFamily(PMBlockFamilies.SNOW_BRICKS_FAMILY);
-        this.blockFamily(PMBlockFamilies.PACKED_ICE_BRICKS_FAMILY);
-        this.blockFamily(PMBlockFamilies.BLUE_ICE_BRICKS_FAMILY);
-        this.block(CHISELED_PACKED_ICE_BRICKS);
-        this.block(CHISELED_BLUE_ICE_BRICKS);
-        this.doorBlocks(PACKED_ICE_DOOR.get(), PACKED_ICE_TRAPDOOR.get());
-        this.doorBlocks(BLUE_ICE_DOOR.get(), BLUE_ICE_TRAPDOOR.get());
-        this.litableLanternBlock(ICE_LANTERN, modLoc("block/template_ice_lantern"), modLoc("block/template_hanging_ice_lantern"));
+        this.block(CHORUS_GLASS);
+        this.block(SOUL_GLASS);
+        this.block(ECHO_GLASS);
+        this.glassPaneBlock(CHORUS_GLASS_PANE, CHORUS_GLASS);
+        this.glassPaneBlock(SOUL_GLASS_PANE, SOUL_GLASS);
+        this.glassPaneBlock(ECHO_GLASS_PANE, ECHO_GLASS);
 
         this.paperLanternBlock(WHITE_PAPER_LANTERN);
         this.paperLanternBlock(ORANGE_PAPER_LANTERN);
@@ -451,7 +442,7 @@ public class PMBlockStateProvider extends BlueprintBlockStateProvider {
                 }
 
                 getVariantBuilder(block.get())
-                        .partialState().with(IceLanternBlock.HANGING, hanging).with(IceLanternBlock.LIT, lit)
+                        .partialState().with(BlockStateProperties.HANGING, hanging).with(BlockStateProperties.LIT, lit)
                         .modelForState().modelFile(models().withExistingParent(name, parent).texture("texture", texture).renderType("cutout")).addModel();
 
             }
