@@ -31,7 +31,6 @@ public class WardenDefeatedCondition implements LootItemCondition {
         }
 
         if (player != null) {
-            System.out.println("Condition triggered!");
             return WardenWorldData.get(player.level()).hasPlayerKilled(player.getUUID());
         }
 
