@@ -60,7 +60,6 @@ public class PMEvents {
 
         WardenWorldData data = WardenWorldData.get(level);
         data.addPlayer(player.getUUID());
-        System.out.println(player.getName() + " has killed the Warden");
     }
 
     @SubscribeEvent
