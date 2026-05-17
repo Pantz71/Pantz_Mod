@@ -244,5 +244,15 @@
   "block.pantz_mod.safe": "Safe",
   "block.pantz_mod.sprinkler": "Sprinkler",
 
-  "_decoration": "decoration"
+  "_decoration": "decoration",
+
+  "_effects": "effects",
+  "effect.pantz_mod.harvesting": "Harvesting",
+  "item.minecraft.potion.effect.harvesting": "Potion of Harvesting",
+  "item.minecraft.splash_potion.effect.harvesting": "Splash Potion of Harvesting",
+  "item.minecraft.lingering_potion.effect.harvesting": "Lingering Potion of Harvesting",
+  "item.minecraft.tipped_arrow.effect.harvesting": "Arrow of Harvesting",
+  "item.caverns_and_chasms.tether_potion.effect.harvesting": "Tether Potion of Harvesting",
+  "item.caverns_and_chasms.trial_potion.effect.harvesting": "Trial Potion of Harvesting",
+  "item.caverns_and_chasms.impact_potion.effect.harvesting": "Impact Potion of Harvesting"
 }

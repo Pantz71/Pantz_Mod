@@ -5,11 +5,13 @@ import net.minecraft.world.level.block.DispenserBlock;
 import pantz.mod.core.registry.PMBlocks;
 import pantz.mod.core.registry.PMDispenserBehaviors;
 import pantz.mod.core.registry.PMItems;
+import pantz.mod.core.registry.PMMobEffects;
 
 public class PMCompat {
     public static void registerCompat() {
         registerDispenserBehaviors();
         registerFlammables();
+        PMMobEffects.registerBrewingRecipes();
     }
 
     private static void registerDispenserBehaviors() {
