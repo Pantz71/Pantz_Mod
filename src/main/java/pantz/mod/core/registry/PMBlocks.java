@@ -47,7 +47,7 @@ public class PMBlocks {
     public static final RegistryObject<Block> SULFUR_ORE = BLOCKS.createBlock("sulfur_ore", () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(Blocks.COAL_ORE), UniformInt.of(2, 4)));
     public static final RegistryObject<Block> DEEPSLATE_SULFUR_ORE = BLOCKS.createBlock("deepslate_sulfur_ore", () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_COAL_ORE), UniformInt.of(2, 4)));
     public static final RegistryObject<Block> NETHER_SULFUR_ORE = BLOCKS.createBlock("nether_sulfur_ore", () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(Blocks.NETHER_QUARTZ_ORE), UniformInt.of(2, 4)));
-    public static final RegistryObject<Block> SULFUR = BLOCKS.createBlock("sulfur", () -> new SulfurBlock(PMProperties.SULFUR));
+    public static final RegistryObject<Block> SULFUR = BLOCKS.createBlock("sulfur", () -> new Block(PMProperties.SULFUR));
     public static final RegistryObject<Block> SULFUR_BLOCK = BLOCKS.createBlock("sulfur_block", () -> new SulfurBlock(PMProperties.SULFUR_BLOCK));
     public static final RegistryObject<Block> POLISHED_SULFUR = BLOCKS.createBlock("polished_sulfur", () -> new Block(PMProperties.SULFUR_BLOCK));
     public static final RegistryObject<Block> POLISHED_SULFUR_STAIRS = BLOCKS.createBlock("polished_sulfur_stairs", () -> new StairBlock(() -> POLISHED_SULFUR.get().defaultBlockState(), PMProperties.SULFUR_BLOCK));
