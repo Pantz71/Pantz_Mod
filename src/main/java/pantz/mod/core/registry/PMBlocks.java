@@ -145,12 +145,12 @@ public class PMBlocks {
     public static final RegistryObject<Block> ENDERPORTER = BLOCKS.createBlock("enderporter", () -> new EnderporterBlock(PMProperties.ENDERPORTER));
     public static final RegistryObject<Block> ROPE_LADDER = BLOCKS.createBlock("rope_ladder", () -> new RopeLadderBlock(BlockBehaviour.Properties.copy(Blocks.LADDER)));
 
-    public static final RegistryObject<Block> CHORUS_GLASS = BLOCKS.createBlock("chorus_glass", () -> new ChorusGlassBlock(PMProperties.QUARTZ_GLASS));
-    public static final RegistryObject<Block> CHORUS_GLASS_PANE = BLOCKS.createBlock("chorus_glass_pane", () -> new ChorusGlassPaneBlock(PMProperties.QUARTZ_GLASS_PANE));
-    public static final RegistryObject<Block> SOUL_GLASS = BLOCKS.createBlock("soul_glass", () -> new SoulGlassBlock(PMProperties.LAPIS_GLASS));
-    public static final RegistryObject<Block> SOUL_GLASS_PANE = BLOCKS.createBlock("soul_glass_pane", () -> new SoulGlassPaneBlock(PMProperties.LAPIS_GLASS_PANE));
-    public static final RegistryObject<Block> ECHO_GLASS = BLOCKS.createBlock("echo_glass", () -> new EchoGlassBlock(PMProperties.REDSTONE_GLASS));
-    public static final RegistryObject<Block> ECHO_GLASS_PANE = BLOCKS.createBlock("echo_glass_pane", () -> new EchoGlassPaneBlock(PMProperties.REDSTONE_GLASS_PANE));
+    public static final RegistryObject<Block> CHORUS_GLASS = BLOCKS.createBlock("chorus_glass", () -> new ChorusGlassBlock(PMProperties.CHORUS_GLASS));
+    public static final RegistryObject<Block> CHORUS_GLASS_PANE = BLOCKS.createBlock("chorus_glass_pane", () -> new ChorusGlassPaneBlock(PMProperties.CHORUS_GLASS_PANE));
+    public static final RegistryObject<Block> SOUL_GLASS = BLOCKS.createBlock("soul_glass", () -> new SoulGlassBlock(PMProperties.SOUL_GLASS));
+    public static final RegistryObject<Block> SOUL_GLASS_PANE = BLOCKS.createBlock("soul_glass_pane", () -> new SoulGlassPaneBlock(PMProperties.SOUL_GLASS_PANE));
+    public static final RegistryObject<Block> ECHO_GLASS = BLOCKS.createBlock("echo_glass", () -> new EchoGlassBlock(PMProperties.ECHO_GLASS));
+    public static final RegistryObject<Block> ECHO_GLASS_PANE = BLOCKS.createBlock("echo_glass_pane", () -> new EchoGlassPaneBlock(PMProperties.ECHO_GLASS_PANE));
 
     public static final RegistryObject<Block> WHITE_PAPER_LANTERN = BLOCKS.createBlock("white_paper_lantern", () -> new PaperLanternBlock(PMProperties.PAPER_LANTERN));
     public static final RegistryObject<Block> ORANGE_PAPER_LANTERN = BLOCKS.createBlock("orange_paper_lantern", () -> new PaperLanternBlock(PMProperties.PAPER_LANTERN));

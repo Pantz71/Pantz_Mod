@@ -366,9 +366,9 @@ public class PMRecipeProvider extends BlueprintRecipeProvider {
                 .unlockedBy(getHasName(Items.STRING), has(Tags.Items.STRING))
                 .save(consumer);
 
-        mineralGlassBuilder(CHORUS_GLASS.get(), Blocks.CHORUS_FLOWER, BUILDING_BLOCKS).unlockedBy(getHasName(Blocks.CHORUS_PLANT), has(Blocks.CHORUS_PLANT)).save(consumer);
-        mineralGlassBuilder(SOUL_GLASS.get(), Blocks.SOUL_SAND, BUILDING_BLOCKS).unlockedBy(getHasName(Blocks.SOUL_SAND), has(Blocks.SOUL_SAND)).save(consumer);
-        mineralGlassBuilder(ECHO_GLASS.get(), Items.ECHO_SHARD, BUILDING_BLOCKS).unlockedBy(getHasName(Items.ECHO_SHARD), has(Items.ECHO_SHARD)).save(consumer);
+        magicGlassBuilder(CHORUS_GLASS.get(), Blocks.CHORUS_FLOWER, BUILDING_BLOCKS).unlockedBy(getHasName(Blocks.CHORUS_PLANT), has(Blocks.CHORUS_PLANT)).save(consumer);
+        magicGlassBuilder(SOUL_GLASS.get(), Blocks.SOUL_SAND, BUILDING_BLOCKS).unlockedBy(getHasName(Blocks.SOUL_SAND), has(Blocks.SOUL_SAND)).save(consumer);
+        magicGlassBuilder(ECHO_GLASS.get(), Items.ECHO_SHARD, BUILDING_BLOCKS).unlockedBy(getHasName(Items.ECHO_SHARD), has(Items.ECHO_SHARD)).save(consumer);
         glassPaneBuilder(CHORUS_GLASS_PANE.get(), CHORUS_GLASS.get(), DECORATIONS).unlockedBy(getHasName(CHORUS_GLASS.get()), has(PMItemTags.GLASS_CHORUS)).save(consumer);
         glassPaneBuilder(SOUL_GLASS_PANE.get(), SOUL_GLASS.get(), DECORATIONS).unlockedBy(getHasName(SOUL_GLASS.get()), has(PMItemTags.GLASS_SOUL)).save(consumer);
         glassPaneBuilder(ECHO_GLASS_PANE.get(), ECHO_GLASS.get(), DECORATIONS).unlockedBy(getHasName(ECHO_GLASS.get()), has(PMItemTags.GLASS_ECHO)).save(consumer);
@@ -421,40 +421,6 @@ public class PMRecipeProvider extends BlueprintRecipeProvider {
                 .pattern("___")
                 .unlockedBy(getHasName(PMItems.STEEL_INGOT.get()), has(PMItemTags.INGOTS_STEEL))
                 .save(consumer);
-        // ----------------------
-
-        // --- Ice ---
-        /*
-        generateRecipes(consumer, PMBlockFamilies.SNOW_BRICKS_FAMILY);
-        generateRecipes(consumer, PMBlockFamilies.PACKED_ICE_BRICKS_FAMILY);
-        generateRecipes(consumer, PMBlockFamilies.BLUE_ICE_BRICKS_FAMILY);
-
-        polished(consumer, RecipeCategory.BUILDING_BLOCKS, PACKED_ICE_BRICKS.get(), Blocks.PACKED_ICE);
-        polished(consumer, RecipeCategory.BUILDING_BLOCKS, BLUE_ICE_BRICKS.get(), Blocks.BLUE_ICE);
-        ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, SNOW_BRICKS.get(), 8)
-                .define('S', Blocks.SNOW_BLOCK).define('#', Blocks.STONE_BRICKS)
-                .pattern("###").pattern("#S#").pattern("###")
-                .unlockedBy(getHasName(Blocks.SNOW_BLOCK), has(Blocks.SNOW_BLOCK))
-                .save(consumer);
-
-        doorBuilder(PACKED_ICE_DOOR.get(), Ingredient.of(Blocks.PACKED_ICE)).unlockedBy(getHasName(Blocks.PACKED_ICE), has(Blocks.PACKED_ICE)).save(consumer);
-        trapdoorBuilder(PACKED_ICE_TRAPDOOR.get(), Ingredient.of(Blocks.PACKED_ICE)).unlockedBy(getHasName(Blocks.PACKED_ICE), has(Blocks.PACKED_ICE)).save(consumer);
-
-        doorBuilder(BLUE_ICE_DOOR.get(), Ingredient.of(Blocks.BLUE_ICE)).unlockedBy(getHasName(Blocks.BLUE_ICE), has(Blocks.BLUE_ICE)).save(consumer);
-        trapdoorBuilder(BLUE_ICE_TRAPDOOR.get(), Ingredient.of(Blocks.BLUE_ICE)).unlockedBy(getHasName(Blocks.BLUE_ICE), has(Blocks.BLUE_ICE)).save(consumer);
-
-        stonecutterRecipes(consumer, PMBlockFamilies.SNOW_BRICKS_FAMILY);
-        stonecutterRecipes(consumer, PMBlockFamilies.PACKED_ICE_BRICKS_FAMILY, Blocks.PACKED_ICE, PACKED_ICE_BRICKS.get());
-        stonecutterRecipes(consumer, PMBlockFamilies.BLUE_ICE_BRICKS_FAMILY, Blocks.BLUE_ICE, BLUE_ICE_BRICKS.get());
-
-        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ICE_LANTERN.get())
-                .define('*', Tags.Items.NUGGETS_IRON).define('#', Blocks.BLUE_ICE)
-                .pattern("***")
-                .pattern("*#*")
-                .pattern("***")
-                .unlockedBy(getHasName(Items.IRON_INGOT), has(Tags.Items.INGOTS_IRON))
-                .save(consumer);
-         */
         // ----------------------
 
 
@@ -641,7 +607,7 @@ public class PMRecipeProvider extends BlueprintRecipeProvider {
                 .pattern("###").pattern("###");
     }
 
-    private static RecipeBuilder mineralGlassBuilder(ItemLike glass, ItemLike ingredient, RecipeCategory category) {
+    private static RecipeBuilder magicGlassBuilder(ItemLike glass, ItemLike ingredient, RecipeCategory category) {
         return ShapedRecipeBuilder.shaped(category, glass, 8).define('#', Tags.Items.GLASS_COLORLESS).define('@', ingredient)
                 .pattern("###").pattern("#@#").pattern("###");
     }
