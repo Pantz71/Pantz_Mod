@@ -21,6 +21,7 @@ import net.minecraft.world.item.SplashPotionItem;
 import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
@@ -52,7 +53,6 @@ import java.util.*;
 
 @Mod.EventBusSubscriber(modid = PantzMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class PMEvents {
-    private static final Map<LivingEntity, BlockPos> LAST_BOOSTED_COLUMN = new WeakHashMap<>();
 
     @SubscribeEvent
     public static void onLivingDeath(LivingDeathEvent event) {
@@ -64,109 +64,6 @@ public class PMEvents {
 
         WardenWorldData data = WardenWorldData.get(level);
         data.addPlayer(player.getUUID());
-    }
-
-    @SubscribeEvent
-    public static void onEntityTick(LivingEvent.LivingTickEvent event) {
-        LivingEntity entity = event.getEntity();
-        Level level = entity.level();
-
-        if (!level.isClientSide() && entity.hasEffect(PMMobEffects.HARVESTING.get())) {
-            BlockPos pos = entity.blockPosition();
-            BlockPos lastPos = LAST_BOOSTED_COLUMN.get(entity);
-
-            if (!pos.equals(lastPos)) {
-                MobEffectInstance effect = entity.getEffect(PMMobEffects.HARVESTING.get());
-                if (effect == null) return;
-
-                BlockPos startPos = null;
-                BlockState startState = null;
-                IntegerProperty ageProperty = null;
-
-                for (int yOffset = 1; yOffset >= -1; yOffset--) {
-                    BlockPos checkPos = pos.above(yOffset);
-                    BlockState checkState = level.getBlockState(checkPos);
-                    IntegerProperty prop = getAgeProperty(checkState);
-
-                    if (prop != null) {
-                        startPos = checkPos;
-                        startState = checkState;
-                        ageProperty = prop;
-                        break;
-                    }
-                }
-
-                if (ageProperty != null) {
-                    Block targetBlock = startState.getBlock();
-
-                    BlockPos basePos = startPos;
-                    while (level.getBlockState(basePos.below()).is(targetBlock)) {
-                        basePos = basePos.below();
-                    }
-
-                    BlockPos topPos = basePos;
-                    while (level.getBlockState(topPos.above()).is(targetBlock)) {
-                        topPos = topPos.above();
-                    }
-
-                    BlockPos blockToGrow = findBlockToGrow(level, basePos, topPos);
-
-                    if (blockToGrow != null) {
-                        BlockState growState = level.getBlockState(blockToGrow);
-                        IntegerProperty growAgeProp = getAgeProperty(growState);
-
-                        if (growAgeProp != null) {
-                            int currentAge = growState.getValue(growAgeProp);
-                            int maxAge = Collections.max(growAgeProp.getPossibleValues());
-
-                            if (currentAge < maxAge) {
-                                int stagesToGrow = effect.getAmplifier() + 1;
-                                int newAge = Math.min(currentAge + stagesToGrow, maxAge);
-
-                                level.setBlockAndUpdate(blockToGrow, growState.setValue(growAgeProp, newAge));
-                                level.levelEvent(1505, blockToGrow, 0);
-                            }
-                        }
-                    }
-
-                    LAST_BOOSTED_COLUMN.put(entity, pos);
-                } else {
-                    LAST_BOOSTED_COLUMN.remove(entity);
-                }
-            }
-        }
-    }
-
-    private static IntegerProperty getAgeProperty(BlockState state) {
-        for (Property<?> prop : state.getProperties()) {
-            if (prop instanceof IntegerProperty intProp && prop.getName().equals("age")) {
-                return intProp;
-            }
-        }
-        return null;
-    }
-
-    /**
-     * Determines which block in the column should receive the growth boost.
-     * Standard crops grow from base up, while tall crops or bamboo often grow from the top block.
-     */
-    private static BlockPos findBlockToGrow(Level level, BlockPos base, BlockPos top) {
-        BlockPos pos = top;
-        while (pos.getY() >= base.getY()) {
-            BlockState state = level.getBlockState(pos);
-            IntegerProperty prop = getAgeProperty(state);
-
-            if (prop != null) {
-                int age = state.getValue(prop);
-                int maxAge = Collections.max(prop.getPossibleValues());
-
-                if (age < maxAge) {
-                    return pos;
-                }
-            }
-            pos = pos.below();
-        }
-        return top;
     }
 
     @SubscribeEvent
