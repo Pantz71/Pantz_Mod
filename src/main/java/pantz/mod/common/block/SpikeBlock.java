@@ -32,6 +32,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 import pantz.mod.common.block.entity.SpikeBlockEntity;
 import pantz.mod.core.registry.PMBlockEntityTypes;
+import pantz.mod.core.registry.datapack.PMDamageTypes;
 
 import java.util.List;
 
@@ -79,7 +80,7 @@ public class SpikeBlock extends BaseEntityBlock {
     public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
         if (!level.isClientSide() && state.getValue(POWERED)) {
 
-            entity.hurt(level.damageSources().cactus(), 1.0F);
+            entity.hurt(PMDamageTypes.spike(level), 1.0F);
 
             BlockEntity be = level.getBlockEntity(pos);
             if (be instanceof SpikeBlockEntity spike && entity instanceof LivingEntity living) {
