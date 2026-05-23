@@ -10,9 +10,13 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.monster.warden.Warden;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.entity.projectile.ThrownEnderpearl;
 import net.minecraft.world.entity.projectile.ThrownPotion;
 import net.minecraft.world.item.ItemStack;
@@ -20,17 +24,14 @@ import net.minecraft.world.item.LingeringPotionItem;
 import net.minecraft.world.item.SplashPotionItem;
 import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.IntegerProperty;
-import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.event.entity.EntityAttributeModificationEvent;
 import net.minecraftforge.event.entity.EntityTeleportEvent;
 import net.minecraftforge.event.entity.ProjectileImpactEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
-import net.minecraftforge.event.entity.living.LivingEvent;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.*;
 import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.eventbus.api.Event;
@@ -45,209 +46,274 @@ import pantz.mod.common.item.EntityFilterItem;
 import pantz.mod.common.utils.*;
 import pantz.mod.common.world.WardenWorldData;
 import pantz.mod.core.PantzMod;
-import pantz.mod.core.registry.PMMobEffects;
+import pantz.mod.core.registry.PMAttributes;
 import pantz.mod.core.registry.PMSoundEvents;
 
 import java.util.*;
 
 
-@Mod.EventBusSubscriber(modid = PantzMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class PMEvents {
+    @Mod.EventBusSubscriber(modid = PantzMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
+    public static class PMModEvents {
 
-    @SubscribeEvent
-    public static void onLivingDeath(LivingDeathEvent event) {
-        if (!(event.getEntity() instanceof Warden)) return;
-        if (!(event.getSource().getEntity() instanceof Player player)) return;
-
-        Level level = player.level();
-        if (level.isClientSide()) return;
-
-        WardenWorldData data = WardenWorldData.get(level);
-        data.addPlayer(player.getUUID());
-    }
-
-    @SubscribeEvent
-    public static void onEntityInteract(EntityInteract event) {
-        Player player = event.getEntity();
-        Level level = player.level();
-        ItemStack stack = player.getItemInHand(event.getHand());
-
-        if (!(stack.getItem() instanceof EntityFilterItem filterItem)) return;
-        if (level.isClientSide()) return;
-
-        Entity target = event.getTarget();
-        if (target instanceof LivingEntity) {
-            if (filterItem.addMobToStack(stack, target.getType())) {
-                player.swing(event.getHand(), true);
-                player.displayClientMessage(Component.translatable("message.pantz_mod.entity.added", target.getType().getDescription()), true);
-
-                event.setCanceled(true);
-                event.setCancellationResult(InteractionResult.SUCCESS);
-            }
-        }
-    }
-
-    @SubscribeEvent
-    public static void onBlockInteract(RightClickBlock event) {
-        if (event.getHand() != InteractionHand.MAIN_HAND) return;
-
-        Player player = event.getEntity();
-        Level level = event.getLevel();
-        BlockPos pos = event.getPos();
-        InteractionHand hand = event.getHand();
-        BlockState state = level.getBlockState(pos);
-
-        if (!player.isShiftKeyDown()) return;
-
-        decoratePedestal(event, level, pos, state, player, hand);
-        setKey(event, player, level, pos, hand);
-        putGlassBoxOn(event, level, pos, state, player, hand);
-    }
-
-    @SubscribeEvent
-    public static void onProjectileImpact(ProjectileImpactEvent event) {
-        if (!(event.getProjectile() instanceof ThrownPotion potion)) return;
-
-        Level level = potion.level();
-        ItemStack stack = potion.getItem();
-
-        if (!(stack.getItem() instanceof SplashPotionItem) && !(stack.getItem() instanceof LingeringPotionItem)) {
-            return;
-        }
-
-        Vec3 impactPos = potion.position();
-        BlockPos center = BlockPos.containing(impactPos);
-
-        for (BlockPos pos : BlockPos.betweenClosed(center.offset(-1, -1, -1), center.offset(1, 1, 1))) {
-            BlockEntity be = level.getBlockEntity(pos);
-
-            if (be instanceof SpikeBlockEntity spike) {
-                List<MobEffectInstance> effects = PotionUtils.getMobEffects(stack);
-
-                for (MobEffectInstance effect : effects) {
-                    spike.addOrUpgradeEffect(new MobEffectInstance(effect));
+        @SubscribeEvent
+        public static void modifyAttribute(EntityAttributeModificationEvent event) {
+            for (EntityType<? extends LivingEntity> type : event.getTypes()) {
+                if (!event.has(type, PMAttributes.PROJECTILE_BONUS_DAMAGE.get())) {
+                    event.add(type, PMAttributes.PROJECTILE_BONUS_DAMAGE.get());
                 }
-
-                spike.setChanged();
             }
         }
+
     }
 
-    private static void putGlassBoxOn(RightClickBlock event, Level level, BlockPos pos, BlockState state, Player player, InteractionHand hand) {
-        if (!(state.getBlock() instanceof ItemStandBlock itemStand)) return;
-        ItemStack stack = player.getItemInHand(hand);
+    @Mod.EventBusSubscriber(modid = PantzMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
+    public static class PMForgeEvents {
 
-        if (player.isShiftKeyDown() && itemStand.isGlass(stack) && !state.getValue(ItemStandBlock.GLASS)) {
-            if (!level.isClientSide()) {
+        @SubscribeEvent
+        public static void onLivingDeath(LivingDeathEvent event) {
+            if (!(event.getEntity() instanceof Warden)) return;
+            if (!(event.getSource().getEntity() instanceof Player player)) return;
+
+            Level level = player.level();
+            if (level.isClientSide()) return;
+
+            WardenWorldData data = WardenWorldData.get(level);
+            data.addPlayer(player.getUUID());
+        }
+
+
+        @SubscribeEvent
+        public static void onEntityInteract(EntityInteract event) {
+            Player player = event.getEntity();
+            Level level = player.level();
+            ItemStack stack = player.getItemInHand(event.getHand());
+
+            if (!(stack.getItem() instanceof EntityFilterItem filterItem)) return;
+            if (level.isClientSide()) return;
+
+            Entity target = event.getTarget();
+            if (target instanceof LivingEntity) {
+                if (filterItem.addMobToStack(stack, target.getType())) {
+                    player.swing(event.getHand(), true);
+                    player.displayClientMessage(Component.translatable("message.pantz_mod.entity.added", target.getType().getDescription()), true);
+
+                    event.setCanceled(true);
+                    event.setCancellationResult(InteractionResult.SUCCESS);
+                }
+            }
+        }
+
+        @SubscribeEvent
+        public static void onBlockInteract(RightClickBlock event) {
+            if (event.getHand() != InteractionHand.MAIN_HAND) return;
+
+            Player player = event.getEntity();
+            Level level = event.getLevel();
+            BlockPos pos = event.getPos();
+            InteractionHand hand = event.getHand();
+            BlockState state = level.getBlockState(pos);
+
+            if (!player.isShiftKeyDown()) return;
+
+            decoratePedestal(event, level, pos, state, player, hand);
+            setKey(event, player, level, pos, hand);
+            putGlassBoxOn(event, level, pos, state, player, hand);
+        }
+
+        @SubscribeEvent
+        public static void onLivingHurt(LivingHurtEvent event) {
+            Entity sourceEntity = event.getSource().getDirectEntity();
+            if (sourceEntity instanceof Projectile projectile) {
+                Entity owner = projectile.getOwner();
+
+                if (owner instanceof LivingEntity shooter) {
+                    AttributeInstance attribute = shooter.getAttribute(PMAttributes.PROJECTILE_BONUS_DAMAGE.get());
+                    if (attribute == null) return;
+
+                    double value = attribute.getValue();
+                    float baseAmount = event.getAmount();
+                    float modifier;
+
+                    if (projectile instanceof AbstractArrow arrow) {
+                        double baseDamage = arrow.getBaseDamage();
+
+                        Vec3 launchVelocity = projectile.getDeltaMovement().subtract(shooter.getDeltaMovement());
+                        double speed = launchVelocity.length();
+
+                        double charge = Math.min(1.0D, baseDamage / 2.0D);
+                        double velocity = Math.min(1.0D, speed / 3.0D);
+                        double motion = (charge * 0.7D) + (velocity * 0.3D);
+
+                        boolean isCrit = arrow.isCritArrow();
+
+                        if (value >= 0.0D) {
+                            modifier = (float) (value * motion);
+                        } else {
+                            modifier = (float) (value * (1.0D - motion));
+                        }
+
+                        if (isCrit) {
+                            modifier *= 1.5F;
+                        }
+                    } else {
+                        double motion = projectile.getDeltaMovement().subtract(shooter.getDeltaMovement()).length() / 1.5D;
+                        modifier = (float) (value * Math.min(1.0D, motion));
+                    }
+
+                    float finalDamage = baseAmount + modifier;
+                    event.setAmount(Math.max(0.5F, finalDamage));
+                }
+            }
+        }
+
+        @SubscribeEvent
+        public static void onProjectileImpact(ProjectileImpactEvent event) {
+            if (!(event.getProjectile() instanceof ThrownPotion potion)) return;
+
+            Level level = potion.level();
+            ItemStack stack = potion.getItem();
+
+            if (!(stack.getItem() instanceof SplashPotionItem) && !(stack.getItem() instanceof LingeringPotionItem)) {
+                return;
+            }
+
+            Vec3 impactPos = potion.position();
+            BlockPos center = BlockPos.containing(impactPos);
+
+            for (BlockPos pos : BlockPos.betweenClosed(center.offset(-1, -1, -1), center.offset(1, 1, 1))) {
+                BlockEntity be = level.getBlockEntity(pos);
+
+                if (be instanceof SpikeBlockEntity spike) {
+                    List<MobEffectInstance> effects = PotionUtils.getMobEffects(stack);
+
+                    for (MobEffectInstance effect : effects) {
+                        spike.addOrUpgradeEffect(new MobEffectInstance(effect));
+                    }
+
+                    spike.setChanged();
+                }
+            }
+        }
+
+        private static void putGlassBoxOn(RightClickBlock event, Level level, BlockPos pos, BlockState state, Player player, InteractionHand hand) {
+            if (!(state.getBlock() instanceof ItemStandBlock itemStand)) return;
+            ItemStack stack = player.getItemInHand(hand);
+
+            if (player.isShiftKeyDown() && itemStand.isGlass(stack) && !state.getValue(ItemStandBlock.GLASS)) {
+                if (!level.isClientSide()) {
+                    player.swing(hand);
+                    if (!player.isCreative()) {
+                        stack.shrink(1);
+                    }
+                    level.setBlock(pos, state.setValue(ItemStandBlock.GLASS, true), 3);
+                    cancel(event);
+                }
+            }
+        }
+
+        private static void setKey(RightClickBlock event, Player player, Level level, BlockPos pos, InteractionHand hand) {
+            if (!(level.getBlockEntity(pos) instanceof Lockable lockable)) return;
+            if (!(level.getBlockState(pos).getBlock() instanceof ILockableBlock lockableBlock)) return;
+
+            ItemStack stack = player.getItemInHand(hand);
+
+            ItemStack storedKey = lockable.getItem();
+            UUID playerId = player.getUUID();
+            UUID owner = lockable.getOwner();
+
+            if (storedKey.isEmpty() && lockableBlock.isValidItem(stack) && owner == null) {
+                lockable.setItem(stack, playerId);
+                player.displayClientMessage(Component.translatable("message.pantz_mod.set_key", stack.getHoverName()), true);
+                level.playSound(null, pos, PMSoundEvents.KEY_SET.get(), SoundSource.BLOCKS);
                 player.swing(hand);
-                if (!player.isCreative()) {
-                    stack.shrink(1);
+                cancel(event);
+                return;
+            }
+
+            if (!storedKey.isEmpty() && stack.equals(storedKey) && owner != null) {
+                if (!owner.equals(playerId)) {
+                    player.displayClientMessage(Component.translatable("message.pantz_mod.ownership"), true);
+                } else {
+                    lockable.removeItem(playerId);
+                    player.displayClientMessage(Component.translatable("message.pantz_mod.remove_key"), true);
                 }
-                level.setBlock(pos, state.setValue(ItemStandBlock.GLASS, true), 3);
+                player.swing(hand);
                 cancel(event);
             }
         }
-    }
 
-    private static void setKey(RightClickBlock event, Player player, Level level, BlockPos pos, InteractionHand hand) {
-        if (!(level.getBlockEntity(pos) instanceof Lockable lockable)) return;
-        if (!(level.getBlockState(pos).getBlock() instanceof ILockableBlock lockableBlock)) return;
+        private static void decoratePedestal(RightClickBlock event, Level level, BlockPos pos, BlockState state, Player player, InteractionHand hand) {
+            if (!(state.getBlock() instanceof PedestalBlock) ||
+                    !(level.getBlockEntity(pos) instanceof PedestalBlockEntity pedestal)) return;
 
-        ItemStack stack = player.getItemInHand(hand);
+            if (!pedestal.getItem().isEmpty()) return;
 
-        ItemStack storedKey = lockable.getItem();
-        UUID playerId = player.getUUID();
-        UUID owner = lockable.getOwner();
+            ItemStack held = player.getItemInHand(hand);
+            CarpetColor currentColor = state.getValue(PedestalBlock.CARPET);
 
-        if (storedKey.isEmpty() && lockableBlock.isValidItem(stack) && owner == null) {
-            lockable.setItem(stack, playerId);
-            player.displayClientMessage(Component.translatable("message.pantz_mod.set_key", stack.getHoverName()), true);
-            level.playSound(null, pos, PMSoundEvents.KEY_SET.get(), SoundSource.BLOCKS);
-            player.swing(hand);
+            if (held.is(ItemTags.WOOL_CARPETS) && currentColor == CarpetColor.NONE) {
+                CarpetColor newColor = PedestalUtils.getCarpetColor(held.getItem());
+                if (newColor != CarpetColor.NONE) {
+                    updateCarpet(event, level, pos, state, newColor, player, held, true);
+                }
+            } else if (held.isEmpty() && currentColor != CarpetColor.NONE) {
+                ItemStack carpetStack = new ItemStack(PedestalUtils.getCarpetForColor(currentColor));
+                if (!player.getInventory().add(carpetStack)) {
+                    player.drop(carpetStack, false);
+                }
+                updateCarpet(event, level, pos, state, CarpetColor.NONE, player, held, false);
+            }
+        }
+
+        private static void updateCarpet(RightClickBlock event, Level level, BlockPos pos, BlockState state, CarpetColor color, Player player, ItemStack held, boolean shrink) {
+            player.swing(event.getHand());
+            if (!level.isClientSide()) {
+                level.setBlock(pos, state.setValue(PedestalBlock.CARPET, color), 3);
+                if (shrink && !player.isCreative()) {
+                    held.shrink(1);
+                }
+            }
             cancel(event);
-            return;
         }
 
-        if (!storedKey.isEmpty() && stack.equals(storedKey) && owner != null) {
-            if (!owner.equals(playerId)) {
-                player.displayClientMessage(Component.translatable("message.pantz_mod.ownership"), true);
-            } else {
-                lockable.removeItem(playerId);
-                player.displayClientMessage(Component.translatable("message.pantz_mod.remove_key"), true);
-            }
-            player.swing(hand);
-            cancel(event);
-        }
-    }
-
-    private static void decoratePedestal(RightClickBlock event, Level level, BlockPos pos, BlockState state, Player player, InteractionHand hand) {
-        if (!(state.getBlock() instanceof PedestalBlock) ||
-                !(level.getBlockEntity(pos) instanceof PedestalBlockEntity pedestal)) return;
-
-        if (!pedestal.getItem().isEmpty()) return;
-
-        ItemStack held = player.getItemInHand(hand);
-        CarpetColor currentColor = state.getValue(PedestalBlock.CARPET);
-
-        if (held.is(ItemTags.WOOL_CARPETS) && currentColor == CarpetColor.NONE) {
-            CarpetColor newColor = PedestalUtils.getCarpetColor(held.getItem());
-            if (newColor != CarpetColor.NONE) {
-                updateCarpet(event, level, pos, state, newColor, player, held, true);
-            }
-        } else if (held.isEmpty() && currentColor != CarpetColor.NONE) {
-            ItemStack carpetStack = new ItemStack(PedestalUtils.getCarpetForColor(currentColor));
-            if (!player.getInventory().add(carpetStack)) {
-                player.drop(carpetStack, false);
-            }
-            updateCarpet(event, level, pos, state, CarpetColor.NONE, player, held, false);
-        }
-    }
-
-    private static void updateCarpet(RightClickBlock event, Level level, BlockPos pos, BlockState state, CarpetColor color, Player player, ItemStack held, boolean shrink) {
-        player.swing(event.getHand());
-        if (!level.isClientSide()) {
-            level.setBlock(pos, state.setValue(PedestalBlock.CARPET, color), 3);
-            if (shrink && !player.isCreative()) {
-                held.shrink(1);
-            }
-        }
-        cancel(event);
-    }
-
-    private static void cancel(RightClickBlock event) {
-        event.setCanceled(true);
-        event.setUseBlock(Event.Result.DENY);
-        event.setUseItem(Event.Result.DENY);
-    }
-
-    @SubscribeEvent
-    public static void onBlockBreak(BlockEvent.BreakEvent event) {
-        Player player = event.getPlayer();
-        ItemStack stack = player.getMainHandItem();
-        InteractionHand hand = player.getUsedItemHand();
-        if (!(stack.getItem() instanceof AreaDiggerItem)) return;
-        if (!(event.getLevel() instanceof ServerLevel level)) return;
-
-        event.setCanceled(true);
-
-        List<BlockPos> blocks = AreaDiggerItem.mineArea(level, player, event.getPos(), 1);
-        for (BlockPos pos : blocks) {
-            if (!level.getBlockState(pos).isAir() && stack.isCorrectToolForDrops(level.getBlockState(pos))) {
-                level.destroyBlock(pos, !player.isCreative());
-            }
-        }
-        stack.hurtAndBreak(3, player, p -> p.broadcastBreakEvent(hand));
-    }
-
-    @SubscribeEvent
-    public static void onEnderpearlLands(EntityTeleportEvent.EnderPearl event) {
-        ThrownEnderpearl pearl = event.getPearlEntity();
-        ServerPlayer player = event.getPlayer();
-        ServerLevel level = player.serverLevel();
-
-        boolean teleported = EnderporterUtils.redirectTeleport(pearl, level, player);
-        if (teleported) {
+        private static void cancel(RightClickBlock event) {
             event.setCanceled(true);
+            event.setUseBlock(Event.Result.DENY);
+            event.setUseItem(Event.Result.DENY);
+        }
+
+        @SubscribeEvent
+        public static void onBlockBreak(BlockEvent.BreakEvent event) {
+            Player player = event.getPlayer();
+            ItemStack stack = player.getMainHandItem();
+            InteractionHand hand = player.getUsedItemHand();
+            if (!(stack.getItem() instanceof AreaDiggerItem)) return;
+            if (!(event.getLevel() instanceof ServerLevel level)) return;
+
+            event.setCanceled(true);
+
+            List<BlockPos> blocks = AreaDiggerItem.mineArea(level, player, event.getPos(), 1);
+            for (BlockPos pos : blocks) {
+                if (!level.getBlockState(pos).isAir() && stack.isCorrectToolForDrops(level.getBlockState(pos))) {
+                    level.destroyBlock(pos, !player.isCreative());
+                }
+            }
+            stack.hurtAndBreak(3, player, p -> p.broadcastBreakEvent(hand));
+        }
+
+        @SubscribeEvent
+        public static void onEnderpearlLands(EntityTeleportEvent.EnderPearl event) {
+            ThrownEnderpearl pearl = event.getPearlEntity();
+            ServerPlayer player = event.getPlayer();
+            ServerLevel level = player.serverLevel();
+
+            boolean teleported = EnderporterUtils.redirectTeleport(pearl, level, player);
+            if (teleported) {
+                event.setCanceled(true);
+            }
         }
     }
+
+
 }

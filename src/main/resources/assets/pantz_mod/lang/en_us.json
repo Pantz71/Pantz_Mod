@@ -247,12 +247,28 @@
   "_decoration": "decoration",
 
   "_effects": "effects",
-  "effect.pantz_mod.harvesting": "Harvesting",
-  "item.minecraft.potion.effect.harvesting": "Potion of Harvesting",
-  "item.minecraft.splash_potion.effect.harvesting": "Splash Potion of Harvesting",
-  "item.minecraft.lingering_potion.effect.harvesting": "Lingering Potion of Harvesting",
-  "item.minecraft.tipped_arrow.effect.harvesting": "Arrow of Harvesting",
-  "item.caverns_and_chasms.tether_potion.effect.harvesting": "Tether Potion of Harvesting",
-  "item.caverns_and_chasms.trial_potion.effect.harvesting": "Trial Potion of Harvesting",
-  "item.caverns_and_chasms.impact_potion.effect.harvesting": "Impact Potion of Harvesting"
+  "effect.pantz_mod.precision": "Precision",
+  "item.minecraft.potion.effect.precision": "Potion of Precision",
+  "item.minecraft.splash_potion.effect.precision": "Splash Potion of Precision",
+  "item.minecraft.lingering_potion.effect.precision": "Lingering Potion of Precision",
+  "item.minecraft.tipped_arrow.effect.precision": "Arrow of Precision",
+  "item.caverns_and_chasms.tether_potion.effect.precision": "Tether Potion of Precision",
+  "item.caverns_and_chasms.trial_potion.effect.precision": "Trial Potion of Precision",
+  "item.caverns_and_chasms.impact_potion.effect.precision": "Impact Potion of Precision",
+
+  "effect.pantz_mod.clumsiness": "Clumsiness",
+  "item.minecraft.potion.effect.clumsiness": "Potion of Clumsiness",
+  "item.minecraft.splash_potion.effect.clumsiness": "Splash Potion of Clumsiness",
+  "item.minecraft.lingering_potion.effect.clumsiness": "Lingering Potion of Clumsiness",
+  "item.minecraft.tipped_arrow.effect.clumsiness": "Arrow of Clumsiness",
+  "item.caverns_and_chasms.tether_potion.effect.clumsiness": "Tether Potion of Clumsiness",
+  "item.caverns_and_chasms.trial_potion.effect.clumsiness": "Trial Potion of Clumsiness",
+  "item.caverns_and_chasms.impact_potion.effect.clumsiness": "Impact Potion of Clumsiness",
+
+  "_attribute": "attribute",
+  "attribute.pantz_mod.name.generic.projectile_bonus_damage": "Projectile Bonus Damage",
+
+  "_dmg_type": "dmg_type",
+  "death.attack.pantz_mod.spike": "%1$s was impaled",
+  "death.attack.pantz_mod.spike.player": "%1$s was impaled whilst trying to escape %2$s"
 }
