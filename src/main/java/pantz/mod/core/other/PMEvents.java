@@ -135,30 +135,23 @@ public class PMEvents {
                     float baseAmount = event.getAmount();
                     float modifier;
 
+                    Vec3 launchVelocity = projectile.getDeltaMovement().subtract(shooter.getDeltaMovement());
+                    double speed = launchVelocity.length();
+                    double motionFactor = Math.min(1.0D, speed / 3.0D);
+
                     if (projectile instanceof AbstractArrow arrow) {
-                        double baseDamage = arrow.getBaseDamage();
-
-                        Vec3 launchVelocity = projectile.getDeltaMovement().subtract(shooter.getDeltaMovement());
-                        double speed = launchVelocity.length();
-
-                        double charge = Math.min(1.0D, baseDamage / 2.0D);
-                        double velocity = Math.min(1.0D, speed / 3.0D);
-                        double motion = (charge * 0.7D) + (velocity * 0.3D);
-
-                        boolean isCrit = arrow.isCritArrow();
-
                         if (value >= 0.0D) {
-                            modifier = (float) (value * motion);
+                            modifier = (float) (value * motionFactor);
                         } else {
-                            modifier = (float) (value * (1.0D - motion));
+                            modifier = (float) (value * (1.0D - motionFactor));
                         }
 
-                        if (isCrit) {
+                        if (arrow.isCritArrow()) {
                             modifier *= 1.5F;
                         }
                     } else {
-                        double motion = projectile.getDeltaMovement().subtract(shooter.getDeltaMovement()).length() / 1.5D;
-                        modifier = (float) (value * Math.min(1.0D, motion));
+                        double genericMotion = speed / 1.5D;
+                        modifier = (float) (value * Math.min(1.0D, genericMotion));
                     }
 
                     float finalDamage = baseAmount + modifier;
