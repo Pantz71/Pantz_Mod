@@ -180,10 +180,15 @@ public class PMBlocks {
     public static final RegistryObject<Block> SPIKE = BLOCKS.createBlock("spike", () -> new SpikeBlock(PMProperties.SPIKE));
     public static final RegistryObject<Block> SPRINKLER = BLOCKS.createBlock("sprinkler", () -> new SprinklerBlock(PMProperties.SPRINKLER));
 
-    // TODO: Update texture for Steel Door, Steel Trapdoor, Dynamites, Magic Glasses
-    // TODO: Port Warden Defeated Loot condition to NeoForge
-    // TODO: Update ORNAMENT_LUCKY_COINS' model
-    // TODO: Remove Packed Ice Bricks, Blue Ice Bricks, Snow Bricks on NeoForge
+    public static final RegistryObject<Block> LEATHER_BLOCK = BLOCKS.createBlock("leather_block", () -> new Block(PMProperties.LEATHER_BLOCK));
+    public static final RegistryObject<Block> RABBIT_HIDE_BLOCK = BLOCKS.createBlock("rabbit_hide_block", () -> new Block(PMProperties.RABBIT_HIDE_BLOCK));
+    public static final RegistryObject<Block> PHANTOM_MEMBRANE_BLOCK = BLOCKS.createBlock("phantom_membrane_block", () -> new Block(PMProperties.MEMBRANE_BLOCK));
+    public static final RegistryObject<Block> SUGAR_BLOCK = BLOCKS.createBlock("sugar_block", () -> new SugarBlock(PMProperties.SUGAR_BLOCK));
+    public static final RegistryObject<Block> FEATHER_BLOCK = BLOCKS.createBlock("feather_block", () -> new FeatherBlock(PMProperties.FEATHER_BLOCK));
+    public static final RegistryObject<Block> SUGAR_CANE_BLOCK = BLOCKS.createBlock("sugar_cane_block", () -> new RotatedPillarBlock(PMProperties.SUGAR_CANE_BLOCK));
+    public static final RegistryObject<Block> FIERY_LAMP = BLOCKS.createBlock("fiery_lamp", () -> new Block(PMProperties.FIERY_LAMP));
+
+    // TODO: Finish the update
     public static void setupTabs() {
         CreativeModeTabContentsPopulator.mod(PantzMod.MOD_ID)
                 .tab(BUILDING_BLOCKS)
@@ -197,23 +202,25 @@ public class PMBlocks {
                 .addItemsBefore(of(Blocks.AMETHYST_BLOCK), SULFUR, SMALL_SULFUR_BUD, MEDIUM_SULFUR_BUD, LARGE_SULFUR_BUD, SULFUR_CLUSTER)
                 .addItemsAfter(of(Blocks.DEEPSLATE_DIAMOND_ORE), SULFUR_ORE, DEEPSLATE_SULFUR_ORE)
                 .addItemsAfter(of(Blocks.NETHER_QUARTZ_ORE), NETHER_SULFUR_ORE)
+                .addItemsAfter(of(Blocks.HONEY_BLOCK), SUGAR_CANE_BLOCK, SUGAR_BLOCK, FEATHER_BLOCK, LEATHER_BLOCK, RABBIT_HIDE_BLOCK, PHANTOM_MEMBRANE_BLOCK)
 
                 .tab(FUNCTIONAL_BLOCKS)
                 .addItemsBefore(of(Blocks.TINTED_GLASS), CHORUS_GLASS, CHORUS_GLASS_PANE, SOUL_GLASS, SOUL_GLASS_PANE, ECHO_GLASS, ECHO_GLASS_PANE)
                 .addItemsBefore(of(Items.PAINTING), ITEM_STAND, GLOW_ITEM_STAND)
                 .addItemsBefore(of(Blocks.SCAFFOLDING), ROPE_LADDER)
                 .addItemsBefore(of(Blocks.BARREL), TRASH_CAN, SAFE)
+                .addItemsBefore(of(Blocks.OCHRE_FROGLIGHT), FIERY_LAMP)
                 .addItemsBefore(of(Blocks.CHAIN), STEEL_LANTERN,
                         WHITE_PAPER_LANTERN, ORANGE_PAPER_LANTERN, MAGENTA_PAPER_LANTERN,
                         LIGHT_BLUE_PAPER_LANTERN, YELLOW_PAPER_LANTERN, LIME_PAPER_LANTERN, PINK_PAPER_LANTERN, GRAY_PAPER_LANTERN, LIGHT_GRAY_PAPER_LANTERN,
                         CYAN_PAPER_LANTERN, PURPLE_PAPER_LANTERN, BLUE_PAPER_LANTERN, BROWN_PAPER_LANTERN, GREEN_PAPER_LANTERN, RED_PAPER_LANTERN, BLACK_PAPER_LANTERN)
+                .addItemsBefore(of(Blocks.SKELETON_SKULL), ORNAMENT_FIRECRACKERS, ORNAMENT_LUCKY_COINS)
                 .addItemsAfter(of(Blocks.DAMAGED_ANVIL), STONE_PEDESTAL, DEEPSLATE_PEDESTAL, BLACKSTONE_PEDESTAL, QUARTZ_PEDESTAL, PRISMARINE_PEDESTAL, PURPUR_PEDESTAL)
                 .addItemsAfter(of(Blocks.BELL), MERCURY_GLOBE, VENUS_GLOBE, EARTH_GLOBE, MARS_GLOBE, JUPITER_GLOBE, SATURN_GLOBE, URANUS_GLOBE, NEPTUNE_GLOBE, PLUTO_GLOBE, CERES_GLOBE, MAKEMAKE_GLOBE, MOON_GLOBE, IO_GLOBE, EUROPA_GLOBE, CALLISTO_GLOBE, GANYMEDE_GLOBE, SUN_GLOBE, BLUE_SUN_GLOBE, IRIS_GLOBE)
                 .addItemsAfter(of(Blocks.REDSTONE_LAMP), WHITE_REDSTONE_LAMP, ORANGE_REDSTONE_LAMP, MAGENTA_REDSTONE_LAMP,
                         LIGHT_BLUE_REDSTONE_LAMP, YELLOW_REDSTONE_LAMP, LIME_REDSTONE_LAMP, PINK_REDSTONE_LAMP, GRAY_REDSTONE_LAMP, LIGHT_GRAY_REDSTONE_LAMP,
                         CYAN_REDSTONE_LAMP, PURPLE_REDSTONE_LAMP, BLUE_REDSTONE_LAMP, BROWN_REDSTONE_LAMP, GREEN_REDSTONE_LAMP, RED_REDSTONE_LAMP, BLACK_REDSTONE_LAMP)
                 .addItemsAfter(of(Blocks.RESPAWN_ANCHOR), ENDERPORTER)
-                .addItemsAfter(of(Raid.getLeaderBannerInstance()), ORNAMENT_FIRECRACKERS, ORNAMENT_LUCKY_COINS)
                 .addItemsAfter(of(Blocks.RESPAWN_ANCHOR), SPRINKLER)
 
                 .tab(REDSTONE_BLOCKS)

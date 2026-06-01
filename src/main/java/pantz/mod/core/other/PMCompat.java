@@ -22,6 +22,10 @@ public class PMCompat {
     private static void registerFlammables() {
         DataUtil.registerFlammable(PMBlocks.ORNAMENT_FIRECRACKERS.get(), 5, 15);
         DataUtil.registerFlammable(PMBlocks.ORNAMENT_LUCKY_COINS.get(), 5, 15);
+        DataUtil.registerFlammable(PMBlocks.LEATHER_BLOCK.get(), 5, 20);
+        DataUtil.registerFlammable(PMBlocks.RABBIT_HIDE_BLOCK.get(), 5, 20);
+        DataUtil.registerFlammable(PMBlocks.PHANTOM_MEMBRANE_BLOCK.get(), 5, 20);
+        DataUtil.registerFlammable(PMBlocks.FEATHER_BLOCK.get(), 30, 60);
     }
 
 }

@@ -128,13 +128,6 @@
 
   "item.pantz_mod.key": "Key",
 
-  "_pedestal": "pedestal",
-  "block.pantz_mod.stone_pedestal": "Stone Pedestal",
-  "block.pantz_mod.deepslate_pedestal": "Deepslate Pedestal",
-  "block.pantz_mod.blackstone_pedestal": "Blackstone Pedestal",
-  "block.pantz_mod.quartz_pedestal": "Quartz Pedestal",
-  "block.pantz_mod.purpur_pedestal": "Purpur Pedestal",
-  "block.pantz_mod.prismarine_pedestal": "Prismarine Pedestal",
 
   "_redstone": "redstone",
   "block.pantz_mod.ender_scanner": "Ender Scanner",
@@ -208,6 +201,13 @@
   "block.pantz_mod.spike": "Spike",
 
   "_functional": "functional",
+  "block.pantz_mod.stone_pedestal": "Stone Pedestal",
+  "block.pantz_mod.deepslate_pedestal": "Deepslate Pedestal",
+  "block.pantz_mod.blackstone_pedestal": "Blackstone Pedestal",
+  "block.pantz_mod.quartz_pedestal": "Quartz Pedestal",
+  "block.pantz_mod.purpur_pedestal": "Purpur Pedestal",
+  "block.pantz_mod.prismarine_pedestal": "Prismarine Pedestal",
+
   "block.pantz_mod.item_stand": "Item Stand",
   "block.pantz_mod.glow_item_stand": "Glow Item Stand",
   "block.pantz_mod.trash_can": "Trash Can",
@@ -245,6 +245,13 @@
   "block.pantz_mod.sprinkler": "Sprinkler",
 
   "_decoration": "decoration",
+  "block.pantz_mod.leather_block": "Block of Leather",
+  "block.pantz_mod.rabbit_hide_block": "Block of Rabbit Hide",
+  "block.pantz_mod.phantom_membrane_block": "Block of Phantom Membrane",
+  "block.pantz_mod.sugar_block": "Block of Sugar",
+  "block.pantz_mod.sugar_cane_block": "Block of Sugar Cane",
+  "block.pantz_mod.feather_block": "Block of Feather",
+  "block.pantz_mod.fiery_lamp": "Fiery Lamp",
 
   "_effects": "effects",
   "effect.pantz_mod.precision": "Precision",

@@ -1,0 +1,7 @@
+{
+  "parent": "pantz_mod:block/tinted_cube_column",
+  "textures": {
+    "end": "pantz_mod:block/sugar_cane_block_top",
+    "side": "pantz_mod:block/sugar_cane_block"
+  }
+}

@@ -34,6 +34,7 @@
     "pantz_mod:enderporter",
     "pantz_mod:redstone_configurator",
     "pantz_mod:safe",
-    "pantz_mod:spike"
+    "pantz_mod:spike",
+    "pantz_mod:fiery_lamp"
   ]
 }

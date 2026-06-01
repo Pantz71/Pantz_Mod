@@ -3,6 +3,7 @@ package pantz.mod.core.other;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -18,7 +19,6 @@ import java.util.function.ToIntFunction;
 
 public class PMProperties {
     public static final BlockSetType STEEL = BlockSetType.register(new BlockSetType(PantzMod.MOD_ID + ":steel", false, SoundType.METAL, SoundEvents.IRON_DOOR_CLOSE, SoundEvents.IRON_DOOR_OPEN, SoundEvents.IRON_TRAPDOOR_CLOSE, SoundEvents.IRON_TRAPDOOR_OPEN, SoundEvents.METAL_PRESSURE_PLATE_CLICK_OFF, SoundEvents.METAL_PRESSURE_PLATE_CLICK_ON, SoundEvents.STONE_BUTTON_CLICK_OFF, SoundEvents.STONE_BUTTON_CLICK_ON));
-    public static final BlockSetType ICE = BlockSetType.register(new BlockSetType(PantzMod.MOD_ID + ":ice", true, SoundType.GLASS, SoundEvents.WOODEN_DOOR_CLOSE, SoundEvents.WOODEN_DOOR_OPEN, SoundEvents.WOODEN_TRAPDOOR_CLOSE, SoundEvents.WOODEN_TRAPDOOR_OPEN,  SoundEvents.STONE_PRESSURE_PLATE_CLICK_OFF, SoundEvents.STONE_PRESSURE_PLATE_CLICK_ON, SoundEvents.STONE_BUTTON_CLICK_OFF, SoundEvents.STONE_BUTTON_CLICK_ON));
 
     public static final BlockBehaviour.Properties STEEL_BLOCK = BlockBehaviour.Properties.of().mapColor(MapColor.METAL).instrument(NoteBlockInstrument.IRON_XYLOPHONE).requiresCorrectToolForDrops().sound(SoundType.METAL).strength(3.0f, 6.0f).mapColor(MapColor.COLOR_GRAY);
     public static final BlockBehaviour.Properties STEEL_DOOR = BlockBehaviour.Properties.of().requiresCorrectToolForDrops().strength(5.0F).noOcclusion().pushReaction(PushReaction.DESTROY).mapColor(MapColor.COLOR_GRAY);
@@ -75,6 +75,14 @@ public class PMProperties {
     public static final BlockBehaviour.Properties SAFE = BlockBehaviour.Properties.of().requiresCorrectToolForDrops().mapColor(MapColor.COLOR_LIGHT_GRAY).strength(50.0f, 2000.0f).pushReaction(PushReaction.BLOCK).instrument(NoteBlockInstrument.BASEDRUM).sound(SoundType.NETHERITE_BLOCK);
     public static final BlockBehaviour.Properties SPIKE = BlockBehaviour.Properties.of().requiresCorrectToolForDrops().mapColor(MapColor.COLOR_GRAY).strength(3.0f, 5.0f).sound(SoundType.STONE).isSuffocating(PMProperties::never).isViewBlocking(PMProperties::never).isRedstoneConductor(PMProperties::never).isValidSpawn(PMProperties::never);
     public static final BlockBehaviour.Properties SPRINKLER = BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BROWN).strength(3.0f, 4.5f).sound(SoundType.WOOD).isSuffocating(PMProperties::never).isViewBlocking(PMProperties::never).isRedstoneConductor(PMProperties::never).isValidSpawn(PMProperties::never);
+
+    public static final BlockBehaviour.Properties LEATHER_BLOCK = BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_ORANGE).strength(3.0f, 4.5f).sound(SoundType.WOOL).instrument(NoteBlockInstrument.GUITAR);
+    public static final BlockBehaviour.Properties RABBIT_HIDE_BLOCK = BlockBehaviour.Properties.of().mapColor(MapColor.SAND).strength(3.0f, 4.5f).sound(SoundType.WOOL).instrument(NoteBlockInstrument.GUITAR);
+    public static final BlockBehaviour.Properties MEMBRANE_BLOCK = BlockBehaviour.Properties.of().mapColor(MapColor.QUARTZ).strength(3.0f, 4.5f).sound(SoundType.WOOL).instrument(NoteBlockInstrument.GUITAR);
+    public static final BlockBehaviour.Properties SUGAR_BLOCK = BlockBehaviour.Properties.of().mapColor(DyeColor.WHITE).strength(0.5f).instrument(NoteBlockInstrument.SNARE).sound(SoundType.SAND).randomTicks();
+    public static final BlockBehaviour.Properties FEATHER_BLOCK = BlockBehaviour.Properties.of().mapColor(DyeColor.WHITE).strength(0.8f).instrument(NoteBlockInstrument.GUITAR).sound(SoundType.WOOL).ignitedByLava();
+    public static final BlockBehaviour.Properties SUGAR_CANE_BLOCK = BlockBehaviour.Properties.of().mapColor(DyeColor.LIME).strength(1f).instrument(NoteBlockInstrument.BANJO).sound(SoundType.GRASS);
+    public static final BlockBehaviour.Properties FIERY_LAMP = BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_YELLOW).strength(3.0f, 4.5f).instrument(NoteBlockInstrument.BASEDRUM).sound(SoundType.STONE).requiresCorrectToolForDrops().lightLevel(light -> 15);
 
     public static boolean never(BlockState state, BlockGetter blockGetter, BlockPos pos) {
         return false;

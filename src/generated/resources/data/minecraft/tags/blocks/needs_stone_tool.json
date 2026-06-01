@@ -30,6 +30,7 @@
     "pantz_mod:entity_detector",
     "pantz_mod:trash_can",
     "pantz_mod:enderporter",
-    "pantz_mod:safe"
+    "pantz_mod:safe",
+    "pantz_mod:fiery_lamp"
   ]
 }

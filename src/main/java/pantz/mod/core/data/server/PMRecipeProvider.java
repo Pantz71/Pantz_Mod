@@ -423,6 +423,16 @@ public class PMRecipeProvider extends BlueprintRecipeProvider {
                 .save(consumer);
         // ----------------------
 
+        // --- Compressed ---
+        storageRecipes(consumer, MISC, Items.LEATHER, BUILDING_BLOCKS, LEATHER_BLOCK.get());
+        storageRecipes(consumer, MISC, Items.RABBIT_HIDE, BUILDING_BLOCKS, RABBIT_HIDE_BLOCK.get());
+        storageRecipes(consumer, MISC, Items.PHANTOM_MEMBRANE, BUILDING_BLOCKS, PHANTOM_MEMBRANE_BLOCK.get());
+        storageRecipes(consumer, MISC, Items.SUGAR_CANE, BUILDING_BLOCKS, SUGAR_CANE_BLOCK.get());
+        storageRecipes(consumer, MISC, Items.FEATHER, BUILDING_BLOCKS, FEATHER_BLOCK.get());
+        storageRecipes(consumer, MISC, Items.SUGAR, BUILDING_BLOCKS, SUGAR_BLOCK.get());
+        storageRecipes(consumer, MISC, Items.BLAZE_POWDER, BUILDING_BLOCKS, FIERY_LAMP.get());
+
+        // ----------------------
 
     }
 

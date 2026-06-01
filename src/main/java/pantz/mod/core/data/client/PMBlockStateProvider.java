@@ -13,10 +13,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
-import net.minecraftforge.client.model.generators.BlockModelBuilder;
-import net.minecraftforge.client.model.generators.ConfiguredModel;
-import net.minecraftforge.client.model.generators.ModelFile;
-import net.minecraftforge.client.model.generators.MultiPartBlockStateBuilder;
+import net.minecraftforge.client.model.generators.*;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -146,6 +143,14 @@ public class PMBlockStateProvider extends BlueprintBlockStateProvider {
         this.safeBlock(SAFE);
         this.equalizerBlock(EQUALIZER);
         this.blockItem(SPRINKLER);
+
+        this.block(LEATHER_BLOCK);
+        this.block(RABBIT_HIDE_BLOCK);
+        this.block(PHANTOM_MEMBRANE_BLOCK);
+        this.block(SUGAR_BLOCK);
+        this.block(FEATHER_BLOCK);
+        this.sugarCaneBlock(SUGAR_CANE_BLOCK);
+        this.block(FIERY_LAMP);
     }
 
     private void redstoneConfiguratorBlock(RegistryObject<Block> block) {
@@ -601,4 +606,30 @@ public class PMBlockStateProvider extends BlueprintBlockStateProvider {
                     .condition(IngotBlock.AXIS, axis).condition(IngotBlock.LAYERS, layer - 1).condition(IngotBlock.TOP_INGOT, ingotLayer, IngotLayer.BOTH);
         }
     }
+
+    public void sugarCaneBlock(RegistryObject<Block> block) {
+        String name = name(block.get());
+        ResourceLocation texture = blockTexture(block.get());
+
+        axisBlock((RotatedPillarBlock) block.get(),
+                tintedCubeColumn(name, texture, suffix(texture, "_top")),
+                tintedCubeColumnHorizontal(name + "_horizontal", texture, suffix(texture, "_top")));
+        blockItem(block);
+
+    }
+
+    public BlockModelBuilder tintedCubeColumn(String name, ResourceLocation side, ResourceLocation end) {
+        return models().withExistingParent(name, PantzMod.location("block/tinted_cube_column"))
+                .texture("side", side)
+                .texture("end", end);
+    }
+
+    public BlockModelBuilder tintedCubeColumnHorizontal(String name, ResourceLocation side, ResourceLocation end) {
+        return models().withExistingParent(name, PantzMod.location("block/tinted_cube_column_horizontal"))
+                .texture("side", side)
+                .texture("end", end);
+    }
+
+
+
 }

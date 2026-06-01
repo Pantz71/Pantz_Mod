@@ -5,6 +5,7 @@ import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.level.GrassColor;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RegisterColorHandlersEvent;
@@ -56,6 +57,13 @@ public class PMClientCompat {
     @SubscribeEvent
     public static void registerBlockColors(RegisterColorHandlersEvent.Block event) {
         event.register((state, level, pos, index) -> level != null && pos != null ? BiomeColors.getAverageWaterColor(level, pos) : -1, SPRINKLER.get());
+        event.register((state, level, pos, index) -> level != null && pos != null ? BiomeColors.getAverageGrassColor(level, pos) : -1, SUGAR_CANE_BLOCK.get());
+
+    }
+
+    @SubscribeEvent
+    public static void registerItemColor(RegisterColorHandlersEvent.Item event) {
+        event.register((stack, index) -> GrassColor.get(0.5D, 1.0D), SUGAR_CANE_BLOCK.get());
     }
 
     private static void registerItemProperties() {

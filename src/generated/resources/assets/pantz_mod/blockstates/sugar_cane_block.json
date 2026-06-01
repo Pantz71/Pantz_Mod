@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "pantz_mod:block/sugar_cane_block_horizontal",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "pantz_mod:block/sugar_cane_block"
+    },
+    "axis=z": {
+      "model": "pantz_mod:block/sugar_cane_block_horizontal",
+      "x": 90
+    }
+  }
+}

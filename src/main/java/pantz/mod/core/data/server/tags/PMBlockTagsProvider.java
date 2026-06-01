@@ -34,15 +34,18 @@ public class PMBlockTagsProvider extends BlockTagsProvider {
                 SULFUR_BRICKS.get(), SULFUR_BRICK_STAIRS.get(), SULFUR_BRICK_SLAB.get(), CHISELED_SULFUR_BRICKS.get(), NETHER_SULFUR_ORE.get(), SULFUR_LAMP.get(),
                 SULFUR_CLUSTER.get(), SMALL_SULFUR_BUD.get(), MEDIUM_SULFUR_BUD.get(), LARGE_SULFUR_BUD.get(),
                 ENDER_SCANNER.get(), WEATHER_DETECTOR.get(), ENTITY_DETECTOR.get(), TRASH_CAN.get(), ENDERPORTER.get(), REDSTONE_CONFIGURATOR.get(),
-                SAFE.get(), SPIKE.get());
+                SAFE.get(), SPIKE.get(), FIERY_LAMP.get());
 
         this.tag(BlockTags.MINEABLE_WITH_AXE).add(LOCK.get(), UNIVERSAL_LOCK.get(), SPRINKLER.get());
+        this.tag(BlockTags.MINEABLE_WITH_HOE).add(LEATHER_BLOCK.get(), RABBIT_HIDE_BLOCK.get(), PHANTOM_MEMBRANE_BLOCK.get(), SUGAR_CANE_BLOCK.get(), FEATHER_BLOCK.get());
+        this.tag(BlockTags.MINEABLE_WITH_SHOVEL).add(SUGAR_BLOCK.get());
+
         this.tag(BlockTags.NEEDS_STONE_TOOL).add(STEEL_BLOCK.get(), STEEL_BARS.get(), STEEL_DOOR.get(), STEEL_TRAPDOOR.get(), STEEL_LANTERN.get(),
                 STEEL_BRICKS.get(), STEEL_BRICK_STAIRS.get(), STEEL_BRICK_SLAB.get(), STEEL_BRICK_WALL.get(), STEEL_INGOT.get(),
                 SULFUR.get(), SULFUR_BLOCK.get(), POLISHED_SULFUR.get(), POLISHED_SULFUR_STAIRS.get(), POLISHED_SULFUR_SLAB.get(), POLISHED_SULFUR_WALL.get(),
                 SULFUR_BRICKS.get(), SULFUR_BRICK_STAIRS.get(), SULFUR_BRICK_SLAB.get(), CHISELED_SULFUR_BRICKS.get(), NETHER_SULFUR_ORE.get(), SULFUR_LAMP.get(),
                 SULFUR_CLUSTER.get(), SMALL_SULFUR_BUD.get(), MEDIUM_SULFUR_BUD.get(), LARGE_SULFUR_BUD.get(),
-                REDSTONE_CONFIGURATOR.get(), ENTITY_DETECTOR.get(), TRASH_CAN.get(), ENDERPORTER.get(), SAFE.get());
+                REDSTONE_CONFIGURATOR.get(), ENTITY_DETECTOR.get(), TRASH_CAN.get(), ENDERPORTER.get(), SAFE.get(), FIERY_LAMP.get());
 
         this.tag(BlockTags.NEEDS_DIAMOND_TOOL).add(ENDER_SCANNER.get());
 
