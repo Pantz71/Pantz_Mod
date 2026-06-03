@@ -3,8 +3,11 @@ package pantz.mod.integration.jei;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.constants.RecipeTypes;
+import mezz.jei.api.gui.handlers.IGuiContainerHandler;
+import mezz.jei.api.registration.IGuiHandlerRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.Rect2i;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
@@ -14,9 +17,11 @@ import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.item.crafting.RecipeType;
 import pantz.mod.common.crafting.PotterySherdDisplayRecipe;
 import pantz.mod.common.crafting.RenewablePotterySherdRecipe;
+import pantz.mod.common.inventory.TrashCanScreen;
 import pantz.mod.core.PantzMod;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @JeiPlugin
@@ -45,5 +50,15 @@ public class PMJEIPlugins implements IModPlugin {
             }));
             registration.addRecipes(RecipeTypes.CRAFTING, recipes);
         }
+    }
+
+    @Override
+    public void registerGuiHandlers(IGuiHandlerRegistration registration) {
+        registration.addGuiContainerHandler(TrashCanScreen.class, new IGuiContainerHandler<>() {
+            @Override
+            public java.util.List<Rect2i> getGuiExtraAreas(TrashCanScreen containerScreen) {
+                return Collections.singletonList(new Rect2i(containerScreen.getGuiLeft() + 176, containerScreen.getGuiTop(), 20, 20));
+            }
+        });
     }
 }

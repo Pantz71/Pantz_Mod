@@ -21,8 +21,11 @@ import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
 import org.jetbrains.annotations.Nullable;
 import pantz.mod.common.block.TrashCanBlock;
+import pantz.mod.common.inventory.TrashCanMenu;
 import pantz.mod.core.registry.PMBlockEntityTypes;
 import pantz.mod.core.registry.PMSoundEvents;
+
+import java.util.Collections;
 
 public class TrashCanBlockEntity extends RandomizableContainerBlockEntity {
     private NonNullList<ItemStack> items = NonNullList.withSize(27, ItemStack.EMPTY);
@@ -49,7 +52,7 @@ public class TrashCanBlockEntity extends RandomizableContainerBlockEntity {
 
         @Override
         protected boolean isOwnContainer(Player player) {
-            if (player.containerMenu instanceof ChestMenu menu) {
+            if (player.containerMenu instanceof TrashCanMenu menu) {
                 return menu.getContainer() == TrashCanBlockEntity.this;
             }
             return false;
@@ -86,10 +89,14 @@ public class TrashCanBlockEntity extends RandomizableContainerBlockEntity {
     }
 
     public void clearContentInside() {
-        items.replaceAll(ignored -> ItemStack.EMPTY);
+        Collections.fill(items, ItemStack.EMPTY);
         setChanged();
         if (level != null) {
             level.updateNeighbourForOutputSignal(worldPosition, getBlockState().getBlock());
+            if (!level.isClientSide()) {
+                BlockPos pos = this.getBlockPos();
+                level.playSound(null, pos, PMSoundEvents.TRASH_CAN_DESTROY.get(), SoundSource.BLOCKS);
+            }
         }
     }
 
@@ -100,6 +107,17 @@ public class TrashCanBlockEntity extends RandomizableContainerBlockEntity {
         }
         if (this.level == null) return;
         Containers.dropContents(this.level, this.worldPosition, inv);
+    }
+
+    @Override
+    public void setLevel(Level level) {
+        super.setLevel(level);
+        if (!level.isClientSide()) {
+            BlockState state = getBlockState();
+            if (state.hasProperty(TrashCanBlock.OPEN) && state.getValue(TrashCanBlock.OPEN)) {
+                level.setBlock(this.worldPosition, state.setValue(TrashCanBlock.OPEN, false), 3);
+            }
+        }
     }
 
     @Override
@@ -129,7 +147,7 @@ public class TrashCanBlockEntity extends RandomizableContainerBlockEntity {
 
     @Override
     protected AbstractContainerMenu createMenu(int id, Inventory inventory) {
-        return ChestMenu.threeRows(id, inventory, this);
+        return new TrashCanMenu(id, inventory, this, this);
     }
 
     @Override

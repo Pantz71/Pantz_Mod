@@ -21,7 +21,7 @@ public class PMItemModelProvider extends BlueprintItemModelProvider {
     @Override
     protected void registerModels() {
         this.generatedItem(PMItems.STEEL_INGOT, STEEL_NUGGET, STEEL_HORSE_ARMOR,
-                SULFUR_DUST, SULFUR_CRYSTAL, HONEY_DESERIALIZER, CACTUS_KEY,
+                SULFUR_DUST, SULFUR_CRYSTAL, HONEY_DESERIALIZER,
                 DYNAMITE, COMBAT_DYNAMITE, FIERY_DYNAMITE, RED_ENVELOPE, KEY, SPIKE);
 
         this.generatedItem(RANDOMIZER, EQUALIZER, NOT_GATE,

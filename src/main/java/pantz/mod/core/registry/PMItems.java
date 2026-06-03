@@ -52,7 +52,6 @@ public class PMItems {
     public static final RegistryObject<Item> NETHERITE_HAMMER = ITEMS.createItem("netherite_hammer", () -> new AreaDiggerItem(-4f, -2.5f, Tiers.NETHERITE, BlockTags.MINEABLE_WITH_PICKAXE, new Item.Properties()));
 
     public static final RegistryObject<Item> ENTITY_FILTER = ITEMS.createItem("entity_filter", () -> new EntityFilterItem(PropertyUtil.stacksOnce()));
-    public static final RegistryObject<Item> CACTUS_KEY = ITEMS.createItem("cactus_key", () -> new CactusKeyItem(PropertyUtil.stacksOnce()));
 
     public static final RegistryObject<Item> DYNAMITE = ITEMS.createItem("dynamite", () -> new DynamiteItem(new Item.Properties(), DynamiteType.GENERIC));
     public static final RegistryObject<Item> COMBAT_DYNAMITE = ITEMS.createItem("combat_dynamite", () -> new DynamiteItem(new Item.Properties(), DynamiteType.COMBAT));
@@ -95,10 +94,7 @@ public class PMItems {
 
         CreativeModeTabContentsPopulator.mod(PantzMod.MOD_ID + "_config")
                 .predicate(event -> modPredicate(event, TOOLS_AND_UTILITIES) && PMConfig.Common.COMMON.enableEntityFilter.get())
-                .addItemsAfter(of(Items.NAME_TAG), ENTITY_FILTER)
-                .predicate(event -> modPredicate(event, TOOLS_AND_UTILITIES) && PMConfig.Common.COMMON.enableCactusKey.get())
-                .addItemsAfter(of(Items.BRUSH), CACTUS_KEY)
-                ;
+                .addItemsAfter(of(Items.NAME_TAG), ENTITY_FILTER);
     }
 
     public static boolean modPredicate(BuildCreativeModeTabContentsEvent event, ResourceKey<CreativeModeTab> tab) {

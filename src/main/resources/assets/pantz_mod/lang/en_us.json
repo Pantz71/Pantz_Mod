@@ -26,6 +26,7 @@
   "tooltip.pantz_mod.mode.nbt": "Copy NBT",
   "tooltip.pantz_mod.entity": " - %s",
   "tooltip.pantz_mod.entity.none": "Empty",
+  "tooltip.pantz_mod.trash": "Destroy all items",
 
   "message.pantz_mod.entity.added": "Added %s to Filter",
   "message.pantz_mod.entity.removed": "Removed %s from Filter",
@@ -34,7 +35,6 @@
   "message.pantz_mod.detector.removed": "Removed %s from Detector",
   "message.pantz_mod.mode_change": "Mode: %s",
 
-  "message.pantz_mod.trash": "Successfully destroyed all items inside Trash Can!",
   "message.pantz_mod.set_key": "Set key as %s",
   "message.pantz_mod.remove_key": "Key removed!",
   "message.pantz_mod.ownership": "Only the owner can change the key!",

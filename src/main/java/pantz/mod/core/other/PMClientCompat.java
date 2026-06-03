@@ -15,6 +15,7 @@ import net.minecraftforge.registries.RegistryObject;
 import pantz.mod.common.item.EntityFilterItem;
 import pantz.mod.core.PantzMod;
 import pantz.mod.core.registry.PMItems;
+import pantz.mod.core.registry.PMMenuTypes;
 import pantz.mod.core.registry.datapack.PMTrimMaterials;
 
 import static pantz.mod.core.registry.PMBlocks.*;
@@ -24,7 +25,9 @@ public class PMClientCompat {
     public static void registerClientCompat() {
         registerRenderLayers();
         registerItemProperties();
+        PMMenuTypes.registerScreenFactories();
         PMTrimMaterials.registerArmorMaterialOverrides();
+
     }
 
     @SuppressWarnings("deprecation")

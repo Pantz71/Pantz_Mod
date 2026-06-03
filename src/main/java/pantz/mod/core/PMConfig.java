@@ -29,9 +29,6 @@ public class PMConfig {
         @ConfigKey("entity_filter")
         public final BooleanValue enableEntityFilter;
 
-        @ConfigKey("cactus_key")
-        public final BooleanValue enableCactusKey;
-
         @ConfigKey("craftable_sponge")
         public final BooleanValue craftableSponge;
 
@@ -51,9 +48,6 @@ public class PMConfig {
 
             enableEntityFilter = builder.comment("Allow filter entities feature of Entity Detector?")
                     .define("Entity filtering", true);
-
-            enableCactusKey = builder.comment("Allow Trash Can to require players to hold a Cactus Key instead of empty hand")
-                    .define("Cactus Key", true);
 
             builder.pop();
 

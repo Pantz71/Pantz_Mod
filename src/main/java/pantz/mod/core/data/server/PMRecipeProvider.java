@@ -43,7 +43,6 @@ public class PMRecipeProvider extends BlueprintRecipeProvider {
     private static final ModLoadedCondition CAVERNS_AND_CHASMS = new ModLoadedCondition(PMConstant.CAVERNS_AND_CHASMS);
     private static final ConfigValueCondition FLINT_AND_STEEL = config(COMMON.flintAndSteel, "flint_and_steel");
     private static final ConfigValueCondition ENTITY_FILTERING = config(COMMON.enableEntityFilter, "entity_filter");
-    private static final ConfigValueCondition REQUIRE_CACTUS_KEY = config(COMMON.enableCactusKey, "cactus_key");
     private static final ConfigValueCondition CRAFTABLE_SPONGE = config(COMMON.craftableSponge, "craftable_sponge");
 
     public static final ImmutableList<ItemLike> SULFUR_SMELTABLES = ImmutableList.of(SULFUR.get(), SULFUR_ORE.get(), DEEPSLATE_SULFUR_ORE.get(), NETHER_SULFUR_ORE.get());
@@ -168,15 +167,6 @@ public class PMRecipeProvider extends BlueprintRecipeProvider {
         hammer(consumer, HAMMER.get(), PMItems.STEEL_INGOT.get(), PMItemTags.INGOTS_STEEL);
         hammer(consumer, DIAMOND_HAMMER.get(), Items.DIAMOND, Tags.Items.GEMS_DIAMOND);
         netheriteSmithingRecipe(consumer, DIAMOND_HAMMER.get(), TOOLS, NETHERITE_HAMMER.get());
-
-        conditionalRecipe(consumer, REQUIRE_CACTUS_KEY, TOOLS,
-                ShapedRecipeBuilder.shaped(TOOLS, CACTUS_KEY.get())
-                        .define('#', Tags.Items.INGOTS_IRON).define('*', Tags.Items.NUGGETS_IRON)
-                        .define('$', Blocks.CACTUS)
-                        .pattern(" ##")
-                        .pattern(" $#")
-                        .pattern("*  ")
-                        .unlockedBy(getHasName(Blocks.CACTUS), has(Blocks.CACTUS)));
 
         ShapelessRecipeBuilder.shapeless(TOOLS, DYNAMITE.get(), 3)
                 .requires(Items.PAPER).requires(Ingredient.of(Tags.Items.GUNPOWDER), 2)

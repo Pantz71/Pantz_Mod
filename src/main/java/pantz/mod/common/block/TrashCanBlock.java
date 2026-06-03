@@ -6,6 +6,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
@@ -23,6 +24,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
 import pantz.mod.common.block.entity.TrashCanBlockEntity;
 import pantz.mod.core.PMConfig;
@@ -66,21 +68,12 @@ public class TrashCanBlock extends BaseEntityBlock {
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         BlockEntity be = level.getBlockEntity(pos);
-        ItemStack held = player.getItemInHand(hand);
 
         if (!(be instanceof TrashCanBlockEntity trash)) return InteractionResult.PASS;
-
-        if (player.isShiftKeyDown()) {
-            if (held.isEmpty() && !PMConfig.Common.COMMON.enableCactusKey.get()) {
-                if (!level.isClientSide()) {
-                    trash.clearContentInside();
-                    level.playSound(null, pos, PMSoundEvents.TRASH_CAN_DESTROY.get(), SoundSource.BLOCKS);
-                }
-                player.displayClientMessage(Component.translatable("message.pantz_mod.trash"), true);
-            }
+        if (!level.isClientSide()) {
+            NetworkHooks.openScreen((ServerPlayer) player, trash, pos);
         }
 
-        player.openMenu(trash);
         return InteractionResult.SUCCESS;
     }
 
