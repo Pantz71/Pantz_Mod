@@ -1,16 +1,11 @@
 package pantz.mod.common.block;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
@@ -28,9 +23,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
 import pantz.mod.common.block.entity.TrashCanBlockEntity;
-import pantz.mod.core.PMConfig;
-import pantz.mod.core.registry.PMSoundEvents;
-import pantz.mod.core.registry.PMStats;
+import pantz.mod.core.other.PMStats;
 
 @SuppressWarnings("deprecation")
 public class TrashCanBlock extends BaseEntityBlock {

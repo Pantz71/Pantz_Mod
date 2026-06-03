@@ -1,4 +1,4 @@
-package pantz.mod.core.registry;
+package pantz.mod.core.other;
 
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
