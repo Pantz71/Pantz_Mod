@@ -4,6 +4,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.monster.piglin.PiglinAi;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.level.BlockGetter;
@@ -62,11 +63,16 @@ public class TrashCanBlock extends BaseEntityBlock {
 
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        if (!level.isClientSide()) {
-            NetworkHooks.openScreen((ServerPlayer) player, state.getMenuProvider(level, pos), pos);
-            player.awardStat(PMStats.INTERACT_WITH_TRASH_CAN);
+        BlockEntity be = level.getBlockEntity(pos);
+        if (be instanceof TrashCanBlockEntity trashCan) {
+            if (!level.isClientSide()) {
+                player.openMenu(trashCan);
+                player.awardStat(PMStats.INTERACT_WITH_TRASH_CAN);
+                PiglinAi.angerNearbyPiglins(player, true);
+            }
+            return InteractionResult.sidedSuccess(level.isClientSide());
         }
-        return InteractionResult.sidedSuccess(level.isClientSide());
+        return InteractionResult.PASS;
     }
 
     @Override
