@@ -4,6 +4,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.MenuProvider;
@@ -72,9 +73,10 @@ public class TrashCanBlock extends BaseEntityBlock {
         if (!(be instanceof TrashCanBlockEntity trash)) return InteractionResult.PASS;
         if (!level.isClientSide()) {
             NetworkHooks.openScreen((ServerPlayer) player, trash, pos);
+            player.awardStat(Stats.INTERACT_WITH_CRAFTING_TABLE);
         }
 
-        return InteractionResult.SUCCESS;
+        return InteractionResult.CONSUME;
     }
 
     @Override
