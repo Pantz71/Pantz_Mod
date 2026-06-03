@@ -52,6 +52,7 @@ public class PMItemTagsProvider extends ItemTagsProvider {
 
         this.tag(PLACEABLE_ITEMS).add(STEEL_INGOT.get());
         this.tag(ItemTags.TRIM_MATERIALS).add(STEEL_INGOT.get(), SULFUR_CRYSTAL.get());
+        this.tag(ItemTags.BEACON_PAYMENT_ITEMS).add(STEEL_INGOT.get());
         this.tag(COALS).add(Items.COAL, Items.CHARCOAL);
 
         this.tag(ENDER_SCANNER_IMMUNITIES).add(Items.CARVED_PUMPKIN);

@@ -51,6 +51,7 @@ public class PMBlockTagsProvider extends BlockTagsProvider {
 
         this.tag(BlockTags.INFINIBURN_OVERWORLD).add(SULFUR.get(), SULFUR_BLOCK.get(), SULFUR_BRICKS.get(), CHISELED_SULFUR_BRICKS.get());
         this.tag(BlockTags.INSIDE_STEP_SOUND_BLOCKS).add(SMALL_SULFUR_BUD.get());
+        this.tag(BlockTags.BEACON_BASE_BLOCKS).add(STEEL_BLOCK.get());
 
         this.tag(Tags.Blocks.STORAGE_BLOCKS).addTag(STORAGE_BLOCKS_STEEL).addTag(STORAGE_BLOCKS_SULFUR);
         this.tag(STORAGE_BLOCKS_STEEL).add(STEEL_BLOCK.get());
