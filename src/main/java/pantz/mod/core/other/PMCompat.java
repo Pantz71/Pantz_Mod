@@ -9,7 +9,6 @@ public class PMCompat {
         registerDispenserBehaviors();
         registerFlammables();
         PMMobEffects.registerBrewingRecipes();
-        PMStats.registerStats();
     }
 
     private static void registerDispenserBehaviors() {

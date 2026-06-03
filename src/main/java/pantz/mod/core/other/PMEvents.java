@@ -1,6 +1,7 @@
 package pantz.mod.core.other;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -37,6 +38,7 @@ import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.registries.RegisterEvent;
 import pantz.mod.common.block.ItemStandBlock;
 import pantz.mod.common.block.PedestalBlock;
 import pantz.mod.common.block.entity.PedestalBlockEntity;
@@ -57,6 +59,13 @@ public class PMEvents {
     public static class PMModEvents {
 
         @SubscribeEvent
+        public static void onRegister(RegisterEvent event) {
+            if (event.getRegistryKey().equals(BuiltInRegistries.CUSTOM_STAT.key())) {
+                PMStats.registerStats();
+            }
+        }
+
+        @SubscribeEvent
         public static void modifyAttribute(EntityAttributeModificationEvent event) {
             for (EntityType<? extends LivingEntity> type : event.getTypes()) {
                 if (!event.has(type, PMAttributes.PROJECTILE_BONUS_DAMAGE.get())) {
@@ -69,6 +78,7 @@ public class PMEvents {
 
     @Mod.EventBusSubscriber(modid = PantzMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
     public static class PMForgeEvents {
+
 
         @SubscribeEvent
         public static void onLivingDeath(LivingDeathEvent event) {
