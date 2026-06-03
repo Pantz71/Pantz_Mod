@@ -1,6 +1,5 @@
 package pantz.mod.common.inventory;
 
-import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
@@ -9,6 +8,7 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import pantz.mod.common.block.entity.TrashCanBlockEntity;
+import pantz.mod.core.other.PMStats;
 import pantz.mod.core.registry.PMMenuTypes;
 
 public class TrashCanMenu extends AbstractContainerMenu {
@@ -47,7 +47,10 @@ public class TrashCanMenu extends AbstractContainerMenu {
     @Override
     public boolean clickMenuButton(Player player, int id) {
         if (id == 0 && this.be != null) {
-            this.be.clearContentInside();
+            if (!this.be.isContainerEmpty()) {
+                this.be.clearContentInside();
+                player.awardStat(PMStats.TIMES_TRASH_CAN_DESTROY_ITEMS);
+            }
             return true;
         }
         return super.clickMenuButton(player, id);

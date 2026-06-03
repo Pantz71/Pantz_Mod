@@ -280,5 +280,6 @@
   "death.attack.pantz_mod.spike.player": "%1$s was impaled whilst trying to escape %2$s",
 
   "_stat": "stats",
-  "stat.pantz_mod.interact_with_trash_can": "Interactions with Trash Can"
+  "stat.pantz_mod.interact_with_trash_can": "Interactions with Trash Can",
+  "stat.pantz_mod.times_trash_can_destroy_items": "Times destroyed items with Trash Can"
 }

@@ -52,10 +52,8 @@ public class TrashCanBlock extends BaseEntityBlock {
             if (powered != state.getValue(POWERED)) {
                 level.setBlock(pos, state.setValue(POWERED, powered), 3);
                 BlockEntity be = level.getBlockEntity(pos);
-                if (be instanceof TrashCanBlockEntity trash) {
-                    if (powered) {
-                        trash.clearContentInside();
-                    }
+                if (be instanceof TrashCanBlockEntity trash && powered && !trash.isContainerEmpty()) {
+                    trash.clearContentInside();
                 }
             }
         }
