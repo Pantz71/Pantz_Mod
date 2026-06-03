@@ -19,10 +19,6 @@ public class TrashCanMenu extends AbstractContainerMenu {
         this(id, playerInventory, new SimpleContainer(27), null);
     }
 
-    public TrashCanMenu(int id, Inventory playerInventory, FriendlyByteBuf extraData) {
-        this(id, playerInventory, new SimpleContainer(27), (TrashCanBlockEntity) playerInventory.player.level().getBlockEntity(extraData.readBlockPos()));
-    }
-
     public TrashCanMenu(int id, Inventory inv, Container container, TrashCanBlockEntity be) {
         super(PMMenuTypes.TRASH_CAN.get(), id);
         checkContainerSize(container, 27);
