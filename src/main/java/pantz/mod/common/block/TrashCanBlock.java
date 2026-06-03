@@ -30,6 +30,7 @@ import org.jetbrains.annotations.Nullable;
 import pantz.mod.common.block.entity.TrashCanBlockEntity;
 import pantz.mod.core.PMConfig;
 import pantz.mod.core.registry.PMSoundEvents;
+import pantz.mod.core.registry.PMStats;
 
 @SuppressWarnings("deprecation")
 public class TrashCanBlock extends BaseEntityBlock {
@@ -68,15 +69,11 @@ public class TrashCanBlock extends BaseEntityBlock {
 
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        BlockEntity be = level.getBlockEntity(pos);
-
-        if (!(be instanceof TrashCanBlockEntity trash)) return InteractionResult.PASS;
         if (!level.isClientSide()) {
-            NetworkHooks.openScreen((ServerPlayer) player, trash, pos);
-            player.awardStat(Stats.INTERACT_WITH_CRAFTING_TABLE);
+            NetworkHooks.openScreen((ServerPlayer) player, state.getMenuProvider(level, pos), pos);
+            player.awardStat(PMStats.INTERACT_WITH_TRASH_CAN);
         }
-
-        return InteractionResult.CONSUME;
+        return InteractionResult.sidedSuccess(level.isClientSide());
     }
 
     @Override
