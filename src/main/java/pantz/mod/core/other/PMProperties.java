@@ -22,12 +22,12 @@ import java.util.function.ToIntFunction;
 public class PMProperties {
     public static final BlockSetType STEEL = BlockSetType.register(new BlockSetType(PantzMod.MOD_ID + ":steel", false, PMSoundTypes.STEEL, PMSoundEvents.STEEL_DOOR_CLOSE.get(), PMSoundEvents.STEEL_DOOR_OPEN.get(), PMSoundEvents.STEEL_TRAPDOOR_CLOSE.get(), PMSoundEvents.STEEL_TRAPDOOR_OPEN.get(), SoundEvents.METAL_PRESSURE_PLATE_CLICK_OFF, SoundEvents.METAL_PRESSURE_PLATE_CLICK_ON, SoundEvents.STONE_BUTTON_CLICK_OFF, SoundEvents.STONE_BUTTON_CLICK_ON));
 
-    public static final BlockBehaviour.Properties STEEL_BLOCK = BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GRAY).instrument(NoteBlockInstrument.IRON_XYLOPHONE).requiresCorrectToolForDrops().sound(PMSoundTypes.STEEL).strength(3.0f, 6.0f);
-    public static final BlockBehaviour.Properties STEEL_DOOR = BlockBehaviour.Properties.of().requiresCorrectToolForDrops().strength(5.0F).noOcclusion().pushReaction(PushReaction.DESTROY).mapColor(MapColor.COLOR_GRAY);
-    public static final BlockBehaviour.Properties STEEL_TRAPDOOR = BlockBehaviour.Properties.of().requiresCorrectToolForDrops().strength(5.0F).noOcclusion().isValidSpawn(PMProperties::never).mapColor(MapColor.COLOR_GRAY);
+    public static final BlockBehaviour.Properties STEEL_BLOCK = BlockBehaviour.Properties.of().mapColor(MapColor.METAL).instrument(NoteBlockInstrument.IRON_XYLOPHONE).requiresCorrectToolForDrops().sound(PMSoundTypes.STEEL).strength(3.0f, 6.0f);
+    public static final BlockBehaviour.Properties STEEL_DOOR = BlockBehaviour.Properties.of().requiresCorrectToolForDrops().strength(5.0F).noOcclusion().pushReaction(PushReaction.DESTROY).mapColor(MapColor.METAL);
+    public static final BlockBehaviour.Properties STEEL_TRAPDOOR = BlockBehaviour.Properties.of().requiresCorrectToolForDrops().strength(5.0F).noOcclusion().isValidSpawn(PMProperties::never).mapColor(MapColor.METAL);
     public static final BlockBehaviour.Properties STEEL_BARS = BlockBehaviour.Properties.of().requiresCorrectToolForDrops().strength(5.0F, 6.0F).sound(PMSoundTypes.STEEL).noOcclusion();
     public static final BlockBehaviour.Properties STEEL_CHAIN = BlockBehaviour.Properties.of().forceSolidOn().requiresCorrectToolForDrops().strength(5.0F, 6.0F).sound(PMSoundTypes.STEEL_CHAIN).noOcclusion();
-    public static final BlockBehaviour.Properties STEEL_LANTERN = BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GRAY).forceSolidOn().requiresCorrectToolForDrops().strength(3.5F).sound(PMSoundTypes.STEEL_LANTERN).lightLevel(litBlockEmission(15));
+    public static final BlockBehaviour.Properties STEEL_LANTERN = BlockBehaviour.Properties.of().mapColor(MapColor.METAL).forceSolidOn().requiresCorrectToolForDrops().strength(3.5F).sound(PMSoundTypes.STEEL_LANTERN).lightLevel(litBlockEmission(15));
     public static final BlockBehaviour.Properties STEEL_PLATED_BRICKS = platedBricks(MapColor.COLOR_GRAY, PMSoundTypes.STEEL);
 
     public static final BlockBehaviour.Properties SULFUR = BlockBehaviour.Properties.of().instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(5.0F, 6.0F).mapColor(MapColor.COLOR_YELLOW).sound(SoundType.STONE).lightLevel(litBlockEmission(12)).randomTicks();
@@ -47,7 +47,7 @@ public class PMProperties {
     public static final BlockBehaviour.Properties PRISMARINE_PEDESTAL = BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_CYAN).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(1.5f, 6.0f).sound(SoundType.STONE);
 
     public static final BlockBehaviour.Properties ENDER_SCANNER = BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BLACK).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(3.0f, 1200.0f);
-    public static final BlockBehaviour.Properties REDSTONE_CONFIGURATOR = BlockBehaviour.Properties.of().strength(3.5F, 6.0f).sound(SoundType.METAL).instrument(NoteBlockInstrument.XYLOPHONE).mapColor(MapColor.METAL).isRedstoneConductor(PMProperties::never);
+    public static final BlockBehaviour.Properties REDSTONE_CONFIGURATOR = BlockBehaviour.Properties.of().strength(3.5F, 6.0f).sound(PMSoundTypes.STEEL).instrument(NoteBlockInstrument.XYLOPHONE).mapColor(MapColor.METAL).isRedstoneConductor(PMProperties::never);
     public static final BlockBehaviour.Properties WEATHER_DETECTOR = BlockBehaviour.Properties.of().requiresCorrectToolForDrops().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).strength(0.2F).sound(SoundType.STONE);
     public static final BlockBehaviour.Properties ENTITY_DETECTOR = BlockBehaviour.Properties.of().requiresCorrectToolForDrops().mapColor(MapColor.TERRACOTTA_LIGHT_BLUE).instrument(NoteBlockInstrument.BASEDRUM).strength(0.2F).sound(SoundType.STONE);
     public static final BlockBehaviour.Properties POWER_DISPLAYER = BlockBehaviour.Properties.of().strength(0.3F).sound(SoundType.TUFF).instrument(NoteBlockInstrument.BASEDRUM).mapColor(MapColor.TERRACOTTA_GRAY);
@@ -60,8 +60,8 @@ public class PMProperties {
     public static final BlockBehaviour.Properties REDSTONE_LAMP = BlockBehaviour.Properties.of().lightLevel(litBlockEmission(15)).strength(0.3F).sound(SoundType.GLASS).isValidSpawn(PMProperties::always);
 
     public static final BlockBehaviour.Properties ITEM_STAND = BlockBehaviour.Properties.of().mapColor(MapColor.STONE).requiresCorrectToolForDrops().instabreak().noOcclusion();
-    public static final BlockBehaviour.Properties TRASH_CAN = BlockBehaviour.Properties.of().strength(4.5f, 6f).sound(SoundType.NETHERITE_BLOCK).instrument(NoteBlockInstrument.BASEDRUM).mapColor(MapColor.COLOR_GRAY);
-    public static final BlockBehaviour.Properties ENDERPORTER = BlockBehaviour.Properties.of().strength(2.0f, 6.0f).mapColor(MapColor.METAL).sound(SoundType.NETHERITE_BLOCK);
+    public static final BlockBehaviour.Properties TRASH_CAN = BlockBehaviour.Properties.of().strength(4.5f, 6f).sound(PMSoundTypes.STEEL).instrument(NoteBlockInstrument.BASEDRUM).mapColor(MapColor.METAL);
+    public static final BlockBehaviour.Properties ENDERPORTER = BlockBehaviour.Properties.of().strength(2.0f, 6.0f).mapColor(MapColor.METAL).sound(PMSoundTypes.STEEL);
 
     public static final BlockBehaviour.Properties CHORUS_GLASS = BlockBehaviour.Properties.of().instrument(NoteBlockInstrument.HAT).strength(0.3F).sound(SoundType.GLASS).noOcclusion().isValidSpawn(PMProperties::never).isRedstoneConductor(PMProperties::never).isSuffocating(PMProperties::never).isViewBlocking(PMProperties::never).strength(0.5f).mapColor(MapColor.QUARTZ).noCollission();
     public static final BlockBehaviour.Properties CHORUS_GLASS_PANE = BlockBehaviour.Properties.of().instrument(NoteBlockInstrument.HAT).strength(0.3F).sound(SoundType.GLASS).noOcclusion().strength(0.5f).mapColor(MapColor.COLOR_MAGENTA).noCollission();
