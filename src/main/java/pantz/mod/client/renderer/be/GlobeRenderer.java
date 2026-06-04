@@ -64,11 +64,11 @@ public class GlobeRenderer implements BlockEntityRenderer<GlobeBlockEntity> {
                 poseStack.mulPose(Axis.YP.rotationDegrees(180f));
             }
             case SOUTH -> poseStack.translate(0, 0, -0.0625);
-            case WEST -> {
+            case EAST -> {
                 poseStack.translate(0.0625, 0, 0);
                 poseStack.mulPose(Axis.YP.rotationDegrees(90f));
             }
-            case EAST -> {
+            case WEST -> {
                 poseStack.translate(-0.0625, 0, 0);
                 poseStack.mulPose(Axis.YP.rotationDegrees(270f));
             }
