@@ -97,15 +97,15 @@ public class PMBlocks {
     public static final RegistryObject<Block> MAJORITY_GATE = BLOCKS.createBlock("majority_gate", () -> new AdvancedLogicGateBlock(PMProperties.ADVANCED_DIODE, LogicGateConditions.MAJORITY));
     public static final RegistryObject<Block> MINORITY_GATE = BLOCKS.createBlock("minority_gate", () -> new AdvancedLogicGateBlock(PMProperties.ADVANCED_DIODE, LogicGateConditions.MINORITY));
 
-    public static final RegistryObject<Block> EARTH_GLOBE = BLOCKS.createCustomRarityBlock("earth_globe", Rarity.UNCOMMON, () -> new GlobeBlock(PMProperties.GLOBE, PantzMod.location("planets/earth")));
-    public static final RegistryObject<Block> MERCURY_GLOBE = BLOCKS.createCustomRarityBlock("mercury_globe", Rarity.UNCOMMON, () -> new GlobeBlock(PMProperties.GLOBE, PantzMod.location("planets/mercury")));
-    public static final RegistryObject<Block> VENUS_GLOBE = BLOCKS.createCustomRarityBlock("venus_globe", Rarity.UNCOMMON, () -> new GlobeBlock(PMProperties.GLOBE, PantzMod.location("planets/venus")));
-    public static final RegistryObject<Block> MARS_GLOBE = BLOCKS.createCustomRarityBlock("mars_globe", Rarity.UNCOMMON, () -> new GlobeBlock(PMProperties.GLOBE, PantzMod.location("planets/mars")));
+    public static final RegistryObject<Block> EARTH_GLOBE = BLOCKS.createCustomRarityBlock("earth_globe", Rarity.UNCOMMON, () -> new GlobeBlock(PMProperties.METAL_GLOBE, PantzMod.location("planets/earth")));
+    public static final RegistryObject<Block> MERCURY_GLOBE = BLOCKS.createCustomRarityBlock("mercury_globe", Rarity.UNCOMMON, () -> new GlobeBlock(PMProperties.METAL_GLOBE, PantzMod.location("planets/mercury")));
+    public static final RegistryObject<Block> VENUS_GLOBE = BLOCKS.createCustomRarityBlock("venus_globe", Rarity.UNCOMMON, () -> new GlobeBlock(PMProperties.METAL_GLOBE, PantzMod.location("planets/venus")));
+    public static final RegistryObject<Block> MARS_GLOBE = BLOCKS.createCustomRarityBlock("mars_globe", Rarity.UNCOMMON, () -> new GlobeBlock(PMProperties.METAL_GLOBE, PantzMod.location("planets/mars")));
 
-    public static final RegistryObject<Block> JUPITER_GLOBE = BLOCKS.createCustomRarityBlock("jupiter_globe", Rarity.UNCOMMON, () -> new GlobeBlock(PMProperties.GAS_GLOBE, PantzMod.location("large_planets/jupiter")));
-    public static final RegistryObject<Block> SATURN_GLOBE = BLOCKS.createCustomRarityBlock("saturn_globe", Rarity.UNCOMMON, () -> new GlobeBlock(PMProperties.GAS_GLOBE, PantzMod.location("large_planets/saturn")));
-    public static final RegistryObject<Block> URANUS_GLOBE = BLOCKS.createCustomRarityBlock("uranus_globe", Rarity.UNCOMMON, () -> new GlobeBlock(PMProperties.GLOBE, PantzMod.location("large_planets/uranus")));
-    public static final RegistryObject<Block> NEPTUNE_GLOBE = BLOCKS.createCustomRarityBlock("neptune_globe", Rarity.UNCOMMON, () -> new GlobeBlock(PMProperties.GLOBE, PantzMod.location("large_planets/neptune")));
+    public static final RegistryObject<Block> JUPITER_GLOBE = BLOCKS.createCustomRarityBlock("jupiter_globe", Rarity.UNCOMMON, () -> new GlobeBlock(PMProperties.COPPER_GLOBE, PantzMod.location("large_planets/jupiter")));
+    public static final RegistryObject<Block> SATURN_GLOBE = BLOCKS.createCustomRarityBlock("saturn_globe", Rarity.UNCOMMON, () -> new GlobeBlock(PMProperties.COPPER_GLOBE, PantzMod.location("large_planets/saturn")));
+    public static final RegistryObject<Block> URANUS_GLOBE = BLOCKS.createCustomRarityBlock("uranus_globe", Rarity.UNCOMMON, () -> new GlobeBlock(PMProperties.METAL_GLOBE, PantzMod.location("large_planets/uranus")));
+    public static final RegistryObject<Block> NEPTUNE_GLOBE = BLOCKS.createCustomRarityBlock("neptune_globe", Rarity.UNCOMMON, () -> new GlobeBlock(PMProperties.METAL_GLOBE, PantzMod.location("large_planets/neptune")));
 
     public static final RegistryObject<Block> PLUTO_GLOBE = BLOCKS.createCustomRarityBlock("pluto_globe", Rarity.UNCOMMON, () -> new GlobeBlock(PMProperties.GLOBE, PantzMod.location("dwarf_planets/pluto")));
     public static final RegistryObject<Block> CERES_GLOBE = BLOCKS.createCustomRarityBlock("ceres_globe", Rarity.UNCOMMON, () -> new GlobeBlock(PMProperties.GLOBE, PantzMod.location("dwarf_planets/ceres")));
@@ -117,8 +117,8 @@ public class PMBlocks {
     public static final RegistryObject<Block> CALLISTO_GLOBE = BLOCKS.createCustomRarityBlock("callisto_globe", Rarity.UNCOMMON, () -> new GlobeBlock(PMProperties.GLOBE, PantzMod.location("moons/callisto")));
     public static final RegistryObject<Block> GANYMEDE_GLOBE = BLOCKS.createCustomRarityBlock("ganymede_globe", Rarity.UNCOMMON, () -> new GlobeBlock(PMProperties.GLOBE, PantzMod.location("moons/ganymede")));
 
-    public static final RegistryObject<Block> SUN_GLOBE = BLOCKS.createCustomRarityBlock("sun_globe", Rarity.RARE, () -> new GlobeBlock(PMProperties.STAR_GLOBE, PantzMod.location("stars/sun")));
-    public static final RegistryObject<Block> BLUE_SUN_GLOBE = BLOCKS.createCustomRarityBlock("blue_sun_globe", Rarity.RARE, () -> new GlobeBlock(PMProperties.STAR_GLOBE, PantzMod.location("stars/blue_sun")));
+    public static final RegistryObject<Block> SUN_GLOBE = BLOCKS.createCustomRarityBlock("sun_globe", Rarity.RARE, () -> new GlobeBlock(PMProperties.AMETHYST_GLOBE, PantzMod.location("stars/sun")));
+    public static final RegistryObject<Block> BLUE_SUN_GLOBE = BLOCKS.createCustomRarityBlock("blue_sun_globe", Rarity.RARE, () -> new GlobeBlock(PMProperties.AMETHYST_GLOBE, PantzMod.location("stars/blue_sun")));
 
     public static final RegistryObject<Block> IRIS_GLOBE = BLOCKS.createCustomRarityBlock("iris_globe", Rarity.EPIC, () -> new GlobeBlock(PMProperties.GLOBE, PantzMod.location("large_planets/iris")));
 
