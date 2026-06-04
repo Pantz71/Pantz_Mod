@@ -33,7 +33,7 @@ public class PMClientCompat {
     @SuppressWarnings("deprecation")
     private static void registerRenderLayers() {
         for (RegistryObject<?> block : new RegistryObject[]{
-                STEEL_BARS, STEEL_DOOR, STEEL_TRAPDOOR, STEEL_LANTERN,
+                STEEL_BARS, STEEL_DOOR, STEEL_TRAPDOOR, STEEL_LANTERN, STEEL_CHAIN,
                 SULFUR_CLUSTER, SMALL_SULFUR_BUD, MEDIUM_SULFUR_BUD, LARGE_SULFUR_BUD,
                 STONE_PEDESTAL, DEEPSLATE_PEDESTAL, BLACKSTONE_PEDESTAL, QUARTZ_PEDESTAL, PURPUR_PEDESTAL, PRISMARINE_PEDESTAL,
                 RANDOMIZER, EQUALIZER,
