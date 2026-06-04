@@ -294,15 +294,22 @@ public class PMEvents {
             if (!(stack.getItem() instanceof AreaDiggerItem)) return;
             if (!(event.getLevel() instanceof ServerLevel level)) return;
 
-            event.setCanceled(true);
+            if (!stack.isCorrectToolForDrops(event.getState())) {
+                event.setCanceled(true);
+                return;
+            }
 
             List<BlockPos> blocks = AreaDiggerItem.mineArea(level, player, event.getPos(), 1);
             for (BlockPos pos : blocks) {
-                if (!level.getBlockState(pos).isAir() && stack.isCorrectToolForDrops(level.getBlockState(pos))) {
+                BlockState state = level.getBlockState(pos);
+                if (pos.equals(event.getPos())) continue;
+                if (!state.isAir() && stack.isCorrectToolForDrops(state)) {
                     level.destroyBlock(pos, !player.isCreative());
                 }
             }
-            stack.hurtAndBreak(3, player, p -> p.broadcastBreakEvent(hand));
+            if (!player.isCreative()) {
+                stack.hurtAndBreak(3, player, p -> p.broadcastBreakEvent(hand));
+            }
         }
 
         @SubscribeEvent

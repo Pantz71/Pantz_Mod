@@ -1,16 +1,15 @@
 package pantz.mod.core.other;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.block.BlockModelShaper;
+
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
-import net.minecraft.client.resources.model.BakedModel;
-import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -18,12 +17,10 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
-import net.minecraftforge.client.event.ModelEvent;
 import net.minecraftforge.client.event.RenderHighlightEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -34,13 +31,11 @@ import pantz.mod.client.renderer.be.EntityDetectorRenderer;
 import pantz.mod.client.renderer.be.GlobeRenderer;
 import pantz.mod.client.renderer.be.ItemStandRenderer;
 import pantz.mod.client.renderer.be.PedestalRenderer;
-import pantz.mod.common.block.DoubleOrnamentBlock;
 import pantz.mod.common.item.AreaDiggerItem;
 import pantz.mod.core.PMConfig;
 import pantz.mod.core.PantzMod;
 import pantz.mod.core.other.tags.PMBlockTags;
 import pantz.mod.core.registry.PMBlockEntityTypes;
-import pantz.mod.core.registry.PMBlocks;
 import pantz.mod.core.registry.PMEntityTypes;
 import pantz.mod.core.registry.PMItems;
 
@@ -104,41 +99,36 @@ public class PMClientEvents {
         private static void renderHighlight(BlockPos center, Direction face, PoseStack poseStack, MultiBufferSource bufferSource) {
             Minecraft minecraft = Minecraft.getInstance();
             Vec3 camera = minecraft.gameRenderer.getMainCamera().getPosition();
+            VertexConsumer buffer = bufferSource.getBuffer(RenderType.lines());
 
-            BlockPos startPos;
-            double width = 1, height = 1, depth = 1;
+            for (int u = -1; u <= 1; u++) {
+                for (int v = -1; v <= 1; v++) {
+                    BlockPos targetPos;
 
-            // box
-            switch (face) {
-                case UP, DOWN -> {
-                    startPos = center.offset(-1, 0, -1);
-                    width = 3;
-                    depth = 3;
+                    switch (face) {
+                        case UP, DOWN ->
+                                targetPos = center.offset(u, 0, v);
+                        case NORTH, SOUTH ->
+                                targetPos = center.offset(u, v, 0);
+                        case WEST, EAST ->
+                                targetPos = center.offset(0, u, v);
+                        default ->
+                                targetPos = center;
+                    }
+
+                    LevelRenderer.renderLineBox(
+                            poseStack,
+                            buffer,
+                            targetPos.getX() - camera.x,
+                            targetPos.getY() - camera.y,
+                            targetPos.getZ() - camera.z,
+                            targetPos.getX() + 1 - camera.x,
+                            targetPos.getY() + 1 - camera.y,
+                            targetPos.getZ() + 1 - camera.z,
+                            1f, 1f, 1f, 1f
+                    );
                 }
-                case NORTH, SOUTH -> {
-                    startPos = center.offset(-1, -1, 0);
-                    width = 3;
-                    height = 3;
-                }
-                case WEST, EAST -> {
-                    startPos = center.offset(0, -1, -1);
-                    height = 3;
-                    depth = 3;
-                }
-                default -> startPos = center;
             }
-            // Outline
-            LevelRenderer.renderLineBox(
-                    poseStack,
-                    bufferSource.getBuffer(RenderType.lines()),
-                    startPos.getX() - camera.x,
-                    startPos.getY() - camera.y,
-                    startPos.getZ() - camera.z,
-                    startPos.getX() + width - camera.x,
-                    startPos.getY() + height - camera.y,
-                    startPos.getZ() + depth - camera.z,
-                    1f, 1f, 1f, 1f
-            );
         }
 
         private static void spawnWaxParticles(Minecraft mc) {
