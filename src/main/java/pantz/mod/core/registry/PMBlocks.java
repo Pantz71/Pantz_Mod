@@ -2,7 +2,6 @@ package pantz.mod.core.registry;
 
 import com.teamabnormals.blueprint.core.util.item.CreativeModeTabContentsPopulator;
 import net.minecraft.util.valueproviders.UniformInt;
-import net.minecraft.world.entity.raid.Raid;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -32,6 +31,7 @@ public class PMBlocks {
 
     public static final RegistryObject<Block> STEEL_BLOCK = BLOCKS.createBlock("steel_block", () -> new Block(PMProperties.STEEL_BLOCK));
     public static final RegistryObject<Block> STEEL_BARS = BLOCKS.createBlock("steel_bars", () -> new IronBarsBlock(PMProperties.STEEL_BARS));
+    public static final RegistryObject<Block> STEEL_CHAIN = BLOCKS.createBlock("steel_chain", () -> new ChainBlock(PMProperties.STEEL_CHAIN));
     public static final RegistryObject<Block> STEEL_DOOR = BLOCKS.createBlock("steel_door", () -> new DoorBlock(PMProperties.STEEL_DOOR, PMProperties.STEEL));
     public static final RegistryObject<Block> STEEL_TRAPDOOR = BLOCKS.createBlock("steel_trapdoor", () -> new TrapDoorBlock(PMProperties.STEEL_TRAPDOOR, PMProperties.STEEL));
     public static final RegistryObject<Block> STEEL_LANTERN = BLOCKS.createBlock("steel_lantern", () -> new SteelLanternBlock(PMProperties.STEEL_LANTERN));
@@ -194,7 +194,7 @@ public class PMBlocks {
                 .tab(BUILDING_BLOCKS)
                 .addItemsBefore(of(Blocks.GOLD_BLOCK), STEEL_BLOCK)
                 .addItemsBefore(modLoaded(Blocks.GOLD_BLOCK, PMConstant.CAVERNS_AND_CHASMS), STEEL_BRICKS, STEEL_BRICK_STAIRS, STEEL_BRICK_SLAB, STEEL_BRICK_WALL, CHISELED_STEEL_BRICKS, STEEL_BARS)
-                .addItemsBefore(of(Blocks.GOLD_BLOCK), STEEL_DOOR, STEEL_TRAPDOOR)
+                .addItemsBefore(of(Blocks.GOLD_BLOCK), STEEL_CHAIN, STEEL_DOOR, STEEL_TRAPDOOR)
                 .addItemsBefore(of(Blocks.AMETHYST_BLOCK), SULFUR_BLOCK, POLISHED_SULFUR, POLISHED_SULFUR_STAIRS, POLISHED_SULFUR_SLAB, POLISHED_SULFUR_WALL,
                         SULFUR_BRICKS, CHISELED_SULFUR_BRICKS, SULFUR_BRICK_STAIRS, SULFUR_BRICK_SLAB, SULFUR_BRICK_WALL, SULFUR_LAMP)
 
@@ -215,6 +215,7 @@ public class PMBlocks {
                         LIGHT_BLUE_PAPER_LANTERN, YELLOW_PAPER_LANTERN, LIME_PAPER_LANTERN, PINK_PAPER_LANTERN, GRAY_PAPER_LANTERN, LIGHT_GRAY_PAPER_LANTERN,
                         CYAN_PAPER_LANTERN, PURPLE_PAPER_LANTERN, BLUE_PAPER_LANTERN, BROWN_PAPER_LANTERN, GREEN_PAPER_LANTERN, RED_PAPER_LANTERN, BLACK_PAPER_LANTERN)
                 .addItemsBefore(of(Blocks.SKELETON_SKULL), ORNAMENT_FIRECRACKERS, ORNAMENT_LUCKY_COINS)
+                .addItemsAfter(of(Blocks.CHAIN), STEEL_CHAIN)
                 .addItemsAfter(of(Blocks.DAMAGED_ANVIL), STONE_PEDESTAL, DEEPSLATE_PEDESTAL, BLACKSTONE_PEDESTAL, QUARTZ_PEDESTAL, PRISMARINE_PEDESTAL, PURPUR_PEDESTAL)
                 .addItemsAfter(of(Blocks.BELL), MERCURY_GLOBE, VENUS_GLOBE, EARTH_GLOBE, MARS_GLOBE, JUPITER_GLOBE, SATURN_GLOBE, URANUS_GLOBE, NEPTUNE_GLOBE, PLUTO_GLOBE, CERES_GLOBE, MAKEMAKE_GLOBE, MOON_GLOBE, IO_GLOBE, EUROPA_GLOBE, CALLISTO_GLOBE, GANYMEDE_GLOBE, SUN_GLOBE, BLUE_SUN_GLOBE, IRIS_GLOBE)
                 .addItemsAfter(of(Blocks.REDSTONE_LAMP), WHITE_REDSTONE_LAMP, ORANGE_REDSTONE_LAMP, MAGENTA_REDSTONE_LAMP,

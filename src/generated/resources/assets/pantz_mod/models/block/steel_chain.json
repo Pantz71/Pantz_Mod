@@ -1,0 +1,7 @@
+{
+  "parent": "pantz_mod:block/template_steel_chain",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "all": "pantz_mod:block/steel_chain"
+  }
+}

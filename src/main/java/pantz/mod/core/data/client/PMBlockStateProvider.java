@@ -33,6 +33,7 @@ public class PMBlockStateProvider extends BlueprintBlockStateProvider {
     protected void registerStatesAndModels() {
         this.block(STEEL_BLOCK);
         this.ironBarsBlock(STEEL_BARS);
+        this.customChainBlock(STEEL_CHAIN, "template_steel_chain");
         this.doorBlocks(STEEL_DOOR.get(), STEEL_TRAPDOOR.get());
         this.litableLanternBlock(STEEL_LANTERN, modLoc("block/template_steel_lantern"), modLoc("block/template_hanging_steel_lantern"));
 
@@ -564,6 +565,16 @@ public class PMBlockStateProvider extends BlueprintBlockStateProvider {
         generatedItem(block.get(), "item");
     }
 
+    public void customChainBlock(RegistryObject<Block> chainBlock, String parent) {
+        Block block = chainBlock.get();
+        ModelFile chain = models().withExistingParent(name(block), PantzMod.MOD_ID + ":block/" + parent).texture("all", blockTexture(block)).renderType("cutout");
+        this.getVariantBuilder(block).forAllStatesExcept(state -> {
+            Axis axis = state.getValue(BlockStateProperties.AXIS);
+            return ConfiguredModel.builder().modelFile(chain).rotationX(axis.isHorizontal() ? 90 : 0).rotationY(axis == Axis.X ? 90 : 0).build();
+        }, BlockStateProperties.WATERLOGGED);
+        this.generatedItem(block, "item");
+    }
+
     public void ingotBlock(RegistryObject<Block> registryObject) {
         Block block = registryObject.get();
 
@@ -629,7 +640,5 @@ public class PMBlockStateProvider extends BlueprintBlockStateProvider {
                 .texture("side", side)
                 .texture("end", end);
     }
-
-
 
 }

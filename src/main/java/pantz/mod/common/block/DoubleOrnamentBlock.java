@@ -2,6 +2,7 @@ package pantz.mod.common.block;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -25,6 +26,7 @@ import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import pantz.mod.core.registry.PMSoundEvents;
 
 public class DoubleOrnamentBlock extends DoublePlantBlock implements SimpleWaterloggedBlock {
     private static final VoxelShape UPPER_SHAPE = Block.box(5, 0, 5, 11, 16, 11);
@@ -97,6 +99,7 @@ public class DoubleOrnamentBlock extends DoublePlantBlock implements SimpleWater
         if (otherState.is(this)) {
             level.setBlockAndUpdate(pos, state.setValue(FACING, nextDirection));
             level.setBlockAndUpdate(otherPos, otherState.setValue(FACING, nextDirection));
+            level.playSound(null, pos, PMSoundEvents.ORNAMENT_ADJUST.get(), SoundSource.BLOCKS);
         }
         return InteractionResult.CONSUME;
     }

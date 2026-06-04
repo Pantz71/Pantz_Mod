@@ -108,6 +108,11 @@ public class PMRecipeProvider extends BlueprintRecipeProvider {
                         .pattern("###")
                         .unlockedBy(getHasName(PMItems.STEEL_INGOT.get()), has(PMItemTags.INGOTS_STEEL)));
 
+        ShapedRecipeBuilder.shaped(DECORATIONS, STEEL_CHAIN.get()).define('I', PMItemTags.INGOTS_STEEL).define('n', PMItemTags.NUGGETS_STEEL)
+                .pattern("n").pattern("I").pattern("n")
+                .unlockedBy(getHasName(PMItems.STEEL_INGOT.get()), has(PMItemTags.INGOTS_STEEL))
+                .unlockedBy(getHasName(STEEL_NUGGET.get()), has(PMItemTags.NUGGETS_STEEL)).save(consumer);
+
         platedBricksRecipe(consumer, STEEL_BRICKS.get(), PMItemTags.INGOTS_STEEL, "steel");
         platedBricksRecipes(consumer, PMBlockFamilies.STEEL_BRICKS_FAMILY);
 

@@ -1,6 +1,7 @@
 package pantz.mod.common.block;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -16,6 +17,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import pantz.mod.core.registry.PMSoundEvents;
 
 public class SteelLanternBlock extends LanternBlock {
     public static final BooleanProperty HANGING = BlockStateProperties.HANGING;
@@ -50,6 +52,7 @@ public class SteelLanternBlock extends LanternBlock {
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
         if (!level.isClientSide()) {
             level.setBlock(pos, state.cycle(LIT), 3);
+            level.playSound(null, pos, PMSoundEvents.STEEL_LANTERN_TOGGLE.get(), SoundSource.BLOCKS);
         }
         return InteractionResult.sidedSuccess(level.isClientSide());
     }
