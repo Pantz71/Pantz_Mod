@@ -28,7 +28,7 @@ public class PMBlockTagsProvider extends BlockTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider provider) {
-        this.tag(BlockTags.MINEABLE_WITH_PICKAXE).addTag(PEDESTALS).add(STEEL_BLOCK.get(), STEEL_BARS.get(), STEEL_DOOR.get(), STEEL_TRAPDOOR.get(), STEEL_LANTERN.get(),
+        this.tag(BlockTags.MINEABLE_WITH_PICKAXE).addTag(PEDESTALS).add(STEEL_BLOCK.get(), STEEL_BARS.get(), STEEL_DOOR.get(), STEEL_TRAPDOOR.get(), STEEL_LANTERN.get(), STEEL_CHAIN.get(),
                 STEEL_BRICKS.get(), STEEL_BRICK_STAIRS.get(), STEEL_BRICK_SLAB.get(), STEEL_BRICK_WALL.get(), STEEL_INGOT.get(),
                 SULFUR.get(), SULFUR_BLOCK.get(), POLISHED_SULFUR.get(), POLISHED_SULFUR_STAIRS.get(), POLISHED_SULFUR_SLAB.get(), POLISHED_SULFUR_WALL.get(),
                 SULFUR_BRICKS.get(), SULFUR_BRICK_STAIRS.get(), SULFUR_BRICK_SLAB.get(), CHISELED_SULFUR_BRICKS.get(), NETHER_SULFUR_ORE.get(), SULFUR_LAMP.get(),
