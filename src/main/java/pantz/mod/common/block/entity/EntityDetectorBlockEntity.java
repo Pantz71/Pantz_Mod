@@ -48,7 +48,7 @@ public class EntityDetectorBlockEntity extends BlockEntity {
         for (int i = 0; i < list.size(); i++) {
             CompoundTag entry = list.getCompound(i);
             this.filters.add(new ResourceLocation(entry.getString("Id")));
-            this.level.setBlockAndUpdate(this.worldPosition, this.getBlockState().setValue(EntityDetectorBlock.FILTERED, true));
+            this.level.setBlockAndUpdate(this.worldPosition, this.getBlockState().setValue(EntityDetectorBlock.FILTERED, hasFilters()));
         }
 
         this.slideshowIndex = 0;
