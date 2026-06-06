@@ -17,7 +17,6 @@ public class GlobeBlockEntity extends BlockEntity {
     private long spinTime = -1;
     private ResourceLocation texture;
     private ResourceLocation cachedRenderTexture;
-    private boolean glow;
 
     private static final float ROTATE_SPEED = 1f;
     private static final int SPIN_TICKS = 24;
@@ -51,15 +50,18 @@ public class GlobeBlockEntity extends BlockEntity {
     }
 
     public boolean isGlow() {
-        return this.glow;
+        return this.getBlockState().getValue(GlobeBlock.GLOWING);
     }
 
     public void setGlow(boolean value) {
-        if (this.glow != value) {
-            this.glow = value;
-            setChanged();
-        }
+        BlockState state = this.getBlockState();
+        boolean glow = state.getValue(GlobeBlock.GLOWING);
+
         if (this.level != null) {
+            if (glow != value) {
+                this.level.setBlockAndUpdate(this.worldPosition, state.setValue(GlobeBlock.GLOWING, value));
+                setChanged();
+            }
             this.level.sendBlockUpdated(this.worldPosition, getBlockState(), getBlockState(), 3);
         }
     }
@@ -124,7 +126,6 @@ public class GlobeBlockEntity extends BlockEntity {
     public void load(CompoundTag tag) {
         super.load(tag);
         this.rotation = tag.getFloat("Rotation");
-        this.glow = tag.getBoolean("Glow");
         if (tag.contains("SpinTime")) {
             this.spinTime = tag.getLong("SpinTime");
         }
@@ -134,7 +135,6 @@ public class GlobeBlockEntity extends BlockEntity {
     protected void saveAdditional(CompoundTag tag) {
         super.saveAdditional(tag);
         tag.putFloat("Rotation", getRotation());
-        tag.putBoolean("Glow", isGlow());
         tag.putLong("SpinTime", getSpinTime());
     }
 

@@ -34,6 +34,7 @@ import pantz.mod.common.utils.PedestalUtils;
 public class PedestalBlock extends HorizontalDirectionalBlock implements EntityBlock, SimpleWaterloggedBlock {
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
+    public static final BooleanProperty SPINNING = PMBlockStateProperties.SPINNING;
     public static final EnumProperty<CarpetColor> CARPET = PMBlockStateProperties.CARPET;
     public static final VoxelShape SHAPE = Shapes.or(
             Block.box(1, 0, 1, 15, 2, 15),
@@ -46,12 +47,12 @@ public class PedestalBlock extends HorizontalDirectionalBlock implements EntityB
 
     public PedestalBlock(Properties pProperties) {
         super(pProperties);
-        this.registerDefaultState(this.getStateDefinition().any().setValue(FACING, Direction.NORTH).setValue(CARPET, CarpetColor.NONE));
+        this.registerDefaultState(this.getStateDefinition().any().setValue(FACING, Direction.NORTH).setValue(CARPET, CarpetColor.NONE).setValue(SPINNING, false));
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(FACING, WATERLOGGED, CARPET);
+        builder.add(FACING, WATERLOGGED, CARPET, SPINNING);
     }
 
     private InteractionResult putItemOn(Player player, InteractionHand hand, ItemStack stack, PedestalBlockEntity pedestal, Level level, BlockPos pos, BlockState state) {

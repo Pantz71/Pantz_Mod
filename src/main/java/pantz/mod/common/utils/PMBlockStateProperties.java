@@ -10,6 +10,9 @@ public class PMBlockStateProperties {
     public static final IntegerProperty ENDERPORTER_CHARGE = IntegerProperty.create("enderporter_charge", 0, 4);
 
     public static final BooleanProperty GLASS = BooleanProperty.create("glass");
+    public static final BooleanProperty SPINNING = BooleanProperty.create("spinning");
+    public static final BooleanProperty GLOWING = BooleanProperty.create("glowing");
+    public static final BooleanProperty FILLED = BooleanProperty.create("filled");
 
     public static final EnumProperty<CarpetColor> CARPET = EnumProperty.create("carpet", CarpetColor.class);
 
@@ -19,8 +22,6 @@ public class PMBlockStateProperties {
     public static final BooleanProperty INPUT_LEFT = BooleanProperty.create("input_left");
     public static final BooleanProperty INPUT_RIGHT = BooleanProperty.create("input_right");
     public static final BooleanProperty INPUT_BACK = BooleanProperty.create("input_back");
-
-    public static final BooleanProperty FILLED = BooleanProperty.create("filled");
 
     public static final EnumProperty<RandomizerOutput> OUTPUT = EnumProperty.create("output", RandomizerOutput.class);
 

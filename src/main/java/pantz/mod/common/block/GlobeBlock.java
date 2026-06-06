@@ -33,6 +33,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import pantz.mod.common.block.entity.GlobeBlockEntity;
+import pantz.mod.common.utils.PMBlockStateProperties;
 import pantz.mod.core.PantzMod;
 import pantz.mod.core.registry.PMBlockEntityTypes;
 
@@ -40,6 +41,7 @@ import pantz.mod.core.registry.PMBlockEntityTypes;
 public class GlobeBlock extends HorizontalDirectionalBlock implements EntityBlock {
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
+    public static final BooleanProperty GLOWING = PMBlockStateProperties.GLOWING;
     public static final VoxelShape SHAPE = Shapes.or(
             Block.box(2, 0, 2, 14, 12, 14)
     );
@@ -48,7 +50,7 @@ public class GlobeBlock extends HorizontalDirectionalBlock implements EntityBloc
 
     public GlobeBlock(Properties pProperties, @NotNull ResourceLocation texture) {
         super(pProperties);
-        this.registerDefaultState(this.getStateDefinition().any().setValue(FACING, Direction.NORTH).setValue(POWERED, false));
+        this.registerDefaultState(this.getStateDefinition().any().setValue(FACING, Direction.NORTH).setValue(POWERED, false).setValue(GLOWING, false));
         this.texture = texture;
     }
 
@@ -111,7 +113,7 @@ public class GlobeBlock extends HorizontalDirectionalBlock implements EntityBloc
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(FACING, POWERED);
+        builder.add(FACING, POWERED, GLOWING);
     }
 
     @Override

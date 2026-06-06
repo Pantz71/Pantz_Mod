@@ -16,6 +16,7 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import pantz.mod.common.block.PedestalBlock;
 import pantz.mod.core.registry.PMBlockEntityTypes;
 
 public class PedestalBlockEntity extends BlockEntity {
@@ -43,8 +44,6 @@ public class PedestalBlockEntity extends BlockEntity {
 
     private LazyOptional<ItemStackHandler> lazyOptional = LazyOptional.empty();
 
-    private boolean spinning = false;
-
     public PedestalBlockEntity(BlockPos pos, BlockState state) {
         super(PMBlockEntityTypes.PEDESTAL.get(), pos, state);
     }
@@ -69,16 +68,17 @@ public class PedestalBlockEntity extends BlockEntity {
     }
 
     public boolean isSpinning() {
-        return spinning;
+        return this.getBlockState().getValue(PedestalBlock.SPINNING);
     }
 
     public void setSpinning(boolean spin) {
-        this.spinning = spin;
-        setChanged();
+        BlockState state = this.getBlockState();
         if (this.level != null) {
+            this.level.setBlockAndUpdate(this.worldPosition, state.setValue(PedestalBlock.SPINNING, spin));
             this.level.updateNeighborsAt(this.worldPosition, this.getBlockState().getBlock());
             this.level.updateNeighbourForOutputSignal(this.worldPosition, this.getBlockState().getBlock());
         }
+        setChanged();
     }
 
     public int getPower() {
@@ -102,14 +102,12 @@ public class PedestalBlockEntity extends BlockEntity {
     protected void saveAdditional(CompoundTag tag) {
         super.saveAdditional(tag);
         tag.put("Item", itemHandler.serializeNBT());
-        tag.putBoolean("Spinning", spinning);
     }
 
     @Override
     public void load(CompoundTag tag) {
         super.load(tag);
         itemHandler.deserializeNBT(tag.getCompound("Item"));
-        spinning = tag.getBoolean("Spinning");
     }
 
     @Override

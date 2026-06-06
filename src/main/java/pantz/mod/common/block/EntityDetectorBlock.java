@@ -36,7 +36,7 @@ public class EntityDetectorBlock extends BaseEntityBlock {
 
     public EntityDetectorBlock(Properties pProperties) {
         super(pProperties);
-        this.registerDefaultState(this.getStateDefinition().any().setValue(INVERTED, false));
+        this.registerDefaultState(this.getStateDefinition().any().setValue(INVERTED, false).setValue(POWERED, false).setValue(FILTERED, false));
     }
 
     @Nullable
@@ -53,7 +53,7 @@ public class EntityDetectorBlock extends BaseEntityBlock {
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         Item item = player.getItemInHand(hand).getItem();
-        if (state.getValue(FILTERED)) {
+        if (state.getValue(FILTERED) && !(item instanceof EntityFilterItem)) {
             return InteractionResult.FAIL;
         }
         if (!level.isClientSide()) {
