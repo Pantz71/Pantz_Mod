@@ -48,6 +48,7 @@ public class EntityDetectorBlockEntity extends BlockEntity {
         for (int i = 0; i < list.size(); i++) {
             CompoundTag entry = list.getCompound(i);
             this.filters.add(new ResourceLocation(entry.getString("Id")));
+            this.level.setBlockAndUpdate(this.worldPosition, this.getBlockState().setValue(EntityDetectorBlock.FILTERED, true));
         }
 
         this.slideshowIndex = 0;
@@ -67,7 +68,7 @@ public class EntityDetectorBlockEntity extends BlockEntity {
 
     @Nullable
     public ResourceLocation removeLastEntity() {
-        if (!this.filters.isEmpty()) {
+        if (hasFilters()) {
             ResourceLocation removedId = this.filters.remove(this.filters.size() - 1);
             this.slideshowIndex = Math.max(0, this.filters.size() - 1);
             this.sync();

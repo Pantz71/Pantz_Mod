@@ -2,6 +2,8 @@ package pantz.mod.common.block;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -59,6 +61,7 @@ public class PedestalBlock extends HorizontalDirectionalBlock implements EntityB
         ItemStack onPedestal = pedestal.getItem();
 
         if (stack.isEmpty() && !onPedestal.isEmpty()) {
+            level.playSound(null, pos, SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS);
             player.setItemInHand(hand, onPedestal.copy());
             pedestal.setItem(ItemStack.EMPTY);
         }
@@ -77,6 +80,7 @@ public class PedestalBlock extends HorizontalDirectionalBlock implements EntityB
             if (!player.isCreative()) {
                 stack.shrink(1);
             }
+            level.playSound(null, pos, SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS, 0.75f, 0.75f);
         } else {
             return InteractionResult.PASS;
         }
@@ -84,6 +88,7 @@ public class PedestalBlock extends HorizontalDirectionalBlock implements EntityB
         if (!level.isClientSide()) {
             level.sendBlockUpdated(pos, state, state, 3);
         }
+
         return InteractionResult.sidedSuccess(level.isClientSide());
     }
 

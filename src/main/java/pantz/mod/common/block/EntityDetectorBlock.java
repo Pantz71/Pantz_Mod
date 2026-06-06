@@ -47,7 +47,7 @@ public class EntityDetectorBlock extends BaseEntityBlock {
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(INVERTED);
+        builder.add(INVERTED, POWERED, FILTERED);
     }
 
     @Override

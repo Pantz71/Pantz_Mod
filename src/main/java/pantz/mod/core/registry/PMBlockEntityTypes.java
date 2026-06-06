@@ -20,5 +20,6 @@ public class PMBlockEntityTypes {
     public static final RegistryObject<BlockEntityType<SafeBlockEntity>> SAFE = BLOCK_ENTITY_TYPES.createBlockEntity("safe", SafeBlockEntity::new, SafeBlock.class);
     public static final RegistryObject<BlockEntityType<SpikeBlockEntity>> SPIKE = BLOCK_ENTITY_TYPES.createBlockEntity("spike", SpikeBlockEntity::new, SpikeBlock.class);
     public static final RegistryObject<BlockEntityType<SprinklerBlockEntity>> SPRINKLER = BLOCK_ENTITY_TYPES.createBlockEntity("sprinkler", SprinklerBlockEntity::new, SprinklerBlock.class);
+    public static final RegistryObject<BlockEntityType<FeedingTroughBlockEntity>> FEEDING_TROUGH = BLOCK_ENTITY_TYPES.createBlockEntity("feeding_trough", FeedingTroughBlockEntity::new, FeedingTroughBlock.class);
 
 }

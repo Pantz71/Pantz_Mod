@@ -46,6 +46,7 @@ import pantz.mod.common.block.entity.SpikeBlockEntity;
 import pantz.mod.common.item.AreaDiggerItem;
 import pantz.mod.common.item.EntityFilterItem;
 import pantz.mod.common.utils.*;
+import pantz.mod.common.utils.PMBlockStateProperties.CarpetColor;
 import pantz.mod.common.world.WardenWorldData;
 import pantz.mod.core.PantzMod;
 import pantz.mod.core.registry.PMAttributes;
