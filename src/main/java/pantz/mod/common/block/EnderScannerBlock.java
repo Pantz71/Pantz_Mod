@@ -35,9 +35,7 @@ public class EnderScannerBlock extends BaseEntityBlock {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-        return createTickerHelper(type, PMBlockEntityTypes.ENDER_SCANNER.get(),
-                ((pLevel, pPos, pState, be)
-                        -> be.serverTick(pLevel, pPos, pState)));
+        return createTickerHelper(type, PMBlockEntityTypes.ENDER_SCANNER.get(), EnderScannerBlockEntity::serverTick);
     }
 
     @Override

@@ -26,8 +26,8 @@ public class EnderScannerBlockEntity extends BlockEntity {
         super(PMBlockEntityTypes.ENDER_SCANNER.get(), pPos, pBlockState);
     }
 
-    public void serverTick(Level level, BlockPos pos, BlockState state) {
-        int currentSignal = getPowerFromLooking(level, pos);
+    public static void serverTick(Level level, BlockPos pos, BlockState state, EnderScannerBlockEntity be) {
+        int currentSignal = be.getPowerFromLooking(level, pos);
         int oldSignal = state.getValue(BlockStateProperties.POWER);;
 
         if (currentSignal != state.getValue(BlockStateProperties.POWER)) {
@@ -47,7 +47,6 @@ public class EnderScannerBlockEntity extends BlockEntity {
         }
     }
 
-    // Check vectors
     public int getPowerFromLooking(Level level, BlockPos pos) {
         AABB box = new AABB(pos).inflate(0.01);
         int distance = PMConfig.Common.COMMON.enderScannerDetectionRadius.get();
@@ -67,7 +66,6 @@ public class EnderScannerBlockEntity extends BlockEntity {
 
             Vec3 hit = hitOptional.get();
 
-            // Check if entity is wearing a piece of armor that are immune to scanner detection
             for (ItemStack armor : entity.getArmorSlots()) {
                 if (armor.is(PMItemTags.ENDER_SCANNER_IMMUNITIES)) {
                     isImmune = true;
@@ -75,7 +73,6 @@ public class EnderScannerBlockEntity extends BlockEntity {
                 }
             }
 
-            // or the entity is just immune to it
             if (entity.getType().is(PMEntityTypeTags.ENDER_SCANNER_IMMUNE_TYPES)) {
                 isImmune = true;
             }
@@ -84,7 +81,6 @@ public class EnderScannerBlockEntity extends BlockEntity {
                 continue;
             }
 
-            // Looking at the center of each faces
             Direction hitFace = null;
             for (Direction direction : Direction.values()) {
                 Vec3 facePoint = Vec3.atCenterOf(pos).add(Vec3.atLowerCornerOf(direction.getNormal()).scale(0.5));
@@ -100,7 +96,6 @@ public class EnderScannerBlockEntity extends BlockEntity {
 
             Vec3 faceCenter = Vec3.atCenterOf(pos).add(Vec3.atLowerCornerOf(hitFace.getNormal()).scale(0.5));
 
-            // Determine the power output
             double faceDistance = faceCenter.distanceTo(hit);
             double maxDist = 0.65;
 
@@ -112,14 +107,6 @@ public class EnderScannerBlockEntity extends BlockEntity {
                 precision = Math.pow(Mth.clamp(rawPrecision, 0, 1), 1.2);
             }
             precision = Mth.clamp(precision, 0, 1);
-
-            // Log
-            // System.out.println("✔ HitFace: " + hitFace);
-            // System.out.println("✔ EyePos: " + eyePos + " → HitPos: " + hit);
-            // System.out.println("✔ FaceCenter: " + faceCenter + " → Dist: " + faceDistance);
-            // System.out.println("✔ Precision: " + precision);
-            // System.out.println("✔ Power: " + (int)(precision * 15));
-
             bestPrecision = Math.max(bestPrecision, precision);
         }
 
