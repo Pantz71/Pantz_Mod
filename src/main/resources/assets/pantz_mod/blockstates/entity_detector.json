@@ -1,10 +1,16 @@
 {
   "variants": {
-    "inverted=false": {
+    "inverted=false,filtered=false": {
       "model": "pantz_mod:block/entity_detector"
     },
-    "inverted=true": {
+    "inverted=true,filtered=false": {
       "model": "pantz_mod:block/entity_detector_inverted"
+    },
+    "inverted=false,filtered=true": {
+      "model": "pantz_mod:block/entity_detector_filtered"
+    },
+    "inverted=true,filtered=true": {
+      "model": "pantz_mod:block/entity_detector_filtered"
     }
   }
 }

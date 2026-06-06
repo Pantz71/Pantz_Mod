@@ -53,6 +53,9 @@ public class EntityDetectorBlock extends BaseEntityBlock {
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         Item item = player.getItemInHand(hand).getItem();
+        if (state.getValue(FILTERED)) {
+            return InteractionResult.FAIL;
+        }
         if (!level.isClientSide()) {
             if (item instanceof EntityFilterItem) {
                 return InteractionResult.PASS;
