@@ -1,6 +1,7 @@
 package pantz.mod.common.block;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -27,6 +28,7 @@ import pantz.mod.common.item.EntityFilterItem;
 
 public class EntityDetectorBlock extends BaseEntityBlock {
     public static final BooleanProperty INVERTED = BlockStateProperties.INVERTED;
+    public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
     private static final VoxelShape SHAPE = Block.box(0, 0, 0, 16, 6, 16);
 
     public EntityDetectorBlock(Properties pProperties) {
@@ -69,16 +71,16 @@ public class EntityDetectorBlock extends BaseEntityBlock {
     }
 
     @Override
-    public int getSignal(BlockState state, BlockGetter level, BlockPos pos, net.minecraft.core.Direction dir) {
+    public int getSignal(BlockState state, BlockGetter level, BlockPos pos, Direction dir) {
         BlockEntity be = level.getBlockEntity(pos);
-        if (be instanceof EntityDetectorBlockEntity detector) {
-            return detector.isPowered() ? 15 : 0;
+        if (be instanceof EntityDetectorBlockEntity) {
+            return state.getValue(POWERED) ? 15 : 0;
         }
         return 0;
     }
 
     @Override
-    public int getDirectSignal(BlockState state, BlockGetter level, BlockPos pos, net.minecraft.core.Direction dir) {
+    public int getDirectSignal(BlockState state, BlockGetter level, BlockPos pos, Direction dir) {
         return getSignal(state, level, pos, dir);
     }
 

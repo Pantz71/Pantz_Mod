@@ -37,7 +37,6 @@ public class EntityDetectorBlockEntity extends BlockEntity {
     private int slideshowIndex = 0;
     public int slideshowTimer = 0;
     private int tickCounter = 0;
-    private boolean powered = false;
 
     public EntityDetectorBlockEntity(BlockPos pPos, BlockState pBlockState) {
         super(PMBlockEntityTypes.ENTITY_DETECTOR.get(), pPos, pBlockState);
@@ -118,15 +117,11 @@ public class EntityDetectorBlockEntity extends BlockEntity {
         boolean inverted = state.getValue(EntityDetectorBlock.INVERTED);
         boolean shouldPower = this.detectEntities(level, pos, inverted);
 
-        if (shouldPower != this.powered) {
-            this.powered = shouldPower;
-            this.setChanged();
+        if (state.getValue(EntityDetectorBlock.POWERED) != shouldPower) {
+            level.setBlockAndUpdate(pos, state.setValue(EntityDetectorBlock.POWERED, shouldPower));
             level.updateNeighborsAt(pos, state.getBlock());
+            this.setChanged();
         }
-    }
-
-    public boolean isPowered() {
-        return this.powered;
     }
 
     public FilterMode getFilterMode() {
@@ -154,7 +149,6 @@ public class EntityDetectorBlockEntity extends BlockEntity {
     @Override
     protected void saveAdditional(CompoundTag tag) {
         super.saveAdditional(tag);
-        tag.putBoolean("Powered", this.powered);
         tag.putInt("FilterMode", this.filterMode.getId());
 
         ListTag list = new ListTag();
@@ -171,7 +165,6 @@ public class EntityDetectorBlockEntity extends BlockEntity {
     @Override
     public void load(CompoundTag tag) {
         super.load(tag);
-        this.powered = tag.getBoolean("Powered");
         this.filterMode = FilterMode.byId(tag.getInt("FilterMode"));
 
         this.filters.clear();
