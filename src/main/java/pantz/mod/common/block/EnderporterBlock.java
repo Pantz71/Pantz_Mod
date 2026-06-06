@@ -15,12 +15,13 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.BlockHitResult;
+import pantz.mod.common.utils.PMBlockStateProperties;
 import pantz.mod.core.registry.PMParticleTypes;
 import pantz.mod.core.registry.PMSoundEvents;
 
 @SuppressWarnings("deprecation")
 public class EnderporterBlock extends Block {
-    public static final IntegerProperty ENDERPORTER_CHARGE = IntegerProperty.create("enderporter_charge", 0, 4);
+    public static final IntegerProperty ENDERPORTER_CHARGE = PMBlockStateProperties.ENDERPORTER_CHARGE;
 
     public EnderporterBlock(Properties pProperties) {
         super(pProperties);

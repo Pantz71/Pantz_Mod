@@ -27,10 +27,11 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 import pantz.mod.common.block.entity.ItemStandBlockEntity;
+import pantz.mod.common.utils.PMBlockStateProperties;
 
 public class ItemStandBlock extends HorizontalDirectionalBlock implements EntityBlock, SimpleWaterloggedBlock {
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
-    public static final BooleanProperty GLASS = BooleanProperty.create("glass");
+    public static final BooleanProperty GLASS = PMBlockStateProperties.GLASS;
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     public static final VoxelShape SHAPE = Shapes.or(
             Block.box(0, 0, 0, 16, 2, 16),

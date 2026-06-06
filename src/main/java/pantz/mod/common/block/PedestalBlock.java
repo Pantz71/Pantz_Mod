@@ -2,7 +2,6 @@ package pantz.mod.common.block;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -27,14 +26,15 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 import pantz.mod.common.block.entity.PedestalBlockEntity;
-import pantz.mod.common.utils.CarpetColor;
+import pantz.mod.common.utils.PMBlockStateProperties;
+import pantz.mod.common.utils.PMBlockStateProperties.CarpetColor;
 import pantz.mod.common.utils.PedestalUtils;
 
 @SuppressWarnings("deprecation")
 public class PedestalBlock extends HorizontalDirectionalBlock implements EntityBlock, SimpleWaterloggedBlock {
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
-    public static final EnumProperty<CarpetColor> CARPET = EnumProperty.create("carpet", CarpetColor.class);
+    public static final EnumProperty<CarpetColor> CARPET = PMBlockStateProperties.CARPET;
     public static final VoxelShape SHAPE = Shapes.or(
             Block.box(1, 0, 1, 15, 2, 15),
             Block.box(3, 2, 3, 13, 13, 13),

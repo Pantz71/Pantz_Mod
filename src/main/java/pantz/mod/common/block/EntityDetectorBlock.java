@@ -25,10 +25,13 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 import pantz.mod.common.block.entity.EntityDetectorBlockEntity;
 import pantz.mod.common.item.EntityFilterItem;
+import pantz.mod.common.utils.PMBlockStateProperties;
+import pantz.mod.core.registry.PMBlockEntityTypes;
 
 public class EntityDetectorBlock extends BaseEntityBlock {
     public static final BooleanProperty INVERTED = BlockStateProperties.INVERTED;
     public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
+    public static final BooleanProperty FILTERED = PMBlockStateProperties.FILTERED;
     private static final VoxelShape SHAPE = Block.box(0, 0, 0, 16, 6, 16);
 
     public EntityDetectorBlock(Properties pProperties) {
@@ -58,7 +61,7 @@ public class EntityDetectorBlock extends BaseEntityBlock {
             level.setBlock(pos, newState, 3);
             BlockEntity be = level.getBlockEntity(pos);
             if (be instanceof EntityDetectorBlockEntity detector) {
-                detector.tick();
+                detector.serverTick();
             }
             return InteractionResult.SUCCESS;
         }
@@ -103,11 +106,6 @@ public class EntityDetectorBlock extends BaseEntityBlock {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-        if (level.isClientSide()) return null;
-        return (lvl, pos, st, be) -> {
-            if (be instanceof EntityDetectorBlockEntity detector) {
-                EntityDetectorBlockEntity.serverTick(lvl, pos, st, detector);
-            }
-        };
+        return !level.isClientSide() ? createTickerHelper(type, PMBlockEntityTypes.ENTITY_DETECTOR.get(), EntityDetectorBlockEntity::serverTick) : null;
     }
 }

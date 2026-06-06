@@ -16,10 +16,11 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
-import pantz.mod.common.utils.RandomizerOutput;
+import pantz.mod.common.utils.PMBlockStateProperties;
+import pantz.mod.common.utils.PMBlockStateProperties.RandomizerOutput;
 
 public class RandomizerBlock extends DiodeBlock {
-    public static final EnumProperty<RandomizerOutput> OUTPUT = EnumProperty.create("output", RandomizerOutput.class);
+    public static final EnumProperty<RandomizerOutput> OUTPUT = PMBlockStateProperties.OUTPUT;
     public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 

@@ -15,10 +15,11 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import pantz.mod.common.utils.LogicGateConditions;
+import pantz.mod.common.utils.PMBlockStateProperties;
 
 public class LogicGateBlock extends DiodeBlock {
-    public static final BooleanProperty INPUT_LEFT = BooleanProperty.create("input_left");
-    public static final BooleanProperty INPUT_RIGHT = BooleanProperty.create("input_right");
+    public static final BooleanProperty INPUT_LEFT = PMBlockStateProperties.INPUT_LEFT;
+    public static final BooleanProperty INPUT_RIGHT = PMBlockStateProperties.INPUT_RIGHT;
     public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
 
     public final LogicGateConditions logic;

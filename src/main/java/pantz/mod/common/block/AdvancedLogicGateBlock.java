@@ -12,13 +12,13 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import pantz.mod.common.utils.LogicGateConditions;
+import pantz.mod.common.utils.PMBlockStateProperties;
 
 public class AdvancedLogicGateBlock extends LogicGateBlock {
-    public static final BooleanProperty INPUT_LEFT = BooleanProperty.create("input_left");
-    public static final BooleanProperty INPUT_RIGHT = BooleanProperty.create("input_right");
-    public static final BooleanProperty INPUT_BACK = BooleanProperty.create("input_back");
+    public static final BooleanProperty INPUT_LEFT = PMBlockStateProperties.INPUT_LEFT;
+    public static final BooleanProperty INPUT_RIGHT = PMBlockStateProperties.INPUT_RIGHT;
+    public static final BooleanProperty INPUT_BACK = PMBlockStateProperties.INPUT_BACK;
     public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
-
 
     public AdvancedLogicGateBlock(Properties props, LogicGateConditions logic) {
         super(props, logic);

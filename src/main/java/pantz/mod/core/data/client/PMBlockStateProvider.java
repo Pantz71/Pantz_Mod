@@ -18,7 +18,7 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import pantz.mod.common.block.*;
-import pantz.mod.common.utils.CarpetColor;
+import pantz.mod.common.utils.PMBlockStateProperties.CarpetColor;
 import pantz.mod.core.PantzMod;
 import pantz.mod.core.other.PMBlockFamilies;
 

@@ -25,12 +25,13 @@ import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
+import pantz.mod.common.utils.PMBlockStateProperties;
 
 public class RopeLadderBlock extends LadderBlock {
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
-    public static final BooleanProperty TOP = BooleanProperty.create("top");
-    public static final BooleanProperty BOTTOM = BooleanProperty.create("bottom");
+    public static final BooleanProperty TOP = PMBlockStateProperties.TOP;
+    public static final BooleanProperty BOTTOM = PMBlockStateProperties.BOTTOM;
 
     public RopeLadderBlock(Properties pProperties) {
         super(pProperties);

@@ -4,6 +4,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import pantz.mod.common.utils.PMBlockStateProperties.CarpetColor;
 
 import java.util.HashMap;
 import java.util.Map;

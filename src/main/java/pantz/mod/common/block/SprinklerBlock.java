@@ -24,11 +24,12 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 import pantz.mod.common.block.entity.SprinklerBlockEntity;
+import pantz.mod.common.utils.PMBlockStateProperties;
 import pantz.mod.core.registry.PMBlockEntityTypes;
 
 public class SprinklerBlock extends BaseEntityBlock {
     private static final VoxelShape SHAPE = Block.box(1, 0, 1, 15, 16, 15);
-    public static final BooleanProperty FILLED = BooleanProperty.create("filled");
+    public static final BooleanProperty FILLED = PMBlockStateProperties.FILLED;
     public SprinklerBlock(Properties pProperties) {
         super(pProperties);
         this.registerDefaultState(this.getStateDefinition().any().setValue(FILLED, false));

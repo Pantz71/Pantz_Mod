@@ -1,7 +1,6 @@
 package pantz.mod.common.block.entity;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
@@ -108,7 +107,7 @@ public class EntityDetectorBlockEntity extends BlockEntity {
         }
     }
 
-    public void tick() {
+    public void serverTick() {
         this.tickCounter = 1000;
         this.setChanged();
     }
