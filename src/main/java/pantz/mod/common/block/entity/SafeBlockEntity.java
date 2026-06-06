@@ -92,12 +92,10 @@ public class SafeBlockEntity extends RandomizableContainerBlockEntity implements
     }
 
     public void drops() {
-        SimpleContainer inv = new SimpleContainer(items.size());
-        for(int i = 0; i < items.size(); i++) {
-            inv.setItem(i, items.get(i));
+        this.unpackLootTable(null);
+        if (this.level != null) {
+            Containers.dropContents(this.level, this.worldPosition, this);
         }
-        if (this.level == null) return;
-        Containers.dropContents(this.level, this.worldPosition, inv);
     }
 
     @Override
