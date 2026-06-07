@@ -36,7 +36,7 @@ public class PMBlockTagsProvider extends BlockTagsProvider {
                 ENDER_SCANNER.get(), WEATHER_DETECTOR.get(), ENTITY_DETECTOR.get(), TRASH_CAN.get(), ENDERPORTER.get(), REDSTONE_CONFIGURATOR.get(),
                 SAFE.get(), SPIKE.get(), FIERY_LAMP.get());
 
-        this.tag(BlockTags.MINEABLE_WITH_AXE).add(LOCK.get(), UNIVERSAL_LOCK.get(), SPRINKLER.get());
+        this.tag(BlockTags.MINEABLE_WITH_AXE).add(LOCK.get(), UNIVERSAL_LOCK.get(), SPRINKLER.get(), FEEDING_TROUGH.get());
         this.tag(BlockTags.MINEABLE_WITH_HOE).add(LEATHER_BLOCK.get(), RABBIT_HIDE_BLOCK.get(), PHANTOM_MEMBRANE_BLOCK.get(), SUGAR_CANE_BLOCK.get(), FEATHER_BLOCK.get());
         this.tag(BlockTags.MINEABLE_WITH_SHOVEL).add(SUGAR_BLOCK.get());
 

@@ -179,6 +179,7 @@ public class PMBlocks {
     public static final RegistryObject<Block> EQUALIZER = BLOCKS.createBlock("equalizer", () -> new EqualizerBlock(PMProperties.DIODE));
     public static final RegistryObject<Block> SPIKE = BLOCKS.createBlock("spike", () -> new SpikeBlock(PMProperties.SPIKE));
     public static final RegistryObject<Block> SPRINKLER = BLOCKS.createBlock("sprinkler", () -> new SprinklerBlock(PMProperties.SPRINKLER));
+    public static final RegistryObject<Block> FEEDING_TROUGH = BLOCKS.createBlock("feeding_trough", () -> new FeedingTroughBlock(PMProperties.TROUGH));
 
     public static final RegistryObject<Block> LEATHER_BLOCK = BLOCKS.createBlock("leather_block", () -> new Block(PMProperties.LEATHER_BLOCK));
     public static final RegistryObject<Block> RABBIT_HIDE_BLOCK = BLOCKS.createBlock("rabbit_hide_block", () -> new Block(PMProperties.RABBIT_HIDE_BLOCK));
@@ -221,7 +222,7 @@ public class PMBlocks {
                 .addItemsAfter(of(Blocks.REDSTONE_LAMP), WHITE_REDSTONE_LAMP, ORANGE_REDSTONE_LAMP, MAGENTA_REDSTONE_LAMP,
                         LIGHT_BLUE_REDSTONE_LAMP, YELLOW_REDSTONE_LAMP, LIME_REDSTONE_LAMP, PINK_REDSTONE_LAMP, GRAY_REDSTONE_LAMP, LIGHT_GRAY_REDSTONE_LAMP,
                         CYAN_REDSTONE_LAMP, PURPLE_REDSTONE_LAMP, BLUE_REDSTONE_LAMP, BROWN_REDSTONE_LAMP, GREEN_REDSTONE_LAMP, RED_REDSTONE_LAMP, BLACK_REDSTONE_LAMP)
-                .addItemsAfter(of(Blocks.RESPAWN_ANCHOR), ENDERPORTER, SPRINKLER)
+                .addItemsAfter(of(Blocks.RESPAWN_ANCHOR), ENDERPORTER, SPRINKLER, FEEDING_TROUGH)
 
                 .tab(REDSTONE_BLOCKS)
                 .addItemsBefore(of(Blocks.DAYLIGHT_DETECTOR), EARTH_GLOBE)

@@ -53,6 +53,12 @@
   "subtitles.pantz_mod.block.steel_trapdoor.open": "Trapdoor opens",
   "subtitles.pantz_mod.block.steel_lantern.toggle": "Lantern toggles",
   "subtitles.pantz_mod.block.ornament.adjust": "Ornament adjusts",
+  "subtitles.pantz_mod.block.pedestal.decorated": "Pedestal decorates",
+  "subtitles.pantz_mod.block.pedestal.interacted": "Pedestal's item interacts",
+  "subtitles.pantz_mod.block.pedestal.spin": "Pedestal spins",
+  "subtitles.pantz_mod.block.item_stand.add_item": "Item Stand fills",
+  "subtitles.pantz_mod.block.item_stand.remove_item": "Item Stand empties",
+  "subtitles.pantz_mod.block.item_stand.encase": "Item Stand encases",
 
   "_steel": "steel",
   "block.pantz_mod.steel_block": "Block of Steel",
@@ -248,6 +254,7 @@
 
   "block.pantz_mod.safe": "Safe",
   "block.pantz_mod.sprinkler": "Sprinkler",
+  "block.pantz_mod.feeding_trough": "Feeding Trough",
 
   "_decoration": "decoration",
   "block.pantz_mod.leather_block": "Block of Leather",
@@ -286,5 +293,6 @@
 
   "_stat": "stats",
   "stat.pantz_mod.interact_with_trash_can": "Interactions with Trash Can",
+  "stat.pantz_mod.interact_with_feeding_trough": "Interactions with Feeding Trough",
   "stat.pantz_mod.times_trash_can_destroy_items": "Times destroyed items with Trash Can"
 }

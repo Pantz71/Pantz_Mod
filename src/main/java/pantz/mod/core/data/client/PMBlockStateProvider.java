@@ -152,6 +152,7 @@ public class PMBlockStateProvider extends BlueprintBlockStateProvider {
         this.block(FEATHER_BLOCK);
         this.sugarCaneBlock(SUGAR_CANE_BLOCK);
         this.block(FIERY_LAMP);
+        this.blockItem(FEEDING_TROUGH);
     }
 
     private void redstoneConfiguratorBlock(RegistryObject<Block> block) {

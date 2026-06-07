@@ -92,48 +92,116 @@
     ],
     "subtitle": "subtitles.pantz_mod.safe.locked"
   },
-  "block.steel.break": {
+  "block.soul_glass.break": {
     "sounds": [
-      "pantz_mod:block/steel/break1",
-      "pantz_mod:block/steel/break2",
-      "pantz_mod:block/steel/break3",
-      "pantz_mod:block/steel/break4"
+      "pantz_mod:block/soul_glass/break1",
+      "pantz_mod:block/soul_glass/break2",
+      "pantz_mod:block/soul_glass/break3",
+      "pantz_mod:block/soul_glass/break4",
+      "pantz_mod:block/soul_glass/break5",
+      "pantz_mod:block/soul_glass/break6",
+      "pantz_mod:block/soul_glass/break7",
+      "pantz_mod:block/soul_glass/break8",
+      "pantz_mod:block/soul_glass/break9"
     ],
     "subtitle": "subtitles.block.generic.break"
   },
-  "block.steel.step": {
+  "block.soul_glass.step": {
     "sounds": [
-      "pantz_mod:block/steel/step1",
-      "pantz_mod:block/steel/step2",
-      "pantz_mod:block/steel/step3",
-      "pantz_mod:block/steel/step4"
+      "step/stone1",
+      "step/stone2",
+      "step/stone3",
+      "step/stone4",
+      "step/stone5",
+      "step/stone6"
     ],
     "subtitle": "subtitles.block.generic.footsteps"
   },
-  "block.steel.place": {
+  "block.soul_glass.place": {
     "sounds": [
-      "pantz_mod:block/steel/break1",
-      "pantz_mod:block/steel/break2",
-      "pantz_mod:block/steel/break3",
-      "pantz_mod:block/steel/break4"
+      "pantz_mod:block/soul_glass/place1",
+      "pantz_mod:block/soul_glass/place2",
+      "pantz_mod:block/soul_glass/place3",
+      "pantz_mod:block/soul_glass/place4",
+      "pantz_mod:block/soul_glass/place5",
+      "pantz_mod:block/soul_glass/place6",
+      "pantz_mod:block/soul_glass/place7",
+      "pantz_mod:block/soul_glass/place8",
+      "pantz_mod:block/soul_glass/place9"
     ],
     "subtitle": "subtitles.block.generic.place"
   },
-  "block.steel.hit": {
+  "block.soul_glass.hit": {
     "sounds": [
-      "pantz_mod:block/steel/step1",
-      "pantz_mod:block/steel/step2",
-      "pantz_mod:block/steel/step3",
-      "pantz_mod:block/steel/step4"
+      "step/stone1",
+      "step/stone2",
+      "step/stone3",
+      "step/stone4",
+      "step/stone5",
+      "step/stone6"
     ],
     "subtitle": "subtitles.block.generic.hit"
   },
-  "block.steel.fall": {
+  "block.soul_glass.fall": {
     "sounds": [
-      "pantz_mod:block/steel/step1",
-      "pantz_mod:block/steel/step2",
-      "pantz_mod:block/steel/step3",
-      "pantz_mod:block/steel/step4"
+      "step/stone1",
+      "step/stone2",
+      "step/stone3",
+      "step/stone4",
+      "step/stone5",
+      "step/stone6"
+    ]
+  },
+  "block.echo_glass.break": {
+    "sounds": [
+      "pantz_mod:block/echo_glass/break1",
+      "pantz_mod:block/echo_glass/break2",
+      "pantz_mod:block/echo_glass/break3",
+      "pantz_mod:block/echo_glass/break4",
+      "pantz_mod:block/echo_glass/break5",
+      "pantz_mod:block/echo_glass/break6"
+    ],
+    "subtitle": "subtitles.block.generic.break"
+  },
+  "block.echo_glass.step": {
+    "sounds": [
+      "step/stone1",
+      "step/stone2",
+      "step/stone3",
+      "step/stone4",
+      "step/stone5",
+      "step/stone6"
+    ],
+    "subtitle": "subtitles.block.generic.footsteps"
+  },
+  "block.echo_glass.place": {
+    "sounds": [
+      "pantz_mod:block/echo_glass/place1",
+      "pantz_mod:block/echo_glass/place2",
+      "pantz_mod:block/echo_glass/place3",
+      "pantz_mod:block/echo_glass/place4"
+    ],
+    "subtitle": "subtitles.block.generic.place"
+  },
+  "block.echo_glass.hit": {
+    "sounds": [
+      "step/stone1",
+      "step/stone2",
+      "step/stone3",
+      "step/stone4",
+      "step/stone5",
+      "step/stone6"
+    ],
+    "subtitle": "subtitles.block.generic.hit"
+  },
+  "block.echo_glass.fall": {
+    "sounds": [
+      "step/stone1",
+      "step/stone2",
+      "step/stone3",
+      "step/stone4",
+      "step/stone5",
+      "step/stone6"
     ]
   },
   "block.steel_chain.break": {
@@ -312,13 +380,53 @@
   },
   "block.steel_lantern.toggle": {
     "sounds": [
-      {
-        "name": "random/click",
-        "volume": 0.45,
-        "pitch": 0.75
-      }
+      "random/click"
     ],
     "subtitle": "subtitles.pantz_mod.block.steel_lantern.toggle"
+  },
+  "block.steel.break": {
+    "sounds": [
+      "pantz_mod:block/steel/break1",
+      "pantz_mod:block/steel/break2",
+      "pantz_mod:block/steel/break3",
+      "pantz_mod:block/steel/break4"
+    ],
+    "subtitle": "subtitles.block.generic.break"
+  },
+  "block.steel.step": {
+    "sounds": [
+      "pantz_mod:block/steel/step1",
+      "pantz_mod:block/steel/step2",
+      "pantz_mod:block/steel/step3",
+      "pantz_mod:block/steel/step4"
+    ],
+    "subtitle": "subtitles.block.generic.footsteps"
+  },
+  "block.steel.place": {
+    "sounds": [
+      "pantz_mod:block/steel/break1",
+      "pantz_mod:block/steel/break2",
+      "pantz_mod:block/steel/break3",
+      "pantz_mod:block/steel/break4"
+    ],
+    "subtitle": "subtitles.block.generic.place"
+  },
+  "block.steel.hit": {
+    "sounds": [
+      "pantz_mod:block/steel/step1",
+      "pantz_mod:block/steel/step2",
+      "pantz_mod:block/steel/step3",
+      "pantz_mod:block/steel/step4"
+    ],
+    "subtitle": "subtitles.block.generic.hit"
+  },
+  "block.steel.fall": {
+    "sounds": [
+      "pantz_mod:block/steel/step1",
+      "pantz_mod:block/steel/step2",
+      "pantz_mod:block/steel/step3",
+      "pantz_mod:block/steel/step4"
+    ]
   },
   "block.ornament.adjust": {
     "sounds": [
@@ -328,5 +436,53 @@
       "step/cloth4"
     ],
     "subtitle": "subtitles.pantz_mod.block.ornament.adjust"
+  },
+  "block.pedestal.decorate": {
+    "sounds": [
+      "step/cloth1",
+      "step/cloth2",
+      "step/cloth3",
+      "step/cloth4"
+    ],
+    "subtitle": "subtitles.pantz_mod.block.pedestal.decorate"
+  },
+  "block.pedestal.interact": {
+    "sounds": [
+      "random/pop"
+    ],
+    "subtitle": "subtitles.pantz_mod.block.pedestal.interact"
+  },
+  "block.pedestal.spin": {
+    "sounds": [
+      "random/click"
+    ],
+    "subtitle": "subtitles.pantz_mod.block.pedestal.spin"
+  },
+  "block.item_stand.encase": {
+    "sounds": [
+      "dig/stone1",
+      "dig/stone2",
+      "dig/stone3",
+      "dig/stone4"
+    ],
+    "subtitle": "subtitles.pantz_mod.block.item_stand.encase"
+  },
+  "block.item_stand.add_item": {
+    "sounds": [
+      "entity/itemframe/add_item1",
+      "entity/itemframe/add_item2",
+      "entity/itemframe/add_item3",
+      "entity/itemframe/add_item4"
+    ],
+    "subtitle": "subtitles.pantz_mod.block.item_stand.add_item"
+  },
+  "block.item_stand.remove_item": {
+    "sounds": [
+      "entity/itemframe/remove_item1",
+      "entity/itemframe/remove_item2",
+      "entity/itemframe/remove_item3",
+      "entity/itemframe/remove_item4"
+    ],
+    "subtitle": "subtitles.pantz_mod.block.item_stand.add_item"
   }
 }

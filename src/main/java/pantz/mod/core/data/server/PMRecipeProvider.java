@@ -416,6 +416,13 @@ public class PMRecipeProvider extends BlueprintRecipeProvider {
                 .pattern("___")
                 .unlockedBy(getHasName(PMItems.STEEL_INGOT.get()), has(PMItemTags.INGOTS_STEEL))
                 .save(consumer);
+
+        ShapedRecipeBuilder.shaped(DECORATIONS, FEEDING_TROUGH.get())
+                .define('_', ItemTags.WOODEN_SLABS)
+                .pattern("_ _")
+                .pattern("___")
+                .unlockedBy("has_wooden_slabs", has(ItemTags.WOODEN_SLABS))
+                .save(consumer);
         // ----------------------
 
         // --- Compressed ---

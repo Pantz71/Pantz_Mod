@@ -8,6 +8,7 @@ import net.minecraft.world.level.block.state.properties.IntegerProperty;
 public class PMBlockStateProperties {
     public static final BooleanProperty FILTERED = BooleanProperty.create("filtered");
     public static final IntegerProperty ENDERPORTER_CHARGE = IntegerProperty.create("enderporter_charge", 0, 4);
+    public static final IntegerProperty LAYERS = IntegerProperty.create("layers", 0, 4);
 
     public static final BooleanProperty GLASS = BooleanProperty.create("glass");
     public static final BooleanProperty SPINNING = BooleanProperty.create("spinning");

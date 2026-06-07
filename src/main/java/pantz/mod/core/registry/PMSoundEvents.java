@@ -46,11 +46,32 @@ public class PMSoundEvents {
     public static final RegistryObject<SoundEvent> STEEL_LANTERN_STEP = SOUND_EVENTS.createSoundEvent("block.steel_lantern.step");
     public static final RegistryObject<SoundEvent> STEEL_LANTERN_TOGGLE = SOUND_EVENTS.createSoundEvent("block.steel_lantern.toggle");
 
+    public static final RegistryObject<SoundEvent> SOUL_GLASS_BREAK = SOUND_EVENTS.createSoundEvent("block.soul_glass.break");
+    public static final RegistryObject<SoundEvent> SOUL_GLASS_FALL = SOUND_EVENTS.createSoundEvent("block.soul_glass.fall");
+    public static final RegistryObject<SoundEvent> SOUL_GLASS_HIT = SOUND_EVENTS.createSoundEvent("block.soul_glass.hit");
+    public static final RegistryObject<SoundEvent> SOUL_GLASS_PLACE = SOUND_EVENTS.createSoundEvent("block.soul_glass.place");
+    public static final RegistryObject<SoundEvent> SOUL_GLASS_STEP = SOUND_EVENTS.createSoundEvent("block.soul_glass.step");
+
+    public static final RegistryObject<SoundEvent> ECHO_GLASS_BREAK = SOUND_EVENTS.createSoundEvent("block.echo_glass.break");
+    public static final RegistryObject<SoundEvent> ECHO_GLASS_FALL = SOUND_EVENTS.createSoundEvent("block.echo_glass.fall");
+    public static final RegistryObject<SoundEvent> ECHO_GLASS_HIT = SOUND_EVENTS.createSoundEvent("block.echo_glass.hit");
+    public static final RegistryObject<SoundEvent> ECHO_GLASS_PLACE = SOUND_EVENTS.createSoundEvent("block.echo_glass.place");
+    public static final RegistryObject<SoundEvent> ECHO_GLASS_STEP = SOUND_EVENTS.createSoundEvent("block.echo_glass.step");
+
     public static final RegistryObject<SoundEvent> ORNAMENT_ADJUST = SOUND_EVENTS.createSoundEvent("block.ornament.adjust");
+    public static final RegistryObject<SoundEvent> PEDESTAL_INTERACT = SOUND_EVENTS.createSoundEvent("block.pedestal.interact");
+    public static final RegistryObject<SoundEvent> PEDESTAL_DECORATE = SOUND_EVENTS.createSoundEvent("block.pedestal.decorate");
+    public static final RegistryObject<SoundEvent> PEDESTAL_SPIN = SOUND_EVENTS.createSoundEvent("block.pedestal.spin");
+    public static final RegistryObject<SoundEvent> ITEM_STAND_ADD_ITEM = SOUND_EVENTS.createSoundEvent("block.item_stand.add_item");
+    public static final RegistryObject<SoundEvent> ITEM_STAND_REMOVE_ITEM = SOUND_EVENTS.createSoundEvent("block.item_stand.remove_item");
+    public static final RegistryObject<SoundEvent> ITEM_STAND_ENCASE = SOUND_EVENTS.createSoundEvent("block.item_stand.encase");
 
     public static class PMSoundTypes {
         public static final ForgeSoundType STEEL = new ForgeSoundType(1.0f, 1.0f, STEEL_BREAK, STEEL_STEP, STEEL_PLACE, STEEL_HIT, STEEL_FALL);
         public static final ForgeSoundType STEEL_CHAIN = new ForgeSoundType(1.0f, 1.0f, STEEL_CHAIN_BREAK, STEEL_CHAIN_STEP, STEEL_CHAIN_PLACE, STEEL_CHAIN_HIT, STEEL_CHAIN_FALL);
         public static final ForgeSoundType STEEL_LANTERN = new ForgeSoundType(1.0f, 1.0f, STEEL_LANTERN_BREAK, STEEL_LANTERN_STEP, STEEL_LANTERN_PLACE, STEEL_LANTERN_HIT, STEEL_LANTERN_FALL);
+        public static final ForgeSoundType SOUL_GLASS = new ForgeSoundType(1.0f, 1.0f, SOUL_GLASS_BREAK, SOUL_GLASS_STEP, SOUL_GLASS_PLACE, SOUL_GLASS_HIT, SOUL_GLASS_FALL);
+        public static final ForgeSoundType ECHO_GLASS = new ForgeSoundType(1.0f, 1.0f, ECHO_GLASS_BREAK, ECHO_GLASS_STEP, ECHO_GLASS_PLACE, ECHO_GLASS_HIT, ECHO_GLASS_FALL);
+
     }
 }

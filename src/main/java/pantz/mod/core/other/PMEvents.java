@@ -14,6 +14,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
+import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.monster.warden.Warden;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
@@ -29,6 +30,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.entity.EntityAttributeModificationEvent;
+import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.EntityTeleportEvent;
 import net.minecraftforge.event.entity.ProjectileImpactEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -43,6 +45,7 @@ import pantz.mod.common.block.ItemStandBlock;
 import pantz.mod.common.block.PedestalBlock;
 import pantz.mod.common.block.entity.PedestalBlockEntity;
 import pantz.mod.common.block.entity.SpikeBlockEntity;
+import pantz.mod.common.entity.ai.goal.MoveToFeedingTroughGoal;
 import pantz.mod.common.item.AreaDiggerItem;
 import pantz.mod.common.item.EntityFilterItem;
 import pantz.mod.common.utils.*;
@@ -80,6 +83,12 @@ public class PMEvents {
     @Mod.EventBusSubscriber(modid = PantzMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
     public static class PMForgeEvents {
 
+        @SubscribeEvent
+        public static void onEntityJoin(EntityJoinLevelEvent event) {
+            if (!event.getLevel().isClientSide() && event.getEntity() instanceof Animal animal) {
+                animal.goalSelector.addGoal(4, new MoveToFeedingTroughGoal(animal, 1.25f, 16));
+            }
+        }
 
         @SubscribeEvent
         public static void onLivingDeath(LivingDeathEvent event) {
@@ -211,6 +220,7 @@ public class PMEvents {
                         stack.shrink(1);
                     }
                     level.setBlock(pos, state.setValue(ItemStandBlock.GLASS, true), 3);
+                    level.playSound(null, pos, PMSoundEvents.ITEM_STAND_ENCASE.get(), SoundSource.BLOCKS);
                     cancel(event);
                 }
             }
@@ -277,6 +287,7 @@ public class PMEvents {
                 if (shrink && !player.isCreative()) {
                     held.shrink(1);
                 }
+                level.playSound(null, pos, PMSoundEvents.PEDESTAL_DECORATE.get(), SoundSource.BLOCKS);
             }
             cancel(event);
         }

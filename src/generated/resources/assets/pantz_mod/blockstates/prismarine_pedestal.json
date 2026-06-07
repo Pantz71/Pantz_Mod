@@ -1,512 +1,1022 @@
 {
   "variants": {
-    "carpet=black,facing=east,waterlogged=false": {
+    "carpet=black,facing=east,spinning=false,waterlogged=false": {
       "model": "pantz_mod:block/prismarine_pedestal_black",
       "y": 270
     },
-    "carpet=black,facing=east,waterlogged=true": {
+    "carpet=black,facing=east,spinning=false,waterlogged=true": {
       "model": "pantz_mod:block/prismarine_pedestal_black",
       "y": 270
     },
-    "carpet=black,facing=north,waterlogged=false": {
+    "carpet=black,facing=east,spinning=true,waterlogged=false": {
+      "model": "pantz_mod:block/prismarine_pedestal_black",
+      "y": 270
+    },
+    "carpet=black,facing=east,spinning=true,waterlogged=true": {
+      "model": "pantz_mod:block/prismarine_pedestal_black",
+      "y": 270
+    },
+    "carpet=black,facing=north,spinning=false,waterlogged=false": {
       "model": "pantz_mod:block/prismarine_pedestal_black",
       "y": 180
     },
-    "carpet=black,facing=north,waterlogged=true": {
+    "carpet=black,facing=north,spinning=false,waterlogged=true": {
       "model": "pantz_mod:block/prismarine_pedestal_black",
       "y": 180
     },
-    "carpet=black,facing=south,waterlogged=false": {
+    "carpet=black,facing=north,spinning=true,waterlogged=false": {
+      "model": "pantz_mod:block/prismarine_pedestal_black",
+      "y": 180
+    },
+    "carpet=black,facing=north,spinning=true,waterlogged=true": {
+      "model": "pantz_mod:block/prismarine_pedestal_black",
+      "y": 180
+    },
+    "carpet=black,facing=south,spinning=false,waterlogged=false": {
       "model": "pantz_mod:block/prismarine_pedestal_black"
     },
-    "carpet=black,facing=south,waterlogged=true": {
+    "carpet=black,facing=south,spinning=false,waterlogged=true": {
       "model": "pantz_mod:block/prismarine_pedestal_black"
     },
-    "carpet=black,facing=west,waterlogged=false": {
+    "carpet=black,facing=south,spinning=true,waterlogged=false": {
+      "model": "pantz_mod:block/prismarine_pedestal_black"
+    },
+    "carpet=black,facing=south,spinning=true,waterlogged=true": {
+      "model": "pantz_mod:block/prismarine_pedestal_black"
+    },
+    "carpet=black,facing=west,spinning=false,waterlogged=false": {
       "model": "pantz_mod:block/prismarine_pedestal_black",
       "y": 90
     },
-    "carpet=black,facing=west,waterlogged=true": {
+    "carpet=black,facing=west,spinning=false,waterlogged=true": {
       "model": "pantz_mod:block/prismarine_pedestal_black",
       "y": 90
     },
-    "carpet=blue,facing=east,waterlogged=false": {
+    "carpet=black,facing=west,spinning=true,waterlogged=false": {
+      "model": "pantz_mod:block/prismarine_pedestal_black",
+      "y": 90
+    },
+    "carpet=black,facing=west,spinning=true,waterlogged=true": {
+      "model": "pantz_mod:block/prismarine_pedestal_black",
+      "y": 90
+    },
+    "carpet=blue,facing=east,spinning=false,waterlogged=false": {
       "model": "pantz_mod:block/prismarine_pedestal_blue",
       "y": 270
     },
-    "carpet=blue,facing=east,waterlogged=true": {
+    "carpet=blue,facing=east,spinning=false,waterlogged=true": {
       "model": "pantz_mod:block/prismarine_pedestal_blue",
       "y": 270
     },
-    "carpet=blue,facing=north,waterlogged=false": {
+    "carpet=blue,facing=east,spinning=true,waterlogged=false": {
+      "model": "pantz_mod:block/prismarine_pedestal_blue",
+      "y": 270
+    },
+    "carpet=blue,facing=east,spinning=true,waterlogged=true": {
+      "model": "pantz_mod:block/prismarine_pedestal_blue",
+      "y": 270
+    },
+    "carpet=blue,facing=north,spinning=false,waterlogged=false": {
       "model": "pantz_mod:block/prismarine_pedestal_blue",
       "y": 180
     },
-    "carpet=blue,facing=north,waterlogged=true": {
+    "carpet=blue,facing=north,spinning=false,waterlogged=true": {
       "model": "pantz_mod:block/prismarine_pedestal_blue",
       "y": 180
     },
-    "carpet=blue,facing=south,waterlogged=false": {
+    "carpet=blue,facing=north,spinning=true,waterlogged=false": {
+      "model": "pantz_mod:block/prismarine_pedestal_blue",
+      "y": 180
+    },
+    "carpet=blue,facing=north,spinning=true,waterlogged=true": {
+      "model": "pantz_mod:block/prismarine_pedestal_blue",
+      "y": 180
+    },
+    "carpet=blue,facing=south,spinning=false,waterlogged=false": {
       "model": "pantz_mod:block/prismarine_pedestal_blue"
     },
-    "carpet=blue,facing=south,waterlogged=true": {
+    "carpet=blue,facing=south,spinning=false,waterlogged=true": {
       "model": "pantz_mod:block/prismarine_pedestal_blue"
     },
-    "carpet=blue,facing=west,waterlogged=false": {
+    "carpet=blue,facing=south,spinning=true,waterlogged=false": {
+      "model": "pantz_mod:block/prismarine_pedestal_blue"
+    },
+    "carpet=blue,facing=south,spinning=true,waterlogged=true": {
+      "model": "pantz_mod:block/prismarine_pedestal_blue"
+    },
+    "carpet=blue,facing=west,spinning=false,waterlogged=false": {
       "model": "pantz_mod:block/prismarine_pedestal_blue",
       "y": 90
     },
-    "carpet=blue,facing=west,waterlogged=true": {
+    "carpet=blue,facing=west,spinning=false,waterlogged=true": {
       "model": "pantz_mod:block/prismarine_pedestal_blue",
       "y": 90
     },
-    "carpet=brown,facing=east,waterlogged=false": {
+    "carpet=blue,facing=west,spinning=true,waterlogged=false": {
+      "model": "pantz_mod:block/prismarine_pedestal_blue",
+      "y": 90
+    },
+    "carpet=blue,facing=west,spinning=true,waterlogged=true": {
+      "model": "pantz_mod:block/prismarine_pedestal_blue",
+      "y": 90
+    },
+    "carpet=brown,facing=east,spinning=false,waterlogged=false": {
       "model": "pantz_mod:block/prismarine_pedestal_brown",
       "y": 270
     },
-    "carpet=brown,facing=east,waterlogged=true": {
+    "carpet=brown,facing=east,spinning=false,waterlogged=true": {
       "model": "pantz_mod:block/prismarine_pedestal_brown",
       "y": 270
     },
-    "carpet=brown,facing=north,waterlogged=false": {
+    "carpet=brown,facing=east,spinning=true,waterlogged=false": {
+      "model": "pantz_mod:block/prismarine_pedestal_brown",
+      "y": 270
+    },
+    "carpet=brown,facing=east,spinning=true,waterlogged=true": {
+      "model": "pantz_mod:block/prismarine_pedestal_brown",
+      "y": 270
+    },
+    "carpet=brown,facing=north,spinning=false,waterlogged=false": {
       "model": "pantz_mod:block/prismarine_pedestal_brown",
       "y": 180
     },
-    "carpet=brown,facing=north,waterlogged=true": {
+    "carpet=brown,facing=north,spinning=false,waterlogged=true": {
       "model": "pantz_mod:block/prismarine_pedestal_brown",
       "y": 180
     },
-    "carpet=brown,facing=south,waterlogged=false": {
+    "carpet=brown,facing=north,spinning=true,waterlogged=false": {
+      "model": "pantz_mod:block/prismarine_pedestal_brown",
+      "y": 180
+    },
+    "carpet=brown,facing=north,spinning=true,waterlogged=true": {
+      "model": "pantz_mod:block/prismarine_pedestal_brown",
+      "y": 180
+    },
+    "carpet=brown,facing=south,spinning=false,waterlogged=false": {
       "model": "pantz_mod:block/prismarine_pedestal_brown"
     },
-    "carpet=brown,facing=south,waterlogged=true": {
+    "carpet=brown,facing=south,spinning=false,waterlogged=true": {
       "model": "pantz_mod:block/prismarine_pedestal_brown"
     },
-    "carpet=brown,facing=west,waterlogged=false": {
+    "carpet=brown,facing=south,spinning=true,waterlogged=false": {
+      "model": "pantz_mod:block/prismarine_pedestal_brown"
+    },
+    "carpet=brown,facing=south,spinning=true,waterlogged=true": {
+      "model": "pantz_mod:block/prismarine_pedestal_brown"
+    },
+    "carpet=brown,facing=west,spinning=false,waterlogged=false": {
       "model": "pantz_mod:block/prismarine_pedestal_brown",
       "y": 90
     },
-    "carpet=brown,facing=west,waterlogged=true": {
+    "carpet=brown,facing=west,spinning=false,waterlogged=true": {
       "model": "pantz_mod:block/prismarine_pedestal_brown",
       "y": 90
     },
-    "carpet=cyan,facing=east,waterlogged=false": {
+    "carpet=brown,facing=west,spinning=true,waterlogged=false": {
+      "model": "pantz_mod:block/prismarine_pedestal_brown",
+      "y": 90
+    },
+    "carpet=brown,facing=west,spinning=true,waterlogged=true": {
+      "model": "pantz_mod:block/prismarine_pedestal_brown",
+      "y": 90
+    },
+    "carpet=cyan,facing=east,spinning=false,waterlogged=false": {
       "model": "pantz_mod:block/prismarine_pedestal_cyan",
       "y": 270
     },
-    "carpet=cyan,facing=east,waterlogged=true": {
+    "carpet=cyan,facing=east,spinning=false,waterlogged=true": {
       "model": "pantz_mod:block/prismarine_pedestal_cyan",
       "y": 270
     },
-    "carpet=cyan,facing=north,waterlogged=false": {
+    "carpet=cyan,facing=east,spinning=true,waterlogged=false": {
+      "model": "pantz_mod:block/prismarine_pedestal_cyan",
+      "y": 270
+    },
+    "carpet=cyan,facing=east,spinning=true,waterlogged=true": {
+      "model": "pantz_mod:block/prismarine_pedestal_cyan",
+      "y": 270
+    },
+    "carpet=cyan,facing=north,spinning=false,waterlogged=false": {
       "model": "pantz_mod:block/prismarine_pedestal_cyan",
       "y": 180
     },
-    "carpet=cyan,facing=north,waterlogged=true": {
+    "carpet=cyan,facing=north,spinning=false,waterlogged=true": {
       "model": "pantz_mod:block/prismarine_pedestal_cyan",
       "y": 180
     },
-    "carpet=cyan,facing=south,waterlogged=false": {
+    "carpet=cyan,facing=north,spinning=true,waterlogged=false": {
+      "model": "pantz_mod:block/prismarine_pedestal_cyan",
+      "y": 180
+    },
+    "carpet=cyan,facing=north,spinning=true,waterlogged=true": {
+      "model": "pantz_mod:block/prismarine_pedestal_cyan",
+      "y": 180
+    },
+    "carpet=cyan,facing=south,spinning=false,waterlogged=false": {
       "model": "pantz_mod:block/prismarine_pedestal_cyan"
     },
-    "carpet=cyan,facing=south,waterlogged=true": {
+    "carpet=cyan,facing=south,spinning=false,waterlogged=true": {
       "model": "pantz_mod:block/prismarine_pedestal_cyan"
     },
-    "carpet=cyan,facing=west,waterlogged=false": {
+    "carpet=cyan,facing=south,spinning=true,waterlogged=false": {
+      "model": "pantz_mod:block/prismarine_pedestal_cyan"
+    },
+    "carpet=cyan,facing=south,spinning=true,waterlogged=true": {
+      "model": "pantz_mod:block/prismarine_pedestal_cyan"
+    },
+    "carpet=cyan,facing=west,spinning=false,waterlogged=false": {
       "model": "pantz_mod:block/prismarine_pedestal_cyan",
       "y": 90
     },
-    "carpet=cyan,facing=west,waterlogged=true": {
+    "carpet=cyan,facing=west,spinning=false,waterlogged=true": {
       "model": "pantz_mod:block/prismarine_pedestal_cyan",
       "y": 90
     },
-    "carpet=gray,facing=east,waterlogged=false": {
+    "carpet=cyan,facing=west,spinning=true,waterlogged=false": {
+      "model": "pantz_mod:block/prismarine_pedestal_cyan",
+      "y": 90
+    },
+    "carpet=cyan,facing=west,spinning=true,waterlogged=true": {
+      "model": "pantz_mod:block/prismarine_pedestal_cyan",
+      "y": 90
+    },
+    "carpet=gray,facing=east,spinning=false,waterlogged=false": {
       "model": "pantz_mod:block/prismarine_pedestal_gray",
       "y": 270
     },
-    "carpet=gray,facing=east,waterlogged=true": {
+    "carpet=gray,facing=east,spinning=false,waterlogged=true": {
       "model": "pantz_mod:block/prismarine_pedestal_gray",
       "y": 270
     },
-    "carpet=gray,facing=north,waterlogged=false": {
+    "carpet=gray,facing=east,spinning=true,waterlogged=false": {
+      "model": "pantz_mod:block/prismarine_pedestal_gray",
+      "y": 270
+    },
+    "carpet=gray,facing=east,spinning=true,waterlogged=true": {
+      "model": "pantz_mod:block/prismarine_pedestal_gray",
+      "y": 270
+    },
+    "carpet=gray,facing=north,spinning=false,waterlogged=false": {
       "model": "pantz_mod:block/prismarine_pedestal_gray",
       "y": 180
     },
-    "carpet=gray,facing=north,waterlogged=true": {
+    "carpet=gray,facing=north,spinning=false,waterlogged=true": {
       "model": "pantz_mod:block/prismarine_pedestal_gray",
       "y": 180
     },
-    "carpet=gray,facing=south,waterlogged=false": {
+    "carpet=gray,facing=north,spinning=true,waterlogged=false": {
+      "model": "pantz_mod:block/prismarine_pedestal_gray",
+      "y": 180
+    },
+    "carpet=gray,facing=north,spinning=true,waterlogged=true": {
+      "model": "pantz_mod:block/prismarine_pedestal_gray",
+      "y": 180
+    },
+    "carpet=gray,facing=south,spinning=false,waterlogged=false": {
       "model": "pantz_mod:block/prismarine_pedestal_gray"
     },
-    "carpet=gray,facing=south,waterlogged=true": {
+    "carpet=gray,facing=south,spinning=false,waterlogged=true": {
       "model": "pantz_mod:block/prismarine_pedestal_gray"
     },
-    "carpet=gray,facing=west,waterlogged=false": {
+    "carpet=gray,facing=south,spinning=true,waterlogged=false": {
+      "model": "pantz_mod:block/prismarine_pedestal_gray"
+    },
+    "carpet=gray,facing=south,spinning=true,waterlogged=true": {
+      "model": "pantz_mod:block/prismarine_pedestal_gray"
+    },
+    "carpet=gray,facing=west,spinning=false,waterlogged=false": {
       "model": "pantz_mod:block/prismarine_pedestal_gray",
       "y": 90
     },
-    "carpet=gray,facing=west,waterlogged=true": {
+    "carpet=gray,facing=west,spinning=false,waterlogged=true": {
       "model": "pantz_mod:block/prismarine_pedestal_gray",
       "y": 90
     },
-    "carpet=green,facing=east,waterlogged=false": {
+    "carpet=gray,facing=west,spinning=true,waterlogged=false": {
+      "model": "pantz_mod:block/prismarine_pedestal_gray",
+      "y": 90
+    },
+    "carpet=gray,facing=west,spinning=true,waterlogged=true": {
+      "model": "pantz_mod:block/prismarine_pedestal_gray",
+      "y": 90
+    },
+    "carpet=green,facing=east,spinning=false,waterlogged=false": {
       "model": "pantz_mod:block/prismarine_pedestal_green",
       "y": 270
     },
-    "carpet=green,facing=east,waterlogged=true": {
+    "carpet=green,facing=east,spinning=false,waterlogged=true": {
       "model": "pantz_mod:block/prismarine_pedestal_green",
       "y": 270
     },
-    "carpet=green,facing=north,waterlogged=false": {
+    "carpet=green,facing=east,spinning=true,waterlogged=false": {
+      "model": "pantz_mod:block/prismarine_pedestal_green",
+      "y": 270
+    },
+    "carpet=green,facing=east,spinning=true,waterlogged=true": {
+      "model": "pantz_mod:block/prismarine_pedestal_green",
+      "y": 270
+    },
+    "carpet=green,facing=north,spinning=false,waterlogged=false": {
       "model": "pantz_mod:block/prismarine_pedestal_green",
       "y": 180
     },
-    "carpet=green,facing=north,waterlogged=true": {
+    "carpet=green,facing=north,spinning=false,waterlogged=true": {
       "model": "pantz_mod:block/prismarine_pedestal_green",
       "y": 180
     },
-    "carpet=green,facing=south,waterlogged=false": {
+    "carpet=green,facing=north,spinning=true,waterlogged=false": {
+      "model": "pantz_mod:block/prismarine_pedestal_green",
+      "y": 180
+    },
+    "carpet=green,facing=north,spinning=true,waterlogged=true": {
+      "model": "pantz_mod:block/prismarine_pedestal_green",
+      "y": 180
+    },
+    "carpet=green,facing=south,spinning=false,waterlogged=false": {
       "model": "pantz_mod:block/prismarine_pedestal_green"
     },
-    "carpet=green,facing=south,waterlogged=true": {
+    "carpet=green,facing=south,spinning=false,waterlogged=true": {
       "model": "pantz_mod:block/prismarine_pedestal_green"
     },
-    "carpet=green,facing=west,waterlogged=false": {
+    "carpet=green,facing=south,spinning=true,waterlogged=false": {
+      "model": "pantz_mod:block/prismarine_pedestal_green"
+    },
+    "carpet=green,facing=south,spinning=true,waterlogged=true": {
+      "model": "pantz_mod:block/prismarine_pedestal_green"
+    },
+    "carpet=green,facing=west,spinning=false,waterlogged=false": {
       "model": "pantz_mod:block/prismarine_pedestal_green",
       "y": 90
     },
-    "carpet=green,facing=west,waterlogged=true": {
+    "carpet=green,facing=west,spinning=false,waterlogged=true": {
       "model": "pantz_mod:block/prismarine_pedestal_green",
       "y": 90
     },
-    "carpet=light_blue,facing=east,waterlogged=false": {
+    "carpet=green,facing=west,spinning=true,waterlogged=false": {
+      "model": "pantz_mod:block/prismarine_pedestal_green",
+      "y": 90
+    },
+    "carpet=green,facing=west,spinning=true,waterlogged=true": {
+      "model": "pantz_mod:block/prismarine_pedestal_green",
+      "y": 90
+    },
+    "carpet=light_blue,facing=east,spinning=false,waterlogged=false": {
       "model": "pantz_mod:block/prismarine_pedestal_light_blue",
       "y": 270
     },
-    "carpet=light_blue,facing=east,waterlogged=true": {
+    "carpet=light_blue,facing=east,spinning=false,waterlogged=true": {
       "model": "pantz_mod:block/prismarine_pedestal_light_blue",
       "y": 270
     },
-    "carpet=light_blue,facing=north,waterlogged=false": {
+    "carpet=light_blue,facing=east,spinning=true,waterlogged=false": {
+      "model": "pantz_mod:block/prismarine_pedestal_light_blue",
+      "y": 270
+    },
+    "carpet=light_blue,facing=east,spinning=true,waterlogged=true": {
+      "model": "pantz_mod:block/prismarine_pedestal_light_blue",
+      "y": 270
+    },
+    "carpet=light_blue,facing=north,spinning=false,waterlogged=false": {
       "model": "pantz_mod:block/prismarine_pedestal_light_blue",
       "y": 180
     },
-    "carpet=light_blue,facing=north,waterlogged=true": {
+    "carpet=light_blue,facing=north,spinning=false,waterlogged=true": {
       "model": "pantz_mod:block/prismarine_pedestal_light_blue",
       "y": 180
     },
-    "carpet=light_blue,facing=south,waterlogged=false": {
+    "carpet=light_blue,facing=north,spinning=true,waterlogged=false": {
+      "model": "pantz_mod:block/prismarine_pedestal_light_blue",
+      "y": 180
+    },
+    "carpet=light_blue,facing=north,spinning=true,waterlogged=true": {
+      "model": "pantz_mod:block/prismarine_pedestal_light_blue",
+      "y": 180
+    },
+    "carpet=light_blue,facing=south,spinning=false,waterlogged=false": {
       "model": "pantz_mod:block/prismarine_pedestal_light_blue"
     },
-    "carpet=light_blue,facing=south,waterlogged=true": {
+    "carpet=light_blue,facing=south,spinning=false,waterlogged=true": {
       "model": "pantz_mod:block/prismarine_pedestal_light_blue"
     },
-    "carpet=light_blue,facing=west,waterlogged=false": {
+    "carpet=light_blue,facing=south,spinning=true,waterlogged=false": {
+      "model": "pantz_mod:block/prismarine_pedestal_light_blue"
+    },
+    "carpet=light_blue,facing=south,spinning=true,waterlogged=true": {
+      "model": "pantz_mod:block/prismarine_pedestal_light_blue"
+    },
+    "carpet=light_blue,facing=west,spinning=false,waterlogged=false": {
       "model": "pantz_mod:block/prismarine_pedestal_light_blue",
       "y": 90
     },
-    "carpet=light_blue,facing=west,waterlogged=true": {
+    "carpet=light_blue,facing=west,spinning=false,waterlogged=true": {
       "model": "pantz_mod:block/prismarine_pedestal_light_blue",
       "y": 90
     },
-    "carpet=light_gray,facing=east,waterlogged=false": {
+    "carpet=light_blue,facing=west,spinning=true,waterlogged=false": {
+      "model": "pantz_mod:block/prismarine_pedestal_light_blue",
+      "y": 90
+    },
+    "carpet=light_blue,facing=west,spinning=true,waterlogged=true": {
+      "model": "pantz_mod:block/prismarine_pedestal_light_blue",
+      "y": 90
+    },
+    "carpet=light_gray,facing=east,spinning=false,waterlogged=false": {
       "model": "pantz_mod:block/prismarine_pedestal_light_gray",
       "y": 270
     },
-    "carpet=light_gray,facing=east,waterlogged=true": {
+    "carpet=light_gray,facing=east,spinning=false,waterlogged=true": {
       "model": "pantz_mod:block/prismarine_pedestal_light_gray",
       "y": 270
     },
-    "carpet=light_gray,facing=north,waterlogged=false": {
+    "carpet=light_gray,facing=east,spinning=true,waterlogged=false": {
+      "model": "pantz_mod:block/prismarine_pedestal_light_gray",
+      "y": 270
+    },
+    "carpet=light_gray,facing=east,spinning=true,waterlogged=true": {
+      "model": "pantz_mod:block/prismarine_pedestal_light_gray",
+      "y": 270
+    },
+    "carpet=light_gray,facing=north,spinning=false,waterlogged=false": {
       "model": "pantz_mod:block/prismarine_pedestal_light_gray",
       "y": 180
     },
-    "carpet=light_gray,facing=north,waterlogged=true": {
+    "carpet=light_gray,facing=north,spinning=false,waterlogged=true": {
       "model": "pantz_mod:block/prismarine_pedestal_light_gray",
       "y": 180
     },
-    "carpet=light_gray,facing=south,waterlogged=false": {
+    "carpet=light_gray,facing=north,spinning=true,waterlogged=false": {
+      "model": "pantz_mod:block/prismarine_pedestal_light_gray",
+      "y": 180
+    },
+    "carpet=light_gray,facing=north,spinning=true,waterlogged=true": {
+      "model": "pantz_mod:block/prismarine_pedestal_light_gray",
+      "y": 180
+    },
+    "carpet=light_gray,facing=south,spinning=false,waterlogged=false": {
       "model": "pantz_mod:block/prismarine_pedestal_light_gray"
     },
-    "carpet=light_gray,facing=south,waterlogged=true": {
+    "carpet=light_gray,facing=south,spinning=false,waterlogged=true": {
       "model": "pantz_mod:block/prismarine_pedestal_light_gray"
     },
-    "carpet=light_gray,facing=west,waterlogged=false": {
+    "carpet=light_gray,facing=south,spinning=true,waterlogged=false": {
+      "model": "pantz_mod:block/prismarine_pedestal_light_gray"
+    },
+    "carpet=light_gray,facing=south,spinning=true,waterlogged=true": {
+      "model": "pantz_mod:block/prismarine_pedestal_light_gray"
+    },
+    "carpet=light_gray,facing=west,spinning=false,waterlogged=false": {
       "model": "pantz_mod:block/prismarine_pedestal_light_gray",
       "y": 90
     },
-    "carpet=light_gray,facing=west,waterlogged=true": {
+    "carpet=light_gray,facing=west,spinning=false,waterlogged=true": {
       "model": "pantz_mod:block/prismarine_pedestal_light_gray",
       "y": 90
     },
-    "carpet=lime,facing=east,waterlogged=false": {
+    "carpet=light_gray,facing=west,spinning=true,waterlogged=false": {
+      "model": "pantz_mod:block/prismarine_pedestal_light_gray",
+      "y": 90
+    },
+    "carpet=light_gray,facing=west,spinning=true,waterlogged=true": {
+      "model": "pantz_mod:block/prismarine_pedestal_light_gray",
+      "y": 90
+    },
+    "carpet=lime,facing=east,spinning=false,waterlogged=false": {
       "model": "pantz_mod:block/prismarine_pedestal_lime",
       "y": 270
     },
-    "carpet=lime,facing=east,waterlogged=true": {
+    "carpet=lime,facing=east,spinning=false,waterlogged=true": {
       "model": "pantz_mod:block/prismarine_pedestal_lime",
       "y": 270
     },
-    "carpet=lime,facing=north,waterlogged=false": {
+    "carpet=lime,facing=east,spinning=true,waterlogged=false": {
+      "model": "pantz_mod:block/prismarine_pedestal_lime",
+      "y": 270
+    },
+    "carpet=lime,facing=east,spinning=true,waterlogged=true": {
+      "model": "pantz_mod:block/prismarine_pedestal_lime",
+      "y": 270
+    },
+    "carpet=lime,facing=north,spinning=false,waterlogged=false": {
       "model": "pantz_mod:block/prismarine_pedestal_lime",
       "y": 180
     },
-    "carpet=lime,facing=north,waterlogged=true": {
+    "carpet=lime,facing=north,spinning=false,waterlogged=true": {
       "model": "pantz_mod:block/prismarine_pedestal_lime",
       "y": 180
     },
-    "carpet=lime,facing=south,waterlogged=false": {
+    "carpet=lime,facing=north,spinning=true,waterlogged=false": {
+      "model": "pantz_mod:block/prismarine_pedestal_lime",
+      "y": 180
+    },
+    "carpet=lime,facing=north,spinning=true,waterlogged=true": {
+      "model": "pantz_mod:block/prismarine_pedestal_lime",
+      "y": 180
+    },
+    "carpet=lime,facing=south,spinning=false,waterlogged=false": {
       "model": "pantz_mod:block/prismarine_pedestal_lime"
     },
-    "carpet=lime,facing=south,waterlogged=true": {
+    "carpet=lime,facing=south,spinning=false,waterlogged=true": {
       "model": "pantz_mod:block/prismarine_pedestal_lime"
     },
-    "carpet=lime,facing=west,waterlogged=false": {
+    "carpet=lime,facing=south,spinning=true,waterlogged=false": {
+      "model": "pantz_mod:block/prismarine_pedestal_lime"
+    },
+    "carpet=lime,facing=south,spinning=true,waterlogged=true": {
+      "model": "pantz_mod:block/prismarine_pedestal_lime"
+    },
+    "carpet=lime,facing=west,spinning=false,waterlogged=false": {
       "model": "pantz_mod:block/prismarine_pedestal_lime",
       "y": 90
     },
-    "carpet=lime,facing=west,waterlogged=true": {
+    "carpet=lime,facing=west,spinning=false,waterlogged=true": {
       "model": "pantz_mod:block/prismarine_pedestal_lime",
       "y": 90
     },
-    "carpet=magenta,facing=east,waterlogged=false": {
+    "carpet=lime,facing=west,spinning=true,waterlogged=false": {
+      "model": "pantz_mod:block/prismarine_pedestal_lime",
+      "y": 90
+    },
+    "carpet=lime,facing=west,spinning=true,waterlogged=true": {
+      "model": "pantz_mod:block/prismarine_pedestal_lime",
+      "y": 90
+    },
+    "carpet=magenta,facing=east,spinning=false,waterlogged=false": {
       "model": "pantz_mod:block/prismarine_pedestal_magenta",
       "y": 270
     },
-    "carpet=magenta,facing=east,waterlogged=true": {
+    "carpet=magenta,facing=east,spinning=false,waterlogged=true": {
       "model": "pantz_mod:block/prismarine_pedestal_magenta",
       "y": 270
     },
-    "carpet=magenta,facing=north,waterlogged=false": {
+    "carpet=magenta,facing=east,spinning=true,waterlogged=false": {
+      "model": "pantz_mod:block/prismarine_pedestal_magenta",
+      "y": 270
+    },
+    "carpet=magenta,facing=east,spinning=true,waterlogged=true": {
+      "model": "pantz_mod:block/prismarine_pedestal_magenta",
+      "y": 270
+    },
+    "carpet=magenta,facing=north,spinning=false,waterlogged=false": {
       "model": "pantz_mod:block/prismarine_pedestal_magenta",
       "y": 180
     },
-    "carpet=magenta,facing=north,waterlogged=true": {
+    "carpet=magenta,facing=north,spinning=false,waterlogged=true": {
       "model": "pantz_mod:block/prismarine_pedestal_magenta",
       "y": 180
     },
-    "carpet=magenta,facing=south,waterlogged=false": {
+    "carpet=magenta,facing=north,spinning=true,waterlogged=false": {
+      "model": "pantz_mod:block/prismarine_pedestal_magenta",
+      "y": 180
+    },
+    "carpet=magenta,facing=north,spinning=true,waterlogged=true": {
+      "model": "pantz_mod:block/prismarine_pedestal_magenta",
+      "y": 180
+    },
+    "carpet=magenta,facing=south,spinning=false,waterlogged=false": {
       "model": "pantz_mod:block/prismarine_pedestal_magenta"
     },
-    "carpet=magenta,facing=south,waterlogged=true": {
+    "carpet=magenta,facing=south,spinning=false,waterlogged=true": {
       "model": "pantz_mod:block/prismarine_pedestal_magenta"
     },
-    "carpet=magenta,facing=west,waterlogged=false": {
+    "carpet=magenta,facing=south,spinning=true,waterlogged=false": {
+      "model": "pantz_mod:block/prismarine_pedestal_magenta"
+    },
+    "carpet=magenta,facing=south,spinning=true,waterlogged=true": {
+      "model": "pantz_mod:block/prismarine_pedestal_magenta"
+    },
+    "carpet=magenta,facing=west,spinning=false,waterlogged=false": {
       "model": "pantz_mod:block/prismarine_pedestal_magenta",
       "y": 90
     },
-    "carpet=magenta,facing=west,waterlogged=true": {
+    "carpet=magenta,facing=west,spinning=false,waterlogged=true": {
       "model": "pantz_mod:block/prismarine_pedestal_magenta",
       "y": 90
     },
-    "carpet=none,facing=east,waterlogged=false": {
+    "carpet=magenta,facing=west,spinning=true,waterlogged=false": {
+      "model": "pantz_mod:block/prismarine_pedestal_magenta",
+      "y": 90
+    },
+    "carpet=magenta,facing=west,spinning=true,waterlogged=true": {
+      "model": "pantz_mod:block/prismarine_pedestal_magenta",
+      "y": 90
+    },
+    "carpet=none,facing=east,spinning=false,waterlogged=false": {
       "model": "pantz_mod:block/prismarine_pedestal",
       "y": 270
     },
-    "carpet=none,facing=east,waterlogged=true": {
+    "carpet=none,facing=east,spinning=false,waterlogged=true": {
       "model": "pantz_mod:block/prismarine_pedestal",
       "y": 270
     },
-    "carpet=none,facing=north,waterlogged=false": {
+    "carpet=none,facing=east,spinning=true,waterlogged=false": {
+      "model": "pantz_mod:block/prismarine_pedestal",
+      "y": 270
+    },
+    "carpet=none,facing=east,spinning=true,waterlogged=true": {
+      "model": "pantz_mod:block/prismarine_pedestal",
+      "y": 270
+    },
+    "carpet=none,facing=north,spinning=false,waterlogged=false": {
       "model": "pantz_mod:block/prismarine_pedestal",
       "y": 180
     },
-    "carpet=none,facing=north,waterlogged=true": {
+    "carpet=none,facing=north,spinning=false,waterlogged=true": {
       "model": "pantz_mod:block/prismarine_pedestal",
       "y": 180
     },
-    "carpet=none,facing=south,waterlogged=false": {
+    "carpet=none,facing=north,spinning=true,waterlogged=false": {
+      "model": "pantz_mod:block/prismarine_pedestal",
+      "y": 180
+    },
+    "carpet=none,facing=north,spinning=true,waterlogged=true": {
+      "model": "pantz_mod:block/prismarine_pedestal",
+      "y": 180
+    },
+    "carpet=none,facing=south,spinning=false,waterlogged=false": {
       "model": "pantz_mod:block/prismarine_pedestal"
     },
-    "carpet=none,facing=south,waterlogged=true": {
+    "carpet=none,facing=south,spinning=false,waterlogged=true": {
       "model": "pantz_mod:block/prismarine_pedestal"
     },
-    "carpet=none,facing=west,waterlogged=false": {
+    "carpet=none,facing=south,spinning=true,waterlogged=false": {
+      "model": "pantz_mod:block/prismarine_pedestal"
+    },
+    "carpet=none,facing=south,spinning=true,waterlogged=true": {
+      "model": "pantz_mod:block/prismarine_pedestal"
+    },
+    "carpet=none,facing=west,spinning=false,waterlogged=false": {
       "model": "pantz_mod:block/prismarine_pedestal",
       "y": 90
     },
-    "carpet=none,facing=west,waterlogged=true": {
+    "carpet=none,facing=west,spinning=false,waterlogged=true": {
       "model": "pantz_mod:block/prismarine_pedestal",
       "y": 90
     },
-    "carpet=orange,facing=east,waterlogged=false": {
+    "carpet=none,facing=west,spinning=true,waterlogged=false": {
+      "model": "pantz_mod:block/prismarine_pedestal",
+      "y": 90
+    },
+    "carpet=none,facing=west,spinning=true,waterlogged=true": {
+      "model": "pantz_mod:block/prismarine_pedestal",
+      "y": 90
+    },
+    "carpet=orange,facing=east,spinning=false,waterlogged=false": {
       "model": "pantz_mod:block/prismarine_pedestal_orange",
       "y": 270
     },
-    "carpet=orange,facing=east,waterlogged=true": {
+    "carpet=orange,facing=east,spinning=false,waterlogged=true": {
       "model": "pantz_mod:block/prismarine_pedestal_orange",
       "y": 270
     },
-    "carpet=orange,facing=north,waterlogged=false": {
+    "carpet=orange,facing=east,spinning=true,waterlogged=false": {
+      "model": "pantz_mod:block/prismarine_pedestal_orange",
+      "y": 270
+    },
+    "carpet=orange,facing=east,spinning=true,waterlogged=true": {
+      "model": "pantz_mod:block/prismarine_pedestal_orange",
+      "y": 270
+    },
+    "carpet=orange,facing=north,spinning=false,waterlogged=false": {
       "model": "pantz_mod:block/prismarine_pedestal_orange",
       "y": 180
     },
-    "carpet=orange,facing=north,waterlogged=true": {
+    "carpet=orange,facing=north,spinning=false,waterlogged=true": {
       "model": "pantz_mod:block/prismarine_pedestal_orange",
       "y": 180
     },
-    "carpet=orange,facing=south,waterlogged=false": {
+    "carpet=orange,facing=north,spinning=true,waterlogged=false": {
+      "model": "pantz_mod:block/prismarine_pedestal_orange",
+      "y": 180
+    },
+    "carpet=orange,facing=north,spinning=true,waterlogged=true": {
+      "model": "pantz_mod:block/prismarine_pedestal_orange",
+      "y": 180
+    },
+    "carpet=orange,facing=south,spinning=false,waterlogged=false": {
       "model": "pantz_mod:block/prismarine_pedestal_orange"
     },
-    "carpet=orange,facing=south,waterlogged=true": {
+    "carpet=orange,facing=south,spinning=false,waterlogged=true": {
       "model": "pantz_mod:block/prismarine_pedestal_orange"
     },
-    "carpet=orange,facing=west,waterlogged=false": {
+    "carpet=orange,facing=south,spinning=true,waterlogged=false": {
+      "model": "pantz_mod:block/prismarine_pedestal_orange"
+    },
+    "carpet=orange,facing=south,spinning=true,waterlogged=true": {
+      "model": "pantz_mod:block/prismarine_pedestal_orange"
+    },
+    "carpet=orange,facing=west,spinning=false,waterlogged=false": {
       "model": "pantz_mod:block/prismarine_pedestal_orange",
       "y": 90
     },
-    "carpet=orange,facing=west,waterlogged=true": {
+    "carpet=orange,facing=west,spinning=false,waterlogged=true": {
       "model": "pantz_mod:block/prismarine_pedestal_orange",
       "y": 90
     },
-    "carpet=pink,facing=east,waterlogged=false": {
+    "carpet=orange,facing=west,spinning=true,waterlogged=false": {
+      "model": "pantz_mod:block/prismarine_pedestal_orange",
+      "y": 90
+    },
+    "carpet=orange,facing=west,spinning=true,waterlogged=true": {
+      "model": "pantz_mod:block/prismarine_pedestal_orange",
+      "y": 90
+    },
+    "carpet=pink,facing=east,spinning=false,waterlogged=false": {
       "model": "pantz_mod:block/prismarine_pedestal_pink",
       "y": 270
     },
-    "carpet=pink,facing=east,waterlogged=true": {
+    "carpet=pink,facing=east,spinning=false,waterlogged=true": {
       "model": "pantz_mod:block/prismarine_pedestal_pink",
       "y": 270
     },
-    "carpet=pink,facing=north,waterlogged=false": {
+    "carpet=pink,facing=east,spinning=true,waterlogged=false": {
+      "model": "pantz_mod:block/prismarine_pedestal_pink",
+      "y": 270
+    },
+    "carpet=pink,facing=east,spinning=true,waterlogged=true": {
+      "model": "pantz_mod:block/prismarine_pedestal_pink",
+      "y": 270
+    },
+    "carpet=pink,facing=north,spinning=false,waterlogged=false": {
       "model": "pantz_mod:block/prismarine_pedestal_pink",
       "y": 180
     },
-    "carpet=pink,facing=north,waterlogged=true": {
+    "carpet=pink,facing=north,spinning=false,waterlogged=true": {
       "model": "pantz_mod:block/prismarine_pedestal_pink",
       "y": 180
     },
-    "carpet=pink,facing=south,waterlogged=false": {
+    "carpet=pink,facing=north,spinning=true,waterlogged=false": {
+      "model": "pantz_mod:block/prismarine_pedestal_pink",
+      "y": 180
+    },
+    "carpet=pink,facing=north,spinning=true,waterlogged=true": {
+      "model": "pantz_mod:block/prismarine_pedestal_pink",
+      "y": 180
+    },
+    "carpet=pink,facing=south,spinning=false,waterlogged=false": {
       "model": "pantz_mod:block/prismarine_pedestal_pink"
     },
-    "carpet=pink,facing=south,waterlogged=true": {
+    "carpet=pink,facing=south,spinning=false,waterlogged=true": {
       "model": "pantz_mod:block/prismarine_pedestal_pink"
     },
-    "carpet=pink,facing=west,waterlogged=false": {
+    "carpet=pink,facing=south,spinning=true,waterlogged=false": {
+      "model": "pantz_mod:block/prismarine_pedestal_pink"
+    },
+    "carpet=pink,facing=south,spinning=true,waterlogged=true": {
+      "model": "pantz_mod:block/prismarine_pedestal_pink"
+    },
+    "carpet=pink,facing=west,spinning=false,waterlogged=false": {
       "model": "pantz_mod:block/prismarine_pedestal_pink",
       "y": 90
     },
-    "carpet=pink,facing=west,waterlogged=true": {
+    "carpet=pink,facing=west,spinning=false,waterlogged=true": {
       "model": "pantz_mod:block/prismarine_pedestal_pink",
       "y": 90
     },
-    "carpet=purple,facing=east,waterlogged=false": {
+    "carpet=pink,facing=west,spinning=true,waterlogged=false": {
+      "model": "pantz_mod:block/prismarine_pedestal_pink",
+      "y": 90
+    },
+    "carpet=pink,facing=west,spinning=true,waterlogged=true": {
+      "model": "pantz_mod:block/prismarine_pedestal_pink",
+      "y": 90
+    },
+    "carpet=purple,facing=east,spinning=false,waterlogged=false": {
       "model": "pantz_mod:block/prismarine_pedestal_purple",
       "y": 270
     },
-    "carpet=purple,facing=east,waterlogged=true": {
+    "carpet=purple,facing=east,spinning=false,waterlogged=true": {
       "model": "pantz_mod:block/prismarine_pedestal_purple",
       "y": 270
     },
-    "carpet=purple,facing=north,waterlogged=false": {
+    "carpet=purple,facing=east,spinning=true,waterlogged=false": {
+      "model": "pantz_mod:block/prismarine_pedestal_purple",
+      "y": 270
+    },
+    "carpet=purple,facing=east,spinning=true,waterlogged=true": {
+      "model": "pantz_mod:block/prismarine_pedestal_purple",
+      "y": 270
+    },
+    "carpet=purple,facing=north,spinning=false,waterlogged=false": {
       "model": "pantz_mod:block/prismarine_pedestal_purple",
       "y": 180
     },
-    "carpet=purple,facing=north,waterlogged=true": {
+    "carpet=purple,facing=north,spinning=false,waterlogged=true": {
       "model": "pantz_mod:block/prismarine_pedestal_purple",
       "y": 180
     },
-    "carpet=purple,facing=south,waterlogged=false": {
+    "carpet=purple,facing=north,spinning=true,waterlogged=false": {
+      "model": "pantz_mod:block/prismarine_pedestal_purple",
+      "y": 180
+    },
+    "carpet=purple,facing=north,spinning=true,waterlogged=true": {
+      "model": "pantz_mod:block/prismarine_pedestal_purple",
+      "y": 180
+    },
+    "carpet=purple,facing=south,spinning=false,waterlogged=false": {
       "model": "pantz_mod:block/prismarine_pedestal_purple"
     },
-    "carpet=purple,facing=south,waterlogged=true": {
+    "carpet=purple,facing=south,spinning=false,waterlogged=true": {
       "model": "pantz_mod:block/prismarine_pedestal_purple"
     },
-    "carpet=purple,facing=west,waterlogged=false": {
+    "carpet=purple,facing=south,spinning=true,waterlogged=false": {
+      "model": "pantz_mod:block/prismarine_pedestal_purple"
+    },
+    "carpet=purple,facing=south,spinning=true,waterlogged=true": {
+      "model": "pantz_mod:block/prismarine_pedestal_purple"
+    },
+    "carpet=purple,facing=west,spinning=false,waterlogged=false": {
       "model": "pantz_mod:block/prismarine_pedestal_purple",
       "y": 90
     },
-    "carpet=purple,facing=west,waterlogged=true": {
+    "carpet=purple,facing=west,spinning=false,waterlogged=true": {
       "model": "pantz_mod:block/prismarine_pedestal_purple",
       "y": 90
     },
-    "carpet=red,facing=east,waterlogged=false": {
+    "carpet=purple,facing=west,spinning=true,waterlogged=false": {
+      "model": "pantz_mod:block/prismarine_pedestal_purple",
+      "y": 90
+    },
+    "carpet=purple,facing=west,spinning=true,waterlogged=true": {
+      "model": "pantz_mod:block/prismarine_pedestal_purple",
+      "y": 90
+    },
+    "carpet=red,facing=east,spinning=false,waterlogged=false": {
       "model": "pantz_mod:block/prismarine_pedestal_red",
       "y": 270
     },
-    "carpet=red,facing=east,waterlogged=true": {
+    "carpet=red,facing=east,spinning=false,waterlogged=true": {
       "model": "pantz_mod:block/prismarine_pedestal_red",
       "y": 270
     },
-    "carpet=red,facing=north,waterlogged=false": {
+    "carpet=red,facing=east,spinning=true,waterlogged=false": {
+      "model": "pantz_mod:block/prismarine_pedestal_red",
+      "y": 270
+    },
+    "carpet=red,facing=east,spinning=true,waterlogged=true": {
+      "model": "pantz_mod:block/prismarine_pedestal_red",
+      "y": 270
+    },
+    "carpet=red,facing=north,spinning=false,waterlogged=false": {
       "model": "pantz_mod:block/prismarine_pedestal_red",
       "y": 180
     },
-    "carpet=red,facing=north,waterlogged=true": {
+    "carpet=red,facing=north,spinning=false,waterlogged=true": {
       "model": "pantz_mod:block/prismarine_pedestal_red",
       "y": 180
     },
-    "carpet=red,facing=south,waterlogged=false": {
+    "carpet=red,facing=north,spinning=true,waterlogged=false": {
+      "model": "pantz_mod:block/prismarine_pedestal_red",
+      "y": 180
+    },
+    "carpet=red,facing=north,spinning=true,waterlogged=true": {
+      "model": "pantz_mod:block/prismarine_pedestal_red",
+      "y": 180
+    },
+    "carpet=red,facing=south,spinning=false,waterlogged=false": {
       "model": "pantz_mod:block/prismarine_pedestal_red"
     },
-    "carpet=red,facing=south,waterlogged=true": {
+    "carpet=red,facing=south,spinning=false,waterlogged=true": {
       "model": "pantz_mod:block/prismarine_pedestal_red"
     },
-    "carpet=red,facing=west,waterlogged=false": {
+    "carpet=red,facing=south,spinning=true,waterlogged=false": {
+      "model": "pantz_mod:block/prismarine_pedestal_red"
+    },
+    "carpet=red,facing=south,spinning=true,waterlogged=true": {
+      "model": "pantz_mod:block/prismarine_pedestal_red"
+    },
+    "carpet=red,facing=west,spinning=false,waterlogged=false": {
       "model": "pantz_mod:block/prismarine_pedestal_red",
       "y": 90
     },
-    "carpet=red,facing=west,waterlogged=true": {
+    "carpet=red,facing=west,spinning=false,waterlogged=true": {
       "model": "pantz_mod:block/prismarine_pedestal_red",
       "y": 90
     },
-    "carpet=white,facing=east,waterlogged=false": {
+    "carpet=red,facing=west,spinning=true,waterlogged=false": {
+      "model": "pantz_mod:block/prismarine_pedestal_red",
+      "y": 90
+    },
+    "carpet=red,facing=west,spinning=true,waterlogged=true": {
+      "model": "pantz_mod:block/prismarine_pedestal_red",
+      "y": 90
+    },
+    "carpet=white,facing=east,spinning=false,waterlogged=false": {
       "model": "pantz_mod:block/prismarine_pedestal_white",
       "y": 270
     },
-    "carpet=white,facing=east,waterlogged=true": {
+    "carpet=white,facing=east,spinning=false,waterlogged=true": {
       "model": "pantz_mod:block/prismarine_pedestal_white",
       "y": 270
     },
-    "carpet=white,facing=north,waterlogged=false": {
+    "carpet=white,facing=east,spinning=true,waterlogged=false": {
+      "model": "pantz_mod:block/prismarine_pedestal_white",
+      "y": 270
+    },
+    "carpet=white,facing=east,spinning=true,waterlogged=true": {
+      "model": "pantz_mod:block/prismarine_pedestal_white",
+      "y": 270
+    },
+    "carpet=white,facing=north,spinning=false,waterlogged=false": {
       "model": "pantz_mod:block/prismarine_pedestal_white",
       "y": 180
     },
-    "carpet=white,facing=north,waterlogged=true": {
+    "carpet=white,facing=north,spinning=false,waterlogged=true": {
       "model": "pantz_mod:block/prismarine_pedestal_white",
       "y": 180
     },
-    "carpet=white,facing=south,waterlogged=false": {
+    "carpet=white,facing=north,spinning=true,waterlogged=false": {
+      "model": "pantz_mod:block/prismarine_pedestal_white",
+      "y": 180
+    },
+    "carpet=white,facing=north,spinning=true,waterlogged=true": {
+      "model": "pantz_mod:block/prismarine_pedestal_white",
+      "y": 180
+    },
+    "carpet=white,facing=south,spinning=false,waterlogged=false": {
       "model": "pantz_mod:block/prismarine_pedestal_white"
     },
-    "carpet=white,facing=south,waterlogged=true": {
+    "carpet=white,facing=south,spinning=false,waterlogged=true": {
       "model": "pantz_mod:block/prismarine_pedestal_white"
     },
-    "carpet=white,facing=west,waterlogged=false": {
+    "carpet=white,facing=south,spinning=true,waterlogged=false": {
+      "model": "pantz_mod:block/prismarine_pedestal_white"
+    },
+    "carpet=white,facing=south,spinning=true,waterlogged=true": {
+      "model": "pantz_mod:block/prismarine_pedestal_white"
+    },
+    "carpet=white,facing=west,spinning=false,waterlogged=false": {
       "model": "pantz_mod:block/prismarine_pedestal_white",
       "y": 90
     },
-    "carpet=white,facing=west,waterlogged=true": {
+    "carpet=white,facing=west,spinning=false,waterlogged=true": {
       "model": "pantz_mod:block/prismarine_pedestal_white",
       "y": 90
     },
-    "carpet=yellow,facing=east,waterlogged=false": {
+    "carpet=white,facing=west,spinning=true,waterlogged=false": {
+      "model": "pantz_mod:block/prismarine_pedestal_white",
+      "y": 90
+    },
+    "carpet=white,facing=west,spinning=true,waterlogged=true": {
+      "model": "pantz_mod:block/prismarine_pedestal_white",
+      "y": 90
+    },
+    "carpet=yellow,facing=east,spinning=false,waterlogged=false": {
       "model": "pantz_mod:block/prismarine_pedestal_yellow",
       "y": 270
     },
-    "carpet=yellow,facing=east,waterlogged=true": {
+    "carpet=yellow,facing=east,spinning=false,waterlogged=true": {
       "model": "pantz_mod:block/prismarine_pedestal_yellow",
       "y": 270
     },
-    "carpet=yellow,facing=north,waterlogged=false": {
+    "carpet=yellow,facing=east,spinning=true,waterlogged=false": {
+      "model": "pantz_mod:block/prismarine_pedestal_yellow",
+      "y": 270
+    },
+    "carpet=yellow,facing=east,spinning=true,waterlogged=true": {
+      "model": "pantz_mod:block/prismarine_pedestal_yellow",
+      "y": 270
+    },
+    "carpet=yellow,facing=north,spinning=false,waterlogged=false": {
       "model": "pantz_mod:block/prismarine_pedestal_yellow",
       "y": 180
     },
-    "carpet=yellow,facing=north,waterlogged=true": {
+    "carpet=yellow,facing=north,spinning=false,waterlogged=true": {
       "model": "pantz_mod:block/prismarine_pedestal_yellow",
       "y": 180
     },
-    "carpet=yellow,facing=south,waterlogged=false": {
+    "carpet=yellow,facing=north,spinning=true,waterlogged=false": {
+      "model": "pantz_mod:block/prismarine_pedestal_yellow",
+      "y": 180
+    },
+    "carpet=yellow,facing=north,spinning=true,waterlogged=true": {
+      "model": "pantz_mod:block/prismarine_pedestal_yellow",
+      "y": 180
+    },
+    "carpet=yellow,facing=south,spinning=false,waterlogged=false": {
       "model": "pantz_mod:block/prismarine_pedestal_yellow"
     },
-    "carpet=yellow,facing=south,waterlogged=true": {
+    "carpet=yellow,facing=south,spinning=false,waterlogged=true": {
       "model": "pantz_mod:block/prismarine_pedestal_yellow"
     },
-    "carpet=yellow,facing=west,waterlogged=false": {
+    "carpet=yellow,facing=south,spinning=true,waterlogged=false": {
+      "model": "pantz_mod:block/prismarine_pedestal_yellow"
+    },
+    "carpet=yellow,facing=south,spinning=true,waterlogged=true": {
+      "model": "pantz_mod:block/prismarine_pedestal_yellow"
+    },
+    "carpet=yellow,facing=west,spinning=false,waterlogged=false": {
       "model": "pantz_mod:block/prismarine_pedestal_yellow",
       "y": 90
     },
-    "carpet=yellow,facing=west,waterlogged=true": {
+    "carpet=yellow,facing=west,spinning=false,waterlogged=true": {
+      "model": "pantz_mod:block/prismarine_pedestal_yellow",
+      "y": 90
+    },
+    "carpet=yellow,facing=west,spinning=true,waterlogged=false": {
+      "model": "pantz_mod:block/prismarine_pedestal_yellow",
+      "y": 90
+    },
+    "carpet=yellow,facing=west,spinning=true,waterlogged=true": {
       "model": "pantz_mod:block/prismarine_pedestal_yellow",
       "y": 90
     }

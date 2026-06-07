@@ -2,6 +2,7 @@ package pantz.mod.common.block;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -28,6 +29,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 import pantz.mod.common.block.entity.ItemStandBlockEntity;
 import pantz.mod.common.utils.PMBlockStateProperties;
+import pantz.mod.core.registry.PMSoundEvents;
 
 public class ItemStandBlock extends HorizontalDirectionalBlock implements EntityBlock, SimpleWaterloggedBlock {
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
@@ -111,6 +113,7 @@ public class ItemStandBlock extends HorizontalDirectionalBlock implements Entity
 
         if (!level.isClientSide()) {
             stand.setItem(ItemStack.EMPTY);
+            level.playSound(null, pos, PMSoundEvents.ITEM_STAND_REMOVE_ITEM.get(), SoundSource.BLOCKS);
             ItemEntity drop = new ItemEntity(level, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, stack);
             level.addFreshEntity(drop);
             level.sendBlockUpdated(pos, state, state, 3);
@@ -123,6 +126,7 @@ public class ItemStandBlock extends HorizontalDirectionalBlock implements Entity
             ItemStack copy = stack.copy();
             copy.setCount(1);
             stand.setItem(copy);
+            level.playSound(null, pos, PMSoundEvents.ITEM_STAND_ADD_ITEM.get(), SoundSource.BLOCKS);
             if (!player.isCreative()) {
                 stack.shrink(1);
             }

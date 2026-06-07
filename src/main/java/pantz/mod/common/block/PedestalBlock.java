@@ -2,8 +2,8 @@ package pantz.mod.common.block;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -31,6 +31,7 @@ import pantz.mod.common.block.entity.PedestalBlockEntity;
 import pantz.mod.common.utils.PMBlockStateProperties;
 import pantz.mod.common.utils.PMBlockStateProperties.CarpetColor;
 import pantz.mod.common.utils.PedestalUtils;
+import pantz.mod.core.registry.PMSoundEvents;
 
 @SuppressWarnings("deprecation")
 public class PedestalBlock extends HorizontalDirectionalBlock implements EntityBlock, SimpleWaterloggedBlock {
@@ -57,11 +58,12 @@ public class PedestalBlock extends HorizontalDirectionalBlock implements EntityB
         builder.add(FACING, WATERLOGGED, CARPET, SPINNING);
     }
 
-    private InteractionResult putItemOn(Player player, InteractionHand hand, ItemStack stack, PedestalBlockEntity pedestal, Level level, BlockPos pos, BlockState state) {
+    private InteractionResult pedestalInteractions(Player player, InteractionHand hand, ItemStack stack, PedestalBlockEntity pedestal, Level level, BlockPos pos, BlockState state) {
         ItemStack onPedestal = pedestal.getItem();
+        RandomSource random = level.getRandom();
 
         if (stack.isEmpty() && !onPedestal.isEmpty()) {
-            level.playSound(null, pos, SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS);
+            level.playSound(null, pos, PMSoundEvents.PEDESTAL_INTERACT.get(), SoundSource.BLOCKS, 0.2f, (random.nextFloat() - random.nextFloat()) * 1.4F + 2.0F);
             player.setItemInHand(hand, onPedestal.copy());
             pedestal.setItem(ItemStack.EMPTY);
         }
@@ -80,7 +82,7 @@ public class PedestalBlock extends HorizontalDirectionalBlock implements EntityB
             if (!player.isCreative()) {
                 stack.shrink(1);
             }
-            level.playSound(null, pos, SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS, 0.75f, 0.75f);
+            level.playSound(null, pos, PMSoundEvents.PEDESTAL_INTERACT.get(), SoundSource.BLOCKS, 0.2f, (random.nextFloat() - random.nextFloat()) * 1.4F + 2.0F);
         } else {
             return InteractionResult.PASS;
         }
@@ -99,11 +101,12 @@ public class PedestalBlock extends HorizontalDirectionalBlock implements EntityB
 
         if (player.isShiftKeyDown()) {
             pedestal.setSpinning(!pedestal.isSpinning());
+            level.playSound(null, pos, PMSoundEvents.PEDESTAL_SPIN.get(), SoundSource.BLOCKS, 0.3f, 0.5F);
             level.sendBlockUpdated(pos, state, state, 3);
             return InteractionResult.SUCCESS;
         }
 
-        return putItemOn(player, hand, stack, pedestal, level, pos, state);
+        return pedestalInteractions(player, hand, stack, pedestal, level, pos, state);
     }
 
     @Override
