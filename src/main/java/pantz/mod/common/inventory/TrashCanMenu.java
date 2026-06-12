@@ -63,11 +63,11 @@ public class TrashCanMenu extends AbstractContainerMenu {
         if (slot.hasItem()) {
             ItemStack itemstack1 = slot.getItem();
             itemstack = itemstack1.copy();
-            if (index < 27) {
-                if (!this.moveItemStackTo(itemstack1, 27, this.slots.size(), true)) {
+            if (index < this.container.getContainerSize()) {
+                if (!this.moveItemStackTo(itemstack1, this.container.getContainerSize(), this.slots.size(), true)) {
                     return ItemStack.EMPTY;
                 }
-            } else if (!this.moveItemStackTo(itemstack1, 0, 27, false)) {
+            } else if (!this.moveItemStackTo(itemstack1, 0, this.container.getContainerSize(), false)) {
                 return ItemStack.EMPTY;
             }
 
@@ -77,6 +77,7 @@ public class TrashCanMenu extends AbstractContainerMenu {
                 slot.setChanged();
             }
         }
+
         return itemstack;
     }
 
