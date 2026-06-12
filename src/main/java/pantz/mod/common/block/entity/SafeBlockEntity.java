@@ -6,6 +6,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.Containers;
 import net.minecraft.world.LockCode;
 import net.minecraft.world.SimpleContainer;
@@ -214,6 +215,11 @@ public class SafeBlockEntity extends RandomizableContainerBlockEntity implements
         if (owner != null) {
             tag.putUUID("Owner", owner);
         }
+
+        this.items = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
+        if (!this.tryLoadLootTable(tag)) {
+            ContainerHelper.loadAllItems(tag, this.items);
+        }
     }
 
     @Override
@@ -226,6 +232,10 @@ public class SafeBlockEntity extends RandomizableContainerBlockEntity implements
 
         if (tag.contains("Owner")) {
             owner = tag.getUUID("Owner");
+        }
+
+        if (!this.trySaveLootTable(tag)) {
+            ContainerHelper.saveAllItems(tag, this.items);
         }
     }
 }
