@@ -21,6 +21,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
+import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
 import net.minecraftforge.client.event.RenderHighlightEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -32,6 +33,7 @@ import pantz.mod.client.renderer.be.GlobeRenderer;
 import pantz.mod.client.renderer.be.ItemStandRenderer;
 import pantz.mod.client.renderer.be.PedestalRenderer;
 import pantz.mod.common.item.AreaDiggerItem;
+import pantz.mod.common.network.C2SDrinkSatchelPotionPacket;
 import pantz.mod.core.PMConfig;
 import pantz.mod.core.PantzMod;
 import pantz.mod.core.other.tags.PMBlockTags;
@@ -64,12 +66,15 @@ public class PMClientEvents {
             event.registerLayerDefinition(PMModelLayers.SATURN_GLOBE, SaturnGlobeModel::createModel);
             event.registerLayerDefinition(PMModelLayers.URANUS_GLOBE, UranusGlobeModel::createModel);
         }
+
+        @SubscribeEvent
+        public static void registerKeyMappings(RegisterKeyMappingsEvent event) {
+            event.register(PMKeybinds.DRINK_SATCHEL_POTION);
+        }
     }
 
     @Mod.EventBusSubscriber(modid = PantzMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
     public static class PMForgeClientEvents {
-        private static int particleCounter = 0;
-        private static final int cooldown = 5;
         private static final String[] PRIORITIES = { "copper", "exposed", "weathered", "oxidized" };
 
         @SubscribeEvent
@@ -77,6 +82,7 @@ public class PMClientEvents {
             if (event.phase == TickEvent.Phase.END) {
                 Minecraft minecraft = Minecraft.getInstance();
                 spawnWaxParticles(minecraft);
+                drinkSatchelPotion(minecraft);
             }
         }
 
@@ -134,14 +140,12 @@ public class PMClientEvents {
         private static void spawnWaxParticles(Minecraft mc) {
             LocalPlayer player = mc.player;
             ClientLevel level = mc.level;
-            if (player == null || level == null) return;
+            if (player == null || level == null || mc.isPaused()) return;
 
-            if (mc.isPaused()) {
-                particleCounter = 0;
-                return;
-            }
+            int cooldown = 5;
+            long particleCounter = level.getGameTime();
 
-            if (particleCounter++ % cooldown != 0) return;
+            if (particleCounter % cooldown != 0) return;
             if (!isHoldingDeserializer(player)) return;
 
             BlockPos center = player.blockPosition();
@@ -232,6 +236,14 @@ public class PMClientEvents {
                 }
             }
             return false;
+        }
+
+        private static void drinkSatchelPotion(Minecraft minecraft) {
+            if (minecraft.screen == null && minecraft.player != null) {
+                while (PMKeybinds.DRINK_SATCHEL_POTION.consumeClick()) {
+                    PMNetwork.sendToServer(new C2SDrinkSatchelPotionPacket());
+                }
+            }
         }
     }
 

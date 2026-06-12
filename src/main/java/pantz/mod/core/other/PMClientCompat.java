@@ -5,6 +5,7 @@ import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.item.DyeableLeatherItem;
 import net.minecraft.world.level.GrassColor;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.api.distmarker.Dist;
@@ -14,11 +15,11 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.RegistryObject;
 import pantz.mod.common.item.EntityFilterItem;
 import pantz.mod.core.PantzMod;
-import pantz.mod.core.registry.PMItems;
 import pantz.mod.core.registry.PMMenuTypes;
 import pantz.mod.core.registry.datapack.PMTrimMaterials;
 
 import static pantz.mod.core.registry.PMBlocks.*;
+import static pantz.mod.core.registry.PMItems.*;
 
 @Mod.EventBusSubscriber(modid = PantzMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class PMClientCompat {
@@ -67,10 +68,11 @@ public class PMClientCompat {
     @SubscribeEvent
     public static void registerItemColor(RegisterColorHandlersEvent.Item event) {
         event.register((stack, index) -> GrassColor.get(0.5D, 1.0D), SUGAR_CANE_BLOCK.get());
+        event.register((stack, index) -> index > 0 ? -1 : ((DyeableLeatherItem) stack.getItem()).getColor(stack), POTION_SATCHEL.get());
     }
 
     private static void registerItemProperties() {
-        ItemProperties.register(PMItems.ENTITY_FILTER.get(), PantzMod.location("mode"),
+        ItemProperties.register(ENTITY_FILTER.get(), PantzMod.location("mode"),
                 (stack, level, entity, seed) -> {
             CompoundTag tag = stack.getOrCreateTag();
             int mode = tag.getInt(EntityFilterItem.MODE_KEY);

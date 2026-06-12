@@ -120,7 +120,6 @@
   "item.pantz_mod.trowel": "Trowel",
   "item.pantz_mod.honey_deserializer": "Honey Deserializer",
   "item.pantz_mod.entity_filter": "Entity Filter",
-  "item.pantz_mod.cactus_key": "Cactus Key",
 
   "item.pantz_mod.excavator": "Excavator",
   "item.pantz_mod.diamond_excavator": "Diamond Excavator",
@@ -138,6 +137,7 @@
   "item.pantz_mod.red_envelope": "Red Envelope",
 
   "item.pantz_mod.key": "Key",
+  "item.pantz_mod.potion_satchel": "Potion Satchel",
 
 
   "_redstone": "redstone",
@@ -294,5 +294,8 @@
   "_stat": "stats",
   "stat.pantz_mod.interact_with_trash_can": "Interactions with Trash Can",
   "stat.pantz_mod.interact_with_feeding_trough": "Interactions with Feeding Trough",
-  "stat.pantz_mod.times_trash_can_destroy_items": "Times destroyed items with Trash Can"
+  "stat.pantz_mod.times_trash_can_destroy_items": "Times destroyed items with Trash Can",
+
+  "_keybinds": "keybinds",
+  "key.pantz_mod.drinkSatchelPotion": "Drink Potion from Satchel"
 }

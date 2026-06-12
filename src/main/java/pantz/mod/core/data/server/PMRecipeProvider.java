@@ -198,6 +198,15 @@ public class PMRecipeProvider extends BlueprintRecipeProvider {
                 .pattern(" * ")
                 .unlockedBy(getHasName(Items.GOLD_INGOT), has(Tags.Items.INGOTS_GOLD))
                 .save(consumer);
+
+        ShapedRecipeBuilder.shaped(TOOLS, POTION_SATCHEL.get())
+                .define('L', Tags.Items.LEATHER).define('G', Tags.Items.INGOTS_GOLD)
+                .define('I', Tags.Items.NUGGETS_IRON)
+                .pattern("GIG")
+                .pattern("L L")
+                .pattern("LLL")
+                .unlockedBy(getHasName(Items.LEATHER), has(Tags.Items.LEATHER))
+                .save(consumer);
         // ----------------------
 
         // --- Redstone ---

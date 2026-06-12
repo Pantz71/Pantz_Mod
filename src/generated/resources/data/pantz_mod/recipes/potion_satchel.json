@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "G": {
+      "tag": "forge:ingots/gold"
+    },
+    "I": {
+      "tag": "forge:nuggets/iron"
+    },
+    "L": {
+      "tag": "forge:leather"
+    }
+  },
+  "pattern": [
+    "GIG",
+    "L L",
+    "LLL"
+  ],
+  "result": {
+    "item": "pantz_mod:potion_satchel"
+  },
+  "show_notification": true
+}

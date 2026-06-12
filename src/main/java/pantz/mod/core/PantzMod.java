@@ -39,6 +39,7 @@ import pantz.mod.core.data.server.modifiers.PMLootModifierProvider;
 import pantz.mod.core.data.server.tags.*;
 import pantz.mod.core.other.PMClientCompat;
 import pantz.mod.core.other.PMCompat;
+import pantz.mod.core.other.PMNetwork;
 import pantz.mod.core.registry.*;
 import pantz.mod.core.registry.helper.PMBlockSubRegistryHelper;
 
@@ -53,6 +54,7 @@ public class PantzMod {
     public PantzMod() {
         ModLoadingContext context = ModLoadingContext.get();
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
+        PMNetwork.register();
         PMBlocks.BLOCKS.register(bus);
         PMBlockEntityTypes.BLOCK_ENTITY_TYPES.register(bus);
         PMItems.ITEMS.register(bus);
@@ -117,7 +119,6 @@ public class PantzMod {
         gen.addProvider(server, new PMLootModifierProvider(output, provider));
 
     }
-
 
     public static ResourceLocation location(String loc) {
         return new ResourceLocation(MOD_ID, loc);

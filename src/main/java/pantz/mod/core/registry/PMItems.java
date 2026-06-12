@@ -60,6 +60,7 @@ public class PMItems {
     public static final RegistryObject<Item> RED_ENVELOPE = ITEMS.createItem("red_envelope", () -> new RedEnvelopeItem(new Item.Properties().stacksTo(16)));
 
     public static final RegistryObject<Item> KEY = ITEMS.createItem("key", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> POTION_SATCHEL = ITEMS.createItem("potion_satchel", () -> new PotionSatchelItem(new Item.Properties().stacksTo(1)));
 
     private static Supplier<Item> basicItem() {
         return () -> new Item(new Item.Properties());
@@ -89,6 +90,8 @@ public class PMItems {
 
                 .addItemsAfter(of(Items.WRITABLE_BOOK), RED_ENVELOPE)
                 .addItemsAfter(of(Items.BRUSH), KEY)
+
+                .addItemsAfter(of(Items.LEAD), POTION_SATCHEL)
 
         ;
 
