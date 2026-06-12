@@ -7,17 +7,16 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import pantz.mod.core.registry.PMMenuTypes;
 
 public class FeedingTroughMenu extends AbstractContainerMenu {
     private final Container container;
 
     public FeedingTroughMenu(int id, Inventory inv) {
-        this(id, inv, new SimpleContainer(24), null);
+        this(id, inv, new SimpleContainer(24));
     }
 
-    public FeedingTroughMenu(int pContainerId, Inventory inv, Container container, BlockEntity be) {
+    public FeedingTroughMenu(int pContainerId, Inventory inv, Container container) {
         super(PMMenuTypes.FEEDING_TROUGH.get(), pContainerId);
         this.container = container;
         checkContainerSize(container, 24);

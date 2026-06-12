@@ -127,7 +127,7 @@ public class FeedingTroughBlockEntity extends RandomizableContainerBlockEntity {
 
     @Override
     protected AbstractContainerMenu createMenu(int pContainerId, Inventory pInventory) {
-        return new FeedingTroughMenu(pContainerId, pInventory, this, this);
+        return new FeedingTroughMenu(pContainerId, pInventory, this);
     }
 
     @Override
