@@ -6,9 +6,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.Slot;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.PotionItem;
-import net.minecraft.world.item.UseAnim;
+import net.minecraft.world.item.*;
 import pantz.mod.core.registry.PMMenuTypes;
 
 public class PotionSatchelMenu extends AbstractContainerMenu {
@@ -112,7 +110,7 @@ public class PotionSatchelMenu extends AbstractContainerMenu {
 
         @Override
         public boolean mayPlace(ItemStack stack) {
-            return stack.getItem() instanceof PotionItem && stack.getUseAnimation() == UseAnim.DRINK;
+            return stack.is(Items.POTION);
         }
     }
 }

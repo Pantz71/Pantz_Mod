@@ -13,15 +13,14 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
-import net.minecraft.world.level.storage.loot.functions.EnchantRandomlyFunction;
-import net.minecraft.world.level.storage.loot.functions.EnchantWithLevelsFunction;
-import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
-import net.minecraft.world.level.storage.loot.functions.SetItemDamageFunction;
+import net.minecraft.world.level.storage.loot.functions.*;
 import net.minecraft.world.level.storage.loot.predicates.LocationCheck;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
+import pantz.mod.common.loot.SetItemLootTableFunction;
 import pantz.mod.common.loot.WardenDefeatedCondition;
 import pantz.mod.core.PantzMod;
+import pantz.mod.core.data.server.PMLootTableProvider;
 import pantz.mod.core.registry.PMItems;
 
 import java.util.List;
@@ -55,7 +54,8 @@ public class PMLootModifierProvider extends LootModifierProvider {
                         List.of(
                                 lootPool(EARTH_GLOBE.get(), 2),
                                 lootPool(CALLISTO_GLOBE.get(), 1),
-                                lootPool(SUN_GLOBE.get(), 1)
+                                lootPool(SUN_GLOBE.get(), 1),
+                                LootItem.lootTableItem(POTION_SATCHEL.get()).setWeight(1).apply(SetItemLootTableFunction.setLootTable(PMLootTableProvider.POTION_SATCHEL)).build()
                         )));
         this.entry("stronghold_corridor").selects(BuiltInLootTables.STRONGHOLD_CORRIDOR)
                 .addModifier(new LootPoolEntriesModifier(false, 0,
@@ -63,20 +63,23 @@ public class PMLootModifierProvider extends LootModifierProvider {
                                 lootPool(PMItems.STEEL_INGOT.get(), 5, 2, 6),
                                 lootPool(DYNAMITE.get(), 2, 1, 3),
                                 lootPool(COMBAT_DYNAMITE.get(), 2, 1, 3),
-                                lootPool(STEEL_HORSE_ARMOR.get(), 10)
+                                lootPool(STEEL_HORSE_ARMOR.get(), 10),
+                                LootItem.lootTableItem(POTION_SATCHEL.get()).setWeight(1).apply(SetItemLootTableFunction.setLootTable(PMLootTableProvider.POTION_SATCHEL)).build()
                         )));
         this.entry("stronghold_crossing").selects(BuiltInLootTables.STRONGHOLD_CROSSING)
                 .addModifier(new LootPoolEntriesModifier(false, 0,
                         List.of(
                                 lootPool(PMItems.STEEL_INGOT.get(), 5, 2, 4),
-                                lootPool(DYNAMITE.get(), 1)
+                                lootPool(DYNAMITE.get(), 1),
+                                LootItem.lootTableItem(POTION_SATCHEL.get()).setWeight(1).apply(SetItemLootTableFunction.setLootTable(PMLootTableProvider.POTION_SATCHEL)).build()
                         )));
 
         this.entry("abandoned_mineshaft").selects(BuiltInLootTables.ABANDONED_MINESHAFT)
                 .addModifier(new LootPoolEntriesModifier(false, 0,
                         List.of(
                                 lootPool(GANYMEDE_GLOBE.get(), 10),
-                                lootPool(CERES_GLOBE.get(), 10)
+                                lootPool(CERES_GLOBE.get(), 10),
+                                LootItem.lootTableItem(POTION_SATCHEL.get()).setWeight(1).apply(SetItemLootTableFunction.setLootTable(PMLootTableProvider.POTION_SATCHEL)).build()
                         )))
                 .addModifier(new LootPoolEntriesModifier(false, 1,
                         List.of(
@@ -107,6 +110,10 @@ public class PMLootModifierProvider extends LootModifierProvider {
                         )));
 
         this.entry("woodland_mansion").selects(BuiltInLootTables.WOODLAND_MANSION)
+                .addModifier(new LootPoolEntriesModifier(false, 0,
+                        List.of(
+                                LootItem.lootTableItem(POTION_SATCHEL.get()).setWeight(1).apply(SetItemLootTableFunction.setLootTable(PMLootTableProvider.POTION_SATCHEL)).build()
+                        )))
                 .addModifier(new LootPoolEntriesModifier(false, 1,
                         List.of(
                                 lootPool(PMItems.STEEL_INGOT.get(), 3, 1, 5)
@@ -184,7 +191,8 @@ public class PMLootModifierProvider extends LootModifierProvider {
                 .addModifier(new LootPoolEntriesModifier(false, 1,
                         List.of(
                                 lootPool(JUPITER_GLOBE.get(), 8),
-                                lootPool(SATURN_GLOBE.get(), 8)
+                                lootPool(SATURN_GLOBE.get(), 8),
+                                LootItem.lootTableItem(POTION_SATCHEL.get()).setWeight(1).apply(SetItemLootTableFunction.setLootTable(PMLootTableProvider.POTION_SATCHEL)).build()
                         )))
                 .addModifier(new LootPoolEntriesModifier(false, 0,
                         List.of(
@@ -199,7 +207,8 @@ public class PMLootModifierProvider extends LootModifierProvider {
                         List.of(
                                 lootPool(PLUTO_GLOBE.get(), 1),
                                 lootPool(BLUE_SUN_GLOBE.get(), 1),
-                                lootPool(IRIS_GLOBE.get(), 1)
+                                lootPool(IRIS_GLOBE.get(), 1),
+                                LootItem.lootTableItem(POTION_SATCHEL.get()).setWeight(1).apply(SetItemLootTableFunction.setLootTable(PMLootTableProvider.POTION_SATCHEL)).build()
                         )))
                 .addModifier(new LootPoolEntriesModifier(false, 0,
                         List.of(

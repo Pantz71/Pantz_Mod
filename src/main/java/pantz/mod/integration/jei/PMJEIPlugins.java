@@ -7,6 +7,7 @@ import mezz.jei.api.gui.handlers.IGuiContainerHandler;
 import mezz.jei.api.registration.IGuiHandlerRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.Rect2i;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
@@ -17,6 +18,7 @@ import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.item.crafting.RecipeType;
 import pantz.mod.common.crafting.PotterySherdDisplayRecipe;
 import pantz.mod.common.crafting.RenewablePotterySherdRecipe;
+import pantz.mod.common.inventory.PotionSatchelScreen;
 import pantz.mod.common.inventory.TrashCanScreen;
 import pantz.mod.core.PantzMod;
 
@@ -58,6 +60,13 @@ public class PMJEIPlugins implements IModPlugin {
             @Override
             public java.util.List<Rect2i> getGuiExtraAreas(TrashCanScreen containerScreen) {
                 return Collections.singletonList(new Rect2i(containerScreen.getGuiLeft() + 176, containerScreen.getGuiTop(), 20, 20));
+            }
+        });
+        
+        registration.addGenericGuiContainerHandler(PotionSatchelScreen.class, new IGuiContainerHandler<>() {
+            @Override
+            public List<Rect2i> getGuiExtraAreas(AbstractContainerScreen containerScreen) {
+                return Collections.singletonList(new Rect2i(containerScreen.getGuiLeft() - 32, containerScreen.getGuiTop(), 32, containerScreen.getXSize()));
             }
         });
     }

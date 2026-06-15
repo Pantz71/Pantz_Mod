@@ -1,0 +1,39 @@
+{
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:loot_table",
+          "name": "pantz_mod:container_item/potion_satchel_beneficial_potions"
+        },
+        {
+          "type": "minecraft:loot_table",
+          "conditions": [
+            {
+              "chance": 0.5,
+              "condition": "minecraft:random_chance"
+            }
+          ],
+          "name": "pantz_mod:container_item/potion_satchel_stronger_beneficial_potions"
+        },
+        {
+          "type": "minecraft:loot_table",
+          "name": "pantz_mod:container_item/potion_satchel_harmful_potions"
+        },
+        {
+          "type": "minecraft:loot_table",
+          "conditions": [
+            {
+              "chance": 0.5,
+              "condition": "minecraft:random_chance"
+            }
+          ],
+          "name": "pantz_mod:container_item/potion_satchel_stronger_harmful_potions"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "pantz_mod:container_item/potion_satchel"
+}

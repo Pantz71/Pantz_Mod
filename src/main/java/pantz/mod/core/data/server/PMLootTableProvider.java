@@ -3,17 +3,24 @@ package pantz.mod.core.data.server;
 import com.google.common.collect.ImmutableList;
 import com.teamabnormals.caverns_and_chasms.common.block.IngotBlock;
 import com.teamabnormals.caverns_and_chasms.common.block.IngotLayer;
+import com.teamabnormals.caverns_and_chasms.core.registry.CCItems;
 import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.data.loot.LootTableProvider;
 import net.minecraft.data.loot.LootTableSubProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.effect.MobEffectCategory;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.alchemy.Potion;
+import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
@@ -27,6 +34,7 @@ import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.entries.LootTableReference;
 import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
+import net.minecraft.world.level.storage.loot.functions.SetPotionFunction;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition;
@@ -39,6 +47,7 @@ import pantz.mod.common.block.DoubleOrnamentBlock;
 import pantz.mod.core.PantzMod;
 import pantz.mod.core.other.PMLootContextParamSets;
 import pantz.mod.core.registry.PMItems;
+import pantz.mod.core.registry.PMMobEffects;
 
 import java.util.List;
 import java.util.Map;
@@ -54,10 +63,17 @@ public class PMLootTableProvider extends LootTableProvider {
     public static final ResourceLocation COMMON = PantzMod.location("red_envelope/common");
     public static final ResourceLocation RARE = PantzMod.location("red_envelope/rare");
 
+    public static final ResourceLocation POTION_SATCHEL = PantzMod.location("container_item/potion_satchel");
+    public static final ResourceLocation POTION_SATCHEL_BENEFICIAL_POTIONS = PantzMod.location("container_item/potion_satchel_beneficial_potions");
+    public static final ResourceLocation POTION_SATCHEL_HARMFUL_POTIONS = PantzMod.location("container_item/potion_satchel_harmful_potions");
+    public static final ResourceLocation POTION_SATCHEL_STRONGER_BENEFICIAL_POTIONS = PantzMod.location("container_item/potion_satchel_stronger_beneficial_potions");
+    public static final ResourceLocation POTION_SATCHEL_STRONGER_HARMFUL_POTIONS = PantzMod.location("container_item/potion_satchel_stronger_harmful_potions");
+
     public PMLootTableProvider(PackOutput pOutput) {
         super(pOutput, BuiltInLootTables.all(), ImmutableList.of(
                 new SubProviderEntry(PMBlockLoot::new, LootContextParamSets.BLOCK),
-                new SubProviderEntry(PMRedEnvelopeLoot::new, PMLootContextParamSets.RED_ENVELOPE)
+                new SubProviderEntry(PMRedEnvelopeLoot::new, PMLootContextParamSets.RED_ENVELOPE),
+                new SubProviderEntry(PMContainerItemLoot::new, PMLootContextParamSets.CONTAINER_ITEM)
         ));
     }
 
@@ -101,7 +117,8 @@ public class PMLootTableProvider extends LootTableProvider {
 
             // door
             for (RegistryObject<?> block : new RegistryObject[]{
-                    STEEL_DOOR,             }) {
+                    STEEL_DOOR,
+            }) {
                 this.add((Block) block.get(), this::createDoorTable);
             }
 
@@ -178,6 +195,79 @@ public class PMLootTableProvider extends LootTableProvider {
         @Override
         public Iterable<Block> getKnownBlocks() {
             return ForgeRegistries.BLOCKS.getValues().stream().filter(block -> ForgeRegistries.BLOCKS.getKey(block).getNamespace().equals(PantzMod.MOD_ID)).collect(Collectors.toSet());
+        }
+    }
+
+    private static class PMContainerItemLoot implements LootTableSubProvider {
+
+        @Override
+        public void generate(BiConsumer<ResourceLocation, LootTable.Builder> consumer) {
+            consumer.accept(POTION_SATCHEL_BENEFICIAL_POTIONS,
+                    LootTable.lootTable()
+                            .withPool(
+                                    LootPool.lootPool()
+                                            .setRolls(UniformGenerator.between(3.0f, 7.0f))
+                                            .add(LootItem.lootTableItem(Items.POTION).setWeight(10).apply(SetPotionFunction.setPotion(getRandomPotion(List.of(Potions.REGENERATION, Potions.STRENGTH, Potions.SWIFTNESS, Potions.LEAPING, PMMobEffects.NORMAL_PRECISION.get())))))
+                                            .add(LootItem.lootTableItem(Items.SPLASH_POTION).setWeight(10).apply(SetPotionFunction.setPotion(getRandomPotion(List.of(Potions.REGENERATION, Potions.STRENGTH, Potions.SWIFTNESS, Potions.LEAPING, PMMobEffects.NORMAL_PRECISION.get())))))
+                                            .add(LootItem.lootTableItem(CCItems.TETHER_POTION.get()).setWeight(4).apply(SetPotionFunction.setPotion(getRandomPotion(List.of(Potions.REGENERATION, Potions.STRENGTH, Potions.SWIFTNESS, Potions.LEAPING, PMMobEffects.NORMAL_PRECISION.get())))))
+                                            .add(LootItem.lootTableItem(CCItems.IMPACT_POTION.get()).setWeight(4).apply(SetPotionFunction.setPotion(getRandomPotion(List.of(Potions.REGENERATION, Potions.STRENGTH, Potions.SWIFTNESS, Potions.LEAPING, PMMobEffects.NORMAL_PRECISION.get())))))
+
+                            )
+            );
+
+            consumer.accept(POTION_SATCHEL_HARMFUL_POTIONS,
+                    LootTable.lootTable()
+                            .withPool(
+                                    LootPool.lootPool()
+                                            .setRolls(UniformGenerator.between(3.0f, 7.0f))
+                                            .add(LootItem.lootTableItem(Items.SPLASH_POTION).setWeight(2).apply(SetPotionFunction.setPotion(getRandomPotion(List.of(Potions.SLOWNESS, Potions.WEAKNESS, Potions.POISON, PMMobEffects.NORMAL_CLUMSINESS.get())))))
+
+                            )
+            );
+
+            consumer.accept(POTION_SATCHEL_STRONGER_BENEFICIAL_POTIONS,
+                    LootTable.lootTable()
+                            .withPool(
+                                    LootPool.lootPool()
+                                            .setRolls(UniformGenerator.between(3.0f, 7.0f))
+                                            .add(LootItem.lootTableItem(Items.POTION).setWeight(10).apply(SetPotionFunction.setPotion(getRandomPotion(List.of(Potions.LONG_REGENERATION, Potions.STRONG_REGENERATION, Potions.LONG_STRENGTH, Potions.STRONG_STRENGTH, Potions.LONG_SWIFTNESS, Potions.STRONG_SWIFTNESS, Potions.LONG_LEAPING, Potions.STRONG_LEAPING, PMMobEffects.LONG_PRECISION.get(), PMMobEffects.STRONG_PRECISION.get())))))
+                                            .add(LootItem.lootTableItem(Items.SPLASH_POTION).setWeight(10).apply(SetPotionFunction.setPotion(getRandomPotion(List.of(Potions.LONG_REGENERATION, Potions.STRONG_REGENERATION, Potions.LONG_STRENGTH, Potions.STRONG_STRENGTH, Potions.LONG_SWIFTNESS, Potions.STRONG_SWIFTNESS, Potions.LONG_LEAPING, Potions.STRONG_LEAPING, PMMobEffects.LONG_PRECISION.get(), PMMobEffects.STRONG_PRECISION.get())))))
+                                            .add(LootItem.lootTableItem(CCItems.TETHER_POTION.get()).setWeight(4).apply(SetPotionFunction.setPotion(getRandomPotion(List.of(Potions.LONG_REGENERATION, Potions.STRONG_REGENERATION, Potions.LONG_STRENGTH, Potions.STRONG_STRENGTH, Potions.LONG_SWIFTNESS, Potions.STRONG_SWIFTNESS, Potions.LONG_LEAPING, Potions.STRONG_LEAPING, PMMobEffects.LONG_PRECISION.get(), PMMobEffects.STRONG_PRECISION.get())))))
+                                            .add(LootItem.lootTableItem(CCItems.IMPACT_POTION.get()).setWeight(4).apply(SetPotionFunction.setPotion(getRandomPotion(List.of(Potions.LONG_REGENERATION, Potions.STRONG_REGENERATION, Potions.LONG_STRENGTH, Potions.STRONG_STRENGTH, Potions.LONG_SWIFTNESS, Potions.STRONG_SWIFTNESS, Potions.LONG_LEAPING, Potions.STRONG_LEAPING, PMMobEffects.LONG_PRECISION.get(), PMMobEffects.STRONG_PRECISION.get())))))
+
+                            )
+            );
+
+            consumer.accept(POTION_SATCHEL_STRONGER_HARMFUL_POTIONS,
+                    LootTable.lootTable()
+                            .withPool(
+                                    LootPool.lootPool()
+                                            .setRolls(UniformGenerator.between(3.0f, 7.0f))
+                                            .add(LootItem.lootTableItem(Items.SPLASH_POTION).setWeight(2).apply(SetPotionFunction.setPotion(getRandomPotion(List.of(Potions.LONG_SLOWNESS, Potions.STRONG_SLOWNESS, Potions.LONG_WEAKNESS, Potions.LONG_POISON, Potions.STRONG_POISON, PMMobEffects.LONG_CLUMSINESS.get(), PMMobEffects.STRONG_CLUMSINESS.get())))))
+
+                            )
+            );
+
+            consumer.accept(POTION_SATCHEL,
+                    LootTable.lootTable()
+                            .withPool(
+                                    LootPool.lootPool()
+                                            .setRolls(UniformGenerator.between(2.0f, 5.0f))
+                                            .add(LootTableReference.lootTableReference(POTION_SATCHEL_BENEFICIAL_POTIONS))
+                                            .add(LootTableReference.lootTableReference(POTION_SATCHEL_STRONGER_BENEFICIAL_POTIONS).when(LootItemRandomChanceCondition.randomChance(0.5f)))
+                                            .add(LootTableReference.lootTableReference(POTION_SATCHEL_HARMFUL_POTIONS))
+                                            .add(LootTableReference.lootTableReference(POTION_SATCHEL_STRONGER_HARMFUL_POTIONS).when(LootItemRandomChanceCondition.randomChance(0.5f)))
+                            ));
+
+        }
+
+        protected static Potion getRandomPotion(List<Potion> list) {
+            if (list == null || list.isEmpty()) {
+                return null;
+            }
+            RandomSource random = RandomSource.create();
+            int index = random.nextInt(list.size());
+            return list.get(index);
         }
     }
 

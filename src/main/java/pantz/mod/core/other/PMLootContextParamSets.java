@@ -8,4 +8,9 @@ public class PMLootContextParamSets {
             .required(LootContextParams.THIS_ENTITY)
             .required(LootContextParams.ORIGIN)
             .build();
+
+    public static final LootContextParamSet CONTAINER_ITEM = LootContextParamSet.builder()
+            .required(LootContextParams.THIS_ENTITY)
+            .required(LootContextParams.ORIGIN)
+            .build();
 }

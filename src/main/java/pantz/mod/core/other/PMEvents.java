@@ -2,6 +2,7 @@ package pantz.mod.core.other;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -34,6 +35,7 @@ import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.EntityTeleportEvent;
 import net.minecraftforge.event.entity.ProjectileImpactEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.*;
 import net.minecraftforge.event.level.BlockEvent;
@@ -82,6 +84,23 @@ public class PMEvents {
 
     @Mod.EventBusSubscriber(modid = PantzMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
     public static class PMForgeEvents {
+
+        @SubscribeEvent
+        public static void onLivingTick(LivingEvent.LivingTickEvent event) {
+            if (event.getEntity() instanceof Animal animal && !animal.level().isClientSide()) {
+                CompoundTag persistentData = animal.getPersistentData();
+
+                if (persistentData.contains(MoveToFeedingTroughGoal.COOLDOWN_TAG)) {
+                    int currentCooldown = persistentData.getInt(MoveToFeedingTroughGoal.COOLDOWN_TAG);
+
+                    if (currentCooldown > 0) {
+                        persistentData.putInt(MoveToFeedingTroughGoal.COOLDOWN_TAG, currentCooldown - 1);
+                    } else {
+                        persistentData.remove(MoveToFeedingTroughGoal.COOLDOWN_TAG);
+                    }
+                }
+            }
+        }
 
         @SubscribeEvent
         public static void onEntityJoin(EntityJoinLevelEvent event) {

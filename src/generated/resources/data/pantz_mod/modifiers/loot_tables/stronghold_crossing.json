@@ -23,6 +23,16 @@
           {
             "type": "minecraft:item",
             "name": "pantz_mod:dynamite"
+          },
+          {
+            "type": "minecraft:item",
+            "functions": [
+              {
+                "function": "pantz_mod:set_item_loot_table",
+                "loot_table": "pantz_mod:container_item/potion_satchel"
+              }
+            ],
+            "name": "pantz_mod:potion_satchel"
           }
         ],
         "index": 0,

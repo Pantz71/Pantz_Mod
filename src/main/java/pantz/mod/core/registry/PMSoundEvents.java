@@ -66,6 +66,9 @@ public class PMSoundEvents {
     public static final RegistryObject<SoundEvent> ITEM_STAND_REMOVE_ITEM = SOUND_EVENTS.createSoundEvent("block.item_stand.remove_item");
     public static final RegistryObject<SoundEvent> ITEM_STAND_ENCASE = SOUND_EVENTS.createSoundEvent("block.item_stand.encase");
 
+    public static final RegistryObject<SoundEvent> POTION_SATCHEL_OPEN = SOUND_EVENTS.createSoundEvent("item.potion_satchel.open");
+    public static final RegistryObject<SoundEvent> POTION_SATCHEL_CLOSE = SOUND_EVENTS.createSoundEvent("item.potion_satchel.close");
+
     public static class PMSoundTypes {
         public static final ForgeSoundType STEEL = new ForgeSoundType(1.0f, 1.0f, STEEL_BREAK, STEEL_STEP, STEEL_PLACE, STEEL_HIT, STEEL_FALL);
         public static final ForgeSoundType STEEL_CHAIN = new ForgeSoundType(1.0f, 1.0f, STEEL_CHAIN_BREAK, STEEL_CHAIN_STEP, STEEL_CHAIN_PLACE, STEEL_CHAIN_HIT, STEEL_CHAIN_FALL);
