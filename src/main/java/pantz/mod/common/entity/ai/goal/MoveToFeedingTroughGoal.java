@@ -9,28 +9,18 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
+import net.minecraftforge.items.IItemHandler;
 import pantz.mod.common.block.entity.FeedingTroughBlockEntity;
-
-import java.util.concurrent.atomic.AtomicBoolean;
 
 public class MoveToFeedingTroughGoal extends MoveToBlockGoal {
     private final Animal animal;
-    private static final String COOLDOWN_TAG = "FeedingTroughCooldown";
+    public static final String COOLDOWN_TAG = "FeedingTroughCooldown";
     public MoveToFeedingTroughGoal(Animal animal, double pSpeedModifier, int pSearchRange) {
         super(animal, pSpeedModifier, pSearchRange, 4);
         this.animal = animal;
     }
     @Override
     public boolean canUse() {
-        CompoundTag persistentData = this.animal.getPersistentData();
-        if (persistentData.contains(COOLDOWN_TAG)) {
-            int currentCooldown = persistentData.getInt(COOLDOWN_TAG);
-            if (currentCooldown > 0) {
-                persistentData.putInt(COOLDOWN_TAG, currentCooldown - 1);
-                return false;
-            }
-        }
-
         if (this.animal.isInLove() || (!this.animal.isBaby() && this.animal.getAge() > 0)) {
             return false;
         }
@@ -64,33 +54,29 @@ public class MoveToFeedingTroughGoal extends MoveToBlockGoal {
         }
     }
 
-    @Override
-    protected boolean isValidTarget(LevelReader level, BlockPos pos) {
-        if (this.animal.getPersistentData().getInt(COOLDOWN_TAG) > 0) {
-            return false;
-        }
+        @Override
+        protected boolean isValidTarget(LevelReader level, BlockPos pos) {
+            if (this.animal.getPersistentData().getInt(COOLDOWN_TAG) > 0) {
+                return false;
+            }
 
-        BlockEntity be = level.getBlockEntity(pos);
-        if (be instanceof FeedingTroughBlockEntity) {
-            AtomicBoolean hasValidFood = new AtomicBoolean(false);
+            BlockEntity be = level.getBlockEntity(pos);
+            if (be instanceof FeedingTroughBlockEntity) {
+                IItemHandler handler = be.getCapability(ForgeCapabilities.ITEM_HANDLER).orElse(null);
 
-            be.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(handler -> {
                 for (int i = 0; i < handler.getSlots(); i++) {
                     ItemStack stack = handler.getStackInSlot(i);
                     if (!stack.isEmpty() && this.animal.isFood(stack)) {
-                        hasValidFood.set(true);
-                        break;
+                        return true;
                     }
                 }
-            });
-            return hasValidFood.get();
+            }
+            return false;
         }
-        return false;
-    }
 
     @Override
     public double acceptedDistance() {
-        return 2.5D;
+        return 1.5d;
     }
 
     @Override
