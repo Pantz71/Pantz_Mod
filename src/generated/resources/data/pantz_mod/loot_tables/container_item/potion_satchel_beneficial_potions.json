@@ -19,7 +19,7 @@
           "functions": [
             {
               "function": "minecraft:set_potion",
-              "id": "minecraft:regeneration"
+              "id": "minecraft:leaping"
             }
           ],
           "name": "minecraft:splash_potion",
@@ -30,7 +30,7 @@
           "functions": [
             {
               "function": "minecraft:set_potion",
-              "id": "pantz_mod:precision"
+              "id": "minecraft:regeneration"
             }
           ],
           "name": "caverns_and_chasms:tether_potion",
@@ -41,7 +41,7 @@
           "functions": [
             {
               "function": "minecraft:set_potion",
-              "id": "minecraft:strength"
+              "id": "minecraft:leaping"
             }
           ],
           "name": "caverns_and_chasms:impact_potion",

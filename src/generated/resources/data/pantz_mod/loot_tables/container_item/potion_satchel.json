@@ -32,7 +32,11 @@
           "name": "pantz_mod:container_item/potion_satchel_stronger_harmful_potions"
         }
       ],
-      "rolls": 1.0
+      "rolls": {
+        "type": "minecraft:uniform",
+        "max": 5.0,
+        "min": 2.0
+      }
     }
   ],
   "random_sequence": "pantz_mod:container_item/potion_satchel"
