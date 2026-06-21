@@ -78,5 +78,7 @@ public class PMClientCompat {
             int mode = tag.getInt(EntityFilterItem.MODE_KEY);
             return mode == 0 ? 0.0f : 1.0f;
         });
+        ItemProperties.register(HONEY_DESERIALIZER.get(), PantzMod.location("level"),
+                (stack, level, entity, seed) -> PMClientEvents.PMForgeClientEvents.getWaxLevel());
     }
 }

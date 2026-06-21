@@ -76,6 +76,7 @@ public class PMClientEvents {
     @Mod.EventBusSubscriber(modid = PantzMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
     public static class PMForgeClientEvents {
         private static final String[] PRIORITIES = { "copper", "exposed", "weathered", "oxidized" };
+        private static float waxLevel = 0.0f;
 
         @SubscribeEvent
         public static void onClientTick(TickEvent.ClientTickEvent event) {
@@ -145,8 +146,12 @@ public class PMClientEvents {
             int cooldown = 5;
             long particleCounter = level.getGameTime();
 
+
             if (particleCounter % cooldown != 0) return;
-            if (!isHoldingDeserializer(player)) return;
+            if (!isHoldingDeserializer(player)) {
+                waxLevel = 0.0f;
+                return;
+            }
 
             BlockPos center = player.blockPosition();
             int range = PMConfig.Common.COMMON.waxedBlocksDetectionRadius.get();
@@ -174,7 +179,25 @@ public class PMClientEvents {
             }
 
             List<BlockPos> targets = priority.isEmpty() ? normal : concat(priority, normal);
+            waxLevel = calculateWaxLevel(targets.size(), range);
             targets.forEach(pos -> spawnParticles(level, pos));
+        }
+
+        public static float getWaxLevel() {
+            return waxLevel;
+        }
+
+        public static float calculateWaxLevel(int blockCount, int range) {
+            if (blockCount == 0) return 0.0F;
+            double totalBlocks = (2 * range + 1) * (2 * range + 1) * (2 * range + 1);
+            float blocksForMaxLevel = (float) Math.round(totalBlocks - 0.6 * totalBlocks);
+            float percentage = (float) blockCount / blocksForMaxLevel;
+            if (percentage >= 1.0f) return 1.0F;
+            if (percentage >= 0.8F) return 0.8F;
+            if (percentage >= 0.6F) return 0.6F;
+            if (percentage >= 0.4F) return 0.4F;
+            if (percentage >= 0.2F) return 0.2F;
+            return 0.0F;
         }
 
         private static void spawnParticles(ClientLevel level, BlockPos pos) {

@@ -8,6 +8,7 @@ import net.minecraftforge.client.model.generators.ModelFile.UncheckedModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.RegistryObject;
 import pantz.mod.core.PantzMod;
+import pantz.mod.core.other.PMClientEvents;
 import pantz.mod.core.registry.PMItems;
 
 import static pantz.mod.core.registry.PMBlocks.*;
@@ -21,7 +22,7 @@ public class PMItemModelProvider extends BlueprintItemModelProvider {
     @Override
     protected void registerModels() {
         this.generatedItem(PMItems.STEEL_INGOT, STEEL_NUGGET, STEEL_HORSE_ARMOR,
-                SULFUR_DUST, SULFUR_CRYSTAL, HONEY_DESERIALIZER,
+                SULFUR_DUST, SULFUR_CRYSTAL,
                 DYNAMITE, COMBAT_DYNAMITE, FIERY_DYNAMITE, RED_ENVELOPE, KEY, SPIKE);
 
         this.generatedItem(RANDOMIZER, EQUALIZER, NOT_GATE,
@@ -35,6 +36,7 @@ public class PMItemModelProvider extends BlueprintItemModelProvider {
                 TROWEL, EXCAVATOR, DIAMOND_EXCAVATOR, NETHERITE_EXCAVATOR, HAMMER, DIAMOND_HAMMER, NETHERITE_HAMMER);
 
         this.entityFilterItem(ENTITY_FILTER);
+        this.honeyDeserializerItem(HONEY_DESERIALIZER);
     }
 
     private void entityFilterItem(RegistryObject<? extends ItemLike> item) {
@@ -54,5 +56,31 @@ public class PMItemModelProvider extends BlueprintItemModelProvider {
                 .predicate(state, 1.0F)
                 .model(new UncheckedModelFile(new ResourceLocation(this.modid, "item/" + name + "_exclude")))
                 .end();
+    }
+
+    private void honeyDeserializerItem(RegistryObject<? extends ItemLike> item) {
+        String name = name(item.get());
+        ResourceLocation state = new ResourceLocation(this.modid, "level");
+        float[] levels = new float[]{0.0f, 0.2f, 0.4f, 0.6f, 0.8f, 1.0f};
+
+        for (int i = 1; i < levels.length; i++) {
+            String modelName = name + i;
+            ResourceLocation texture = suffix(itemTexture(item.get()), String.valueOf(i));
+            this.withExistingParent(modelName, "item/generated").texture("layer0", texture);
+        }
+
+        for (int i = 0; i < levels.length; i++) {
+            float level = levels[i];
+            String modelName = i == 0 ? name : name + i;
+
+            this.item(item, name, "generated").override()
+                    .predicate(state, level)
+                    .model(new UncheckedModelFile(new ResourceLocation(this.modid, "item/" + modelName)))
+                    .end();
+        }
+    }
+
+    public static ResourceLocation suffix(ResourceLocation rl, String suffix) {
+        return new ResourceLocation(rl.getNamespace(), rl.getPath() + suffix);
     }
 }
