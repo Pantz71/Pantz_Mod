@@ -53,19 +53,19 @@ public class PMConfig {
 
             builder.push("Redstone");
             enderScannerDetectionRadius = builder.comment("How far can the Ender Scanners detect players looking at them?")
-                    .defineInRange("Ender Scanner detection radius", 16, 0, Integer.MAX_VALUE);
+                    .defineInRange("Ender Scanner detection radius", 16, 1, Integer.MAX_VALUE);
 
             entityDetectorDetectionRadius = builder.comment("How far can the Entity Detector detect entities?")
-                    .defineInRange("Entity Detector detection radius", 16, 0, Integer.MAX_VALUE);
+                    .defineInRange("Entity Detector detection radius", 16, 1, Integer.MAX_VALUE);
 
-            spikeMaxEffects = builder.comment("How many effects can the Spike have?")
+            spikeMaxEffects = builder.comment("How many effects can the Spike have? (0 = disabled)")
                     .defineInRange("Max Spike effects", 5, 0, Integer.MAX_VALUE);
 
             builder.pop();
 
             builder.push("Functional");
             enderporterDetectionRadius = builder.comment("How far can the Enderporter detect thrown Ender Pearls?")
-                    .defineInRange("Enderporter detection radius", 16, 0, Integer.MAX_VALUE);
+                    .defineInRange("Enderporter detection radius", 16, 1, Integer.MAX_VALUE);
 
             sprinklerBoostChance = builder.comment("The odds for Sprinkler to boost crop every tick")
                     .defineInRange("Sprinkler boost chance", 0.00003d, 0.0d, 1.0d);
