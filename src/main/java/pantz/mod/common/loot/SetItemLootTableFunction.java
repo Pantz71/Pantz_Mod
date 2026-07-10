@@ -1,21 +1,31 @@
 package pantz.mod.common.loot;
 
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonSerializationContext;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.GsonHelper;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.SeededContainerLoot;
 import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.functions.LootItemConditionalFunction;
 import net.minecraft.world.level.storage.loot.functions.LootItemFunctionType;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import pantz.mod.core.other.PMLootFunctions;
 
+import java.util.List;
+
 public class SetItemLootTableFunction extends LootItemConditionalFunction {
-    private final ResourceLocation lootTable;
-    public SetItemLootTableFunction(LootItemCondition[] conditions, ResourceLocation lootTable) {
+    public static final MapCodec<SetItemLootTableFunction> CODEC = RecordCodecBuilder.mapCodec(
+            instance -> commonFields(instance).and(
+                    ResourceKey.codec(Registries.LOOT_TABLE).fieldOf("loot_table").forGetter(f -> f.lootTable)
+            ).apply(instance, SetItemLootTableFunction::new)
+    );
+
+    private final ResourceKey<LootTable> lootTable;
+
+    public SetItemLootTableFunction(List<LootItemCondition> conditions, ResourceKey<LootTable> lootTable) {
         super(conditions);
         this.lootTable = lootTable;
     }
@@ -23,33 +33,20 @@ public class SetItemLootTableFunction extends LootItemConditionalFunction {
     @Override
     protected ItemStack run(ItemStack pStack, LootContext pContext) {
         if (!pStack.isEmpty()) {
-            CompoundTag tag = pStack.getOrCreateTag();
-            tag.putString("LootTable", this.lootTable.toString());
-            tag.putLong("LootTableSeed", pContext.getRandom().nextLong());
+            pStack.set(DataComponents.CONTAINER_LOOT, new SeededContainerLoot(
+                    this.lootTable,
+                    pContext.getRandom().nextLong()
+            ));
         }
         return pStack;
     }
 
     @Override
-    public LootItemFunctionType getType() {
+    public LootItemFunctionType<? extends LootItemConditionalFunction> getType() {
         return PMLootFunctions.SET_ITEM_LOOT_TABLE.get();
     }
 
-    public static LootItemConditionalFunction.Builder<?> setLootTable(ResourceLocation lootTableRes) {
-        return simpleBuilder((conditions) -> new SetItemLootTableFunction(conditions, lootTableRes));
-    }
-
-    public static class Serializer extends LootItemConditionalFunction.Serializer<SetItemLootTableFunction> {
-        @Override
-        public void serialize(JsonObject json, SetItemLootTableFunction function, JsonSerializationContext context) {
-            super.serialize(json, function, context);
-            json.addProperty("loot_table", function.lootTable.toString());
-        }
-
-        @Override
-        public SetItemLootTableFunction deserialize(JsonObject json, JsonDeserializationContext context, LootItemCondition[] conditions) {
-            ResourceLocation res = new ResourceLocation(GsonHelper.getAsString(json, "loot_table"));
-            return new SetItemLootTableFunction(conditions, res);
-        }
+    public static LootItemConditionalFunction.Builder<?> setLootTable(ResourceKey<LootTable> lootTableKey) {
+        return simpleBuilder((conditions) -> new SetItemLootTableFunction(conditions, lootTableKey));
     }
 }

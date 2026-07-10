@@ -1,11 +1,13 @@
 package pantz.mod.common.block;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
@@ -32,6 +34,7 @@ import pantz.mod.common.utils.PMBlockStateProperties;
 import pantz.mod.core.registry.PMSoundEvents;
 
 public class ItemStandBlock extends HorizontalDirectionalBlock implements EntityBlock, SimpleWaterloggedBlock {
+    private static final MapCodec<ItemStandBlock> CODEC = simpleCodec(ItemStandBlock::new);
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     public static final BooleanProperty GLASS = PMBlockStateProperties.GLASS;
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
@@ -43,6 +46,11 @@ public class ItemStandBlock extends HorizontalDirectionalBlock implements Entity
     public ItemStandBlock(Properties pProperties) {
         super(pProperties);
         this.registerDefaultState(this.getStateDefinition().any().setValue(WATERLOGGED, false).setValue(GLASS, false).setValue(FACING, Direction.NORTH));
+    }
+
+    @Override
+    protected MapCodec<? extends HorizontalDirectionalBlock> codec() {
+        return CODEC;
     }
 
     @Override
@@ -60,10 +68,12 @@ public class ItemStandBlock extends HorizontalDirectionalBlock implements Entity
         return state.getValue(GLASS) ? SoundType.GLASS : SoundType.STONE;
     }
 
+
     @Override
-    public VoxelShape getShape(BlockState state, net.minecraft.world.level.BlockGetter level, BlockPos pos, net.minecraft.world.phys.shapes.CollisionContext context) {
+    public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, net.minecraft.world.phys.shapes.CollisionContext context) {
         return state.getValue(GLASS) ? Shapes.block() : SHAPE;
     }
+
 
     @Override
     public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
@@ -89,22 +99,29 @@ public class ItemStandBlock extends HorizontalDirectionalBlock implements Entity
     }
 
     @Override
-    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
         BlockEntity be = level.getBlockEntity(pos);
         if (!(be instanceof ItemStandBlockEntity stand)) return InteractionResult.PASS;
+        ItemStack stackStand = stand.getItem();
 
-        ItemStack held = player.getItemInHand(hand);
-        ItemStack stack = stand.getItem();
+        if (!stackStand.isEmpty()) {
+            return takeItemOff(level, pos, state, stand);
+        }
+        return InteractionResult.sidedSuccess(level.isClientSide());
+    }
 
-        if (!isGlass(held)) {
-            if (stack.isEmpty() && !held.isEmpty()) {
-                return putItemOn(level, pos, player, held, state, stand);
-            } else if (!stack.isEmpty()) {
-                return takeItemOff(level, pos, state, stand);
+    @Override
+    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
+        BlockEntity be = level.getBlockEntity(pos);
+        if (!(be instanceof ItemStandBlockEntity stand)) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+        ItemStack stackStand = stand.getItem();
+
+        if (!isGlass(stack)) {
+            if (stackStand.isEmpty() && !stack.isEmpty()) {
+                return putItemOn(level, pos, player, stack, state, stand);
             }
         }
-
-        return InteractionResult.sidedSuccess(level.isClientSide());
+        return ItemInteractionResult.sidedSuccess(level.isClientSide());
     }
 
     private InteractionResult takeItemOff(Level level, BlockPos pos, BlockState state, ItemStandBlockEntity stand) {
@@ -121,7 +138,7 @@ public class ItemStandBlock extends HorizontalDirectionalBlock implements Entity
         return InteractionResult.sidedSuccess(level.isClientSide());
     }
 
-    private InteractionResult putItemOn(Level level, BlockPos pos, Player player, ItemStack stack, BlockState state, ItemStandBlockEntity stand) {
+    private ItemInteractionResult putItemOn(Level level, BlockPos pos, Player player, ItemStack stack, BlockState state, ItemStandBlockEntity stand) {
         if (!level.isClientSide()) {
             ItemStack copy = stack.copy();
             copy.setCount(1);
@@ -132,7 +149,7 @@ public class ItemStandBlock extends HorizontalDirectionalBlock implements Entity
             }
             level.sendBlockUpdated(pos, state, state, 3);
         }
-        return InteractionResult.sidedSuccess(level.isClientSide());
+        return ItemInteractionResult.sidedSuccess(level.isClientSide());
     }
 
     public boolean isGlass(ItemStack stack) {

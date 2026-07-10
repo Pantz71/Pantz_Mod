@@ -1,0 +1,22 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "pantz_mod:config",
+      "value": "flint_and_steel"
+    }
+  ],
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    {
+      "tag": "c:ingots/steel"
+    },
+    {
+      "item": "minecraft:flint"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "minecraft:flint_and_steel"
+  }
+}

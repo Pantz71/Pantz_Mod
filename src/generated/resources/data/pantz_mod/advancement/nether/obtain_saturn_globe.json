@@ -1,0 +1,33 @@
+{
+  "parent": "minecraft:nether/find_fortress",
+  "criteria": {
+    "saturn_globe": {
+      "conditions": {
+        "items": [
+          {
+            "items": "pantz_mod:saturn_globe"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.pantz_mod.nether.obtain_saturn_globe.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "pantz_mod:saturn_globe"
+    },
+    "title": {
+      "translate": "advancements.pantz_mod.nether.obtain_saturn_globe.title"
+    }
+  },
+  "requirements": [
+    [
+      "saturn_globe"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,5 +1,6 @@
 package pantz.mod.common.crafting;
 
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.ResourceLocation;
@@ -10,8 +11,8 @@ import net.minecraft.world.item.crafting.Ingredient;
 
 public class PotterySherdDisplayRecipe extends RenewablePotterySherdRecipe {
     private final ItemStack potterySherd;
-    public PotterySherdDisplayRecipe(ResourceLocation id, ItemStack potterySherd) {
-        super(id, CraftingBookCategory.MISC);
+    public PotterySherdDisplayRecipe(ItemStack potterySherd) {
+        super(CraftingBookCategory.MISC);
         this.potterySherd = potterySherd;
     }
 
@@ -28,7 +29,7 @@ public class PotterySherdDisplayRecipe extends RenewablePotterySherdRecipe {
     }
 
     @Override
-    public ItemStack getResultItem(RegistryAccess access) {
+    public ItemStack getResultItem(HolderLookup.Provider registries) {
         return this.potterySherd.copyWithCount(2);
     }
 

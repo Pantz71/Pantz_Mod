@@ -1,6 +1,7 @@
 package pantz.mod.common.block.entity;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
@@ -17,6 +18,7 @@ public class GlobeBlockEntity extends BlockEntity {
     private long spinTime = -1;
     private ResourceLocation texture;
     private ResourceLocation cachedRenderTexture;
+    private boolean glow;
 
     private static final float ROTATE_SPEED = 1f;
     private static final int SPIN_TICKS = 24;
@@ -35,7 +37,7 @@ public class GlobeBlockEntity extends BlockEntity {
     public ResourceLocation getRenderTexture() {
         if (this.cachedRenderTexture == null) {
             ResourceLocation location = getTexture();
-            this.cachedRenderTexture = new ResourceLocation(location.getNamespace(), "textures/block/globe/" + location.getPath() + ".png");
+            this.cachedRenderTexture = ResourceLocation.fromNamespaceAndPath(location.getNamespace(), "textures/block/globe/" + location.getPath() + ".png");
         }
         return this.cachedRenderTexture;
     }
@@ -50,18 +52,15 @@ public class GlobeBlockEntity extends BlockEntity {
     }
 
     public boolean isGlow() {
-        return this.getBlockState().getValue(GlobeBlock.GLOWING);
+        return this.glow;
     }
 
     public void setGlow(boolean value) {
-        BlockState state = this.getBlockState();
-        boolean glow = state.getValue(GlobeBlock.GLOWING);
-
+        if (this.glow != value) {
+            this.glow = value;
+            setChanged();
+        }
         if (this.level != null) {
-            if (glow != value) {
-                this.level.setBlockAndUpdate(this.worldPosition, state.setValue(GlobeBlock.GLOWING, value));
-                setChanged();
-            }
             this.level.sendBlockUpdated(this.worldPosition, getBlockState(), getBlockState(), 3);
         }
     }
@@ -123,24 +122,26 @@ public class GlobeBlockEntity extends BlockEntity {
     }
 
     @Override
-    public void load(CompoundTag tag) {
-        super.load(tag);
+    protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
+        super.loadAdditional(tag, registries);
         this.rotation = tag.getFloat("Rotation");
+        this.glow = tag.getBoolean("Glow");
         if (tag.contains("SpinTime")) {
             this.spinTime = tag.getLong("SpinTime");
         }
     }
 
     @Override
-    protected void saveAdditional(CompoundTag tag) {
-        super.saveAdditional(tag);
+    protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
+        super.saveAdditional(tag, registries);
         tag.putFloat("Rotation", getRotation());
+        tag.putBoolean("Glow", isGlow());
         tag.putLong("SpinTime", getSpinTime());
     }
 
     @Override
-    public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
-        load(pkt.getTag());
+    public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt, HolderLookup.Provider lookupProvider) {
+        loadAdditional(pkt.getTag(), lookupProvider);
     }
 
     @Override
@@ -149,7 +150,7 @@ public class GlobeBlockEntity extends BlockEntity {
     }
 
     @Override
-    public CompoundTag getUpdateTag() {
-        return saveWithoutMetadata();
+    public CompoundTag getUpdateTag(HolderLookup.Provider registries) {
+        return saveWithoutMetadata(registries);
     }
 }

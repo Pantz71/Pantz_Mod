@@ -5,6 +5,8 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
@@ -35,14 +37,14 @@ public class TrowelItem extends Item {
         RandomSource random = level.getRandom();
         InteractionHand hand = ctx.getHand();
         ItemStack trowel = ctx.getItemInHand();
-        Inventory inventory = player.getInventory();
+        Inventory inv = player.getInventory();
 
-        int trowelSlot = inventory.selected;
+        int trowelSlot = inv.selected;
 
         List<ItemStack> placeableBlocks = new ArrayList<>();
         for (int i = 0; i < 9; i++) {
             if (i == trowelSlot) continue;
-            ItemStack stack = inventory.getItem(i);
+            ItemStack stack = inv.getItem(i);
             if (!stack.isEmpty() && stack.getItem() instanceof BlockItem) {
                 placeableBlocks.add(stack);
             }
@@ -68,8 +70,7 @@ public class TrowelItem extends Item {
             SoundType sound = state.getSoundType();
 
             level.playSound(null, placePos, sound.getPlaceSound(), SoundSource.BLOCKS, (sound.getVolume() + 1.0F) / 2.0F, sound.getPitch() * 0.8F);
-            trowel.hurtAndBreak(1, player,
-                    p -> p.broadcastBreakEvent(hand));
+            trowel.hurtAndBreak(1, player, LivingEntity.getSlotForHand(ctx.getHand()));
 
             return InteractionResult.sidedSuccess(level.isClientSide());
         }

@@ -1,5 +1,6 @@
 package pantz.mod.common.block;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.DustParticleOptions;
@@ -13,11 +14,18 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 
 public class NotGateBlock extends DiodeBlock {
+    private static final MapCodec<NotGateBlock> CODEC = simpleCodec(NotGateBlock::new);
+
     public NotGateBlock(Properties props) {
         super(props);
         this.registerDefaultState(this.getStateDefinition().any()
                 .setValue(FACING, Direction.NORTH)
                 .setValue(POWERED, false));
+    }
+
+    @Override
+    protected MapCodec<? extends DiodeBlock> codec() {
+        return CODEC;
     }
 
     @Override

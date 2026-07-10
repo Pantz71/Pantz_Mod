@@ -1,14 +1,17 @@
 package pantz.mod.core.data.server.tags;
 
-
 import com.teamabnormals.blueprint.core.other.tags.BlueprintBlockTags;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.block.*;
-import net.minecraftforge.common.Tags;
-import net.minecraftforge.common.data.BlockTagsProvider;
-import net.minecraftforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.common.Tags;
+import net.neoforged.neoforge.common.data.BlockTagsProvider;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.Nullable;
 import pantz.mod.common.block.LogicGateBlock;
 import pantz.mod.common.block.NotGateBlock;
@@ -16,10 +19,11 @@ import pantz.mod.common.block.PaperLanternBlock;
 import pantz.mod.common.block.PedestalBlock;
 import pantz.mod.core.PantzMod;
 
+import java.util.Locale;
 import java.util.concurrent.CompletableFuture;
 
-import static pantz.mod.core.registry.PMBlocks.*;
 import static pantz.mod.core.other.tags.PMBlockTags.*;
+import static pantz.mod.core.registry.PMBlocks.*;
 
 public class PMBlockTagsProvider extends BlockTagsProvider {
     public PMBlockTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, @Nullable ExistingFileHelper existingFileHelper) {
@@ -52,10 +56,21 @@ public class PMBlockTagsProvider extends BlockTagsProvider {
         this.tag(BlockTags.INFINIBURN_OVERWORLD).add(SULFUR.get(), SULFUR_BLOCK.get(), SULFUR_BRICKS.get(), CHISELED_SULFUR_BRICKS.get());
         this.tag(BlockTags.INSIDE_STEP_SOUND_BLOCKS).add(SMALL_SULFUR_BUD.get());
         this.tag(BlockTags.BEACON_BASE_BLOCKS).add(STEEL_BLOCK.get());
+        this.tag(Tags.Blocks.CHAINS).add(STEEL_CHAIN.get());
 
-        this.tag(Tags.Blocks.STORAGE_BLOCKS).addTag(STORAGE_BLOCKS_STEEL).addTag(STORAGE_BLOCKS_SULFUR);
+        this.tag(Tags.Blocks.STORAGE_BLOCKS).addTag(STORAGE_BLOCKS_STEEL).addTag(STORAGE_BLOCKS_SULFUR)
+                .addTag(STORAGE_BLOCKS_LEATHER).addTag(STORAGE_BLOCKS_RABBIT_HIDE).addTag(STORAGE_BLOCKS_PHANTOM_MEMBRANE)
+                .addTag(STORAGE_BLOCKS_FEATHER).addTag(STORAGE_BLOCKS_SUGAR).addTag(STORAGE_BLOCKS_SUGAR_CANE)
+                .addTag(STORAGE_BLOCKS_BLAZE_POWDER);
         this.tag(STORAGE_BLOCKS_STEEL).add(STEEL_BLOCK.get());
         this.tag(STORAGE_BLOCKS_SULFUR).add(SULFUR_BLOCK.get());
+        this.tag(STORAGE_BLOCKS_LEATHER).add(LEATHER_BLOCK.get());
+        this.tag(STORAGE_BLOCKS_RABBIT_HIDE).add(RABBIT_HIDE_BLOCK.get());
+        this.tag(STORAGE_BLOCKS_PHANTOM_MEMBRANE).add(PHANTOM_MEMBRANE_BLOCK.get());
+        this.tag(STORAGE_BLOCKS_FEATHER).add(FEATHER_BLOCK.get());
+        this.tag(STORAGE_BLOCKS_SUGAR).add(SUGAR_BLOCK.get());
+        this.tag(STORAGE_BLOCKS_SUGAR_CANE).add(SUGAR_CANE_BLOCK.get());
+        this.tag(STORAGE_BLOCKS_BLAZE_POWDER).add(FIERY_LAMP.get());
 
         this.tag(Tags.Blocks.ORES).addTag(ORES_SULFUR);
         this.tag(ORES_SULFUR).add(SULFUR_ORE.get(), DEEPSLATE_SULFUR_ORE.get(), NETHER_SULFUR_ORE.get());
@@ -66,14 +81,14 @@ public class PMBlockTagsProvider extends BlockTagsProvider {
         this.tag(Tags.Blocks.ORES_IN_GROUND_DEEPSLATE).add(DEEPSLATE_SULFUR_ORE.get());
         this.tag(Tags.Blocks.ORES_IN_GROUND_NETHERRACK).add(NETHER_SULFUR_ORE.get());
 
-        this.tag(GLASS_CHORUS).add(CHORUS_GLASS.get());
-        this.tag(GLASS_SOUL).add(SOUL_GLASS.get());
-        this.tag(GLASS_ECHO).add(ECHO_GLASS.get());
+        this.tag(GLASS_BLOCKS_CHORUS).add(CHORUS_GLASS.get());
+        this.tag(GLASS_BLOCKS_SOUL).add(SOUL_GLASS.get());
         this.tag(GLASS_PANES_CHORUS).add(CHORUS_GLASS_PANE.get());
         this.tag(GLASS_PANES_SOUL).add(SOUL_GLASS_PANE.get());
+        this.tag(GLASS_BLOCKS_ECHO).add(ECHO_GLASS.get());
         this.tag(GLASS_PANES_ECHO).add(ECHO_GLASS_PANE.get());
 
-        this.tag(Tags.Blocks.GLASS).addTag(GLASS_CHORUS).addTag(GLASS_SOUL).addTag(GLASS_ECHO);
+        this.tag(Tags.Blocks.GLASS_BLOCKS).addTag(GLASS_BLOCKS_CHORUS).addTag(GLASS_BLOCKS_SOUL).addTag(GLASS_BLOCKS_ECHO);
         this.tag(Tags.Blocks.GLASS_PANES).addTag(GLASS_PANES_CHORUS).addTag(GLASS_PANES_SOUL).addTag(GLASS_PANES_ECHO);
 
         BLOCKS.getDeferredRegister().getEntries().forEach((registry -> {
@@ -110,5 +125,30 @@ public class PMBlockTagsProvider extends BlockTagsProvider {
             }
         }
         ));
+
+        this.addColored(Tags.Blocks.DYED,"{color}_redstone_lamp");
+        this.addColored(Tags.Blocks.DYED,"{color}_paper_lantern");
+    }
+
+    private void addColored(TagKey<Block> group, String pattern) {
+        String prefix = group.location().getPath().toUpperCase(Locale.ENGLISH) + '_';
+        for (DyeColor color : DyeColor.values()) {
+            ResourceLocation key = ResourceLocation.fromNamespaceAndPath(PantzMod.MOD_ID, pattern.replace("{color}", color.getName()));
+            TagKey<Block> tag = getForgeBlockTag(prefix + color.getName());
+            Block block = BuiltInRegistries.BLOCK.get(key);
+            if (block == Blocks.AIR)
+                throw new IllegalStateException("Unknown item: " + key);
+            tag(tag).add(block);
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    private TagKey<Block> getForgeBlockTag(String name) {
+        try {
+            name = name.toUpperCase(Locale.ENGLISH);
+            return (TagKey<Block>) Tags.Blocks.class.getDeclaredField(name).get(null);
+        } catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException e) {
+            throw new IllegalStateException(Tags.Blocks.class.getName() + " is missing tag name: " + name);
+        }
     }
 }

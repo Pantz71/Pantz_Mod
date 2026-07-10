@@ -1,11 +1,12 @@
 package pantz.mod.core.registry;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.BlockSource;
 import net.minecraft.core.Direction;
+import net.minecraft.core.dispenser.BlockSource;
 import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
 import net.minecraft.core.dispenser.DispenseItemBehavior;
 import net.minecraft.core.dispenser.OptionalDispenseItemBehavior;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.animal.horse.AbstractHorse;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -17,11 +18,12 @@ import pantz.mod.common.block.RopeLadderBlock;
 public class PMDispenserBehaviors {
     public static DispenseItemBehavior EXTEND_ROPE_LADDER = new DefaultDispenseItemBehavior() {
         private final DefaultDispenseItemBehavior defaultDispenseItemBehavior = new DefaultDispenseItemBehavior();
+
         @Override
         protected ItemStack execute(BlockSource source, ItemStack stack) {
-            Level level = source.getLevel();
-            Direction direction = source.getBlockState().getValue(DispenserBlock.FACING);
-            BlockPos frontPos = source.getPos().relative(direction);
+            Level level = source.level();
+            Direction direction = source.state().getValue(DispenserBlock.FACING);
+            BlockPos frontPos = source.pos().relative(direction);
             BlockState frontState = level.getBlockState(frontPos);
 
             if (!(frontState.getBlock() instanceof RopeLadderBlock ladder)) {
@@ -69,9 +71,9 @@ public class PMDispenserBehaviors {
     public static OptionalDispenseItemBehavior EQUIP_HORSE_ARMOR = new OptionalDispenseItemBehavior() {
         @Override
         protected ItemStack execute(BlockSource source, ItemStack stack) {
-            BlockPos pos = source.getPos().relative(source.getBlockState().getValue(DispenserBlock.FACING));
-            for (AbstractHorse abstractHorse : source.getLevel().getEntitiesOfClass(AbstractHorse.class, new AABB(pos), horse -> horse.isAlive() && horse.canWearArmor())) {
-                if (abstractHorse.isArmor(stack) && !abstractHorse.isWearingArmor() && abstractHorse.isTamed()) {
+            BlockPos pos = source.pos().relative(source.state().getValue(DispenserBlock.FACING));
+            for (AbstractHorse abstractHorse : source.level().getEntitiesOfClass(AbstractHorse.class, new AABB(pos), horse -> horse.isAlive() && horse.canUseSlot(EquipmentSlot.BODY))) {
+                if (abstractHorse.isBodyArmorItem(stack) && !abstractHorse.isWearingBodyArmor() && abstractHorse.isTamed()) {
                     abstractHorse.getSlot(401).set(stack.split(1));
                     this.setSuccess(true);
                     return stack;

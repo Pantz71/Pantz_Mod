@@ -22,11 +22,11 @@ public class FeedingTroughScreen extends AbstractContainerScreen<FeedingTroughMe
         RenderSystem.setShaderTexture(0, TEXTURE);
 
         guiGraphics.blit(TEXTURE, this.leftPos, this.topPos, 0, 0, imageWidth, imageHeight);
+
     }
 
     @Override
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
-        this.renderBackground(guiGraphics);
         super.render(guiGraphics, mouseX, mouseY, partialTick);
         this.renderTooltip(guiGraphics, mouseX, mouseY);
     }

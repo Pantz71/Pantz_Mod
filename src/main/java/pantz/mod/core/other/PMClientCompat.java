@@ -4,38 +4,38 @@ import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.item.ItemProperties;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.item.DyeableLeatherItem;
+import net.minecraft.world.item.component.CustomData;
+import net.minecraft.world.item.component.DyedItemColor;
 import net.minecraft.world.level.GrassColor;
-import net.minecraft.world.level.block.Block;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.RegisterColorHandlersEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
+import net.neoforged.neoforge.registries.DeferredBlock;
 import pantz.mod.common.item.EntityFilterItem;
 import pantz.mod.core.PantzMod;
-import pantz.mod.core.registry.PMMenuTypes;
-import pantz.mod.core.registry.datapack.PMTrimMaterials;
+import pantz.mod.core.registry.PMBlocks;
+import pantz.mod.core.registry.PMItems;
 
 import static pantz.mod.core.registry.PMBlocks.*;
-import static pantz.mod.core.registry.PMItems.*;
+import static pantz.mod.core.registry.PMItems.POTION_SATCHEL;
 
-@Mod.EventBusSubscriber(modid = PantzMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+@EventBusSubscriber(modid = PantzMod.MOD_ID, value = Dist.CLIENT)
 public class PMClientCompat {
     public static void registerClientCompat() {
         registerRenderLayers();
         registerItemProperties();
-        PMMenuTypes.registerScreenFactories();
-        PMTrimMaterials.registerArmorMaterialOverrides();
-
+        PMBlocks.setupTabs();
+        PMItems.setupTabs();
     }
 
     @SuppressWarnings("deprecation")
     private static void registerRenderLayers() {
-        for (RegistryObject<?> block : new RegistryObject[]{
+        for (DeferredBlock<?> block : new DeferredBlock[]{
                 STEEL_BARS, STEEL_DOOR, STEEL_TRAPDOOR, STEEL_LANTERN, STEEL_CHAIN,
-                SULFUR_CLUSTER, SMALL_SULFUR_BUD, MEDIUM_SULFUR_BUD, LARGE_SULFUR_BUD,
+                SMALL_SULFUR_BUD, MEDIUM_SULFUR_BUD, LARGE_SULFUR_BUD, SULFUR_CLUSTER,
                 STONE_PEDESTAL, DEEPSLATE_PEDESTAL, BLACKSTONE_PEDESTAL, QUARTZ_PEDESTAL, PURPUR_PEDESTAL, PRISMARINE_PEDESTAL,
                 RANDOMIZER, EQUALIZER,
                 NOT_GATE, AND_GATE, OR_GATE, NOR_GATE, NAND_GATE, XNOR_GATE, XOR_GATE,
@@ -47,15 +47,16 @@ public class PMClientCompat {
                 CYAN_PAPER_LANTERN, PURPLE_PAPER_LANTERN, BLUE_PAPER_LANTERN, BROWN_PAPER_LANTERN, GREEN_PAPER_LANTERN, RED_PAPER_LANTERN, BLACK_PAPER_LANTERN,
                 ORNAMENT_FIRECRACKERS, ORNAMENT_LUCKY_COINS, SPIKE
         }) {
-            ItemBlockRenderTypes.setRenderLayer((Block) block.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(block.get(), RenderType.cutout());
         }
 
-        for (RegistryObject<?> block : new RegistryObject[]{
+        for (DeferredBlock<?> block : new DeferredBlock[]{
                 ITEM_STAND, GLOW_ITEM_STAND,
-                CHORUS_GLASS, CHORUS_GLASS_PANE, SOUL_GLASS, SOUL_GLASS_PANE, ECHO_GLASS, ECHO_GLASS_PANE
+                CHORUS_GLASS, CHORUS_GLASS_PANE, SOUL_GLASS, SOUL_GLASS_PANE
         }) {
-            ItemBlockRenderTypes.setRenderLayer((Block) block.get(), RenderType.cutoutMipped());
+            ItemBlockRenderTypes.setRenderLayer(block.get(), RenderType.cutoutMipped());
         }
+
     }
 
     @SubscribeEvent
@@ -68,17 +69,15 @@ public class PMClientCompat {
     @SubscribeEvent
     public static void registerItemColor(RegisterColorHandlersEvent.Item event) {
         event.register((stack, index) -> GrassColor.get(0.5D, 1.0D), SUGAR_CANE_BLOCK.get());
-        event.register((stack, index) -> index > 0 ? -1 : ((DyeableLeatherItem) stack.getItem()).getColor(stack), POTION_SATCHEL.get());
+        event.register((stack, index) -> index > 0 ? -1 : DyedItemColor.getOrDefault(stack, -6265536), POTION_SATCHEL.get());
     }
 
     private static void registerItemProperties() {
-        ItemProperties.register(ENTITY_FILTER.get(), PantzMod.location("mode"),
+        ItemProperties.register(PMItems.ENTITY_FILTER.get(), PantzMod.location("mode"),
                 (stack, level, entity, seed) -> {
-            CompoundTag tag = stack.getOrCreateTag();
-            int mode = tag.getInt(EntityFilterItem.MODE_KEY);
-            return mode == 0 ? 0.0f : 1.0f;
-        });
-        ItemProperties.register(HONEY_DESERIALIZER.get(), PantzMod.location("level"),
-                (stack, level, entity, seed) -> PMClientEvents.PMForgeClientEvents.getWaxLevel());
+                    CompoundTag tag = stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
+                    int mode = tag.getInt(EntityFilterItem.MODE_KEY);
+                    return mode == 0 ? 0.0f : 1.0f;
+                });
     }
 }

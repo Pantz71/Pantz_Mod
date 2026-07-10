@@ -1,48 +1,32 @@
 package pantz.mod.common.block.entity;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.Containers;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.items.ItemStackHandler;
+import net.neoforged.neoforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-import pantz.mod.common.block.PedestalBlock;
 import pantz.mod.core.registry.PMBlockEntityTypes;
 
 public class PedestalBlockEntity extends BlockEntity {
     private final ItemStackHandler itemHandler = new ItemStackHandler(1) {
         @Override
         protected void onContentsChanged(int slot) {
-            super.onContentsChanged(slot);
             setChanged();
             if (level != null) {
-                level.updateNeighborsAt(worldPosition, getBlockState().getBlock());
                 level.updateNeighbourForOutputSignal(worldPosition, getBlockState().getBlock());
             }
         }
-
-        @Override
-        public int getSlotLimit(int slot) {
-            return 1;
-        }
-
-        @Override
-        public boolean isItemValid(int slot, @NotNull ItemStack stack) {
-            return slot == 0;
-        }
     };
 
-    private LazyOptional<ItemStackHandler> lazyOptional = LazyOptional.empty();
+    private boolean spinning = false;
 
     public PedestalBlockEntity(BlockPos pos, BlockState state) {
         super(PMBlockEntityTypes.PEDESTAL.get(), pos, state);
@@ -55,29 +39,20 @@ public class PedestalBlockEntity extends BlockEntity {
     public void setItem(ItemStack stack) {
         itemHandler.setStackInSlot(0, stack);
         setChanged();
-
-        if (level != null) {
-            level.updateNeighborsAt(worldPosition, getBlockState().getBlock());
-            level.updateNeighbourForOutputSignal(worldPosition, getBlockState().getBlock());
-
-            if (!level.isClientSide()) {
-                level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), 3);
-            }
-            requestModelDataUpdate();
+        if (this.level != null) {
+            BlockState state = this.getBlockState();
+            this.level.updateNeighborsAt(this.worldPosition, state.getBlock());
+            this.level.updateNeighbourForOutputSignal(this.worldPosition, state.getBlock());
+            this.level.sendBlockUpdated(this.worldPosition, state, state, Block.UPDATE_ALL);
         }
     }
 
     public boolean isSpinning() {
-        return this.getBlockState().getValue(PedestalBlock.SPINNING);
+        return spinning;
     }
 
     public void setSpinning(boolean spin) {
-        BlockState state = this.getBlockState();
-        if (this.level != null) {
-            this.level.setBlockAndUpdate(this.worldPosition, state.setValue(PedestalBlock.SPINNING, spin));
-            this.level.updateNeighborsAt(this.worldPosition, this.getBlockState().getBlock());
-            this.level.updateNeighbourForOutputSignal(this.worldPosition, this.getBlockState().getBlock());
-        }
+        this.spinning = spin;
         setChanged();
     }
 
@@ -89,6 +64,7 @@ public class PedestalBlockEntity extends BlockEntity {
         return 0;
     }
 
+
     public void drops() {
         SimpleContainer inv = new SimpleContainer(itemHandler.getSlots());
         for(int i = 0; i < itemHandler.getSlots(); i++) {
@@ -98,51 +74,35 @@ public class PedestalBlockEntity extends BlockEntity {
         Containers.dropContents(this.level, this.worldPosition, inv);
     }
 
-    @Override
-    protected void saveAdditional(CompoundTag tag) {
-        super.saveAdditional(tag);
-        tag.put("Item", itemHandler.serializeNBT());
+    public ItemStackHandler getItemHandler() {
+        return this.itemHandler;
     }
 
     @Override
-    public void load(CompoundTag tag) {
-        super.load(tag);
-        itemHandler.deserializeNBT(tag.getCompound("Item"));
+    protected void saveAdditional(@NotNull CompoundTag tag, @NotNull HolderLookup.Provider provider) {
+        super.saveAdditional(tag, provider);
+        tag.put("Item", itemHandler.serializeNBT(provider));
+        tag.putBoolean("Spinning", spinning);
     }
 
     @Override
-    public void onLoad() {
-        super.onLoad();
-        lazyOptional = LazyOptional.of(() -> itemHandler);
+    protected void loadAdditional(@NotNull CompoundTag tag, @NotNull HolderLookup.Provider provider) {
+        super.loadAdditional(tag, provider);
+        itemHandler.deserializeNBT(provider, tag.getCompound("Item"));
+        spinning = tag.getBoolean("Spinning");
+    }
+
+
+    @Override
+    public CompoundTag getUpdateTag(HolderLookup.Provider registries) {
+        CompoundTag tag = new CompoundTag();
+        saveAdditional(tag, registries);
+        return tag;
     }
 
     @Override
-    public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
-        if (cap == ForgeCapabilities.ITEM_HANDLER) {
-            return lazyOptional.cast();
-        }
-        return super.getCapability(cap, side);
-    }
-
-    @Override
-    public void invalidateCaps() {
-        super.invalidateCaps();
-        lazyOptional.invalidate();
-    }
-
-    @Override
-    public void reviveCaps() {
-        super.reviveCaps();
-    }
-
-    @Override
-    public CompoundTag getUpdateTag() {
-        return saveWithoutMetadata();
-    }
-
-    @Override
-    public void handleUpdateTag(CompoundTag tag) {
-        load(tag);
+    public void handleUpdateTag(CompoundTag tag, HolderLookup.Provider lookupProvider) {
+        loadAdditional(tag, lookupProvider);
     }
 
     @Override
@@ -151,8 +111,7 @@ public class PedestalBlockEntity extends BlockEntity {
     }
 
     @Override
-    public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
-        load(pkt.getTag());
+    public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt, HolderLookup.Provider lookupProvider) {
+        loadAdditional(pkt.getTag(), lookupProvider);
     }
-
 }

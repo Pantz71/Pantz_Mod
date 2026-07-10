@@ -1,7 +1,6 @@
 package pantz.mod.common.block;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -50,11 +49,10 @@ public class SteelLanternBlock extends LanternBlock {
     }
 
     @Override
-    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
+    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
         if (!level.isClientSide()) {
             level.setBlock(pos, state.cycle(LIT), 3);
-            float pitch = state.getValue(LIT) ? 0.6F : 0.5F;
-            level.playSound(null, pos, PMSoundEvents.STEEL_LANTERN_TOGGLE.get(), SoundSource.BLOCKS, 0.3f, pitch);
+            level.playSound(null, pos, PMSoundEvents.STEEL_LANTERN_TOGGLE.get(), SoundSource.BLOCKS);
         }
         return InteractionResult.sidedSuccess(level.isClientSide());
     }

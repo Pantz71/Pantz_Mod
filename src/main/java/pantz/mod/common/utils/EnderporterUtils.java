@@ -33,7 +33,7 @@ public class EnderporterUtils {
                 }
             }
             pearl.discard();
-            PMCriteriaTriggers.REDIRECT_TELEPORTATION.trigger(player);
+            PMCriteriaTriggers.REDIRECT_TELEPORTATION.get().trigger(player);
             return true;
         }
 

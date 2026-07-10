@@ -1,45 +1,53 @@
 package pantz.mod.common.network;
 
-import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.network.NetworkEvent;
+import net.neoforged.neoforge.network.handling.IPayloadContext;
 import pantz.mod.common.item.PotionSatchelItem;
+import pantz.mod.core.PantzMod;
 
-import java.util.function.Supplier;
+public class C2SDrinkSatchelPotionPacket implements CustomPacketPayload {
+    public static final CustomPacketPayload.Type<C2SDrinkSatchelPotionPacket> TYPE =
+            new CustomPacketPayload.Type<>(PantzMod.location("drink_satchel_potion"));
 
-public class C2SDrinkSatchelPotionPacket {
+    public static final StreamCodec<RegistryFriendlyByteBuf, C2SDrinkSatchelPotionPacket> STREAM_CODEC =
+            StreamCodec.unit(new C2SDrinkSatchelPotionPacket());
+
     public C2SDrinkSatchelPotionPacket() {}
 
-    public C2SDrinkSatchelPotionPacket(FriendlyByteBuf buf) {}
+    @Override
+    public CustomPacketPayload.Type<?> type() {
+        return TYPE;
+    }
 
-    public void toBytes(FriendlyByteBuf buf) {}
-
-    public void handle(Supplier<NetworkEvent.Context> contextSupplier) {
-        NetworkEvent.Context context = contextSupplier.get();
+    public static void handle(C2SDrinkSatchelPotionPacket packet, IPayloadContext context) {
         context.enqueueWork(() -> {
-            ServerPlayer player = context.getSender();
-            if (player == null) return;
+            Player player = context.player();
+            if (player instanceof ServerPlayer serverPlayer) {
 
-            ItemStack mainHand = player.getMainHandItem();
-            ItemStack offHand = player.getOffhandItem();
+                ItemStack mainHand = serverPlayer.getMainHandItem();
+                ItemStack offHand = serverPlayer.getOffhandItem();
 
-            if (mainHand.getItem() instanceof PotionSatchelItem) {
-                PotionSatchelItem.tryQuickDrink(player, mainHand);
-            } else if (offHand.getItem() instanceof PotionSatchelItem) {
-                PotionSatchelItem.tryQuickDrink(player, offHand);
-            } else {
-                Inventory inventory = player.getInventory();
-                for (int slot = 0; slot < inventory.getContainerSize(); slot++) {
-                    ItemStack stack = inventory.getItem(slot);
-                    if (stack.getItem() instanceof PotionSatchelItem) {
-                        PotionSatchelItem.tryQuickDrink(player, stack);
-                        break;
+                if (mainHand.getItem() instanceof PotionSatchelItem) {
+                    PotionSatchelItem.tryQuickDrink(serverPlayer, mainHand);
+                } else if (offHand.getItem() instanceof PotionSatchelItem) {
+                    PotionSatchelItem.tryQuickDrink(serverPlayer, offHand);
+                } else {
+                    Inventory inventory = serverPlayer.getInventory();
+                    for (int slot = 0; slot < inventory.getContainerSize(); slot++) {
+                        ItemStack stack = inventory.getItem(slot);
+                        if (stack.getItem() instanceof PotionSatchelItem) {
+                            PotionSatchelItem.tryQuickDrink(serverPlayer, stack);
+                            break;
+                        }
                     }
                 }
             }
         });
-        context.setPacketHandled(true);
     }
 }

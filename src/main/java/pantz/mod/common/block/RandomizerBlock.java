@@ -1,5 +1,6 @@
 package pantz.mod.common.block;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.DustParticleOptions;
@@ -20,6 +21,7 @@ import pantz.mod.common.utils.PMBlockStateProperties;
 import pantz.mod.common.utils.PMBlockStateProperties.RandomizerOutput;
 
 public class RandomizerBlock extends DiodeBlock {
+    private static final MapCodec<RandomizerBlock> CODEC = simpleCodec(RandomizerBlock::new);
     public static final EnumProperty<RandomizerOutput> OUTPUT = PMBlockStateProperties.OUTPUT;
     public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
@@ -30,6 +32,11 @@ public class RandomizerBlock extends DiodeBlock {
                 .setValue(FACING, Direction.NORTH)
                 .setValue(POWERED, false)
                 .setValue(OUTPUT, RandomizerOutput.NONE));
+    }
+
+    @Override
+    protected MapCodec<? extends DiodeBlock> codec() {
+        return CODEC;
     }
 
     @Override
@@ -109,7 +116,7 @@ public class RandomizerBlock extends DiodeBlock {
 
     @Override
     protected int getDelay(BlockState pState) {
-        return 1;
+        return 2;
     }
 
     @Override

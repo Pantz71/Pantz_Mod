@@ -4,8 +4,8 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
-import net.minecraftforge.common.data.DatapackBuiltinEntriesProvider;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.neoforged.neoforge.common.data.DatapackBuiltinEntriesProvider;
+import net.neoforged.neoforge.registries.NeoForgeRegistries;
 import pantz.mod.core.PantzMod;
 import pantz.mod.core.registry.PMFeatures.*;
 import pantz.mod.core.registry.datapack.PMBiomeModifiers;
@@ -25,5 +25,5 @@ public class PMDatapackBuiltinEntriesProvider extends DatapackBuiltinEntriesProv
             .add(Registries.TRIM_MATERIAL, PMTrimMaterials::bootstrap)
             .add(Registries.CONFIGURED_FEATURE, PMConfiguredFeatures::bootstrap)
             .add(Registries.PLACED_FEATURE, PMPlacedFeatures::bootstrap)
-            .add(ForgeRegistries.Keys.BIOME_MODIFIERS, PMBiomeModifiers::bootstrap);
+            .add(NeoForgeRegistries.Keys.BIOME_MODIFIERS, PMBiomeModifiers::bootstrap);
 }

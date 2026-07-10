@@ -1,7 +1,7 @@
 package pantz.mod.common.block.entity;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
@@ -10,12 +10,8 @@ import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.items.ItemStackHandler;
+import net.neoforged.neoforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import pantz.mod.core.registry.PMBlockEntityTypes;
 
 public class ItemStandBlockEntity extends BlockEntity {
@@ -31,7 +27,6 @@ public class ItemStandBlockEntity extends BlockEntity {
         }
     };
 
-    private LazyOptional<ItemStackHandler> lazyOptional = LazyOptional.empty();
 
     public ItemStandBlockEntity(BlockPos pPos, BlockState pBlockState) {
         super(PMBlockEntityTypes.ITEM_STAND.get(), pPos, pBlockState);
@@ -51,55 +46,37 @@ public class ItemStandBlockEntity extends BlockEntity {
         for(int i = 0; i < itemHandler.getSlots(); i++) {
             inv.setItem(i, itemHandler.getStackInSlot(i));
         }
+
         if (this.level == null) return;
         Containers.dropContents(this.level, this.worldPosition, inv);
     }
 
-    @Override
-    protected void saveAdditional(CompoundTag tag) {
-        super.saveAdditional(tag);
-        tag.put("Item", itemHandler.serializeNBT());
+    public ItemStackHandler getItemHandler() {
+        return this.itemHandler;
     }
 
     @Override
-    public void load(CompoundTag tag) {
-        super.load(tag);
-        itemHandler.deserializeNBT(tag.getCompound("Item"));
+    protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
+        super.saveAdditional(tag, registries);
+        tag.put("Item", itemHandler.serializeNBT(registries));
     }
 
     @Override
-    public void onLoad() {
-        super.onLoad();
-        lazyOptional = LazyOptional.of(() -> itemHandler);
+    protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
+        super.loadAdditional(tag, registries);
+        itemHandler.deserializeNBT(registries, tag.getCompound("Item"));
     }
 
     @Override
-    public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
-        if (cap == ForgeCapabilities.ITEM_HANDLER) {
-            return lazyOptional.cast();
-        }
-        return super.getCapability(cap, side);
+    public CompoundTag getUpdateTag(HolderLookup.Provider registries) {
+        CompoundTag tag = new CompoundTag();
+        saveAdditional(tag, registries);
+        return tag;
     }
 
     @Override
-    public void invalidateCaps() {
-        super.invalidateCaps();
-        lazyOptional.invalidate();
-    }
-
-    @Override
-    public void reviveCaps() {
-        super.reviveCaps();
-    }
-
-    @Override
-    public CompoundTag getUpdateTag() {
-        return saveWithoutMetadata();
-    }
-
-    @Override
-    public void handleUpdateTag(CompoundTag tag) {
-        load(tag);
+    public void handleUpdateTag(CompoundTag tag, HolderLookup.Provider lookupProvider) {
+        loadAdditional(tag, lookupProvider);
     }
 
     @Override
@@ -108,9 +85,7 @@ public class ItemStandBlockEntity extends BlockEntity {
     }
 
     @Override
-    public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
-        load(pkt.getTag());
+    public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt, HolderLookup.Provider lookupProvider) {
+        loadAdditional(pkt.getTag(), lookupProvider);
     }
-
-
 }

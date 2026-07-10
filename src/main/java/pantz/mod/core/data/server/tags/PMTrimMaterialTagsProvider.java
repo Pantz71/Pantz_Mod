@@ -6,7 +6,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.TagsProvider;
 import net.minecraft.world.item.armortrim.TrimMaterial;
-import net.minecraftforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.Nullable;
 import pantz.mod.core.PantzMod;
 import pantz.mod.core.registry.datapack.PMTrimMaterials;
@@ -20,6 +20,6 @@ public class PMTrimMaterialTagsProvider extends TagsProvider<TrimMaterial> {
 
     @Override
     protected void addTags(HolderLookup.Provider pProvider) {
-        this.tag(BlueprintTrimMaterialTags.GENERATES_OVERRIDES).add(PMTrimMaterials.STEEL).add(PMTrimMaterials.SULFUR);
+        this.tag(BlueprintTrimMaterialTags.GENERATES_OVERRIDES).add(PMTrimMaterials.STEEL, PMTrimMaterials.SULFUR);
     }
 }

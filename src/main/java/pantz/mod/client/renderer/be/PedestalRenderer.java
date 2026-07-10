@@ -38,7 +38,7 @@ public class PedestalRenderer implements BlockEntityRenderer<PedestalBlockEntity
         } else if (isWeapon) {
             yOffset = 1.25f;
         } else if (isTool) {
-            yOffset = 1.375f;
+            yOffset = 1.125f;
         } else {
             yOffset = 1.3125f;
         }

@@ -1,5 +1,6 @@
 package pantz.mod.common.block;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -20,11 +21,17 @@ import pantz.mod.common.block.entity.EnderScannerBlockEntity;
 import pantz.mod.core.registry.PMBlockEntityTypes;
 
 public class EnderScannerBlock extends BaseEntityBlock {
+    private static final MapCodec<EnderScannerBlock> CODEC = simpleCodec(EnderScannerBlock::new);
     public static final IntegerProperty POWER = BlockStateProperties.POWER;
 
     public EnderScannerBlock(Properties props) {
         super(props);
         this.registerDefaultState(this.getStateDefinition().any().setValue(POWER, 0));
+    }
+
+    @Override
+    protected MapCodec<? extends BaseEntityBlock> codec() {
+        return CODEC;
     }
 
     @Override

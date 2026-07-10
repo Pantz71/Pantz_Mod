@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "cookingtime": 100,
+  "experience": 0.2,
+  "group": "sulfur",
+  "ingredient": {
+    "item": "pantz_mod:sulfur"
+  },
+  "result": {
+    "count": 1,
+    "id": "pantz_mod:sulfur_crystal"
+  }
+}

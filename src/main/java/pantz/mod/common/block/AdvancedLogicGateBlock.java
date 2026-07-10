@@ -11,7 +11,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import pantz.mod.common.utils.LogicGateConditions;
+import pantz.mod.common.utils.LogicGateRegistry;
 import pantz.mod.common.utils.PMBlockStateProperties;
 
 public class AdvancedLogicGateBlock extends LogicGateBlock {
@@ -20,8 +20,8 @@ public class AdvancedLogicGateBlock extends LogicGateBlock {
     public static final BooleanProperty INPUT_BACK = PMBlockStateProperties.INPUT_BACK;
     public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
 
-    public AdvancedLogicGateBlock(Properties props, LogicGateConditions logic) {
-        super(props, logic);
+    public AdvancedLogicGateBlock(Properties properties, LogicGateRegistry logic) {
+        super(properties, logic);
         this.registerDefaultState(this.getStateDefinition().any()
                 .setValue(INPUT_LEFT, false)
                 .setValue(INPUT_RIGHT, false)

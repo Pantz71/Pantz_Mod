@@ -1,6 +1,8 @@
 package pantz.mod.common.block.entity;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
@@ -16,7 +18,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
-import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.Nullable;
 import pantz.mod.common.block.EntityDetectorBlock;
 import pantz.mod.common.utils.FilterMode;
@@ -47,7 +48,7 @@ public class EntityDetectorBlockEntity extends BlockEntity {
 
         for (int i = 0; i < list.size(); i++) {
             CompoundTag entry = list.getCompound(i);
-            this.filters.add(new ResourceLocation(entry.getString("Id")));
+            this.filters.add(ResourceLocation.parse(entry.getString("Id")));
             this.level.setBlockAndUpdate(this.worldPosition, this.getBlockState().setValue(EntityDetectorBlock.FILTERED, hasFilters()));
         }
 
@@ -56,7 +57,7 @@ public class EntityDetectorBlockEntity extends BlockEntity {
     }
 
     private boolean matchesFilter(Entity entity) {
-        ResourceLocation entityId = ForgeRegistries.ENTITY_TYPES.getKey(entity.getType());
+        ResourceLocation entityId = BuiltInRegistries.ENTITY_TYPE.getKey(entity.getType());
 
         boolean found = this.filters.contains(entityId);
         return (this.filterMode == FilterMode.INCLUDE) == found;
@@ -88,7 +89,7 @@ public class EntityDetectorBlockEntity extends BlockEntity {
     public EntityType<?> getSlideshowEntities() {
         if (this.filters.isEmpty() || level == null) return null;
         ResourceLocation id = filters.get(this.slideshowIndex % this.filters.size());
-        return ForgeRegistries.ENTITY_TYPES.getValue(id);
+        return BuiltInRegistries.ENTITY_TYPE.get(id);
     }
 
     public static void serverTick(Level level, BlockPos pos, BlockState state, EntityDetectorBlockEntity be) {
@@ -108,7 +109,7 @@ public class EntityDetectorBlockEntity extends BlockEntity {
         }
     }
 
-    public void serverTick() {
+    public void tick() {
         this.tickCounter = 1000;
         this.setChanged();
     }
@@ -147,8 +148,8 @@ public class EntityDetectorBlockEntity extends BlockEntity {
     }
 
     @Override
-    protected void saveAdditional(CompoundTag tag) {
-        super.saveAdditional(tag);
+    protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
+        super.saveAdditional(tag, registries);
         tag.putInt("FilterMode", this.filterMode.getId());
 
         ListTag list = new ListTag();
@@ -163,28 +164,30 @@ public class EntityDetectorBlockEntity extends BlockEntity {
     }
 
     @Override
-    public void load(CompoundTag tag) {
-        super.load(tag);
+    protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
+        super.loadAdditional(tag, registries);
         this.filterMode = FilterMode.byId(tag.getInt("FilterMode"));
 
         this.filters.clear();
         ListTag list = tag.getList("Filters", Tag.TAG_COMPOUND);
         for (int i = 0; i < list.size(); i++) {
             CompoundTag entryTag = list.getCompound(i);
-            this.filters.add(new ResourceLocation(entryTag.getString("Id")));
+            this.filters.add(ResourceLocation.parse(entryTag.getString("Id")));
         }
         this.slideshowIndex = tag.getInt("Index");
         this.slideshowTimer = tag.getInt("Timer");
     }
 
     @Override
-    public CompoundTag getUpdateTag() {
-        return this.saveWithoutMetadata();
+    public CompoundTag getUpdateTag(HolderLookup.Provider registries) {
+        CompoundTag tag = new CompoundTag();
+        this.saveAdditional(tag, registries);
+        return tag;
     }
 
     @Override
-    public void handleUpdateTag(CompoundTag tag) {
-        this.load(tag);
+    public void handleUpdateTag(CompoundTag tag, HolderLookup.Provider lookupProvider) {
+        this.loadAdditional(tag, lookupProvider);
     }
 
     @Override
@@ -193,7 +196,7 @@ public class EntityDetectorBlockEntity extends BlockEntity {
     }
 
     @Override
-    public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
-        this.load(pkt.getTag());
+    public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt, HolderLookup.Provider lookupProvider) {
+        this.loadAdditional(pkt.getTag(), lookupProvider);
     }
 }

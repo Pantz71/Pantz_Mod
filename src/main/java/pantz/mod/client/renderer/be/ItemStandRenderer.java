@@ -25,26 +25,42 @@ public class ItemStandRenderer implements BlockEntityRenderer<ItemStandBlockEnti
         ItemStack item = be.getItem();
         if (item.isEmpty()) return;
 
-        boolean isBlock = item.getItem() instanceof BlockItem;
-
-        float yOffset = isBlock ? 0.21875f : 0.1875f;
-        float zOffset = isBlock ? 0.2f : 0.1f;
-        float scale = isBlock ? 0.7f : 0.65f;
-
         poseStack.pushPose();
+        float yOffset;
+        if (item.getItem() instanceof BlockItem) {
+            yOffset = 0.21875f;
+        } else {
+            yOffset = 0.1875f;
+        }
 
         poseStack.translate(0.5, yOffset, 0.5);
+        float yRot = switch (be.getBlockState().getValue(ItemStandBlock.FACING)) {
+            case SOUTH -> 180f;
+            case WEST -> 90f;
+            case EAST -> -90f;
+            default -> 0f;
+        };
+        poseStack.mulPose(Axis.YP.rotationDegrees(yRot));
 
-        float yRot = be.getBlockState().getValue(ItemStandBlock.FACING).toYRot();
-        poseStack.mulPose(Axis.YP.rotationDegrees(-yRot));
-
+        float zOffset;
+        if (item.getItem() instanceof BlockItem) {
+            zOffset = 0.2f;
+        } else {
+            zOffset = 0.1f;
+        }
         poseStack.translate(0.0, 0.0, -zOffset);
-        poseStack.mulPose(Axis.XP.rotationDegrees(75f));
-        poseStack.scale(scale, scale, scale);
+        poseStack.mulPose(Axis.XP.rotationDegrees(75));
 
-        int renderLight = be.getBlockState().is(PMBlocks.GLOW_ITEM_STAND.get()) ? 0xF000F0 : light;
+        float size;
+        if (item.getItem() instanceof BlockItem) {
+            size = 0.7f;
+        } else {
+            size = 0.65f;
+        }
 
-        itemRenderer.renderStatic(item, ItemDisplayContext.FIXED, renderLight, OverlayTexture.NO_OVERLAY, poseStack, bufferSource, be.getLevel(), (int) be.getBlockPos().asLong());
+        poseStack.scale(size, size, size);
+
+        itemRenderer.renderStatic(item, ItemDisplayContext.FIXED, be.getBlockState().is(PMBlocks.GLOW_ITEM_STAND.get()) ? 0xf000f0 : light, OverlayTexture.NO_OVERLAY, poseStack, bufferSource, be.getLevel(), (int) be.getBlockPos().asLong());
 
         poseStack.popPose();
     }

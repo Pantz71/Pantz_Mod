@@ -1,0 +1,22 @@
+{
+  "molding": "json",
+  "remolder": [
+    {
+      "type": "add",
+      "target": "pools[1].entries[]",
+      "value": {
+        "type": "minecraft:item",
+        "name": "pantz_mod:io_globe"
+      }
+    },
+    {
+      "type": "add",
+      "target": "pools[1].entries[]",
+      "value": {
+        "type": "minecraft:item",
+        "name": "pantz_mod:makemake_globe"
+      }
+    }
+  ],
+  "selector": "minecraft:loot_table/chests/shipwreck_treasure"
+}

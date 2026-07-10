@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "#": {
+      "tag": "c:glass_blocks/colorless"
+    },
+    "@": {
+      "item": "minecraft:soul_sand"
+    }
+  },
+  "pattern": [
+    "###",
+    "#@#",
+    "###"
+  ],
+  "result": {
+    "count": 8,
+    "id": "pantz_mod:soul_glass"
+  }
+}

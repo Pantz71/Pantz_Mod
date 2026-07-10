@@ -1,0 +1,26 @@
+{
+  "molding": "json",
+  "remolder": [
+    {
+      "type": "add",
+      "target": "pools[0].entries[]",
+      "value": {
+        "type": "minecraft:item",
+        "functions": [
+          {
+            "add": false,
+            "count": {
+              "type": "minecraft:uniform",
+              "max": 2.0,
+              "min": 1.0
+            },
+            "function": "minecraft:set_count"
+          }
+        ],
+        "name": "pantz_mod:steel_ingot",
+        "weight": 100
+      }
+    }
+  ],
+  "selector": "minecraft:loot_table/pots/trial_chambers/corridor"
+}

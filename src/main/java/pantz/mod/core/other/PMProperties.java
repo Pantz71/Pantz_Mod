@@ -20,14 +20,14 @@ import pantz.mod.core.registry.PMSoundEvents.PMSoundTypes;
 import java.util.function.ToIntFunction;
 
 public class PMProperties {
-    public static final BlockSetType STEEL = BlockSetType.register(new BlockSetType(PantzMod.MOD_ID + ":steel", false, PMSoundTypes.STEEL, PMSoundEvents.STEEL_DOOR_CLOSE.get(), PMSoundEvents.STEEL_DOOR_OPEN.get(), PMSoundEvents.STEEL_TRAPDOOR_CLOSE.get(), PMSoundEvents.STEEL_TRAPDOOR_OPEN.get(), SoundEvents.METAL_PRESSURE_PLATE_CLICK_OFF, SoundEvents.METAL_PRESSURE_PLATE_CLICK_ON, SoundEvents.STONE_BUTTON_CLICK_OFF, SoundEvents.STONE_BUTTON_CLICK_ON));
+    public static final BlockSetType STEEL = BlockSetType.register(new BlockSetType(PantzMod.MOD_ID + ":steel", false, false, false, BlockSetType.PressurePlateSensitivity.EVERYTHING, PMSoundTypes.STEEL, PMSoundEvents.STEEL_DOOR_CLOSE.get(), PMSoundEvents.STEEL_DOOR_OPEN.get(), PMSoundEvents.STEEL_TRAPDOOR_CLOSE.get(), PMSoundEvents.STEEL_TRAPDOOR_OPEN.get(), SoundEvents.METAL_PRESSURE_PLATE_CLICK_OFF, SoundEvents.METAL_PRESSURE_PLATE_CLICK_ON, SoundEvents.STONE_BUTTON_CLICK_OFF, SoundEvents.STONE_BUTTON_CLICK_ON));
 
-    public static final BlockBehaviour.Properties STEEL_BLOCK = BlockBehaviour.Properties.of().mapColor(MapColor.METAL).instrument(NoteBlockInstrument.IRON_XYLOPHONE).requiresCorrectToolForDrops().sound(PMSoundTypes.STEEL).strength(3.0f, 6.0f);
-    public static final BlockBehaviour.Properties STEEL_DOOR = BlockBehaviour.Properties.of().requiresCorrectToolForDrops().strength(5.0F).noOcclusion().pushReaction(PushReaction.DESTROY).mapColor(MapColor.METAL);
-    public static final BlockBehaviour.Properties STEEL_TRAPDOOR = BlockBehaviour.Properties.of().requiresCorrectToolForDrops().strength(5.0F).noOcclusion().isValidSpawn(PMProperties::never).mapColor(MapColor.METAL);
+    public static final BlockBehaviour.Properties STEEL_BLOCK = BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GRAY).instrument(NoteBlockInstrument.IRON_XYLOPHONE).requiresCorrectToolForDrops().sound(PMSoundTypes.STEEL).strength(3.0f, 6.0f);
+    public static final BlockBehaviour.Properties STEEL_DOOR = BlockBehaviour.Properties.of().requiresCorrectToolForDrops().strength(5.0F).noOcclusion().pushReaction(PushReaction.DESTROY).mapColor(MapColor.COLOR_GRAY);
+    public static final BlockBehaviour.Properties STEEL_TRAPDOOR = BlockBehaviour.Properties.of().requiresCorrectToolForDrops().strength(5.0F).noOcclusion().isValidSpawn(PMProperties::never).mapColor(MapColor.COLOR_GRAY);
     public static final BlockBehaviour.Properties STEEL_BARS = BlockBehaviour.Properties.of().requiresCorrectToolForDrops().strength(5.0F, 6.0F).sound(PMSoundTypes.STEEL).noOcclusion();
     public static final BlockBehaviour.Properties STEEL_CHAIN = BlockBehaviour.Properties.of().forceSolidOn().requiresCorrectToolForDrops().strength(5.0F, 6.0F).sound(PMSoundTypes.STEEL_CHAIN).noOcclusion();
-    public static final BlockBehaviour.Properties STEEL_LANTERN = BlockBehaviour.Properties.of().mapColor(MapColor.METAL).forceSolidOn().requiresCorrectToolForDrops().strength(3.5F).sound(PMSoundTypes.STEEL_LANTERN).lightLevel(litBlockEmission(15));
+    public static final BlockBehaviour.Properties STEEL_LANTERN = BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GRAY).forceSolidOn().requiresCorrectToolForDrops().strength(3.5F).sound(PMSoundTypes.STEEL_LANTERN).lightLevel(litBlockEmission(15));
     public static final BlockBehaviour.Properties STEEL_PLATED_BRICKS = platedBricks(MapColor.COLOR_GRAY, PMSoundTypes.STEEL);
 
     public static final BlockBehaviour.Properties SULFUR = BlockBehaviour.Properties.of().instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(5.0F, 6.0F).mapColor(MapColor.COLOR_YELLOW).sound(SoundType.STONE).lightLevel(litBlockEmission(12)).randomTicks();

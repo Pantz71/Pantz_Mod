@@ -1,28 +1,22 @@
 package pantz.mod.core.other;
 
-import net.minecraftforge.network.NetworkDirection;
-import net.minecraftforge.network.NetworkRegistry;
-import net.minecraftforge.network.simple.SimpleChannel;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.network.PacketDistributor;
+import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
+import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 import pantz.mod.common.network.C2SDrinkSatchelPotionPacket;
 import pantz.mod.core.PantzMod;
 
-import java.util.Optional;
-
+@EventBusSubscriber(modid = PantzMod.MOD_ID)
 public class PMNetwork {
-    private static int id = -1;
-    private static int nextId() {
-        return id++;
+    @SubscribeEvent
+    public static void register(RegisterPayloadHandlersEvent event) {
+        PayloadRegistrar registrar = event.registrar("1");
+        registrar.playToServer(C2SDrinkSatchelPotionPacket.TYPE, C2SDrinkSatchelPotionPacket.STREAM_CODEC, C2SDrinkSatchelPotionPacket::handle);
     }
 
-    private static final String PROTOCOL_VERSION = "PM1";
-    public static final SimpleChannel CHANNEL = NetworkRegistry.ChannelBuilder.named(PantzMod.location("net")).networkProtocolVersion(() -> PROTOCOL_VERSION).clientAcceptedVersions(PROTOCOL_VERSION::equals).serverAcceptedVersions(PROTOCOL_VERSION::equals).simpleChannel();
-
-    public static void register() {
-        CHANNEL.registerMessage(nextId(), C2SDrinkSatchelPotionPacket.class, C2SDrinkSatchelPotionPacket::toBytes, C2SDrinkSatchelPotionPacket::new, C2SDrinkSatchelPotionPacket::handle, Optional.of(NetworkDirection.PLAY_TO_SERVER));
-
-    }
-
-    public static <MSG> void sendToServer(MSG message) {
-        CHANNEL.sendToServer(message);
+    public static void sendToServer(C2SDrinkSatchelPotionPacket message) {
+        PacketDistributor.sendToServer(message);
     }
 }

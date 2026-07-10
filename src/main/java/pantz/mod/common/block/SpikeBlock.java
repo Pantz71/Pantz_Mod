@@ -1,10 +1,12 @@
 package pantz.mod.common.block;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -12,7 +14,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.PotionItem;
-import net.minecraft.world.item.alchemy.PotionUtils;
+import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -32,11 +34,12 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 import pantz.mod.common.block.entity.SpikeBlockEntity;
 import pantz.mod.core.registry.PMBlockEntityTypes;
-import pantz.mod.core.registry.datapack.PMDamageTypes;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SpikeBlock extends BaseEntityBlock {
+    private static final MapCodec<SpikeBlock> CODEC = simpleCodec(SpikeBlock::new);
     protected static final VoxelShape SHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 2.0D, 16.0D);
     public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
 
@@ -45,21 +48,29 @@ public class SpikeBlock extends BaseEntityBlock {
     }
 
     @Override
-    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        BlockEntity be = level.getBlockEntity(pos);
-        if (!(be instanceof SpikeBlockEntity spike)) return InteractionResult.PASS;
+    protected MapCodec<? extends BaseEntityBlock> codec() {
+        return CODEC;
+    }
 
-        ItemStack stack = player.getItemInHand(hand);
+    @Override
+    public ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+        BlockEntity be = level.getBlockEntity(pos);
+        if (!(be instanceof SpikeBlockEntity spike)) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+
         if (stack.getItem() == Items.WET_SPONGE) {
             if (!level.isClientSide()) {
                 spike.removeLastEffect();
                 level.playSound(null, pos, SoundEvents.GENERIC_SPLASH, SoundSource.BLOCKS);
             }
-            return InteractionResult.sidedSuccess(level.isClientSide());
+            return ItemInteractionResult.sidedSuccess(level.isClientSide());
         }
 
         if (stack.getItem() instanceof PotionItem) {
-            List<MobEffectInstance> effects = PotionUtils.getMobEffects(stack);
+            PotionContents contents = stack.get(DataComponents.POTION_CONTENTS);
+            List<MobEffectInstance> effects = new ArrayList<>();
+            if (contents != null) {
+                contents.getAllEffects().forEach(effects::add);
+            }
 
             for (MobEffectInstance effect : effects) {
                 if (spike.addOrUpgradeEffect(effect)) {
@@ -69,18 +80,18 @@ public class SpikeBlock extends BaseEntityBlock {
                             player.setItemInHand(hand, new ItemStack(Items.GLASS_BOTTLE));
                         }
                     }
-                    return InteractionResult.sidedSuccess(level.isClientSide());
+                    return ItemInteractionResult.sidedSuccess(level.isClientSide());
                 }
             }
         }
-        return InteractionResult.PASS;
+        return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
     }
 
     @Override
     public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
         if (!level.isClientSide() && state.getValue(POWERED)) {
 
-            entity.hurt(PMDamageTypes.spike(level), 1.0F);
+            entity.hurt(level.damageSources().cactus(), 1.0F);
 
             BlockEntity be = level.getBlockEntity(pos);
             if (be instanceof SpikeBlockEntity spike && entity instanceof LivingEntity living) {
@@ -133,8 +144,7 @@ public class SpikeBlock extends BaseEntityBlock {
     @Nullable
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
         return level.isClientSide()
-                ? createTickerHelper(type, PMBlockEntityTypes.SPIKE.get(), SpikeBlockEntity::tick)
-                : null;
+                ? createTickerHelper(type, PMBlockEntityTypes.SPIKE.get(), SpikeBlockEntity::tick) : null;
     }
 
 }

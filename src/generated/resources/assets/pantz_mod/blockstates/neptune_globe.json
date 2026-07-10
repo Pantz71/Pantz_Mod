@@ -1,62 +1,32 @@
 {
   "variants": {
-    "facing=east,glowing=false,powered=false": {
+    "facing=east,powered=false": {
       "model": "pantz_mod:block/neptune_globe",
       "y": 270
     },
-    "facing=east,glowing=false,powered=true": {
+    "facing=east,powered=true": {
       "model": "pantz_mod:block/neptune_globe",
       "y": 270
     },
-    "facing=east,glowing=true,powered=false": {
-      "model": "pantz_mod:block/neptune_globe",
-      "y": 270
-    },
-    "facing=east,glowing=true,powered=true": {
-      "model": "pantz_mod:block/neptune_globe",
-      "y": 270
-    },
-    "facing=north,glowing=false,powered=false": {
+    "facing=north,powered=false": {
       "model": "pantz_mod:block/neptune_globe",
       "y": 180
     },
-    "facing=north,glowing=false,powered=true": {
+    "facing=north,powered=true": {
       "model": "pantz_mod:block/neptune_globe",
       "y": 180
     },
-    "facing=north,glowing=true,powered=false": {
-      "model": "pantz_mod:block/neptune_globe",
-      "y": 180
-    },
-    "facing=north,glowing=true,powered=true": {
-      "model": "pantz_mod:block/neptune_globe",
-      "y": 180
-    },
-    "facing=south,glowing=false,powered=false": {
+    "facing=south,powered=false": {
       "model": "pantz_mod:block/neptune_globe"
     },
-    "facing=south,glowing=false,powered=true": {
+    "facing=south,powered=true": {
       "model": "pantz_mod:block/neptune_globe"
     },
-    "facing=south,glowing=true,powered=false": {
-      "model": "pantz_mod:block/neptune_globe"
-    },
-    "facing=south,glowing=true,powered=true": {
-      "model": "pantz_mod:block/neptune_globe"
-    },
-    "facing=west,glowing=false,powered=false": {
+    "facing=west,powered=false": {
       "model": "pantz_mod:block/neptune_globe",
       "y": 90
     },
-    "facing=west,glowing=false,powered=true": {
-      "model": "pantz_mod:block/neptune_globe",
-      "y": 90
-    },
-    "facing=west,glowing=true,powered=false": {
-      "model": "pantz_mod:block/neptune_globe",
-      "y": 90
-    },
-    "facing=west,glowing=true,powered=true": {
+    "facing=west,powered=true": {
       "model": "pantz_mod:block/neptune_globe",
       "y": 90
     }

@@ -1,5 +1,7 @@
 package pantz.mod.common.block;
 
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.DustParticleOptions;
@@ -14,18 +16,23 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import pantz.mod.common.utils.LogicGateConditions;
+import pantz.mod.common.utils.LogicGateRegistry;
 import pantz.mod.common.utils.PMBlockStateProperties;
 
 public class LogicGateBlock extends DiodeBlock {
+    public static final MapCodec<LogicGateBlock> CODEC = RecordCodecBuilder.mapCodec(
+            instance -> instance.group(
+                    Properties.CODEC.fieldOf("properties").forGetter(block -> block.properties),
+                    LogicGateRegistry.CODEC.fieldOf("logic_type").forGetter(block -> block.logic)
+            ).apply(instance, LogicGateBlock::new));
     public static final BooleanProperty INPUT_LEFT = PMBlockStateProperties.INPUT_LEFT;
     public static final BooleanProperty INPUT_RIGHT = PMBlockStateProperties.INPUT_RIGHT;
     public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
 
-    public final LogicGateConditions logic;
+    public final LogicGateRegistry logic;
 
-    public LogicGateBlock(Properties props, LogicGateConditions logic) {
-        super(props);
+    public LogicGateBlock(Properties properties, LogicGateRegistry logic) {
+        super(properties);
         this.logic = logic;
         this.registerDefaultState(this.getStateDefinition().any()
                 .setValue(INPUT_LEFT, false)
@@ -36,8 +43,13 @@ public class LogicGateBlock extends DiodeBlock {
     }
 
     @Override
+    protected MapCodec<? extends DiodeBlock> codec() {
+        return CODEC;
+    }
+
+    @Override
     protected int getDelay(BlockState blockState) {
-        return 2;
+        return 1;
     }
 
     @Override
@@ -52,15 +64,12 @@ public class LogicGateBlock extends DiodeBlock {
     }
 
     @Override
-    public void neighborChanged(BlockState state, Level level, BlockPos pos, Block block, BlockPos fromPos, boolean isMoving) {
-        super.neighborChanged(state, level, pos, block, fromPos, isMoving);
+    public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+        super.tick(state, level, pos, random);
+        BlockState updatedInputs = updateInputs(level, pos, state);
 
-        if (!level.isClientSide()) {
-            BlockState updateInputs = updateInputs(level, pos, state);
-            if (!updateInputs.equals(state)) {
-                level.setBlock(pos, updateInputs, 2);
-            }
-            this.checkTickOnNeighbor(level, pos, updateInputs);
+        if (!updatedInputs.equals(state)) {
+            level.setBlock(pos, updatedInputs, Block.UPDATE_CLIENTS | Block.UPDATE_NEIGHBORS);
         }
     }
 
@@ -93,13 +102,13 @@ public class LogicGateBlock extends DiodeBlock {
     @Override
     public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
         if (state.getValue(POWERED) || state.getValue(INPUT_LEFT) || state.getValue(INPUT_RIGHT)) {
-            Direction direction = state.getValue(FACING);
+            Direction dir = state.getValue(FACING);
             double x = pos.getX() + 0.5 + (random.nextDouble() - 0.5) * 0.2;
             double y = pos.getY() + 0.4 + (random.nextDouble() - 0.5) * 0.2;
             double z = pos.getZ() + 0.5 + (random.nextDouble() - 0.5) * 0.2;
 
-            double offsetX = direction.getStepX() * 0.1;
-            double offsetZ = direction.getStepZ() * 0.1;
+            double offsetX = dir.getStepX() * 0.1;
+            double offsetZ = dir.getStepZ() * 0.1;
 
             level.addParticle(DustParticleOptions.REDSTONE, x + offsetX, y, z + offsetZ, 0.0, 0.0, 0.0);
         }

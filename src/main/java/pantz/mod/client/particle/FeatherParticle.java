@@ -73,10 +73,10 @@ public class FeatherParticle extends TextureSheetParticle {
         float b = this.bCol;
         float a = this.alpha;
 
-        buffer.vertex(corners[0].x(), corners[0].y(), corners[0].z()).uv(maxU, maxV).color(r, g, b, a).uv2(light).endVertex();
-        buffer.vertex(corners[1].x(), corners[1].y(), corners[1].z()).uv(maxU, minV).color(r, g, b, a).uv2(light).endVertex();
-        buffer.vertex(corners[2].x(), corners[2].y(), corners[2].z()).uv(minU, minV).color(r, g, b, a).uv2(light).endVertex();
-        buffer.vertex(corners[3].x(), corners[3].y(), corners[3].z()).uv(minU, maxV).color(r, g, b, a).uv2(light).endVertex();
+        buffer.addVertex(corners[0].x(), corners[0].y(), corners[0].z()).setUv(maxU, maxV).setColor(r, g, b, a).setLight(light);
+        buffer.addVertex(corners[1].x(), corners[1].y(), corners[1].z()).setUv(maxU, minV).setColor(r, g, b, a).setLight(light);
+        buffer.addVertex(corners[2].x(), corners[2].y(), corners[2].z()).setUv(minU, minV).setColor(r, g, b, a).setLight(light);
+        buffer.addVertex(corners[3].x(), corners[3].y(), corners[3].z()).setUv(minU, maxV).setColor(r, g, b, a).setLight(light);
     }
 
     @Override

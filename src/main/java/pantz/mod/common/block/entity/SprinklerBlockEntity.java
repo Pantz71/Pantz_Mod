@@ -1,20 +1,16 @@
 package pantz.mod.common.block.entity;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
-import net.minecraftforge.common.FarmlandWaterManager;
-import net.minecraftforge.common.IPlantable;
-import net.minecraftforge.common.ticket.AABBTicket;
+import net.neoforged.neoforge.common.FarmlandWaterManager;
+import net.neoforged.neoforge.common.ticket.AABBTicket;
 import pantz.mod.common.block.SprinklerBlock;
 import pantz.mod.core.PMConfig;
 import pantz.mod.core.registry.PMBlockEntityTypes;
@@ -80,7 +76,7 @@ public class SprinklerBlockEntity extends BlockEntity {
                 BlockState state = level.getBlockState(targetPos);
 
                 if (state.getBlock() instanceof BonemealableBlock growable) {
-                    if (growable.isValidBonemealTarget(level, targetPos, state, false)) {
+                    if (growable.isValidBonemealTarget(level, targetPos, state)) {
                         state.randomTick(level, targetPos, random);
                     }
                 }

@@ -4,13 +4,13 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.EntityTypeTagsProvider;
 import net.minecraft.world.entity.EntityType;
-import net.minecraftforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.Nullable;
 import pantz.mod.core.PantzMod;
 
 import java.util.concurrent.CompletableFuture;
 
-import static pantz.mod.core.other.tags.PMEntityTypeTags.*;
+import static pantz.mod.core.other.tags.PMEntityTypeTags.ENDER_SCANNER_IMMUNE_TYPES;
 
 public class PMEntityTypeTagsProvider extends EntityTypeTagsProvider {
     public PMEntityTypeTagsProvider(PackOutput pOutput, CompletableFuture<HolderLookup.Provider> pProvider, @Nullable ExistingFileHelper existingFileHelper) {

@@ -6,6 +6,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -19,7 +20,6 @@ import pantz.mod.common.utils.PMBlockStateProperties;
 import pantz.mod.core.registry.PMParticleTypes;
 import pantz.mod.core.registry.PMSoundEvents;
 
-@SuppressWarnings("deprecation")
 public class EnderporterBlock extends Block {
     public static final IntegerProperty ENDERPORTER_CHARGE = PMBlockStateProperties.ENDERPORTER_CHARGE;
 
@@ -34,8 +34,7 @@ public class EnderporterBlock extends Block {
     }
 
     @Override
-    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
-        ItemStack stack = player.getItemInHand(hand);
+    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
         if (hand == InteractionHand.MAIN_HAND) {
             if (stack.is(Items.END_STONE) && state.getValue(ENDERPORTER_CHARGE) < 4) {
                 if (!level.isClientSide()) {
@@ -46,10 +45,10 @@ public class EnderporterBlock extends Block {
                     }
                     level.playSound(null, pos, PMSoundEvents.ENDERPORTER_CHARGE.get(), SoundSource.BLOCKS);
                 }
-                return InteractionResult.sidedSuccess(level.isClientSide());
+                return ItemInteractionResult.sidedSuccess(level.isClientSide());
             }
         }
-        return InteractionResult.FAIL;
+        return ItemInteractionResult.FAIL;
     }
 
     @Override

@@ -10,7 +10,6 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -21,7 +20,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import javax.annotation.Nullable;
 
 public class RedstoneConfiguratorBlock extends Block {
-    public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
+    public static final DirectionProperty FACING = BlockStateProperties.FACING;
     public static final IntegerProperty POWER = BlockStateProperties.POWER;
 
     public RedstoneConfiguratorBlock(Properties props) {
@@ -39,12 +38,11 @@ public class RedstoneConfiguratorBlock extends Block {
     @Nullable
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
-        return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection());
+        return this.defaultBlockState().setValue(FACING, context.getNearestLookingDirection());
     }
 
     @Override
-    public InteractionResult use(BlockState state, Level level, BlockPos pos,
-                                 Player player, InteractionHand hand, BlockHitResult hit) {
+    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
         if (!level.isClientSide()) {
             int nextPower = (state.getValue(POWER) + 1) % 16;
             BlockState newState = state.setValue(POWER, nextPower);
@@ -57,11 +55,6 @@ public class RedstoneConfiguratorBlock extends Block {
             level.updateNeighborsAt(pos, this);
         }
         return InteractionResult.sidedSuccess(level.isClientSide());
-    }
-
-    @Override
-    public boolean isSignalSource(BlockState pState) {
-        return true;
     }
 
     @Override

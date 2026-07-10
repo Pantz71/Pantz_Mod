@@ -14,7 +14,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.material.Fluids;
 import org.jetbrains.annotations.Nullable;
 import pantz.mod.core.registry.PMBlocks;
 
@@ -26,40 +25,17 @@ public class SulfurBlock extends Block {
         this.registerDefaultState(this.getStateDefinition().any().setValue(LIT, false));
     }
 
-    private boolean isLavaNearby(LevelAccessor level, BlockPos pos) {
-        int radius = 4;
-        for (int x = -radius; x <= radius; x++) {
-            for (int y = -radius; y <= 0; y++) {
-                for (int z = -radius; z <= radius; z++) {
-                    BlockPos checkPos = pos.offset(x, y, z);
-                    BlockState state = level.getBlockState(checkPos);
-                    if (state.is(Blocks.LAVA) || state.getFluidState().is(Fluids.LAVA)) {
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
-    }
-
-    private boolean shouldLit(LevelAccessor level, BlockPos pos) {
-        BlockPos belowPos = pos.below();
-        BlockState belowState = level.getBlockState(belowPos);
-
-        boolean isFireBelow = belowState.getBlock() instanceof BaseFireBlock ||
-                (belowState.getBlock() instanceof CampfireBlock && CampfireBlock.isLitCampfire(belowState));
-
-        return isFireBelow || isLavaNearby(level, pos);
-    }
-
     @Override
     public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+        BlockPos belowPos = pos.below();
         BlockPos abovePos = pos.above();
+        BlockState belowState = level.getBlockState(belowPos);
         BlockState aboveState = level.getBlockState(abovePos);
-        boolean growRequirement = shouldLit(level, pos);
+
+        boolean fire = belowState.getBlock() instanceof BaseFireBlock || (belowState.getBlock() instanceof CampfireBlock && CampfireBlock.isLitCampfire(belowState));
 
         if (canClusterGrowAtState(aboveState)) {
-            if (growRequirement) {
+            if (fire) {
                 level.setBlockAndUpdate(pos, state.setValue(LIT, true));
                 level.setBlockAndUpdate(abovePos, PMBlocks.SMALL_SULFUR_BUD.get().defaultBlockState());
             } else {
@@ -70,9 +46,14 @@ public class SulfurBlock extends Block {
 
     @Override
     public void neighborChanged(BlockState state, Level level, BlockPos pos, Block neighborBlock, BlockPos neighborPos, boolean isMoving) {
-        boolean growRequirement = shouldLit(level, pos);
-        if (state.getValue(LIT) != growRequirement) {
-            level.setBlock(pos, state.setValue(LIT, growRequirement), 2);
+        if (neighborPos.equals(pos.below())) {
+            BlockState belowState = level.getBlockState(neighborPos);
+
+            boolean fire = belowState.getBlock() instanceof BaseFireBlock || (belowState.getBlock() instanceof CampfireBlock && CampfireBlock.isLitCampfire(belowState));
+
+            if (state.getValue(LIT) != fire) {
+                level.setBlock(pos, state.setValue(LIT, fire), 2);
+            }
         }
     }
 
@@ -86,7 +67,12 @@ public class SulfurBlock extends Block {
 
     @Override
     public @Nullable BlockState getStateForPlacement(BlockPlaceContext context) {
-        return this.defaultBlockState().setValue(LIT, shouldLit(context.getLevel(), context.getClickedPos()));
+        LevelAccessor level = context.getLevel();
+        BlockPos belowPos = context.getClickedPos().below();
+        BlockState belowState = level.getBlockState(belowPos);
+        boolean fire = belowState.getBlock() instanceof BaseFireBlock;
+        boolean campfire = belowState.getBlock() instanceof CampfireBlock && CampfireBlock.isLitCampfire(belowState);
+        return this.defaultBlockState().setValue(LIT, fire || campfire);
     }
 
     @Override

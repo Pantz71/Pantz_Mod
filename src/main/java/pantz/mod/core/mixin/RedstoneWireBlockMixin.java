@@ -46,6 +46,7 @@ public class RedstoneWireBlockMixin {
                 cir.setReturnValue(RedstoneSide.NONE);
             }
 
+
         }
     }
 }

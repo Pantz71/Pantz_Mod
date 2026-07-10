@@ -7,7 +7,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.HitResult;
-import net.minecraftforge.network.PlayMessages;
 import pantz.mod.common.item.DynamiteItem;
 import pantz.mod.common.utils.DynamiteType;
 import pantz.mod.core.registry.PMEntityTypes;
@@ -15,15 +14,16 @@ import pantz.mod.core.registry.PMItems;
 
 public class Dynamite extends ThrowableItemProjectile {
 
-    public Dynamite(EntityType<? extends ThrowableItemProjectile> pEntityType, Level pLevel) {
-        super(pEntityType, pLevel);
-    }
     public Dynamite(Level pLevel, LivingEntity pShooter) {
         super(PMEntityTypes.DYNAMITE.get(), pShooter, pLevel);
     }
 
-    public Dynamite(PlayMessages.SpawnEntity entity, Level level) {
-        this(PMEntityTypes.DYNAMITE.get(), level);
+    public Dynamite(Level level, double x, double y, double z) {
+        super(PMEntityTypes.DYNAMITE.get(), x, y, z, level);
+    }
+
+    public Dynamite(EntityType<? extends ThrowableItemProjectile> entity, Level level) {
+        super(entity, level);
     }
 
     @Override
@@ -39,9 +39,8 @@ public class Dynamite extends ThrowableItemProjectile {
         }
     }
 
-
     public DynamiteType getDynamiteType() {
-        ItemStack stack = this.getItemRaw();
+        ItemStack stack = this.getItem();
         if (stack.getItem() instanceof DynamiteItem dynamiteItem) {
             return dynamiteItem.getType();
         }

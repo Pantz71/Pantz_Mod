@@ -1,43 +1,30 @@
 package pantz.mod.core;
 
-import com.mojang.logging.LogUtils;
-import com.teamabnormals.blueprint.core.util.DataUtil;
 import com.teamabnormals.blueprint.core.util.registry.RegistryHelper;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.data.event.GatherDataEvent;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fml.DistExecutor;
-import net.minecraftforge.fml.ModLoadingContext;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.config.ModConfig.*;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.ModContainer;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.config.ModConfig.*;
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.neoforge.common.data.BlockTagsProvider;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.data.event.GatherDataEvent;
 import org.jetbrains.annotations.Nullable;
-import org.slf4j.Logger;
 import pantz.mod.core.data.client.PMBlockStateProvider;
 import pantz.mod.core.data.client.PMItemModelProvider;
 import pantz.mod.core.data.client.PMSpriteSourceProvider;
-import pantz.mod.core.data.server.PMAdvancementProvider;
-import pantz.mod.core.data.server.PMDatapackBuiltinEntriesProvider;
-import pantz.mod.core.data.server.PMLootTableProvider;
-import pantz.mod.core.data.server.PMRecipeProvider;
-import pantz.mod.core.data.server.modifiers.PMLootModifierProvider;
+import pantz.mod.core.data.server.*;
 import pantz.mod.core.data.server.tags.*;
-import pantz.mod.core.other.PMClientCompat;
-import pantz.mod.core.other.PMCompat;
-import pantz.mod.core.other.PMLootFunctions;
-import pantz.mod.core.other.PMNetwork;
+import pantz.mod.core.other.*;
 import pantz.mod.core.registry.*;
 import pantz.mod.core.registry.helper.PMBlockSubRegistryHelper;
 
@@ -46,37 +33,30 @@ import java.util.concurrent.CompletableFuture;
 @Mod(PantzMod.MOD_ID)
 public class PantzMod {
     public static final String MOD_ID = "pantz_mod";
-    public static final RegistryHelper REGISTRY_HELPER = RegistryHelper.create(MOD_ID, helper -> helper.putSubHelper(ForgeRegistries.BLOCKS, new PMBlockSubRegistryHelper(helper)));
-    private static final Logger LOGGER = LogUtils.getLogger();
+    public static final RegistryHelper REGISTRY_HELPER = RegistryHelper.create(MOD_ID, helper -> helper.putSubHelper(Registries.BLOCK, new PMBlockSubRegistryHelper(helper)));
 
-    public PantzMod() {
-        ModLoadingContext context = ModLoadingContext.get();
-        IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
-        PMNetwork.register();
+    public PantzMod(IEventBus bus, ModContainer container) {
         PMBlocks.BLOCKS.register(bus);
-        PMBlockEntityTypes.BLOCK_ENTITY_TYPES.register(bus);
         PMItems.ITEMS.register(bus);
+        PMBlockEntityTypes.BLOCK_ENTITY_TYPES.register(bus);
         PMEntityTypes.ENTITY_TYPES.register(bus);
         PMAttributes.ATTRIBUTES.register(bus);
         PMMobEffects.register(bus);
-        PMMenuTypes.MENU_TYPES.register(bus);
+        PMMenuTypes.MENUS.register(bus);
         PMParticleTypes.PARTICLE_TYPES.register(bus);
         PMSoundEvents.SOUND_EVENTS.register(bus);
+        PMCriteriaTriggers.TRIGGERS.register(bus);
+        PMConditionSerializers.CONDITION_SERIALIZERS.register(bus);
         PMLootConditions.LOOT_CONDITION_TYPES.register(bus);
+        PMLootContextParamSets.register();
         PMLootFunctions.LOOT_FUNCTIONS.register(bus);
-        PMRecipes.register(bus);
 
-        MinecraftForge.EVENT_BUS.register(this);
         bus.addListener(this::commonSetup);
         bus.addListener(this::clientSetup);
         bus.addListener(this::dataSetup);
-        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {
-            PMBlocks.setupTabs();
-            PMItems.setupTabs();
-        });
 
-        context.registerConfig(Type.COMMON, PMConfig.Common.COMMON_SPEC);
-        DataUtil.registerConfigCondition(MOD_ID, PMConfig.Common.COMMON);
+        container.registerConfig(Type.COMMON, PMConfig.Common.COMMON_SPEC);
+
     }
 
     private void commonSetup(FMLCommonSetupEvent event) {
@@ -96,17 +76,18 @@ public class PantzMod {
         boolean client = event.includeClient();
         gen.addProvider(client, new PMBlockStateProvider(output, helper));
         gen.addProvider(client, new PMItemModelProvider(output, helper));
-        gen.addProvider(client, new PMSpriteSourceProvider(output, helper));
+        gen.addProvider(client, new PMSpriteSourceProvider(output, provider, helper));
 
         boolean server = event.includeServer();
         PMDatapackBuiltinEntriesProvider datapackEntries = new PMDatapackBuiltinEntriesProvider(output, provider);
         gen.addProvider(server, datapackEntries);
         provider = datapackEntries.getRegistryProvider();
 
-        gen.addProvider(server, new PMRecipeProvider(output));
-        gen.addProvider(server, new PMLootTableProvider(output));
+        gen.addProvider(server, new PMRecipeProvider(output, provider));
+        gen.addProvider(server, new PMLootTableProvider(output, provider));
 
-        PMBlockTagsProvider blockTags = new PMBlockTagsProvider(output, provider, helper);
+        BlockTagsProvider blockTags = new PMBlockTagsProvider(output, provider, helper);
+
         gen.addProvider(server, blockTags);
         gen.addProvider(server, new PMItemTagsProvider(output, provider, blockTags.contentsGetter(), helper));
         gen.addProvider(server, new PMEntityTypeTagsProvider(output, provider, helper));
@@ -115,12 +96,12 @@ public class PantzMod {
 
         gen.addProvider(server, PMAdvancementProvider.create(output, provider, helper));
 
-        gen.addProvider(server, new PMLootModifierProvider(output, provider));
+        gen.addProvider(server, new PMDataRemolderProvider(output, provider));
 
     }
 
     public static ResourceLocation location(String loc) {
-        return new ResourceLocation(MOD_ID, loc);
+        return ResourceLocation.fromNamespaceAndPath(MOD_ID, loc);
     }
 
     @SuppressWarnings("unchecked")
@@ -128,5 +109,4 @@ public class PantzMod {
     public static <E extends BlockEntity, A extends BlockEntity> BlockEntityTicker<A> createTickerHelper(BlockEntityType<A> pServerType, BlockEntityType<E> pClientType, BlockEntityTicker<? super E> pTicker) {
         return pClientType == pServerType ? (BlockEntityTicker<A>)pTicker : null;
     }
-
 }

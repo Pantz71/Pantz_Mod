@@ -28,7 +28,7 @@ public class GlobeModel extends Model {
     }
 
     @Override
-    public void renderToBuffer(PoseStack stack, VertexConsumer buffer, int light, int overlay, float red, float green, float blue, float alpha) {
-        globe.render(stack, buffer, light, overlay, red, green, blue, alpha);
+    public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int light, int overlay, int alpha) {
+        globe.render(poseStack, vertexConsumer, light, overlay);
     }
 }

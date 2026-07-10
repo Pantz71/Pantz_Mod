@@ -1,5 +1,6 @@
 package pantz.mod.common.block;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundSource;
@@ -7,6 +8,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -35,9 +37,9 @@ import pantz.mod.core.registry.PMSoundEvents;
 
 @SuppressWarnings("deprecation")
 public class PedestalBlock extends HorizontalDirectionalBlock implements EntityBlock, SimpleWaterloggedBlock {
+    private static final MapCodec<PedestalBlock> CODEC = simpleCodec(PedestalBlock::new);
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
-    public static final BooleanProperty SPINNING = PMBlockStateProperties.SPINNING;
     public static final EnumProperty<CarpetColor> CARPET = PMBlockStateProperties.CARPET;
     public static final VoxelShape SHAPE = Shapes.or(
             Block.box(1, 0, 1, 15, 2, 15),
@@ -50,15 +52,45 @@ public class PedestalBlock extends HorizontalDirectionalBlock implements EntityB
 
     public PedestalBlock(Properties pProperties) {
         super(pProperties);
-        this.registerDefaultState(this.getStateDefinition().any().setValue(FACING, Direction.NORTH).setValue(CARPET, CarpetColor.NONE).setValue(SPINNING, false));
+        this.registerDefaultState(this.getStateDefinition().any().setValue(FACING, Direction.NORTH));
+    }
+
+    @Override
+    protected MapCodec<? extends HorizontalDirectionalBlock> codec() {
+        return CODEC;
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(FACING, WATERLOGGED, CARPET, SPINNING);
+        builder.add(FACING, WATERLOGGED, CARPET);
     }
 
-    private InteractionResult pedestalInteractions(Player player, InteractionHand hand, ItemStack stack, PedestalBlockEntity pedestal, Level level, BlockPos pos, BlockState state) {
+    @Override
+    public @Nullable BlockState getStateForPlacement(BlockPlaceContext ctx) {
+        return this.defaultBlockState().setValue(WATERLOGGED, ctx.getLevel().getFluidState(ctx.getClickedPos()).getType() == Fluids.WATER).setValue(FACING, ctx.getHorizontalDirection().getOpposite()).setValue(CARPET, CarpetColor.NONE);
+    }
+
+    @Override
+    public FluidState getFluidState(BlockState state) {
+        return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
+    }
+
+    @Override
+    public BlockState rotate(BlockState state, Rotation rotation) {
+        return state.setValue(FACING, rotation.rotate(state.getValue(FACING)));
+    }
+
+    @Override
+    public BlockState mirror(BlockState state, Mirror mirror) {
+        return state.rotate(mirror.getRotation(state.getValue(FACING)));
+    }
+
+    @Override
+    public boolean hasDynamicShape() {
+        return true;
+    }
+
+    private ItemInteractionResult pedestalInteractions(Player player, InteractionHand hand, ItemStack stack, PedestalBlockEntity pedestal, Level level, BlockPos pos, BlockState state) {
         ItemStack onPedestal = pedestal.getItem();
         RandomSource random = level.getRandom();
 
@@ -84,39 +116,33 @@ public class PedestalBlock extends HorizontalDirectionalBlock implements EntityB
             }
             level.playSound(null, pos, PMSoundEvents.PEDESTAL_INTERACT.get(), SoundSource.BLOCKS, 0.2f, (random.nextFloat() - random.nextFloat()) * 1.4F + 2.0F);
         } else {
-            return InteractionResult.PASS;
+            return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
         }
 
         if (!level.isClientSide()) {
             level.sendBlockUpdated(pos, state, state, 3);
         }
-
-        return InteractionResult.sidedSuccess(level.isClientSide());
+        return ItemInteractionResult.sidedSuccess(level.isClientSide());
     }
 
     @Override
-    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
+    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
         if (!(level.getBlockEntity(pos) instanceof PedestalBlockEntity pedestal)) return InteractionResult.PASS;
-        ItemStack stack = player.getItemInHand(hand);
+        boolean isSneaking = player.isShiftKeyDown();
 
-        if (player.isShiftKeyDown()) {
+        if (isSneaking) {
             pedestal.setSpinning(!pedestal.isSpinning());
             level.playSound(null, pos, PMSoundEvents.PEDESTAL_SPIN.get(), SoundSource.BLOCKS, 0.3f, 0.5F);
             level.sendBlockUpdated(pos, state, state, 3);
             return InteractionResult.SUCCESS;
         }
+        return InteractionResult.PASS;
+    }
 
+    @Override
+    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
+        if (!(level.getBlockEntity(pos) instanceof PedestalBlockEntity pedestal)) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
         return pedestalInteractions(player, hand, stack, pedestal, level, pos, state);
-    }
-
-    @Override
-    public @Nullable BlockState getStateForPlacement(BlockPlaceContext ctx) {
-        return this.defaultBlockState().setValue(WATERLOGGED, ctx.getLevel().getFluidState(ctx.getClickedPos()).getType() == Fluids.WATER).setValue(FACING, ctx.getHorizontalDirection().getOpposite()).setValue(CARPET, CarpetColor.NONE);
-    }
-
-    @Override
-    public FluidState getFluidState(BlockState state) {
-        return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
     }
 
     @Override
@@ -128,15 +154,6 @@ public class PedestalBlock extends HorizontalDirectionalBlock implements EntityB
         return 0;
     }
 
-    @Override
-    public boolean hasAnalogOutputSignal(BlockState pState) {
-        return true;
-    }
-
-    @Override
-    public boolean hasDynamicShape() {
-        return true;
-    }
 
     @Override
     public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
@@ -151,6 +168,11 @@ public class PedestalBlock extends HorizontalDirectionalBlock implements EntityB
             }
         }
         super.onRemove(state, level, pos, newState, movedByPiston);
+    }
+
+    @Override
+    public boolean hasAnalogOutputSignal(BlockState pState) {
+        return true;
     }
 
     @Override
