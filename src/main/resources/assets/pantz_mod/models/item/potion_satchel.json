@@ -1,0 +1,7 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "pantz_mod:item/potion_satchel",
+    "layer1": "pantz_mod:item/potion_satchel_overlay"
+  }
+}

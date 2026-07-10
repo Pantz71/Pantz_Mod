@@ -1,0 +1,7 @@
+{
+  "parent": "pantz_mod:item/large_globe_stand",
+  "textures": {
+    "globe": "pantz_mod:block/globe/large_planets/neptune",
+    "stand": "pantz_mod:block/iron_globe_stand"
+  }
+}

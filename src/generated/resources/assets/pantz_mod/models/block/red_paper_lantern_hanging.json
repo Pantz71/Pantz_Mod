@@ -1,0 +1,6 @@
+{
+  "parent": "pantz_mod:block/template_hanging_paper_lantern",
+  "textures": {
+    "texture": "pantz_mod:block/red_paper_lantern"
+  }
+}

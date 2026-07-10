@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/wall_inventory",
+  "textures": {
+    "wall": "pantz_mod:block/sulfur_bricks"
+  }
+}

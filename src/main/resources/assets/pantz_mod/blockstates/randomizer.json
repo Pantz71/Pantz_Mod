@@ -1,0 +1,42 @@
+{
+  "variants": {
+    "facing=north,powered=false,output=front": { "model": "pantz_mod:block/randomizer","y": 180 },
+    "facing=north,powered=false,output=left":  { "model": "pantz_mod:block/randomizer","y": 180 },
+    "facing=north,powered=false,output=right": { "model": "pantz_mod:block/randomizer","y": 180 },
+    "facing=north,powered=false,output=none":  { "model": "pantz_mod:block/randomizer","y": 180 },
+
+    "facing=south,powered=false,output=front": { "model": "pantz_mod:block/randomizer" },
+    "facing=south,powered=false,output=left":  { "model": "pantz_mod:block/randomizer" },
+    "facing=south,powered=false,output=right": { "model": "pantz_mod:block/randomizer" },
+    "facing=south,powered=false,output=none":  { "model": "pantz_mod:block/randomizer" },
+
+    "facing=west,powered=false,output=front":  { "model": "pantz_mod:block/randomizer", "y": 90 },
+    "facing=west,powered=false,output=left":   { "model": "pantz_mod:block/randomizer", "y": 90 },
+    "facing=west,powered=false,output=right":  { "model": "pantz_mod:block/randomizer", "y": 90 },
+    "facing=west,powered=false,output=none":   { "model": "pantz_mod:block/randomizer", "y": 90 },
+
+    "facing=east,powered=false,output=front":  { "model": "pantz_mod:block/randomizer", "y": 270 },
+    "facing=east,powered=false,output=left":   { "model": "pantz_mod:block/randomizer", "y": 270 },
+    "facing=east,powered=false,output=right":  { "model": "pantz_mod:block/randomizer", "y": 270 },
+    "facing=east,powered=false,output=none":   { "model": "pantz_mod:block/randomizer", "y": 270 },
+
+    "facing=north,powered=true,output=front": { "model": "pantz_mod:block/randomizer_front", "y": 180 },
+    "facing=north,powered=true,output=left":  { "model": "pantz_mod:block/randomizer_left", "y": 180 },
+    "facing=north,powered=true,output=right": { "model": "pantz_mod:block/randomizer_right", "y": 180 },
+    "facing=north,powered=true,output=none":  { "model": "pantz_mod:block/randomizer", "y": 180 },
+
+    "facing=south,powered=true,output=front": { "model": "pantz_mod:block/randomizer_front" },
+    "facing=south,powered=true,output=left":  { "model": "pantz_mod:block/randomizer_left" },
+    "facing=south,powered=true,output=right": { "model": "pantz_mod:block/randomizer_right" },
+
+    "facing=west,powered=true,output=front":  { "model": "pantz_mod:block/randomizer_front", "y": 90 },
+    "facing=west,powered=true,output=left":   { "model": "pantz_mod:block/randomizer_left", "y": 90 },
+    "facing=west,powered=true,output=right":  { "model": "pantz_mod:block/randomizer_right", "y": 90 },
+    "facing=west,powered=true,output=none":   { "model": "pantz_mod:block/randomizer", "y": 90 },
+
+    "facing=east,powered=true,output=front":  { "model": "pantz_mod:block/randomizer_front", "y": 270 },
+    "facing=east,powered=true,output=left":   { "model": "pantz_mod:block/randomizer_left", "y": 270 },
+    "facing=east,powered=true,output=right":  { "model": "pantz_mod:block/randomizer_right", "y": 270 },
+    "facing=east,powered=true,output=none":   { "model": "pantz_mod:block/randomizer", "y": 270 }
+  }
+}

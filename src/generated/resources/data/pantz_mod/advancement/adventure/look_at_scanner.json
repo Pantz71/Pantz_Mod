@@ -1,0 +1,26 @@
+{
+  "parent": "minecraft:adventure/root",
+  "criteria": {
+    "look_at_scanner": {
+      "trigger": "pantz_mod:look_at_scanner"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.pantz_mod.adventure.look_at_scanner.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "pantz_mod:ender_scanner"
+    },
+    "title": {
+      "translate": "advancements.pantz_mod.adventure.look_at_scanner.title"
+    }
+  },
+  "requirements": [
+    [
+      "look_at_scanner"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

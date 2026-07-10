@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "layers=0": {
+      "model": "pantz_mod:block/feeding_trough"
+    },
+    "layers=1": {
+      "model": "pantz_mod:block/feeding_trough1"
+    },
+    "layers=2": {
+      "model": "pantz_mod:block/feeding_trough2"
+    },
+    "layers=3": {
+      "model": "pantz_mod:block/feeding_trough3"
+    },
+    "layers=4": {
+      "model": "pantz_mod:block/feeding_trough4"
+    }
+  }
+}

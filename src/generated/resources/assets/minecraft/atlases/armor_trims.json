@@ -1,0 +1,20 @@
+{
+  "sources": [
+    {
+      "type": "blueprint:paletted_permutations",
+      "palette_key": "minecraft:trims/color_palettes/trim_palette",
+      "permutations": {
+        "pantz_mod_steel": "pantz_mod:trims/color_palettes/steel",
+        "pantz_mod_steel_darker": "pantz_mod:trims/color_palettes/steel_darker",
+        "pantz_mod_sulfur": "pantz_mod:trims/color_palettes/sulfur"
+      },
+      "sources": [
+        {
+          "type": "minecraft:directory",
+          "prefix": "trims/models/armor/",
+          "source": "trims/models/armor"
+        }
+      ]
+    }
+  ]
+}

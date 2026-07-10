@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "pantz_mod:polished_sulfur"
+  },
+  "result": {
+    "count": 1,
+    "id": "pantz_mod:sulfur_brick_wall"
+  }
+}

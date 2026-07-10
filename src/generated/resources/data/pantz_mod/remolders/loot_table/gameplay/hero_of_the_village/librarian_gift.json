@@ -1,0 +1,17 @@
+{
+  "molding": "json",
+  "remolder": [
+    {
+      "type": "add",
+      "target": "pools[0].entries[]",
+      "value": {
+        "type": "minecraft:item",
+        "name": "pantz_mod:red_envelope"
+      }
+    }
+  ],
+  "selector": {
+    "type": "names",
+    "config": []
+  }
+}

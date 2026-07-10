@@ -1,0 +1,45 @@
+{
+  "molding": "json",
+  "remolder": [
+    {
+      "type": "add",
+      "target": "pools[1].entries[]",
+      "value": {
+        "type": "minecraft:item",
+        "name": "pantz_mod:earth_globe",
+        "weight": 2
+      }
+    },
+    {
+      "type": "add",
+      "target": "pools[1].entries[]",
+      "value": {
+        "type": "minecraft:item",
+        "name": "pantz_mod:callisto_globe"
+      }
+    },
+    {
+      "type": "add",
+      "target": "pools[1].entries[]",
+      "value": {
+        "type": "minecraft:item",
+        "name": "pantz_mod:sun_globe"
+      }
+    },
+    {
+      "type": "add",
+      "target": "pools[1].entries[]",
+      "value": {
+        "type": "minecraft:item",
+        "functions": [
+          {
+            "function": "pantz_mod:set_item_loot_table",
+            "loot_table": "pantz_mod:container_item/potion_satchel"
+          }
+        ],
+        "name": "pantz_mod:potion_satchel"
+      }
+    }
+  ],
+  "selector": "minecraft:loot_table/chests/stronghold_library"
+}

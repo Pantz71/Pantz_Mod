@@ -1,0 +1,7 @@
+{
+  "parent": "pantz_mod:item/tiny_globe_stand",
+  "textures": {
+    "globe": "pantz_mod:block/globe/dwarf_planets/ceres",
+    "stand": "pantz_mod:block/quartz_globe_stand"
+  }
+}

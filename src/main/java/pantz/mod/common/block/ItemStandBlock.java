@@ -1,0 +1,188 @@
+package pantz.mod.common.block;
+
+import com.mojang.serialization.MapCodec;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.Containers;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jetbrains.annotations.Nullable;
+import pantz.mod.common.block.entity.ItemStandBlockEntity;
+import pantz.mod.common.utils.PMBlockStateProperties;
+import pantz.mod.core.registry.PMSoundEvents;
+
+public class ItemStandBlock extends HorizontalDirectionalBlock implements EntityBlock, SimpleWaterloggedBlock {
+    private static final MapCodec<ItemStandBlock> CODEC = simpleCodec(ItemStandBlock::new);
+    public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
+    public static final BooleanProperty GLASS = PMBlockStateProperties.GLASS;
+    public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
+    public static final VoxelShape SHAPE = Shapes.or(
+            Block.box(0, 0, 0, 16, 2, 16),
+            Block.box(7, 2, 7, 9, 3, 9)
+    );
+
+    public ItemStandBlock(Properties pProperties) {
+        super(pProperties);
+        this.registerDefaultState(this.getStateDefinition().any().setValue(WATERLOGGED, false).setValue(GLASS, false).setValue(FACING, Direction.NORTH));
+    }
+
+    @Override
+    protected MapCodec<? extends HorizontalDirectionalBlock> codec() {
+        return CODEC;
+    }
+
+    @Override
+    public RenderShape getRenderShape(BlockState pState) {
+        return RenderShape.MODEL;
+    }
+
+    @Override
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        builder.add(GLASS, FACING, WATERLOGGED);
+    }
+
+    @Override
+    public SoundType getSoundType(BlockState state) {
+        return state.getValue(GLASS) ? SoundType.GLASS : SoundType.STONE;
+    }
+
+
+    @Override
+    public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, net.minecraft.world.phys.shapes.CollisionContext context) {
+        return state.getValue(GLASS) ? Shapes.block() : SHAPE;
+    }
+
+
+    @Override
+    public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
+        if (state.getBlock() != newState.getBlock()) {
+            if (level.getBlockEntity(pos) instanceof ItemStandBlockEntity itemStand) {
+                itemStand.drops();
+            }
+            if (state.getValue(GLASS)) {
+                Containers.dropItemStack(level, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, Blocks.GLASS.asItem().getDefaultInstance());
+            }
+        }
+        super.onRemove(state, level, pos, newState, movedByPiston);
+    }
+
+    @Override
+    public @Nullable BlockState getStateForPlacement(BlockPlaceContext ctx) {
+        return this.defaultBlockState().setValue(WATERLOGGED, ctx.getLevel().getFluidState(ctx.getClickedPos()).getType() == Fluids.WATER).setValue(FACING, ctx.getHorizontalDirection().getOpposite());
+    }
+
+    @Override
+    public FluidState getFluidState(BlockState state) {
+        return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
+    }
+
+    @Override
+    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
+        BlockEntity be = level.getBlockEntity(pos);
+        if (!(be instanceof ItemStandBlockEntity stand)) return InteractionResult.PASS;
+        ItemStack stackStand = stand.getItem();
+
+        if (!stackStand.isEmpty()) {
+            return takeItemOff(level, pos, state, stand);
+        }
+        return InteractionResult.sidedSuccess(level.isClientSide());
+    }
+
+    @Override
+    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
+        BlockEntity be = level.getBlockEntity(pos);
+        if (!(be instanceof ItemStandBlockEntity stand)) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+        ItemStack stackStand = stand.getItem();
+
+        if (!isGlass(stack)) {
+            if (stackStand.isEmpty() && !stack.isEmpty()) {
+                return putItemOn(level, pos, player, stack, state, stand);
+            }
+        }
+        return ItemInteractionResult.sidedSuccess(level.isClientSide());
+    }
+
+    private InteractionResult takeItemOff(Level level, BlockPos pos, BlockState state, ItemStandBlockEntity stand) {
+        ItemStack stack = stand.getItem();
+        if (stack.isEmpty()) return InteractionResult.PASS;
+
+        if (!level.isClientSide()) {
+            stand.setItem(ItemStack.EMPTY);
+            level.playSound(null, pos, PMSoundEvents.ITEM_STAND_REMOVE_ITEM.get(), SoundSource.BLOCKS);
+            ItemEntity drop = new ItemEntity(level, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, stack);
+            level.addFreshEntity(drop);
+            level.sendBlockUpdated(pos, state, state, 3);
+        }
+        return InteractionResult.sidedSuccess(level.isClientSide());
+    }
+
+    private ItemInteractionResult putItemOn(Level level, BlockPos pos, Player player, ItemStack stack, BlockState state, ItemStandBlockEntity stand) {
+        if (!level.isClientSide()) {
+            ItemStack copy = stack.copy();
+            copy.setCount(1);
+            stand.setItem(copy);
+            level.playSound(null, pos, PMSoundEvents.ITEM_STAND_ADD_ITEM.get(), SoundSource.BLOCKS);
+            if (!player.isCreative()) {
+                stack.shrink(1);
+            }
+            level.sendBlockUpdated(pos, state, state, 3);
+        }
+        return ItemInteractionResult.sidedSuccess(level.isClientSide());
+    }
+
+    public boolean isGlass(ItemStack stack) {
+        return stack.getItem() instanceof BlockItem blockItem && blockItem.getBlock().defaultBlockState().is(Blocks.GLASS);
+    }
+
+    @Override
+    public boolean canSurvive(BlockState pState, LevelReader pLevel, BlockPos pPos) {
+        return canSupportRigidBlock(pLevel, pPos.below());
+    }
+
+    @Override
+    public @Nullable BlockEntity newBlockEntity(BlockPos blockPos, BlockState blockState) {
+        return new ItemStandBlockEntity(blockPos, blockState);
+    }
+
+    @Override
+    public boolean useShapeForLightOcclusion(BlockState state) {
+        return false;
+    }
+
+    @Override
+    public boolean isOcclusionShapeFullBlock(BlockState state, BlockGetter world, BlockPos pos) {
+        return false;
+    }
+
+    @Override
+    public boolean propagatesSkylightDown(BlockState state, BlockGetter reader, BlockPos pos) {
+        return true;
+    }
+
+    @Override
+    public float getShadeBrightness(BlockState state, BlockGetter world, BlockPos pos) {
+        return 1.0f;
+    }
+}

@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "powered=false": {
+      "model": "pantz_mod:block/lock"
+    },
+    "powered=true": {
+      "model": "pantz_mod:block/lock_on"
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "molding": "json",
+  "remolder": [
+    {
+      "type": "add",
+      "target": "pools[5].entries[]",
+      "value": {
+        "type": "minecraft:item",
+        "name": "pantz_mod:ganymede_globe"
+      }
+    }
+  ],
+  "selector": "minecraft:loot_table/chests/pillager_outpost"
+}

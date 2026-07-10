@@ -1,0 +1,30 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "pantz_mod:config",
+      "value": "craftable_sponge"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "#": {
+      "tag": "minecraft:wool"
+    },
+    "$": {
+      "item": "minecraft:honeycomb"
+    },
+    "/": {
+      "item": "minecraft:bamboo"
+    }
+  },
+  "pattern": [
+    " $ ",
+    "/#/",
+    " / "
+  ],
+  "result": {
+    "count": 1,
+    "id": "minecraft:sponge"
+  }
+}

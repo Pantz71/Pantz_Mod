@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "glass=false": {
+      "model": "pantz_mod:block/item_stand"
+    },
+    "glass=true": {
+      "model": "pantz_mod:block/item_stand_glass"
+    }
+  }
+}

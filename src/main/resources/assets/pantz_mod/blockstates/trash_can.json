@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "open=false,powered=false": {
+      "model": "pantz_mod:block/trash_can"
+    },
+    "open=false,powered=true": {
+      "model": "pantz_mod:block/trash_can"
+    },
+    "open=true,powered=false": {
+      "model": "pantz_mod:block/trash_can_open"
+    },
+    "open=true,powered=true": {
+      "model": "pantz_mod:block/trash_can_open"
+    }
+  }
+}

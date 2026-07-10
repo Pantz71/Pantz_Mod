@@ -1,0 +1,7 @@
+{
+  "parent": "pantz_mod:item/saturn_globe_stand",
+  "textures": {
+    "globe": "pantz_mod:block/globe/large_planets/saturn",
+    "stand": "pantz_mod:block/copper_globe_stand"
+  }
+}

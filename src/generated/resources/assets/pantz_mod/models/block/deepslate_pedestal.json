@@ -1,0 +1,6 @@
+{
+  "parent": "pantz_mod:block/template_pedestal",
+  "textures": {
+    "pedestal": "pantz_mod:block/deepslate_pedestal"
+  }
+}
