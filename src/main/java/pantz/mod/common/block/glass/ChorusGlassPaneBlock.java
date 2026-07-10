@@ -14,7 +14,7 @@ public class ChorusGlassPaneBlock extends MagicGlassPaneBlock {
     }
 
     @Override
-    protected boolean isPathfindable(BlockState state, PathComputationType pathComputationType) {
+    public boolean isPathfindable(BlockState pState, BlockGetter pLevel, BlockPos pPos, PathComputationType pType) {
         return false;
     }
 

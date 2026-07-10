@@ -1,7 +1,5 @@
 package pantz.mod.common.block;
 
-import com.mojang.serialization.MapCodec;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
@@ -9,7 +7,6 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -17,7 +14,10 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.EntityBlock;
+import net.minecraft.world.level.block.HorizontalDirectionalBlock;
+import net.minecraft.world.level.block.SupportType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -33,19 +33,15 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import pantz.mod.common.block.entity.GlobeBlockEntity;
+import pantz.mod.common.utils.PMBlockStateProperties;
 import pantz.mod.core.PantzMod;
 import pantz.mod.core.registry.PMBlockEntityTypes;
 
+@SuppressWarnings("deprecation")
 public class GlobeBlock extends HorizontalDirectionalBlock implements EntityBlock {
-    private static final MapCodec<GlobeBlock> CODEC = RecordCodecBuilder.mapCodec(
-            instance -> instance.group(
-                    Properties.CODEC.fieldOf("properties").forGetter(block -> block.properties),
-                    ResourceLocation.CODEC.fieldOf("texture").forGetter(block -> block.texture)
-            ).apply(instance, GlobeBlock::new)
-    );
-
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
+    public static final BooleanProperty GLOWING = PMBlockStateProperties.GLOWING;
     public static final VoxelShape SHAPE = Shapes.or(
             Block.box(2, 0, 2, 14, 12, 14)
     );
@@ -54,7 +50,7 @@ public class GlobeBlock extends HorizontalDirectionalBlock implements EntityBloc
 
     public GlobeBlock(Properties pProperties, @NotNull ResourceLocation texture) {
         super(pProperties);
-        this.registerDefaultState(this.getStateDefinition().any().setValue(FACING, Direction.NORTH).setValue(POWERED, false));
+        this.registerDefaultState(this.getStateDefinition().any().setValue(FACING, Direction.NORTH).setValue(POWERED, false).setValue(GLOWING, false));
         this.texture = texture;
     }
 
@@ -63,43 +59,30 @@ public class GlobeBlock extends HorizontalDirectionalBlock implements EntityBloc
     }
 
     @Override
-    protected MapCodec<? extends HorizontalDirectionalBlock> codec() {
-        return CODEC;
-    }
-
-    @Override
     public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
         return SHAPE;
     }
 
     @Override
-    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
+    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         BlockEntity be = level.getBlockEntity(pos);
-        if (!(be instanceof GlobeBlockEntity globe)) return InteractionResult.PASS;
+        if (be instanceof GlobeBlockEntity globe) {
+            ItemStack stack = player.getItemInHand(hand);
 
-        if (!level.isClientSide()) {
-            globe.spin();
-        }
-        return InteractionResult.sidedSuccess(level.isClientSide());
-    }
-
-    @Override
-    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
-        BlockEntity be = level.getBlockEntity(pos);
-        if (!(be instanceof GlobeBlockEntity globe)) return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
-
-        if (stack.is(Items.GLOW_INK_SAC) && !globe.isGlow()) {
-            if (!level.isClientSide()) {
-                globe.setGlow(true);
-                level.playSound(null, pos, SoundEvents.GLOW_INK_SAC_USE, SoundSource.BLOCKS);
-
-                if (!player.isCreative()) {
-                    stack.shrink(1);
+            if (stack.is(Items.GLOW_INK_SAC) && !globe.isGlow()) {
+                if (!level.isClientSide()) {
+                    globe.setGlow(true);
+                    level.playSound(null, pos, SoundEvents.GLOW_INK_SAC_USE, SoundSource.BLOCKS, 1.0F, 1.0F);
+                    if (!player.isCreative()) stack.shrink(1);
+                }
+            } else {
+                if (!level.isClientSide()) {
+                    globe.spin();
                 }
             }
-            return ItemInteractionResult.sidedSuccess(level.isClientSide());
+            return InteractionResult.sidedSuccess(level.isClientSide());
         }
-        return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+        return InteractionResult.PASS;
     }
 
     @Override
@@ -130,7 +113,7 @@ public class GlobeBlock extends HorizontalDirectionalBlock implements EntityBloc
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(FACING, POWERED);
+        builder.add(FACING, POWERED, GLOWING);
     }
 
     @Override
@@ -139,12 +122,12 @@ public class GlobeBlock extends HorizontalDirectionalBlock implements EntityBloc
     }
 
     @Override
-    protected boolean hasAnalogOutputSignal(BlockState state) {
+    public boolean hasAnalogOutputSignal(BlockState pState) {
         return true;
     }
 
     @Override
-    protected int getAnalogOutputSignal(BlockState blockState, Level level, BlockPos pos) {
+    public int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos) {
         BlockEntity be = level.getBlockEntity(pos);
         if (be instanceof GlobeBlockEntity globe) {
             return globe.getPower();

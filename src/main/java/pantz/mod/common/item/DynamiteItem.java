@@ -36,7 +36,7 @@ public class DynamiteItem extends Item {
         player.getCooldowns().addCooldown(this, 20);
         player.awardStat(Stats.ITEM_USED.get(this));
         if (player instanceof ServerPlayer serverPlayer) {
-            PMCriteriaTriggers.USE_DYNAMITE.get().trigger(serverPlayer);
+            PMCriteriaTriggers.USE_DYNAMITE.trigger(serverPlayer);
         }
         if (!player.isCreative()) {
             stack.shrink(1);

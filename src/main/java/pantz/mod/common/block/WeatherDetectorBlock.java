@@ -98,7 +98,7 @@ public class WeatherDetectorBlock extends Block {
     }
 
     @Override
-    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
+    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         if (player.mayBuild()) {
             if (level.isClientSide()) return InteractionResult.SUCCESS;
 
@@ -109,7 +109,7 @@ public class WeatherDetectorBlock extends Block {
 
             return InteractionResult.CONSUME;
         }
-        return super.useWithoutItem(state, level, pos, player, hitResult);
+        return super.use(state, level, pos, player, hand, hit);
     }
 
     @Override

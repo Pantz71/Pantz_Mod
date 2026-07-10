@@ -6,16 +6,15 @@ import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.goal.MoveToBlockGoal;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.neoforged.neoforge.capabilities.Capabilities;
-import net.neoforged.neoforge.items.IItemHandler;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
+import net.minecraftforge.items.IItemHandler;
 import pantz.mod.common.block.entity.FeedingTroughBlockEntity;
 
 public class MoveToFeedingTroughGoal extends MoveToBlockGoal {
-    public static final String COOLDOWN_TAG = "FeedingTroughCooldown";
     private final Animal animal;
+    public static final String COOLDOWN_TAG = "FeedingTroughCooldown";
     public MoveToFeedingTroughGoal(Animal animal, double pSpeedModifier, int pSearchRange) {
         super(animal, pSpeedModifier, pSearchRange, 4);
         this.animal = animal;
@@ -55,34 +54,29 @@ public class MoveToFeedingTroughGoal extends MoveToBlockGoal {
         }
     }
 
-    @Override
-    protected boolean isValidTarget(LevelReader levelReader, BlockPos pos) {
-        if (this.animal.getPersistentData().getInt(COOLDOWN_TAG) > 0) {
-            return false;
-        }
+        @Override
+        protected boolean isValidTarget(LevelReader level, BlockPos pos) {
+            if (this.animal.getPersistentData().getInt(COOLDOWN_TAG) > 0) {
+                return false;
+            }
 
-        BlockEntity be = levelReader.getBlockEntity(pos);
-        if (be instanceof FeedingTroughBlockEntity) {
-            Level level = be.getLevel();
-            if (level != null) {
-                IItemHandler handler = level.getCapability(Capabilities.ItemHandler.BLOCK, pos, null);
+            BlockEntity be = level.getBlockEntity(pos);
+            if (be instanceof FeedingTroughBlockEntity) {
+                IItemHandler handler = be.getCapability(ForgeCapabilities.ITEM_HANDLER).orElse(null);
 
-                if (handler != null) {
-                    for (int i = 0; i < handler.getSlots(); i++) {
-                        ItemStack stack = handler.getStackInSlot(i);
-                        if (!stack.isEmpty() && this.animal.isFood(stack)) {
-                            return true;
-                        }
+                for (int i = 0; i < handler.getSlots(); i++) {
+                    ItemStack stack = handler.getStackInSlot(i);
+                    if (!stack.isEmpty() && this.animal.isFood(stack)) {
+                        return true;
                     }
                 }
             }
+            return false;
         }
-        return false;
-    }
 
     @Override
     public double acceptedDistance() {
-        return 1.75D;
+        return 1.5d;
     }
 
     @Override

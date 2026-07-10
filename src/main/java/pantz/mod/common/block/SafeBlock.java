@@ -1,6 +1,5 @@
 package pantz.mod.common.block;
 
-import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
@@ -9,9 +8,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.BaseEntityBlock;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.RenderShape;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -24,8 +21,7 @@ import pantz.mod.common.block.entity.SafeBlockEntity;
 import pantz.mod.common.utils.ILockableBlock;
 import pantz.mod.core.other.tags.PMItemTags;
 
-public class SafeBlock extends BaseEntityBlock implements ILockableBlock {
-    private static final MapCodec<SafeBlock> CODEC = simpleCodec(SafeBlock::new);
+public class SafeBlock extends HorizontalDirectionalBlock implements ILockableBlock, EntityBlock {
     public static final BooleanProperty OPEN = BlockStateProperties.OPEN;
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 
@@ -35,17 +31,12 @@ public class SafeBlock extends BaseEntityBlock implements ILockableBlock {
     }
 
     @Override
-    protected MapCodec<? extends BaseEntityBlock> codec() {
-        return CODEC;
-    }
-
-    @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(FACING, OPEN);
     }
 
     @Override
-    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
+    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         if (level.isClientSide()) {
             return InteractionResult.SUCCESS;
         }

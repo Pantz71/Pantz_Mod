@@ -13,6 +13,7 @@ import net.minecraft.resources.ResourceLocation;
 import pantz.mod.client.model.block.*;
 import pantz.mod.common.block.GlobeBlock;
 import pantz.mod.common.block.entity.GlobeBlockEntity;
+import pantz.mod.core.PantzMod;
 import pantz.mod.core.other.PMModelLayers;
 
 import java.util.HashMap;
@@ -50,7 +51,7 @@ public class GlobeRenderer implements BlockEntityRenderer<GlobeBlockEntity> {
         int renderLight = glow ? 0xF000F0 : light;
         RenderType type = glow ? RenderType.entityTranslucent(texture) : RenderType.entityCutout(texture);
 
-        model.renderToBuffer(poseStack, buffer.getBuffer(type), renderLight, overlay);
+        model.renderToBuffer(poseStack, buffer.getBuffer(type), renderLight, overlay, 1.0f, 1.0f, 1.0f, 1.0f);
 
         poseStack.popPose();
     }

@@ -29,8 +29,9 @@ public class UranusGlobeModel extends Model {
         return LayerDefinition.create(mesh, 80, 80);
     }
 
+
     @Override
-    public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int light, int overlay, int alpha) {
-        globe.render(poseStack, vertexConsumer, light, overlay);
+    public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+        globe.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
     }
 }

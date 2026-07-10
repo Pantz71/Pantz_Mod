@@ -1,31 +1,33 @@
 package pantz.mod.common.crafting;
 
-import com.mojang.serialization.MapCodec;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.network.RegistryFriendlyByteBuf;
-import net.minecraft.network.codec.StreamCodec;
+import com.google.gson.JsonObject;
+import net.minecraft.core.NonNullList;
+import net.minecraft.core.RegistryAccess;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.util.GsonHelper;
+import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.Nullable;
 import pantz.mod.core.registry.PMRecipes.*;
 
 public class RenewablePotterySherdRecipe extends CustomRecipe {
-    public RenewablePotterySherdRecipe(CraftingBookCategory category) {
-        super(category);
+    public RenewablePotterySherdRecipe(ResourceLocation id, CraftingBookCategory category) {
+        super(id, category);
     }
 
-
     @Override
-    public boolean matches(CraftingInput craftingInput, Level level) {
+    public boolean matches(CraftingContainer inv, Level level) {
         int firstX = -1, lastX = -1, firstY = -1, lastY = -1;
         int count = 0;
 
-        for (int y = 0; y < craftingInput.height(); ++y) {
-            for (int x = 0; x < craftingInput.width(); ++x) {
-                ItemStack stack = craftingInput.getItem(x + y * craftingInput.width());
+        for (int y = 0; y < inv.getHeight(); ++y) {
+            for (int x = 0; x < inv.getWidth(); ++x) {
+                ItemStack stack = inv.getItem(x + y * inv.getWidth());
                 if (!stack.isEmpty()) {
                     if (firstX == -1) firstX = x;
                     if (firstY == -1) firstY = y;
@@ -42,7 +44,7 @@ public class RenewablePotterySherdRecipe extends CustomRecipe {
 
         for (int y = 0; y < 3; y++) {
             for (int x = 0; x < 3; x++) {
-                ItemStack stack = craftingInput.getItem((firstX + x) + (firstY + y) * craftingInput.width());
+                ItemStack stack = inv.getItem((firstX + x) + (firstY + y) * inv.getWidth());
                 if (x == 1 && y == 1) {
                     if (!isPotterySherd(stack)) return false;
                 } else {
@@ -54,11 +56,11 @@ public class RenewablePotterySherdRecipe extends CustomRecipe {
     }
 
     @Override
-    public ItemStack assemble(CraftingInput craftingInput, HolderLookup.Provider provider) {
+    public ItemStack assemble(CraftingContainer inv, RegistryAccess access) {
         ItemStack input = ItemStack.EMPTY;
 
-        for (int i = 0; i < craftingInput.size(); i++) {
-            ItemStack stack = craftingInput.getItem(i);
+        for (int i = 0; i < inv.getContainerSize(); i++) {
+            ItemStack stack = inv.getItem(i);
             if (!stack.isEmpty() && isPotterySherd(stack)) {
                 input = stack;
                 break;
@@ -78,9 +80,10 @@ public class RenewablePotterySherdRecipe extends CustomRecipe {
     }
 
     @Override
-    public ItemStack getResultItem(HolderLookup.Provider registries) {
+    public ItemStack getResultItem(RegistryAccess access) {
         return ItemStack.EMPTY;
     }
+
 
     private boolean isPotterySherd(ItemStack stack) {
         return stack.is(ItemTags.DECORATED_POT_SHERDS);
@@ -102,27 +105,22 @@ public class RenewablePotterySherdRecipe extends CustomRecipe {
     }
 
     public static class Serializer implements RecipeSerializer<RenewablePotterySherdRecipe> {
-
-        private final MapCodec<RenewablePotterySherdRecipe> CODEC = RecordCodecBuilder.mapCodec(
-                instance -> instance.group(
-                        CraftingBookCategory.CODEC.fieldOf("category").orElse(CraftingBookCategory.MISC).forGetter(CustomRecipe::category)
-                ).apply(instance, RenewablePotterySherdRecipe::new)
-        );
-
-        private final StreamCodec<RegistryFriendlyByteBuf, RenewablePotterySherdRecipe> STREAM_CODEC = StreamCodec.composite(
-                CraftingBookCategory.STREAM_CODEC,
-                CustomRecipe::category,
-                RenewablePotterySherdRecipe::new
-        );
-
         @Override
-        public MapCodec<RenewablePotterySherdRecipe> codec() {
-            return CODEC;
+        public RenewablePotterySherdRecipe fromJson(ResourceLocation pRecipeId, JsonObject pSerializedRecipe) {
+            String categoryString = GsonHelper.getAsString(pSerializedRecipe, "category", "misc");
+            CraftingBookCategory category = CraftingBookCategory.CODEC.byName(categoryString, CraftingBookCategory.MISC);
+            return new RenewablePotterySherdRecipe(pRecipeId, category);
         }
 
         @Override
-        public StreamCodec<RegistryFriendlyByteBuf, RenewablePotterySherdRecipe> streamCodec() {
-            return STREAM_CODEC;
+        public @Nullable RenewablePotterySherdRecipe fromNetwork(ResourceLocation pRecipeId, FriendlyByteBuf pBuffer) {
+            CraftingBookCategory category = pBuffer.readEnum(CraftingBookCategory.class);
+            return new RenewablePotterySherdRecipe(pRecipeId, category);
+        }
+
+        @Override
+        public void toNetwork(FriendlyByteBuf pBuffer, RenewablePotterySherdRecipe pRecipe) {
+            pBuffer.writeEnum(pRecipe.category());
         }
     }
 }

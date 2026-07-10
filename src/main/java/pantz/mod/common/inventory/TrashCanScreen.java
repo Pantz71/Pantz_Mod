@@ -15,8 +15,8 @@ import pantz.mod.core.PantzMod;
 
 public class TrashCanScreen extends AbstractContainerScreen<TrashCanMenu> {
     private static final ResourceLocation TEXTURE = PantzMod.location("textures/gui/container/trash_can.png");
-    private static final ResourceLocation BUTTON = PantzMod.location("textures/gui/sprites/container/trash_can/destroy.png");
-    private static final ResourceLocation BUTTON_HIGHLIGHTED = PantzMod.location("textures/gui/sprites/container/trash_can/destroy_highlighted.png");
+    private static final ResourceLocation BUTTON = PantzMod.location("textures/gui/container/destroy.png");
+    private static final ResourceLocation BUTTON_HIGHLIGHTED = PantzMod.location("textures/gui/container/destroy_highlighted.png");
 
     public TrashCanScreen(TrashCanMenu menu, Inventory inv, Component title) {
         super(menu, inv, title);
@@ -53,6 +53,7 @@ public class TrashCanScreen extends AbstractContainerScreen<TrashCanMenu> {
 
     @Override
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+        this.renderBackground(guiGraphics);
         super.render(guiGraphics, mouseX, mouseY, partialTick);
         this.renderTooltip(guiGraphics, mouseX, mouseY);
     }

@@ -1,6 +1,5 @@
 package pantz.mod.common.block;
 
-import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -17,14 +16,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FluidState;
 
 public class DissolveBlock extends FallingBlock {
-    private static final MapCodec<DissolveBlock> CODEC = simpleCodec(DissolveBlock::new);
     public DissolveBlock(Properties pProperties) {
         super(pProperties);
-    }
-
-    @Override
-    protected MapCodec<? extends FallingBlock> codec() {
-        return CODEC;
     }
 
     @Override

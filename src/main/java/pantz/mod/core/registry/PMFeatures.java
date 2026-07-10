@@ -1,7 +1,7 @@
 package pantz.mod.core.registry;
 
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.worldgen.BootstrapContext;
+import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.BlockTags;
@@ -13,7 +13,7 @@ import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguratio
 import net.minecraft.world.level.levelgen.placement.*;
 import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTest;
 import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
-import net.neoforged.neoforge.common.Tags;
+import net.minecraftforge.common.Tags;
 import pantz.mod.core.PantzMod;
 
 import java.util.List;
@@ -25,10 +25,10 @@ public class PMFeatures {
         public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_NETHER_SULFUR = createKey("ore_nether_sulfur");
         public static final ResourceKey<ConfiguredFeature<?, ?>> ORE_SULFUR_BLOCK = createKey("ore_sulfur_block");
 
-        public static void bootstrap(BootstrapContext<ConfiguredFeature<?, ?>> context) {
+        public static void bootstrap(BootstapContext<ConfiguredFeature<?, ?>> context) {
             RuleTest stone = new TagMatchTest(BlockTags.STONE_ORE_REPLACEABLES);
             RuleTest deepslate = new TagMatchTest(BlockTags.DEEPSLATE_ORE_REPLACEABLES);
-            RuleTest netherrack = new TagMatchTest(Tags.Blocks.NETHERRACKS);
+            RuleTest netherrack = new TagMatchTest(Tags.Blocks.NETHERRACK);
 
             register(context, ORE_SULFUR, Feature.ORE, new OreConfiguration(List.of(OreConfiguration.target(stone, PMBlocks.SULFUR_ORE.get().defaultBlockState()), OreConfiguration.target(deepslate, PMBlocks.DEEPSLATE_SULFUR_ORE.get().defaultBlockState())), 32));
             register(context, ORE_NETHER_SULFUR, Feature.ORE, new OreConfiguration(netherrack, PMBlocks.NETHER_SULFUR_ORE.get().defaultBlockState(), 16));
@@ -40,7 +40,7 @@ public class PMFeatures {
             return ResourceKey.create(Registries.CONFIGURED_FEATURE, PantzMod.location(name));
         }
 
-        public static <FC extends FeatureConfiguration, F extends Feature<FC>> void register(BootstrapContext<ConfiguredFeature<?, ?>> context, ResourceKey<ConfiguredFeature<?, ?>> key, F feature, FC config) {
+        public static <FC extends FeatureConfiguration, F extends Feature<FC>> void register(BootstapContext<ConfiguredFeature<?, ?>> context, ResourceKey<ConfiguredFeature<?, ?>> key, F feature, FC config) {
             context.register(key, new ConfiguredFeature<>(feature, config));
         }
     }
@@ -51,7 +51,7 @@ public class PMFeatures {
         public static final ResourceKey<PlacedFeature> ORE_SULFUR_DELTAS = createKey("ore_sulfur_deltas");
         public static final ResourceKey<PlacedFeature> ORE_SULFUR_BLOCK = createKey("ore_sulfur_block");
 
-        public static void bootstrap(BootstrapContext<PlacedFeature> context) {
+        public static void bootstrap(BootstapContext<PlacedFeature> context) {
             register(context, ORE_SULFUR, PMConfiguredFeatures.ORE_SULFUR_BLOCK, commonOrePlacement(30, HeightRangePlacement.uniform(VerticalAnchor.bottom(), VerticalAnchor.absolute(-15))));
             register(context, ORE_SULFUR_NETHER, PMConfiguredFeatures.ORE_NETHER_SULFUR, commonOrePlacement(16, PlacementUtils.RANGE_10_10));
             register(context, ORE_SULFUR_DELTAS, PMConfiguredFeatures.ORE_NETHER_SULFUR, commonOrePlacement(20, PlacementUtils.RANGE_10_10));
@@ -71,11 +71,11 @@ public class PMFeatures {
             return orePlacement(RarityFilter.onAverageOnceEvery(pChance), pHeightRange);
         }
 
-        public static void register(BootstrapContext<PlacedFeature> context, ResourceKey<PlacedFeature> key, ResourceKey<ConfiguredFeature<?, ?>> feature, List<PlacementModifier> modifiers) {
+        public static void register(BootstapContext<PlacedFeature> context, ResourceKey<PlacedFeature> key, ResourceKey<ConfiguredFeature<?, ?>> feature, List<PlacementModifier> modifiers) {
             context.register(key, new PlacedFeature(context.lookup(Registries.CONFIGURED_FEATURE).getOrThrow(feature), modifiers));
         }
 
-        public static void register(BootstrapContext<PlacedFeature> context, ResourceKey<PlacedFeature> key, ResourceKey<ConfiguredFeature<?, ?>> feature, PlacementModifier... modifiers) {
+        public static void register(BootstapContext<PlacedFeature> context, ResourceKey<PlacedFeature> key, ResourceKey<ConfiguredFeature<?, ?>> feature, PlacementModifier... modifiers) {
             register(context, key, feature, List.of(modifiers));
         }
 

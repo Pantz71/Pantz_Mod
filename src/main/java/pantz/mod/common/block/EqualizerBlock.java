@@ -1,6 +1,5 @@
 package pantz.mod.common.block;
 
-import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.DustParticleOptions;
@@ -25,7 +24,6 @@ import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.BlockHitResult;
 
 public class EqualizerBlock extends DiodeBlock {
-    private static final MapCodec<EqualizerBlock> CODEC = simpleCodec(EqualizerBlock::new);
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final IntegerProperty POWER = BlockStateProperties.POWER;
     public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
@@ -39,12 +37,7 @@ public class EqualizerBlock extends DiodeBlock {
     }
 
     @Override
-    protected MapCodec<? extends DiodeBlock> codec() {
-        return CODEC;
-    }
-
-    @Override
-    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
+    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
         if (!level.isClientSide()) {
             int current = state.getValue(POWER);
             int nextPower = (current + 1) % 16;

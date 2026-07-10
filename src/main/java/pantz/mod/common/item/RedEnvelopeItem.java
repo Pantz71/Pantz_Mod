@@ -11,10 +11,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.LootTable;
-import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
+import pantz.mod.core.data.server.PMLootTableProvider;
 import pantz.mod.core.other.PMLootContextParamSets;
-import pantz.mod.core.other.PMLootTables;
 
 public class RedEnvelopeItem extends Item {
     public RedEnvelopeItem(Properties pProperties) {
@@ -27,11 +26,10 @@ public class RedEnvelopeItem extends Item {
 
         ServerLevel serverLevel = (ServerLevel) level;
 
-        LootTable lootTable = serverLevel.getServer().reloadableRegistries().getLootTable(PMLootTables.ENVELOPE);
+        LootTable lootTable = serverLevel.getServer().getLootData().getLootTable(PMLootTableProvider.ENVELOPE);
         LootParams lootParams = new LootParams.Builder(serverLevel)
                 .withParameter(LootContextParams.THIS_ENTITY, player)
-                .withParameter(LootContextParams.ORIGIN, player.position())
-                .create(PMLootContextParamSets.ENVELOPE);
+                .create(PMLootContextParamSets.RED_ENVELOPE);
 
         lootTable.getRandomItems(lootParams).forEach(stack -> {
             if (!player.getInventory().add(stack)) {

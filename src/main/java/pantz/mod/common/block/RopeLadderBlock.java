@@ -6,7 +6,6 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -70,13 +69,6 @@ public class RopeLadderBlock extends LadderBlock {
     }
 
     @Override
-    public void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean moving) {
-        if (!level.isClientSide()) {
-            level.scheduleTick(pos, this, 1);
-        }
-    }
-
-    @Override
     public BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor level, BlockPos currentPos, BlockPos neighborPos) {
         if (!state.canSurvive(level, currentPos)) {
             level.scheduleTick(currentPos, this, 1);
@@ -130,9 +122,8 @@ public class RopeLadderBlock extends LadderBlock {
 
     @Override
     public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
-        Direction direction = state.getValue(FACING);
-        return this.canAttachTo(level, pos.relative(direction.getOpposite()), direction) ||
-                !isTop(level, pos);
+        Direction facing = state.getValue(FACING);
+        return this.canAttachTo(level, pos.relative(facing.getOpposite()), facing) || !isTop(level, pos);
     }
 
     private InteractionResult retractLadder(BlockPos pos, Level level, Player player) {
@@ -162,7 +153,7 @@ public class RopeLadderBlock extends LadderBlock {
         return InteractionResult.SUCCESS;
     }
 
-    private ItemInteractionResult extendLadder(BlockPos pos, Level level, Player player, BlockState state, ItemStack stack) {
+    private InteractionResult extendLadder(BlockPos pos, Level level, Player player, BlockState state, ItemStack stack) {
         BlockPos currentPos = pos;
 
         while (level.getBlockState(currentPos.below()).is(this)) {
@@ -192,31 +183,28 @@ public class RopeLadderBlock extends LadderBlock {
             if (!player.isCreative()) {
                 stack.shrink(1);
             }
-            return ItemInteractionResult.SUCCESS;
-        }
-        return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
-    }
-
-    @Override
-    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
-        if (player.isShiftKeyDown() && isTop(level, pos)) {
-            if (!level.isClientSide()) {
-                return retractLadder(pos, level, player);
-            }
-            return InteractionResult.sidedSuccess(level.isClientSide());
+            return InteractionResult.SUCCESS;
         }
         return InteractionResult.PASS;
     }
 
     @Override
-    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
-        if (stack.is(this.asItem()) && !player.isShiftKeyDown()) {
+    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
+        ItemStack stack = player.getItemInHand(hand);
+        if (stack.isEmpty() && player.isShiftKeyDown()) {
+            if (isTop(level, pos)) {
+                if (!level.isClientSide()) {
+                    return retractLadder(pos, level, player);
+                }
+                return InteractionResult.sidedSuccess(level.isClientSide());
+            }
+        } else if (stack.is(this.asItem()) && !player.isShiftKeyDown()) {
             if (!level.isClientSide()) {
                 return extendLadder(pos, level, player, state, stack);
             }
-            return ItemInteractionResult.sidedSuccess(level.isClientSide());
+            return InteractionResult.sidedSuccess(level.isClientSide());
         }
-        return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
-    }
 
+        return InteractionResult.PASS;
+    }
 }

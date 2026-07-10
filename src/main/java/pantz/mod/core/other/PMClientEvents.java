@@ -8,23 +8,25 @@ import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
+
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.client.event.ClientTickEvent;
-import net.neoforged.neoforge.client.event.EntityRenderersEvent;
-import net.neoforged.neoforge.client.event.RenderHighlightEvent;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.EntityRenderersEvent;
+import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
+import net.minecraftforge.client.event.RenderHighlightEvent;
+import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.registries.ForgeRegistries;
 import pantz.mod.client.model.block.*;
 import pantz.mod.client.renderer.be.EntityDetectorRenderer;
 import pantz.mod.client.renderer.be.GlobeRenderer;
@@ -39,203 +41,233 @@ import pantz.mod.core.registry.PMBlockEntityTypes;
 import pantz.mod.core.registry.PMEntityTypes;
 import pantz.mod.core.registry.PMItems;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
-@EventBusSubscriber(modid = PantzMod.MOD_ID, value = Dist.CLIENT)
 public class PMClientEvents {
-    private static int particleCounter = 0;
-    private static final int cooldown = 5;
 
-    private static final String[] PRIORITIES = { "copper", "exposed", "weathered", "oxidized" };
+    @Mod.EventBusSubscriber(modid = PantzMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+    public static class PMModClientEvents {
+        @SubscribeEvent
+        public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
+            event.registerBlockEntityRenderer(PMBlockEntityTypes.PEDESTAL.get(), PedestalRenderer::new);
+            event.registerBlockEntityRenderer(PMBlockEntityTypes.ENTITY_DETECTOR.get(), EntityDetectorRenderer::new);
+            event.registerBlockEntityRenderer(PMBlockEntityTypes.GLOBE.get(), GlobeRenderer::new);
+            event.registerBlockEntityRenderer(PMBlockEntityTypes.ITEM_STAND.get(), ItemStandRenderer::new);
+            event.registerEntityRenderer(PMEntityTypes.DYNAMITE.get(), ThrownItemRenderer::new);
+        }
 
-    @SubscribeEvent
-    public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
-        event.registerBlockEntityRenderer(PMBlockEntityTypes.PEDESTAL.get(), PedestalRenderer::new);
-        event.registerBlockEntityRenderer(PMBlockEntityTypes.ENTITY_DETECTOR.get(), EntityDetectorRenderer::new);
-        event.registerBlockEntityRenderer(PMBlockEntityTypes.GLOBE.get(), GlobeRenderer::new);
-        event.registerBlockEntityRenderer(PMBlockEntityTypes.ITEM_STAND.get(), ItemStandRenderer::new);
+        @SubscribeEvent
+        public static void registerLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
+            event.registerLayerDefinition(PMModelLayers.GLOBE, GlobeModel::createModel);
+            event.registerLayerDefinition(PMModelLayers.LARGE_GLOBE, LargeGlobeModel::createModel);
+            event.registerLayerDefinition(PMModelLayers.GIANT_GLOBE, GiantGlobeModel::createModel);
+            event.registerLayerDefinition(PMModelLayers.SMALL_GLOBE, SmallGlobeModel::createModel);
+            event.registerLayerDefinition(PMModelLayers.TINY_GLOBE, TinyGlobeModel::createModel);
+            event.registerLayerDefinition(PMModelLayers.SATURN_GLOBE, SaturnGlobeModel::createModel);
+            event.registerLayerDefinition(PMModelLayers.URANUS_GLOBE, UranusGlobeModel::createModel);
+        }
 
-        event.registerEntityRenderer(PMEntityTypes.DYNAMITE.get(), ThrownItemRenderer::new);
+        @SubscribeEvent
+        public static void registerKeyMappings(RegisterKeyMappingsEvent event) {
+            event.register(PMKeybinds.DRINK_SATCHEL_POTION);
+        }
     }
 
-    @SubscribeEvent
-    public static void registerLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
-        event.registerLayerDefinition(PMModelLayers.GLOBE, GlobeModel::createModel);
-        event.registerLayerDefinition(PMModelLayers.LARGE_GLOBE, LargeGlobeModel::createModel);
-        event.registerLayerDefinition(PMModelLayers.GIANT_GLOBE, GiantGlobeModel::createModel);
-        event.registerLayerDefinition(PMModelLayers.SMALL_GLOBE, SmallGlobeModel::createModel);
-        event.registerLayerDefinition(PMModelLayers.TINY_GLOBE, TinyGlobeModel::createModel);
-        event.registerLayerDefinition(PMModelLayers.SATURN_GLOBE, SaturnGlobeModel::createModel);
-        event.registerLayerDefinition(PMModelLayers.URANUS_GLOBE, UranusGlobeModel::createModel);
-    }
+    @Mod.EventBusSubscriber(modid = PantzMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
+    public static class PMForgeClientEvents {
+        private static final String[] PRIORITIES = { "copper", "exposed", "weathered", "oxidized" };
+        private static float waxLevel = 0.0f;
 
-    @SubscribeEvent
-    public static void onClientTick(ClientTickEvent.Post event) {
-        Minecraft minecraft = Minecraft.getInstance();
-        spawnWaxParticles(minecraft);
-        drinkSatchelPotion(minecraft);
-    }
-
-    @SubscribeEvent
-    public static void onBlockHighlight(RenderHighlightEvent.Block event) {
-        Player player = Minecraft.getInstance().player;
-        if (player != null) {
-            ItemStack held = player.getMainHandItem();
-            if (held.getItem() instanceof AreaDiggerItem) {
-                BlockPos blockPos = event.getTarget().getBlockPos();
-
-                event.setCanceled(true);
-
-                Direction direction = event.getTarget().getDirection();
-                renderHighlight(blockPos, direction, event.getPoseStack(), event.getMultiBufferSource());
+        @SubscribeEvent
+        public static void onClientTick(TickEvent.ClientTickEvent event) {
+            if (event.phase == TickEvent.Phase.END) {
+                Minecraft minecraft = Minecraft.getInstance();
+                spawnWaxParticles(minecraft);
+                drinkSatchelPotion(minecraft);
             }
         }
-    }
 
-    private static void renderHighlight(BlockPos center, Direction face, PoseStack poseStack, MultiBufferSource bufferSource) {
-        Minecraft minecraft = Minecraft.getInstance();
-        Vec3 camera = minecraft.gameRenderer.getMainCamera().getPosition();
-        VertexConsumer buffer = bufferSource.getBuffer(RenderType.lines());
+        @SubscribeEvent
+        public static void onBlockHighlight(RenderHighlightEvent.Block event) {
+            Player player = Minecraft.getInstance().player;
+            if (player != null) {
+                ItemStack held = player.getMainHandItem();
+                if (held.getItem() instanceof AreaDiggerItem) {
+                    BlockPos blockPos = event.getTarget().getBlockPos();
 
-        for (int u = -1; u <= 1; u++) {
-            for (int v = -1; v <= 1; v++) {
-                BlockPos targetPos;
+                    event.setCanceled(true);
 
-                switch (face) {
-                    case UP, DOWN ->
-                            targetPos = center.offset(u, 0, v);
-                    case NORTH, SOUTH ->
-                            targetPos = center.offset(u, v, 0);
-                    case WEST, EAST ->
-                            targetPos = center.offset(0, u, v);
-                    default ->
-                            targetPos = center;
-                }
-
-                LevelRenderer.renderLineBox(
-                        poseStack,
-                        buffer,
-                        targetPos.getX() - camera.x,
-                        targetPos.getY() - camera.y,
-                        targetPos.getZ() - camera.z,
-                        targetPos.getX() + 1 - camera.x,
-                        targetPos.getY() + 1 - camera.y,
-                        targetPos.getZ() + 1 - camera.z,
-                        1f, 1f, 1f, 1f
-                );
-            }
-        }
-    }
-
-
-    private static void spawnWaxParticles(Minecraft mc) {
-        LocalPlayer player = mc.player;
-        ClientLevel level = mc.level;
-        if (player == null || level == null) return;
-
-        if (mc.isPaused()) {
-            particleCounter = 0;
-            return;
-        }
-
-        if (particleCounter++ % cooldown != 0) return;
-        if (!isHoldingDeserializer(player)) return;
-
-        BlockPos center = player.blockPosition();
-        int range = PMConfig.Common.COMMON.waxedBlocksDetectionRadius.get();
-
-        List<BlockPos> priority = new ArrayList<>();
-        List<BlockPos> normal = new ArrayList<>();
-
-        for (int dx = -range; dx <= range; dx++) {
-            for (int dy = -range; dy <= range; dy++) {
-                for (int dz = -range; dz <= range; dz++) {
-                    BlockPos pos = center.offset(dx, dy, dz);
-                    BlockState state = level.getBlockState(pos);
-
-                    if (state.isAir() || state.is(PMBlockTags.NON_WAXED_BLOCKS)) continue;
-
-                    ResourceLocation id = BuiltInRegistries.BLOCK.getKey(state.getBlock());
-
-                    String path = id.getPath();
-                    if (!path.startsWith("waxed_")) continue;
-
-                    (containsAny(path) ? priority : normal).add(pos);
+                    Direction direction = event.getTarget().getDirection();
+                    renderHighlight(blockPos, direction, event.getPoseStack(), event.getMultiBufferSource());
                 }
             }
         }
 
-        List<BlockPos> targets = priority.isEmpty() ? normal : concat(priority, normal);
-        targets.forEach(pos -> spawnParticles(level, pos));
-    }
+        private static void renderHighlight(BlockPos center, Direction face, PoseStack poseStack, MultiBufferSource bufferSource) {
+            Minecraft minecraft = Minecraft.getInstance();
+            Vec3 camera = minecraft.gameRenderer.getMainCamera().getPosition();
+            VertexConsumer buffer = bufferSource.getBuffer(RenderType.lines());
 
-    private static void spawnParticles(ClientLevel level, BlockPos pos) {
-        RandomSource random = level.getRandom();
-        double spread = 0.6;
+            for (int u = -1; u <= 1; u++) {
+                for (int v = -1; v <= 1; v++) {
+                    BlockPos targetPos;
 
-        double blockX = pos.getX();
-        double blockY = pos.getY();
-        double blockZ = pos.getZ();
+                    switch (face) {
+                        case UP, DOWN ->
+                                targetPos = center.offset(u, 0, v);
+                        case NORTH, SOUTH ->
+                                targetPos = center.offset(u, v, 0);
+                        case WEST, EAST ->
+                                targetPos = center.offset(0, u, v);
+                        default ->
+                                targetPos = center;
+                    }
 
-        for (int i = 0; i < 6; i++) {
-            int face = random.nextInt(6);
-
-            double x = blockX + 0.5;
-            double y = blockY + 0.5;
-            double z = blockZ + 0.5;
-
-            int axis = face >> 1;
-            double side = (face & 1) == 0 ? -0.1 : 1.1;
-
-            if (axis == 0) {
-                x = blockX + side;
-            } else if (axis == 1) {
-                y = blockY + side;
-            } else {
-                z = blockZ + side;
+                    LevelRenderer.renderLineBox(
+                            poseStack,
+                            buffer,
+                            targetPos.getX() - camera.x,
+                            targetPos.getY() - camera.y,
+                            targetPos.getZ() - camera.z,
+                            targetPos.getX() + 1 - camera.x,
+                            targetPos.getY() + 1 - camera.y,
+                            targetPos.getZ() + 1 - camera.z,
+                            1f, 1f, 1f, 1f
+                    );
+                }
             }
-            double randomSpread = (random.nextDouble() - 0.5) * spread;
-            if (axis != 0) {
-                x += randomSpread;
-            }
-            if (axis != 1) {
-                y += randomSpread;
-            }
-            if (axis != 2) {
-                z += randomSpread;
+        }
+
+        private static void spawnWaxParticles(Minecraft mc) {
+            LocalPlayer player = mc.player;
+            ClientLevel level = mc.level;
+            if (player == null || level == null || mc.isPaused()) return;
+
+            int cooldown = 5;
+            long particleCounter = level.getGameTime();
+
+
+            if (particleCounter % cooldown != 0) return;
+            if (!isHoldingDeserializer(player)) {
+                waxLevel = 0.0f;
+                return;
             }
 
-            level.addParticle(ParticleTypes.WAX_ON, x, y, z, 0.0, 0.05, 0.0);
+            BlockPos center = player.blockPosition();
+            int range = PMConfig.Common.COMMON.waxedBlocksDetectionRadius.get();
+
+            List<BlockPos> priority = new ArrayList<>();
+            List<BlockPos> normal = new ArrayList<>();
+
+            for (int dx = -range; dx <= range; dx++) {
+                for (int dy = -range; dy <= range; dy++) {
+                    for (int dz = -range; dz <= range; dz++) {
+                        BlockPos pos = center.offset(dx, dy, dz);
+                        BlockState state = level.getBlockState(pos);
+
+                        if (state.isAir() || state.is(PMBlockTags.NON_WAXED_BLOCKS)) continue;
+
+                        ResourceLocation id = ForgeRegistries.BLOCKS.getKey(state.getBlock());
+                        if (id == null) continue;
+
+                        String path = id.getPath();
+                        if (!path.startsWith("waxed_")) continue;
+
+                        (containsAny(path) ? priority : normal).add(pos);
+                    }
+                }
+            }
+
+            List<BlockPos> targets = priority.isEmpty() ? normal : concat(priority, normal);
+            waxLevel = calculateWaxLevel(targets.size(), range);
+            targets.forEach(pos -> spawnParticles(level, pos));
+        }
+
+        public static float getWaxLevel() {
+            return waxLevel;
+        }
+
+        public static float calculateWaxLevel(int blockCount, int range) {
+            if (blockCount == 0) return 0.0F;
+            double totalBlocks = (2 * range + 1) * (2 * range + 1) * (2 * range + 1);
+            float blocksForMaxLevel = (float) Math.round(totalBlocks - 0.6 * totalBlocks);
+            float percentage = (float) blockCount / blocksForMaxLevel;
+            if (percentage >= 1.0f) return 1.0F;
+            if (percentage >= 0.8F) return 0.8F;
+            if (percentage >= 0.6F) return 0.6F;
+            if (percentage >= 0.4F) return 0.4F;
+            if (percentage >= 0.2F) return 0.2F;
+            return 0.0F;
+        }
+
+        private static void spawnParticles(ClientLevel level, BlockPos pos) {
+            RandomSource random = level.getRandom();
+            double spread = 0.6;
+
+            double blockX = pos.getX();
+            double blockY = pos.getY();
+            double blockZ = pos.getZ();
+
+            for (int i = 0; i < 6; i++) {
+                int face = random.nextInt(6);
+
+                double x = blockX + 0.5;
+                double y = blockY + 0.5;
+                double z = blockZ + 0.5;
+
+                int axis = face >> 1;
+                double side = (face & 1) == 0 ? -0.1 : 1.1;
+
+                if (axis == 0) {
+                    x = blockX + side;
+                } else if (axis == 1) {
+                    y = blockY + side;
+                } else {
+                    z = blockZ + side;
+                }
+                double randomSpread = (random.nextDouble() - 0.5) * spread;
+                if (axis != 0) {
+                    x += randomSpread;
+                }
+                if (axis != 1) {
+                    y += randomSpread;
+                }
+                if (axis != 2) {
+                    z += randomSpread;
+                }
+
+                level.addParticle(ParticleTypes.WAX_ON, x, y, z, 0.0, 0.05, 0.0);
+            }
+        }
+
+        private static boolean isHoldingDeserializer(LocalPlayer player) {
+            return player.getMainHandItem().is(PMItems.HONEY_DESERIALIZER.get())
+                    || player.getOffhandItem().is(PMItems.HONEY_DESERIALIZER.get());
+        }
+
+        private static List<BlockPos> concat(List<BlockPos> a, List<BlockPos> b) {
+            List<BlockPos> out = new ArrayList<>(a.size() + b.size());
+            out.addAll(a);
+            out.addAll(b);
+            return out;
+        }
+
+        private static boolean containsAny(String string) {
+            for (String name : PRIORITIES) {
+                if (string.contains(name)) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private static void drinkSatchelPotion(Minecraft minecraft) {
+            if (minecraft.screen == null && minecraft.player != null) {
+                while (PMKeybinds.DRINK_SATCHEL_POTION.consumeClick()) {
+                    PMNetwork.sendToServer(new C2SDrinkSatchelPotionPacket());
+                }
+            }
         }
     }
 
-    private static boolean isHoldingDeserializer(LocalPlayer player) {
-        return player.getMainHandItem().is(PMItems.HONEY_DESERIALIZER.get())
-                || player.getOffhandItem().is(PMItems.HONEY_DESERIALIZER.get());
-    }
-
-    private static List<BlockPos> concat(List<BlockPos> a, List<BlockPos> b) {
-        List<BlockPos> out = new ArrayList<>(a.size() + b.size());
-        out.addAll(a);
-        out.addAll(b);
-        return out;
-    }
-
-    private static boolean containsAny(String string) {
-        for (String name : PRIORITIES) {
-            if (string.contains(name)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private static void drinkSatchelPotion(Minecraft minecraft) {
-        if (minecraft.screen == null && minecraft.player != null) {
-            while (PMKeybinds.DRINK_SATCHEL_POTION.consumeClick()) {
-                PMNetwork.sendToServer(new C2SDrinkSatchelPotionPacket());
-            }
-        }
-    }
 }

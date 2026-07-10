@@ -1,32 +1,62 @@
 {
   "variants": {
-    "facing=east,powered=false": {
+    "facing=east,glowing=false,powered=false": {
       "model": "pantz_mod:block/ceres_globe",
       "y": 270
     },
-    "facing=east,powered=true": {
+    "facing=east,glowing=false,powered=true": {
       "model": "pantz_mod:block/ceres_globe",
       "y": 270
     },
-    "facing=north,powered=false": {
+    "facing=east,glowing=true,powered=false": {
+      "model": "pantz_mod:block/ceres_globe",
+      "y": 270
+    },
+    "facing=east,glowing=true,powered=true": {
+      "model": "pantz_mod:block/ceres_globe",
+      "y": 270
+    },
+    "facing=north,glowing=false,powered=false": {
       "model": "pantz_mod:block/ceres_globe",
       "y": 180
     },
-    "facing=north,powered=true": {
+    "facing=north,glowing=false,powered=true": {
       "model": "pantz_mod:block/ceres_globe",
       "y": 180
     },
-    "facing=south,powered=false": {
+    "facing=north,glowing=true,powered=false": {
+      "model": "pantz_mod:block/ceres_globe",
+      "y": 180
+    },
+    "facing=north,glowing=true,powered=true": {
+      "model": "pantz_mod:block/ceres_globe",
+      "y": 180
+    },
+    "facing=south,glowing=false,powered=false": {
       "model": "pantz_mod:block/ceres_globe"
     },
-    "facing=south,powered=true": {
+    "facing=south,glowing=false,powered=true": {
       "model": "pantz_mod:block/ceres_globe"
     },
-    "facing=west,powered=false": {
+    "facing=south,glowing=true,powered=false": {
+      "model": "pantz_mod:block/ceres_globe"
+    },
+    "facing=south,glowing=true,powered=true": {
+      "model": "pantz_mod:block/ceres_globe"
+    },
+    "facing=west,glowing=false,powered=false": {
       "model": "pantz_mod:block/ceres_globe",
       "y": 90
     },
-    "facing=west,powered=true": {
+    "facing=west,glowing=false,powered=true": {
+      "model": "pantz_mod:block/ceres_globe",
+      "y": 90
+    },
+    "facing=west,glowing=true,powered=false": {
+      "model": "pantz_mod:block/ceres_globe",
+      "y": 90
+    },
+    "facing=west,glowing=true,powered=true": {
       "model": "pantz_mod:block/ceres_globe",
       "y": 90
     }

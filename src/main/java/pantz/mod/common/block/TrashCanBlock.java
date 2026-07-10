@@ -1,16 +1,12 @@
 package pantz.mod.common.block;
 
-import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.Component;
-import net.minecraft.sounds.SoundSource;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.monster.piglin.PiglinAi;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
@@ -25,14 +21,13 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
 import pantz.mod.common.block.entity.TrashCanBlockEntity;
-import pantz.mod.core.PMConfig;
 import pantz.mod.core.other.PMStats;
-import pantz.mod.core.registry.PMSoundEvents;
 
+@SuppressWarnings("deprecation")
 public class TrashCanBlock extends BaseEntityBlock {
-    private static final MapCodec<TrashCanBlock> CODEC = simpleCodec(TrashCanBlock::new);
     private static final VoxelShape SHAPE = Shapes.or(
             Block.box(2, 0, 2, 14, 13, 14),
             Block.box(1, 13, 1, 15, 15, 15),
@@ -43,11 +38,6 @@ public class TrashCanBlock extends BaseEntityBlock {
     public TrashCanBlock(Properties pProperties) {
         super(pProperties);
         this.registerDefaultState(this.getStateDefinition().any().setValue(POWERED, false).setValue(OPEN, false));
-    }
-
-    @Override
-    protected MapCodec<? extends BaseEntityBlock> codec() {
-        return CODEC;
     }
 
     @Override
@@ -70,7 +60,7 @@ public class TrashCanBlock extends BaseEntityBlock {
     }
 
     @Override
-    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
+    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         BlockEntity be = level.getBlockEntity(pos);
         if (be instanceof TrashCanBlockEntity trashCan) {
             if (!level.isClientSide()) {
@@ -96,12 +86,12 @@ public class TrashCanBlock extends BaseEntityBlock {
     }
 
     @Override
-    protected boolean hasAnalogOutputSignal(BlockState state) {
+    public boolean hasAnalogOutputSignal(BlockState state) {
         return true;
     }
 
     @Override
-    protected int getAnalogOutputSignal(BlockState blockState, Level level, BlockPos pos) {
+    public int getAnalogOutputSignal(BlockState blockState, Level level, BlockPos pos) {
         return AbstractContainerMenu.getRedstoneSignalFromBlockEntity(level.getBlockEntity(pos));
     }
 

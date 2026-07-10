@@ -1,24 +1,24 @@
 package pantz.mod.core.registry;
 
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
-import net.neoforged.bus.api.IEventBus;
-import net.neoforged.neoforge.registries.DeferredHolder;
-import net.neoforged.neoforge.registries.DeferredRegister;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 import pantz.mod.common.crafting.RenewablePotterySherdRecipe;
 import pantz.mod.core.PantzMod;
 
 public class PMRecipes {
     public static class PMRecipeTypes {
-        public static final DeferredRegister<RecipeType<?>> TYPES = DeferredRegister.create(BuiltInRegistries.RECIPE_TYPE, PantzMod.MOD_ID);
+        public static final DeferredRegister<RecipeType<?>> TYPES = DeferredRegister.create(ForgeRegistries.RECIPE_TYPES, PantzMod.MOD_ID);
 
     }
 
     public static class PMRecipeSerializers {
-        public static final DeferredRegister<RecipeSerializer<?>> SERIALIZERS = DeferredRegister.create(BuiltInRegistries.RECIPE_SERIALIZER, PantzMod.MOD_ID);
+        public static final DeferredRegister<RecipeSerializer<?>> SERIALIZERS = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, PantzMod.MOD_ID);
 
-        public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<RenewablePotterySherdRecipe>> POTTERY_SHERD_DUPLICATION =
+        public static final RegistryObject<RecipeSerializer<RenewablePotterySherdRecipe>> POTTERY_SHERD_DUPLICATION =
                 SERIALIZERS.register("pottery_sherd_duplication", RenewablePotterySherdRecipe.Serializer::new);
     }
 

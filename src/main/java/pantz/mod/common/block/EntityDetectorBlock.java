@@ -1,13 +1,11 @@
 package pantz.mod.common.block;
 
-import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -35,16 +33,10 @@ public class EntityDetectorBlock extends BaseEntityBlock {
     public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
     public static final BooleanProperty FILTERED = PMBlockStateProperties.FILTERED;
     private static final VoxelShape SHAPE = Block.box(0, 0, 0, 16, 6, 16);
-    private static final MapCodec<EntityDetectorBlock> CODEC = simpleCodec(EntityDetectorBlock::new);
 
     public EntityDetectorBlock(Properties pProperties) {
         super(pProperties);
-        this.registerDefaultState(this.getStateDefinition().any().setValue(INVERTED, false));
-    }
-
-    @Override
-    protected MapCodec<? extends BaseEntityBlock> codec() {
-        return CODEC;
+        this.registerDefaultState(this.getStateDefinition().any().setValue(INVERTED, false).setValue(POWERED, false).setValue(FILTERED, false));
     }
 
     @Nullable
@@ -59,35 +51,24 @@ public class EntityDetectorBlock extends BaseEntityBlock {
     }
 
     @Override
-    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
-        if (!level.isClientSide()) {
-            BlockState newState = state.cycle(INVERTED);
-            level.setBlock(pos, newState, 3);
-            BlockEntity be = level.getBlockEntity(pos);
-            if (be instanceof EntityDetectorBlockEntity detector) {
-                detector.tick();
-            }
-            return InteractionResult.SUCCESS_NO_ITEM_USED;
-        }
-        return InteractionResult.sidedSuccess(level.isClientSide());
-    }
-
-    @Override
-    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
+    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         Item item = player.getItemInHand(hand).getItem();
+        if (state.getValue(FILTERED) && !(item instanceof EntityFilterItem)) {
+            return InteractionResult.FAIL;
+        }
         if (!level.isClientSide()) {
             if (item instanceof EntityFilterItem) {
-                return ItemInteractionResult.SKIP_DEFAULT_BLOCK_INTERACTION;
+                return InteractionResult.PASS;
             }
             BlockState newState = state.cycle(INVERTED);
             level.setBlock(pos, newState, 3);
             BlockEntity be = level.getBlockEntity(pos);
             if (be instanceof EntityDetectorBlockEntity detector) {
-                detector.tick();
+                detector.serverTick();
             }
-            return ItemInteractionResult.sidedSuccess(level.isClientSide());
+            return InteractionResult.SUCCESS;
         }
-        return ItemInteractionResult.sidedSuccess(level.isClientSide());
+        return InteractionResult.sidedSuccess(level.isClientSide());
     }
 
     @Override
@@ -96,7 +77,7 @@ public class EntityDetectorBlock extends BaseEntityBlock {
     }
 
     @Override
-    public int getSignal(BlockState state, BlockGetter level, BlockPos pos, net.minecraft.core.Direction dir) {
+    public int getSignal(BlockState state, BlockGetter level, BlockPos pos, Direction dir) {
         BlockEntity be = level.getBlockEntity(pos);
         if (be instanceof EntityDetectorBlockEntity) {
             return state.getValue(POWERED) ? 15 : 0;
@@ -105,7 +86,7 @@ public class EntityDetectorBlock extends BaseEntityBlock {
     }
 
     @Override
-    public int getDirectSignal(BlockState state, BlockGetter level, BlockPos pos, net.minecraft.core.Direction dir) {
+    public int getDirectSignal(BlockState state, BlockGetter level, BlockPos pos, Direction dir) {
         return getSignal(state, level, pos, dir);
     }
 

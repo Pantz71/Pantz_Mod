@@ -1,7 +1,7 @@
 package pantz.mod.core.registry.datapack;
 
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.worldgen.BootstrapContext;
+import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageType;
@@ -12,7 +12,7 @@ public class PMDamageTypes {
 
     public static ResourceKey<DamageType> SPIKE = createKey("spike");
 
-    public static void bootstrap(BootstrapContext<DamageType> context) {
+    public static void bootstrap(BootstapContext<DamageType> context) {
         context.register(SPIKE, new DamageType(PantzMod.MOD_ID + ".spike", 0.1f));
     }
 

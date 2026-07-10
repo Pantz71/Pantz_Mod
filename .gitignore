@@ -20,9 +20,8 @@ build
 # other
 eclipse
 run
-runs
 run-data
-.github/workflows
 src/generated/resources/.cache
 
-repo
+# Files from Forge MDK
+forge*changelog.txt

@@ -6,19 +6,17 @@ import com.teamabnormals.caverns_and_chasms.common.block.IngotBlock;
 import com.teamabnormals.caverns_and_chasms.common.block.IngotLayer;
 import com.teamabnormals.caverns_and_chasms.core.CavernsAndChasms;
 import net.minecraft.core.Direction;
-import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.Direction.Axis;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
-import net.neoforged.neoforge.client.model.generators.BlockModelBuilder;
-import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
-import net.neoforged.neoforge.client.model.generators.ModelFile;
-import net.neoforged.neoforge.client.model.generators.MultiPartBlockStateBuilder;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
-import net.neoforged.neoforge.registries.DeferredBlock;
+import net.minecraftforge.client.model.generators.*;
+import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 import pantz.mod.common.block.*;
 import pantz.mod.common.utils.PMBlockStateProperties.CarpetColor;
 import pantz.mod.core.PantzMod;
@@ -157,7 +155,7 @@ public class PMBlockStateProvider extends BlueprintBlockStateProvider {
         this.blockItem(FEEDING_TROUGH);
     }
 
-    private void redstoneConfiguratorBlock(DeferredBlock<Block> block) {
+    private void redstoneConfiguratorBlock(RegistryObject<Block> block) {
         String name = name(block.get());
         ResourceLocation texture = blockTexture(block.get());
         for (int power = 0; power <= 15; power++) {
@@ -167,12 +165,9 @@ public class PMBlockStateProvider extends BlueprintBlockStateProvider {
             ModelFile model = models()
                     .withExistingParent(modelName, modLoc("block/template_redstone_configurator"))
                     .texture("front", frontTexture);
-            for (Direction dir : Direction.values()) {
-                int rotX = 0;
+            for (Direction dir : Direction.Plane.HORIZONTAL) {
                 int rotY = 0;
                 switch (dir) {
-                    case UP -> rotX = 90;
-                    case DOWN -> rotX = 270;
                     case NORTH -> rotY = 180;
                     case SOUTH -> {}
                     case WEST -> rotY = 90;
@@ -182,13 +177,13 @@ public class PMBlockStateProvider extends BlueprintBlockStateProvider {
                         .with(RedstoneConfiguratorBlock.FACING, dir)
                         .with(RedstoneConfiguratorBlock.POWER, power)
                         .modelForState().modelFile(model)
-                        .rotationX(rotX).rotationY(rotY).addModel();
+                        .rotationY(rotY).addModel();
             }
         }
         blockItem(block);
     }
 
-    private void enderScannerBlock(DeferredBlock<Block> block) {
+    private void enderScannerBlock(RegistryObject<Block> block) {
         for (int power = 0; power <= 15; power++) {
             String modelName = power == 0 ? name(block.get())
                     : name(block.get()) + "_" + power;
@@ -202,11 +197,11 @@ public class PMBlockStateProvider extends BlueprintBlockStateProvider {
         blockItem(block);
     }
 
-    private void redstoneLampBlock(DeferredBlock<Block> block) {
+    private void redstoneLampBlock(RegistryObject<Block> block) {
         litableBlock(block, "_on");
     }
 
-    private void sulfurBlock(DeferredBlock<Block> block) {
+    private void sulfurBlock(RegistryObject<Block> block) {
         ResourceLocation texture = blockTexture(block.get());
         getVariantBuilder(block.get())
                 .partialState().with(BlockStateProperties.LIT, false)
@@ -216,8 +211,7 @@ public class PMBlockStateProvider extends BlueprintBlockStateProvider {
         blockItem(block);
     }
 
-
-    private void litableBlock(DeferredBlock<Block> block, String suffix) {
+    private void litableBlock(RegistryObject<Block> block, String suffix) {
         ResourceLocation unlit = blockTexture(block.get());
         ResourceLocation lit = suffix(unlit, suffix);
         getVariantBuilder(block.get())
@@ -228,7 +222,7 @@ public class PMBlockStateProvider extends BlueprintBlockStateProvider {
         blockItem(block);
     }
 
-    private void pedestalBlock(DeferredBlock<Block> block) {
+    private void pedestalBlock(RegistryObject<Block> block) {
         getVariantBuilder(block.get()).forAllStates(state -> {
             Direction dir = state.getValue(PedestalBlock.FACING);
             CarpetColor carpet = state.getValue(PedestalBlock.CARPET);
@@ -254,7 +248,7 @@ public class PMBlockStateProvider extends BlueprintBlockStateProvider {
         blockItem(block);
     }
 
-    public void clusterBlock(DeferredBlock<Block> block) {
+    public void clusterBlock(RegistryObject<Block> block) {
         String name = name(block.get());
         ModelFile model = models().cross(name, blockTexture(block.get()));
 
@@ -277,7 +271,7 @@ public class PMBlockStateProvider extends BlueprintBlockStateProvider {
         generatedItem(block.get(), blockTexture(block.get()));
     }
 
-    private void powerDisplayerBlock(DeferredBlock<Block> block) {
+    private void powerDisplayerBlock(RegistryObject<Block> block) {
         String name = name(block.get());
         ResourceLocation texture = blockTexture(block.get());
         for (int power = 0; power <= 15; power++) {
@@ -307,15 +301,15 @@ public class PMBlockStateProvider extends BlueprintBlockStateProvider {
         generatedItem(block.get(), texture);
     }
 
-    private void globeBlock(DeferredBlock<Block> block, String model, String stand, String standTexture, Block blockParticle) {
+    private void globeBlock(RegistryObject<Block> block, String model, String stand, String standTexture, Block blockParticle) {
         globeBlock(block, modLoc("item/" + model + "_globe_stand"), modLoc("block/" + stand + "_globe_stand"), modLoc("block/" + standTexture + "_globe_stand"), blockTexture(blockParticle));
     }
 
-    private void globeBlock(DeferredBlock<Block> block, String model, String stand, String standTexture, ResourceLocation texture) {
+    private void globeBlock(RegistryObject<Block> block, String model, String stand, String standTexture, ResourceLocation texture) {
         globeBlock(block, modLoc("item/" + model + "_globe_stand"), modLoc("block/" + stand + "_globe_stand"), modLoc("block/" + standTexture + "_globe_stand"), texture);
     }
 
-    private void globeBlock(DeferredBlock<Block> block, ResourceLocation model, ResourceLocation stand, ResourceLocation standTexture, ResourceLocation particle) {
+    private void globeBlock(RegistryObject<Block> block, ResourceLocation model, ResourceLocation stand, ResourceLocation standTexture, ResourceLocation particle) {
         getVariantBuilder(block.get()).forAllStatesExcept(state -> {
             Direction facing = state.getValue(HorizontalDirectionalBlock.FACING);
             return ConfiguredModel.builder()
@@ -337,7 +331,7 @@ public class PMBlockStateProvider extends BlueprintBlockStateProvider {
                 .texture("globe", prefix("block/globe/", texturePath));
     }
 
-    private void enderporterBlock(DeferredBlock<Block> block) {
+    private void enderporterBlock(RegistryObject<Block> block) {
         String name = name(block.get());
         for (int charge = 0; charge <= 4; charge++) {
             String textureName = name + "_side" + charge;
@@ -359,7 +353,7 @@ public class PMBlockStateProvider extends BlueprintBlockStateProvider {
         blockItem(block.get());
     }
 
-    private void ropeLadderBlock(DeferredBlock<Block> block) {
+    private void ropeLadderBlock(RegistryObject<Block> block) {
         String name = name(block.get());
         ResourceLocation texture = blockTexture(block.get());
 
@@ -396,7 +390,7 @@ public class PMBlockStateProvider extends BlueprintBlockStateProvider {
         generatedItem(block.get(), texture);
     }
 
-    public void glassPaneBlock(DeferredBlock<Block> pane, DeferredBlock<Block> glass) {
+    public void glassPaneBlock(RegistryObject<Block> pane, RegistryObject<Block> glass) {
         Block block = pane.get();
         String name = name(block);
 
@@ -424,10 +418,10 @@ public class PMBlockStateProvider extends BlueprintBlockStateProvider {
     }
 
     public BlockModelBuilder glassPaneBlock(String name, String suffix) {
-        return models().getBuilder(name + "_" + suffix).parent(new ModelFile.UncheckedModelFile(ResourceLocation.parse("block/template_glass_pane_" + suffix)));
+        return models().getBuilder(name + "_" + suffix).parent(new ModelFile.UncheckedModelFile(new ResourceLocation("block/template_glass_pane_" + suffix)));
     }
 
-    private void litableLanternBlock(DeferredBlock<Block> block, ResourceLocation baseParent, ResourceLocation hangingParent) {
+    private void litableLanternBlock(RegistryObject<Block> block, ResourceLocation baseParent, ResourceLocation hangingParent) {
         String baseName = name(block.get()), hangingSuffix = "_hanging", litSuffix = "_on";
         ResourceLocation baseTexture = blockTexture(block.get()), litTexture = suffix(baseTexture, litSuffix);
 
@@ -464,7 +458,7 @@ public class PMBlockStateProvider extends BlueprintBlockStateProvider {
         generatedItem(block.get(), "item");
     }
 
-    private void doubleOrnamentBlock(DeferredBlock<Block> block, ResourceLocation model) {
+    private void doubleOrnamentBlock(RegistryObject<Block> block, ResourceLocation model) {
         String name = name(block.get());
 
         ModelFile lowerModel = models().withExistingParent(name + "_bottom", suffix(model, "_lower"));
@@ -487,7 +481,7 @@ public class PMBlockStateProvider extends BlueprintBlockStateProvider {
         generatedItem(block.get(), "item");
     }
 
-    private void paperLanternBlock(DeferredBlock<Block> block) {
+    private void paperLanternBlock(RegistryObject<Block> block) {
         String name = name(block.get());
         ResourceLocation texture = blockTexture(block.get());
 
@@ -504,7 +498,7 @@ public class PMBlockStateProvider extends BlueprintBlockStateProvider {
         generatedItem(block.get(), "item");
     }
 
-    private void lockBlock(DeferredBlock<Block> block) {
+    private void lockBlock(RegistryObject<Block> block) {
         String name = name(block.get());
         ResourceLocation texture = blockTexture(block.get());
 
@@ -520,7 +514,7 @@ public class PMBlockStateProvider extends BlueprintBlockStateProvider {
         blockItem(block);
     }
 
-    private void safeBlock(DeferredBlock<Block> block) {
+    private void safeBlock(RegistryObject<Block> block) {
         String name = name(block.get());
         ResourceLocation texture = blockTexture(block.get());
         ResourceLocation frontTexture = suffix(texture, "_front");
@@ -544,7 +538,7 @@ public class PMBlockStateProvider extends BlueprintBlockStateProvider {
         blockItem(block.get());
     }
 
-    private void equalizerBlock(DeferredBlock<Block> block) {
+    private void equalizerBlock(RegistryObject<Block> block) {
         String name = name(block.get());
 
         for (int power = 0; power <= 15; power++) {
@@ -572,17 +566,17 @@ public class PMBlockStateProvider extends BlueprintBlockStateProvider {
         generatedItem(block.get(), "item");
     }
 
-    public void customChainBlock(DeferredBlock<Block> chainBlock, String parent) {
+    public void customChainBlock(RegistryObject<Block> chainBlock, String parent) {
         Block block = chainBlock.get();
         ModelFile chain = models().withExistingParent(name(block), PantzMod.MOD_ID + ":block/" + parent).texture("all", blockTexture(block)).renderType("cutout");
         this.getVariantBuilder(block).forAllStatesExcept(state -> {
-            Direction.Axis axis = state.getValue(BlockStateProperties.AXIS);
-            return ConfiguredModel.builder().modelFile(chain).rotationX(axis.isHorizontal() ? 90 : 0).rotationY(axis == Direction.Axis.X ? 90 : 0).build();
+            Axis axis = state.getValue(BlockStateProperties.AXIS);
+            return ConfiguredModel.builder().modelFile(chain).rotationX(axis.isHorizontal() ? 90 : 0).rotationY(axis == Axis.X ? 90 : 0).build();
         }, BlockStateProperties.WATERLOGGED);
         this.generatedItem(block, "item");
     }
 
-    public void ingotBlock(DeferredBlock<Block> registryObject) {
+    public void ingotBlock(RegistryObject<Block> registryObject) {
         Block block = registryObject.get();
 
         MultiPartBlockStateBuilder builder = this.getMultipartBuilder(block);
@@ -595,18 +589,18 @@ public class PMBlockStateProvider extends BlueprintBlockStateProvider {
     }
 
     public void placedItemModel(Block block) {
-        this.itemModels().withExistingParent(BuiltInRegistries.BLOCK.getKey(block).withSuffix("_placed").getPath(), "item/generated").texture("layer0", BuiltInRegistries.ITEM.getKey(Items.BARRIER).withPrefix("item/"));
+        this.itemModels().withExistingParent(ForgeRegistries.BLOCKS.getKey(block).withSuffix("_placed").getPath(), "item/generated").texture("layer0", ForgeRegistries.ITEMS.getKey(Items.BARRIER).withPrefix("item/"));
     }
 
     public void addIngotLayer(MultiPartBlockStateBuilder builder, Block block, int i, Integer... nums) {
-        this.addIngotModel(builder, block, IngotLayer.LEFT, Direction.Axis.X, i, nums);
-        this.addIngotModel(builder, block, IngotLayer.RIGHT, Direction.Axis.X, i, nums);
-        this.addIngotModel(builder, block, IngotLayer.LEFT, Direction.Axis.Z, i, nums);
-        this.addIngotModel(builder, block, IngotLayer.RIGHT, Direction.Axis.Z, i, nums);
+        this.addIngotModel(builder, block, IngotLayer.LEFT, Axis.X, i, nums);
+        this.addIngotModel(builder, block, IngotLayer.RIGHT, Axis.X, i, nums);
+        this.addIngotModel(builder, block, IngotLayer.LEFT, Axis.Z, i, nums);
+        this.addIngotModel(builder, block, IngotLayer.RIGHT, Axis.Z, i, nums);
     }
 
-    public void addIngotModel(MultiPartBlockStateBuilder builder, Block block, IngotLayer ingotLayer, Direction.Axis axis, int layer, Integer... nums) {
-        Direction.Axis visualAxis = IngotBlock.getAxisForLayer(layer, axis);
+    public void addIngotModel(MultiPartBlockStateBuilder builder, Block block, IngotLayer ingotLayer, Axis axis, int layer, Integer... nums) {
+        Axis visualAxis = IngotBlock.getAxisForLayer(layer, axis);
         String name = "_" + ingotLayer.getSerializedName() + "_" + visualAxis.getSerializedName() + "_layer" + layer;
 
         ResourceLocation parentLocation = CavernsAndChasms.location("block/template_ingot" + name);
@@ -625,7 +619,7 @@ public class PMBlockStateProvider extends BlueprintBlockStateProvider {
         }
     }
 
-    public void sugarCaneBlock(DeferredBlock<Block> block) {
+    public void sugarCaneBlock(RegistryObject<Block> block) {
         String name = name(block.get());
         ResourceLocation texture = blockTexture(block.get());
 
@@ -647,4 +641,5 @@ public class PMBlockStateProvider extends BlueprintBlockStateProvider {
                 .texture("side", side)
                 .texture("end", end);
     }
+
 }

@@ -1,17 +1,17 @@
 package pantz.mod.core;
 
 import com.teamabnormals.blueprint.core.annotations.ConfigKey;
-import net.neoforged.neoforge.common.ModConfigSpec;
-import net.neoforged.neoforge.common.ModConfigSpec.*;
+import net.minecraftforge.common.ForgeConfigSpec;
+import net.minecraftforge.common.ForgeConfigSpec.*;
 import org.apache.commons.lang3.tuple.Pair;
 
 public class PMConfig {
     public static class Common {
-        public static final ModConfigSpec COMMON_SPEC;
+        public static final ForgeConfigSpec COMMON_SPEC;
         public static final Common COMMON;
 
         static {
-            Pair<Common, ModConfigSpec> commonSpecPair = new ModConfigSpec.Builder().configure(Common::new);
+            Pair<Common, ForgeConfigSpec> commonSpecPair = new ForgeConfigSpec.Builder().configure(Common::new);
             COMMON_SPEC = commonSpecPair.getRight();
             COMMON = commonSpecPair.getLeft();
         }
@@ -32,18 +32,19 @@ public class PMConfig {
         @ConfigKey("craftable_sponge")
         public final BooleanValue craftableSponge;
 
+
         Common(Builder builder) {
-            builder.push("recipes");
+            builder.push("Recipes");
             flintAndSteel = builder.comment("Change Flint and Steel recipe from using Iron to Steel")
-                    .define("Using steel for flint and steel", true);
+                    .define("Using steel for Flint and Steel", true);
 
             craftableSponge = builder.comment("Make Sponge craftable using Bamboo, Honeycomb and Wool")
                     .define("Craftable Sponge", true);
             builder.pop();
 
-            builder.push("tools");
+            builder.push("Tools");
             waxedBlocksDetectionRadius = builder.comment("How far can the Honey Deserializer detect waxed blocks?")
-                    .defineInRange("Honey Deserializer Detection Radius", 16, 0, Integer.MAX_VALUE);
+                    .defineInRange("Honey Deserializer detection radius", 16, 0, Integer.MAX_VALUE);
 
             enableEntityFilter = builder.comment("Allow filter entities feature of Entity Detector?")
                     .define("Entity filtering", true);
@@ -52,18 +53,19 @@ public class PMConfig {
 
             builder.push("Redstone");
             enderScannerDetectionRadius = builder.comment("How far can the Ender Scanners detect players looking at them?")
-                    .defineInRange("Ender Scanner detection radius", 64, 0, Integer.MAX_VALUE);
+                    .defineInRange("Ender Scanner detection radius", 16, 1, Integer.MAX_VALUE);
 
             entityDetectorDetectionRadius = builder.comment("How far can the Entity Detector detect entities?")
-                    .defineInRange("Entity Detector detection radius", 16, 0, Integer.MAX_VALUE);
+                    .defineInRange("Entity Detector detection radius", 16, 1, Integer.MAX_VALUE);
 
-            spikeMaxEffects = builder.comment("How many effects can the Spike have?")
+            spikeMaxEffects = builder.comment("How many effects can the Spike have? (0 = disabled)")
                     .defineInRange("Max Spike effects", 5, 0, Integer.MAX_VALUE);
+
             builder.pop();
 
             builder.push("Functional");
             enderporterDetectionRadius = builder.comment("How far can the Enderporter detect thrown Ender Pearls?")
-                    .defineInRange("Enderporter detection radius", 16, 0, Integer.MAX_VALUE);
+                    .defineInRange("Enderporter detection radius", 16, 1, Integer.MAX_VALUE);
 
             sprinklerBoostChance = builder.comment("The odds for Sprinkler to boost crop every tick")
                     .defineInRange("Sprinkler boost chance", 0.00003d, 0.0d, 1.0d);

@@ -42,7 +42,7 @@ public class EnderScannerBlockEntity extends BlockEntity {
         if (currentSignal == 15 && oldSignal < 15) {
             List<ServerPlayer> players = level.getEntitiesOfClass(ServerPlayer.class, new AABB(pos).inflate(8));
             for (ServerPlayer player : players) {
-                PMCriteriaTriggers.LOOK_AT_SCANNER.get().trigger(player);
+                PMCriteriaTriggers.LOOK_AT_SCANNER.trigger(player);
             }
         }
     }

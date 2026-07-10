@@ -2,16 +2,13 @@ package pantz.mod.core.other;
 
 import com.teamabnormals.blueprint.core.util.DataUtil;
 import net.minecraft.world.level.block.DispenserBlock;
-import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
-import pantz.mod.core.PantzMod;
-import pantz.mod.core.registry.PMBlocks;
-import pantz.mod.core.registry.PMDispenserBehaviors;
-import pantz.mod.core.registry.PMItems;
+import pantz.mod.core.registry.*;
 
 public class PMCompat {
     public static void registerCompat() {
         registerDispenserBehaviors();
         registerFlammables();
+        PMMobEffects.registerBrewingRecipes();
     }
 
     private static void registerDispenserBehaviors() {
@@ -27,4 +24,5 @@ public class PMCompat {
         DataUtil.registerFlammable(PMBlocks.PHANTOM_MEMBRANE_BLOCK.get(), 5, 20);
         DataUtil.registerFlammable(PMBlocks.FEATHER_BLOCK.get(), 30, 60);
     }
+
 }

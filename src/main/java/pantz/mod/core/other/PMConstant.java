@@ -11,6 +11,5 @@ import java.util.function.Supplier;
 public class PMConstant {
     public static final String CAVERNS_AND_CHASMS = "caverns_and_chasms";
 
-    public static final Supplier<Block> STEEL_INGOT = () -> new IngotBlock(PMItems.STEEL_INGOT, BlockBehaviour.Properties.ofFullCopy(PMBlocks.STEEL_BLOCK.get()));
-
+    public static final Supplier<Block> STEEL_INGOT = () -> new IngotBlock(PMItems.STEEL_INGOT, BlockBehaviour.Properties.copy(PMBlocks.STEEL_BLOCK.get()));
 }

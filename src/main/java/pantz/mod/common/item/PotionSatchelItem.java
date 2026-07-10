@@ -1,17 +1,17 @@
 package pantz.mod.common.item;
 
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.*;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.PotionItem;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import pantz.mod.common.inventory.PotionSatchelMenu;
+import pantz.mod.core.registry.PMSoundEvents;
 
-public class PotionSatchelItem extends ContainerItem {
+public class PotionSatchelItem extends ContainerItem implements DyeableLeatherItem {
     public PotionSatchelItem(Properties pProperties) {
         super(pProperties);
     }
@@ -34,6 +34,16 @@ public class PotionSatchelItem extends ContainerItem {
         return new PotionSatchelMenu(id, inv, container);
     }
 
+    @Override
+    protected SoundEvent openSound() {
+        return PMSoundEvents.POTION_SATCHEL_OPEN.get();
+    }
+
+    @Override
+    protected SoundEvent closeSound() {
+        return PMSoundEvents.POTION_SATCHEL_CLOSE.get();
+    }
+
     public static void tryQuickDrink(Player player, ItemStack satchel) {
         SimpleContainer container = new SimpleContainer(23);
         Level level = player.level();
@@ -48,7 +58,7 @@ public class PotionSatchelItem extends ContainerItem {
                 ItemStack resultStack = copy.finishUsingItem(level, player);
 
                 if (player.isCreative()) {
-                    resultStack = new ItemStack(Items.GLASS_BOTTLE);
+                    resultStack = new ItemStack(net.minecraft.world.item.Items.GLASS_BOTTLE);
                 }
 
                 potion.shrink(1);

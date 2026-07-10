@@ -9,13 +9,12 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.EntityCollisionContext;
 
 public class ChorusGlassBlock extends MagicGlassBlock {
-
-    public ChorusGlassBlock(Properties properties) {
-        super(properties);
+    public ChorusGlassBlock(Properties pProperties) {
+        super(pProperties);
     }
 
     @Override
-    protected boolean isPathfindable(BlockState state, PathComputationType pathComputationType) {
+    public boolean isPathfindable(BlockState pState, BlockGetter pLevel, BlockPos pPos, PathComputationType pType) {
         return false;
     }
 

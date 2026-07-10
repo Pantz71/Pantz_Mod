@@ -1,13 +1,11 @@
 package pantz.mod.common.block;
 
-import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
@@ -28,7 +26,6 @@ import pantz.mod.core.other.tags.PMItemTags;
 import pantz.mod.core.registry.PMSoundEvents;
 
 public class LockBlock extends BaseEntityBlock implements ILockableBlock {
-    private static final MapCodec<LockBlock> CODEC = simpleCodec(LockBlock::new);
     public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
     public LockBlock(Properties pProperties) {
         super(pProperties);
@@ -36,29 +33,26 @@ public class LockBlock extends BaseEntityBlock implements ILockableBlock {
     }
 
     @Override
-    protected MapCodec<? extends BaseEntityBlock> codec() {
-        return CODEC;
-    }
-
-    @Override
-    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
+    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
 
         if (!(level.getBlockEntity(pos) instanceof LockBlockEntity lock)) {
-            return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+            return InteractionResult.PASS;
         }
+
+        ItemStack held = player.getItemInHand(hand);
 
         if (lock.getKeyItem() == null) {
-            return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+            return InteractionResult.PASS;
         }
 
-        boolean item = stack.is(lock.getKeyItem());
-        boolean key = item && lock.getLockCode().unlocksWith(stack);
+        boolean item = held.is(lock.getKeyItem());
+        boolean key = item && lock.getLockCode().unlocksWith(held);
 
         if (!key) {
             if (!level.isClientSide()) {
                 player.displayClientMessage(Component.translatable("container.isLocked", state.getBlock().getName()), true);
             }
-            return ItemInteractionResult.sidedSuccess(level.isClientSide());
+            return InteractionResult.sidedSuccess(level.isClientSide());
         }
 
         level.playSound(null, pos, PMSoundEvents.KEY_LOCK.get(), SoundSource.BLOCKS);
@@ -66,7 +60,7 @@ public class LockBlock extends BaseEntityBlock implements ILockableBlock {
             level.setBlock(pos, state.cycle(POWERED), 3);
         }
 
-        return ItemInteractionResult.sidedSuccess(level.isClientSide());
+        return InteractionResult.sidedSuccess(level.isClientSide());
     }
 
     @Override

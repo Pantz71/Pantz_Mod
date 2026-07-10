@@ -1,17 +1,14 @@
 package pantz.mod.common.block.entity;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.core.component.DataComponents;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.LockCode;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.Nullable;
 import pantz.mod.common.utils.Lockable;
 import pantz.mod.core.registry.PMBlockEntityTypes;
@@ -57,9 +54,8 @@ public class LockBlockEntity extends BlockEntity implements Lockable {
     public void setItem(ItemStack stack, UUID owner) {
 
         this.keyItem = stack.getItem();
-        Component component = stack.get(DataComponents.CUSTOM_NAME);
 
-        if (component != null) {
+        if (stack.hasCustomHoverName()) {
             setLockCode(new LockCode(stack.getHoverName().getString()));
         } else {
             setLockCode(LockCode.NO_LOCK);
@@ -85,11 +81,11 @@ public class LockBlockEntity extends BlockEntity implements Lockable {
     }
 
     @Override
-    protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
-        super.saveAdditional(tag, registries);
+    protected void saveAdditional(CompoundTag tag) {
+        super.saveAdditional(tag);
 
         if (keyItem != null) {
-            tag.putString("KeyItem", BuiltInRegistries.ITEM.getKey(keyItem).toString());
+            tag.putString("KeyItem", ForgeRegistries.ITEMS.getKey(keyItem).toString());
         }
         lockCode.addToTag(tag);
         if (owner != null) {
@@ -98,11 +94,11 @@ public class LockBlockEntity extends BlockEntity implements Lockable {
     }
 
     @Override
-    protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
-        super.loadAdditional(tag, registries);
+    public void load(CompoundTag tag) {
+        super.load(tag);
 
         if (tag.contains("KeyItem")) {
-            keyItem = BuiltInRegistries.ITEM.get(ResourceLocation.parse(tag.getString("KeyItem")));
+            keyItem = ForgeRegistries.ITEMS.getValue(new ResourceLocation(tag.getString("KeyItem")));
         }
         lockCode = LockCode.fromTag(tag);
         if (tag.contains("Owner")) {
@@ -111,14 +107,14 @@ public class LockBlockEntity extends BlockEntity implements Lockable {
     }
 
     @Override
-    public CompoundTag getUpdateTag(HolderLookup.Provider registries) {
+    public CompoundTag getUpdateTag() {
         CompoundTag tag = new CompoundTag();
-        saveAdditional(tag, registries);
+        saveAdditional(tag);
         return tag;
     }
 
     @Override
-    public void handleUpdateTag(CompoundTag tag, HolderLookup.Provider lookupProvider) {
-        loadAdditional(tag, lookupProvider);
+    public void handleUpdateTag(CompoundTag tag) {
+        load(tag);
     }
 }

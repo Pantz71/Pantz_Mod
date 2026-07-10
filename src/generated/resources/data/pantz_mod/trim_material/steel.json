@@ -5,8 +5,5 @@
     "translate": "trim_material.pantz_mod.steel"
   },
   "ingredient": "pantz_mod:steel_ingot",
-  "item_model_index": -1.0,
-  "override_armor_materials": {
-    "pantz_mod:steel": "pantz_mod_steel_darker"
-  }
+  "item_model_index": -1.0
 }

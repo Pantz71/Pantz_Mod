@@ -1,5 +1,43 @@
 {
   "parent": "minecraft:item/generated",
+  "overrides": [
+    {
+      "model": "pantz_mod:item/honey_deserializer",
+      "predicate": {
+        "pantz_mod:level": 0.0
+      }
+    },
+    {
+      "model": "pantz_mod:item/honey_deserializer1",
+      "predicate": {
+        "pantz_mod:level": 0.2
+      }
+    },
+    {
+      "model": "pantz_mod:item/honey_deserializer2",
+      "predicate": {
+        "pantz_mod:level": 0.4
+      }
+    },
+    {
+      "model": "pantz_mod:item/honey_deserializer3",
+      "predicate": {
+        "pantz_mod:level": 0.6
+      }
+    },
+    {
+      "model": "pantz_mod:item/honey_deserializer4",
+      "predicate": {
+        "pantz_mod:level": 0.8
+      }
+    },
+    {
+      "model": "pantz_mod:item/honey_deserializer5",
+      "predicate": {
+        "pantz_mod:level": 1.0
+      }
+    }
+  ],
   "textures": {
     "layer0": "pantz_mod:item/honey_deserializer"
   }
