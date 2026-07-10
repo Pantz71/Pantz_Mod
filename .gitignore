@@ -22,5 +22,7 @@ eclipse
 run
 runs
 run-data
+.github/workflows
+src/generated/resources/.cache
 
 repo
