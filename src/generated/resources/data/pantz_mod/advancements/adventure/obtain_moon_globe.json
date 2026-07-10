@@ -1,0 +1,38 @@
+{
+  "parent": "minecraft:adventure/trade",
+  "criteria": {
+    "moon_globe": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "pantz_mod:moon_globe"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.pantz_mod.adventure.obtain_moon_globe.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "pantz_mod:moon_globe"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.pantz_mod.adventure.obtain_moon_globe.title"
+    }
+  },
+  "requirements": [
+    [
+      "moon_globe"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

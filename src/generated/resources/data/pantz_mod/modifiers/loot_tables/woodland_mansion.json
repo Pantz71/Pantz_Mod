@@ -1,0 +1,67 @@
+{
+  "modifiers": [
+    {
+      "type": "entries",
+      "config": {
+        "entries": [
+          {
+            "type": "minecraft:item",
+            "functions": [
+              {
+                "function": "pantz_mod:set_item_loot_table",
+                "loot_table": "pantz_mod:container_item/potion_satchel"
+              }
+            ],
+            "name": "pantz_mod:potion_satchel"
+          }
+        ],
+        "index": 0,
+        "replace": false
+      }
+    },
+    {
+      "type": "entries",
+      "config": {
+        "entries": [
+          {
+            "type": "minecraft:item",
+            "functions": [
+              {
+                "add": false,
+                "count": {
+                  "type": "minecraft:uniform",
+                  "max": 5.0,
+                  "min": 1.0
+                },
+                "function": "minecraft:set_count"
+              }
+            ],
+            "name": "pantz_mod:steel_ingot",
+            "weight": 3
+          }
+        ],
+        "index": 1,
+        "replace": false
+      }
+    },
+    {
+      "type": "entries",
+      "config": {
+        "entries": [
+          {
+            "type": "minecraft:item",
+            "name": "pantz_mod:pluto_globe"
+          },
+          {
+            "type": "minecraft:item",
+            "name": "pantz_mod:europa_globe"
+          }
+        ],
+        "index": 3,
+        "replace": false
+      }
+    }
+  ],
+  "priority": "normal",
+  "selector": "minecraft:chests/woodland_mansion"
+}

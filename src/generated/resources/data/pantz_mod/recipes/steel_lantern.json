@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "minecraft:blaze_powder"
+    },
+    "*": {
+      "tag": "forge:nuggets/steel"
+    }
+  },
+  "pattern": [
+    "***",
+    "*#*",
+    "***"
+  ],
+  "result": {
+    "item": "pantz_mod:steel_lantern"
+  },
+  "show_notification": true
+}

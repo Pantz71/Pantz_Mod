@@ -1,0 +1,34 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "pantz_mod:config",
+          "value": "entity_filter"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "category": "equipment",
+        "key": {
+          "#": {
+            "tag": "forge:ingots/steel"
+          },
+          "$": {
+            "item": "minecraft:rotten_flesh"
+          }
+        },
+        "pattern": [
+          " # ",
+          "#$#",
+          " # "
+        ],
+        "result": {
+          "item": "pantz_mod:entity_filter"
+        },
+        "show_notification": true
+      }
+    }
+  ]
+}

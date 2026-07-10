@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "sulfur_crystal",
+  "ingredients": [
+    {
+      "item": "pantz_mod:sulfur_block"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "item": "pantz_mod:sulfur_crystal"
+  }
+}

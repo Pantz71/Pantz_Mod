@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "I": {
+      "tag": "forge:ingots/steel"
+    },
+    "n": {
+      "tag": "forge:nuggets/steel"
+    }
+  },
+  "pattern": [
+    "n",
+    "I",
+    "n"
+  ],
+  "result": {
+    "item": "pantz_mod:steel_chain"
+  },
+  "show_notification": true
+}

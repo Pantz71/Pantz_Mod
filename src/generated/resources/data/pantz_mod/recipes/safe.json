@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "I": {
+      "tag": "forge:ingots/steel"
+    },
+    "O": {
+      "tag": "forge:obsidian"
+    }
+  },
+  "pattern": [
+    "III",
+    "O O",
+    "III"
+  ],
+  "result": {
+    "item": "pantz_mod:safe"
+  },
+  "show_notification": true
+}

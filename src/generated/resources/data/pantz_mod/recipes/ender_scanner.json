@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "key": {
+    "E": {
+      "item": "minecraft:ender_eye"
+    },
+    "O": {
+      "tag": "forge:obsidian"
+    },
+    "R": {
+      "tag": "forge:dusts/redstone"
+    }
+  },
+  "pattern": [
+    "ORO",
+    "RER",
+    "ORO"
+  ],
+  "result": {
+    "item": "pantz_mod:ender_scanner"
+  },
+  "show_notification": true
+}

@@ -1,0 +1,40 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:not",
+          "value": {
+            "type": "forge:mod_loaded",
+            "modid": "caverns_and_chasms"
+          }
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "category": "redstone",
+        "key": {
+          "#": {
+            "item": "minecraft:glass"
+          },
+          "7": {
+            "tag": "forge:gems/lapis"
+          },
+          "_": {
+            "tag": "forge:ingots/iron"
+          }
+        },
+        "pattern": [
+          "###",
+          "777",
+          "___"
+        ],
+        "result": {
+          "item": "pantz_mod:entity_detector"
+        },
+        "show_notification": true
+      }
+    }
+  ]
+}

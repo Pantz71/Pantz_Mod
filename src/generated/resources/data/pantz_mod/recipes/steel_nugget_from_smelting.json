@@ -1,0 +1,39 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 200,
+  "experience": 0.1,
+  "ingredient": [
+    {
+      "item": "pantz_mod:steel_pickaxe"
+    },
+    {
+      "item": "pantz_mod:steel_shovel"
+    },
+    {
+      "item": "pantz_mod:steel_axe"
+    },
+    {
+      "item": "pantz_mod:steel_hoe"
+    },
+    {
+      "item": "pantz_mod:steel_sword"
+    },
+    {
+      "item": "pantz_mod:steel_helmet"
+    },
+    {
+      "item": "pantz_mod:steel_chestplate"
+    },
+    {
+      "item": "pantz_mod:steel_leggings"
+    },
+    {
+      "item": "pantz_mod:steel_boots"
+    },
+    {
+      "item": "pantz_mod:steel_horse_armor"
+    }
+  ],
+  "result": "pantz_mod:steel_nugget"
+}

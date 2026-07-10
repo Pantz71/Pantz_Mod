@@ -1,0 +1,97 @@
+{
+  "modifiers": [
+    {
+      "type": "entries",
+      "config": {
+        "entries": [
+          {
+            "type": "minecraft:item",
+            "name": "pantz_mod:jupiter_globe",
+            "weight": 8
+          },
+          {
+            "type": "minecraft:item",
+            "name": "pantz_mod:saturn_globe",
+            "weight": 8
+          },
+          {
+            "type": "minecraft:item",
+            "functions": [
+              {
+                "function": "pantz_mod:set_item_loot_table",
+                "loot_table": "pantz_mod:container_item/potion_satchel"
+              }
+            ],
+            "name": "pantz_mod:potion_satchel"
+          }
+        ],
+        "index": 1,
+        "replace": false
+      }
+    },
+    {
+      "type": "entries",
+      "config": {
+        "entries": [
+          {
+            "type": "minecraft:item",
+            "functions": [
+              {
+                "add": false,
+                "count": {
+                  "type": "minecraft:uniform",
+                  "max": 10.0,
+                  "min": 2.0
+                },
+                "function": "minecraft:set_count"
+              }
+            ],
+            "name": "pantz_mod:sulfur_crystal",
+            "weight": 15
+          },
+          {
+            "type": "minecraft:item",
+            "functions": [
+              {
+                "add": false,
+                "count": {
+                  "type": "minecraft:uniform",
+                  "max": 12.0,
+                  "min": 4.0
+                },
+                "function": "minecraft:set_count"
+              }
+            ],
+            "name": "pantz_mod:sulfur_dust",
+            "weight": 15
+          },
+          {
+            "type": "minecraft:item",
+            "functions": [
+              {
+                "add": false,
+                "count": {
+                  "type": "minecraft:uniform",
+                  "max": 2.0,
+                  "min": 1.0
+                },
+                "function": "minecraft:set_count"
+              }
+            ],
+            "name": "pantz_mod:dynamite",
+            "weight": 3
+          },
+          {
+            "type": "minecraft:item",
+            "name": "pantz_mod:steel_horse_armor",
+            "weight": 10
+          }
+        ],
+        "index": 0,
+        "replace": false
+      }
+    }
+  ],
+  "priority": "normal",
+  "selector": "minecraft:chests/nether_bridge"
+}

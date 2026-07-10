@@ -1,0 +1,45 @@
+{
+  "modifiers": [
+    {
+      "type": "entries",
+      "config": {
+        "entries": [
+          {
+            "type": "minecraft:item",
+            "functions": [
+              {
+                "add": false,
+                "count": {
+                  "type": "minecraft:uniform",
+                  "max": 4.0,
+                  "min": 2.0
+                },
+                "function": "minecraft:set_count"
+              }
+            ],
+            "name": "pantz_mod:steel_ingot",
+            "weight": 5
+          },
+          {
+            "type": "minecraft:item",
+            "name": "pantz_mod:dynamite"
+          },
+          {
+            "type": "minecraft:item",
+            "functions": [
+              {
+                "function": "pantz_mod:set_item_loot_table",
+                "loot_table": "pantz_mod:container_item/potion_satchel"
+              }
+            ],
+            "name": "pantz_mod:potion_satchel"
+          }
+        ],
+        "index": 0,
+        "replace": false
+      }
+    }
+  ],
+  "priority": "normal",
+  "selector": "minecraft:chests/stronghold_crossing"
+}

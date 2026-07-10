@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "pedestal",
+  "key": {
+    "B": {
+      "item": "minecraft:stone"
+    },
+    "S": {
+      "item": "minecraft:stone_slab"
+    }
+  },
+  "pattern": [
+    "SSS",
+    " B ",
+    " S "
+  ],
+  "result": {
+    "item": "pantz_mod:stone_pedestal"
+  },
+  "show_notification": true
+}

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "_": {
+      "tag": "minecraft:wooden_slabs"
+    }
+  },
+  "pattern": [
+    "_ _",
+    "___"
+  ],
+  "result": {
+    "item": "pantz_mod:feeding_trough"
+  },
+  "show_notification": true
+}

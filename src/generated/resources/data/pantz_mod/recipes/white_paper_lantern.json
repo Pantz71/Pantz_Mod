@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "minecraft:paper"
+    },
+    "i": {
+      "item": "minecraft:torch"
+    }
+  },
+  "pattern": [
+    "###",
+    "#i#",
+    "###"
+  ],
+  "result": {
+    "item": "pantz_mod:white_paper_lantern"
+  },
+  "show_notification": true
+}

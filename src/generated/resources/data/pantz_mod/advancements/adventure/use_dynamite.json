@@ -1,0 +1,29 @@
+{
+  "parent": "minecraft:adventure/root",
+  "criteria": {
+    "dynamite": {
+      "trigger": "pantz_mod:use_dynamite"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.pantz_mod.adventure.use_dynamite.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "pantz_mod:dynamite"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.pantz_mod.adventure.use_dynamite.title"
+    }
+  },
+  "requirements": [
+    [
+      "dynamite"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

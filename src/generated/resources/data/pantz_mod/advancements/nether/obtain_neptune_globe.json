@@ -1,0 +1,38 @@
+{
+  "parent": "minecraft:nether/loot_bastion",
+  "criteria": {
+    "neptune_globe": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "pantz_mod:neptune_globe"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.pantz_mod.nether.obtain_neptune_globe.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "pantz_mod:neptune_globe"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.pantz_mod.nether.obtain_neptune_globe.title"
+    }
+  },
+  "requirements": [
+    [
+      "neptune_globe"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,158 @@
+{
+  "modifiers": [
+    {
+      "type": "entries",
+      "config": {
+        "entries": [
+          {
+            "type": "minecraft:item",
+            "name": "pantz_mod:pluto_globe"
+          },
+          {
+            "type": "minecraft:item",
+            "name": "pantz_mod:blue_sun_globe"
+          },
+          {
+            "type": "minecraft:item",
+            "name": "pantz_mod:iris_globe"
+          },
+          {
+            "type": "minecraft:item",
+            "functions": [
+              {
+                "function": "pantz_mod:set_item_loot_table",
+                "loot_table": "pantz_mod:container_item/potion_satchel"
+              }
+            ],
+            "name": "pantz_mod:potion_satchel"
+          }
+        ],
+        "index": 1,
+        "replace": false
+      }
+    },
+    {
+      "type": "entries",
+      "config": {
+        "entries": [
+          {
+            "type": "minecraft:item",
+            "functions": [
+              {
+                "function": "minecraft:enchant_with_levels",
+                "levels": {
+                  "type": "minecraft:uniform",
+                  "max": 20.0,
+                  "min": 3.0
+                },
+                "treasure": true
+              }
+            ],
+            "name": "pantz_mod:steel_chestplate",
+            "weight": 39
+          },
+          {
+            "type": "minecraft:item",
+            "functions": [
+              {
+                "function": "minecraft:enchant_with_levels",
+                "levels": {
+                  "type": "minecraft:uniform",
+                  "max": 20.0,
+                  "min": 3.0
+                },
+                "treasure": true
+              }
+            ],
+            "name": "pantz_mod:steel_boots",
+            "weight": 39
+          },
+          {
+            "type": "minecraft:item",
+            "functions": [
+              {
+                "function": "minecraft:enchant_with_levels",
+                "levels": {
+                  "type": "minecraft:uniform",
+                  "max": 20.0,
+                  "min": 3.0
+                },
+                "treasure": true
+              }
+            ],
+            "name": "pantz_mod:steel_helmet",
+            "weight": 39
+          },
+          {
+            "type": "minecraft:item",
+            "functions": [
+              {
+                "function": "minecraft:enchant_with_levels",
+                "levels": {
+                  "type": "minecraft:uniform",
+                  "max": 20.0,
+                  "min": 3.0
+                },
+                "treasure": true
+              }
+            ],
+            "name": "pantz_mod:steel_leggings",
+            "weight": 39
+          },
+          {
+            "type": "minecraft:item",
+            "functions": [
+              {
+                "function": "minecraft:enchant_with_levels",
+                "levels": {
+                  "type": "minecraft:uniform",
+                  "max": 20.0,
+                  "min": 3.0
+                },
+                "treasure": true
+              }
+            ],
+            "name": "pantz_mod:steel_sword",
+            "weight": 39
+          },
+          {
+            "type": "minecraft:item",
+            "functions": [
+              {
+                "function": "minecraft:enchant_with_levels",
+                "levels": {
+                  "type": "minecraft:uniform",
+                  "max": 20.0,
+                  "min": 3.0
+                },
+                "treasure": true
+              }
+            ],
+            "name": "pantz_mod:steel_shovel",
+            "weight": 39
+          },
+          {
+            "type": "minecraft:item",
+            "functions": [
+              {
+                "function": "minecraft:enchant_with_levels",
+                "levels": {
+                  "type": "minecraft:uniform",
+                  "max": 20.0,
+                  "min": 3.0
+                },
+                "treasure": true
+              }
+            ],
+            "name": "pantz_mod:steel_pickaxe",
+            "weight": 39
+          }
+        ],
+        "index": 0,
+        "replace": false
+      }
+    }
+  ],
+  "priority": "normal",
+  "selector": "minecraft:chests/end_city_treasure"
+}

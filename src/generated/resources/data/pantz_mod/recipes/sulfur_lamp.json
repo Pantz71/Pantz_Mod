@@ -1,0 +1,34 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "caverns_and_chasms"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "category": "building",
+        "key": {
+          "#": {
+            "tag": "forge:gems/sulfur"
+          },
+          "G": {
+            "item": "minecraft:glowstone"
+          }
+        },
+        "pattern": [
+          " # ",
+          "#G#",
+          " # "
+        ],
+        "result": {
+          "item": "pantz_mod:sulfur_lamp"
+        },
+        "show_notification": true
+      }
+    }
+  ]
+}

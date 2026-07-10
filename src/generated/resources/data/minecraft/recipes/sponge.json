@@ -1,0 +1,37 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "pantz_mod:config",
+          "value": "craftable_sponge"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "category": "building",
+        "key": {
+          "#": {
+            "tag": "minecraft:wool"
+          },
+          "$": {
+            "item": "minecraft:honeycomb"
+          },
+          "/": {
+            "item": "minecraft:bamboo"
+          }
+        },
+        "pattern": [
+          " $ ",
+          "/#/",
+          " / "
+        ],
+        "result": {
+          "item": "minecraft:sponge"
+        },
+        "show_notification": true
+      }
+    }
+  ]
+}

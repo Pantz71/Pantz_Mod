@@ -1,0 +1,39 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:not",
+          "value": {
+            "type": "forge:mod_loaded",
+            "modid": "caverns_and_chasms"
+          }
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "category": "redstone",
+        "key": {
+          "Q": {
+            "tag": "forge:gems/prismarine"
+          },
+          "S": {
+            "item": "minecraft:stone"
+          },
+          "T": {
+            "item": "minecraft:redstone_torch"
+          }
+        },
+        "pattern": [
+          "TQT",
+          "SSS"
+        ],
+        "result": {
+          "item": "pantz_mod:randomizer"
+        },
+        "show_notification": true
+      }
+    }
+  ]
+}

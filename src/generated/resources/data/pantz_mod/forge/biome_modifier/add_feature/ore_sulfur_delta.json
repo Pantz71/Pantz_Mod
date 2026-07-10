@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#forge:is_basalt_deltas",
+  "features": "pantz_mod:ore_sulfur_deltas",
+  "step": "underground_ores"
+}

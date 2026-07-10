@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#pantz_mod:has_sulfur_nether",
+  "features": "pantz_mod:ore_sulfur_nether",
+  "step": "underground_ores"
+}

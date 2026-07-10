@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "tag": "blueprint:wooden_chests"
+    },
+    "$": {
+      "item": "minecraft:cactus"
+    },
+    "I": {
+      "tag": "forge:ingots/steel"
+    }
+  },
+  "pattern": [
+    "I#I",
+    "I$I",
+    "III"
+  ],
+  "result": {
+    "item": "pantz_mod:trash_can"
+  },
+  "show_notification": true
+}
