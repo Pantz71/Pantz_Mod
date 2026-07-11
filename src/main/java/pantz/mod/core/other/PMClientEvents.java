@@ -24,6 +24,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
+import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
 import net.neoforged.neoforge.client.event.RenderHighlightEvent;
 import pantz.mod.client.model.block.*;
 import pantz.mod.client.renderer.be.EntityDetectorRenderer;
@@ -44,9 +45,7 @@ import java.util.List;
 
 @EventBusSubscriber(modid = PantzMod.MOD_ID, value = Dist.CLIENT)
 public class PMClientEvents {
-    private static int particleCounter = 0;
-    private static final int cooldown = 5;
-
+    private static float waxLevel = 0.0f;
     private static final String[] PRIORITIES = { "copper", "exposed", "weathered", "oxidized" };
 
     @SubscribeEvent
@@ -68,6 +67,11 @@ public class PMClientEvents {
         event.registerLayerDefinition(PMModelLayers.TINY_GLOBE, TinyGlobeModel::createModel);
         event.registerLayerDefinition(PMModelLayers.SATURN_GLOBE, SaturnGlobeModel::createModel);
         event.registerLayerDefinition(PMModelLayers.URANUS_GLOBE, UranusGlobeModel::createModel);
+    }
+
+    @SubscribeEvent
+    public static void registerKeyMappings(RegisterKeyMappingsEvent event) {
+        event.register(PMKeybinds.DRINK_SATCHEL_POTION);
     }
 
     @SubscribeEvent
@@ -128,19 +132,20 @@ public class PMClientEvents {
         }
     }
 
-
     private static void spawnWaxParticles(Minecraft mc) {
         LocalPlayer player = mc.player;
         ClientLevel level = mc.level;
-        if (player == null || level == null) return;
+        if (player == null || level == null || mc.isPaused()) return;
 
-        if (mc.isPaused()) {
-            particleCounter = 0;
+        int cooldown = 5;
+        long particleCounter = level.getGameTime();
+
+
+        if (particleCounter % cooldown != 0) return;
+        if (!isHoldingDeserializer(player)) {
+            waxLevel = 0.0f;
             return;
         }
-
-        if (particleCounter++ % cooldown != 0) return;
-        if (!isHoldingDeserializer(player)) return;
 
         BlockPos center = player.blockPosition();
         int range = PMConfig.Common.COMMON.waxedBlocksDetectionRadius.get();
@@ -157,7 +162,6 @@ public class PMClientEvents {
                     if (state.isAir() || state.is(PMBlockTags.NON_WAXED_BLOCKS)) continue;
 
                     ResourceLocation id = BuiltInRegistries.BLOCK.getKey(state.getBlock());
-
                     String path = id.getPath();
                     if (!path.startsWith("waxed_")) continue;
 
@@ -167,7 +171,26 @@ public class PMClientEvents {
         }
 
         List<BlockPos> targets = priority.isEmpty() ? normal : concat(priority, normal);
+        waxLevel = calculateWaxLevel(targets.size(), range);
         targets.forEach(pos -> spawnParticles(level, pos));
+    }
+
+    public static float getWaxLevel() {
+        return waxLevel;
+    }
+
+    public static float calculateWaxLevel(int blockCount, int range) {
+        if (blockCount == 0) return 0.0F;
+        double totalBlocks = (2 * range + 1) * (2 * range + 1) * (2 * range + 1);
+        float blocksForMaxLevel = (float) Math.round(totalBlocks - 0.6 * totalBlocks);
+        float percentage = (float) blockCount / blocksForMaxLevel;
+        if (percentage <= 0.2F && percentage > 0.0F) return 0.2F;
+        if (percentage >= 1.0f) return 1.0F;
+        if (percentage >= 0.8F) return 0.8F;
+        if (percentage >= 0.6F) return 0.6F;
+        if (percentage >= 0.4F) return 0.4F;
+        if (percentage >= 0.2F) return 0.2F;
+        return 0.0F;
     }
 
     private static void spawnParticles(ClientLevel level, BlockPos pos) {

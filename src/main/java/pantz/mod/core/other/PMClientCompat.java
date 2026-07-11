@@ -20,6 +20,7 @@ import pantz.mod.core.registry.PMBlocks;
 import pantz.mod.core.registry.PMItems;
 
 import static pantz.mod.core.registry.PMBlocks.*;
+import static pantz.mod.core.registry.PMItems.HONEY_DESERIALIZER;
 import static pantz.mod.core.registry.PMItems.POTION_SATCHEL;
 
 @EventBusSubscriber(modid = PantzMod.MOD_ID, value = Dist.CLIENT)
@@ -79,5 +80,7 @@ public class PMClientCompat {
                     int mode = tag.getInt(EntityFilterItem.MODE_KEY);
                     return mode == 0 ? 0.0f : 1.0f;
                 });
+        ItemProperties.register(HONEY_DESERIALIZER.get(), PantzMod.location("level"),
+                (stack, level, entity, seed) -> PMClientEvents.getWaxLevel());
     }
 }
