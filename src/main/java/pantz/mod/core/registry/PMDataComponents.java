@@ -4,11 +4,13 @@ import com.mojang.serialization.Codec;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.resources.ResourceLocation;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import pantz.mod.common.utils.FilterMode;
 import pantz.mod.core.PantzMod;
 
+import java.util.List;
 import java.util.function.UnaryOperator;
 
 public class PMDataComponents {
@@ -16,6 +18,7 @@ public class PMDataComponents {
 
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<Float>> WAX_LEVEL = register("wax_level", builder -> builder.persistent(Codec.FLOAT).networkSynchronized(ByteBufCodecs.FLOAT));
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<FilterMode>> FILTER_MODE = register("filter_mode", builder -> builder.persistent(FilterMode.CODEC).networkSynchronized(FilterMode.STREAM_CODEC));
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<List<ResourceLocation>>> FILTERED_ENTITIES = register("filtered_entities", builder -> builder.persistent(ResourceLocation.CODEC.listOf()).networkSynchronized(ResourceLocation.STREAM_CODEC.apply(ByteBufCodecs.list())));
 
 
     private static <T> DeferredHolder<DataComponentType<?>, DataComponentType<T>> register(String name, UnaryOperator<DataComponentType.Builder<T>> builderOperator) {

@@ -42,13 +42,12 @@ public class EntityDetectorBlockEntity extends BlockEntity {
         super(PMBlockEntityTypes.ENTITY_DETECTOR.get(), pPos, pBlockState);
     }
 
-    public void setFilterSettings(FilterMode mode, ListTag list) {
+    public void setFilterSettings(FilterMode mode, List<ResourceLocation> list) {
         this.filterMode = mode;
         this.filters.clear();
+        this.filters.addAll(list);
 
-        for (int i = 0; i < list.size(); i++) {
-            CompoundTag entry = list.getCompound(i);
-            this.filters.add(ResourceLocation.parse(entry.getString("Id")));
+        if (this.level != null) {
             this.level.setBlockAndUpdate(this.worldPosition, this.getBlockState().setValue(EntityDetectorBlock.FILTERED, hasFilters()));
         }
 
