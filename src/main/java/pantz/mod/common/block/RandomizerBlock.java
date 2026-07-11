@@ -116,7 +116,7 @@ public class RandomizerBlock extends DiodeBlock {
 
     @Override
     protected int getDelay(BlockState pState) {
-        return 2;
+        return 1;
     }
 
     @Override
