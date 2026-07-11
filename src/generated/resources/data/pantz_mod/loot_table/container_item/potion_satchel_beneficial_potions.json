@@ -9,7 +9,7 @@
           "functions": [
             {
               "function": "minecraft:set_potion",
-              "id": "minecraft:swiftness"
+              "id": "minecraft:regeneration"
             }
           ],
           "name": "minecraft:potion",
@@ -42,7 +42,7 @@
           "functions": [
             {
               "function": "minecraft:set_potion",
-              "id": "minecraft:swiftness"
+              "id": "minecraft:leaping"
             }
           ],
           "name": "caverns_and_chasms:impact_potion",

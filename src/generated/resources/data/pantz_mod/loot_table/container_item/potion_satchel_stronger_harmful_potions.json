@@ -9,7 +9,7 @@
           "functions": [
             {
               "function": "minecraft:set_potion",
-              "id": "pantz_mod:strong_clumsiness"
+              "id": "minecraft:long_poison"
             }
           ],
           "name": "minecraft:splash_potion",

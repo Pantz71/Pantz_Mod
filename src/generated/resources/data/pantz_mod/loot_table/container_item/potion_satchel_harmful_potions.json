@@ -9,7 +9,7 @@
           "functions": [
             {
               "function": "minecraft:set_potion",
-              "id": "minecraft:weakness"
+              "id": "pantz_mod:clumsiness"
             }
           ],
           "name": "minecraft:splash_potion",
