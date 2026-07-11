@@ -15,6 +15,7 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
@@ -37,6 +38,7 @@ import pantz.mod.core.PMConfig;
 import pantz.mod.core.PantzMod;
 import pantz.mod.core.other.tags.PMBlockTags;
 import pantz.mod.core.registry.PMBlockEntityTypes;
+import pantz.mod.core.registry.PMDataComponents;
 import pantz.mod.core.registry.PMEntityTypes;
 import pantz.mod.core.registry.PMItems;
 
@@ -45,7 +47,6 @@ import java.util.List;
 
 @EventBusSubscriber(modid = PantzMod.MOD_ID, value = Dist.CLIENT)
 public class PMClientEvents {
-    private static float waxLevel = 0.0f;
     private static final String[] PRIORITIES = { "copper", "exposed", "weathered", "oxidized" };
 
     @SubscribeEvent
@@ -140,10 +141,9 @@ public class PMClientEvents {
         int cooldown = 5;
         long particleCounter = level.getGameTime();
 
-
         if (particleCounter % cooldown != 0) return;
-        if (!isHoldingDeserializer(player)) {
-            waxLevel = 0.0f;
+        ItemStack deserializerStack = getHeldDeserializer(player);
+        if (deserializerStack.isEmpty()) {
             return;
         }
 
@@ -171,12 +171,8 @@ public class PMClientEvents {
         }
 
         List<BlockPos> targets = priority.isEmpty() ? normal : concat(priority, normal);
-        waxLevel = calculateWaxLevel(targets.size(), range);
+        deserializerStack.set(PMDataComponents.WAX_LEVEL.get(), calculateWaxLevel(targets.size(), range));
         targets.forEach(pos -> spawnParticles(level, pos));
-    }
-
-    public static float getWaxLevel() {
-        return waxLevel;
     }
 
     public static float calculateWaxLevel(int blockCount, int range) {
@@ -233,9 +229,16 @@ public class PMClientEvents {
         }
     }
 
-    private static boolean isHoldingDeserializer(LocalPlayer player) {
-        return player.getMainHandItem().is(PMItems.HONEY_DESERIALIZER.get())
-                || player.getOffhandItem().is(PMItems.HONEY_DESERIALIZER.get());
+    private static ItemStack getHeldDeserializer(LocalPlayer player) {
+        ItemStack mainHand = player.getMainHandItem();
+        if (mainHand.is(PMItems.HONEY_DESERIALIZER.get())) {
+            return mainHand;
+        }
+        ItemStack offHand = player.getOffhandItem();
+        if (offHand.is(PMItems.HONEY_DESERIALIZER.get())) {
+            return offHand;
+        }
+        return ItemStack.EMPTY;
     }
 
     private static List<BlockPos> concat(List<BlockPos> a, List<BlockPos> b) {

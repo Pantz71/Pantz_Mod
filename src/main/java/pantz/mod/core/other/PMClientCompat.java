@@ -15,8 +15,10 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import pantz.mod.common.item.EntityFilterItem;
+import pantz.mod.common.utils.FilterMode;
 import pantz.mod.core.PantzMod;
 import pantz.mod.core.registry.PMBlocks;
+import pantz.mod.core.registry.PMDataComponents;
 import pantz.mod.core.registry.PMItems;
 
 import static pantz.mod.core.registry.PMBlocks.*;
@@ -76,11 +78,10 @@ public class PMClientCompat {
     private static void registerItemProperties() {
         ItemProperties.register(PMItems.ENTITY_FILTER.get(), PantzMod.location("mode"),
                 (stack, level, entity, seed) -> {
-                    CompoundTag tag = stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
-                    int mode = tag.getInt(EntityFilterItem.MODE_KEY);
-                    return mode == 0 ? 0.0f : 1.0f;
+                    FilterMode mode = stack.getOrDefault(PMDataComponents.FILTER_MODE, FilterMode.INCLUDE);
+                    return mode == FilterMode.INCLUDE ? 0.0f : 1.0f;
                 });
         ItemProperties.register(HONEY_DESERIALIZER.get(), PantzMod.location("level"),
-                (stack, level, entity, seed) -> PMClientEvents.getWaxLevel());
+                (stack, level, entity, seed) -> stack.getOrDefault(PMDataComponents.WAX_LEVEL.get(), 0.0F));
     }
 }

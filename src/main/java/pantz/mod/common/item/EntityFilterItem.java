@@ -27,6 +27,7 @@ import org.jetbrains.annotations.Nullable;
 import pantz.mod.common.block.entity.EntityDetectorBlockEntity;
 import pantz.mod.common.utils.FilterMode;
 import pantz.mod.core.PMConfig;
+import pantz.mod.core.registry.PMDataComponents;
 
 import java.util.List;
 
@@ -110,17 +111,11 @@ public class EntityFilterItem extends Item {
     }
 
     private void cycleMode(ItemStack stack, Player player) {
-        CustomData customData = stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY);
-        CompoundTag tag = customData.copyTag();
+        FilterMode nextMode = stack.update(PMDataComponents.FILTER_MODE.get(), FilterMode.INCLUDE, FilterMode::next);
 
-        FilterMode nextMode = FilterMode.byId(tag.getInt(MODE_KEY)).next();
-        tag.putInt(MODE_KEY, nextMode.getId());
-
-        stack.set(DataComponents.CUSTOM_DATA, CustomData.of(tag));
-
-        player.displayClientMessage(
-                Component.translatable("message.pantz_mod.mode_change", Component.translatable(nextMode.getTranslationKey()).withStyle(nextMode.getColor())),
-                true);
+        if (nextMode != null) {
+            player.displayClientMessage(Component.translatable("message.pantz_mod.mode_change", Component.translatable(nextMode.getTranslationKey()).withStyle(nextMode.getColor())), true);
+        }
     }
 
     public void removeLastEntityFromStack(ItemStack stack, Player player) {
