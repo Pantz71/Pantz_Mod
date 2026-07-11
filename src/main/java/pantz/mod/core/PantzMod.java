@@ -41,6 +41,7 @@ public class PantzMod {
         PMBlockEntityTypes.BLOCK_ENTITY_TYPES.register(bus);
         PMEntityTypes.ENTITY_TYPES.register(bus);
         PMAttributes.ATTRIBUTES.register(bus);
+        PMDataComponents.DATA_COMPONENTS.register(bus);
         PMMobEffects.register(bus);
         PMMenuTypes.MENUS.register(bus);
         PMParticleTypes.PARTICLE_TYPES.register(bus);
