@@ -1,0 +1,17 @@
+{
+  "modifiers": [
+    {
+      "type": "effects_changed",
+      "config": {
+        "criteria": "all_effects",
+        "effects": {
+          "pantz_mod:clumsiness": {},
+          "pantz_mod:precision": {}
+        },
+        "removes": false
+      }
+    }
+  ],
+  "priority": "normal",
+  "selector": "minecraft:nether/all_potions"
+}

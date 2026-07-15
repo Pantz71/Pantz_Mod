@@ -20,7 +20,7 @@
           "functions": [
             {
               "function": "minecraft:set_potion",
-              "id": "minecraft:leaping"
+              "id": "minecraft:swiftness"
             }
           ],
           "name": "minecraft:splash_potion",

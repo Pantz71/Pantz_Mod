@@ -9,7 +9,7 @@
           "functions": [
             {
               "function": "minecraft:set_potion",
-              "id": "pantz_mod:clumsiness"
+              "id": "minecraft:slowness"
             }
           ],
           "name": "minecraft:splash_potion",

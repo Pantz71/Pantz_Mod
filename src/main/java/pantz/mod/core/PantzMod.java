@@ -96,6 +96,7 @@ public class PantzMod {
         gen.addProvider(server, new PMTrimMaterialTagsProvider(output, provider, helper));
 
         gen.addProvider(server, PMAdvancementProvider.create(output, provider, helper));
+        gen.addProvider(server, new PMAdvancementModifierProvider(output, provider));
 
         gen.addProvider(server, new PMDataRemolderProvider(output, provider));
 

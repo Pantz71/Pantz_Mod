@@ -9,7 +9,7 @@
           "functions": [
             {
               "function": "minecraft:set_potion",
-              "id": "minecraft:strong_leaping"
+              "id": "minecraft:long_regeneration"
             }
           ],
           "name": "minecraft:potion",
@@ -20,7 +20,7 @@
           "functions": [
             {
               "function": "minecraft:set_potion",
-              "id": "minecraft:long_leaping"
+              "id": "pantz_mod:strong_precision"
             }
           ],
           "name": "minecraft:splash_potion",
@@ -42,7 +42,7 @@
           "functions": [
             {
               "function": "minecraft:set_potion",
-              "id": "minecraft:long_regeneration"
+              "id": "minecraft:long_swiftness"
             }
           ],
           "name": "caverns_and_chasms:impact_potion",
