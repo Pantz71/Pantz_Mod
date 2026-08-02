@@ -15,7 +15,6 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
@@ -144,6 +143,7 @@ public class PMClientEvents {
         if (particleCounter % cooldown != 0) return;
         ItemStack deserializerStack = getHeldDeserializer(player);
         if (deserializerStack.isEmpty()) {
+            resetDeserializer(player);
             return;
         }
 
@@ -226,6 +226,17 @@ public class PMClientEvents {
             }
 
             level.addParticle(ParticleTypes.WAX_ON, x, y, z, 0.0, 0.05, 0.0);
+        }
+    }
+
+    private static void resetDeserializer(LocalPlayer player) {
+        for (ItemStack stack : player.getInventory().items) {
+            if (stack.is(PMItems.HONEY_DESERIALIZER.get())) {
+                Float currentLevel = stack.get(PMDataComponents.WAX_LEVEL.get());
+                if (currentLevel != null && currentLevel > 0.0F) {
+                    stack.set(PMDataComponents.WAX_LEVEL.get(), 0.0F);
+                }
+            }
         }
     }
 
